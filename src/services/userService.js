@@ -3,8 +3,63 @@
 
 const STORAGE_KEYS = {
   CURRENT_EMAIL: "lopcooanh_student_email",
-  PROFILES_MAP: "lopcooanh_student_profiles"
+  PROFILES_MAP: "lopcooanh_student_profiles",
+  LAST_VISIT: "lopcooanh_last_visit_timestamp"
 };
+
+const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000; // 7 ngày = 604,800,000 ms
+
+/**
+ * Ghi nhận thời điểm truy cập hiện tại của người dùng
+ */
+export function recordUserVisit() {
+  try {
+    localStorage.setItem(STORAGE_KEYS.LAST_VISIT, Date.now().toString());
+  } catch (e) {
+    console.error("Lỗi khi lưu thời điểm truy cập:", e);
+  }
+}
+
+/**
+ * Kiểm tra xem có cần hiển thị Welcome Page hay không:
+ * - Chỉ hiện ra nếu lâu quá (7 ngày) người dùng chưa truy cập web
+ * - Hoặc người dùng mới hoàn toàn chưa từng vào web
+ * - Nếu người dùng đã vào web trong vòng 7 ngày -> false (vào thẳng phần luyện tập)
+ */
+export function shouldShowWelcomePage() {
+  try {
+    const lastVisit = localStorage.getItem(STORAGE_KEYS.LAST_VISIT);
+
+    if (!lastVisit) {
+      // Nếu đã có email học viên từ trước -> người dùng cũ đang học -> vào thẳng practice
+      const currentEmail = getSavedEmail();
+      if (currentEmail) {
+        const profile = getProfileByEmail(currentEmail);
+        if (profile?.lastActive) {
+          const lastActiveTime = new Date(profile.lastActive).getTime();
+          if (!isNaN(lastActiveTime)) {
+            const elapsed = Date.now() - lastActiveTime;
+            return elapsed > SEVEN_DAYS_MS;
+          }
+        }
+        return false;
+      }
+      // Người dùng mới hoàn toàn -> hiển thị Welcome Page
+      return true;
+    }
+
+    const lastTime = parseInt(lastVisit, 10);
+    if (isNaN(lastTime)) {
+      return false;
+    }
+
+    const elapsed = Date.now() - lastTime;
+    // Chỉ hiện Welcome Page nếu khoảng cách lớn hơn 7 ngày
+    return elapsed > SEVEN_DAYS_MS;
+  } catch {
+    return false;
+  }
+}
 
 /**
  * Kiểm tra định dạng email hợp lệ

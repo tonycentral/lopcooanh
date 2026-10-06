@@ -33,12 +33,30 @@ import {
   getSavedEmail, 
   getProfileByEmail, 
   saveCurrentEmail, 
-  updateSettingsForEmail 
+  updateSettingsForEmail,
+  recordUserVisit,
+  shouldShowWelcomePage
 } from './services/userService';
 
 export default function App() {
   // Current view: 'welcome' | 'practice' | 'admin' (ẩn bí mật)
-  const [currentView, setCurrentView] = useState('welcome');
+  // Chỉ hiển thị Welcome Page nếu lâu quá (> 7 ngày) học viên chưa vào web hoặc là người dùng mới
+  // Nếu đã vào web trong vòng 7 ngày -> vào thẳng workspace luyện tập
+  const [currentView, setCurrentView] = useState(() => {
+    const hash = window.location.hash.toLowerCase();
+    const search = window.location.search.toLowerCase();
+    const path = window.location.pathname.toLowerCase();
+    if (
+      hash === '#admin' || 
+      hash === '#admin-cooanh' || 
+      search.includes('admin=true') ||
+      search.includes('admin=cooanh') ||
+      path.endsWith('/admin')
+    ) {
+      return 'admin';
+    }
+    return shouldShowWelcomePage() ? 'welcome' : 'practice';
+  });
 
   // Lắng nghe link ẩn bí mật vào Admin Dashboard (URL #admin, #admin-cooanh, ?admin=true) hoặc Ctrl+Shift+A
   useEffect(() => {
@@ -64,10 +82,13 @@ export default function App() {
     const handleKeyDown = (e) => {
       if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
         e.preventDefault();
-        setCurrentView((prev) => (prev === 'admin' ? 'welcome' : 'admin'));
+        setCurrentView((prev) => (prev === 'admin' ? 'practice' : 'admin'));
       }
     };
     window.addEventListener('keydown', handleKeyDown);
+
+    // Ghi nhận mốc thời gian truy cập hiện tại
+    recordUserVisit();
 
     return () => {
       window.removeEventListener('hashchange', checkSecretAdminAccess);
@@ -80,7 +101,7 @@ export default function App() {
     if (window.location.hash) {
       window.history.replaceState(null, '', window.location.pathname + window.location.search);
     }
-    setCurrentView('welcome');
+    setCurrentView('practice');
   };
 
   // Student Email State: Pop-up automatically if not found
@@ -224,7 +245,10 @@ export default function App() {
           selectedTask={activeTask}
           onSettingsChange={handleSettingsChange}
           onChangeEmail={() => setIsEmailModalOpen(true)}
-          onStartPractice={() => setCurrentView('practice')}
+          onStartPractice={() => {
+            recordUserVisit();
+            setCurrentView('practice');
+          }}
           onOpenContactModal={() => setIsContactModalOpen(true)}
         />
       ) : (
