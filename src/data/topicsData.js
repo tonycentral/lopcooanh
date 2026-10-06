@@ -414,3 +414,172 @@ export const IELTS_TOPICS = [
     ]
   }
 ];
+
+export const IELTS_TASK2_TOPICS = IELTS_TOPICS;
+
+export const IELTS_TASK1_TOPICS = [
+  {
+    id: "task1-line-graph",
+    name: "Line Graph: Renewable vs Fossil Energy (2000-2030)",
+    vietnameseName: "Biểu đồ đường: Năng lượng tái tạo vs Nhiên liệu hóa thạch",
+    tag: "Task 1: Xu hướng thời gian",
+    icon: "TrendingUp",
+    ieltsPrompt: "The line graph below shows the changes in energy consumption between fossil fuels and renewable energy sources from 2000 to 2030 (including projections). Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    vocabularies: [
+      {
+        id: "t1-lg-1",
+        word: "outstrip",
+        partOfSpeech: "verb",
+        meaning: "Vượt xa, vượt trội hơn về số lượng hoặc tốc độ tăng",
+        basicEquivalent: "exceed / surpass (Band 5-6)",
+        synonyms: ["surpass", "eclipse", "overtake"],
+        collocations: ["outstrip demand", "dramatically outstrip", "projected to outstrip"],
+        modelSentence: "By 2028, renewable electricity generation is projected to outstrip coal consumption globally."
+      },
+      {
+        id: "t1-lg-2",
+        word: "plateau",
+        partOfSpeech: "verb / noun",
+        meaning: "Đạt trạng thái bình ổn, đi ngang sau giai đoạn tăng nhanh",
+        basicEquivalent: "stay unchanged / level off (Band 5-6)",
+        synonyms: ["level off", "stabilize", "flatten out"],
+        collocations: ["reach a plateau", "plateau at approximately 40%"],
+        modelSentence: "After experiencing rapid gains during the initial decade, petroleum reliance plateaued at around 45%."
+      },
+      {
+        id: "t1-lg-3",
+        word: "fluctuate",
+        partOfSpeech: "verb",
+        meaning: "Dao động lên xuống thất thường qua các mốc thời gian",
+        basicEquivalent: "go up and down (Band 5)",
+        synonyms: ["oscillate", "vary erratically", "shift"],
+        collocations: ["fluctuate between 20% and 30%", "experience wild fluctuations"],
+        modelSentence: "Natural gas production fluctuated mildly before commencing a steep downward trend."
+      },
+      {
+        id: "t1-lg-4",
+        word: "trajectory",
+        partOfSpeech: "noun",
+        meaning: "Quỹ đạo, chiều hướng phát triển liên tục",
+        basicEquivalent: "trend / direction (Band 6)",
+        synonyms: ["upward trend", "course", "pathway"],
+        collocations: ["upward trajectory", "downward trajectory", "follow an identical trajectory"],
+        modelSentence: "Solar and wind power maintained an uninterrupted upward trajectory throughout the surveyed period."
+      }
+    ],
+    coherenceChallenges: [
+      {
+        id: "t1-lg-cc-1",
+        sentenceA: "Overall, fossil fuel consumption followed an overall downward trajectory over the three-decade timeframe.",
+        sentenceARole: "Nêu xu hướng tổng quan của đối tượng 1 (Overview part 1)",
+        prompt: "Viết câu tiếp theo (Sentence B) đối chiếu với xu hướng tăng trưởng vượt bậc của nguồn năng lượng tái tạo (Overview part 2).",
+        linkingSuggestions: ["In stark contrast,", "Conversely,", "By comparison, renewable energy sources witnessed"],
+        modelSentenceB: "In stark contrast, green energy generation experienced exponential growth, outstripping conventional sources by the end of the period.",
+        coherenceExplanation: "Cụm nối đối lập 'In stark contrast' tạo sự tương phản rõ rệt giữa hai xu hướng ngược chiều trong phần Overview của Task 1."
+      }
+    ]
+  },
+  {
+    id: "task1-bar-chart",
+    name: "Bar Chart: Household Spending on Education & Leisure",
+    vietnameseName: "Biểu đồ cột: Chi tiêu hộ gia đình cho giáo dục & giải trí",
+    tag: "Task 1: Biểu đồ so sánh",
+    icon: "BarChart3",
+    ieltsPrompt: "The bar chart illustrates the proportion of household budgets spent on education, housing, and recreation across five countries in 2023. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    vocabularies: [
+      {
+        id: "t1-bc-1",
+        word: "allocate",
+        partOfSpeech: "verb",
+        meaning: "Phân bổ, dành ngân sách hay tài nguyên cho một mục đích",
+        basicEquivalent: "spend / give money to (Band 5)",
+        synonyms: ["earmark", "apportion", "distribute"],
+        collocations: ["allocate funds to", "budget allocated for education"],
+        modelSentence: "Households in Country A allocated nearly a third of their total earnings to academic tuition."
+      },
+      {
+        id: "t1-bc-2",
+        word: "disproportionately",
+        partOfSpeech: "adverb",
+        meaning: "Không tương xứng, chiếm tỉ trọng vượt trội hoặc áp đảo",
+        basicEquivalent: "much more / unbalanced (Band 5-6)",
+        synonyms: ["excessively", "unevenly", "overwhelmingly"],
+        collocations: ["disproportionately high", "spent disproportionately more"],
+        modelSentence: "Recreational expenses accounted for a disproportionately small fraction of expenditure in developing nations."
+      },
+      {
+        id: "t1-bc-3",
+        word: "disparity",
+        partOfSpeech: "noun",
+        meaning: "Sự chênh lệch, khoảng cách khác biệt giữa các số liệu",
+        basicEquivalent: "difference / gap (Band 5-6)",
+        synonyms: ["divergence", "gap", "inequality"],
+        collocations: ["substantial disparity", "marginal disparity between nations"],
+        modelSentence: "A substantial disparity is observable between capital city dwellers and rural families regarding education outlay."
+      }
+    ],
+    coherenceChallenges: [
+      {
+        id: "t1-bc-cc-1",
+        sentenceA: "Housing remained the most dominant expenditure category in four out of the five evaluated nations, averaging roughly 38%.",
+        sentenceARole: "Nêu hạng mục dẫn đầu (Dominant feature)",
+        prompt: "Viết câu tiếp theo (Sentence B) chỉ ra hạng mục có tỉ trọng thấp nhất và so sánh sự chênh lệch.",
+        linkingSuggestions: ["At the opposite end of the spectrum,", "Conversely, expenditure on leisure constituted", "In contrast,"],
+        modelSentenceB: "At the opposite end of the spectrum, recreational activities constituted a negligible proportion, hovering beneath 8% overall.",
+        coherenceExplanation: "Cụm 'At the opposite end of the spectrum' là cách diễn đạt C1 liên kết tương phản giữa mức chi tiêu cao nhất và thấp nhất."
+      }
+    ]
+  },
+  {
+    id: "task1-process",
+    name: "Process Diagram: Industrial Paper Recycling Flow",
+    vietnameseName: "Quy trình: Các giai đoạn tái chế giấy công nghiệp",
+    tag: "Task 1: Sơ đồ quy trình",
+    icon: "Layers",
+    ieltsPrompt: "The diagram illustrates how waste paper is collected, treated, and recycled into commercial packaging. Summarise the information by selecting and reporting the main features.",
+    vocabularies: [
+      {
+        id: "t1-pr-1",
+        word: "commence",
+        partOfSpeech: "verb",
+        meaning: "Bắt đầu, khởi sự một quy trình công nghiệp",
+        basicEquivalent: "start / begin (Band 5)",
+        synonyms: ["initiate", "set in motion", "kick off"],
+        collocations: ["the procedure commences with", "commence sorting"],
+        modelSentence: "The recycling loop commences with the systematic collection of used cardboard from urban recovery centers."
+      },
+      {
+        id: "t1-pr-2",
+        word: "undergo",
+        partOfSpeech: "verb",
+        meaning: "Trải qua một công đoạn xử lý vật lý hoặc hóa học",
+        basicEquivalent: "experience / go through (Band 5-6)",
+        synonyms: ["subject to", "experience", "pass through"],
+        collocations: ["undergo chemical treatment", "undergo thorough filtration"],
+        modelSentence: "The soaked paper pulp undergoes extensive de-inking and mechanical cleaning before being rolled."
+      },
+      {
+        id: "t1-pr-3",
+        word: "subsequently",
+        partOfSpeech: "adverb",
+        meaning: "Sau đó, ở giai đoạn tiếp theo của tiến trình",
+        basicEquivalent: "then / after that (Band 5)",
+        synonyms: ["consequently", "thereafter", "next"],
+        collocations: ["subsequently transferred to", "subsequently pressed"],
+        modelSentence: "The bleached fiber slurry is subsequently squeezed through heavy heated rollers to evaporate residual moisture."
+      }
+    ],
+    coherenceChallenges: [
+      {
+        id: "t1-pr-cc-1",
+        sentenceA: "Initial sorting removes non-recyclable contaminants such as plastic liners and adhesive tapes from raw paper bales.",
+        sentenceARole: "Mô tả công đoạn sơ chế ban đầu (Initial stage)",
+        prompt: "Viết câu tiếp theo (Sentence B) chuyển tiếp sang giai đoạn ngâm ủ dung dịch hóa chất để tạo bột giấy.",
+        linkingSuggestions: ["Following this preliminary step,", "Once sorted, the refined paper is subsequently", "Thereafter,"],
+        modelSentenceB: "Following this preliminary step, the cleaned sheets are submerged into an alkaline liquid chamber to be broken down into fiber pulp.",
+        coherenceExplanation: "Cụm 'Following this preliminary step' tạo sự kết nối thời gian và tiến trình cực kỳ mượt mà, đúng chuẩn Task 1 Process."
+      }
+    ]
+  }
+];
+

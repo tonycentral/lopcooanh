@@ -1,4 +1,12 @@
 export const BAND_DESCRIPTORS = {
+  "5.0": {
+    band: "5.0",
+    level: "Modest User (Khởi đầu)",
+    description: "Nắm được ngữ pháp nền tảng, diễn đạt được ý đơn giản nhưng còn nhiều lỗi câu và từ vựng lặp lại.",
+    lexicalResource: "Vốn từ cơ bản, thường dịch word-by-word và mắc lỗi dùng từ.",
+    coherence: "Liên kết câu còn yếu, các ý trình bày rời rạc.",
+    grammar: "Chủ yếu viết câu đơn; câu phức dễ sai thì hoặc chia động từ."
+  },
   "5.5": {
     band: "5.5",
     level: "Modest User (Chưa vững)",
@@ -48,13 +56,21 @@ export const BAND_DESCRIPTORS = {
     grammar: "Cấu trúc câu phong phú và chuẩn xác, lỗi chỉ là các lỗi trượt bút cực hiếm gặp."
   },
   "8.5": {
-    band: "8.5+",
+    band: "8.5",
     level: "Expert User (Gần như bản xứ)",
     description: "Viết như một nhà học giả bản xứ, lập luận thuyết phục, ngôn từ hoa mỹ nhưng gãy gọn.",
     lexicalResource: "Làm chủ hoàn toàn vốn từ học thuật tiếng Anh, diễn đạt biến hóa đa dạng.",
     coherence: "Mạch lạc tuyệt đối, logic chặt chẽ không tì vết.",
     grammar: "Hoàn hảo về ngữ pháp và cấu trúc câu phức tạp."
+  },
+  "9.0": {
+    band: "9.0",
+    level: "Mastery (Đỉnh cao)",
+    description: "Đạt độ chính xác và tự nhiên tuyệt đối, vốn từ học thuật phong phú đỉnh cao và văn phong mẫu mực.",
+    lexicalResource: "Từ vựng bản ngữ tinh tế, collocation chuẩn xác và biểu đạt ý niệm sắc bén.",
+    coherence: "Mạch lập luận hoàn mỹ, không một dấu vết gượng gạo.",
+    grammar: "Ngữ pháp hoàn hảo tuyệt đối."
   }
 };
 
-export const BAND_OPTIONS = ["5.5", "6.0", "6.5", "7.0", "7.5", "8.0", "8.5"];
+export const BAND_OPTIONS = ["5.0", "5.5", "6.0", "6.5", "7.0", "7.5", "8.0", "8.5", "9.0"];

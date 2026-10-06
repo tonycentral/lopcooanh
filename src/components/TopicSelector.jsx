@@ -12,7 +12,11 @@ import {
   Landmark, 
   ArrowRight,
   BookOpen,
-  Sparkles
+  Sparkles,
+  TrendingUp,
+  BarChart3,
+  Layers,
+  Map
 } from 'lucide-react';
 import { IELTS_TOPICS } from '../data/topicsData';
 
@@ -24,18 +28,26 @@ const ICON_MAP = {
   ShieldAlert,
   Globe,
   Building2,
-  Landmark
+  Landmark,
+  TrendingUp,
+  BarChart3,
+  Layers,
+  Map
 };
 
 export default function TopicSelector({ 
   selectedTopic, 
   onSelectTopic, 
-  onRandomTopic 
+  onRandomTopic,
+  topics = IELTS_TOPICS,
+  activeTask = "task2"
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [isShuffling, setIsShuffling] = useState(false);
 
-  const filteredTopics = IELTS_TOPICS.filter(t => 
+  const topicList = topics && topics.length > 0 ? topics : IELTS_TOPICS;
+
+  const filteredTopics = topicList.filter(t => 
     t.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     t.vietnameseName.toLowerCase().includes(searchTerm.toLowerCase())
   );
