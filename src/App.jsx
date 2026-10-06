@@ -9,6 +9,10 @@ import VocabularyList from './components/VocabularyList';
 import SentencePractice from './components/SentencePractice';
 import HistoryDrawer from './components/HistoryDrawer';
 import CohesiveGuideModal from './components/CohesiveGuideModal';
+import Task1Visualizer from './components/Task1Visualizer';
+import Task1ChartModal from './components/Task1ChartModal';
+
+import { BarChart3, BookOpen } from 'lucide-react';
 
 import { 
   IELTS_TOPICS, 
@@ -49,6 +53,9 @@ export default function App() {
   const [targetBand, setTargetBand] = useState(() => initialProfile?.targetBand || getStoredTargetBand() || "7.0");
   const [activeTask, setActiveTask] = useState(() => initialProfile?.selectedTask || 'task2');
   
+  // Tab for Left Column when in Task 1: 'chart' (default) or 'vocab'
+  const [task1LeftTab, setTask1LeftTab] = useState('chart');
+
   // API key & grading stats
   const [apiKey] = useState(() => getStoredApiKey());
   const [, setStats] = useState(() => getStoredStats());
@@ -65,6 +72,7 @@ export default function App() {
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [isCohesiveGuideOpen, setIsCohesiveGuideOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isChartModalOpen, setIsChartModalOpen] = useState(false);
 
   // Handle saving email from mandatory first-time pop-up
   const handleSaveEmail = (email) => {
@@ -96,6 +104,9 @@ export default function App() {
     }
     if (newTask && newTask !== activeTask) {
       setActiveTask(newTask);
+      if (newTask === 'task1') {
+        setTask1LeftTab('chart');
+      }
       const topics = newTask === 'task1' ? IELTS_TASK1_TOPICS : IELTS_TASK2_TOPICS;
       if (topics && topics.length > 0) {
         setSelectedTopic(topics[0]);
@@ -120,6 +131,9 @@ export default function App() {
   // Update task 1 / task 2
   const handleToggleTask = (task) => {
     setActiveTask(task);
+    if (task === 'task1') {
+      setTask1LeftTab('chart');
+    }
     if (studentEmail) {
       updateSettingsForEmail(studentEmail, { selectedTask: task });
     }
@@ -186,26 +200,76 @@ export default function App() {
             currentView={currentView}
           />
 
-          {/* Section 1: Chọn Chủ Đề (Horizontal Tabs + Random Tab + Prompt) */}
+          {/* Section 1: Chọn Chủ Đề (Horizontal Tabs + Random Tab + Prominent IELTS Prompt Card) */}
           <section className="px-3 sm:px-4 pt-2 shrink-0">
             <TopicTabBar
               topics={currentTopics}
               selectedTopic={selectedTopic}
               onSelectTopic={handleSelectTopic}
               onRandomTopic={handleRandomTopic}
+              activeTask={activeTask}
+              onOpenChartModal={() => setIsChartModalOpen(true)}
             />
           </section>
 
-          {/* Section 2: Main Workspace (Split Grid: Left Vocab with IPA, Right Practice Pad) */}
+          {/* Section 2: Main Workspace (Split Grid: Left Vocab/Task 1 Chart, Right Practice Pad) */}
           <main className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-12 gap-3 p-3 sm:p-4 overflow-hidden">
             
-            {/* Left Column: Vocabulary List with IPA (Takes 5 cols on desktop) */}
+            {/* Left Column: Task 1 Bar Chart or Vocabulary List (Takes 5 cols on desktop) */}
             <div className="md:col-span-5 h-full bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col overflow-hidden shadow-lg">
-              <VocabularyList
-                vocabularies={selectedTopic?.vocabularies || []}
-                selectedVocab={selectedVocab}
-                onSelectVocab={setSelectedVocab}
-              />
+              {activeTask === 'task1' ? (
+                <>
+                  {/* Task 1 Left Navigation: Biểu đồ số liệu (Bar Chart) vs Từ vựng */}
+                  <div className="flex items-center gap-1.5 pb-2 mb-2 border-b border-slate-800 shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => setTask1LeftTab('chart')}
+                      className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer ${
+                        task1LeftTab === 'chart'
+                          ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
+                          : "bg-slate-800/80 text-slate-400 hover:text-white"
+                      }`}
+                    >
+                      <BarChart3 className="w-3.5 h-3.5" />
+                      <span>Biểu đồ số liệu</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setTask1LeftTab('vocab')}
+                      className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer ${
+                        task1LeftTab === 'vocab'
+                          ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
+                          : "bg-slate-800/80 text-slate-400 hover:text-white"
+                      }`}
+                    >
+                      <BookOpen className="w-3.5 h-3.5" />
+                      <span>Từ vựng Band 8.0</span>
+                    </button>
+                  </div>
+
+                  {/* Left Column Content */}
+                  <div className="flex-1 min-h-0 overflow-hidden">
+                    {task1LeftTab === 'chart' ? (
+                      <Task1Visualizer
+                        topic={selectedTopic}
+                        onExpandChart={() => setIsChartModalOpen(true)}
+                      />
+                    ) : (
+                      <VocabularyList
+                        vocabularies={selectedTopic?.vocabularies || []}
+                        selectedVocab={selectedVocab}
+                        onSelectVocab={setSelectedVocab}
+                      />
+                    )}
+                  </div>
+                </>
+              ) : (
+                <VocabularyList
+                  vocabularies={selectedTopic?.vocabularies || []}
+                  selectedVocab={selectedVocab}
+                  onSelectVocab={setSelectedVocab}
+                />
+              )}
             </div>
 
             {/* Right Column: Interactive Sentence Practice & Instant Scoring (Takes 7 cols on desktop) */}
@@ -218,6 +282,8 @@ export default function App() {
                   onSelectVocab={setSelectedVocab}
                   apiKey={apiKey}
                   studentEmail={studentEmail}
+                  activeTask={activeTask}
+                  onOpenChartModal={() => setIsChartModalOpen(true)}
                   onSentenceGraded={handleRefreshStats}
                 />
               </div>
@@ -255,6 +321,13 @@ export default function App() {
       <CohesiveGuideModal
         isOpen={isCohesiveGuideOpen}
         onClose={() => setIsCohesiveGuideOpen(false)}
+      />
+
+      {/* Full-Screen / Expanded Task 1 Bar Chart & Visual Modal */}
+      <Task1ChartModal
+        isOpen={isChartModalOpen}
+        onClose={() => setIsChartModalOpen(false)}
+        topic={selectedTopic}
       />
 
     </div>

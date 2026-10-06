@@ -1,16 +1,18 @@
 import React from 'react';
-import { Shuffle } from 'lucide-react';
+import { Shuffle, BarChart3 } from 'lucide-react';
 
 export default function TopicTabBar({ 
   topics, 
   selectedTopic, 
   onSelectTopic, 
-  onRandomTopic 
+  onRandomTopic,
+  activeTask,
+  onOpenChartModal
 }) {
   const list = topics && topics.length > 0 ? topics : [];
 
   return (
-    <div className="space-y-1.5">
+    <div className="space-y-2">
       {/* Horizontal Topic Tabs + Random Tab */}
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-thin">
         {list.map((topic) => {
@@ -46,13 +48,44 @@ export default function TopicTabBar({
         </button>
       </div>
 
-      {/* Compact IELTS Prompt Bar */}
+      {/* Prominent, Legible IELTS Prompt Card (Larger Font & Task 1 Bar Chart Action) */}
       {selectedTopic && (
-        <div className="px-3 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs flex items-baseline gap-2">
-          <span className="font-bold text-indigo-400 uppercase tracking-wider text-[10px] shrink-0">
-            Đề bài:
-          </span>
-          <p className="text-slate-300 italic truncate font-mono text-xs">
+        <div className="px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-slate-900/95 border border-slate-800 shadow-lg space-y-1.5">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className={`text-[10px] sm:text-xs font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
+                activeTask === 'task1'
+                  ? 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30'
+                  : 'bg-purple-500/15 text-purple-300 border-purple-500/30'
+              }`}>
+                {activeTask === 'task1' ? 'Đề bài Task 1' : 'Đề bài Task 2'}
+              </span>
+              <span className="text-xs font-semibold text-slate-300">
+                {selectedTopic.vietnameseName || selectedTopic.name}
+              </span>
+              {selectedTopic.tag && (
+                <span className="text-[10px] px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 hidden md:inline">
+                  {selectedTopic.tag}
+                </span>
+              )}
+            </div>
+
+            {/* Quick Chart modal button for Task 1 */}
+            {activeTask === 'task1' && onOpenChartModal && (
+              <button
+                type="button"
+                onClick={onOpenChartModal}
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 hover:text-white border border-indigo-500/40 text-xs font-bold transition cursor-pointer shrink-0 shadow-sm"
+                title="Mở biểu đồ số liệu chi tiết"
+              >
+                <BarChart3 className="w-3.5 h-3.5 text-indigo-400" />
+                <span>Xem Bar Chart</span>
+              </button>
+            )}
+          </div>
+
+          {/* Prompt description - Large, clear font, no truncation */}
+          <p className="text-sm sm:text-[15px] font-medium text-slate-100 leading-snug font-sans select-text">
             "{selectedTopic.ieltsPrompt}"
           </p>
         </div>

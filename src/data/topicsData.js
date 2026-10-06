@@ -446,11 +446,101 @@ export const IELTS_TASK2_TOPICS = IELTS_TOPICS;
 
 export const IELTS_TASK1_TOPICS = [
   {
+    id: "task1-bar-chart",
+    name: "Bar Chart: Household Spending on Education, Housing & Leisure",
+    vietnameseName: "Biểu đồ cột: Chi tiêu hộ gia đình cho giáo dục & giải trí",
+    tag: "Task 1: Biểu đồ so sánh cột",
+    icon: "BarChart3",
+    chartType: "bar",
+    chartData: {
+      title: "Proportion of Household Budgets Spent on 3 Categories in 5 Countries (2023)",
+      unit: "% tổng chi tiêu",
+      categories: [
+        { key: "housing", label: "Housing (Nhà ở)", color: "#6366f1", bgClass: "bg-indigo-500", textClass: "text-indigo-400" },
+        { key: "education", label: "Education (Giáo dục)", color: "#10b981", bgClass: "bg-emerald-500", textClass: "text-emerald-400" },
+        { key: "recreation", label: "Recreation (Giải trí)", color: "#f59e0b", bgClass: "bg-amber-500", textClass: "text-amber-400" }
+      ],
+      series: [
+        { country: "Country A", housing: 38, education: 28, recreation: 14 },
+        { country: "Country B", housing: 35, education: 22, recreation: 12 },
+        { country: "Country C", housing: 32, education: 26, recreation: 10 },
+        { country: "Country D", housing: 30, education: 18, recreation: 15 },
+        { country: "Country E", housing: 24, education: 32, recreation: 6 }
+      ],
+      keyNotes: [
+        "Housing là khoản chi áp đảo nhất ở 4/5 quốc gia (30% - 38%), cao nhất ở Country A.",
+        "Country E (Việt Nam) là ngoại lệ duy nhất khi chi phí Giáo dục (32%) vượt qua Nhà ở (24%).",
+        "Recreation luôn là hạng mục có tỉ lệ thấp nhất ở tất cả các nước, thấp kỷ lục ở Country E (6%)."
+      ]
+    },
+    ieltsPrompt: "The bar chart illustrates the proportion of household budgets spent on education, housing, and recreation across five countries in 2023. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    vocabularies: [
+      {
+        id: "t1-bc-1",
+        word: "allocate",
+        ipa: "/ˈæl.ə.keɪt/",
+        partOfSpeech: "verb",
+        meaning: "Phân bổ, dành ngân sách hay tài nguyên cho một mục đích",
+        basicEquivalent: "spend / give money to (Band 5)",
+        synonyms: ["earmark", "apportion", "distribute"],
+        collocations: ["allocate funds to", "budget allocated for education"],
+        modelSentence: "Households in Country A allocated nearly a third of their total earnings to academic tuition."
+      },
+      {
+        id: "t1-bc-2",
+        word: "disproportionately",
+        ipa: "/ˌdɪs.prəˈpɔː.ʃən.ət.li/",
+        partOfSpeech: "adverb",
+        meaning: "Không tương xứng, chiếm tỉ trọng vượt trội hoặc áp đảo",
+        basicEquivalent: "much more / unbalanced (Band 5-6)",
+        synonyms: ["excessively", "unevenly", "overwhelmingly"],
+        collocations: ["disproportionately high", "spent disproportionately more"],
+        modelSentence: "Recreational expenses accounted for a disproportionately small fraction of expenditure in developing nations."
+      },
+      {
+        id: "t1-bc-3",
+        word: "disparity",
+        ipa: "/dɪˈspær.ə.ti/",
+        partOfSpeech: "noun",
+        meaning: "Sự chênh lệch, khoảng cách khác biệt giữa các số liệu",
+        basicEquivalent: "difference / gap (Band 5-6)",
+        synonyms: ["divergence", "gap", "inequality"],
+        collocations: ["substantial disparity", "marginal disparity between nations"],
+        modelSentence: "A substantial disparity is observable between capital city dwellers and rural families regarding education outlay."
+      }
+    ],
+    coherenceChallenges: [
+      {
+        id: "t1-bc-cc-1",
+        sentenceA: "Housing remained the most dominant expenditure category in four out of the five evaluated nations, averaging roughly 38%.",
+        sentenceARole: "Nêu hạng mục dẫn đầu (Dominant feature)",
+        prompt: "Viết câu tiếp theo (Sentence B) chỉ ra hạng mục có tỉ trọng thấp nhất và so sánh sự chênh lệch.",
+        linkingSuggestions: ["At the opposite end of the spectrum,", "Conversely, expenditure on leisure constituted", "In contrast,"],
+        modelSentenceB: "At the opposite end of the spectrum, recreational activities constituted a negligible proportion, hovering beneath 8% overall.",
+        coherenceExplanation: "Cụm 'At the opposite end of the spectrum' là cách diễn đạt C1 liên kết tương phản giữa mức chi tiêu cao nhất và thấp nhất."
+      }
+    ]
+  },
+  {
     id: "task1-line-graph",
     name: "Line Graph: Renewable vs Fossil Energy (2000-2030)",
     vietnameseName: "Biểu đồ đường: Năng lượng tái tạo vs Nhiên liệu hóa thạch",
     tag: "Task 1: Xu hướng thời gian",
     icon: "TrendingUp",
+    chartType: "line",
+    chartData: {
+      title: "Energy Consumption Trends: Fossil Fuels vs Renewable Energy (2000 - 2030)",
+      unit: "% tổng năng lượng",
+      years: ["2000", "2010", "2020", "2030 (proj.)"],
+      series: [
+        { name: "Fossil Fuels (Hóa thạch)", data: [78, 68, 52, 38], color: "#f43f5e" },
+        { name: "Renewable Energy (Tái tạo)", data: [12, 22, 39, 58], color: "#10b981" }
+      ],
+      keyNotes: [
+        "Fossil fuels giảm mạnh liên tục từ 78% năm 2000 xuống còn 38% năm 2030.",
+        "Renewable energy tăng trưởng bứt phá từ 12% lên 58%, dự kiến vượt fossil fuels vào khoảng 2026-2028."
+      ]
+    },
     ieltsPrompt: "The line graph below shows the changes in energy consumption between fossil fuels and renewable energy sources from 2000 to 2030 (including projections). Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
     vocabularies: [
       {
@@ -511,65 +601,12 @@ export const IELTS_TASK1_TOPICS = [
     ]
   },
   {
-    id: "task1-bar-chart",
-    name: "Bar Chart: Household Spending on Education & Leisure",
-    vietnameseName: "Biểu đồ cột: Chi tiêu hộ gia đình cho giáo dục & giải trí",
-    tag: "Task 1: Biểu đồ so sánh",
-    icon: "BarChart3",
-    ieltsPrompt: "The bar chart illustrates the proportion of household budgets spent on education, housing, and recreation across five countries in 2023. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
-    vocabularies: [
-      {
-        id: "t1-bc-1",
-        word: "allocate",
-        ipa: "/ˈæl.ə.keɪt/",
-        partOfSpeech: "verb",
-        meaning: "Phân bổ, dành ngân sách hay tài nguyên cho một mục đích",
-        basicEquivalent: "spend / give money to (Band 5)",
-        synonyms: ["earmark", "apportion", "distribute"],
-        collocations: ["allocate funds to", "budget allocated for education"],
-        modelSentence: "Households in Country A allocated nearly a third of their total earnings to academic tuition."
-      },
-      {
-        id: "t1-bc-2",
-        word: "disproportionately",
-        ipa: "/ˌdɪs.prəˈpɔː.ʃən.ət.li/",
-        partOfSpeech: "adverb",
-        meaning: "Không tương xứng, chiếm tỉ trọng vượt trội hoặc áp đảo",
-        basicEquivalent: "much more / unbalanced (Band 5-6)",
-        synonyms: ["excessively", "unevenly", "overwhelmingly"],
-        collocations: ["disproportionately high", "spent disproportionately more"],
-        modelSentence: "Recreational expenses accounted for a disproportionately small fraction of expenditure in developing nations."
-      },
-      {
-        id: "t1-bc-3",
-        word: "disparity",
-        ipa: "/dɪˈspær.ə.ti/",
-        partOfSpeech: "noun",
-        meaning: "Sự chênh lệch, khoảng cách khác biệt giữa các số liệu",
-        basicEquivalent: "difference / gap (Band 5-6)",
-        synonyms: ["divergence", "gap", "inequality"],
-        collocations: ["substantial disparity", "marginal disparity between nations"],
-        modelSentence: "A substantial disparity is observable between capital city dwellers and rural families regarding education outlay."
-      }
-    ],
-    coherenceChallenges: [
-      {
-        id: "t1-bc-cc-1",
-        sentenceA: "Housing remained the most dominant expenditure category in four out of the five evaluated nations, averaging roughly 38%.",
-        sentenceARole: "Nêu hạng mục dẫn đầu (Dominant feature)",
-        prompt: "Viết câu tiếp theo (Sentence B) chỉ ra hạng mục có tỉ trọng thấp nhất và so sánh sự chênh lệch.",
-        linkingSuggestions: ["At the opposite end of the spectrum,", "Conversely, expenditure on leisure constituted", "In contrast,"],
-        modelSentenceB: "At the opposite end of the spectrum, recreational activities constituted a negligible proportion, hovering beneath 8% overall.",
-        coherenceExplanation: "Cụm 'At the opposite end of the spectrum' là cách diễn đạt C1 liên kết tương phản giữa mức chi tiêu cao nhất và thấp nhất."
-      }
-    ]
-  },
-  {
     id: "task1-process",
     name: "Process Diagram: Industrial Paper Recycling Flow",
     vietnameseName: "Quy trình: Các giai đoạn tái chế giấy công nghiệp",
     tag: "Task 1: Sơ đồ quy trình",
     icon: "Layers",
+    chartType: "process",
     ieltsPrompt: "The diagram illustrates how waste paper is collected, treated, and recycled into commercial packaging. Summarise the information by selecting and reporting the main features.",
     vocabularies: [
       {

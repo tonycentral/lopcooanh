@@ -5,11 +5,8 @@ import {
   Sparkles, 
   RefreshCw, 
   Layers, 
-  HelpCircle, 
-  ArrowRight, 
-  Bot,
+  BarChart3,
   Lightbulb,
-  CheckCircle2,
   AlertCircle
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -22,9 +19,10 @@ export default function SentencePractice({
   topic, 
   targetBand, 
   selectedVocab, 
-  onSelectVocab,
   apiKey,
   studentEmail,
+  activeTask,
+  onOpenChartModal,
   onSentenceGraded 
 }) {
   const [activeStep, setActiveStep] = useState("vocab"); // "vocab" or "coherence"
@@ -216,8 +214,8 @@ export default function SentencePractice({
           {selectedVocab ? (
             <div className="p-4 rounded-2xl bg-slate-800/80 border border-indigo-500/30 shadow-lg space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-xs uppercase font-bold text-indigo-400 tracking-wider">Từ Vựng Đang Luyện:</span>
+                <div className="flex items-baseline gap-2 flex-wrap">
+                  <span className="text-xs uppercase font-bold text-indigo-400 tracking-wider">Từ Vựng:</span>
                   <span className="text-lg font-black text-white">{selectedVocab.word}</span>
                   {selectedVocab.ipa && (
                     <span className="text-xs font-mono text-indigo-300 italic font-semibold">
@@ -227,8 +225,21 @@ export default function SentencePractice({
                   <span className="text-xs text-slate-400">({selectedVocab.partOfSpeech})</span>
                 </div>
 
-                <div className="text-xs text-slate-300 font-medium">
-                  {selectedVocab.meaning}
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-slate-300 font-medium">
+                    {selectedVocab.meaning}
+                  </span>
+                  {activeTask === 'task1' && onOpenChartModal && (
+                    <button
+                      type="button"
+                      onClick={onOpenChartModal}
+                      className="px-2 py-0.5 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-500/30 text-[11px] font-bold text-indigo-300 hover:text-white transition cursor-pointer flex items-center gap-1 shrink-0"
+                      title="Xem số liệu biểu đồ Bar Chart"
+                    >
+                      <BarChart3 className="w-3 h-3" />
+                      <span>Xem Bar Chart</span>
+                    </button>
+                  )}
                 </div>
               </div>
 
