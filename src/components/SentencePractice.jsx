@@ -215,8 +215,13 @@ export default function SentencePractice({
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div className="flex items-baseline gap-2">
                   <span className="text-xs uppercase font-bold text-indigo-400 tracking-wider">Từ Vựng Đang Luyện:</span>
-                  <span className="text-xl font-black text-white">{selectedVocab.word}</span>
-                  <span className="text-xs text-indigo-300 italic font-mono">({selectedVocab.partOfSpeech})</span>
+                  <span className="text-lg font-black text-white">{selectedVocab.word}</span>
+                  {selectedVocab.ipa && (
+                    <span className="text-xs font-mono text-indigo-300 italic font-semibold">
+                      {selectedVocab.ipa}
+                    </span>
+                  )}
+                  <span className="text-xs text-slate-400">({selectedVocab.partOfSpeech})</span>
                 </div>
 
                 <div className="text-xs text-slate-300 font-medium">

@@ -35,8 +35,8 @@ export default function Header({
   const currentBandInfo = BAND_DESCRIPTORS[targetBand] || BAND_DESCRIPTORS["7.0"];
 
   return (
-    <header className="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-3">
+    <header className="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-md shrink-0">
+      <div className="w-full px-3 sm:px-5 h-14 flex items-center justify-between gap-2.5">
         
         {/* Logo & App title - Clickable to return to Welcome Page */}
         <div 

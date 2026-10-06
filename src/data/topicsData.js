@@ -10,6 +10,7 @@ export const IELTS_TOPICS = [
       {
         id: "env-1",
         word: "mitigate",
+        ipa: "/ˈmɪt.ɪ.ɡeɪt/",
         partOfSpeech: "verb",
         meaning: "Làm dịu bớt, giảm nhẹ tác hại hoặc mức độ nghiêm trọng",
         basicEquivalent: "reduce / lessen (Band 5-6)",
@@ -20,6 +21,7 @@ export const IELTS_TOPICS = [
       {
         id: "env-2",
         word: "exacerbate",
+        ipa: "/ɪɡˈzæs.ər.beɪt/",
         partOfSpeech: "verb",
         meaning: "Làm trầm trọng thêm, khiến tình hình tồi tệ hơn",
         basicEquivalent: "make worse (Band 5-6)",
@@ -30,6 +32,7 @@ export const IELTS_TOPICS = [
       {
         id: "env-3",
         word: "detrimental",
+        ipa: "/ˌdet.rɪˈmen.təl/",
         partOfSpeech: "adjective",
         meaning: "Gây tổn hại nghiêm trọng, có hại",
         basicEquivalent: "harmful / bad (Band 5-6)",
@@ -40,6 +43,7 @@ export const IELTS_TOPICS = [
       {
         id: "env-4",
         word: "sustainable",
+        ipa: "/səˈsteɪ.nə.bəl/",
         partOfSpeech: "adjective",
         meaning: "Bền vững, có thể duy trì lâu dài mà không cạn kiệt tài nguyên",
         basicEquivalent: "eco-friendly / green (Band 6)",
@@ -50,6 +54,7 @@ export const IELTS_TOPICS = [
       {
         id: "env-5",
         word: "imperative",
+        ipa: "/ɪmˈper.ə.tɪv/",
         partOfSpeech: "adjective / noun",
         meaning: "Cấp bách, mang tính chất bắt buộc, không thể trì hoãn",
         basicEquivalent: "very important / necessary (Band 5-6)",
@@ -90,6 +95,7 @@ export const IELTS_TOPICS = [
       {
         id: "edu-1",
         word: "foster",
+        ipa: "/ˈfɒs.tər/",
         partOfSpeech: "verb",
         meaning: "Nuôi dưỡng, thúc đẩy, tạo điều kiện phát triển",
         basicEquivalent: "encourage / help develop (Band 5-6)",
@@ -100,6 +106,7 @@ export const IELTS_TOPICS = [
       {
         id: "edu-2",
         word: "obsolete",
+        ipa: "/ˈɒb.sə.liːt/",
         partOfSpeech: "adjective",
         meaning: "Lỗi thời, không còn được sử dụng do có thứ tiên tiến hơn thay thế",
         basicEquivalent: "old-fashioned / out of date (Band 5-6)",
@@ -110,6 +117,7 @@ export const IELTS_TOPICS = [
       {
         id: "edu-3",
         word: "holistic",
+        ipa: "/həʊˈlɪs.tɪk/",
         partOfSpeech: "adjective",
         meaning: "Toàn diện, xem xét tổng thể mọi khía cạnh",
         basicEquivalent: "complete / comprehensive (Band 6)",
@@ -120,6 +128,7 @@ export const IELTS_TOPICS = [
       {
         id: "edu-4",
         word: "paramount",
+        ipa: "/ˈpær.ə.maʊnt/",
         partOfSpeech: "adjective",
         meaning: "Tối quan trọng, có tầm quan trọng tối cao",
         basicEquivalent: "most important (Band 5-6)",
@@ -130,6 +139,7 @@ export const IELTS_TOPICS = [
       {
         id: "edu-5",
         word: "disparity",
+        ipa: "/dɪˈspær.ə.ti/",
         partOfSpeech: "noun",
         meaning: "Sự chênh lệch, sự bất bình đẳng rõ rệt",
         basicEquivalent: "difference / inequality (Band 5-6)",
@@ -170,6 +180,7 @@ export const IELTS_TOPICS = [
       {
         id: "tech-1",
         word: "ubiquitous",
+        ipa: "/juːˈbɪk.wɪ.təs/",
         partOfSpeech: "adjective",
         meaning: "Phổ biến khắp nơi, có mặt ở mọi chỗ",
         basicEquivalent: "common / everywhere (Band 5-6)",
@@ -180,6 +191,7 @@ export const IELTS_TOPICS = [
       {
         id: "tech-2",
         word: "supersede",
+        ipa: "/ˌsuː.pəˈsiːd/",
         partOfSpeech: "verb",
         meaning: "Thay thế vị trí của cái cũ bằng cái mới ưu việt hơn",
         basicEquivalent: "replace (Band 5-6)",
@@ -190,6 +202,7 @@ export const IELTS_TOPICS = [
       {
         id: "tech-3",
         word: "profound",
+        ipa: "/prəˈfaʊnd/",
         partOfSpeech: "adjective",
         meaning: "Sâu sắc, có tầm ảnh hưởng to lớn và toàn diện",
         basicEquivalent: "deep / great (Band 5-6)",
@@ -200,6 +213,7 @@ export const IELTS_TOPICS = [
       {
         id: "tech-4",
         word: "upskill",
+        ipa: "/ˌʌpˈskɪl/",
         partOfSpeech: "verb",
         meaning: "Học nâng cao kỹ năng mới để thích ứng với thị trường lao động",
         basicEquivalent: "learn new skills (Band 5-6)",
@@ -210,6 +224,7 @@ export const IELTS_TOPICS = [
       {
         id: "tech-5",
         word: "ethical",
+        ipa: "/ˈeθ.ɪ.kəl/",
         partOfSpeech: "adjective",
         meaning: "Thuộc về đạo đức, phù hợp với chuẩn mực luân lý",
         basicEquivalent: "moral / good (Band 5-6)",
@@ -241,6 +256,7 @@ export const IELTS_TOPICS = [
       {
         id: "health-1",
         word: "sedentary",
+        ipa: "/ˈsed.ən.tər.i/",
         partOfSpeech: "adjective",
         meaning: "Ngồi nhiều một chỗ, thụ động, ít vận động thể chất",
         basicEquivalent: "inactive / sitting a lot (Band 5-6)",
@@ -251,6 +267,7 @@ export const IELTS_TOPICS = [
       {
         id: "health-2",
         word: "deterrent",
+        ipa: "/dɪˈter.ənt/",
         partOfSpeech: "noun",
         meaning: "Biện pháp răn đe, yếu tố ngăn chặn hành vi tiêu cực",
         basicEquivalent: "prevention / barrier (Band 5-6)",
@@ -261,6 +278,7 @@ export const IELTS_TOPICS = [
       {
         id: "health-3",
         word: "alleviate",
+        ipa: "/əˈliː.vi.eɪt/",
         partOfSpeech: "verb",
         meaning: "Làm giảm nhẹ bớt gánh nặng, cơn đau hoặc áp lực",
         basicEquivalent: "ease / make less painful (Band 5-6)",
@@ -271,6 +289,7 @@ export const IELTS_TOPICS = [
       {
         id: "health-4",
         word: "prevalent",
+        ipa: "/ˈprev.əl.ənt/",
         partOfSpeech: "adjective",
         meaning: "Thịnh hành, phổ biến rộng rãi trong một cộng đồng",
         basicEquivalent: "common / widespread (Band 5-6)",
@@ -302,6 +321,7 @@ export const IELTS_TOPICS = [
       {
         id: "crime-1",
         word: "rehabilitate",
+        ipa: "/ˌriː.həˈbɪl.ɪ.teɪt/",
         partOfSpeech: "verb",
         meaning: "Cải tạo, giáo dục phục hồi nhân phẩm cho người lầm lỡ",
         basicEquivalent: "help reform / change (Band 5-6)",
@@ -312,6 +332,7 @@ export const IELTS_TOPICS = [
       {
         id: "crime-2",
         word: "recidivism",
+        ipa: "/rɪˈsɪd.ɪ.vɪ.zəm/",
         partOfSpeech: "noun",
         meaning: "Tỷ lệ tái phạm tội của người từng thụ án",
         basicEquivalent: "re-offending rate (Band 6)",
@@ -322,6 +343,7 @@ export const IELTS_TOPICS = [
       {
         id: "crime-3",
         word: "stringent",
+        ipa: "/ˈstrɪn.dʒənt/",
         partOfSpeech: "adjective",
         meaning: "Nghiêm ngặt, chặt chẽ, khắt khe",
         basicEquivalent: "strict / tough (Band 5-6)",
@@ -332,6 +354,7 @@ export const IELTS_TOPICS = [
       {
         id: "crime-4",
         word: "reintegrate",
+        ipa: "/ˌriːˈɪn.tɪ.ɡreɪt/",
         partOfSpeech: "verb",
         meaning: "Tái hòa nhập cộng đồng sau một thời gian cách ly",
         basicEquivalent: "fit back into society (Band 5-6)",
@@ -363,6 +386,7 @@ export const IELTS_TOPICS = [
       {
         id: "glob-1",
         word: "homogenize",
+        ipa: "/həˈmɒdʒ.ə.naɪz/",
         partOfSpeech: "verb",
         meaning: "Đồng nhất hóa, làm cho mọi thứ trở nên giống hệt nhau, mất đi nét riêng",
         basicEquivalent: "make the same (Band 5-6)",
@@ -373,6 +397,7 @@ export const IELTS_TOPICS = [
       {
         id: "glob-2",
         word: "indigenous",
+        ipa: "/ɪnˈdɪdʒ.ɪ.nəs/",
         partOfSpeech: "adjective",
         meaning: "Bản địa, thuộc về nguồn gốc nguyên bản của một vùng đất",
         basicEquivalent: "local / native (Band 5-6)",
@@ -383,6 +408,7 @@ export const IELTS_TOPICS = [
       {
         id: "glob-3",
         word: "preserve",
+        ipa: "/prɪˈzɜːv/",
         partOfSpeech: "verb",
         meaning: "Bảo tồn, gìn giữ cho thế hệ mai sau",
         basicEquivalent: "protect / keep (Band 5-6)",
@@ -393,6 +419,7 @@ export const IELTS_TOPICS = [
       {
         id: "glob-4",
         word: "erosion",
+        ipa: "/ɪˈrəʊ.ʒən/",
         partOfSpeech: "noun",
         meaning: "Sự xói mòn, mai một dần theo thời gian",
         basicEquivalent: "loss / weakening (Band 5-6)",
@@ -429,6 +456,7 @@ export const IELTS_TASK1_TOPICS = [
       {
         id: "t1-lg-1",
         word: "outstrip",
+        ipa: "/ˌaʊtˈstrɪp/",
         partOfSpeech: "verb",
         meaning: "Vượt xa, vượt trội hơn về số lượng hoặc tốc độ tăng",
         basicEquivalent: "exceed / surpass (Band 5-6)",
@@ -439,6 +467,7 @@ export const IELTS_TASK1_TOPICS = [
       {
         id: "t1-lg-2",
         word: "plateau",
+        ipa: "/ˈplæt.əʊ/",
         partOfSpeech: "verb / noun",
         meaning: "Đạt trạng thái bình ổn, đi ngang sau giai đoạn tăng nhanh",
         basicEquivalent: "stay unchanged / level off (Band 5-6)",
@@ -449,6 +478,7 @@ export const IELTS_TASK1_TOPICS = [
       {
         id: "t1-lg-3",
         word: "fluctuate",
+        ipa: "/ˈflʌk.tʃu.eɪt/",
         partOfSpeech: "verb",
         meaning: "Dao động lên xuống thất thường qua các mốc thời gian",
         basicEquivalent: "go up and down (Band 5)",
@@ -459,6 +489,7 @@ export const IELTS_TASK1_TOPICS = [
       {
         id: "t1-lg-4",
         word: "trajectory",
+        ipa: "/trəˈdʒek.tər.i/",
         partOfSpeech: "noun",
         meaning: "Quỹ đạo, chiều hướng phát triển liên tục",
         basicEquivalent: "trend / direction (Band 6)",
@@ -490,6 +521,7 @@ export const IELTS_TASK1_TOPICS = [
       {
         id: "t1-bc-1",
         word: "allocate",
+        ipa: "/ˈæl.ə.keɪt/",
         partOfSpeech: "verb",
         meaning: "Phân bổ, dành ngân sách hay tài nguyên cho một mục đích",
         basicEquivalent: "spend / give money to (Band 5)",
@@ -500,6 +532,7 @@ export const IELTS_TASK1_TOPICS = [
       {
         id: "t1-bc-2",
         word: "disproportionately",
+        ipa: "/ˌdɪs.prəˈpɔː.ʃən.ət.li/",
         partOfSpeech: "adverb",
         meaning: "Không tương xứng, chiếm tỉ trọng vượt trội hoặc áp đảo",
         basicEquivalent: "much more / unbalanced (Band 5-6)",
@@ -510,6 +543,7 @@ export const IELTS_TASK1_TOPICS = [
       {
         id: "t1-bc-3",
         word: "disparity",
+        ipa: "/dɪˈspær.ə.ti/",
         partOfSpeech: "noun",
         meaning: "Sự chênh lệch, khoảng cách khác biệt giữa các số liệu",
         basicEquivalent: "difference / gap (Band 5-6)",
@@ -541,6 +575,7 @@ export const IELTS_TASK1_TOPICS = [
       {
         id: "t1-pr-1",
         word: "commence",
+        ipa: "/kəˈmens/",
         partOfSpeech: "verb",
         meaning: "Bắt đầu, khởi sự một quy trình công nghiệp",
         basicEquivalent: "start / begin (Band 5)",
@@ -551,6 +586,7 @@ export const IELTS_TASK1_TOPICS = [
       {
         id: "t1-pr-2",
         word: "undergo",
+        ipa: "/ˌʌn.dəˈɡəʊ/",
         partOfSpeech: "verb",
         meaning: "Trải qua một công đoạn xử lý vật lý hoặc hóa học",
         basicEquivalent: "experience / go through (Band 5-6)",
@@ -561,6 +597,7 @@ export const IELTS_TASK1_TOPICS = [
       {
         id: "t1-pr-3",
         word: "subsequently",
+        ipa: "/ˈsʌb.sɪ.kwənt.li/",
         partOfSpeech: "adverb",
         meaning: "Sau đó, ở giai đoạn tiếp theo của tiến trình",
         basicEquivalent: "then / after that (Band 5)",
