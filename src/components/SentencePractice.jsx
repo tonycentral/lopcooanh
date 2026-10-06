@@ -22,6 +22,142 @@ import {
 } from '../services/evaluator';
 import { saveHistoryEntry } from '../services/storage';
 
+/**
+ * Component hiển thị chi tiết các phần nâng cấp:
+ * Phân tích chuyên sâu từ vựng & cụm từ (IPA, từ loại, ngữ nghĩa, từ cơ bản thay thế),
+ * ngữ pháp học thuật và kỹ thuật chuyển câu.
+ */
+function UpgradeDetailsBreakdown({ result, targetBand, isPart3 = false }) {
+  if (!result) return null;
+  const analysis = result.detailedAnalysis;
+  const upgradeDetails = result.upgradeDetails || [];
+
+  return (
+    <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-3.5 animate-fadeIn">
+      
+      {/* Title Ribbon */}
+      <div className="flex items-center justify-between pb-2 border-b border-slate-800/80">
+        <span className="text-xs font-black text-slate-200 flex items-center gap-1.5 uppercase tracking-wide">
+          <Lightbulb className="w-4 h-4 text-amber-400" />
+          Chi tiết các phần nâng cấp chuẩn Band {targetBand}:
+        </span>
+        <span className="text-[10px] text-blue-300 bg-blue-500/10 px-2.5 py-0.5 rounded-full font-mono border border-blue-500/20 font-bold">
+          {isPart3 ? "Cohesion & Lexical Breakdown" : "Lexical & Grammar Breakdown"}
+        </span>
+      </div>
+
+      {/* 1. CHI TIẾT TỪ VỰNG & CỤM TỪ NÂNG CẤP (Kèm Phiên âm IPA & Ngữ nghĩa) */}
+      {analysis?.vocabularyList && analysis.vocabularyList.length > 0 ? (
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1.5">
+              <span>📖</span> Từ vựng &amp; Cụm từ học thuật trong câu:
+            </span>
+            <span className="text-[10px] text-slate-400 italic">
+              (Bao gồm phiên âm IPA &amp; giải nghĩa chi tiết)
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {analysis.vocabularyList.map((item, idx) => (
+              <div 
+                key={idx} 
+                className={`p-2.5 rounded-xl border text-xs flex flex-col justify-between gap-1.5 transition ${
+                  item.isTarget 
+                    ? "bg-blue-950/50 border-blue-500/50 ring-1 ring-blue-500/30" 
+                    : "bg-slate-900/80 border-slate-800/90 hover:border-slate-700"
+                }`}
+              >
+                <div>
+                  <div className="flex items-baseline justify-between gap-1 flex-wrap">
+                    <span className="font-black text-white text-sm tracking-tight">{item.word}</span>
+                    <span className="text-[11px] font-mono text-blue-300 font-bold italic">{item.ipa}</span>
+                  </div>
+                  
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                    <span className="text-[9px] uppercase font-bold text-slate-400 px-1.5 py-0.2 rounded bg-slate-800 border border-slate-700/60 font-mono">
+                      {item.pos}
+                    </span>
+                    {item.isTarget && (
+                      <span className="text-[9px] uppercase font-black text-blue-300 bg-blue-500/20 px-1.5 py-0.2 rounded border border-blue-500/40">
+                        Từ đang luyện
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="text-[11px] text-slate-200 leading-relaxed font-sans">
+                  <strong className="text-slate-300 font-bold">Nghĩa:</strong> {item.meaning}
+                </div>
+
+                {item.replaces && (
+                  <div className="text-[10px] text-slate-400 border-t border-slate-800/80 pt-1 flex items-start gap-1">
+                    <span className="text-emerald-400 font-bold shrink-0">🔄 Nâng cấp từ:</span>
+                    <span className="italic text-slate-300">{item.replaces}</span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      {/* 2. ĐIỂM SÁNG NGỮ PHÁP (Grammar Highlights) */}
+      {analysis?.grammarPoints && analysis.grammarPoints.length > 0 && (
+        <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-800/80 space-y-1.5 text-xs">
+          <span className="font-bold text-blue-300 flex items-center gap-1.5 text-[11px] uppercase tracking-wider">
+            <span>⚙️</span> Điểm sáng ngữ pháp (Grammar Architecture):
+          </span>
+          {analysis.grammarPoints.map((g, idx) => (
+            <div key={idx} className="space-y-0.5">
+              <div className="font-semibold text-slate-200">
+                • <strong className="text-white">{g.title}:</strong>{" "}
+                <code className="text-[10px] text-blue-300 bg-slate-950 px-1.5 py-0.5 rounded border border-blue-900/40 font-mono font-bold">
+                  {g.formula}
+                </code>
+              </div>
+              <p className="text-[11px] text-slate-400 pl-3 leading-relaxed">{g.detail}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* 3. KỸ THUẬT CHUYỂN CÂU & MẠCH LẠC (Cohesion - Part 3) */}
+      {analysis?.cohesionPoints && analysis.cohesionPoints.length > 0 && (
+        <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-800/80 space-y-1.5 text-xs">
+          <span className="font-bold text-sky-300 flex items-center gap-1.5 text-[11px] uppercase tracking-wider">
+            <span>🔗</span> Kỹ thuật chuyển câu &amp; Mạch lạc (Cohesion &amp; Logic Transition):
+          </span>
+          {analysis.cohesionPoints.map((c, idx) => (
+            <div key={idx} className="space-y-0.5">
+              <div className="font-semibold text-slate-200 flex items-baseline gap-1.5 flex-wrap">
+                <span>•</span>
+                <strong className="text-white">{c.marker}</strong>
+                <span className="text-[10px] font-mono text-sky-300 italic font-bold">{c.ipa}</span>
+                <span className="text-[10px] text-slate-400">({c.type})</span>
+              </div>
+              <p className="text-[11px] text-slate-400 pl-3 leading-relaxed">{c.detail}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Fallback to text list if no detailedAnalysis */}
+      {(!analysis || !analysis.vocabularyList) && upgradeDetails && upgradeDetails.length > 0 && (
+        <ul className="space-y-1.5 text-xs text-slate-300">
+          {upgradeDetails.map((detail, idx) => (
+            <li key={idx} className="flex items-start gap-1.5">
+              <span className="text-blue-400 font-bold">•</span>
+              <span>{detail}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+    </div>
+  );
+}
+
 export default function SentencePractice({ 
   topic, 
   targetBand = "7.0", 
@@ -580,22 +716,7 @@ export default function SentencePractice({
               </div>
 
               {/* CHI TIẾT CÁC PHẦN NÂNG CẤP */}
-              {part2Result.upgradeDetails && part2Result.upgradeDetails.length > 0 && (
-                <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 space-y-1.5">
-                  <span className="text-xs font-bold text-slate-300 flex items-center gap-1">
-                    <Lightbulb className="w-3.5 h-3.5 text-amber-400" />
-                    Chi tiết các phần nâng cấp:
-                  </span>
-                  <ul className="space-y-1 text-xs text-slate-400">
-                    {part2Result.upgradeDetails.map((detail, idx) => (
-                      <li key={idx} className="flex items-start gap-1.5">
-                        <span className="text-blue-400 font-bold">•</span>
-                        <span>{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              <UpgradeDetailsBreakdown result={part2Result} targetBand={targetBand} isPart3={false} />
 
             </div>
           )}
@@ -765,22 +886,7 @@ export default function SentencePractice({
               </div>
 
               {/* CHI TIẾT CÁC PHẦN NÂNG CẤP */}
-              {part3Result.upgradeDetails && part3Result.upgradeDetails.length > 0 && (
-                <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 space-y-1.5">
-                  <span className="text-xs font-bold text-slate-300 flex items-center gap-1">
-                    <Lightbulb className="w-3.5 h-3.5 text-amber-400" />
-                    Chi tiết các phần nâng cấp:
-                  </span>
-                  <ul className="space-y-1 text-xs text-slate-400">
-                    {part3Result.upgradeDetails.map((detail, idx) => (
-                      <li key={idx} className="flex items-start gap-1.5">
-                        <span className="text-blue-400 font-bold">•</span>
-                        <span>{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              <UpgradeDetailsBreakdown result={part3Result} targetBand={targetBand} isPart3={true} />
 
             </div>
           )}

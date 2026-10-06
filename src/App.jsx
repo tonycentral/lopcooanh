@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import WelcomePage from './components/WelcomePage';
 import ContactModal from './components/ContactModal';
@@ -11,6 +11,7 @@ import HistoryDrawer from './components/HistoryDrawer';
 import CohesiveGuideModal from './components/CohesiveGuideModal';
 import Task1Visualizer from './components/Task1Visualizer';
 import Task1ChartModal from './components/Task1ChartModal';
+import AdminDashboard from './components/AdminDashboard';
 
 import { BarChart3, BookOpen } from 'lucide-react';
 
@@ -36,8 +37,51 @@ import {
 } from './services/userService';
 
 export default function App() {
-  // Current view: 'welcome' (Trang chào mừng) or 'practice' (Phòng luyện viết)
+  // Current view: 'welcome' | 'practice' | 'admin' (ẩn bí mật)
   const [currentView, setCurrentView] = useState('welcome');
+
+  // Lắng nghe link ẩn bí mật vào Admin Dashboard (URL #admin, #admin-cooanh, ?admin=true) hoặc Ctrl+Shift+A
+  useEffect(() => {
+    const checkSecretAdminAccess = () => {
+      const hash = window.location.hash.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      const path = window.location.pathname.toLowerCase();
+      if (
+        hash === '#admin' || 
+        hash === '#admin-cooanh' || 
+        search.includes('admin=true') ||
+        search.includes('admin=cooanh') ||
+        path.endsWith('/admin')
+      ) {
+        setCurrentView('admin');
+      }
+    };
+
+    checkSecretAdminAccess();
+    window.addEventListener('hashchange', checkSecretAdminAccess);
+
+    // Phím tắt bí mật: Ctrl + Shift + A
+    const handleKeyDown = (e) => {
+      if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        setCurrentView((prev) => (prev === 'admin' ? 'welcome' : 'admin'));
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('hashchange', checkSecretAdminAccess);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  const handleExitAdmin = () => {
+    // Xóa dấu vết hash trên thanh địa chỉ trình duyệt khi thoát
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+    setCurrentView('welcome');
+  };
 
   // Student Email State: Pop-up automatically if not found
   const [studentEmail, setStudentEmail] = useState(() => getSavedEmail());
@@ -170,8 +214,10 @@ export default function App() {
   return (
     <div className="bg-slate-950 text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-200">
       
-      {/* If view is 'welcome', render WelcomePage */}
-      {currentView === 'welcome' ? (
+      {/* If view is 'admin', render AdminDashboard (Truy cập qua link ẩn) */}
+      {currentView === 'admin' ? (
+        <AdminDashboard onExitAdmin={handleExitAdmin} />
+      ) : currentView === 'welcome' ? (
         <WelcomePage
           studentEmail={studentEmail}
           targetBand={targetBand}

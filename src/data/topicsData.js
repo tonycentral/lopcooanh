@@ -42,9 +42,9 @@ const RAW_IELTS_TOPICS = [
             "8.5": "The implementation of stringent environmental jurisprudence is of paramount importance to comprehensively mitigate irreversible anthropogenic climate degradation."
           },
           upgradeDetails: [
-            "Từ vựng: 'giảm nhẹ' được nâng cấp thành động từ C1 'mitigate' kết hợp cùng danh từ 'consequences/ramifications'.",
-            "Collocation: 'stringent environmental legislation' (luật môi trường nghiêm ngặt) thay vì 'strict laws'.",
-            "Ngữ pháp: Cấu trúc giả định thức 'It is imperative that... enforce' hoặc danh từ hóa 'Enacting rigorous statutory frameworks'."
+            "Từ vựng: 'mitigate' /ˈmɪt.ɪ.ɡeɪt/ (verb: làm dịu bớt, giảm nhẹ) thay thế cho 'reduce/lessen', kết hợp danh từ 'ramifications' /ˌræm.ɪ.fɪˈkeɪ.ʃənz/ (hệ lụy phức tạp).",
+            "Collocation: 'stringent environmental legislation' (luật môi trường nghiêm ngặt) với 'stringent' /ˈstrɪn.dʒənt/ (nghiêm ngặt) thay vì 'strict laws'.",
+            "Ngữ pháp: Cấu trúc giả định thức 'It is imperative that + S + V-bare' hoặc danh từ hóa 'Enacting rigorous statutory frameworks' (Ban hành khuôn khổ luật định khắt khe)."
           ]
         },
         twoSentencePractice: {
@@ -60,8 +60,8 @@ const RAW_IELTS_TOPICS = [
             "8.5": "Unchecked industrial expansion has precipitated unprecedented atmospheric emissions of hazardous pollutants. Consequently, industrial conglomerates are duty-bound to pioneer sustainable technologies in order to systematically mitigate catastrophic ecological disruptions."
           },
           upgradeDetails: [
-            "Cách chuyển câu (Cohesion): Sử dụng liên từ C1 'Consequently' hoặc 'As a direct consequence' để móc xích nguyên nhân ở Câu 1 với giải pháp ở Câu 2.",
-            "Từ vựng học thuật: 'rampant industrial proliferation' (sự bùng nổ công nghiệp không kiểm soát), 'discharged' thay vì 'xả thải', 'ecological deterioration'.",
+            "Cách chuyển câu (Cohesion): Liên từ C1 'Consequently,' /ˈkɒn.sɪ.kwənt.li/ (Do đó, như một hệ quả tất yếu) để móc xích nguyên nhân ở Câu 1 với giải pháp ở Câu 2.",
+            "Từ vựng học thuật: 'rampant industrial proliferation' /ˌræm.pənt ɪnˌdʌs.tri.əl prəˌlɪf.ərˈeɪ.ʃən/ (sự bùng nổ công nghiệp không kiểm soát), 'discharged' /dɪsˈtʃɑːdʒd/ (xả thải), 'ecological deterioration' /ˌiː.kəˈlɒdʒ.ɪ.kəl dɪˌtɪə.ri.əˈreɪ.ʃən/ (suy thoái sinh thái).",
             "Mạch lập luận logic: Câu 1 nêu thực trạng khẩn cấp, Câu 2 dùng đại từ quy chiếu và mục đích kép để đạt điểm Task Response & Coherence Band 8.0+."
           ]
         }
@@ -703,6 +703,396 @@ const RAW_IELTS_TOPICS = [
         collocations: ["ancient customs", "local customs", "observe religious customs"],
         modelSentence: "Observing local customs when traveling overseas demonstrates fundamental respect for host populations.",
         vietnameseSentence: "Tuân thủ các phong tục địa phương khi du lịch nước ngoài thể hiện sự tôn trọng cơ bản đối với người bản xứ."
+      }
+    ]
+  },
+  {
+    id: "health-2026",
+    name: "Health, Self-Care & Mental Wellbeing (2026 Trend)",
+    vietnameseName: "Sức khỏe tinh thần & Tự điều trị (2026)",
+    tag: "Đề mới 2026",
+    icon: "HeartPulse",
+    ieltsPrompt: "These days, many people attempt to treat minor illnesses at home by themselves rather than consulting medical practitioners. Others argue that self-medication is hazardous. Discuss both views and give your opinion.",
+    vocabularies: [
+      {
+        id: "hlth-1",
+        word: "self-medication",
+        ipa: "/ˌself.med.ɪˈkeɪ.ʃən/",
+        partOfSpeech: "noun",
+        meaning: "Hành vi tự mua thuốc và tự điều trị mà không có chỉ định y khoa",
+        basicEquivalent: "taking medicine by yourself (Band 5)",
+        synonyms: ["unprescribed treatment", "self-treatment", "autonomous healing"],
+        collocations: ["risks of self-medication", "practice self-medication", "curb self-medication"],
+        modelSentence: "Rampant self-medication without professional oversight poses severe health risks and accelerates antibiotic resistance.",
+        vietnameseSentence: "Việc tự ý dùng thuốc tràn lan mà không có sự giám sát của chuyên gia gây ra những rủi ro sức khỏe nghiêm trọng và đẩy nhanh tình trạng kháng kháng sinh."
+      },
+      {
+        id: "hlth-2",
+        word: "ailment",
+        ipa: "/ˈeɪl.mənt/",
+        partOfSpeech: "noun",
+        meaning: "Chứng bệnh nhẹ, cảm sốt hoặc đau ốm thông thường",
+        basicEquivalent: "minor illness / sickness (Band 5)",
+        synonyms: ["indisposition", "affliction", "minor disorder", "complaint"],
+        collocations: ["minor ailments", "common physical ailments", "treat seasonal ailments"],
+        modelSentence: "While over-the-counter remedies may relieve minor ailments, underlying chronic disorders often remain untreated.",
+        vietnameseSentence: "Mặc dù các loại thuốc không kê đơn có thể xoa dịu những chứng bệnh nhẹ, nhưng các rối loạn mãn tính tiềm ẩn thường bị bỏ sót."
+      },
+      {
+        id: "hlth-3",
+        word: "hazardous",
+        ipa: "/ˈhæz.ə.dəs/",
+        partOfSpeech: "adjective",
+        meaning: "Hiểm nguy, tiềm ẩn rủi ro khôn lường đối với an toàn hoặc tính mạng",
+        basicEquivalent: "dangerous / risky (Band 5-6)",
+        synonyms: ["perilous", "precarious", "detrimental", "jeopardizing"],
+        collocations: ["hazardous practice", "hazardous to health", "potentially hazardous substances"],
+        modelSentence: "Relying exclusively on unverified health tips from social media can be exceptionally hazardous to patient recovery.",
+        vietnameseSentence: "Chỉ dựa vào các mẹo sức khỏe chưa kiểm chứng trên mạng xã hội có thể cực kỳ nguy hiểm cho sự hồi phục của bệnh nhân."
+      },
+      {
+        id: "hlth-4",
+        word: "consultation",
+        ipa: "/ˌkɒn.sʌlˈteɪ.ʃən/",
+        partOfSpeech: "noun",
+        meaning: "Buổi thăm khám, hội chẩn hoặc tư vấn chuyên môn từ bác sĩ",
+        basicEquivalent: "doctor visit / meeting a doctor (Band 5)",
+        synonyms: ["clinical appointment", "medical examination", "professional advice"],
+        collocations: ["medical consultation", "schedule a consultation", "undergo clinical consultation"],
+        modelSentence: "Timely consultation with healthcare professionals ensures accurate diagnoses before conditions escalate into critical stages.",
+        vietnameseSentence: "Việc thăm khám kịp thời với các chuyên gia y tế đảm bảo chẩn đoán chính xác trước khi bệnh tình diễn biến nguy kịch."
+      },
+      {
+        id: "hlth-5",
+        word: "preventative",
+        ipa: "/prɪˈven.tə.tɪv/",
+        partOfSpeech: "adjective",
+        meaning: "Mang tính phòng ngừa trước khi phát sinh hậu quả hoặc biến chứng",
+        basicEquivalent: "preventing / stopping before it happens (Band 5)",
+        synonyms: ["prophylactic", "precautionary", "anticipatory"],
+        collocations: ["preventative healthcare", "preventative measures", "preventative medicine"],
+        modelSentence: "Allocating national budgets to preventative healthcare reduces the long-term economic strain on public hospitals.",
+        vietnameseSentence: "Phân bổ ngân sách quốc gia cho y tế dự phòng giúp giảm bớt gánh nặng kinh tế lâu dài lên các bệnh viện công lập."
+      },
+      {
+        id: "hlth-6",
+        word: "wellbeing",
+        ipa: "/ˈwelˌbiː.ɪŋ/",
+        partOfSpeech: "noun",
+        meaning: "Trạng thái khỏe mạnh và hạnh phúc toàn diện cả thể chất lẫn tinh thần",
+        basicEquivalent: "health and happiness (Band 5)",
+        synonyms: ["holistic health", "welfare", "vitality", "soundness"],
+        collocations: ["mental wellbeing", "physical wellbeing", "enhance overall wellbeing"],
+        modelSentence: "Modern corporate cultures must prioritize employee mental wellbeing to sustain productivity and mitigate chronic stress.",
+        vietnameseSentence: "Văn hóa doanh nghiệp hiện đại phải ưu tiên sức khỏe tinh thần của nhân viên để duy trì năng suất và giảm thiểu căng thẳng mãn tính."
+      },
+      {
+        id: "hlth-7",
+        word: "burnout",
+        ipa: "/ˈbɜːn.aʊt/",
+        partOfSpeech: "noun",
+        meaning: "Hội chứng kiệt sức thể chất và suy sụp tinh thần do căng thẳng kéo dài",
+        basicEquivalent: "extreme tiredness from work (Band 5)",
+        synonyms: ["physical exhaustion", "mental fatigue", "nervous collapse"],
+        collocations: ["occupational burnout", "suffer from burnout", "mitigate workplace burnout"],
+        modelSentence: "Prolonged overtime without sufficient psychological recuperation inevitably precipitates severe occupational burnout.",
+        vietnameseSentence: "Làm thêm giờ kéo dài mà không có thời gian hồi phục tâm lý thỏa đáng chắc chắn sẽ dẫn đến tình trạng kiệt sức nghề nghiệp nghiêm trọng."
+      },
+      {
+        id: "hlth-8",
+        word: "remedy",
+        ipa: "/ˈrem.ə.di/",
+        partOfSpeech: "noun / verb",
+        meaning: "Biện pháp chữa trị, bài thuốc hoặc giải pháp xoa dịu bệnh tình",
+        basicEquivalent: "cure / treatment / solution (Band 5)",
+        synonyms: ["therapeutic solution", "panacea", "antidote", "countermeasure"],
+        collocations: ["herbal remedy", "effective remedy for", "remedy the deficiency"],
+        modelSentence: "Natural remedies can complement conventional medical therapies but should never completely supplant scientifically validated prescriptions.",
+        vietnameseSentence: "Các bài thuốc tự nhiên có thể bổ trợ cho liệu pháp y học nhưng không bao giờ được thay thế hoàn toàn đơn thuốc đã được kiểm chứng khoa học."
+      },
+      {
+        id: "hlth-9",
+        word: "sedentary",
+        ipa: "/ˈsed.ən.tər.i/",
+        partOfSpeech: "adjective",
+        meaning: "Lối sống thụ động, ngồi nhiều một chỗ và ít vận động thể chất",
+        basicEquivalent: "sitting too much / inactive (Band 5)",
+        synonyms: ["inactive", "desk-bound", "dormant", "motionless"],
+        collocations: ["sedentary lifestyle", "sedentary habits", "desk-bound sedentary occupations"],
+        modelSentence: "Adopting a sedentary lifestyle dramatically increases the vulnerability of white-collar workers to cardiovascular complications.",
+        vietnameseSentence: "Lối sống thụ động ngồi nhiều làm gia tăng đáng kể nguy cơ mắc các biến chứng tim mạch ở nhân viên văn phòng."
+      },
+      {
+        id: "hlth-10",
+        word: "diagnose",
+        ipa: "/ˈdaɪ.əɡ.nəʊz/",
+        partOfSpeech: "verb",
+        meaning: "Chẩn đoán, xác định chính xác căn nguyên của bệnh tật",
+        basicEquivalent: "find out what illness someone has (Band 5)",
+        synonyms: ["identify", "pinpoint", "detect", "ascertain"],
+        collocations: ["diagnose symptoms accurately", "diagnosed with chronic illness", "early clinical diagnosis"],
+        modelSentence: "Advanced artificial intelligence algorithms assist clinicians to diagnose microscopic tumors at substantially earlier stages.",
+        vietnameseSentence: "Các thuật toán trí tuệ nhân tạo tiên tiến hỗ trợ bác sĩ chẩn đoán các khối u siêu nhỏ ở những giai đoạn sớm hơn đáng kể."
+      }
+    ]
+  },
+  {
+    id: "work-2026",
+    name: "Modern Workplace & 4-Day Workweek (2026 Trend)",
+    vietnameseName: "Văn hóa làm việc & Tuần làm 4 ngày (2026)",
+    tag: "Đề mới 2026",
+    icon: "Briefcase",
+    ieltsPrompt: "In many countries, corporations and governments are experimenting with a four-day working week with no reduction in salaries. Do the advantages of this modern work policy outweigh its disadvantages?",
+    vocabularies: [
+      {
+        id: "work-1",
+        word: "productivity",
+        ipa: "/ˌprɒd.ʌkˈtɪv.ə.ti/",
+        partOfSpeech: "noun",
+        meaning: "Năng suất lao động, hiệu suất tạo ra sản phẩm hoặc giá trị",
+        basicEquivalent: "how much work gets done (Band 5)",
+        synonyms: ["work output", "efficiency", "labor yield", "efficacy"],
+        collocations: ["boost labor productivity", "maintain peak productivity", "productivity gains"],
+        modelSentence: "Trials demonstrate that reducing weekly working hours elevates focus and boosts aggregate employee productivity.",
+        vietnameseSentence: "Các thử nghiệm chứng minh rằng việc cắt giảm số giờ làm việc hàng tuần giúp nâng cao độ tập trung và tăng năng suất tổng thể của người lao động."
+      },
+      {
+        id: "work-2",
+        word: "telecommuting",
+        ipa: "/ˈtel.ɪ.kəˌmjuː.tɪŋ/",
+        partOfSpeech: "noun",
+        meaning: "Hình thức làm việc từ xa tại nhà thông qua công nghệ mạng",
+        basicEquivalent: "working from home (Band 5)",
+        synonyms: ["remote work", "distance working", "home-based employment"],
+        collocations: ["widespread telecommuting", "telecommuting arrangements", "adopt telecommuting"],
+        modelSentence: "The widespread normalization of telecommuting has eliminated stressful commuting times and reduced carbon emissions in major cities.",
+        vietnameseSentence: "Sự phổ biến của hình thức làm việc từ xa đã xóa bỏ thời gian đi lại căng thẳng và giảm lượng khí thải carbon ở các đô thị lớn."
+      },
+      {
+        id: "work-3",
+        word: "equilibrium",
+        ipa: "/ˌiː.kwɪˈlɪb.ri.əm/",
+        partOfSpeech: "noun",
+        meaning: "Trạng thái cân bằng hài hòa, ổn định giữa các yếu tố đối lập",
+        basicEquivalent: "balance (Band 5)",
+        synonyms: ["harmony", "work-life balance", "stability", "parity"],
+        collocations: ["work-life equilibrium", "restore psychological equilibrium", "delicate equilibrium"],
+        modelSentence: "Compressing the workweek allows professionals to achieve a sustainable equilibrium between career ambitions and personal duties.",
+        vietnameseSentence: "Rút ngắn tuần làm việc cho phép người lao động đạt được sự cân bằng bền vững giữa khát vọng sự nghiệp và nghĩa vụ cá nhân."
+      },
+      {
+        id: "work-4",
+        word: "flexibility",
+        ipa: "/ˌflek.səˈbɪl.ə.ti/",
+        partOfSpeech: "noun",
+        meaning: "Tính linh hoạt, khả năng dễ dàng thích nghi với hoàn cảnh thay đổi",
+        basicEquivalent: "being easy to change (Band 5)",
+        synonyms: ["adaptability", "versatility", "elasticity"],
+        collocations: ["schedule flexibility", "workplace flexibility", "greater operational flexibility"],
+        modelSentence: "Offering greater schedule flexibility empowers working parents to harmonize professional responsibilities with childcare.",
+        vietnameseSentence: "Trao cho nhân viên sự linh hoạt về thời gian giúp các bậc phụ huynh vừa hoàn thành công việc vừa chăm sóc con cái chu đáo."
+      },
+      {
+        id: "work-5",
+        word: "disillusionment",
+        ipa: "/ˌdɪs.ɪˈluː.ʒən.mənt/",
+        partOfSpeech: "noun",
+        meaning: "Sự vỡ mộng, cảm giác hụt hẫng và mất nhiệt huyết cống hiến",
+        basicEquivalent: "disappointment with work (Band 5)",
+        synonyms: ["disenchantment", "alienation", "demoralization", "apathy"],
+        collocations: ["workplace disillusionment", "grow into disillusionment", "overcome employee disillusionment"],
+        modelSentence: "Excessive corporate bureaucracy and uncompensated overtime often breed cynicism and widespread disillusionment among junior staff.",
+        vietnameseSentence: "Sự quan liêu của doanh nghiệp và việc làm thêm giờ không thù lao thường làm nảy sinh tâm lý chán nản và sự vỡ mộng của nhân viên cấp dưới."
+      },
+      {
+        id: "work-6",
+        word: "turnover",
+        ipa: "/ˈtɜːnˌəʊ.vər/",
+        partOfSpeech: "noun",
+        meaning: "Tỷ lệ thay thế nhân sự hoặc tỷ lệ nghỉ việc của nhân viên",
+        basicEquivalent: "people quitting jobs (Band 5)",
+        synonyms: ["attrition rate", "staff churn", "employee departures"],
+        collocations: ["high employee turnover", "curb staff turnover", "turnover rate"],
+        modelSentence: "Instituting a condensed four-day work schedule noticeably curtails staff turnover and retains premier talent.",
+        vietnameseSentence: "Áp dụng lịch làm việc rút gọn 4 ngày làm giảm rõ rệt tỷ lệ thay thế nhân sự và giữ chân các nhân tài hàng đầu."
+      },
+      {
+        id: "work-7",
+        word: "incentivize",
+        ipa: "/ɪnˈsen.tɪ.vaɪz/",
+        partOfSpeech: "verb",
+        meaning: "Khuyến khích, tạo động lực bằng đãi ngộ hoặc phần thưởng cụ thể",
+        basicEquivalent: "encourage with reward (Band 5-6)",
+        synonyms: ["motivate", "stimulate", "reward", "spur"],
+        collocations: ["incentivize employees", "financial packages that incentivize innovation", "strongly incentivized"],
+        modelSentence: "Forward-thinking firms incentivize performance through generous autonomy rather than punitive surveillance measures.",
+        vietnameseSentence: "Các công ty có tư duy đổi mới tạo động lực bằng cách trao quyền tự chủ rộng rãi thay vì áp dụng các biện pháp giám sát hà khắc."
+      },
+      {
+        id: "work-8",
+        word: "monotony",
+        ipa: "/məˈnɒt.ən.i/",
+        partOfSpeech: "noun",
+        meaning: "Sự đơn điệu, sự nhàm chán do công việc lặp đi lặp lại không đổi",
+        basicEquivalent: "sameness / boring routine (Band 5)",
+        synonyms: ["tedium", "repetitiveness", "routine dullness", "drudgery"],
+        collocations: ["break the monotony", "relieve daily monotony", "monotony of repetitive tasks"],
+        modelSentence: "Longer weekends provide a vital psychological respite to break the exhausting monotony of repetitive corporate routines.",
+        vietnameseSentence: "Những kỳ nghỉ cuối tuần dài hơn mang lại khoảng nghỉ tâm lý thiết yếu để phá vỡ sự đơn điệu mệt mỏi của thói quen công sở lặp đi lặp lại."
+      },
+      {
+        id: "work-9",
+        word: "efficiency",
+        ipa: "/ɪˈfɪʃ.ən.si/",
+        partOfSpeech: "noun",
+        meaning: "Hiệu quả, khả năng tối ưu hóa nguồn lực mà không lãng phí thời gian",
+        basicEquivalent: "working well without waste (Band 5)",
+        synonyms: ["competence", "streamlined execution", "cost-effectiveness"],
+        collocations: ["operational efficiency", "maximize energy efficiency", "time efficiency"],
+        modelSentence: "Eliminating unnecessary meetings allows teams to achieve optimal operational efficiency within compressed working hours.",
+        vietnameseSentence: "Cắt bỏ các cuộc họp không cần thiết cho phép các nhóm đạt hiệu quả vận hành tối ưu trong số giờ làm việc rút ngắn."
+      },
+      {
+        id: "work-10",
+        word: "collaborative",
+        ipa: "/kəˈlæb.ər.ə.tɪv/",
+        partOfSpeech: "adjective",
+        meaning: "Mang tính cộng tác, dựa trên tinh thần phối hợp tập thể",
+        basicEquivalent: "working together (Band 5)",
+        synonyms: ["cooperative", "collective", "synergistic", "team-oriented"],
+        collocations: ["collaborative environment", "collaborative tools", "foster collaborative culture"],
+        modelSentence: "Virtual whiteboards and asynchronous messaging tools foster a vibrant collaborative culture across distributed teams.",
+        vietnameseSentence: "Bảng trắng ảo và các công cụ nhắn tin không đồng bộ nuôi dưỡng văn hóa cộng tác sôi nổi giữa các nhóm làm việc từ xa."
+      }
+    ]
+  },
+  {
+    id: "family-2026",
+    name: "Aging Population & Modern Family Care (2026 Trend)",
+    vietnameseName: "Già hóa dân số & Trách nhiệm gia đình (2026)",
+    tag: "Đề mới 2026",
+    icon: "Users",
+    ieltsPrompt: "As life expectancy continues to rise worldwide, some argue that governments should assume primary financial and caregiving responsibility for elderly citizens, while others maintain that this duty rests strictly with families. Discuss both views and give your opinion.",
+    vocabularies: [
+      {
+        id: "fam-1",
+        word: "longevity",
+        ipa: "/lɒnˈdʒev.ə.ti/",
+        partOfSpeech: "noun",
+        meaning: "Tuổi thọ cao, sự sống lâu của con người trong xã hội hiện đại",
+        basicEquivalent: "long life (Band 5)",
+        synonyms: ["life expectancy", "extended lifespan", "durability of life"],
+        collocations: ["increased longevity", "human longevity", "demographic challenges of longevity"],
+        modelSentence: "Unprecedented gains in human longevity have fundamentally transformed the demographic composition of developed economies.",
+        vietnameseSentence: "Sự gia tăng chưa từng có về tuổi thọ của con người đã thay đổi căn bản cấu trúc nhân khẩu học của các nền kinh tế phát triển."
+      },
+      {
+        id: "fam-2",
+        word: "obligation",
+        ipa: "/ˌɒb.lɪˈɡeɪ.ʃən/",
+        partOfSpeech: "noun",
+        meaning: "Nghĩa vụ, bổn phận đạo lý hoặc trách nhiệm pháp lý bắt buộc",
+        basicEquivalent: "duty / must do (Band 5)",
+        synonyms: ["moral responsibility", "duty", "commitment", "imperative"],
+        collocations: ["moral obligation", "statutory obligation", "fulfill family obligations"],
+        modelSentence: "Adult offspring frequently feel an insurmountable moral obligation to nurture their aging parents through infirmity.",
+        vietnameseSentence: "Con cái khi trưởng thành thường cảm nhận một nghĩa vụ đạo đức to lớn phải chăm sóc cha mẹ già lúc ốm đau."
+      },
+      {
+        id: "fam-3",
+        word: "caregiver",
+        ipa: "/ˈkeəˌɡɪv.ər/",
+        partOfSpeech: "noun",
+        meaning: "Người trực tiếp chăm sóc người già, trẻ nhỏ hoặc bệnh nhân mất khả năng tự phục vụ",
+        basicEquivalent: "person who looks after someone (Band 5)",
+        synonyms: ["caretaker", "carer", "guardian", "attendant"],
+        collocations: ["primary caregiver", "professional caregivers", "support for family caregivers"],
+        modelSentence: "Without subsidized respite care, informal family caregivers risk experiencing profound physical and emotional depletion.",
+        vietnameseSentence: "Nếu không có dịch vụ chăm sóc hỗ trợ được trợ cấp, những người thân chăm sóc trong gia đình có nguy cơ kiệt quệ thể chất và cảm xúc."
+      },
+      {
+        id: "fam-4",
+        word: "pension",
+        ipa: "/ˈpen.ʃən/",
+        partOfSpeech: "noun",
+        meaning: "Chế độ lương hưu, khoản trợ cấp hưu trí chi trả định kỳ cho người cao tuổi",
+        basicEquivalent: "retirement money (Band 5)",
+        synonyms: ["retirement annuity", "superannuation", "state allowance"],
+        collocations: ["pension scheme", "state pension fund", "adequate pension provisions"],
+        modelSentence: "Demographic aging threatens the long-term solvency of public pension funds unless retirement ages are strategically adjusted.",
+        vietnameseSentence: "Tình trạng già hóa dân số đe dọa khả năng thanh toán dài hạn của các quỹ hưu trí công trừ khi tuổi nghỉ hưu được điều chỉnh chiến lược."
+      },
+      {
+        id: "fam-5",
+        word: "alienation",
+        ipa: "/ˌeɪ.li.əˈneɪ.ʃən/",
+        partOfSpeech: "noun",
+        meaning: "Sự xa lánh, cảm giác bị cô lập và tách biệt khỏi gia đình hoặc cộng đồng",
+        basicEquivalent: "feeling alone and separated (Band 5)",
+        synonyms: ["estrangement", "isolation", "disconnection", "detachment"],
+        collocations: ["emotional alienation", "social alienation among the elderly", "sense of alienation"],
+        modelSentence: "Confining senior citizens to institutional nursing homes can trigger severe feelings of emotional alienation and neglect.",
+        vietnameseSentence: "Việc đưa người cao tuổi vào các viện dưỡng lão có thể gây ra cảm giác xa lánh tình cảm và sự bỏ rơi sâu sắc."
+      },
+      {
+        id: "fam-6",
+        word: "cohesion",
+        ipa: "/kəʊˈhiː.ʒən/",
+        partOfSpeech: "noun",
+        meaning: "Sự gắn kết, tình đoàn kết keo sơn giữa các thành viên hoặc trong xã hội",
+        basicEquivalent: "staying closely together (Band 5)",
+        synonyms: ["solidarity", "unity", "interconnectedness", "togetherness"],
+        collocations: ["family cohesion", "social cohesion", "foster intergenerational cohesion"],
+        modelSentence: "Multigenerational households strengthen familial cohesion by fostering daily interactions between grandparents and grandchildren.",
+        vietnameseSentence: "Gia đình đa thế hệ củng cố sự gắn kết gia đình bằng cách nuôi dưỡng các tương tác hàng ngày giữa ông bà và con cháu."
+      },
+      {
+        id: "fam-7",
+        word: "demographic",
+        ipa: "/ˌdem.əˈɡræf.ɪk/",
+        partOfSpeech: "adjective / noun",
+        meaning: "Thuộc về nhân khẩu học, sự biến đổi về số lượng và độ tuổi dân số",
+        basicEquivalent: "about population numbers (Band 5)",
+        synonyms: ["population-related", "census-related", "demographical"],
+        collocations: ["demographic shift", "demographic crisis", "aging demographic"],
+        modelSentence: "Developing nations must prepare infrastructure well in advance to accommodate this unprecedented demographic shift.",
+        vietnameseSentence: "Các quốc gia đang phát triển phải chuẩn bị cơ sở hạ tầng từ sớm để thích ứng với sự chuyển dịch nhân khẩu học chưa từng có này."
+      },
+      {
+        id: "fam-8",
+        word: "intergenerational",
+        ipa: "/ˌɪn.təˌdʒen.əˈreɪ.ʃən.əl/",
+        partOfSpeech: "adjective",
+        meaning: "Diễn ra giữa các thế hệ khác nhau trong gia đình hoặc xã hội",
+        basicEquivalent: "between old and young generations (Band 5)",
+        synonyms: ["cross-generational", "multigenerational"],
+        collocations: ["intergenerational dialogue", "intergenerational wealth transfer", "intergenerational conflict"],
+        modelSentence: "Encouraging intergenerational dialogue bridges cultural divides and preserves valuable oral traditions within communities.",
+        vietnameseSentence: "Khuyến khích đối thoại giữa các thế hệ giúp thu hẹp khoảng cách văn hóa và bảo tồn các truyền thống quý báu trong cộng đồng."
+      },
+      {
+        id: "fam-9",
+        word: "solitude",
+        ipa: "/ˈsɒl.ɪ.tʃuːd/",
+        partOfSpeech: "noun",
+        meaning: "Cảnh sống thui thủi một mình, tình trạng đơn độc tuổi xế chiều",
+        basicEquivalent: "being alone (Band 5)",
+        synonyms: ["seclusion", "loneliness", "isolation", "reclusion"],
+        collocations: ["prolonged solitude", "live in solitude", "suffer in solitude"],
+        modelSentence: "Community volunteer programs play an indispensable role in rescuing widowed seniors from the perils of chronic solitude.",
+        vietnameseSentence: "Các chương trình tình nguyện cộng đồng đóng vai trò không thể thiếu trong việc cứu những người già góa bụa khỏi sự cô đơn mãn tính."
+      },
+      {
+        id: "fam-10",
+        word: "filial",
+        ipa: "/ˈfɪl.i.əl/",
+        partOfSpeech: "adjective",
+        meaning: "Thuộc về đạo làm con cái, lòng hiếu thảo đối với cha mẹ",
+        basicEquivalent: "about children's duty to parents (Band 5)",
+        synonyms: ["dutiful", "devoted", "respectful"],
+        collocations: ["filial piety", "filial duty", "filial devotion"],
+        modelSentence: "In many Asian cultures, filial piety remains the moral bedrock guiding family structures and caregiving conventions.",
+        vietnameseSentence: "Trong nhiều nền văn hóa Á Đông, lòng hiếu thảo vẫn là nền tảng đạo đức dẫn dắt cấu trúc gia đình và chuẩn mực phụng dưỡng cha mẹ."
       }
     ]
   }

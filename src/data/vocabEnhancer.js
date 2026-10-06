@@ -14,7 +14,6 @@ export function enrichVocabulary(vocab, topicName = "IELTS Writing") {
   const word = vocab.word || "";
   const ipa = vocab.ipa || "";
   const meaning = vocab.meaning || "Hiểu nghĩa từ";
-  const synonyms = vocab.synonyms || [];
   const partOfSpeech = vocab.partOfSpeech || "từ vựng";
 
   // 1. Comprehension Quiz Data
@@ -42,9 +41,10 @@ export function enrichVocabulary(vocab, topicName = "IELTS Writing") {
       "8.5": `Implementing proactive macroeconomic interventions is of paramount importance to thoroughly ${word} structural deficiencies and safeguard societal equilibrium.`
     },
     upgradeDetails: vocab.upgradeDetails || [
-      `Từ vựng: Sử dụng chính xác từ "${word}" (${partOfSpeech}) kết hợp với collocations học thuật cao cấp.`,
-      `Ngữ pháp: Sử dụng cấu trúc giả định thức "It is imperative that... enforce" hoặc danh từ hóa (Nominalization).`,
-      `Sắc thái: Thay thế các diễn đạt thông tục (Band 5-6) bằng các thuật ngữ học thuật chuẩn mực C1/C2.`
+      `Từ vựng mục tiêu: "${word}" ${ipa} (${partOfSpeech}) - Nghĩa: ${meaning} (thay thế cho từ cơ bản Band 5-6).`,
+      `Từ vựng nâng cấp đi kèm: "statutory framework" /ˈstætʃ.ə.tər.i ˈfreɪm.wɜːk/ (khung pháp lý) & "adverse consequences" /ˈæd.vɜːs ˈkɒn.sɪ.kwən.sɪz/ (hệ lụy tiêu cực).`,
+      `Ngữ pháp: Cấu trúc giả định thức "It is imperative that + S + V-bare" hoặc danh từ hóa "Enacting decisive reforms...".`,
+      `Sắc thái học thuật: Chuyển đổi giọng văn từ informal/văn nói sang học thuật khách quan chuẩn C1/C2.`
     ]
   };
 
@@ -62,9 +62,10 @@ export function enrichVocabulary(vocab, topicName = "IELTS Writing") {
       "8.5": `Rampant socioeconomic volatility has exacerbated unprecedented systemic strains across ${topicName}. Consequently, governing bodies must spearhead multilateral policy harmonization to comprehensively ${word} these existential ramifications before catastrophic thresholds are breached.`
     },
     upgradeDetails: [
-      `Cách chuyển câu (Cohesion): Sử dụng liên từ chỉ hệ quả cao cấp như "Consequently," hoặc "As a direct consequence," để liên kết nhân quả logic tuyệt đối giữa Câu 1 và Câu 2.`,
-      `Đại từ quy chiếu (Referencing): Sử dụng "these escalating vulnerabilities" để móc xích chặt chẽ với tiền đề được nêu ở Câu 1.`,
-      `Từ vựng & Cấu trúc câu: Kết hợp câu phức (Complex sentence) với từ khóa "${word}" đặt ở vị trí nhấn mạnh mục đích.`
+      `Từ vựng mục tiêu: "${word}" ${ipa} (${partOfSpeech}) - Nghĩa: ${meaning}.`,
+      `Cách chuyển câu (Cohesion): Liên từ C1 "Consequently," /ˈkɒn.sɪ.kwənt.li/ (Do đó, như một hệ quả tất yếu) chỉ quan hệ nhân quả mạnh mẽ thay cho 'so/therefore'.`,
+      `Đại từ quy chiếu (Referencing): Sử dụng "these escalating vulnerabilities" /ˌvʌl.nər.əˈbɪl.ə.tiz/ (những lỗ hổng ngày càng tăng) để móc xích với tiền đề ở Câu 1.`,
+      `Từ vựng nâng cấp: "socioeconomic escalation" /ˌsəʊ.si.əʊ.iː.kəˈnɒm.ɪk ˌes.kəˈleɪ.ʃən/ (sự leo thang kinh tế - xã hội).`
     ]
   };
 

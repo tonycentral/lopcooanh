@@ -1,5 +1,6 @@
 // Evaluator for IELTS Writing Sentences
 // Checks Grammar, Lexical Resource, and Coherence & Cohesion
+import { analyzeUpgradeDetails } from './upgradeDetailHelper';
 
 const INFORMAL_PATTERNS = [
   { regex: /\b(don't|doesn't|didn't|won't|can't|couldn't|shouldn't|isn't|aren't|wasn't|weren't)\b/gi, message: "Tránh dùng dạng viết tắt (contractions) trong IELTS Academic Writing. Nên viết rõ (do not, cannot, etc.)." },
@@ -374,10 +375,21 @@ export function evaluatePart2Translation(userSentence, vocab, targetBand = "7.0"
   const bandKey = parseFloat(targetBand) >= 8.5 ? "8.5" : parseFloat(targetBand) >= 8.0 ? "8.0" : parseFloat(targetBand) >= 7.5 ? "7.5" : parseFloat(targetBand) >= 7.0 ? "7.0" : "6.5";
   const upgradedSentence = practiceData.bandUpgrades?.[bandKey] || practiceData.bandUpgrades?.["7.5"] || practiceData.modelTranslation || `It is imperative that authorities take decisive measures to ${vocab.word} adverse developments.`;
 
+  // Generate deep breakdown of vocabulary (IPA + Vietnamese meaning), grammar & style
+  const detailedAnalysis = analyzeUpgradeDetails({
+    upgradedSentence,
+    vocab,
+    targetBand,
+    isPart3: false
+  });
+
   const upgradeDetails = practiceData.upgradeDetails || [
-    `Từ vựng: Sử dụng từ "${vocab.word}" (${vocab.partOfSpeech}) chuẩn xác trong ngữ cảnh học thuật thay vì từ cơ bản.`,
-    `Cấu trúc ngữ pháp: Sử dụng cấu trúc câu chuẩn Band ${targetBand} với mệnh đề quan hệ và bị động học thuật.`,
-    `Collocation: Kết hợp cụm từ tự nhiên phù hợp với tiêu chí Lexical Resource.`
+    `Từ vựng mục tiêu: "${vocab.word}" ${vocab.ipa || ''} (${vocab.partOfSpeech || 'từ vựng'}) - Nghĩa: ${vocab.meaning || ''}.`,
+    detailedAnalysis.vocabularyList.find(v => !v.isTarget)
+      ? `Từ vựng nâng cấp đi kèm: "${detailedAnalysis.vocabularyList.find(v => !v.isTarget).word}" ${detailedAnalysis.vocabularyList.find(v => !v.isTarget).ipa} (${detailedAnalysis.vocabularyList.find(v => !v.isTarget).pos}) - Nghĩa: ${detailedAnalysis.vocabularyList.find(v => !v.isTarget).meaning}.`
+      : `Collocation chuẩn mực: ${vocab.collocations?.[0] || 'Cụm từ học thuật C1/C2 tự nhiên'}.`,
+    `Ngữ pháp: ${detailedAnalysis.grammarPoints?.[0]?.title || 'Cấu trúc câu phức chuẩn Band ' + targetBand} - ${detailedAnalysis.grammarPoints?.[0]?.detail || ''}`,
+    `Sắc thái học thuật: Nâng cấp diễn đạt từ mức cơ bản (Band 5-6) lên chuẩn mực C1/C2 với tính trang trọng và khách quan.`
   ];
 
   const strengths = [];
@@ -403,6 +415,7 @@ export function evaluatePart2Translation(userSentence, vocab, targetBand = "7.0"
     isTargetMet: overallBand >= targetBandNum,
     upgradedSentence,
     upgradeDetails,
+    detailedAnalysis,
     strengths,
     improvements,
     detectedStructures
@@ -473,10 +486,22 @@ export function evaluatePart3Translation(userTranslation, vocab, targetBand = "7
   const bandKey = parseFloat(targetBand) >= 8.5 ? "8.5" : parseFloat(targetBand) >= 8.0 ? "8.0" : parseFloat(targetBand) >= 7.5 ? "7.5" : parseFloat(targetBand) >= 7.0 ? "7.0" : "6.5";
   const upgradedPair = practiceData.bandUpgrades?.[bandKey] || practiceData.bandUpgrades?.["7.5"] || practiceData.modelTranslation || `The primary cause remains unaddressed. Consequently, authorities must act promptly to ${vocab.word} adverse outcomes.`;
 
+  // Generate deep breakdown of vocabulary (IPA + Vietnamese meaning), grammar & cohesion
+  const detailedAnalysis = analyzeUpgradeDetails({
+    upgradedSentence: upgradedPair,
+    vocab,
+    targetBand,
+    isPart3: true
+  });
+
   const upgradeDetails = practiceData.upgradeDetails || [
-    `Cách chuyển câu (Cohesion): Sử dụng liên từ chuyển tiếp chỉ hệ quả/tương phản học thuật giúp hai câu gắn kết hữu cơ.`,
-    `Từ vựng & Collocation: Áp dụng từ mục tiêu "${vocab.word}" cùng các danh từ trừu tượng đạt chuẩn Band ${targetBand}.`,
-    `Mạch lập luận logic: Câu 1 làm tiền đề nguyên nhân, Câu 2 đóng vai trò giải pháp/kết quả tương xứng.`
+    `Từ vựng mục tiêu: "${vocab.word}" ${vocab.ipa || ''} (${vocab.partOfSpeech || 'từ vựng'}) - Nghĩa: ${vocab.meaning || ''}.`,
+    detailedAnalysis.cohesionPoints?.[0]
+      ? `Cách chuyển câu (Cohesion): Liên từ "${detailedAnalysis.cohesionPoints[0].marker}" ${detailedAnalysis.cohesionPoints[0].ipa} - ${detailedAnalysis.cohesionPoints[0].detail}`
+      : `Cách chuyển câu (Cohesion): Sử dụng liên từ chuyển tiếp chỉ hệ quả/tương phản học thuật giúp hai câu gắn kết hữu cơ.`,
+    detailedAnalysis.vocabularyList.find(v => !v.isTarget)
+      ? `Từ vựng nâng cấp đi kèm: "${detailedAnalysis.vocabularyList.find(v => !v.isTarget).word}" ${detailedAnalysis.vocabularyList.find(v => !v.isTarget).ipa} (${detailedAnalysis.vocabularyList.find(v => !v.isTarget).pos}) - Nghĩa: ${detailedAnalysis.vocabularyList.find(v => !v.isTarget).meaning}.`
+      : `Mạch lập luận logic: Câu 1 làm tiền đề nguyên nhân, Câu 2 đóng vai trò giải pháp/kết quả tương xứng.`
   ];
 
   const strengths = [];
@@ -514,6 +539,7 @@ export function evaluatePart3Translation(userTranslation, vocab, targetBand = "7
     isTargetMet: overallBand >= targetBandNum,
     upgradedPair,
     upgradeDetails,
+    detailedAnalysis,
     detectedCohesiveDevices,
     strengths,
     improvements,

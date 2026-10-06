@@ -1,0 +1,101 @@
+[
+  {
+    "id": "environment",
+    "name": "Environment & Climate Change",
+    "vietnameseName": "Môi trường & Biến đổi khí hậu",
+    "taskScope": "Both",
+    "icon": "Leaf",
+    "tag": "Phổ biến nhất",
+    "subTopics": ["global warming", "carbon footprint", "renewable energy", "plastic pollution", "biodiversity loss"]
+  },
+  {
+    "id": "education",
+    "name": "Education & Schooling",
+    "vietnameseName": "Giáo dục & Học đường",
+    "taskScope": "Both",
+    "icon": "GraduationCap",
+    "tag": "Trọng tâm",
+    "subTopics": ["higher education", "tuition fees", "online learning", "curriculum reform", "teachers vs AI"]
+  },
+  {
+    "id": "technology",
+    "name": "Technology & Artificial Intelligence",
+    "vietnameseName": "Công nghệ & Trí tuệ nhân tạo",
+    "taskScope": "Both",
+    "icon": "Cpu",
+    "tag": "Xu hướng 2024+",
+    "subTopics": ["artificial intelligence", "workplace automation", "social media addiction", "smartphones", "data privacy"]
+  },
+  {
+    "id": "society",
+    "name": "Society & Modern Lifestyle",
+    "vietnameseName": "Xã hội & Đời sống hiện đại",
+    "taskScope": "Task 2",
+    "icon": "Users",
+    "tag": "Kinh điển",
+    "subTopics": ["aging population", "consumerism", "work-life balance", "urbanization", "wealth gap"]
+  },
+  {
+    "id": "globalization",
+    "name": "Globalization & Culture",
+    "vietnameseName": "Toàn cầu hóa & Văn hóa",
+    "taskScope": "Task 2",
+    "icon": "Globe",
+    "tag": "Nâng cao",
+    "subTopics": ["cultural preservation", "mass tourism", "language endangerment", "westernization", "traditional values"]
+  },
+  {
+    "id": "health",
+    "name": "Public Health & Healthcare",
+    "vietnameseName": "Y tế & Sức khỏe cộng đồng",
+    "taskScope": "Both",
+    "icon": "HeartPulse",
+    "tag": "Thực tế",
+    "subTopics": ["sedentary lifestyle", "fast food taxes", "universal healthcare", "mental health", "preventive medicine"]
+  },
+  {
+    "id": "work_career",
+    "name": "Work & Careers",
+    "vietnameseName": "Việc làm & Nghề nghiệp",
+    "taskScope": "Both",
+    "icon": "Briefcase",
+    "tag": "Thực tế",
+    "subTopics": ["remote working", "job automation", "retirement age", "job-hopping", "gig economy"]
+  },
+  {
+    "id": "crime_law",
+    "name": "Crime & Legal System",
+    "vietnameseName": "Tội phạm & Pháp luật",
+    "taskScope": "Task 2",
+    "icon": "Scale",
+    "tag": "Nâng cao",
+    "subTopics": ["prison rehabilitation", "capital punishment", "juvenile crime", "surveillance cameras", "cybercrime"]
+  },
+  {
+    "id": "task1_bar_chart",
+    "name": "Task 1 - Bar Chart (Biểu đồ cột)",
+    "vietnameseName": "Biểu đồ cột so sánh",
+    "taskScope": "Task 1",
+    "icon": "BarChart3",
+    "tag": "Task 1 Cốt lõi",
+    "subTopics": ["grouped bars", "stacked bars", "single-year comparison", "cross-country comparison"]
+  },
+  {
+    "id": "task1_line_graph",
+    "name": "Task 1 - Line Graph (Biểu đồ đường)",
+    "vietnameseName": "Biểu đồ đường xu hướng",
+    "taskScope": "Task 1",
+    "icon": "TrendingUp",
+    "tag": "Task 1 Xu hướng",
+    "subTopics": ["trends over time", "fluctuations", "overtaking", "peak and plateau", "projections"]
+  },
+  {
+    "id": "task1_process",
+    "name": "Task 1 - Process & Cycles (Quy trình)",
+    "vietnameseName": "Quy trình & Vòng tuần hoàn",
+    "taskScope": "Task 1",
+    "icon": "Layers",
+    "tag": "Task 1 Đặc biệt",
+    "subTopics": ["man-made manufacturing", "natural life cycles", "recycling phases", "linear vs cyclic"]
+  }
+]
