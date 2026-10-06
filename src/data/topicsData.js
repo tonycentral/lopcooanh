@@ -1095,6 +1095,396 @@ const RAW_IELTS_TOPICS = [
         vietnameseSentence: "Trong nhiều nền văn hóa Á Đông, lòng hiếu thảo vẫn là nền tảng đạo đức dẫn dắt cấu trúc gia đình và chuẩn mực phụng dưỡng cha mẹ."
       }
     ]
+  },
+  {
+    id: "transport-2025",
+    name: "Aviation, Transport & Environmental Impact (2025 Actual)",
+    vietnameseName: "Hàng không & Giao thông bền vững (2025)",
+    tag: "Đề thi 2025",
+    icon: "Plane",
+    ieltsPrompt: "Long-distance flights consume vast amounts of fuel and pollute the air. Some people believe that governments should discourage non-essential flights, such as tourism, rather than limiting the use of cars. To what extent do you agree or disagree?",
+    vocabularies: [
+      {
+        id: "trans-1",
+        word: "aviation",
+        ipa: "/ˌeɪ.viˈeɪ.ʃən/",
+        partOfSpeech: "noun",
+        meaning: "Ngành hàng không, hoạt động vận tải bằng máy bay",
+        basicEquivalent: "flying / planes (Band 5)",
+        synonyms: ["aeronautics", "air transport", "flight industry"],
+        collocations: ["commercial aviation", "aviation emissions", "aviation sector"],
+        modelSentence: "Commercial aviation accounts for a disproportionate share of global greenhouse gas emissions relative to passenger volume.",
+        vietnameseSentence: "Ngành hàng không thương mại chiếm một tỷ trọng phát thải khí nhà kính toàn cầu lớn bất tương xứng so với lượng hành khách."
+      },
+      {
+        id: "trans-2",
+        word: "deterrent",
+        ipa: "/dɪˈter.ənt/",
+        partOfSpeech: "noun",
+        meaning: "Biện pháp hoặc rào cản mang tính răn đe, ngăn ngừa hành vi tiêu cực",
+        basicEquivalent: "something that stops people (Band 5)",
+        synonyms: ["disincentive", "curb", "impediment", "restraint"],
+        collocations: ["effective deterrent", "financial deterrent", "act as a deterrent against"],
+        modelSentence: "Levying heavy carbon surcharges on long-haul tourist tickets serves as a powerful financial deterrent against frivolous flying.",
+        vietnameseSentence: "Việc đánh phụ phí carbon nặng vào vé máy bay du lịch đường dài đóng vai trò như một biện pháp răn đe tài chính mạnh mẽ chống lại việc bay bừa bãi."
+      },
+      {
+        id: "trans-3",
+        word: "carbon-intensive",
+        ipa: "/ˌkɑː.bən.ɪnˈten.sɪv/",
+        partOfSpeech: "adjective",
+        meaning: "Thâm dụng phát thải carbon, tiêu tốn nhiều nhiên liệu hóa thạch",
+        basicEquivalent: "making lots of carbon pollution (Band 5)",
+        synonyms: ["polluting", "emission-heavy", "fossil-dependent"],
+        collocations: ["carbon-intensive travel", "carbon-intensive industries", "carbon-intensive lifestyles"],
+        modelSentence: "Aviation represents the most carbon-intensive mode of passenger transport per kilometer traveled.",
+        vietnameseSentence: "Hàng không là phương thức vận tải hành khách thâm dụng carbon nhiều nhất trên mỗi kilomet di chuyển."
+      },
+      {
+        id: "trans-4",
+        word: "subsidize",
+        ipa: "/ˈsʌb.sɪ.daɪz/",
+        partOfSpeech: "verb",
+        meaning: "Trợ cấp kinh phí từ ngân sách nhà nước nhằm giảm giá thành",
+        basicEquivalent: "give money to help pay (Band 5)",
+        synonyms: ["fund", "underwrite", "finance", "support financially"],
+        collocations: ["subsidize rail networks", "subsidize public transit", "heavily subsidized"],
+        modelSentence: "Governments should heavily subsidize high-speed rail networks to present viable eco-friendly alternatives to regional flights.",
+        vietnameseSentence: "Chính phủ nên trợ cấp mạnh mẽ cho mạng lưới đường sắt cao tốc để mang lại giải pháp thay thế thân thiện môi trường khả thi cho các chuyến bay khu vực."
+      },
+      {
+        id: "trans-5",
+        word: "curb",
+        ipa: "/kɜːb/",
+        partOfSpeech: "verb",
+        meaning: "Kiềm chế, kiểm soát hoặc cắt giảm mức độ nghiêm trọng",
+        basicEquivalent: "limit / control / stop (Band 5)",
+        synonyms: ["restrain", "suppress", "rein in", "check"],
+        collocations: ["curb carbon emissions", "curb frivolous consumption", "curb reliance on cars"],
+        modelSentence: "Strict municipal policies are required to curb private automobile usage and mitigate chronic urban congestion.",
+        vietnameseSentence: "Cần có các chính sách đô thị nghiêm ngặt để kiềm chế việc sử dụng ô tô cá nhân và giảm thiểu ùn tắc đô thị kinh niên."
+      },
+      {
+        id: "trans-6",
+        word: "feasibility",
+        ipa: "/ˌfiː.zəˈbɪl.ə.ti/",
+        partOfSpeech: "noun",
+        meaning: "Tính khả thi, khả năng thực hiện thành công trong thực tế",
+        basicEquivalent: "can it be done (Band 5)",
+        synonyms: ["viability", "practicability", "workability"],
+        collocations: ["economic feasibility", "technical feasibility", "assess the feasibility of"],
+        modelSentence: "Critics question the economic feasibility of prohibiting leisure flights given the tourism industry's reliance on international visitors.",
+        vietnameseSentence: "Các nhà phản biện hoài nghi tính khả thi kinh tế của việc cấm các chuyến bay du lịch do sự phụ thuộc của ngành du lịch vào du khách quốc tế."
+      },
+      {
+        id: "trans-7",
+        word: "indispensable",
+        ipa: "/ˌɪn.dɪˈspen.sə.bəl/",
+        partOfSpeech: "adjective",
+        meaning: "Thiết yếu, không thể thiếu được đối với đời sống hoặc vận hành",
+        basicEquivalent: "very important / must-have (Band 5)",
+        synonyms: ["essential", "crucial", "vital", "imperative"],
+        collocations: ["indispensable role", "indispensable to modern life", "remain indispensable"],
+        modelSentence: "Personal vehicles remain indispensable for rural inhabitants who lack access to synchronized public transit options.",
+        vietnameseSentence: "Phương tiện cá nhân vẫn không thể thiếu đối với cư dân nông thôn vốn không có khả năng tiếp cận các phương tiện giao thông công cộng đồng bộ."
+      },
+      {
+        id: "trans-8",
+        word: "counterproductive",
+        ipa: "/ˌkaʊn.tə.prəˈdʌk.tɪv/",
+        partOfSpeech: "adjective",
+        meaning: "Phản tác dụng, đem lại kết quả tiêu cực trái ngược với mong muốn",
+        basicEquivalent: "having opposite bad result (Band 5)",
+        synonyms: ["detrimental", "ineffectual", "self-defeating"],
+        collocations: ["prove counterproductive", "counterproductive policy", "highly counterproductive"],
+        modelSentence: "Singling out vacationers while exempting business flights would prove fundamentally inequitable and counterproductive.",
+        vietnameseSentence: "Việc chỉ nhắm vào khách du lịch trong khi miễn trừ các chuyến bay công vụ sẽ là điều bất công và phản tác dụng."
+      },
+      {
+        id: "trans-9",
+        word: "levy",
+        ipa: "/ˈlev.i/",
+        partOfSpeech: "verb / noun",
+        meaning: "Đánh thuế hoặc thu các khoản phí chính thức bắt buộc",
+        basicEquivalent: "charge tax (Band 5)",
+        synonyms: ["impose", "exact", "charge"],
+        collocations: ["levy eco-taxes on", "levy penalties", "levy a green tariff"],
+        modelSentence: "Authorities ought to levy progressive green tariffs on frequent flyers rather than instituting blanket flight prohibitions.",
+        vietnameseSentence: "Nhà chức trách nên đánh các loại thuế xanh lũy tiến vào người bay thường xuyên thay vì áp đặt các lệnh cấm bay toàn diện."
+      },
+      {
+        id: "trans-10",
+        word: "exponential",
+        ipa: "/ˌek.spəˈnen.ʃəl/",
+        partOfSpeech: "adjective",
+        meaning: "Gia tăng theo cấp số nhân, tăng trưởng với tốc độ cực kỳ nhanh",
+        basicEquivalent: "growing very fast (Band 5)",
+        synonyms: ["rapid", "accelerated", "soaring"],
+        collocations: ["exponential growth in air traffic", "exponential rise in emissions", "exponential expansion"],
+        modelSentence: "The exponential expansion of budget airlines has made cross-border holidays affordable at severe ecological costs.",
+        vietnameseSentence: "Sự phát triển theo cấp số nhân của các hãng hàng không giá rẻ đã khiến các kỳ nghỉ xuyên biên giới vừa túi tiền nhưng để lại cái giá sinh thái đắt đỏ."
+      }
+    ]
+  },
+  {
+    id: "law-safety-2025",
+    name: "Crime, Law Enforcement & Road Safety (2025 Actual)",
+    vietnameseName: "Pháp luật & Ý thức an toàn (2025)",
+    tag: "Đề thi 2025",
+    icon: "ShieldAlert",
+    ieltsPrompt: "In every country, driving laws exist to ensure road safety. However, many motorists continue to violate traffic regulations by speeding or using smartphones. What are the reasons for this, and what effective measures can be implemented to solve this problem?",
+    vocabularies: [
+      {
+        id: "law-1",
+        word: "enforcement",
+        ipa: "/ɪnˈfɔːs.mənt/",
+        partOfSpeech: "noun",
+        meaning: "Sự thi hành, sự cưỡng chế thực hiện nghiêm minh luật lệ",
+        basicEquivalent: "making people follow laws (Band 5)",
+        synonyms: ["implementation", "execution", "imposition", "administration"],
+        collocations: ["rigorous law enforcement", "enforcement of traffic rules", "strengthen enforcement"],
+        modelSentence: "Lax enforcement of traffic statutes encourages motorists to disregard speed boundaries with relative impunity.",
+        vietnameseSentence: "Việc thực thi các quy chế giao thông lỏng lẻo khiến người lái xe coi thường các giới hạn tốc độ mà không sợ bị trừng phạt."
+      },
+      {
+        id: "law-2",
+        word: "reckless",
+        ipa: "/ˈrek.ləs/",
+        partOfSpeech: "adjective",
+        meaning: "Liều lĩnh, thiếu cẩn trọng và coi thường hậu quả nguy hiểm",
+        basicEquivalent: "careless / dangerous (Band 5)",
+        synonyms: ["rash", "irresponsible", "heedless", "audacious"],
+        collocations: ["reckless driving", "reckless disregard for safety", "reckless behavior"],
+        modelSentence: "Reckless texting while operating high-speed vehicles substantially heightens the probability of fatal road collisions.",
+        vietnameseSentence: "Hành vi liều lĩnh nhắn tin khi điều khiển phương tiện tốc độ cao làm tăng đáng kể khả năng xảy ra va chạm giao thông chết người."
+      },
+      {
+        id: "law-3",
+        word: "penalize",
+        ipa: "/ˈpiː.nəl.aɪz/",
+        partOfSpeech: "verb",
+        meaning: "Xử phạt, áp đặt hình phạt pháp lý đối với hành vi sai phạm",
+        basicEquivalent: "punish (Band 5)",
+        synonyms: ["punish", "sanction", "fine", "discipline"],
+        collocations: ["penalize repeat offenders", "harshly penalized", "penalized under statutory law"],
+        modelSentence: "Judicial systems must harshly penalize repeat offenders by revoking operator licenses and imposing heavy fines.",
+        vietnameseSentence: "Hệ thống tư pháp phải trừng phạt nghiêm khắc những người tái phạm bằng cách tước giấy phép lái xe và phạt tiền nặng."
+      },
+      {
+        id: "law-4",
+        word: "complacency",
+        ipa: "/kəmˈpleɪ.sən.si/",
+        partOfSpeech: "noun",
+        meaning: "Sự tự mãn, tâm lý chủ quan coi thường rủi ro nguy hiểm",
+        basicEquivalent: "feeling too comfortable and safe (Band 5)",
+        synonyms: ["overconfidence", "self-satisfaction", "carelessness"],
+        collocations: ["driver complacency", "bred complacency", "shatter complacency"],
+        modelSentence: "Experienced motorists frequently fall prey to dangerous complacency, falsely presuming their reflexes can avert accidents.",
+        vietnameseSentence: "Những người lái xe có kinh nghiệm thường rơi vào tâm lý chủ quan nguy hiểm, ảo tưởng rằng phản xạ của họ có thể ngăn ngừa mọi tai nạn."
+      },
+      {
+        id: "law-5",
+        word: "surveillance",
+        ipa: "/səˈveɪ.ləns/",
+        partOfSpeech: "noun",
+        meaning: "Hệ thống giám sát, việc theo dõi tự động bằng thiết bị công nghệ",
+        basicEquivalent: "watching / security cameras (Band 5)",
+        synonyms: ["monitoring", "observation", "scrutiny", "automated tracking"],
+        collocations: ["traffic surveillance cameras", "radar surveillance", "round-the-clock surveillance"],
+        modelSentence: "Installing automated speed surveillance cameras eliminates reliance on physical police patrols and catches violators systematically.",
+        vietnameseSentence: "Lắp đặt camera giám sát tốc độ tự động giúp loại bỏ sự phụ thuộc vào tuần tra cảnh sát và bắt lỗi người vi phạm một cách có hệ thống."
+      },
+      {
+        id: "law-6",
+        word: "confiscate",
+        ipa: "/ˈkɒn.fɪ.skeɪt/",
+        partOfSpeech: "verb",
+        meaning: "Tịch thu, tạm giữ phương tiện hoặc tài sản do vi phạm pháp luật",
+        basicEquivalent: "take away by law (Band 5)",
+        synonyms: ["seize", "impound", "appropriate"],
+        collocations: ["confiscate driving licenses", "confiscate vehicles", "empowered to confiscate"],
+        modelSentence: "Authorities should be legally empowered to confiscate vehicles from intoxicated drivers who jeopardize pedestrian lives.",
+        vietnameseSentence: "Nhà chức trách cần được trao quyền hợp pháp để tịch thu phương tiện của những tài xế say rượu gây nguy hiểm cho tính mạng người đi bộ."
+      },
+      {
+        id: "law-7",
+        word: "fatal",
+        ipa: "/ˈfeɪ.təl/",
+        partOfSpeech: "adjective",
+        meaning: "Gây tử vong, chết người, để lại hậu quả thảm khốc",
+        basicEquivalent: "deadly / killing (Band 5)",
+        synonyms: ["lethal", "mortal", "deadly", "catastrophic"],
+        collocations: ["fatal accidents", "fatal casualties", "fatal impact"],
+        modelSentence: "A momentary lapse in concentration caused by mobile notifications can trigger an irreversible fatal collision.",
+        vietnameseSentence: "Một thoáng mất tập trung do thông báo trên điện thoại có thể dẫn đến vụ va chạm chết người không thể cứu vãn."
+      },
+      {
+        id: "law-8",
+        word: "negligence",
+        ipa: "/ˈneɡ.lɪ.dʒəns/",
+        partOfSpeech: "noun",
+        meaning: "Sự tắc trách, sự sơ suất cẩu thả không hoàn thành bổn phận an toàn",
+        basicEquivalent: "not caring / being careless (Band 5)",
+        synonyms: ["carelessness", "dereliction", "inattention", "laxity"],
+        collocations: ["criminal negligence", "gross negligence", "driver negligence"],
+        modelSentence: "Holding motorists accountable for gross negligence sends an unmistakable societal signal that lives are sacrosanct.",
+        vietnameseSentence: "Buộc người lái xe phải chịu trách nhiệm về sự tắc trách nghiêm trọng sẽ gửi đi thông điệp xã hội rõ ràng rằng tính mạng con người là bất khả xâm phạm."
+      },
+      {
+        id: "law-9",
+        word: "habitual",
+        ipa: "/həˈbɪtʃ.u.əl/",
+        partOfSpeech: "adjective",
+        meaning: "Thành thói quen cố hữu, tái diễn liên tục theo thói quen",
+        basicEquivalent: "doing something as a bad habit (Band 5)",
+        synonyms: ["chronic", "persistent", "recurrent", "inveterate"],
+        collocations: ["habitual speeding", "habitual offenders", "habitual violation"],
+        modelSentence: "Educational campaigns must deconstruct the psychological roots of habitual speeding among young demographics.",
+        vietnameseSentence: "Các chiến dịch giáo dục phải giải quyết tận gốc rễ tâm lý của thói quen phóng nhanh vượt ẩu ở giới trẻ."
+      },
+      {
+        id: "law-10",
+        word: "imperative",
+        ipa: "/ɪmˈper.ə.tɪv/",
+        partOfSpeech: "noun / adjective",
+        meaning: "Nhiệm vụ cấp bách, mệnh lệnh sống còn không thể trì hoãn",
+        basicEquivalent: "very urgent and necessary thing (Band 5)",
+        synonyms: ["urgent priority", "necessity", "vital requirement"],
+        collocations: ["moral imperative", "societal imperative", "it is imperative that"],
+        modelSentence: "Establishing universally respected driving norms is a societal imperative to diminish premature road fatalities.",
+        vietnameseSentence: "Thiết lập các chuẩn mực lái xe được tôn trọng toàn diện là một mệnh lệnh xã hội cấp bách nhằm giảm thiểu thương vong giao thông."
+      }
+    ]
+  },
+  {
+    id: "museum-culture-2024",
+    name: "Museums, Heritage & National Identity (2024 Actual)",
+    vietnameseName: "Bảo tàng & Bản sắc văn hóa (2024)",
+    tag: "Đề thi 2024",
+    icon: "Landmark",
+    ieltsPrompt: "Some people believe that museums and art galleries should focus on showcasing the history and culture of their own country rather than that of other nations. To what extent do you agree or disagree?",
+    vocabularies: [
+      {
+        id: "mus-1",
+        word: "indigenous",
+        ipa: "/ɪnˈdɪdʒ.ɪ.nəs/",
+        partOfSpeech: "adjective",
+        meaning: "Thuộc về bản địa, nguồn gốc xuất xứ nguyên bản của địa phương",
+        basicEquivalent: "local / native (Band 5)",
+        synonyms: ["aboriginal", "native", "endemic", "autochthonous"],
+        collocations: ["indigenous culture", "indigenous heritage", "indigenous artifacts"],
+        modelSentence: "Museums fulfill a crucial educational role by exhibiting the tangible crafts of indigenous civilizations.",
+        vietnameseSentence: "Các viện bảo tàng hoàn thành vai trò giáo dục quan trọng bằng cách trưng bày các sản phẩm thủ công hữu hình của các nền văn minh bản địa."
+      },
+      {
+        id: "mus-2",
+        word: "artifact",
+        ipa: "/ˈɑː.tɪ.fækt/",
+        partOfSpeech: "noun",
+        meaning: "Hiện vật khảo cổ, cổ vật có giá trị văn hóa và lịch sử",
+        basicEquivalent: "historical object (Band 5)",
+        synonyms: ["relic", "antiquity", "historical specimen", "monument"],
+        collocations: ["ancient artifacts", "preserve cultural artifacts", "valuable archaeological artifacts"],
+        modelSentence: "Curators must meticulously preserve rare archaeological artifacts to convey historical narratives to posterity.",
+        vietnameseSentence: "Các nhà giám tuyển phải bảo quản tỉ mỉ những hiện vật khảo cổ học quý hiếm để truyền tải các câu chuyện lịch sử cho hậu thế."
+      },
+      {
+        id: "mus-3",
+        word: "heritage",
+        ipa: "/ˈher.ɪ.tɪdʒ/",
+        partOfSpeech: "noun",
+        meaning: "Di sản văn hóa, giá trị lịch sử và tinh thần được kế thừa",
+        basicEquivalent: "tradition passed down (Band 5)",
+        synonyms: ["legacy", "inheritance", "cultural patrimony"],
+        collocations: ["cultural heritage", "national heritage", "safeguard intangible heritage"],
+        modelSentence: "Showcasing national heritage fosters social cohesion and instills historical pride in younger generations.",
+        vietnameseSentence: "Trưng bày di sản dân tộc thúc đẩy sự gắn kết xã hội và hun đúc lòng tự hào lịch sử ở thế hệ trẻ."
+      },
+      {
+        id: "mus-4",
+        word: "curate",
+        ipa: "/kjʊəˈreɪt/",
+        partOfSpeech: "verb",
+        meaning: "Tuyển chọn, giám tuyển và tổ chức trưng bày tác phẩm nghệ thuật",
+        basicEquivalent: "select and organize for exhibition (Band 5-6)",
+        synonyms: ["organize", "assemble", "oversee", "exhibit"],
+        collocations: ["curate an exhibition", "carefully curated collection", "curate historical displays"],
+        modelSentence: "Galleries must thoughtfully curate international masterpieces to broaden the aesthetic appreciation of visitors.",
+        vietnameseSentence: "Các phòng trưng bày phải giám tuyển chu đáo các kiệt tác quốc tế để mở rộng sự cảm thụ thẩm mỹ của khách tham quan."
+      },
+      {
+        id: "mus-5",
+        word: "parochial",
+        ipa: "/pəˈrəʊ.ki.əl/",
+        partOfSpeech: "adjective",
+        meaning: "Thiển cận, mang tính cục bộ hạn hẹp chỉ nhìn vào địa phương mình",
+        basicEquivalent: "narrow-minded / only caring about own place (Band 5)",
+        synonyms: ["insular", "provincial", "narrow-minded", "myopic"],
+        collocations: ["parochial mindset", "parochial perspective", "risk becoming parochial"],
+        modelSentence: "Excluding foreign artistic masterpieces risks cultivating an insular and parochial worldview among citizens.",
+        vietnameseSentence: "Việc loại trừ các kiệt tác nghệ thuật nước ngoài có nguy cơ hình thành thế giới quan thiển cận và cục bộ ở người dân."
+      },
+      {
+        id: "mus-6",
+        word: "intercultural",
+        ipa: "/ˌɪn.təˈkʌl.tʃər.əl/",
+        partOfSpeech: "adjective",
+        meaning: "Liên văn hóa, sự giao thoa và đối thoại giữa các nền văn hóa",
+        basicEquivalent: "between different cultures (Band 5)",
+        synonyms: ["cross-cultural", "transcultural", "multicultural"],
+        collocations: ["intercultural dialogue", "intercultural understanding", "foster intercultural empathy"],
+        modelSentence: "Hosting exhibitions from overseas civilizations nurtures intercultural empathy and dispels xenophobic misconceptions.",
+        vietnameseSentence: "Tổ chức các cuộc triển lãm từ các nền văn minh hải ngoại giúp nuôi dưỡng sự thấu hiểu liên văn hóa và xóa tan những định kiến bài ngoại."
+      },
+      {
+        id: "mus-7",
+        word: "custodian",
+        ipa: "/kʌsˈtəʊ.di.ən/",
+        partOfSpeech: "noun",
+        meaning: "Người trông coi, người bảo vệ và gìn giữ di sản quý giá",
+        basicEquivalent: "guardian / keeper (Band 5)",
+        synonyms: ["guardian", "keeper", "protector", "steward"],
+        collocations: ["custodians of cultural memory", "public custodians", "serve as custodians"],
+        modelSentence: "Public galleries act as indispensable custodians of human civilization, safeguarding treasures across centuries.",
+        vietnameseSentence: "Các phòng tranh công cộng đóng vai trò là những người gìn giữ không thể thiếu của nền văn minh nhân loại, bảo vệ các kho báu qua nhiều thế kỷ."
+      },
+      {
+        id: "mus-8",
+        word: "provenance",
+        ipa: "/ˈprɒv.ən.əns/",
+        partOfSpeech: "noun",
+        meaning: "Nguồn gốc xuất xứ và lịch sử sở hữu đã được xác thực của cổ vật",
+        basicEquivalent: "origin / history of an object (Band 5)",
+        synonyms: ["origin", "lineage", "pedigree", "derivation"],
+        collocations: ["establish the provenance", "disputed provenance", "flawless provenance"],
+        modelSentence: "Documenting the ethical provenance of foreign antiquities prevents the illicit trafficking of stolen cultural property.",
+        vietnameseSentence: "Việc ghi chép nguồn gốc đạo đức của các cổ vật nước ngoài ngăn chặn nạn buôn bán bất hợp pháp tài sản văn hóa bị đánh cắp."
+      },
+      {
+        id: "mus-9",
+        word: "repatriation",
+        ipa: "/ˌriː.pæt.riˈeɪ.ʃən/",
+        partOfSpeech: "noun",
+        meaning: "Sự hồi hương, sự trao trả cổ vật về đất nước cội nguồn",
+        basicEquivalent: "sending back to home country (Band 5)",
+        synonyms: ["return", "restitution", "restoration"],
+        collocations: ["repatriation of stolen artifacts", "demand repatriation", "cultural repatriation"],
+        modelSentence: "Ethical debates surrounding the repatriation of colonial-era antiquities have prompted major institutions to re-evaluate their collections.",
+        vietnameseSentence: "Các cuộc tranh luận đạo đức xung quanh việc hồi hương cổ vật thời thuộc địa đã thúc đẩy các viện bảo tàng lớn đánh giá lại bộ sưu tập của họ."
+      },
+      {
+        id: "mus-10",
+        word: "cosmopolitan",
+        ipa: "/ˌkɒz.məˈpɒl.ɪ.tən/",
+        partOfSpeech: "adjective",
+        meaning: "Mang tính quốc tế cởi mở, không bị giới hạn bởi biên giới quốc gia",
+        basicEquivalent: "worldwide / open to the world (Band 5)",
+        synonyms: ["global-minded", "worldly", "broad-minded", "universal"],
+        collocations: ["cosmopolitan perspective", "cosmopolitan outlook", "foster a cosmopolitan society"],
+        modelSentence: "A truly educational museum must embrace a cosmopolitan perspective that honors human diversity.",
+        vietnameseSentence: "Một viện bảo tàng mang tính giáo dục thực thụ phải đón nhận một góc nhìn cởi mở mang tính toàn cầu nhằm tôn vinh sự đa dạng của con người."
+      }
+    ]
   }
 ];
 

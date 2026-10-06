@@ -145,46 +145,48 @@ export default function VocabularyList({
             <div
               key={vocab.id}
               onClick={() => handlePracticeWord(vocab)}
-              className={`p-3 rounded-2xl border transition-all cursor-pointer text-left select-none flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 ${
+              className={`p-2.5 rounded-xl border transition-all cursor-pointer text-left select-none flex flex-col gap-2 ${
                 isSelected
-                  ? "bg-blue-950/60 border-blue-500 shadow-lg shadow-blue-950/40 ring-1 ring-blue-500/60"
+                  ? "bg-blue-950/60 border-blue-500 shadow-md shadow-blue-950/40 ring-1 ring-blue-500/60"
                   : isKnown
                     ? "bg-slate-900/40 hover:bg-slate-900/70 border-slate-800/60 opacity-80"
                     : "bg-slate-900/90 hover:bg-slate-850 border-slate-800 hover:border-slate-700"
               }`}
             >
               {/* CHỈ HIỆN: TỪ VỰNG VÀ PHIÊN ÂM (IPA) */}
-              <div className="flex items-baseline gap-2 flex-wrap">
-                <span className={`text-base font-extrabold tracking-tight ${
-                  isSelected ? "text-white" : isKnown ? "text-slate-300" : "text-white"
-                }`}>
-                  {vocab.word}
-                </span>
-
-                {vocab.ipa && (
-                  <span className="text-xs font-mono text-blue-300 italic font-semibold">
-                    {vocab.ipa}
+              <div className="flex items-baseline justify-between gap-1.5 flex-wrap">
+                <div className="flex items-baseline gap-1.5 flex-wrap">
+                  <span className={`text-sm sm:text-base font-extrabold tracking-tight ${
+                    isSelected ? "text-white" : isKnown ? "text-slate-300" : "text-white"
+                  }`}>
+                    {vocab.word}
                   </span>
-                )}
 
-                <span className="text-[10px] text-slate-400 font-sans">
-                  ({vocab.partOfSpeech || "từ vựng"})
-                </span>
+                  {vocab.ipa && (
+                    <span className="text-xs font-mono text-blue-300 italic font-semibold">
+                      {vocab.ipa}
+                    </span>
+                  )}
+
+                  <span className="text-[10px] text-slate-400 font-sans">
+                    ({vocab.partOfSpeech || "từ vựng"})
+                  </span>
+                </div>
 
                 {isKnown && (
-                  <span className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium flex items-center gap-0.5">
+                  <span className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium flex items-center gap-0.5 shrink-0">
                     <Check className="w-2.5 h-2.5" /> Đã biết
                   </span>
                 )}
               </div>
 
               {/* 2 NÚT LỰA CHỌN: "Tôi đã biết" & "Luyện tập" */}
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center gap-1.5 shrink-0 pt-0.5">
                 {/* Nút 1: Tôi đã biết (không ưu tiên hiển thị ở những lần sau) */}
                 <button
                   type="button"
                   onClick={(e) => handleToggleKnown(e, vocab.id)}
-                  className={`px-2.5 py-1 rounded-xl text-xs font-semibold transition flex items-center gap-1 cursor-pointer ${
+                  className={`flex-1 py-1 px-2 rounded-lg text-xs font-semibold transition flex items-center justify-center gap-1 cursor-pointer ${
                     isKnown
                       ? "bg-emerald-500/15 text-emerald-300 hover:bg-emerald-500/25 border border-emerald-500/30"
                       : "bg-slate-800/80 hover:bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-700/60"
@@ -193,7 +195,7 @@ export default function VocabularyList({
                 >
                   {isKnown ? (
                     <>
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                      <CheckCircle2 className="w-3 h-3 text-emerald-400" />
                       <span>Đã biết</span>
                     </>
                   ) : (
@@ -208,7 +210,7 @@ export default function VocabularyList({
                     e.stopPropagation();
                     handlePracticeWord(vocab);
                   }}
-                  className={`px-3 py-1 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-md ${
+                  className={`flex-1 py-1 px-2.5 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer shadow-sm ${
                     isSelected
                       ? "bg-blue-600 text-white shadow-blue-600/30 ring-1 ring-blue-400"
                       : "bg-blue-600 hover:bg-blue-500 text-white shadow-blue-600/20"

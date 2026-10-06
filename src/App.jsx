@@ -13,7 +13,6 @@ import Task1Visualizer from './components/Task1Visualizer';
 import Task1ChartModal from './components/Task1ChartModal';
 import AdminDashboard from './components/AdminDashboard';
 
-import { BarChart3, BookOpen } from 'lucide-react';
 
 import { 
   IELTS_TOPICS, 
@@ -118,8 +117,23 @@ export default function App() {
   const [targetBand, setTargetBand] = useState(() => initialProfile?.targetBand || getStoredTargetBand() || "7.0");
   const [activeTask, setActiveTask] = useState(() => initialProfile?.selectedTask || 'task2');
   
-  // Tab for Left Column when in Task 1: 'chart' (default) or 'vocab'
-  const [task1LeftTab, setTask1LeftTab] = useState('chart');
+  // Task 1 Layout Mode: 'three-col' (mặc định: 3 cột song song - Đề & Biểu đồ | Từ vựng | Luyện tập) hoặc 'stacked' (Cột trái 2 tầng)
+  const [task1Layout, setTask1Layout] = useState(() => {
+    try {
+      return localStorage.getItem('lopcooanh_task1_layout') || 'three-col';
+    } catch {
+      return 'three-col';
+    }
+  });
+
+  const handleToggleTask1Layout = (layout) => {
+    setTask1Layout(layout);
+    try {
+      localStorage.setItem('lopcooanh_task1_layout', layout);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   // API key & grading stats
   const [apiKey] = useState(() => getStoredApiKey());
@@ -169,9 +183,6 @@ export default function App() {
     }
     if (newTask && newTask !== activeTask) {
       setActiveTask(newTask);
-      if (newTask === 'task1') {
-        setTask1LeftTab('chart');
-      }
       const topics = newTask === 'task1' ? IELTS_TASK1_TOPICS : IELTS_TASK2_TOPICS;
       if (topics && topics.length > 0) {
         setSelectedTopic(topics[0]);
@@ -196,9 +207,6 @@ export default function App() {
   // Update task 1 / task 2
   const handleToggleTask = (task) => {
     setActiveTask(task);
-    if (task === 'task1') {
-      setTask1LeftTab('chart');
-    }
     if (studentEmail) {
       updateSettingsForEmail(studentEmail, { selectedTask: task });
     }
@@ -279,52 +287,69 @@ export default function App() {
               onRandomTopic={handleRandomTopic}
               activeTask={activeTask}
               onOpenChartModal={() => setIsChartModalOpen(true)}
+              task1Layout={task1Layout}
+              onToggleTask1Layout={handleToggleTask1Layout}
             />
           </section>
 
-          {/* Section 2: Main Workspace (Split Grid: Left Vocab/Task 1 Chart, Right Practice Pad) */}
+          {/* Section 2: Main Workspace */}
           <main className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-12 gap-3 p-3 sm:p-4 overflow-hidden">
-            
-            {/* Left Column: Task 1 Bar Chart or Vocabulary List (Takes 5 cols on desktop) */}
-            <div className="md:col-span-5 h-full bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col overflow-hidden shadow-lg">
-              {activeTask === 'task1' ? (
+            {activeTask === 'task1' ? (
+              task1Layout === 'three-col' ? (
+                /* Task 1 Chế độ 3 Cột: Luôn thấy Đề/Biểu đồ (4 cols) | Từ vựng (3 cols) | Luyện tập (5 cols) */
                 <>
-                  {/* Task 1 Left Navigation: Biểu đồ số liệu (Bar Chart) vs Từ vựng */}
-                  <div className="flex items-center gap-1.5 pb-2 mb-2 border-b border-slate-800 shrink-0">
-                    <button
-                      type="button"
-                      onClick={() => setTask1LeftTab('chart')}
-                      className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer ${
-                        task1LeftTab === 'chart'
-                          ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
-                          : "bg-slate-800/80 text-slate-400 hover:text-white"
-                      }`}
-                    >
-                      <BarChart3 className="w-3.5 h-3.5" />
-                      <span>Biểu đồ số liệu</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setTask1LeftTab('vocab')}
-                      className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer ${
-                        task1LeftTab === 'vocab'
-                          ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
-                          : "bg-slate-800/80 text-slate-400 hover:text-white"
-                      }`}
-                    >
-                      <BookOpen className="w-3.5 h-3.5" />
-                      <span>Từ vựng Band 8.0</span>
-                    </button>
+                  {/* Cột 1: Đề bài & Biểu đồ số liệu Task 1 */}
+                  <div className="md:col-span-4 h-full overflow-hidden">
+                    <Task1Visualizer
+                      topic={selectedTopic}
+                      onExpandChart={() => setIsChartModalOpen(true)}
+                      isCompact={false}
+                    />
                   </div>
 
-                  {/* Left Column Content */}
-                  <div className="flex-1 min-h-0 overflow-hidden">
-                    {task1LeftTab === 'chart' ? (
+                  {/* Cột 2: Danh sách từ vựng Band 8.0 */}
+                  <div className="md:col-span-3 h-full bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col overflow-hidden shadow-lg">
+                    <VocabularyList
+                      vocabularies={selectedTopic?.vocabularies || []}
+                      selectedVocab={selectedVocab}
+                      onSelectVocab={setSelectedVocab}
+                      studentEmail={studentEmail}
+                      onStartPractice={(vocab) => setSelectedVocab(vocab)}
+                    />
+                  </div>
+
+                  {/* Cột 3: Khu vực luyện tập 3 phần */}
+                  <div className="md:col-span-5 h-full bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col overflow-hidden shadow-lg">
+                    <div className="flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-thin">
+                      <SentencePractice
+                        topic={selectedTopic}
+                        targetBand={targetBand}
+                        selectedVocab={selectedVocab}
+                        onSelectVocab={setSelectedVocab}
+                        apiKey={apiKey}
+                        studentEmail={studentEmail}
+                        activeTask={activeTask}
+                        onOpenChartModal={() => setIsChartModalOpen(true)}
+                        onSentenceGraded={handleRefreshStats}
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                /* Task 1 Chế độ Cột Trái 2 Tầng: Tầng trên Biểu đồ | Tầng dưới Từ vựng | Cột phải Luyện tập */
+                <>
+                  <div className="md:col-span-5 h-full flex flex-col gap-2.5 overflow-hidden">
+                    {/* Tầng trên: Biểu đồ số liệu */}
+                    <div className="flex-1 min-h-0 overflow-hidden">
                       <Task1Visualizer
                         topic={selectedTopic}
                         onExpandChart={() => setIsChartModalOpen(true)}
+                        isCompact={true}
                       />
-                    ) : (
+                    </div>
+
+                    {/* Tầng dưới: Danh sách từ vựng Band 8.0 */}
+                    <div className="flex-1 min-h-0 bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col overflow-hidden shadow-lg">
                       <VocabularyList
                         vocabularies={selectedTopic?.vocabularies || []}
                         selectedVocab={selectedVocab}
@@ -332,37 +357,57 @@ export default function App() {
                         studentEmail={studentEmail}
                         onStartPractice={(vocab) => setSelectedVocab(vocab)}
                       />
-                    )}
+                    </div>
+                  </div>
+
+                  {/* Cột Phải: Khu vực luyện tập 3 phần (7 cols) */}
+                  <div className="md:col-span-7 h-full bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col overflow-hidden shadow-lg">
+                    <div className="flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-thin">
+                      <SentencePractice
+                        topic={selectedTopic}
+                        targetBand={targetBand}
+                        selectedVocab={selectedVocab}
+                        onSelectVocab={setSelectedVocab}
+                        apiKey={apiKey}
+                        studentEmail={studentEmail}
+                        activeTask={activeTask}
+                        onOpenChartModal={() => setIsChartModalOpen(true)}
+                        onSentenceGraded={handleRefreshStats}
+                      />
+                    </div>
                   </div>
                 </>
-              ) : (
-                <VocabularyList
-                  vocabularies={selectedTopic?.vocabularies || []}
-                  selectedVocab={selectedVocab}
-                  onSelectVocab={setSelectedVocab}
-                  studentEmail={studentEmail}
-                  onStartPractice={(vocab) => setSelectedVocab(vocab)}
-                />
-              )}
-            </div>
+              )
+            ) : (
+              /* Task 2: Cột 1 là Từ vựng (5 cols), Cột 2 là Luyện tập (7 cols) */
+              <>
+                <div className="md:col-span-5 h-full bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col overflow-hidden shadow-lg">
+                  <VocabularyList
+                    vocabularies={selectedTopic?.vocabularies || []}
+                    selectedVocab={selectedVocab}
+                    onSelectVocab={setSelectedVocab}
+                    studentEmail={studentEmail}
+                    onStartPractice={(vocab) => setSelectedVocab(vocab)}
+                  />
+                </div>
 
-            {/* Right Column: Interactive Sentence Practice & Instant Scoring (Takes 7 cols on desktop) */}
-            <div className="md:col-span-7 h-full bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col overflow-hidden shadow-lg">
-              <div className="flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-thin">
-                <SentencePractice
-                  topic={selectedTopic}
-                  targetBand={targetBand}
-                  selectedVocab={selectedVocab}
-                  onSelectVocab={setSelectedVocab}
-                  apiKey={apiKey}
-                  studentEmail={studentEmail}
-                  activeTask={activeTask}
-                  onOpenChartModal={() => setIsChartModalOpen(true)}
-                  onSentenceGraded={handleRefreshStats}
-                />
-              </div>
-            </div>
-
+                <div className="md:col-span-7 h-full bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col overflow-hidden shadow-lg">
+                  <div className="flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-thin">
+                    <SentencePractice
+                      topic={selectedTopic}
+                      targetBand={targetBand}
+                      selectedVocab={selectedVocab}
+                      onSelectVocab={setSelectedVocab}
+                      apiKey={apiKey}
+                      studentEmail={studentEmail}
+                      activeTask={activeTask}
+                      onOpenChartModal={() => setIsChartModalOpen(true)}
+                      onSentenceGraded={handleRefreshStats}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
           </main>
         </div>
       )}

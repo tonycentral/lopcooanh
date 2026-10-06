@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shuffle, BarChart3 } from 'lucide-react';
+import { Shuffle, BarChart3, Columns3, Columns2 } from 'lucide-react';
 
 export default function TopicTabBar({ 
   topics, 
@@ -7,7 +7,9 @@ export default function TopicTabBar({
   onSelectTopic, 
   onRandomTopic,
   activeTask,
-  onOpenChartModal
+  onOpenChartModal,
+  task1Layout = 'three-col',
+  onToggleTask1Layout
 }) {
   const list = topics && topics.length > 0 ? topics : [];
 
@@ -70,18 +72,52 @@ export default function TopicTabBar({
               )}
             </div>
 
-            {/* Quick Chart modal button for Task 1 */}
-            {activeTask === 'task1' && onOpenChartModal && (
-              <button
-                type="button"
-                onClick={onOpenChartModal}
-                className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 hover:text-white border border-blue-500/40 text-xs font-bold transition cursor-pointer shrink-0 shadow-sm"
-                title="Mở biểu đồ số liệu chi tiết"
-              >
-                <BarChart3 className="w-3.5 h-3.5 text-blue-400" />
-                <span>Xem Bar Chart</span>
-              </button>
-            )}
+            <div className="flex items-center gap-2 shrink-0">
+              {/* Layout Switcher for Task 1: 3 Cột song song vs 2 Cột gộp */}
+              {activeTask === 'task1' && onToggleTask1Layout && (
+                <div className="flex items-center bg-slate-950/80 p-0.5 rounded-xl border border-slate-800 text-xs">
+                  <button
+                    type="button"
+                    onClick={() => onToggleTask1Layout('three-col')}
+                    className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
+                      task1Layout === 'three-col'
+                        ? 'bg-blue-600 text-white shadow-sm shadow-blue-600/30 ring-1 ring-blue-400'
+                        : 'text-slate-400 hover:text-white'
+                    }`}
+                    title="Chế độ 3 Cột song song: Luôn thấy Đề/Biểu đồ & Từ vựng & Luyện tập"
+                  >
+                    <Columns3 className="w-3.5 h-3.5" />
+                    <span>3 Cột</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => onToggleTask1Layout('stacked')}
+                    className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
+                      task1Layout === 'stacked'
+                        ? 'bg-blue-600 text-white shadow-sm shadow-blue-600/30 ring-1 ring-blue-400'
+                        : 'text-slate-400 hover:text-white'
+                    }`}
+                    title="Chế độ Cột trái 2 tầng: Nửa trên Biểu đồ, nửa dưới Từ vựng"
+                  >
+                    <Columns2 className="w-3.5 h-3.5" />
+                    <span>2 Cột</span>
+                  </button>
+                </div>
+              )}
+
+              {/* Quick Chart modal button for Task 1 */}
+              {activeTask === 'task1' && onOpenChartModal && (
+                <button
+                  type="button"
+                  onClick={onOpenChartModal}
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 hover:text-white border border-blue-500/40 text-xs font-bold transition cursor-pointer shrink-0 shadow-sm"
+                  title="Mở biểu đồ số liệu toàn màn hình"
+                >
+                  <BarChart3 className="w-3.5 h-3.5 text-blue-400" />
+                  <span>Phóng to</span>
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Prompt description - Large, clear font, no truncation */}
