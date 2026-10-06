@@ -8,8 +8,6 @@ import TopicTabBar from './components/TopicTabBar';
 import VocabularyList from './components/VocabularyList';
 import SentencePractice from './components/SentencePractice';
 import HistoryDrawer from './components/HistoryDrawer';
-import DeploymentGuideModal from './components/DeploymentGuideModal';
-import SettingsModal from './components/SettingsModal';
 import CohesiveGuideModal from './components/CohesiveGuideModal';
 
 import { 
@@ -22,8 +20,8 @@ import {
   getStoredTargetBand, 
   saveTargetBand, 
   getStoredApiKey, 
-  saveApiKey, 
-  getStoredStats 
+  getStoredStats,
+  getAverageScoreLast7Days
 } from './services/storage';
 
 import { 
@@ -41,6 +39,9 @@ export default function App() {
   const [studentEmail, setStudentEmail] = useState(() => getSavedEmail());
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(() => !getSavedEmail());
 
+  // 7-Day Average Status Score
+  const [current7DayScore, setCurrent7DayScore] = useState(() => getAverageScoreLast7Days(studentEmail));
+
   // Initial student profile based on saved email
   const initialProfile = studentEmail ? getProfileByEmail(studentEmail) : null;
 
@@ -49,8 +50,8 @@ export default function App() {
   const [activeTask, setActiveTask] = useState(() => initialProfile?.selectedTask || 'task2');
   
   // API key & grading stats
-  const [apiKey, setApiKey] = useState(() => getStoredApiKey());
-  const [stats, setStats] = useState(() => getStoredStats());
+  const [apiKey] = useState(() => getStoredApiKey());
+  const [, setStats] = useState(() => getStoredStats());
 
   // Available topics based on selected task
   const currentTopics = activeTask === 'task1' ? IELTS_TASK1_TOPICS : IELTS_TASK2_TOPICS;
@@ -62,8 +63,6 @@ export default function App() {
   // Modal States
   const [isBandModalOpen, setIsBandModalOpen] = useState(false);
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
-  const [isDeployGuideOpen, setIsDeployGuideOpen] = useState(false);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isCohesiveGuideOpen, setIsCohesiveGuideOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
@@ -71,6 +70,8 @@ export default function App() {
   const handleSaveEmail = (email) => {
     const profile = saveCurrentEmail(email);
     setStudentEmail(email);
+    setCurrent7DayScore(getAverageScoreLast7Days(email));
+
     if (profile) {
       const band = profile.targetBand || "7.0";
       const task = profile.selectedTask || "task2";
@@ -129,12 +130,6 @@ export default function App() {
     }
   };
 
-  // Update API Key and persist
-  const handleUpdateApiKey = (newKey) => {
-    setApiKey(newKey);
-    saveApiKey(newKey);
-  };
-
   // Pick random topic within current task
   const handleRandomTopic = () => {
     const list = currentTopics.length > 0 ? currentTopics : IELTS_TOPICS;
@@ -152,9 +147,10 @@ export default function App() {
     setSelectedVocab(topic?.vocabularies[0] || null);
   };
 
-  // Refresh stats after sentence grading
+  // Refresh stats & 7-day average after sentence grading
   const handleRefreshStats = () => {
     setStats(getStoredStats());
+    setCurrent7DayScore(getAverageScoreLast7Days(studentEmail));
   };
 
   return (
@@ -178,10 +174,9 @@ export default function App() {
           {/* Compact Top Navigation Bar */}
           <Header
             targetBand={targetBand}
+            current7DayScore={current7DayScore}
             onOpenBandModal={() => setIsBandModalOpen(true)}
             onOpenHistory={() => setIsHistoryOpen(true)}
-            onOpenDeployGuide={() => setIsDeployGuideOpen(true)}
-            onOpenSettings={() => setIsSettingsOpen(true)}
             onOpenContact={() => setIsContactModalOpen(true)}
             onChangeEmail={() => setIsEmailModalOpen(true)}
             onGoWelcome={() => setCurrentView('welcome')}
@@ -189,7 +184,6 @@ export default function App() {
             activeTask={activeTask}
             onToggleTask={handleToggleTask}
             currentView={currentView}
-            stats={stats}
           />
 
           {/* Section 1: Chọn Chủ Đề (Horizontal Tabs + Random Tab + Prompt) */}
@@ -223,6 +217,7 @@ export default function App() {
                   selectedVocab={selectedVocab}
                   onSelectVocab={setSelectedVocab}
                   apiKey={apiKey}
+                  studentEmail={studentEmail}
                   onSentenceGraded={handleRefreshStats}
                 />
               </div>
@@ -255,21 +250,6 @@ export default function App() {
         isOpen={isHistoryOpen}
         onClose={() => setIsHistoryOpen(false)}
         onRefreshStats={handleRefreshStats}
-      />
-
-      <DeploymentGuideModal
-        isOpen={isDeployGuideOpen}
-        onClose={() => setIsDeployGuideOpen(false)}
-      />
-
-      <SettingsModal
-        isOpen={isSettingsOpen}
-        onClose={() => setIsSettingsOpen(false)}
-        targetBand={targetBand}
-        onSelectBand={handleUpdateTargetBand}
-        apiKey={apiKey}
-        onSaveApiKey={handleUpdateApiKey}
-        onResetData={handleRefreshStats}
       />
 
       <CohesiveGuideModal

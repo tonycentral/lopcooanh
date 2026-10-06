@@ -100,3 +100,45 @@ function updateStats(newEntry) {
     console.error("Failed to update stats", e);
   }
 }
+
+/**
+ * Tính điểm trung bình của các bài viết trong 7 ngày gần nhất
+ * @param {string|null} studentEmail Email học viên (nếu có để lọc)
+ * @returns {number|null} Điểm số trung bình (ví dụ: 6.5, 7.2) hoặc null nếu chưa có bài nào
+ */
+export function getAverageScoreLast7Days(studentEmail = null) {
+  try {
+    const history = getStoredHistory();
+    if (!history || history.length === 0) return null;
+
+    const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+
+    const recentEntries = history.filter(item => {
+      const itemTime = new Date(item.timestamp).getTime();
+      const isWithin7Days = itemTime >= sevenDaysAgo;
+      const isEmailMatch = !studentEmail || !item.studentEmail || item.studentEmail.toLowerCase() === studentEmail.toLowerCase();
+      return isWithin7Days && isEmailMatch;
+    });
+
+    if (recentEntries.length === 0) return null;
+
+    let totalScore = 0;
+    let count = 0;
+
+    for (const item of recentEntries) {
+      const score = parseFloat(item.scores?.overallBand) || parseFloat(item.scores?.overall);
+      if (!isNaN(score) && score > 0) {
+        totalScore += score;
+        count += 1;
+      }
+    }
+
+    if (count === 0) return null;
+    const avg = totalScore / count;
+    return Math.round(avg * 10) / 10;
+  } catch (e) {
+    console.error("Failed to calculate average score last 7 days", e);
+    return null;
+  }
+}
+

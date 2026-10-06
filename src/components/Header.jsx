@@ -3,37 +3,27 @@ import {
   BookOpen, 
   Target, 
   History, 
-  Globe, 
-  Settings, 
-  Flame, 
-  CheckCircle2, 
-  Sparkles,
+  TrendingUp,
   PhoneCall,
-  User,
   Home,
   FileText,
   BarChart3,
   Mail
 } from 'lucide-react';
-import { BAND_DESCRIPTORS } from '../data/bandDescriptors';
 
 export default function Header({ 
   targetBand, 
+  current7DayScore,
   onOpenBandModal, 
   onOpenHistory, 
-  onOpenDeployGuide, 
-  onOpenSettings,
   onOpenContact,
   onChangeEmail,
   onGoWelcome,
   studentEmail,
   activeTask,
   onToggleTask,
-  currentView,
-  stats 
+  currentView
 }) {
-  const currentBandInfo = BAND_DESCRIPTORS[targetBand] || BAND_DESCRIPTORS["7.0"];
-
   return (
     <header className="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-md shrink-0">
       <div className="w-full px-3 sm:px-5 h-14 flex items-center justify-between gap-2.5">
@@ -41,35 +31,35 @@ export default function Header({
         {/* Logo & App title - Clickable to return to Welcome Page */}
         <div 
           onClick={onGoWelcome}
-          className="flex items-center gap-3 cursor-pointer group select-none shrink-0"
+          className="flex items-center gap-2.5 cursor-pointer group select-none shrink-0"
           title="Về Trang Chào Mừng Lớp Cô Oanh"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/20 text-white font-black text-xl group-hover:scale-105 transition-transform">
-            <BookOpen className="w-5 h-5" />
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-md shadow-indigo-500/20 text-white font-black group-hover:scale-105 transition-transform">
+            <BookOpen className="w-4 h-4" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <span className="font-extrabold text-lg sm:text-xl tracking-tight text-white group-hover:text-indigo-300 transition">
+            <div className="flex items-center gap-1.5">
+              <span className="font-extrabold text-base sm:text-lg tracking-tight text-white group-hover:text-indigo-300 transition leading-none">
                 Lớp cô Oanh
               </span>
               <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
                 {activeTask === "task1" ? "Task 1" : "Task 2"}
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 hidden md:block">
+            <p className="text-[10px] text-slate-400 hidden md:block leading-none mt-0.5">
               Website chuyên cải thiện writing
             </p>
           </div>
         </div>
 
-        {/* Center: Band Selector & Task Toggle */}
+        {/* Center: Task Toggle, 1-Line Target Band & 7-Day Current Status */}
         <div className="flex items-center gap-2">
           
           {/* Welcome Navigation Button if currently in practice mode */}
           {currentView === 'practice' && (
             <button
               onClick={onGoWelcome}
-              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 text-xs font-semibold text-slate-300 hover:text-white transition cursor-pointer"
+              className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 text-xs font-semibold text-slate-300 hover:text-white transition cursor-pointer"
               title="Quay lại Trang Chào Mừng"
             >
               <Home className="w-3.5 h-3.5 text-indigo-400" />
@@ -105,27 +95,38 @@ export default function Header({
             </div>
           )}
 
-          {/* Target Band Pill */}
+          {/* 1-Line Target Band Button */}
           <button
             onClick={onOpenBandModal}
-            className="group flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700/80 hover:border-indigo-500/50 transition-all cursor-pointer shadow-inner"
+            className="group flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-800 border border-slate-700/80 hover:border-indigo-500/50 transition cursor-pointer select-none text-xs"
             title="Nhấn để đổi mục tiêu Band"
           >
-            <div className="flex items-center justify-center w-6 h-6 rounded-lg bg-indigo-600/20 text-indigo-400 group-hover:scale-105 transition-transform">
-              <Target className="w-3.5 h-3.5" />
-            </div>
-            <div className="text-left">
-              <div className="text-[9px] uppercase tracking-wider text-slate-400 font-semibold">
-                Mục tiêu
-              </div>
-              <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-1">
-                Band {targetBand}
-              </div>
-            </div>
-            <span className="text-[10px] px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-medium ml-0.5 hidden sm:inline">
+            <Target className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+            <span className="text-slate-400">Mục tiêu:</span>
+            <span className="font-bold text-white">Band {targetBand}</span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-medium ml-0.5">
               Đổi
             </span>
           </button>
+
+          {/* Chấm điểm hiện trạng người dùng (Trung bình 7 ngày gần nhất) */}
+          <div
+            className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/60 border border-slate-700/60 text-xs select-none"
+            title="Điểm trung bình các bài đã làm trong 7 ngày gần nhất"
+          >
+            <TrendingUp className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+            <span className="text-slate-400">Hiện trạng (7 ngày):</span>
+            <span className={`font-bold ${
+              current7DayScore !== null
+                ? parseFloat(current7DayScore) >= parseFloat(targetBand)
+                  ? "text-emerald-400"
+                  : "text-amber-400"
+                : "text-slate-500"
+            }`}>
+              {current7DayScore !== null ? `Band ${current7DayScore.toFixed(1)}` : "--"}
+            </span>
+          </div>
+
         </div>
 
         {/* Right Action buttons */}
@@ -158,7 +159,7 @@ export default function Header({
             </button>
           )}
 
-          {/* History */}
+          {/* History Drawer */}
           <button
             onClick={onOpenHistory}
             className="p-2 sm:p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 border border-transparent hover:border-slate-700 transition cursor-pointer"
@@ -167,24 +168,6 @@ export default function Header({
             <History className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
 
-          {/* Deployment Guide */}
-          <button
-            onClick={onOpenDeployGuide}
-            className="hidden lg:flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-sky-400 hover:text-sky-300 bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/30 transition cursor-pointer"
-            title="Hướng dẫn đưa lên tên miền miễn phí"
-          >
-            <Globe className="w-4 h-4" />
-            <span>Online</span>
-          </button>
-
-          {/* Settings */}
-          <button
-            onClick={onOpenSettings}
-            className="p-2 sm:p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 border border-transparent hover:border-slate-700 transition cursor-pointer"
-            title="Cài đặt hệ thống"
-          >
-            <Settings className="w-4 h-4 sm:w-5 sm:h-5" />
-          </button>
         </div>
 
       </div>

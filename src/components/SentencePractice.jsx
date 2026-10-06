@@ -24,6 +24,7 @@ export default function SentencePractice({
   selectedVocab, 
   onSelectVocab,
   apiKey,
+  studentEmail,
   onSentenceGraded 
 }) {
   const [activeStep, setActiveStep] = useState("vocab"); // "vocab" or "coherence"
@@ -90,6 +91,7 @@ export default function SentencePractice({
 
       // Save to history
       saveHistoryEntry({
+        studentEmail,
         type: "vocabulary",
         topicName: topic.name,
         targetWord: selectedVocab?.word,
@@ -145,6 +147,7 @@ export default function SentencePractice({
       }
 
       saveHistoryEntry({
+        studentEmail,
         type: "coherence",
         topicName: topic.name,
         targetBand,
