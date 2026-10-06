@@ -97,7 +97,7 @@ export default function VocabularyList({
       {/* Top Header: Title & Pagination Action */}
       <div className="flex items-center justify-between pb-2.5 mb-1.5 border-b border-slate-800 shrink-0">
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
+          <div className="w-7 h-7 rounded-lg bg-blue-600/15 text-blue-400 flex items-center justify-center">
             <BookOpen className="w-4 h-4" />
           </div>
           <div>
@@ -126,7 +126,7 @@ export default function VocabularyList({
           <button
             type="button"
             onClick={handleNextPage}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 hover:text-white border border-indigo-500/30 text-xs font-bold transition cursor-pointer shadow-sm"
+            className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 hover:text-white border border-blue-500/30 text-xs font-bold transition cursor-pointer shadow-sm"
             title="Xem 5 từ vựng tiếp theo"
           >
             <span>5 từ tiếp theo</span>
@@ -147,7 +147,7 @@ export default function VocabularyList({
               onClick={() => handlePracticeWord(vocab)}
               className={`p-3 rounded-2xl border transition-all cursor-pointer text-left select-none flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 ${
                 isSelected
-                  ? "bg-indigo-950/60 border-indigo-500 shadow-lg shadow-indigo-950/40 ring-1 ring-indigo-500/60"
+                  ? "bg-blue-950/60 border-blue-500 shadow-lg shadow-blue-950/40 ring-1 ring-blue-500/60"
                   : isKnown
                     ? "bg-slate-900/40 hover:bg-slate-900/70 border-slate-800/60 opacity-80"
                     : "bg-slate-900/90 hover:bg-slate-850 border-slate-800 hover:border-slate-700"
@@ -162,7 +162,7 @@ export default function VocabularyList({
                 </span>
 
                 {vocab.ipa && (
-                  <span className="text-xs font-mono text-indigo-300 italic font-semibold">
+                  <span className="text-xs font-mono text-blue-300 italic font-semibold">
                     {vocab.ipa}
                   </span>
                 )}
@@ -210,8 +210,8 @@ export default function VocabularyList({
                   }}
                   className={`px-3 py-1 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-md ${
                     isSelected
-                      ? "bg-indigo-600 text-white shadow-indigo-600/30 ring-1 ring-indigo-400"
-                      : "bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white shadow-indigo-600/20"
+                      ? "bg-blue-600 text-white shadow-blue-600/30 ring-1 ring-blue-400"
+                      : "bg-blue-600 hover:bg-blue-500 text-white shadow-blue-600/20"
                   }`}
                   title="Bắt đầu 3 phần luyện tập từ này"
                 >
@@ -231,7 +231,7 @@ export default function VocabularyList({
           <button
             type="button"
             onClick={handleNextPage}
-            className="text-indigo-400 hover:text-indigo-300 font-semibold cursor-pointer flex items-center gap-1"
+            className="text-blue-400 hover:text-blue-300 font-semibold cursor-pointer flex items-center gap-1"
           >
             <span>Sang 5 từ tiếp theo</span>
             <ChevronRight className="w-3 h-3" />

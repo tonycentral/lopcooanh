@@ -19,7 +19,7 @@ export default function Task1Visualizer({ topic, onExpandChart }) {
       title: "Household Budget Share across 5 Countries (2023)",
       unit: "%",
       categories: [
-        { key: "housing", label: "Housing (Nhà ở)", color: "#6366f1", bgClass: "bg-indigo-500", textClass: "text-indigo-400" },
+        { key: "housing", label: "Housing (Nhà ở)", color: "#2563eb", bgClass: "bg-blue-600", textClass: "text-blue-400" },
         { key: "education", label: "Education (Giáo dục)", color: "#10b981", bgClass: "bg-emerald-500", textClass: "text-emerald-400" },
         { key: "recreation", label: "Recreation (Giải trí)", color: "#f59e0b", bgClass: "bg-amber-500", textClass: "text-amber-400" }
       ],
@@ -44,7 +44,7 @@ export default function Task1Visualizer({ topic, onExpandChart }) {
         {/* Title Bar */}
         <div className="flex items-center justify-between pb-2 border-b border-slate-800 shrink-0">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
+            <div className="w-7 h-7 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center">
               <BarChart3 className="w-4 h-4" />
             </div>
             <div>
@@ -96,12 +96,12 @@ export default function Task1Visualizer({ topic, onExpandChart }) {
                 <div className="w-full flex items-end justify-center gap-1 h-36 sm:h-44">
                   {/* Housing bar */}
                   <div className="flex-1 flex flex-col items-center group relative h-full justify-end">
-                    <span className="text-[10px] font-bold text-indigo-300 opacity-90 group-hover:opacity-100 transition mb-0.5">
+                    <span className="text-[10px] font-bold text-blue-300 opacity-90 group-hover:opacity-100 transition mb-0.5">
                       {item.housing}%
                     </span>
                     <div 
                       style={{ height: `${(item.housing / maxVal) * 100}%` }}
-                      className="w-full bg-indigo-500 hover:bg-indigo-400 rounded-t transition-all shadow-md shadow-indigo-500/20"
+                      className="w-full bg-blue-600 hover:bg-blue-500 rounded-t transition-all shadow-md shadow-blue-600/20"
                       title={`${item.country} - Housing: ${item.housing}%`}
                     />
                   </div>
@@ -142,9 +142,9 @@ export default function Task1Visualizer({ topic, onExpandChart }) {
 
         {/* Key Features for IELTS Writing */}
         {data.keyNotes && data.keyNotes.length > 0 && (
-          <div className="p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20 space-y-1.5 shrink-0">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-indigo-400">
-              <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+          <div className="p-3 rounded-xl bg-blue-950/30 border border-blue-500/20 space-y-1.5 shrink-0">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-blue-400">
+              <Sparkles className="w-3.5 h-3.5 text-blue-400" />
               <span>Đặc điểm chính cần đưa vào bài viết (Overview & Body):</span>
             </div>
             <ul className="space-y-1 text-xs text-slate-300">

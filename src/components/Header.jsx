@@ -1,6 +1,5 @@
 import React from 'react';
 import { 
-  BookOpen, 
   Target, 
   History, 
   TrendingUp,
@@ -34,15 +33,19 @@ export default function Header({
           className="flex items-center gap-2.5 cursor-pointer group select-none shrink-0"
           title="Về Trang Chào Mừng Lớp Cô Oanh"
         >
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-md shadow-indigo-500/20 text-white font-black group-hover:scale-105 transition-transform">
-            <BookOpen className="w-4 h-4" />
+          <div className="w-9 h-9 rounded-xl bg-blue-600/15 border border-blue-500/40 p-0.5 flex items-center justify-center shadow-md shadow-blue-950/40 group-hover:scale-105 transition-transform shrink-0 overflow-hidden bg-slate-950">
+            <img 
+              src="./logo.png" 
+              alt="Logo Lớp cô Oanh" 
+              className="w-full h-full object-contain drop-shadow" 
+            />
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-base sm:text-lg tracking-tight text-white group-hover:text-indigo-300 transition leading-none">
+              <span className="font-extrabold text-base sm:text-lg tracking-tight text-white group-hover:text-blue-300 transition leading-none">
                 Lớp cô Oanh
               </span>
-              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/30">
                 {activeTask === "task1" ? "Task 1" : "Task 2"}
               </span>
             </div>
@@ -59,22 +62,22 @@ export default function Header({
           {currentView === 'practice' && (
             <button
               onClick={onGoWelcome}
-              className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 text-xs font-semibold text-slate-300 hover:text-white transition cursor-pointer"
+              className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 text-xs font-semibold text-slate-300 hover:text-white transition cursor-pointer"
               title="Quay lại Trang Chào Mừng"
             >
-              <Home className="w-3.5 h-3.5 text-indigo-400" />
+              <Home className="w-3.5 h-3.5 text-blue-400" />
               <span>Trang chủ</span>
             </button>
           )}
 
           {/* Quick Task 1 / Task 2 Switcher */}
           {onToggleTask && (
-            <div className="hidden sm:flex items-center p-0.5 rounded-xl bg-slate-950/70 border border-slate-800 text-xs">
+            <div className="hidden sm:flex items-center p-0.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs">
               <button
                 onClick={() => onToggleTask("task1")}
                 className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-bold transition cursor-pointer ${
                   activeTask === "task1"
-                    ? "bg-indigo-600 text-white shadow-sm"
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
                     : "text-slate-400 hover:text-slate-200"
                 }`}
               >
@@ -85,7 +88,7 @@ export default function Header({
                 onClick={() => onToggleTask("task2")}
                 className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-bold transition cursor-pointer ${
                   activeTask === "task2"
-                    ? "bg-purple-600 text-white shadow-sm"
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
                     : "text-slate-400 hover:text-slate-200"
                 }`}
               >
@@ -98,13 +101,13 @@ export default function Header({
           {/* 1-Line Target Band Button */}
           <button
             onClick={onOpenBandModal}
-            className="group flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-800 border border-slate-700/80 hover:border-indigo-500/50 transition cursor-pointer select-none text-xs"
+            className="group flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-800 border border-slate-700/80 hover:border-blue-500/50 transition cursor-pointer select-none text-xs"
             title="Nhấn để đổi mục tiêu Band"
           >
-            <Target className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+            <Target className="w-3.5 h-3.5 text-blue-400 shrink-0" />
             <span className="text-slate-400">Mục tiêu:</span>
             <span className="font-bold text-white">Band {targetBand}</span>
-            <span className="text-[10px] px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-medium ml-0.5">
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 font-medium ml-0.5">
               Đổi
             </span>
           </button>

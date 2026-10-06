@@ -27,7 +27,7 @@ export default function TopicTabBar({
               onClick={() => onSelectTopic(topic)}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer select-none shrink-0 ${
                 isSelected
-                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30 ring-1 ring-indigo-400"
+                  ? "bg-blue-600 text-white shadow-md shadow-blue-600/30 ring-1 ring-blue-400"
                   : "bg-slate-900/90 hover:bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-800"
               }`}
             >
@@ -40,7 +40,7 @@ export default function TopicTabBar({
         <button
           type="button"
           onClick={onRandomTopic}
-          className="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white shadow-md shadow-purple-600/25 transition cursor-pointer select-none shrink-0 flex items-center gap-1.5"
+          className="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-600 hover:from-blue-600 hover:to-indigo-500 text-white shadow-md shadow-blue-600/25 transition cursor-pointer select-none shrink-0 flex items-center gap-1.5"
           title="Chọn chủ đề ngẫu nhiên"
         >
           <Shuffle className="w-3.5 h-3.5" />
@@ -55,8 +55,8 @@ export default function TopicTabBar({
             <div className="flex items-center gap-2 flex-wrap">
               <span className={`text-[10px] sm:text-xs font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
                 activeTask === 'task1'
-                  ? 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30'
-                  : 'bg-purple-500/15 text-purple-300 border-purple-500/30'
+                  ? 'bg-blue-500/15 text-blue-300 border-blue-500/30'
+                  : 'bg-blue-600/15 text-blue-300 border-blue-500/30'
               }`}>
                 {activeTask === 'task1' ? 'Đề bài Task 1' : 'Đề bài Task 2'}
               </span>
@@ -75,10 +75,10 @@ export default function TopicTabBar({
               <button
                 type="button"
                 onClick={onOpenChartModal}
-                className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 hover:text-white border border-indigo-500/40 text-xs font-bold transition cursor-pointer shrink-0 shadow-sm"
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 hover:text-white border border-blue-500/40 text-xs font-bold transition cursor-pointer shrink-0 shadow-sm"
                 title="Mở biểu đồ số liệu chi tiết"
               >
-                <BarChart3 className="w-3.5 h-3.5 text-indigo-400" />
+                <BarChart3 className="w-3.5 h-3.5 text-blue-400" />
                 <span>Xem Bar Chart</span>
               </button>
             )}

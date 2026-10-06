@@ -14,7 +14,7 @@ export default function Task1ChartModal({ isOpen, onClose, topic }) {
         {/* Modal Header */}
         <div className="px-5 py-4 border-b border-slate-800 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center">
               <BarChart3 className="w-4 h-4" />
             </div>
             <div>
@@ -39,7 +39,7 @@ export default function Task1ChartModal({ isOpen, onClose, topic }) {
         <div className="flex-1 min-h-0 p-4 sm:p-6 overflow-y-auto">
           {/* Prompt reminder */}
           <div className="mb-4 p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs sm:text-sm text-slate-200 font-sans leading-relaxed">
-            <span className="font-bold text-indigo-400 mr-2">ĐỀ BÀI:</span>
+            <span className="font-bold text-blue-400 mr-2">ĐỀ BÀI:</span>
             "{topic.ieltsPrompt}"
           </div>
 

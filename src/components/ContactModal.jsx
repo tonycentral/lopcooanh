@@ -33,8 +33,8 @@ export default function ContactModal({ isOpen, onClose }) {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Subtle decorative glow */}
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-52 h-52 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-52 h-52 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-52 h-52 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-52 h-52 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Close Button */}
         <button
@@ -47,11 +47,15 @@ export default function ContactModal({ isOpen, onClose }) {
 
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-emerald-500/20 shrink-0">
-            <GraduationCap className="w-7 h-7" />
+          <div className="w-14 h-14 rounded-2xl bg-blue-600/10 p-1 border border-blue-500/30 flex items-center justify-center shadow-lg shadow-blue-600/20 shrink-0">
+            <img 
+              src="./logo.png" 
+              alt="Lớp cô Oanh" 
+              className="w-full h-full object-contain drop-shadow" 
+            />
           </div>
           <div>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] font-semibold mb-1">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[11px] font-semibold mb-1">
               <Sparkles className="w-3 h-3" />
               <span>Học Trực Tiếp 1-kèm-1 &amp; Nhóm Nhỏ</span>
             </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, ArrowRight, AlertCircle, BookOpen } from 'lucide-react';
+import { Mail, ArrowRight, AlertCircle } from 'lucide-react';
 import { isValidEmail } from '../services/userService';
 
 export default function EmailModal({ isOpen, onSaveEmail }) {
@@ -34,14 +34,18 @@ export default function EmailModal({ isOpen, onSaveEmail }) {
       >
         {/* Header */}
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 border border-indigo-500/20 flex items-center justify-center mx-auto">
-            <BookOpen className="w-6 h-6" />
+          <div className="w-16 h-16 rounded-2xl bg-blue-600/10 p-1 border border-blue-500/30 flex items-center justify-center mx-auto shadow-md">
+            <img 
+              src="./logo.png" 
+              alt="Lớp cô Oanh" 
+              className="w-full h-full object-contain drop-shadow"
+            />
           </div>
 
           <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
             Lớp cô Oanh
           </h2>
-          <p className="text-xs sm:text-sm text-indigo-300 font-semibold">
+          <p className="text-xs sm:text-sm text-blue-300 font-semibold">
             Vui lòng điền email của học viên để tiếp tục
           </p>
         </div>
@@ -68,7 +72,7 @@ export default function EmailModal({ isOpen, onSaveEmail }) {
                 className={`w-full pl-10 pr-4 py-3 bg-slate-950 border rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none transition ${
                   error 
                     ? "border-red-500 focus:border-red-500 ring-1 ring-red-500/30" 
-                    : "border-slate-800 focus:border-indigo-500"
+                    : "border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 }`}
               />
             </div>
@@ -83,7 +87,7 @@ export default function EmailModal({ isOpen, onSaveEmail }) {
 
           <button
             type="submit"
-            className="w-full py-3.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full py-3.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm transition shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>Tiếp tục</span>
             <ArrowRight className="w-4 h-4" />

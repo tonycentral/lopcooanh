@@ -162,7 +162,7 @@ export default function SentencePractice({
   if (!selectedVocab) {
     return (
       <div className="h-full flex flex-col items-center justify-center p-6 text-center space-y-3 bg-slate-900/60 rounded-2xl border border-slate-800">
-        <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center">
+        <div className="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
           <BookOpen className="w-6 h-6" />
         </div>
         <div>
@@ -191,12 +191,12 @@ export default function SentencePractice({
       {/* Target Word Overview Ribbon */}
       <div className="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
         <div className="flex items-baseline gap-2 flex-wrap">
-          <span className="text-[10px] uppercase font-black text-indigo-400 tracking-wider bg-indigo-500/10 px-2 py-0.5 rounded-md border border-indigo-500/20">
+          <span className="text-[10px] uppercase font-black text-blue-400 tracking-wider bg-blue-500/10 px-2 py-0.5 rounded-md border border-blue-500/20">
             Từ Đang Luyện
           </span>
           <span className="text-lg font-black text-white">{selectedVocab.word}</span>
           {selectedVocab.ipa && (
-            <span className="text-xs font-mono text-indigo-300 italic font-bold">
+            <span className="text-xs font-mono text-blue-300 italic font-bold">
               {selectedVocab.ipa}
             </span>
           )}
@@ -208,7 +208,7 @@ export default function SentencePractice({
           <button
             type="button"
             onClick={onOpenChartModal}
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 hover:text-white border border-indigo-500/30 text-xs font-bold transition cursor-pointer self-start sm:self-auto"
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 hover:text-white border border-blue-500/30 text-xs font-bold transition cursor-pointer self-start sm:self-auto"
             title="Xem bảng số liệu biểu đồ Task 1"
           >
             <BarChart3 className="w-3.5 h-3.5" />
@@ -224,7 +224,7 @@ export default function SentencePractice({
           onClick={() => setActivePart(1)}
           className={`py-2 px-2 sm:px-3 rounded-xl text-[11px] sm:text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer text-center ${
             activePart === 1
-              ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
+              ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
               : "text-slate-400 hover:text-white"
           }`}
         >
@@ -240,7 +240,7 @@ export default function SentencePractice({
           onClick={() => setActivePart(2)}
           className={`py-2 px-2 sm:px-3 rounded-xl text-[11px] sm:text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer text-center ${
             activePart === 2
-              ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
+              ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
               : "text-slate-400 hover:text-white"
           }`}
         >
@@ -256,14 +256,14 @@ export default function SentencePractice({
           onClick={() => setActivePart(3)}
           className={`py-2 px-2 sm:px-3 rounded-xl text-[11px] sm:text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer text-center ${
             activePart === 3
-              ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md shadow-pink-600/25"
+              ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
               : "text-slate-400 hover:text-white"
           }`}
         >
           <span className="w-4 h-4 rounded-full bg-white/20 text-[10px] flex items-center justify-center font-black shrink-0">3</span>
           <span className="truncate">Dịch 2 câu & Chuyển</span>
           {part3Result && (
-            <span className="w-1.5 h-1.5 rounded-full bg-pink-400 shrink-0" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
           )}
         </button>
       </div>
@@ -276,7 +276,7 @@ export default function SentencePractice({
           
           <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 shadow-lg">
             <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-              <div className="flex items-center gap-2 text-indigo-400 font-extrabold text-xs sm:text-sm">
+              <div className="flex items-center gap-2 text-blue-400 font-extrabold text-xs sm:text-sm">
                 <HelpCircle className="w-4 h-4" />
                 <span>Phần 1: Chấm điểm hiểu từ "{selectedVocab.word}"</span>
               </div>
@@ -289,7 +289,7 @@ export default function SentencePractice({
             <div className="space-y-2.5">
               <label className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
                 <span>Cách 1: Chọn nghĩa tiếng Việt chính xác của</span>
-                <span className="text-indigo-400 font-extrabold underline">{selectedVocab.word}</span>:
+                <span className="text-blue-400 font-extrabold underline">{selectedVocab.word}</span>:
               </label>
 
               <div className="grid grid-cols-1 gap-2">
@@ -305,12 +305,12 @@ export default function SentencePractice({
                       }}
                       className={`p-3 rounded-xl text-xs text-left transition border cursor-pointer flex items-center justify-between gap-2 ${
                         isChecked
-                          ? "bg-indigo-600/20 border-indigo-500 text-white font-bold ring-1 ring-indigo-400"
+                          ? "bg-blue-600/20 border-blue-500 text-white font-bold ring-1 ring-blue-400"
                           : "bg-slate-950/60 hover:bg-slate-800/80 border-slate-800 text-slate-300"
                       }`}
                     >
                       <span className="flex-1">{String.fromCharCode(65 + idx)}. {option}</span>
-                      {isChecked && <CheckCircle2 className="w-4 h-4 text-indigo-400 shrink-0" />}
+                      {isChecked && <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0" />}
                     </button>
                   );
                 })}
@@ -321,7 +321,7 @@ export default function SentencePractice({
             <div className="pt-2 border-t border-slate-800/80 space-y-2">
               <label className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
                 <span>Cách 2: HOẶC điền 1 từ đồng nghĩa (synonym) tiếng Anh của</span>
-                <span className="text-pink-400 font-extrabold">{selectedVocab.word}</span>:
+                <span className="text-blue-400 font-extrabold">{selectedVocab.word}</span>:
               </label>
               
               <input
@@ -332,7 +332,7 @@ export default function SentencePractice({
                   setQuizSelectedIndex(null); // clear quiz if typing synonym
                 }}
                 placeholder={`Ví dụ: ${selectedVocab.synonyms?.[0] || "alleviate"}, ${selectedVocab.synonyms?.[1] || "lessen"}...`}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs font-mono focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs font-mono focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
               />
             </div>
 
@@ -354,7 +354,7 @@ export default function SentencePractice({
                 type="button"
                 onClick={handleGradePart1}
                 disabled={quizSelectedIndex === null && !synonymInput.trim()}
-                className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-md shadow-indigo-600/30 transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
+                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md shadow-blue-600/30 transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
               >
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Chấm điểm hiểu từ</span>
@@ -391,7 +391,7 @@ export default function SentencePractice({
                 <button
                   type="button"
                   onClick={() => setActivePart(2)}
-                  className="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs transition cursor-pointer flex items-center gap-1 shrink-0"
+                  className="px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition cursor-pointer flex items-center gap-1 shrink-0"
                 >
                   <span>Sang Phần 2</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -404,7 +404,7 @@ export default function SentencePractice({
                   <span className="text-slate-400 font-semibold">Cụm từ học thuật đi kèm (Collocations):</span>
                   <div className="flex flex-wrap gap-1.5 pt-1">
                     {selectedVocab.collocations.map((col, i) => (
-                      <span key={i} className="px-2 py-0.5 rounded-md bg-slate-800/80 text-indigo-300 text-[11px] font-mono">
+                      <span key={i} className="px-2 py-0.5 rounded-md bg-slate-800/80 text-blue-300 text-[11px] font-mono">
                         {col}
                       </span>
                     ))}
@@ -427,7 +427,7 @@ export default function SentencePractice({
             
             {/* Header Phần 2 */}
             <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-              <div className="flex items-center gap-2 text-indigo-400 font-extrabold text-xs sm:text-sm">
+              <div className="flex items-center gap-2 text-blue-400 font-extrabold text-xs sm:text-sm">
                 <BookOpen className="w-4 h-4" />
                 <span>Phần 2: Dịch câu mẫu sang tiếng Anh</span>
               </div>
@@ -437,8 +437,8 @@ export default function SentencePractice({
             </div>
 
             {/* Câu tiếng Việt mẫu do Web đưa ra */}
-            <div className="p-3.5 rounded-xl bg-slate-950 border border-indigo-500/30 space-y-1.5">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-indigo-400">
+            <div className="p-3.5 rounded-xl bg-slate-950 border border-blue-500/30 space-y-1.5">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-blue-400">
                 🇻🇳 Câu Tiếng Việt Cần Dịch:
               </span>
               <p className="text-xs sm:text-sm font-semibold text-white leading-relaxed select-text">
@@ -449,7 +449,7 @@ export default function SentencePractice({
                 <button
                   type="button"
                   onClick={() => insertText(selectedVocab.word, 2)}
-                  className="px-2 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300 text-xs font-mono font-bold hover:bg-indigo-500/30 transition cursor-pointer"
+                  className="px-2 py-0.5 rounded-md bg-blue-500/20 text-blue-300 text-xs font-mono font-bold hover:bg-blue-500/30 transition cursor-pointer"
                   title="Nhấn để chèn từ này vào ô dịch"
                 >
                   + {selectedVocab.word}
@@ -464,7 +464,7 @@ export default function SentencePractice({
                 value={part2Input}
                 onChange={(e) => setPart2Input(e.target.value)}
                 placeholder={`Dịch câu trên sang tiếng Anh có sử dụng từ "${selectedVocab.word}"...`}
-                className="w-full p-3.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs sm:text-sm font-mono focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition resize-y leading-relaxed"
+                className="w-full p-3.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs sm:text-sm font-mono focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition resize-y leading-relaxed"
               />
               <div className="absolute right-2.5 bottom-2.5 text-[10px] text-slate-400 bg-slate-900/90 px-2 py-0.5 rounded">
                 {part2Input.split(/\s+/).filter(Boolean).length} từ
@@ -480,7 +480,7 @@ export default function SentencePractice({
                     key={i}
                     type="button"
                     onClick={() => insertText(syn, 2)}
-                    className="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-pink-300 text-[11px] font-mono transition cursor-pointer"
+                    className="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-blue-300 text-[11px] font-mono transition cursor-pointer"
                   >
                     + {syn}
                   </button>
@@ -502,7 +502,7 @@ export default function SentencePractice({
                 type="button"
                 onClick={handleGradePart2}
                 disabled={isEvaluatingPart2 || !part2Input.trim()}
-                className="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-md shadow-indigo-600/30 transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
+                className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md shadow-blue-600/30 transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
               >
                 {isEvaluatingPart2 ? (
                   <>
@@ -522,7 +522,7 @@ export default function SentencePractice({
 
           {/* KẾT QUẢ CHẤM ĐIỂM & CÂU NÂNG CẤP ĐÚNG SỐ BAND (PHẦN 2) */}
           {part2Result && (
-            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-indigo-500/40 shadow-xl space-y-4 animate-fadeIn">
+            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-blue-500/40 shadow-xl space-y-4 animate-fadeIn">
               
               {/* Header Điểm */}
               <div className="flex items-center justify-between pb-3 border-b border-slate-800">
@@ -549,7 +549,7 @@ export default function SentencePractice({
                 <button
                   type="button"
                   onClick={() => setActivePart(3)}
-                  className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-xs transition cursor-pointer flex items-center gap-1.5 shadow-md"
+                  className="px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition cursor-pointer flex items-center gap-1.5 shadow-md shadow-blue-600/25"
                 >
                   <span>Tiếp tục Phần 3</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -557,10 +557,10 @@ export default function SentencePractice({
               </div>
 
               {/* CÂU NÂNG CẤP ĐÚNG THEO BAND MỤC TIÊU */}
-              <div className="p-3.5 rounded-xl bg-slate-950 border border-indigo-500/30 space-y-2">
+              <div className="p-3.5 rounded-xl bg-slate-950 border border-blue-500/30 space-y-2">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-indigo-400">
-                    <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-blue-400">
+                    <Sparkles className="w-3.5 h-3.5 text-blue-400" />
                     <span>CÂU NÂNG CẤP CHUẨN BAND {targetBand}:</span>
                   </div>
 
@@ -589,7 +589,7 @@ export default function SentencePractice({
                   <ul className="space-y-1 text-xs text-slate-400">
                     {part2Result.upgradeDetails.map((detail, idx) => (
                       <li key={idx} className="flex items-start gap-1.5">
-                        <span className="text-indigo-400 font-bold">•</span>
+                        <span className="text-blue-400 font-bold">•</span>
                         <span>{detail}</span>
                       </li>
                     ))}
@@ -609,11 +609,11 @@ export default function SentencePractice({
       {activePart === 3 && (
         <div className="space-y-4 animate-fadeIn">
           
-          <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-pink-500/30 space-y-3.5 shadow-lg">
+          <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-blue-500/30 space-y-3.5 shadow-lg">
             
             {/* Header Phần 3 */}
             <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-              <div className="flex items-center gap-2 text-pink-400 font-extrabold text-xs sm:text-sm">
+              <div className="flex items-center gap-2 text-blue-400 font-extrabold text-xs sm:text-sm">
                 <Layers className="w-4 h-4" />
                 <span>Phần 3: Dịch 2 câu & Chuyển câu (Cohesion)</span>
               </div>
@@ -623,23 +623,23 @@ export default function SentencePractice({
             </div>
 
             {/* Đoạn 2 câu tiếng Việt mẫu do Web đưa ra */}
-            <div className="p-3.5 rounded-xl bg-slate-950 border border-pink-500/30 space-y-2">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-pink-400">
+            <div className="p-3.5 rounded-xl bg-slate-950 border border-blue-500/30 space-y-2">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-blue-400">
                 🇻🇳 Đoạn 2 Câu Tiếng Việt Cần Dịch &amp; Móc Nối:
               </span>
               
               <div className="space-y-1 text-xs sm:text-sm text-slate-200 leading-relaxed font-sans">
                 <p>
-                  <strong className="text-indigo-400 font-bold">Câu 1:</strong> "{twoSentencePracticeData.sentence1Vietnamese}"
+                  <strong className="text-blue-300 font-bold">Câu 1:</strong> "{twoSentencePracticeData.sentence1Vietnamese}"
                 </p>
                 <p>
-                  <strong className="text-pink-400 font-bold">Câu 2 (Chuyển câu):</strong> "{twoSentencePracticeData.sentence2Vietnamese}"
+                  <strong className="text-blue-400 font-bold">Câu 2 (Chuyển câu):</strong> "{twoSentencePracticeData.sentence2Vietnamese}"
                 </p>
               </div>
 
               <div className="flex items-center gap-2 pt-1 flex-wrap">
                 <span className="text-[11px] text-slate-400">Bắt buộc dùng từ:</span>
-                <span className="px-2 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300 text-xs font-mono font-bold">
+                <span className="px-2 py-0.5 rounded-md bg-blue-500/20 text-blue-300 text-xs font-mono font-bold">
                   {selectedVocab.word}
                 </span>
               </div>
@@ -649,14 +649,14 @@ export default function SentencePractice({
             {twoSentencePracticeData.linkingSuggestions && (
               <div className="flex flex-wrap items-center gap-1.5 text-xs">
                 <span className="text-slate-400 text-[11px] font-semibold flex items-center gap-1">
-                  <Sparkles className="w-3 h-3 text-pink-400" /> Nhấn để chèn liên từ chuyển câu:
+                  <Sparkles className="w-3 h-3 text-blue-400" /> Nhấn để chèn liên từ chuyển câu:
                 </span>
                 {twoSentencePracticeData.linkingSuggestions.map((link, i) => (
                   <button
                     key={i}
                     type="button"
                     onClick={() => insertText(link, 3)}
-                    className="px-2 py-0.5 rounded bg-pink-500/15 hover:bg-pink-500/25 text-pink-300 border border-pink-500/30 text-[11px] font-mono transition cursor-pointer"
+                    className="px-2 py-0.5 rounded bg-blue-500/15 hover:bg-blue-500/25 text-blue-300 border border-blue-500/30 text-[11px] font-mono transition cursor-pointer"
                   >
                     + {link}
                   </button>
@@ -671,7 +671,7 @@ export default function SentencePractice({
                 value={part3Input}
                 onChange={(e) => setPart3Input(e.target.value)}
                 placeholder={`Dịch cả 2 câu trên sang tiếng Anh, dùng từ "${selectedVocab.word}" và liên từ chuyển câu học thuật (ví dụ: Consequently, Therefore...)...`}
-                className="w-full p-3.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs sm:text-sm font-mono focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500 transition resize-y leading-relaxed"
+                className="w-full p-3.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs sm:text-sm font-mono focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition resize-y leading-relaxed"
               />
               <div className="absolute right-2.5 bottom-2.5 text-[10px] text-slate-400 bg-slate-900/90 px-2 py-0.5 rounded">
                 {part3Input.split(/\s+/).filter(Boolean).length} từ
@@ -692,7 +692,7 @@ export default function SentencePractice({
                 type="button"
                 onClick={handleGradePart3}
                 disabled={isEvaluatingPart3 || !part3Input.trim()}
-                className="px-5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-xs shadow-md shadow-pink-600/30 transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
+                className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md shadow-blue-600/30 transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
               >
                 {isEvaluatingPart3 ? (
                   <>
@@ -712,7 +712,7 @@ export default function SentencePractice({
 
           {/* KẾT QUẢ CHẤM ĐIỂM & CẶP CÂU NÂNG CẤP ĐÚNG SỐ BAND (PHẦN 3) */}
           {part3Result && (
-            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-pink-500/40 shadow-xl space-y-4 animate-fadeIn">
+            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-blue-500/40 shadow-xl space-y-4 animate-fadeIn">
               
               {/* Header Điểm */}
               <div className="flex items-center justify-between pb-3 border-b border-slate-800">
@@ -720,7 +720,7 @@ export default function SentencePractice({
                   <div className={`w-12 h-12 rounded-xl flex flex-col items-center justify-center font-black ${
                     part3Result.isTargetMet
                       ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/30"
-                      : "bg-pink-600 text-white shadow-md shadow-pink-600/30"
+                      : "bg-amber-600 text-white shadow-md shadow-amber-600/30"
                   }`}>
                     <span className="text-[9px] uppercase tracking-wider opacity-80">BAND</span>
                     <span className="text-xl leading-none">{part3Result.scores?.overallBand}</span>
@@ -742,10 +742,10 @@ export default function SentencePractice({
               </div>
 
               {/* CẶP CÂU NÂNG CẤP ĐÚNG THEO BAND MỤC TIÊU */}
-              <div className="p-3.5 rounded-xl bg-slate-950 border border-pink-500/30 space-y-2">
+              <div className="p-3.5 rounded-xl bg-slate-950 border border-blue-500/30 space-y-2">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-pink-400">
-                    <Sparkles className="w-3.5 h-3.5 text-pink-400" />
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-blue-400">
+                    <Sparkles className="w-3.5 h-3.5 text-blue-400" />
                     <span>CẶP CÂU NÂNG CẤP CHUẨN BAND {targetBand}:</span>
                   </div>
 
@@ -768,13 +768,13 @@ export default function SentencePractice({
               {part3Result.upgradeDetails && part3Result.upgradeDetails.length > 0 && (
                 <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 space-y-1.5">
                   <span className="text-xs font-bold text-slate-300 flex items-center gap-1">
-                    <Lightbulb className="w-3.5 h-3.5 text-pink-400" />
+                    <Lightbulb className="w-3.5 h-3.5 text-amber-400" />
                     Chi tiết các phần nâng cấp:
                   </span>
                   <ul className="space-y-1 text-xs text-slate-400">
                     {part3Result.upgradeDetails.map((detail, idx) => (
                       <li key={idx} className="flex items-start gap-1.5">
-                        <span className="text-pink-400 font-bold">•</span>
+                        <span className="text-blue-400 font-bold">•</span>
                         <span>{detail}</span>
                       </li>
                     ))}
