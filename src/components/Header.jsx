@@ -12,7 +12,8 @@ import {
   User,
   Home,
   FileText,
-  BarChart3
+  BarChart3,
+  Mail
 } from 'lucide-react';
 import { BAND_DESCRIPTORS } from '../data/bandDescriptors';
 
@@ -23,9 +24,9 @@ export default function Header({
   onOpenDeployGuide, 
   onOpenSettings,
   onOpenContact,
-  onOpenUserModal,
+  onChangeEmail,
   onGoWelcome,
-  currentUser,
+  studentEmail,
   activeTask,
   onToggleTask,
   currentView,
@@ -143,19 +144,19 @@ export default function Header({
             </span>
           </button>
 
-          {/* User profile / Switcher */}
-          <button
-            onClick={onOpenUserModal}
-            className="flex items-center gap-2 p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-xs text-slate-200 transition cursor-pointer"
-            title="Đổi tài khoản học viên"
-          >
-            <div className={`w-6 h-6 rounded-lg bg-gradient-to-tr ${currentUser?.avatarColor || "from-indigo-500 to-purple-600"} flex items-center justify-center text-white font-bold text-[10px]`}>
-              {currentUser?.name?.slice(0, 2).toUpperCase() || "HV"}
-            </div>
-            <span className="font-semibold hidden md:inline max-w-[100px] truncate">
-              {currentUser?.name || "Học viên"}
-            </span>
-          </button>
+          {/* Student Email / Switcher */}
+          {studentEmail && (
+            <button
+              onClick={onChangeEmail}
+              className="flex items-center gap-1.5 p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-xs text-slate-200 transition cursor-pointer"
+              title="Đổi địa chỉ email học viên"
+            >
+              <Mail className="w-3.5 h-3.5 text-indigo-400" />
+              <span className="font-medium hidden md:inline max-w-[130px] truncate">
+                {studentEmail}
+              </span>
+            </button>
+          )}
 
           {/* History */}
           <button

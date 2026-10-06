@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import WelcomePage from './components/WelcomePage';
 import ContactModal from './components/ContactModal';
-import UserSwitcherModal from './components/UserSwitcherModal';
+import EmailModal from './components/EmailModal';
 import BandSelectorModal from './components/BandSelectorModal';
 import TopicSelector from './components/TopicSelector';
 import VocabularyList from './components/VocabularyList';
@@ -27,14 +27,15 @@ import {
 } from './services/storage';
 
 import { 
-  getCurrentUser, 
-  updateCurrentUserSettings 
+  getSavedEmail, 
+  getProfileByEmail, 
+  saveCurrentEmail, 
+  updateSettingsForEmail 
 } from './services/userService';
 
 import { 
-  BookOpen, 
-  Target, 
   Sparkles, 
+  Target, 
   Layers, 
   Shuffle, 
   Globe, 
@@ -47,12 +48,16 @@ export default function App() {
   // Current view: 'welcome' (Trang chào mừng) or 'practice' (Phòng luyện viết)
   const [currentView, setCurrentView] = useState('welcome');
 
-  // Multi-user Profile State
-  const [currentUser, setCurrentUser] = useState(() => getCurrentUser());
+  // Student Email State: Pop-up automatically if not found
+  const [studentEmail, setStudentEmail] = useState(() => getSavedEmail());
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(() => !getSavedEmail());
+
+  // Initial student profile based on saved email
+  const initialProfile = studentEmail ? getProfileByEmail(studentEmail) : null;
 
   // Stored target band & active task (Task 1 or Task 2)
-  const [targetBand, setTargetBand] = useState(() => currentUser?.targetBand || getStoredTargetBand());
-  const [activeTask, setActiveTask] = useState(() => currentUser?.selectedTask || 'task2');
+  const [targetBand, setTargetBand] = useState(() => initialProfile?.targetBand || getStoredTargetBand() || "7.0");
+  const [activeTask, setActiveTask] = useState(() => initialProfile?.selectedTask || 'task2');
   
   // API key & grading stats
   const [apiKey, setApiKey] = useState(() => getStoredApiKey());
@@ -72,54 +77,62 @@ export default function App() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isCohesiveGuideOpen, setIsCohesiveGuideOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
 
-  // Handle User change from UserSwitcherModal
-  const handleUserChanged = (newUser) => {
-    setCurrentUser(newUser);
-    const newBand = newUser.targetBand || "7.0";
-    const newTask = newUser.selectedTask || "task2";
-    setTargetBand(newBand);
-    setActiveTask(newTask);
-    saveTargetBand(newBand);
-    const topics = newTask === 'task1' ? IELTS_TASK1_TOPICS : IELTS_TASK2_TOPICS;
-    if (topics && topics.length > 0) {
-      setSelectedTopic(topics[0]);
-      setSelectedVocab(topics[0].vocabularies[0] || null);
-    }
-  };
+  // Handle saving email from mandatory first-time pop-up
+  const handleSaveEmail = (email) => {
+    const profile = saveCurrentEmail(email);
+    setStudentEmail(email);
+    if (profile) {
+      const band = profile.targetBand || "7.0";
+      const task = profile.selectedTask || "task2";
+      setTargetBand(band);
+      setActiveTask(task);
+      saveTargetBand(band);
 
-  // Handle direct User profile update from WelcomePage
-  const handleUserUpdate = (updatedUser) => {
-    setCurrentUser(updatedUser);
-    if (updatedUser.targetBand && updatedUser.targetBand !== targetBand) {
-      setTargetBand(updatedUser.targetBand);
-      saveTargetBand(updatedUser.targetBand);
-    }
-    if (updatedUser.selectedTask && updatedUser.selectedTask !== activeTask) {
-      setActiveTask(updatedUser.selectedTask);
-      const topics = updatedUser.selectedTask === 'task1' ? IELTS_TASK1_TOPICS : IELTS_TASK2_TOPICS;
+      const topics = task === 'task1' ? IELTS_TASK1_TOPICS : IELTS_TASK2_TOPICS;
       if (topics && topics.length > 0) {
         setSelectedTopic(topics[0]);
         setSelectedVocab(topics[0].vocabularies[0] || null);
       }
     }
+    setIsEmailModalOpen(false);
   };
 
-  // Update target band and persist
+  // Handle settings change from Welcome Page (auto-saved per email)
+  const handleSettingsChange = ({ targetBand: newBand, selectedTask: newTask }) => {
+    if (newBand && newBand !== targetBand) {
+      setTargetBand(newBand);
+      saveTargetBand(newBand);
+    }
+    if (newTask && newTask !== activeTask) {
+      setActiveTask(newTask);
+      const topics = newTask === 'task1' ? IELTS_TASK1_TOPICS : IELTS_TASK2_TOPICS;
+      if (topics && topics.length > 0) {
+        setSelectedTopic(topics[0]);
+        setSelectedVocab(topics[0].vocabularies[0] || null);
+      }
+    }
+    if (studentEmail) {
+      updateSettingsForEmail(studentEmail, { targetBand: newBand, selectedTask: newTask });
+    }
+  };
+
+  // Update target band from modal and persist
   const handleUpdateTargetBand = (newBand) => {
     setTargetBand(newBand);
     saveTargetBand(newBand);
-    const updated = updateCurrentUserSettings({ targetBand: newBand });
-    if (updated) setCurrentUser(updated);
+    if (studentEmail) {
+      updateSettingsForEmail(studentEmail, { targetBand: newBand });
+    }
     setIsBandModalOpen(false);
   };
 
   // Update task 1 / task 2
   const handleToggleTask = (task) => {
     setActiveTask(task);
-    const updated = updateCurrentUserSettings({ selectedTask: task });
-    if (updated) setCurrentUser(updated);
+    if (studentEmail) {
+      updateSettingsForEmail(studentEmail, { selectedTask: task });
+    }
     const topics = task === 'task1' ? IELTS_TASK1_TOPICS : IELTS_TASK2_TOPICS;
     if (topics && topics.length > 0) {
       setSelectedTopic(topics[0]);
@@ -159,11 +172,13 @@ export default function App() {
       {/* If view is 'welcome', render WelcomePage */}
       {currentView === 'welcome' ? (
         <WelcomePage
-          currentUser={currentUser}
-          onUserUpdate={handleUserUpdate}
+          studentEmail={studentEmail}
+          targetBand={targetBand}
+          selectedTask={activeTask}
+          onSettingsChange={handleSettingsChange}
+          onChangeEmail={() => setIsEmailModalOpen(true)}
           onStartPractice={() => setCurrentView('practice')}
           onOpenContactModal={() => setIsContactModalOpen(true)}
-          onOpenUserModal={() => setIsUserModalOpen(true)}
         />
       ) : (
         /* Practice Workspace View */
@@ -176,9 +191,9 @@ export default function App() {
             onOpenDeployGuide={() => setIsDeployGuideOpen(true)}
             onOpenSettings={() => setIsSettingsOpen(true)}
             onOpenContact={() => setIsContactModalOpen(true)}
-            onOpenUserModal={() => setIsUserModalOpen(true)}
+            onChangeEmail={() => setIsEmailModalOpen(true)}
             onGoWelcome={() => setCurrentView('welcome')}
-            currentUser={currentUser}
+            studentEmail={studentEmail}
             activeTask={activeTask}
             onToggleTask={handleToggleTask}
             currentView={currentView}
@@ -199,8 +214,12 @@ export default function App() {
               </button>
 
               <div className="flex items-center gap-2 text-xs text-slate-400">
-                <span>Học viên: <strong className="text-white">{currentUser?.name}</strong></span>
-                <span>•</span>
+                {studentEmail && (
+                  <>
+                    <span>Học viên: <strong className="text-white">{studentEmail}</strong></span>
+                    <span>•</span>
+                  </>
+                )}
                 <span className="text-indigo-400 font-semibold">Band {targetBand}</span>
                 <span>•</span>
                 <span className="text-purple-400 font-semibold">{activeTask === 'task1' ? 'Task 1' : 'Task 2'}</span>
@@ -374,17 +393,16 @@ export default function App() {
         </div>
       )}
 
+      {/* Mandatory First-Time Email Pop-Up Modal */}
+      <EmailModal
+        isOpen={isEmailModalOpen}
+        onSaveEmail={handleSaveEmail}
+      />
+
       {/* Modals */}
       <ContactModal
         isOpen={isContactModalOpen}
         onClose={() => setIsContactModalOpen(false)}
-      />
-
-      <UserSwitcherModal
-        isOpen={isUserModalOpen}
-        onClose={() => setIsUserModalOpen(false)}
-        currentUser={currentUser}
-        onUserChanged={handleUserChanged}
       />
 
       <BandSelectorModal

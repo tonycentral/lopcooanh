@@ -1,44 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   ArrowRight, 
   Check, 
   PhoneCall, 
-  User, 
+  Mail, 
   BookOpen 
 } from 'lucide-react';
 import { BAND_OPTIONS } from '../data/bandDescriptors';
-import { updateCurrentUserSettings } from '../services/userService';
 
 export default function WelcomePage({ 
   onStartPractice, 
   onOpenContactModal,
-  onOpenUserModal,
-  currentUser,
-  onUserUpdate
+  onChangeEmail,
+  studentEmail,
+  targetBand = "7.0",
+  selectedTask = "task2",
+  onSettingsChange
 }) {
-  const [selectedBand, setSelectedBand] = useState(currentUser?.targetBand || "7.0");
-  const [selectedTask, setSelectedTask] = useState(currentUser?.selectedTask || "task2");
   const [justSaved, setJustSaved] = useState(false);
 
-  useEffect(() => {
-    if (currentUser) {
-      setSelectedBand(currentUser.targetBand || "7.0");
-      setSelectedTask(currentUser.selectedTask || "task2");
-    }
-  }, [currentUser]);
-
   const handleSelectBand = (band) => {
-    setSelectedBand(band);
-    const updated = updateCurrentUserSettings({ targetBand: band });
-    if (updated && onUserUpdate) onUserUpdate(updated);
+    if (onSettingsChange) {
+      onSettingsChange({ targetBand: band, selectedTask });
+    }
     setJustSaved(true);
     setTimeout(() => setJustSaved(false), 1500);
   };
 
   const handleSelectTask = (task) => {
-    setSelectedTask(task);
-    const updated = updateCurrentUserSettings({ selectedTask: task });
-    if (updated && onUserUpdate) onUserUpdate(updated);
+    if (onSettingsChange) {
+      onSettingsChange({ targetBand, selectedTask: task });
+    }
     setJustSaved(true);
     setTimeout(() => setJustSaved(false), 1500);
   };
@@ -60,16 +52,18 @@ export default function WelcomePage({
           </div>
         </div>
 
-        {/* User Account Switcher */}
-        <button
-          onClick={onOpenUserModal}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs text-slate-300 hover:text-white transition cursor-pointer"
-          title="Đổi tài khoản học viên"
-        >
-          <User className="w-3.5 h-3.5 text-indigo-400" />
-          <span className="font-medium">{currentUser?.name || "Học viên"}</span>
-          <span className="text-[10px] text-slate-500">• Đổi</span>
-        </button>
+        {/* Student Email Display & Switcher */}
+        {studentEmail && (
+          <button
+            onClick={onChangeEmail}
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs text-slate-300 hover:text-white transition cursor-pointer max-w-[220px]"
+            title="Đổi địa chỉ email học viên"
+          >
+            <Mail className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+            <span className="truncate">{studentEmail}</span>
+            <span className="text-[10px] text-slate-500 shrink-0">• Đổi</span>
+          </button>
+        )}
       </header>
 
       {/* Main Minimalist Center Container */}
@@ -85,7 +79,7 @@ export default function WelcomePage({
           </p>
           {justSaved && (
             <p className="text-[11px] text-emerald-400 font-medium pt-1 animate-pulse">
-              ✓ Đã lưu cài đặt cho {currentUser?.name}
+              ✓ Đã lưu cài đặt cho {studentEmail}
             </p>
           )}
         </div>
@@ -97,12 +91,12 @@ export default function WelcomePage({
           <div className="space-y-2.5">
             <div className="flex items-center justify-between text-xs">
               <span className="font-semibold text-slate-300">Chọn Band:</span>
-              <span className="font-bold text-indigo-400">Band {selectedBand}</span>
+              <span className="font-bold text-indigo-400">Band {targetBand}</span>
             </div>
 
             <div className="grid grid-cols-5 sm:grid-cols-9 gap-1.5 p-1 bg-slate-950 rounded-xl border border-slate-800/80">
               {BAND_OPTIONS.map((band) => {
-                const isSelected = band === selectedBand;
+                const isSelected = band === targetBand;
                 return (
                   <button
                     key={band}
@@ -162,7 +156,7 @@ export default function WelcomePage({
             onClick={onStartPractice}
             className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-sm transition shadow-lg shadow-indigo-600/25 flex items-center justify-center gap-2 cursor-pointer"
           >
-            <span>Bắt đầu luyện tập (Band {selectedBand} • {selectedTask === "task1" ? "Task 1" : "Task 2"})</span>
+            <span>Bắt đầu luyện tập (Band {targetBand} • {selectedTask === "task1" ? "Task 1" : "Task 2"})</span>
             <ArrowRight className="w-4 h-4" />
           </button>
 
