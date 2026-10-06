@@ -134,3 +134,50 @@ export function clearCurrentEmail() {
     console.error("Lỗi khi xóa email:", e);
   }
 }
+
+/**
+ * Lấy danh sách ID các từ học viên đã đánh dấu "Tôi đã biết"
+ */
+export function getKnownWords(email) {
+  try {
+    const cleanEmail = email ? email.trim().toLowerCase() : "default_student";
+    const raw = localStorage.getItem(`lopcooanh_known_words_${cleanEmail}`);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    console.error("Lỗi khi đọc danh sách từ đã biết:", e);
+    return [];
+  }
+}
+
+/**
+ * Đảo trạng thái "Tôi đã biết" của một từ (bật/tắt)
+ * @returns {string[]} Danh sách các ID từ đã biết sau khi cập nhật
+ */
+export function toggleKnownWord(email, wordId) {
+  if (!wordId) return [];
+  try {
+    const cleanEmail = email ? email.trim().toLowerCase() : "default_student";
+    const current = getKnownWords(cleanEmail);
+    const index = current.indexOf(wordId);
+    let updated;
+    if (index >= 0) {
+      updated = current.filter(id => id !== wordId);
+    } else {
+      updated = [...current, wordId];
+    }
+    localStorage.setItem(`lopcooanh_known_words_${cleanEmail}`, JSON.stringify(updated));
+    return updated;
+  } catch (e) {
+    console.error("Lỗi khi lưu từ đã biết:", e);
+    return [];
+  }
+}
+
+/**
+ * Kiểm tra xem từ có thuộc danh sách "Tôi đã biết" hay không
+ */
+export function isWordKnown(email, wordId) {
+  if (!wordId) return false;
+  const list = getKnownWords(email);
+  return list.includes(wordId);
+}

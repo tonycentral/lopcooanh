@@ -245,10 +245,278 @@ export function evaluateCoherenceSentence(sentenceA, sentenceB, promptDetails = 
   };
 }
 
-function generateUpgradedVersions(userSentence, targetWord, currentWord) {
+function generateUpgradedVersions(userSentence, targetWord) {
   return {
     band75: `Furthermore, it is widely acknowledged that ${userSentence.replace(/^[A-Z]/, c => c.toLowerCase()).replace(/\.$/, '')}, thereby underscoring its pivotal role.`,
     band85: `Not only does this phenomenon highlight how critical it is to ${targetWord}, but it also serves as an indispensable prerequisite for long-term sustainability.`,
     explanation: "Phiên bản nâng cấp áp dụng kỹ thuật liên kết mệnh đề nguyên nhân - hệ quả (thereby + V-ing) và cấu trúc đảo ngữ (Not only does... but it also...) để thể hiện vốn ngữ pháp Band 8.0+."
+  };
+}
+
+/**
+ * PHẦN 1: Chấm điểm hiểu từ vựng (Comprehension Test)
+ * Kiểm tra nghĩa tiếng Việt (trắc nghiệm) HOẶC từ đồng nghĩa tiếng Anh
+ */
+export function evaluateComprehensionTest(vocab, { selectedOptionIndex = null, synonymInput = "" }) {
+  if (!vocab) {
+    return { isValid: false, error: "Không tìm thấy từ vựng." };
+  }
+
+  const cleanSynonym = (synonymInput || "").trim().toLowerCase();
+  const synonyms = (vocab.synonyms || []).map(s => s.toLowerCase().trim());
+  const correctQuizIndex = vocab.vietnameseQuiz?.correctIndex ?? 0;
+
+  let isCorrect = false;
+  let testType = "quiz";
+  let feedbackMessage = "";
+
+  if (cleanSynonym) {
+    testType = "synonym";
+    // Check if input matches any of the synonyms or contains the root
+    const matched = synonyms.some(s => s === cleanSynonym || cleanSynonym.includes(s) || s.includes(cleanSynonym));
+    if (matched) {
+      isCorrect = true;
+      feedbackMessage = `Xuất sắc! "${synonymInput}" là từ đồng nghĩa học thuật rất chuẩn của "${vocab.word}".`;
+    } else {
+      isCorrect = false;
+      feedbackMessage = `Từ "${synonymInput}" chưa phải là từ đồng nghĩa tiêu biểu. Các từ đồng nghĩa Band 7.5+ gồm: ${vocab.synonyms?.join(", ")}.`;
+    }
+  } else if (selectedOptionIndex !== null) {
+    testType = "quiz";
+    if (selectedOptionIndex === correctQuizIndex) {
+      isCorrect = true;
+      feedbackMessage = `Chính xác! Bạn đã hiểu đúng 100% nghĩa của từ "${vocab.word}" (${vocab.partOfSpeech}): "${vocab.meaning}".`;
+    } else {
+      isCorrect = false;
+      const correctOption = vocab.vietnameseQuiz?.options?.[correctQuizIndex] || vocab.meaning;
+      feedbackMessage = `Chưa chính xác! Nghĩa chuẩn của "${vocab.word}" là: "${correctOption}".`;
+    }
+  } else {
+    return {
+      isValid: false,
+      error: "Vui lòng chọn 1 đáp án nghĩa tiếng Việt HOẶC nhập từ đồng nghĩa tiếng Anh."
+    };
+  }
+
+  return {
+    isValid: true,
+    isCorrect,
+    testType,
+    score: isCorrect ? 100 : 40,
+    feedbackMessage,
+    word: vocab.word,
+    ipa: vocab.ipa,
+    meaning: vocab.meaning,
+    collocations: vocab.collocations || [],
+    synonyms: vocab.synonyms || []
+  };
+}
+
+/**
+ * PHẦN 2: Chấm điểm dịch 1 câu có sử dụng từ đang luyện tập
+ * Đưa ra câu nâng cấp đúng với số Band mục tiêu + chi tiết các phần nâng cấp
+ */
+export function evaluatePart2Translation(userSentence, vocab, targetBand = "7.0") {
+  const sentence = (userSentence || "").trim();
+  const words = sentence.split(/\s+/).filter(Boolean);
+  const wordCount = words.length;
+
+  if (wordCount < 5) {
+    return {
+      isValid: false,
+      error: "Bản dịch quá ngắn! Hãy viết một câu hoàn chỉnh có đầy đủ chủ vị (tối thiểu 6 từ)."
+    };
+  }
+
+  const cleanTarget = (vocab.word || "").toLowerCase().trim();
+  const lowerSentence = sentence.toLowerCase();
+  const hasTargetWord = lowerSentence.includes(cleanTarget);
+  const synonyms = (vocab.synonyms || []).map(s => s.toLowerCase().trim());
+  const hasSynonym = synonyms.some(s => lowerSentence.includes(s));
+
+  // Check informal words
+  const informalWarnings = [];
+  INFORMAL_PATTERNS.forEach(rule => {
+    if (rule.regex.test(sentence)) informalWarnings.push(rule.message);
+  });
+
+  // Check complex structures
+  const detectedStructures = [];
+  COMPLEX_STRUCTURES.forEach(struct => {
+    if (struct.regex.test(sentence)) detectedStructures.push(struct.name);
+  });
+
+  // Compute Scores
+  let lrScore = 6.0;
+  let graScore = 6.0;
+
+  if (hasTargetWord) lrScore += 1.2;
+  else if (hasSynonym) lrScore += 0.8;
+  else lrScore -= 0.5;
+
+  if (informalWarnings.length === 0) lrScore += 0.5;
+  else lrScore -= 0.4;
+
+  if (detectedStructures.length >= 2) graScore += 1.5;
+  else if (detectedStructures.length === 1) graScore += 0.8;
+  else graScore -= 0.2;
+
+  if (sentence.endsWith(".") || sentence.endsWith("!") || sentence.endsWith("?")) graScore += 0.2;
+  else graScore -= 0.4;
+
+  lrScore = Math.max(5.0, Math.min(8.5, Math.round(lrScore * 2) / 2));
+  graScore = Math.max(5.0, Math.min(8.5, Math.round(graScore * 2) / 2));
+  const overallBand = Math.round(((lrScore + graScore) / 2) * 2) / 2;
+  const targetBandNum = parseFloat(targetBand) || 7.0;
+
+  // Retrieve upgraded sentence tailored to target band
+  const practiceData = vocab.sentencePractice || {};
+  const bandKey = parseFloat(targetBand) >= 8.5 ? "8.5" : parseFloat(targetBand) >= 8.0 ? "8.0" : parseFloat(targetBand) >= 7.5 ? "7.5" : parseFloat(targetBand) >= 7.0 ? "7.0" : "6.5";
+  const upgradedSentence = practiceData.bandUpgrades?.[bandKey] || practiceData.bandUpgrades?.["7.5"] || practiceData.modelTranslation || `It is imperative that authorities take decisive measures to ${vocab.word} adverse developments.`;
+
+  const upgradeDetails = practiceData.upgradeDetails || [
+    `Từ vựng: Sử dụng từ "${vocab.word}" (${vocab.partOfSpeech}) chuẩn xác trong ngữ cảnh học thuật thay vì từ cơ bản.`,
+    `Cấu trúc ngữ pháp: Sử dụng cấu trúc câu chuẩn Band ${targetBand} với mệnh đề quan hệ và bị động học thuật.`,
+    `Collocation: Kết hợp cụm từ tự nhiên phù hợp với tiêu chí Lexical Resource.`
+  ];
+
+  const strengths = [];
+  const improvements = [];
+
+  if (hasTargetWord) strengths.push(`Sử dụng chính xác từ mục tiêu: "${vocab.word}".`);
+  else if (hasSynonym) strengths.push(`Sử dụng từ đồng nghĩa phù hợp: "${hasSynonym}".`);
+  else improvements.push(`Bản dịch chưa xuất hiện từ vựng mục tiêu "${vocab.word}".`);
+
+  if (detectedStructures.length > 0) strengths.push(`Cấu trúc ngữ pháp tốt: ${detectedStructures.join(", ")}.`);
+  if (informalWarnings.length > 0) improvements.push(...informalWarnings);
+
+  return {
+    isValid: true,
+    userSentence: sentence,
+    wordCount,
+    scores: {
+      overallBand,
+      lexicalResource: lrScore,
+      grammarRange: graScore
+    },
+    targetBand,
+    isTargetMet: overallBand >= targetBandNum,
+    upgradedSentence,
+    upgradeDetails,
+    strengths,
+    improvements,
+    detectedStructures
+  };
+}
+
+/**
+ * PHẦN 3: Chấm điểm dịch 2 câu có sử dụng từ đang luyện tập cùng cách chuyển câu (Cohesion)
+ * Đưa ra cặp câu nâng cấp đúng với số Band mục tiêu + chi tiết các phần nâng cấp
+ */
+export function evaluatePart3Translation(userTranslation, vocab, targetBand = "7.0") {
+  const text = (userTranslation || "").trim();
+  const words = text.split(/\s+/).filter(Boolean);
+  const wordCount = words.length;
+
+  if (wordCount < 12) {
+    return {
+      isValid: false,
+      error: "Bản dịch 2 câu quá ngắn! Hãy viết đầy đủ cả 2 câu có liên kết mạch lạc (tối thiểu 12 từ)."
+    };
+  }
+
+  const cleanTarget = (vocab.word || "").toLowerCase().trim();
+  const lowerText = text.toLowerCase();
+  const hasTargetWord = lowerText.includes(cleanTarget);
+
+  // Detect Cohesive Devices
+  const detectedCohesiveDevices = [];
+  COHESIVE_MARKERS.forEach(marker => {
+    if (lowerText.includes(marker)) detectedCohesiveDevices.push(marker);
+  });
+
+  // Check 2 sentences presence
+  const sentenceCount = text.split(/[.!?]+/).filter(s => s.trim().length > 3).length;
+
+  // Check complex structures
+  const detectedStructures = [];
+  COMPLEX_STRUCTURES.forEach(struct => {
+    if (struct.regex.test(text)) detectedStructures.push(struct.name);
+  });
+
+  // Compute Scores
+  let ccScore = 6.0;
+  let lrScore = 6.0;
+  let graScore = 6.0;
+
+  if (detectedCohesiveDevices.length >= 2) ccScore += 1.5;
+  else if (detectedCohesiveDevices.length === 1) ccScore += 1.0;
+  else ccScore -= 0.5;
+
+  if (sentenceCount >= 2) ccScore += 0.5;
+
+  if (hasTargetWord) lrScore += 1.2;
+  else lrScore -= 0.5;
+
+  if (detectedStructures.length >= 2) graScore += 1.2;
+  else if (detectedStructures.length === 1) graScore += 0.6;
+
+  ccScore = Math.max(5.0, Math.min(8.5, Math.round(ccScore * 2) / 2));
+  lrScore = Math.max(5.0, Math.min(8.5, Math.round(lrScore * 2) / 2));
+  graScore = Math.max(5.0, Math.min(8.5, Math.round(graScore * 2) / 2));
+
+  const overallBand = Math.round(((ccScore * 1.5 + lrScore + graScore) / 3.5) * 2) / 2;
+  const targetBandNum = parseFloat(targetBand) || 7.0;
+
+  // Retrieve upgraded 2 sentences tailored to target band
+  const practiceData = vocab.twoSentencePractice || {};
+  const bandKey = parseFloat(targetBand) >= 8.5 ? "8.5" : parseFloat(targetBand) >= 8.0 ? "8.0" : parseFloat(targetBand) >= 7.5 ? "7.5" : parseFloat(targetBand) >= 7.0 ? "7.0" : "6.5";
+  const upgradedPair = practiceData.bandUpgrades?.[bandKey] || practiceData.bandUpgrades?.["7.5"] || practiceData.modelTranslation || `The primary cause remains unaddressed. Consequently, authorities must act promptly to ${vocab.word} adverse outcomes.`;
+
+  const upgradeDetails = practiceData.upgradeDetails || [
+    `Cách chuyển câu (Cohesion): Sử dụng liên từ chuyển tiếp chỉ hệ quả/tương phản học thuật giúp hai câu gắn kết hữu cơ.`,
+    `Từ vựng & Collocation: Áp dụng từ mục tiêu "${vocab.word}" cùng các danh từ trừu tượng đạt chuẩn Band ${targetBand}.`,
+    `Mạch lập luận logic: Câu 1 làm tiền đề nguyên nhân, Câu 2 đóng vai trò giải pháp/kết quả tương xứng.`
+  ];
+
+  const strengths = [];
+  const improvements = [];
+
+  if (detectedCohesiveDevices.length > 0) {
+    strengths.push(`Sử dụng liên từ chuyển tiếp học thuật: "${detectedCohesiveDevices.join(", ")}".`);
+  } else {
+    improvements.push("Chưa phát hiện liên từ chuyển câu rõ ràng (ví dụ: Consequently, Therefore, In contrast...).");
+  }
+
+  if (hasTargetWord) {
+    strengths.push(`Sử dụng chính xác từ mục tiêu: "${vocab.word}".`);
+  } else {
+    improvements.push(`Bản dịch chưa xuất hiện từ vựng mục tiêu "${vocab.word}".`);
+  }
+
+  if (sentenceCount >= 2) {
+    strengths.push("Phân tách cấu trúc 2 câu rõ ràng, đáp ứng yêu cầu chuyển câu.");
+  } else {
+    improvements.push("Hãy viết đủ 2 câu tách biệt bằng dấu chấm để thể hiện kỹ thuật liên kết câu.");
+  }
+
+  return {
+    isValid: true,
+    userSentence: text,
+    wordCount,
+    scores: {
+      overallBand,
+      coherenceCohesion: ccScore,
+      lexicalResource: lrScore,
+      grammarRange: graScore
+    },
+    targetBand,
+    isTargetMet: overallBand >= targetBandNum,
+    upgradedPair,
+    upgradeDetails,
+    detectedCohesiveDevices,
+    strengths,
+    improvements,
+    detectedStructures
   };
 }

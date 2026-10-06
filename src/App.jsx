@@ -259,6 +259,8 @@ export default function App() {
                         vocabularies={selectedTopic?.vocabularies || []}
                         selectedVocab={selectedVocab}
                         onSelectVocab={setSelectedVocab}
+                        studentEmail={studentEmail}
+                        onStartPractice={(vocab) => setSelectedVocab(vocab)}
                       />
                     )}
                   </div>
@@ -268,6 +270,8 @@ export default function App() {
                   vocabularies={selectedTopic?.vocabularies || []}
                   selectedVocab={selectedVocab}
                   onSelectVocab={setSelectedVocab}
+                  studentEmail={studentEmail}
+                  onStartPractice={(vocab) => setSelectedVocab(vocab)}
                 />
               )}
             </div>
