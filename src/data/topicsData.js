@@ -2657,6 +2657,136 @@ const RAW_IELTS_TOPICS = [
         vietnameseSentence: "Các học giả phát triển rực rỡ nhất khi được trao sự tự do học thuật để đào sâu vào những đề tài mà họ thực tâm say mê."
       }
     ]
+  },
+  {
+    id: "ai-workforce-cam19",
+    name: "AI & Workforce Automation (Cambridge 19)",
+    vietnameseName: "Trí tuệ nhân tạo & Lao động tương lai (Cam 19)",
+    tag: "Cambridge 19 (Mới nhất)",
+    icon: "Cpu",
+    ieltsPrompt: "In many countries, artificial intelligence and automation are increasingly replacing human labor across various sectors. Some people believe this development will create more opportunities, while others fear it will lead to widespread unemployment. Discuss both views and give your opinion.",
+    vocabularies: [
+      {
+        id: "ai-cam19-1",
+        word: "displace",
+        ipa: "/dɪsˈpleɪs/",
+        partOfSpeech: "verb",
+        meaning: "Thay thế, tước đoạt vị trí công việc của người lao động",
+        basicEquivalent: "replace / take jobs (Band 5)",
+        synonyms: ["supplant", "supersede", "oust"],
+        collocations: ["displace human labor", "displace traditional workers", "risk displacing millions"],
+        modelSentence: "Generative artificial intelligence threatens to displace routine administrative personnel across multiple industries.",
+        vietnameseSentence: "Trí tuệ nhân tạo tạo sinh đe dọa thay thế nhân viên hành chính xử lý công việc lặp lại ở nhiều ngành công nghiệp."
+      },
+      {
+        id: "ai-cam19-2",
+        word: "ubiquitous",
+        ipa: "/juːˈbɪk.wɪ.təs/",
+        partOfSpeech: "adjective",
+        meaning: "Phổ biến ở mọi nơi, hiện diện khắp chốn trong đời sống",
+        basicEquivalent: "very common / everywhere (Band 5)",
+        synonyms: ["omnipresent", "pervasive", "prevalent"],
+        collocations: ["ubiquitous technology", "become ubiquitous", "ubiquitous presence of algorithms"],
+        modelSentence: "Algorithmic decision-making has become ubiquitous in contemporary corporate management.",
+        vietnameseSentence: "Việc ra quyết định bằng thuật toán đã trở nên hiện diện khắp mọi nơi trong quản trị doanh nghiệp đương đại."
+      },
+      {
+        id: "ai-cam19-3",
+        word: "obsolescence",
+        ipa: "/ˌɒb.səˈles.əns/",
+        partOfSpeech: "noun",
+        meaning: "Sự lỗi thời, tình trạng bị đào thải do công nghệ mới ra đời",
+        basicEquivalent: "becoming out of date (Band 5)",
+        synonyms: ["outdatedness", "supersession"],
+        collocations: ["occupational obsolescence", "technological obsolescence", "face rapid obsolescence"],
+        modelSentence: "Workers who refuse to embrace digital literacy face immediate occupational obsolescence.",
+        vietnameseSentence: "Những người lao động từ chối tiếp cận kỹ năng số sẽ đối mặt với nguy cơ bị đào thải nghề nghiệp ngay lập tức."
+      },
+      {
+        id: "ai-cam19-4",
+        word: "unprecedented",
+        ipa: "/ʌnˈpres.ɪ.den.tɪd/",
+        partOfSpeech: "adjective",
+        meaning: "Chưa từng có tiền lệ trong lịch sử",
+        basicEquivalent: "never seen before (Band 5)",
+        synonyms: ["unmatched", "unparalleled", "novel"],
+        collocations: ["unprecedented speed", "unprecedented disruption", "unprecedented economic shift"],
+        modelSentence: "The transition towards automated manufacturing is occurring at an unprecedented pace.",
+        vietnameseSentence: "Quá trình chuyển dịch sang sản xuất tự động hóa đang diễn ra với tốc độ chưa từng có tiền lệ."
+      },
+      {
+        id: "ai-cam19-5",
+        word: "reskill",
+        ipa: "/ˌriːˈskɪl/",
+        partOfSpeech: "verb",
+        meaning: "Đào tạo lại kỹ năng để đáp ứng nhu cầu thời đại mới",
+        basicEquivalent: "train again (Band 5)",
+        synonyms: ["retrain", "upskill", "re-educate"],
+        collocations: ["reskill the workforce", "reskill displaced workers", "proactive reskilling initiatives"],
+        modelSentence: "Governments must sponsor initiatives to reskill factory workers into higher-value analytical roles.",
+        vietnameseSentence: "Chính phủ cần tài trợ các chương trình đào tạo lại kỹ năng cho công nhân nhà máy sang các vai trò phân tích giá trị cao hơn."
+      },
+      {
+        id: "ai-cam19-6",
+        word: "augment",
+        ipa: "/ɔːɡˈment/",
+        partOfSpeech: "verb",
+        meaning: "Gia tăng, bổ trợ và tăng cường năng lực cho con người",
+        basicEquivalent: "make stronger / help (Band 5)",
+        synonyms: ["enhance", "supplement", "boost"],
+        collocations: ["augment human productivity", "augment cognitive capabilities", "augment decision-making"],
+        modelSentence: "Rather than outright substitution, automation can augment physician diagnostics and reduce surgical mistakes.",
+        vietnameseSentence: "Thay vì thay thế hoàn toàn, tự động hóa có thể bổ trợ việc chẩn đoán của bác sĩ và giảm bớt sai sót phẫu thuật."
+      },
+      {
+        id: "ai-cam19-7",
+        word: "synergy",
+        ipa: "/ˈsɪn.ə.dʒi/",
+        partOfSpeech: "noun",
+        meaning: "Sự cộng hưởng, hợp lực tương hỗ giữa người và máy móc",
+        basicEquivalent: "teamwork / working together (Band 5)",
+        synonyms: ["collaboration", "cooperation", "symbiosis"],
+        collocations: ["human-AI synergy", "create synergy", "exploit technological synergy"],
+        modelSentence: "Firms that master human-AI synergy consistently outcompete counterparts relying exclusively on manual workflows.",
+        vietnameseSentence: "Các công ty làm chủ được sự cộng hưởng giữa người và AI luôn vượt trội hơn những đối thủ thuần túy dựa vào quy trình thủ công."
+      },
+      {
+        id: "ai-cam19-8",
+        word: "disproportionate",
+        ipa: "/ˌdɪs.prəˈpɔː.ʃən.ət/",
+        partOfSpeech: "adjective",
+        meaning: "Không cân xứng, gây tổn thương bất bình đẳng lên nhóm yếu thế",
+        basicEquivalent: "uneven / unfair (Band 5)",
+        synonyms: ["unequal", "unbalanced", "excessive"],
+        collocations: ["disproportionate burden", "disproportionate impact", "disproportionately affected"],
+        modelSentence: "Low-income assembly workers inevitably bear a disproportionate burden during robotic automation rollouts.",
+        vietnameseSentence: "Lao động lắp ráp thu nhập thấp chắc chắn gánh chịu thiệt hại không tương xứng trong các đợt triển khai robot tự động."
+      },
+      {
+        id: "ai-cam19-9",
+        word: "catalyst",
+        ipa: "/ˈkæt.əl.ɪst/",
+        partOfSpeech: "noun",
+        meaning: "Chất xúc tác đẩy nhanh sự biến chuyển kinh tế - xã hội",
+        basicEquivalent: "something that causes change (Band 5)",
+        synonyms: ["impetus", "stimulus", "accelerator"],
+        collocations: ["serve as a catalyst", "catalyst for job creation", "catalyst for innovation"],
+        modelSentence: "Technological disruption acts as a powerful catalyst for emerging sectors like renewable energy and data engineering.",
+        vietnameseSentence: "Sự đột phá công nghệ đóng vai trò như một chất xúc tác mạnh mẽ cho các ngành mới nổi như năng lượng tái tạo và kỹ thuật dữ liệu."
+      },
+      {
+        id: "ai-cam19-10",
+        word: "paradigm",
+        ipa: "/ˈpær.ə.daɪm/",
+        partOfSpeech: "noun",
+        meaning: "Mô hình kiểu mẫu, khuôn khổ tư duy và phương thức vận hành",
+        basicEquivalent: "model / system (Band 5)",
+        synonyms: ["framework", "archetype", "pattern"],
+        collocations: ["paradigm shift", "new employment paradigm", "economic paradigm"],
+        modelSentence: "The proliferation of synthetic intelligence represents an irreversible paradigm shift in global employment dynamics.",
+        vietnameseSentence: "Sự phổ biến của trí tuệ nhân tạo tổng hợp đại diện cho một bước chuyển dịch mô hình không thể đảo ngược trong động lực việc làm toàn cầu."
+      }
+    ]
   }
 ];
 
@@ -3186,6 +3316,156 @@ const RAW_IELTS_TASK1_TOPICS = [
         collocations: ["purify the paper pulp", "purify wash water"],
         modelSentence: "Screening mechanisms purify the recycled slurry to guarantee industrial hygienic safety standards.",
         vietnameseSentence: "Hệ thống sàng lọc tinh chế huyền phù tái chế để đảm bảo các tiêu chuẩn an toàn vệ sinh công nghiệp."
+      }
+    ]
+  },
+  {
+    id: "task1-pie-chart",
+    name: "Pie Charts: Power Generation by Source (2010 vs 2025) - Cam 19",
+    vietnameseName: "Biểu đồ tròn: Cơ cấu nguồn phát điện (2010 so với 2025) - Cam 19",
+    tag: "Task 1: Biểu đồ tròn so sánh (Cam 19)",
+    icon: "PieChart",
+    chartType: "pie",
+    chartData: {
+      title: "Global Electricity Output by Energy Source (2010 vs 2025 Projections)",
+      unit: "% tổng sản lượng",
+      categories: [
+        { key: "coal", label: "Coal (Than đá)", color: "#ef4444", bgClass: "bg-red-500", textClass: "text-red-400" },
+        { key: "gas", label: "Natural Gas (Khí đốt)", color: "#f59e0b", bgClass: "bg-amber-500", textClass: "text-amber-400" },
+        { key: "renewables", label: "Renewables (Tái tạo)", color: "#10b981", bgClass: "bg-emerald-500", textClass: "text-emerald-400" },
+        { key: "nuclear", label: "Nuclear (Hạt nhân)", color: "#6366f1", bgClass: "bg-indigo-500", textClass: "text-indigo-400" }
+      ],
+      series: [
+        { country: "2010", coal: 42, gas: 25, renewables: 18, nuclear: 15 },
+        { country: "2025 (Dự báo)", coal: 22, gas: 28, renewables: 38, nuclear: 12 }
+      ],
+      keyNotes: [
+        "Than đá (Coal) từng chiếm tỉ trọng áp đảo năm 2010 (42%), nhưng dự kiến sụt giảm gần một nửa xuống còn 22% vào năm 2025.",
+        "Năng lượng tái tạo (Renewables) có bước tăng trưởng ngoạn mục hơn gấp đôi từ 18% lên 38%, trở thành nguồn điện chủ đạo nhất vào năm 2025.",
+        "Điện hạt nhân (Nuclear) chiếm tỉ lệ khiêm tốn và thu hẹp nhẹ từ 15% xuống 12%."
+      ]
+    },
+    ieltsPrompt: "The two pie charts compare the proportion of global electricity generation from four distinct energy sources in 2010 and the projected breakdown for 2025. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    vocabularies: [
+      {
+        id: "t1-pie-1",
+        word: "account for",
+        ipa: "/əˈkaʊnt fɔːr/",
+        partOfSpeech: "verb phrase",
+        meaning: "Chiếm tỉ lệ bao nhiêu % trong tổng thể biểu đồ",
+        basicEquivalent: "make up (Band 5)",
+        synonyms: ["constitute", "represent", "comprise"],
+        collocations: ["account for the lion's share", "account for 42% of total output"],
+        modelSentence: "Coal accounted for the largest share of global electricity output in 2010 at 42%.",
+        vietnameseSentence: "Than đá chiếm tỉ trọng lớn nhất trong sản lượng điện toàn cầu năm 2010 ở mức 42%."
+      },
+      {
+        id: "t1-pie-2",
+        word: "predominant",
+        ipa: "/prɪˈdɒm.ɪ.nənt/",
+        partOfSpeech: "adjective",
+        meaning: "Chiếm ưu thế chủ đạo, giữ vị trí số một trong cơ cấu",
+        basicEquivalent: "main / biggest (Band 5)",
+        synonyms: ["dominant", "primary", "foremost"],
+        collocations: ["predominant energy source", "predominant contributor"],
+        modelSentence: "Renewable energy is projected to become the predominant power source by 2025.",
+        vietnameseSentence: "Năng lượng tái tạo được dự báo sẽ trở thành nguồn cung cấp điện chủ đạo vào năm 2025."
+      },
+      {
+        id: "t1-pie-3",
+        word: "contraction",
+        ipa: "/kənˈtræk.ʃən/",
+        partOfSpeech: "noun",
+        meaning: "Sự co hẹp, suy giảm đáng kể về thị phần hoặc tỉ trọng",
+        basicEquivalent: "decrease / shrinking (Band 5)",
+        synonyms: ["reduction", "decline", "diminution"],
+        collocations: ["experience a sharp contraction", "contraction in coal reliance"],
+        modelSentence: "The chart highlights a sharp contraction in fossil fuel reliance, dropping from 42% to 22%.",
+        vietnameseSentence: "Biểu đồ nhấn mạnh sự co hẹp mạnh mẽ trong sự phụ thuộc vào nhiên liệu hóa thạch, giảm từ 42% xuống 22%."
+      },
+      {
+        id: "t1-pie-4",
+        word: "counterpart",
+        ipa: "/ˈkaʊn.tə.pɑːt/",
+        partOfSpeech: "noun",
+        meaning: "Đối tượng tương đương hoặc thời điểm đối chiếu để so sánh",
+        basicEquivalent: "the other one (Band 5)",
+        synonyms: ["equivalent", "corresponding figure"],
+        collocations: ["compared to its 2010 counterpart", "exceed its counterpart"],
+        modelSentence: "The 2025 projection for green energy stands more than double its 2010 counterpart.",
+        vietnameseSentence: "Dự báo năm 2025 cho năng lượng xanh cao hơn gấp đôi so với số liệu đối chiếu của nó năm 2010."
+      },
+      {
+        id: "t1-pie-5",
+        word: "negligible",
+        ipa: "/ˈneɡ.lɪ.dʒə.bəl/",
+        partOfSpeech: "adjective",
+        meaning: "Không đáng kể, chiếm tỉ lệ rất nhỏ trong tổng thể",
+        basicEquivalent: "very small / tiny (Band 5)",
+        synonyms: ["marginal", "insignificant", "minimal"],
+        collocations: ["negligible variation", "remain negligible"],
+        modelSentence: "The decline in nuclear power represents a relatively negligible shift of only three percentage points.",
+        vietnameseSentence: "Sự suy giảm của điện hạt nhân đại diện cho một sự thay đổi tương đối không đáng kể chỉ 3 điểm phần trăm."
+      },
+      {
+        id: "t1-pie-6",
+        word: "surge",
+        ipa: "/sɜːdʒ/",
+        partOfSpeech: "verb / noun",
+        meaning: "Tăng vọt đột biến và nhanh chóng",
+        basicEquivalent: "go up quickly (Band 5)",
+        synonyms: ["soar", "rocket", "escalate"],
+        collocations: ["surge from 18% to 38%", "experience a remarkable surge"],
+        modelSentence: "The proportion of renewable electricity is expected to surge by twenty percentage points.",
+        vietnameseSentence: "Tỉ trọng điện tái tạo dự kiến sẽ tăng vọt thêm hai mươi điểm phần trăm."
+      },
+      {
+        id: "t1-pie-7",
+        word: "diminish",
+        ipa: "/dɪˈmɪn.ɪʃ/",
+        partOfSpeech: "verb",
+        meaning: "Thu hẹp dần, giảm sút liên tục",
+        basicEquivalent: "reduce / become less (Band 5)",
+        synonyms: ["dwindle", "wane", "subside"],
+        collocations: ["diminish considerably", "diminish in prominence"],
+        modelSentence: "The prominence of conventional coal plants will diminish considerably over the 15-year projection.",
+        vietnameseSentence: "Tầm vóc của các nhà máy than truyền thống sẽ giảm sút đáng kể trong giai đoạn dự báo 15 năm."
+      },
+      {
+        id: "t1-pie-8",
+        word: "discrepancy",
+        ipa: "/dɪˈskrep.ən.si/",
+        partOfSpeech: "noun",
+        meaning: "Khoảng cách chênh lệch giữa hai số liệu",
+        basicEquivalent: "difference (Band 5)",
+        synonyms: ["gap", "divergence", "variance"],
+        collocations: ["wide discrepancy", "discrepancy between energy forms"],
+        modelSentence: "A substantial discrepancy emerges between surging green power and dwindling coal reliance.",
+        vietnameseSentence: "Một khoảng cách chênh lệch đáng kể xuất hiện giữa năng lượng xanh đang tăng vọt và sự phụ thuộc than đá đang suy giảm."
+      },
+      {
+        id: "t1-pie-9",
+        word: "plurality",
+        ipa: "/plʊəˈræl.ə.ti/",
+        partOfSpeech: "noun",
+        meaning: "Tỉ lệ lớn nhất trong các nhóm khảo sát",
+        basicEquivalent: "the biggest part (Band 5)",
+        synonyms: ["majority share", "relative majority"],
+        collocations: ["command a plurality", "capture a plurality of 38%"],
+        modelSentence: "By 2025, clean energy will command a commanding plurality of all generated wattage.",
+        vietnameseSentence: "Đến năm 2025, năng lượng sạch sẽ nắm giữ tỉ lệ áp đảo lớn nhất trong tất cả sản lượng điện năng được tạo ra."
+      },
+      {
+        id: "t1-pie-10",
+        word: "equilibrium",
+        ipa: "/ˌek.wɪˈlɪb.ri.əm/",
+        partOfSpeech: "noun",
+        meaning: "Trạng thái cân bằng tương đối giữa các thành phần",
+        basicEquivalent: "balance (Band 5)",
+        synonyms: ["balance", "parity"],
+        collocations: ["reach an equilibrium", "maintain energetic equilibrium"],
+        modelSentence: "Natural gas generation maintains a near equilibrium, oscillating modestly around 25% to 28%.",
+        vietnameseSentence: "Sản lượng điện từ khí tự nhiên duy trì trạng thái gần như cân bằng, chỉ dao động nhẹ quanh mức 25% đến 28%."
       }
     ]
   }

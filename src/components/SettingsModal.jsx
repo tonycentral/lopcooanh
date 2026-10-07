@@ -131,7 +131,7 @@ export default function SettingsModal({
               <a
                 href="https://aistudio.google.com/app/apikey"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="text-sky-400 hover:text-sky-300 flex items-center gap-1 underline font-medium"
               >
                 Google AI Studio <ExternalLink className="w-3 h-3" />
@@ -142,7 +142,7 @@ export default function SettingsModal({
           {/* Privacy & Storage Notice */}
           <div className="p-3 rounded-xl bg-slate-800/40 border border-slate-700/60 flex items-start gap-2.5 text-xs text-slate-400">
             <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-            <span>Mọi dữ liệu điểm số, band mục tiêu và API Key đều được mã hoá và lưu trực tiếp trong LocalStorage của trình duyệt máy bạn, an toàn tuyệt đối và bảo mật.</span>
+            <span>Mọi dữ liệu điểm số, band mục tiêu và API Key được lưu trữ cục bộ trực tiếp trên trình duyệt của bạn (LocalStorage) và chỉ được dùng khi giao tiếp với Google AI, không lưu trên bất kỳ máy chủ bên thứ ba nào khác.</span>
           </div>
 
           {/* Reset Action */}

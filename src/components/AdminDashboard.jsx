@@ -25,10 +25,23 @@ import {
   exportDatabankBackup 
 } from '../data/databank/databankService';
 
+// Khóa băm mật mã SHA-256 (Salted Hash) bảo vệ khu vực quản trị viên
+const ADMIN_HASH_TARGET = "9bd902d1804e959bb6ed9cea3b386422343f5e2601b8da68d2a7790fc61f5760";
+const PIN_SALT = "lopcooanh_salt_2026";
+
+async function computePinHash(pin) {
+  if (!crypto?.subtle) return "";
+  const encoder = new TextEncoder();
+  const data = encoder.encode(PIN_SALT + pin.trim());
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 export default function AdminDashboard({ onExitAdmin }) {
-  // Passcode protection (Mặc định mã PIN riêng của cô Oanh là '8888')
+  // Passcode protection với token băm trong sessionStorage
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return sessionStorage.getItem('admin_authenticated') === 'true';
+    return sessionStorage.getItem('admin_auth_hash') === ADMIN_HASH_TARGET;
   });
   const [pinInput, setPinInput] = useState('');
   const [pinError, setPinError] = useState(false);
@@ -50,14 +63,19 @@ export default function AdminDashboard({ onExitAdmin }) {
   const vocabularies = useMemo(() => getAllVocabularies(), []);
   const stats = useMemo(() => getDatabankStats(), []);
 
-  // Handle PIN unlock
-  const handleUnlock = (e) => {
+  // Handle PIN unlock bằng thuật toán mật mã
+  const handleUnlock = async (e) => {
     e.preventDefault();
-    if (pinInput === '8888' || pinInput === 'admin') {
-      setIsAuthenticated(true);
-      sessionStorage.setItem('admin_authenticated', 'true');
-      setPinError(false);
-    } else {
+    try {
+      const computedHash = await computePinHash(pinInput);
+      if (computedHash === ADMIN_HASH_TARGET) {
+        setIsAuthenticated(true);
+        sessionStorage.setItem('admin_auth_hash', ADMIN_HASH_TARGET);
+        setPinError(false);
+      } else {
+        setPinError(true);
+      }
+    } catch {
       setPinError(true);
     }
   };
@@ -110,7 +128,7 @@ export default function AdminDashboard({ onExitAdmin }) {
                 setPinInput(e.target.value);
                 setPinError(false);
               }}
-              placeholder="Nhập mã PIN (Mặc định: 8888)"
+              placeholder="Nhập mã PIN bảo mật"
               className="w-full py-2.5 px-3 bg-slate-950 border border-slate-800 focus:border-indigo-500 rounded-xl text-center text-sm font-mono text-white tracking-widest outline-none transition"
               autoFocus
             />

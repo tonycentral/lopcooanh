@@ -21,9 +21,42 @@ export function saveTargetBand(band) {
   }
 }
 
+const OBFUSCATION_PREFIX = "sec_v1_";
+const SALT_KEY = "lopcooanh_shield_storage";
+
+function obfuscateSecret(plain) {
+  if (!plain) return "";
+  try {
+    const xor = plain
+      .split("")
+      .map((c, i) => String.fromCharCode(c.charCodeAt(0) ^ SALT_KEY.charCodeAt(i % SALT_KEY.length)))
+      .join("");
+    return OBFUSCATION_PREFIX + btoa(unescape(encodeURIComponent(xor)));
+  } catch {
+    return plain;
+  }
+}
+
+function deobfuscateSecret(encoded) {
+  if (!encoded) return "";
+  // Tương thích ngược với các key lưu dạng plain text trước đó
+  if (!encoded.startsWith(OBFUSCATION_PREFIX)) return encoded;
+  try {
+    const raw = encoded.slice(OBFUSCATION_PREFIX.length);
+    const decodedStr = decodeURIComponent(escape(atob(raw)));
+    return decodedStr
+      .split("")
+      .map((c, i) => String.fromCharCode(c.charCodeAt(0) ^ SALT_KEY.charCodeAt(i % SALT_KEY.length)))
+      .join("");
+  } catch {
+    return "";
+  }
+}
+
 export function getStoredApiKey() {
   try {
-    return localStorage.getItem(STORAGE_KEYS.GEMINI_API_KEY) || "";
+    const raw = localStorage.getItem(STORAGE_KEYS.GEMINI_API_KEY);
+    return raw ? deobfuscateSecret(raw) : "";
   } catch {
     return "";
   }
@@ -31,7 +64,12 @@ export function getStoredApiKey() {
 
 export function saveApiKey(key) {
   try {
-    localStorage.setItem(STORAGE_KEYS.GEMINI_API_KEY, key.trim());
+    const clean = (key || "").trim();
+    if (!clean) {
+      localStorage.removeItem(STORAGE_KEYS.GEMINI_API_KEY);
+      return;
+    }
+    localStorage.setItem(STORAGE_KEYS.GEMINI_API_KEY, obfuscateSecret(clean));
   } catch (e) {
     console.error("Failed to save API key", e);
   }

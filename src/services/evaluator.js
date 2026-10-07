@@ -548,3 +548,218 @@ export function evaluatePart3Translation(userTranslation, vocab, targetBand = "7
     bandUpgrades: practiceData.bandUpgrades || {}
   };
 }
+
+/**
+ * Chấm điểm bài viết Full Essay (Task 2) hoặc Full Report (Task 1)
+ * Đánh giá toàn diện theo 4 tiêu chí chuẩn IELTS:
+ * 1. Task Achievement / Task Response (TR)
+ * 2. Coherence & Cohesion (CC)
+ * 3. Lexical Resource (LR) - đặc biệt theo dõi từ vựng trọng tâm Band 8.0 đã dùng
+ * 4. Grammatical Range & Accuracy (GRA)
+ */
+export function evaluateFullEssay(essayText, topic = {}, targetBand = "7.0", activeTask = "task2") {
+  const text = (essayText || "").trim();
+  const words = text.split(/\s+/).filter(Boolean);
+  const wordCount = words.length;
+  const isTask1 = activeTask === 'task1';
+  const minWords = isTask1 ? 150 : 250;
+
+  if (wordCount < 25) {
+    return {
+      isValid: false,
+      error: `Bài viết quá ngắn (${wordCount} từ). Vui lòng viết ít nhất ${minWords} từ để hệ thống chấm điểm đầy đủ và chính xác theo chuẩn IELTS!`
+    };
+  }
+
+  // 1. Phân tích đoạn văn (Paragraphs)
+  const paragraphs = text.split(/\n\s*\n|\r\n\s*\r\n/).map(p => p.trim()).filter(Boolean);
+  const paragraphCount = paragraphs.length > 0 ? paragraphs.length : 1;
+
+  // 2. Kiểm tra từ vựng trọng tâm trong chủ đề (Target Vocabularies Tracking)
+  const targetVocabs = topic?.vocabularies || [];
+  const lowerText = text.toLowerCase();
+  const usedTargetWords = [];
+  const missingTargetWords = [];
+
+  targetVocabs.forEach(v => {
+    if (!v?.word) return;
+    const cleanWord = v.word.toLowerCase();
+    const regex = new RegExp(`\\b${cleanWord.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}`, 'i');
+    const hasWord = regex.test(text);
+    const hasSynonym = (v.synonyms || []).some(s => lowerText.includes(s.toLowerCase()));
+
+    if (hasWord || hasSynonym) {
+      usedTargetWords.push({
+        word: v.word,
+        ipa: v.ipa,
+        meaning: v.meaning,
+        partOfSpeech: v.partOfSpeech
+      });
+    } else {
+      missingTargetWords.push({
+        word: v.word,
+        ipa: v.ipa,
+        meaning: v.meaning,
+        partOfSpeech: v.partOfSpeech
+      });
+    }
+  });
+
+  // 3. Phân tích ngữ pháp phức hợp (Complex Structures)
+  const detectedStructures = [];
+  COMPLEX_STRUCTURES.forEach(struct => {
+    if (struct.regex.test(text)) {
+      detectedStructures.push(struct.name);
+    }
+  });
+
+  // 4. Phân tích liên từ và chuyển câu (Cohesive Devices)
+  const detectedCohesiveDevices = [];
+  COHESIVE_MARKERS.forEach(marker => {
+    const regex = new RegExp(`\\b${marker}\\b`, "i");
+    if (regex.test(text) && !detectedCohesiveDevices.includes(marker)) {
+      detectedCohesiveDevices.push(marker);
+    }
+  });
+
+  // 5. Cảnh báo từ ngữ thông tục (Informal Patterns)
+  const informalWarnings = [];
+  INFORMAL_PATTERNS.forEach(rule => {
+    if (rule.regex.test(text)) {
+      informalWarnings.push(rule.message);
+    }
+  });
+
+  // 6. Tính điểm theo 4 tiêu chí IELTS chính thức
+  // Task Response / Task Achievement (TR)
+  let trScore = 6.0;
+  if (wordCount >= minWords) trScore += 1.0;
+  if (wordCount >= (isTask1 ? 180 : 280)) trScore += 0.5;
+  if (wordCount < minWords) trScore -= 1.0;
+  if (paragraphCount >= 4) trScore += 0.5;
+  else if (paragraphCount < 3) trScore -= 0.5;
+
+  // Coherence & Cohesion (CC)
+  let ccScore = 6.0;
+  if (detectedCohesiveDevices.length >= 5) ccScore += 1.5;
+  else if (detectedCohesiveDevices.length >= 3) ccScore += 1.0;
+  else if (detectedCohesiveDevices.length >= 1) ccScore += 0.5;
+  if (paragraphCount >= 4) ccScore += 0.5;
+
+  // Lexical Resource (LR)
+  let lrScore = 6.0;
+  if (usedTargetWords.length >= 5) lrScore += 2.0;
+  else if (usedTargetWords.length >= 3) lrScore += 1.5;
+  else if (usedTargetWords.length >= 1) lrScore += 0.5;
+  if (informalWarnings.length === 0) lrScore += 0.5;
+  else lrScore -= 0.5;
+
+  // Grammatical Range & Accuracy (GRA)
+  let graScore = 6.0;
+  if (detectedStructures.length >= 4) graScore += 1.5;
+  else if (detectedStructures.length >= 2) graScore += 1.0;
+  else if (detectedStructures.length >= 1) graScore += 0.5;
+  if (informalWarnings.length === 0) graScore += 0.5;
+
+  // Giới hạn trong khoảng 5.0 - 9.0
+  const clamp = (val) => Math.min(9.0, Math.max(5.0, Math.round(val * 2) / 2));
+  trScore = clamp(trScore);
+  ccScore = clamp(ccScore);
+  lrScore = clamp(lrScore);
+  graScore = clamp(graScore);
+
+  // Overall band tính theo trung bình cộng và làm tròn theo quy tắc IELTS
+  const rawAvg = (trScore + ccScore + lrScore + graScore) / 4;
+  const decimal = rawAvg - Math.floor(rawAvg);
+  let overallBand = Math.floor(rawAvg);
+  if (decimal >= 0.75) {
+    overallBand += 1.0;
+  } else if (decimal >= 0.25) {
+    overallBand += 0.5;
+  }
+
+  // Nhận xét chi tiết
+  const strengths = [];
+  const improvements = [];
+
+  if (wordCount >= minWords) {
+    strengths.push(`Độ dài bài viết tốt: ${wordCount} từ (đạt yêu cầu tối thiểu ${minWords} từ).`);
+  } else {
+    improvements.push(`Bài viết hiện có ${wordCount} từ, chưa đạt ngưỡng tối thiểu ${minWords} từ của IELTS ${isTask1 ? 'Task 1' : 'Task 2'} (bị trừ điểm tiêu chí Task Achievement).`);
+  }
+
+  if (usedTargetWords.length > 0) {
+    strengths.push(`Đã vận dụng thành công ${usedTargetWords.length} từ vựng Band 8.0: "${usedTargetWords.map(w => w.word).join(', ')}".`);
+  } else {
+    improvements.push(`Chưa đưa được từ vựng trọng tâm Band 8.0 nào từ chủ đề này vào bài. Hãy tham khảo bảng gợi ý bên trên.`);
+  }
+
+  if (detectedCohesiveDevices.length >= 3) {
+    strengths.push(`Sử dụng phong phú các liên từ chuyển tiếp học thuật: "${detectedCohesiveDevices.slice(0, 5).join(', ')}".`);
+  } else {
+    improvements.push(`Cần tăng cường các liên từ chuyển ý giữa các câu và các đoạn để nâng band Coherence & Cohesion.`);
+  }
+
+  if (detectedStructures.length >= 3) {
+    strengths.push(`Vận dụng tốt các cấu trúc ngữ pháp học thuật: ${detectedStructures.slice(0, 3).join(', ')}.`);
+  }
+
+  if (informalWarnings.length > 0) {
+    improvements.push(`Phát hiện từ ngữ thông tục: ${informalWarnings[0]}`);
+  }
+
+  // Nhận xét từng đoạn
+  const paragraphFeedbacks = paragraphs.map((para, idx) => {
+    const pWords = para.split(/\s+/).filter(Boolean).length;
+    let title = `Đoạn ${idx + 1}`;
+    let role = "Thân bài (Body Paragraph)";
+    let tip = "Cần có câu chủ đề (Topic Sentence) rõ ràng và phát triển luận điểm với các dẫn chứng cụ thể.";
+    if (idx === 0) {
+      title = "Mở bài (Introduction)";
+      role = isTask1 ? "Paraphrase câu đề bài" : "Dẫn nhập bối cảnh & Luận điểm trọng tâm (Thesis Statement)";
+      tip = isTask1 ? "Paraphrase lại đề bài bằng các từ đồng nghĩa học thuật, tránh chép lại nguyên văn." : "Giới thiệu đề bài và nêu rõ quan điểm cá nhân ngay tại câu cuối của mở bài.";
+    } else if (idx === paragraphs.length - 1 && paragraphs.length >= 3) {
+      title = isTask1 ? "Overview / Kết luận" : "Kết bài (Conclusion)";
+      role = isTask1 ? "Nêu 2-3 xu hướng nổi bật nhất" : "Tóm lược các luận điểm chính & Khẳng định lại quan điểm";
+      tip = isTask1 ? "Tuyệt đối không đưa số liệu cụ thể vào phần Overview; chỉ nêu xu hướng bao quát." : "Không đưa ý mới vào kết bài; chỉ tổng kết lại các ý đã phân tích ở thân bài.";
+    } else {
+      title = `Thân bài ${idx} (Body ${idx})`;
+      role = isTask1 ? "Phân tích số liệu và so sánh chi tiết" : "Phát triển luận điểm với ví dụ & phân tích nguyên nhân - kết quả";
+      tip = "Đảm bảo mỗi câu triển khai đều giải thích mạch lạc cho câu chủ đề ở đầu đoạn.";
+    }
+
+    return {
+      index: idx + 1,
+      title,
+      role,
+      wordCount: pWords,
+      tip,
+      preview: para.length > 150 ? para.slice(0, 150) + "..." : para
+    };
+  });
+
+  return {
+    isValid: true,
+    essayText: text,
+    wordCount,
+    paragraphCount,
+    minWords,
+    targetBand,
+    scores: {
+      overallBand,
+      taskResponse: trScore,
+      coherenceCohesion: ccScore,
+      lexicalResource: lrScore,
+      grammarRange: graScore
+    },
+    usedTargetWords,
+    missingTargetWords,
+    detectedCohesiveDevices,
+    detectedStructures,
+    informalWarnings,
+    strengths,
+    improvements,
+    paragraphFeedbacks,
+    timestamp: new Date().toISOString()
+  };
+}

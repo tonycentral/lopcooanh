@@ -13,6 +13,7 @@ import Task1Visualizer from './components/Task1Visualizer';
 import Task1ChartModal from './components/Task1ChartModal';
 import AdminDashboard from './components/AdminDashboard';
 import FlashcardPage from './components/flashcards/FlashcardPage';
+import SourcesDatabankModal from './components/SourcesDatabankModal';
 
 
 import { 
@@ -140,12 +141,17 @@ export default function App() {
   const [apiKey] = useState(() => getStoredApiKey());
   const [, setStats] = useState(() => getStoredStats());
 
-  // Available topics based on selected task
-  const currentTopics = activeTask === 'task1' ? IELTS_TASK1_TOPICS : IELTS_TASK2_TOPICS;
+  // Available topics based on selected task + custom added topics
+  const [customTask1Topics, setCustomTask1Topics] = useState([]);
+  const [customTask2Topics, setCustomTask2Topics] = useState([]);
+  const currentTopics = activeTask === 'task1' 
+    ? [...IELTS_TASK1_TOPICS, ...customTask1Topics] 
+    : [...IELTS_TASK2_TOPICS, ...customTask2Topics];
 
-  // Topic & Vocab State
+  // Topic, Vocab & Practice Tab State
   const [selectedTopic, setSelectedTopic] = useState(() => currentTopics[0] || IELTS_TOPICS[0]);
   const [selectedVocab, setSelectedVocab] = useState(() => currentTopics[0]?.vocabularies[0] || null);
+  const [practiceActivePart, setPracticeActivePart] = useState(1);
 
   // Modal States
   const [isBandModalOpen, setIsBandModalOpen] = useState(false);
@@ -153,6 +159,7 @@ export default function App() {
   const [isCohesiveGuideOpen, setIsCohesiveGuideOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isChartModalOpen, setIsChartModalOpen] = useState(false);
+  const [isSourcesModalOpen, setIsSourcesModalOpen] = useState(false);
 
   // Handle saving email from mandatory first-time pop-up
   const handleSaveEmail = (email) => {
@@ -233,6 +240,30 @@ export default function App() {
   const handleSelectTopic = (topic) => {
     setSelectedTopic(topic);
     setSelectedVocab(topic?.vocabularies[0] || null);
+    setPracticeActivePart(1);
+  };
+
+  // Next topic action (when topic is completed or skipped)
+  const handleNextTopic = () => {
+    const list = currentTopics.length > 0 ? currentTopics : IELTS_TOPICS;
+    const currentIndex = list.findIndex(t => t.id === selectedTopic?.id);
+    const nextIndex = (currentIndex + 1) % list.length;
+    const nextTopic = list[nextIndex];
+    setSelectedTopic(nextTopic);
+    setSelectedVocab(nextTopic?.vocabularies[0] || null);
+    setPracticeActivePart(1);
+  };
+
+  // Add custom topic from Sources Databank Modal
+  const handleAddCustomTopic = (newTopic) => {
+    if (newTopic.taskType === 'task1') {
+      setCustomTask1Topics(prev => [newTopic, ...prev]);
+    } else {
+      setCustomTask2Topics(prev => [newTopic, ...prev]);
+    }
+    setSelectedTopic(newTopic);
+    setSelectedVocab(newTopic?.vocabularies?.[0] || null);
+    setPracticeActivePart(1);
   };
 
   // Refresh stats & 7-day average after sentence grading
@@ -286,6 +317,7 @@ export default function App() {
             onOpenBandModal={() => setIsBandModalOpen(true)}
             onOpenHistory={() => setIsHistoryOpen(true)}
             onOpenContact={() => setIsContactModalOpen(true)}
+            onOpenSources={() => setIsSourcesModalOpen(true)}
             onChangeEmail={() => setIsEmailModalOpen(true)}
             onGoWelcome={() => setCurrentView('welcome')}
             onOpenFlashcard={() => setCurrentView('flashcard')}
@@ -334,6 +366,9 @@ export default function App() {
                       studentEmail={studentEmail}
                       onStartPractice={(vocab) => setSelectedVocab(vocab)}
                       onOpenFlashcard={() => setCurrentView('flashcard')}
+                      onGoFullEssay={() => setPracticeActivePart(4)}
+                      onNextTopic={handleNextTopic}
+                      onOpenSourcesModal={() => setIsSourcesModalOpen(true)}
                     />
                   </div>
 
@@ -350,6 +385,8 @@ export default function App() {
                         activeTask={activeTask}
                         onOpenChartModal={() => setIsChartModalOpen(true)}
                         onSentenceGraded={handleRefreshStats}
+                        activePart={practiceActivePart}
+                        onPartChange={setPracticeActivePart}
                       />
                     </div>
                   </div>
@@ -376,6 +413,9 @@ export default function App() {
                         studentEmail={studentEmail}
                         onStartPractice={(vocab) => setSelectedVocab(vocab)}
                         onOpenFlashcard={() => setCurrentView('flashcard')}
+                        onGoFullEssay={() => setPracticeActivePart(4)}
+                        onNextTopic={handleNextTopic}
+                        onOpenSourcesModal={() => setIsSourcesModalOpen(true)}
                       />
                     </div>
                   </div>
@@ -393,6 +433,8 @@ export default function App() {
                         activeTask={activeTask}
                         onOpenChartModal={() => setIsChartModalOpen(true)}
                         onSentenceGraded={handleRefreshStats}
+                        activePart={practiceActivePart}
+                        onPartChange={setPracticeActivePart}
                       />
                     </div>
                   </div>
@@ -409,6 +451,9 @@ export default function App() {
                     studentEmail={studentEmail}
                     onStartPractice={(vocab) => setSelectedVocab(vocab)}
                     onOpenFlashcard={() => setCurrentView('flashcard')}
+                    onGoFullEssay={() => setPracticeActivePart(4)}
+                    onNextTopic={handleNextTopic}
+                    onOpenSourcesModal={() => setIsSourcesModalOpen(true)}
                   />
                 </div>
 
@@ -424,6 +469,8 @@ export default function App() {
                       activeTask={activeTask}
                       onOpenChartModal={() => setIsChartModalOpen(true)}
                       onSentenceGraded={handleRefreshStats}
+                      activePart={practiceActivePart}
+                      onPartChange={setPracticeActivePart}
                     />
                   </div>
                 </div>
@@ -468,6 +515,15 @@ export default function App() {
         isOpen={isChartModalOpen}
         onClose={() => setIsChartModalOpen(false)}
         topic={selectedTopic}
+      />
+
+      {/* Kho Đề Thi & Nguồn Bổ Sung Cambridge, Simon, AWL */}
+      <SourcesDatabankModal
+        isOpen={isSourcesModalOpen}
+        onClose={() => setIsSourcesModalOpen(false)}
+        onAddCustomTopic={handleAddCustomTopic}
+        totalTopicsCount={currentTopics.length}
+        totalVocabCount={currentTopics.reduce((acc, t) => acc + (t.vocabularies?.length || 0), 0)}
       />
 
     </div>

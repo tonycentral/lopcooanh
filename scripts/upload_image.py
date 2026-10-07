@@ -3,10 +3,14 @@ import json
 import subprocess
 import os
 
-API_KEY = "6d207e02198a847aa98d0a2a901485a5"
+API_KEY = os.environ.get("FREEIMAGE_API_KEY", "")
 UPLOAD_URL = "https://freeimage.host/api/1/upload"
 
 def upload_image_to_cdn(image_path):
+    if not API_KEY:
+        print(json.dumps({"error": "Thiếu biến môi trường FREEIMAGE_API_KEY. Vui lòng cấu hình trước khi chạy script."}))
+        return None
+
     if not os.path.exists(image_path):
         print(json.dumps({"error": f"File not found: {image_path}"}))
         return None

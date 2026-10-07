@@ -236,3 +236,20 @@ export function isWordKnown(email, wordId) {
   const list = getKnownWords(email);
   return list.includes(wordId);
 }
+
+/**
+ * Đặt lại trạng thái "Tôi đã biết" cho toàn bộ các từ trong một chủ đề cụ thể (để học viên ôn tập lại)
+ */
+export function resetKnownWordsForTopic(email, wordIds = []) {
+  if (!wordIds || wordIds.length === 0) return [];
+  try {
+    const cleanEmail = email ? email.trim().toLowerCase() : "default_student";
+    const current = getKnownWords(cleanEmail);
+    const updated = current.filter(id => !wordIds.includes(id));
+    localStorage.setItem(`lopcooanh_known_words_${cleanEmail}`, JSON.stringify(updated));
+    return updated;
+  } catch (e) {
+    console.error("Lỗi khi reset từ đã biết cho chủ đề:", e);
+    return [];
+  }
+}

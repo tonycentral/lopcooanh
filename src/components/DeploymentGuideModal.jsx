@@ -225,7 +225,7 @@ export default function DeploymentGuideModal({ isOpen, onClose }) {
             <ol className="text-xs text-slate-300 space-y-1.5 list-decimal list-inside leading-relaxed">
               <li>Mở terminal, gõ lệnh <code className="text-indigo-300 bg-slate-900 px-1 py-0.5 rounded">npm run build</code> để tạo thư mục xuất bản <code className="text-slate-200">dist</code>.</li>
               <li>Đẩy mã nguồn lên tài khoản GitHub của bạn.</li>
-              <li>Vào trang <a href="https://vercel.com" target="_blank" rel="noreferrer" className="text-sky-400 underline font-semibold">vercel.com</a>, đăng nhập bằng GitHub và nhấn <strong>"Add New Project"</strong> &gt; chọn dự án này &gt; nhấn <strong>"Deploy"</strong>.</li>
+              <li>Vào trang <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-sky-400 underline font-semibold">vercel.com</a>, đăng nhập bằng GitHub và nhấn <strong>"Add New Project"</strong> &gt; chọn dự án này &gt; nhấn <strong>"Deploy"</strong>.</li>
             </ol>
             <p className="text-[11px] text-emerald-400 font-medium pt-1">
               ✓ Bạn sẽ nhận được đường link như <code className="text-white">https://lopcooanh-ielts.vercel.app</code> dùng được ngay trên điện thoại và máy tính!

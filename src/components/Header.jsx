@@ -9,7 +9,8 @@ import {
   Mail,
   Layers,
   Sparkles,
-  PenTool
+  PenTool,
+  Database
 } from 'lucide-react';
 
 export default function Header({ 
@@ -18,6 +19,7 @@ export default function Header({
   onOpenBandModal, 
   onOpenHistory, 
   onOpenContact,
+  onOpenSources,
   onChangeEmail,
   onGoWelcome,
   onOpenFlashcard,
@@ -194,6 +196,18 @@ export default function Header({
               <span className="font-medium hidden md:inline max-w-[130px] truncate">
                 {studentEmail}
               </span>
+            </button>
+          )}
+
+          {/* Sources Databank Modal Button */}
+          {onOpenSources && (
+            <button
+              onClick={onOpenSources}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-xs text-blue-300 hover:text-white transition cursor-pointer"
+              title="Kho đề thi & Nguồn bổ sung chủ đề (Cambridge, Simon, AWL)"
+            >
+              <Database className="w-3.5 h-3.5 text-blue-400" />
+              <span className="font-semibold hidden lg:inline">Nguồn Cambridge</span>
             </button>
           )}
 

@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   BookOpen, 
   Check, 
@@ -5,9 +6,13 @@ import {
   ChevronLeft, 
   PenTool, 
   CheckCircle2,
-  Layers
+  Layers,
+  RotateCcw,
+  Sparkles,
+  PlusCircle,
+  FileEdit
 } from 'lucide-react';
-import { getKnownWords, toggleKnownWord } from '../services/userService';
+import { getKnownWords, toggleKnownWord, resetKnownWordsForTopic } from '../services/userService';
 
 export default function VocabularyList({ 
   vocabularies = [], 
@@ -15,7 +20,10 @@ export default function VocabularyList({
   onSelectVocab, 
   studentEmail,
   onStartPractice,
-  onOpenFlashcard
+  onOpenFlashcard,
+  onGoFullEssay,
+  onNextTopic,
+  onOpenSourcesModal
 }) {
   const [knownWordIds, setKnownWordIds] = useState(() => getKnownWords(studentEmail));
   const [pageIndex, setPageIndex] = useState(0);
@@ -72,6 +80,22 @@ export default function VocabularyList({
     if (onStartPractice) onStartPractice(vocab);
   };
 
+  // Số lượng từ đã biết riêng trong chủ đề hiện tại
+  const topicKnownCount = useMemo(() => {
+    return vocabularies.filter(v => knownWordIds.includes(v.id)).length;
+  }, [vocabularies, knownWordIds]);
+
+  const isAllKnown = vocabularies.length > 0 && topicKnownCount >= vocabularies.length;
+
+  const handleResetTopicWords = (e) => {
+    e.stopPropagation();
+    if (window.confirm("Bạn có muốn bỏ đánh dấu 'Đã biết' của các từ trong chủ đề này để ôn tập lại từ đầu không?")) {
+      const allIds = vocabularies.map(v => v.id);
+      const updated = resetKnownWordsForTopic(studentEmail, allIds);
+      setKnownWordIds(updated);
+    }
+  };
+
   // Pagination navigation
   const handleNextPage = () => {
     setPageIndex(prev => (prev + 1) % totalPages);
@@ -96,7 +120,7 @@ export default function VocabularyList({
     <div className="h-full flex flex-col overflow-hidden">
       
       {/* Top Header: Title & Pagination Action */}
-      <div className="flex items-center justify-between pb-2.5 mb-1.5 border-b border-slate-800 shrink-0">
+      <div className="flex items-center justify-between pb-2 mb-1.5 border-b border-slate-800 shrink-0">
         <div className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-lg bg-blue-600/15 text-blue-400 flex items-center justify-center">
             <BookOpen className="w-4 h-4" />
@@ -106,7 +130,7 @@ export default function VocabularyList({
               Từ vựng trọng tâm ({sortedVocabs.length})
             </h3>
             <span className="text-[10px] text-slate-400">
-              Hiện từ {startWordIdx}-{endWordIdx} • Đã biết: {knownWordIds.length}
+              Hiện từ {startWordIdx}-{endWordIdx} • Đã biết: <strong className={isAllKnown ? "text-emerald-400 font-bold" : "text-blue-300"}>{topicKnownCount}/{vocabularies.length}</strong>
             </span>
           </div>
         </div>
@@ -147,6 +171,69 @@ export default function VocabularyList({
           </button>
         </div>
       </div>
+
+      {/* Celebratory Banner when 100% of vocabularies in this topic are learned */}
+      {isAllKnown && (
+        <div className="p-3 mb-2 rounded-2xl bg-gradient-to-br from-emerald-950/80 via-blue-950/70 to-slate-900 border border-emerald-500/40 shadow-lg space-y-2 shrink-0 animate-fadeIn">
+          <div className="flex items-center gap-2">
+            <span className="text-xl">🏆</span>
+            <div>
+              <h4 className="text-xs font-black text-emerald-300 flex items-center gap-1.5">
+                <span>Xuất sắc! Bạn đã học hết {vocabularies.length}/{vocabularies.length} từ vựng</span>
+                <span className="px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-mono border border-emerald-500/40">100%</span>
+              </h4>
+              <p className="text-[11px] text-slate-300 leading-snug">
+                Bạn đã nắm vững toàn bộ từ vựng chủ đề này. Hãy chọn hành động tiếp theo:
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-1.5 pt-1.5 border-t border-emerald-500/20">
+            {onGoFullEssay && (
+              <button
+                type="button"
+                onClick={onGoFullEssay}
+                className="col-span-2 py-1.5 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs flex items-center justify-center gap-1.5 transition shadow-md shadow-blue-900/40 cursor-pointer"
+              >
+                <FileEdit className="w-3.5 h-3.5 text-blue-200" />
+                <span>Viết Full Bài Essay ngay (Tab 4)</span>
+              </button>
+            )}
+
+            {onNextTopic && (
+              <button
+                type="button"
+                onClick={onNextTopic}
+                className="py-1 px-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs flex items-center justify-center gap-1 transition border border-slate-700/60 cursor-pointer"
+              >
+                <span>Chủ đề tiếp theo</span>
+                <ChevronRight className="w-3 h-3 text-blue-400" />
+              </button>
+            )}
+
+            <button
+              type="button"
+              onClick={handleResetTopicWords}
+              className="py-1 px-2.5 rounded-xl bg-slate-850 hover:bg-slate-800 text-slate-300 hover:text-white font-medium text-xs flex items-center justify-center gap-1 transition border border-slate-800 cursor-pointer"
+              title="Bỏ đánh dấu đã biết các từ này để ôn tập lại từ đầu"
+            >
+              <RotateCcw className="w-3 h-3 text-amber-400" />
+              <span>Ôn tập lại từ</span>
+            </button>
+
+            {onOpenSourcesModal && (
+              <button
+                type="button"
+                onClick={onOpenSourcesModal}
+                className="col-span-2 py-1 px-2.5 rounded-xl bg-indigo-950/60 hover:bg-indigo-900/70 text-indigo-300 border border-indigo-500/30 font-semibold text-[11px] flex items-center justify-center gap-1 transition cursor-pointer"
+              >
+                <PlusCircle className="w-3 h-3" />
+                <span>Nguồn bổ sung chủ đề &amp; từ vựng mới</span>
+              </button>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Vocabulary List: CHỈ HIỆN PHIÊN ÂM VÀ 2 NÚT LỰA CHỌN */}
       <div className="flex-1 min-h-0 overflow-y-auto space-y-2 pr-1 scrollbar-thin py-1">
