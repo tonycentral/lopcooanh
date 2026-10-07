@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { 
   CheckCircle2, 
   Sparkles, 
@@ -32,6 +32,7 @@ import {
 import { evaluateWithGemini } from '../services/geminiService';
 import { analyzeUpgradeDetails } from '../services/upgradeDetailHelper';
 import { saveHistoryEntry } from '../services/storage';
+import WritingProcessModal from './WritingProcessModal';
 
 const AVAILABLE_BANDS = ["6.5", "7.0", "7.5", "8.0", "8.5"];
 
@@ -217,6 +218,16 @@ export default function SentencePractice({
   const [essayTimeLeft, setEssayTimeLeft] = useState(isTask1 ? 20 * 60 : 40 * 60);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [showModelEssay, setShowModelEssay] = useState(false);
+  const [isProcessModalOpen, setIsProcessModalOpen] = useState(false);
+  const hasAutoOpenedModalRef = useRef(false);
+
+  // Tự động hiện pop-up quy trình viết bài khi học viên vào mục số 4 (Tab 4)
+  useEffect(() => {
+    if (activePart === 4 && !hasAutoOpenedModalRef.current) {
+      setIsProcessModalOpen(true);
+      hasAutoOpenedModalRef.current = true;
+    }
+  }, [activePart]);
 
   // Timer countdown for essay
   useEffect(() => {
@@ -1446,6 +1457,38 @@ In conclusion, while..., I believe that...`;
               </div>
             </div>
 
+            {/* Banner Khuyên Dùng: Pop-up Quy Trình Bóc Tách Từng Bước */}
+            <div className="p-3.5 rounded-xl bg-gradient-to-r from-indigo-950/90 via-blue-950/80 to-purple-950/90 border border-indigo-500/40 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-fadeIn">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center justify-center shrink-0">
+                  <BookOpen className="w-5 h-5 text-indigo-300" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-xs sm:text-sm font-black text-white">Quy Trình Bóc Tách Viết Bài Chuẩn Giám Khảo</span>
+                    <span className="text-[10px] bg-indigo-500/30 text-indigo-200 px-2 py-0.5 rounded-full font-bold border border-indigo-400/30">
+                      {isTask1 ? "6 Bước Task 1" : "7 Bước Task 2"}
+                    </span>
+                    <span className="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full font-bold border border-amber-400/30">
+                      ⭐ Khuyên xem trước khi viết
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-300 leading-snug mt-0.5">
+                    Trình tự các bước chuẩn thi thật: Phân tích đề &rarr; Dàn ý &amp; Từ vựng &rarr; Mở bài &rarr; Thân bài 1 &rarr; Thân bài 2 &rarr; Kết bài &rarr; Soát lỗi.
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsProcessModalOpen(true)}
+                className="py-2 px-3.5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-black text-xs flex items-center justify-center gap-1.5 shadow-md shadow-indigo-950/50 transition cursor-pointer shrink-0 ring-1 ring-white/20 active:scale-95"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                <span>Mở Pop-up Quy Trình Luyện</span>
+              </button>
+            </div>
+
             {/* Prompt Quote Display */}
             <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 space-y-1.5">
               <div className="flex items-center justify-between text-[11px] text-slate-400">
@@ -1808,6 +1851,17 @@ In conclusion, while..., I believe that...`;
 
         </div>
       )}
+
+      {/* Pop-up Quy Trình Viết Bài Từng Bước Chuẩn Giám Khảo */}
+      <WritingProcessModal
+        isOpen={isProcessModalOpen}
+        onClose={() => setIsProcessModalOpen(false)}
+        topic={topic}
+        activeTask={activeTask}
+        targetBand={targetBand}
+        onInsertStepText={(text) => insertIntoEssay(text)}
+        onApplyFullDraft={(fullText) => setEssayInput(fullText)}
+      />
 
     </div>
   );
