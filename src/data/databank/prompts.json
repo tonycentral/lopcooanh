@@ -16,16 +16,59 @@
       "title": "Household Budget Share across 5 Countries (2023)",
       "unit": "%",
       "categories": [
-        { "key": "housing", "label": "Housing (Nhà ở)", "color": "#2563eb", "bgClass": "bg-blue-600", "textClass": "text-blue-400" },
-        { "key": "education", "label": "Education (Giáo dục)", "color": "#10b981", "bgClass": "bg-emerald-500", "textClass": "text-emerald-400" },
-        { "key": "recreation", "label": "Recreation (Giải trí)", "color": "#f59e0b", "bgClass": "bg-amber-500", "textClass": "text-amber-400" }
+        {
+          "key": "housing",
+          "label": "Housing (Nhà ở)",
+          "color": "#2563eb",
+          "bgClass": "bg-blue-600",
+          "textClass": "text-blue-400"
+        },
+        {
+          "key": "education",
+          "label": "Education (Giáo dục)",
+          "color": "#10b981",
+          "bgClass": "bg-emerald-500",
+          "textClass": "text-emerald-400"
+        },
+        {
+          "key": "recreation",
+          "label": "Recreation (Giải trí)",
+          "color": "#f59e0b",
+          "bgClass": "bg-amber-500",
+          "textClass": "text-amber-400"
+        }
       ],
       "series": [
-        { "country": "Country A", "housing": 38, "education": 28, "recreation": 14 },
-        { "country": "Country B", "housing": 35, "education": 22, "recreation": 12 },
-        { "country": "Country C", "housing": 32, "education": 26, "recreation": 10 },
-        { "country": "Country D", "housing": 30, "education": 18, "recreation": 15 },
-        { "country": "Country E", "housing": 24, "education": 32, "recreation": 6 }
+        {
+          "country": "Country A",
+          "housing": 38,
+          "education": 28,
+          "recreation": 14
+        },
+        {
+          "country": "Country B",
+          "housing": 35,
+          "education": 22,
+          "recreation": 12
+        },
+        {
+          "country": "Country C",
+          "housing": 32,
+          "education": 26,
+          "recreation": 10
+        },
+        {
+          "country": "Country D",
+          "housing": 30,
+          "education": 18,
+          "recreation": 15
+        },
+        {
+          "country": "Country E",
+          "housing": 24,
+          "education": 32,
+          "recreation": 6
+        }
       ],
       "keyNotes": [
         "Housing là khoản chi áp đảo ở 4/5 quốc gia (30% - 38%), cao nhất ở Country A.",
@@ -51,17 +94,32 @@
       "chartType": "line",
       "title": "Energy Consumption: Fossil Fuels vs Renewables (2000 - 2030)",
       "unit": "%",
-      "timePeriods": ["2000", "2010", "2020", "2030 (proj.)"],
+      "timePeriods": [
+        "2000",
+        "2010",
+        "2020",
+        "2030 (proj.)"
+      ],
       "lines": [
         {
           "name": "Fossil Fuels (Hóa thạch)",
           "color": "#f43f5e",
-          "points": [78, 68, 52, 38]
+          "points": [
+            78,
+            68,
+            52,
+            38
+          ]
         },
         {
           "name": "Renewables (Tái tạo)",
           "color": "#10b981",
-          "points": [12, 22, 39, 58]
+          "points": [
+            12,
+            22,
+            39,
+            58
+          ]
         }
       ],
       "keyNotes": [
@@ -89,11 +147,36 @@
       "title": "The 5-Stage Plastic Recycling Process",
       "processType": "man_made",
       "steps": [
-        { "step": 1, "name": "Collection", "action": "Thu gom", "detail": "Discarded plastic bottles are collected from designated bins." },
-        { "step": 2, "name": "Sorting & Cleaning", "action": "Phân loại & Làm sạch", "detail": "Bottles are sorted by plastic type and washed with high-pressure water." },
-        { "step": 3, "name": "Shredding", "action": "Nghiền nhỏ", "detail": "Cleaned containers are shredded into micro plastic flakes." },
-        { "step": 4, "name": "Melting & Pelleting", "action": "Nung chảy & Tạo hạt", "detail": "Flakes are melted under high temperature and extruded into pellets." },
-        { "step": 5, "name": "Manufacturing", "action": "Sản xuất mới", "detail": "Pellets are remolded into clothing fibers, rugs, and new bottles." }
+        {
+          "step": 1,
+          "name": "Collection",
+          "action": "Thu gom",
+          "detail": "Discarded plastic bottles are collected from designated bins."
+        },
+        {
+          "step": 2,
+          "name": "Sorting & Cleaning",
+          "action": "Phân loại & Làm sạch",
+          "detail": "Bottles are sorted by plastic type and washed with high-pressure water."
+        },
+        {
+          "step": 3,
+          "name": "Shredding",
+          "action": "Nghiền nhỏ",
+          "detail": "Cleaned containers are shredded into micro plastic flakes."
+        },
+        {
+          "step": 4,
+          "name": "Melting & Pelleting",
+          "action": "Nung chảy & Tạo hạt",
+          "detail": "Flakes are melted under high temperature and extruded into pellets."
+        },
+        {
+          "step": 5,
+          "name": "Manufacturing",
+          "action": "Sản xuất mới",
+          "detail": "Pellets are remolded into clothing fibers, rugs, and new bottles."
+        }
       ],
       "keyNotes": [
         "Quy trình tuần hoàn nhân tạo tuyến tính gồm 5 giai đoạn chính.",
@@ -1151,5 +1234,131 @@
     "difficulty": "Nâng cao (Band 7.5+)",
     "status": "Active",
     "outlineHints": "Introduction: Paraphrase việc du lịch và thám hiểm khoa học tiếp cận các vùng hoang dã hẻo lánh như Nam Cực + Khẳng định quan điểm: việc nghiên cứu khoa học đem lại đột phá lớn, nhưng tác hại sinh thái từ du lịch đại chúng lấn át mọi lợi ích thương mại ngắn hạn. Body 1: Lợi ích (nghiên cứu lõi băng giúp theo dõi biến đổi khí hậu toàn cầu, khám phá sinh học mới; du lịch trải nghiệm nâng cao nhận thức bảo tồn cho du khách). Body 2: Tác hại môi trường khôn lường (hệ sinh thái vùng cực cực kỳ mong manh; nguy cơ tràn dầu từ tàu du lịch, rác thải nhựa không phân hủy, xáo trộn nơi sinh sản của chim cánh cụt và động vật hoang dã). Conclusion: Những hiểm họa sinh thái vượt trội hơn hẳn; thế giới cần áp dụng quy chế quốc tế nghiêm ngặt, chỉ cho phép nghiên cứu khoa học có kiểm soát và hạn chế tối đa các hoạt động du lịch thương mại."
+  },
+  {
+    "id": "T2_076",
+    "taskType": "Task 2",
+    "questionType": "Two-part Question",
+    "topicId": "work_career",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Đề thi thật ngày 02/03/2019 - ZIM Two-part Collection",
+    "yearDate": "2019",
+    "title": "Thị trường lao động biến đổi liên tục & Cách thức chuẩn bị (02/03/2019)",
+    "promptText": "The world of work is rapidly changing and employees cannot depend on having the same job or the same working conditions for life. Why is it the case? Can you suggest some ways to prepare people to work in the future?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase việc môi trường làm việc thay đổi nhanh chóng và người lao động không còn có thể gắn bó với một công việc suốt đời. Nêu 2 ý: nguyên nhân do tự động hóa/AI và xu hướng cắt giảm chi phí (outsourcing); giải pháp là định hướng nghề nghiệp và học tập suốt đời để thích ứng công nghệ.\n\nBody 1 (Why is it the case? - Nguyên nhân thay đổi):\n1. Sự bùng nổ của máy móc công nghệ cao và AI: Quy trình tự động hóa thay thế hàng triệu lao động trong dây chuyền sản xuất, bán lẻ và dịch vụ.\n2. Nhu cầu cắt giảm chi phí & gia công ngoài (Outsourcing): Doanh nghiệp chuyển dịch các vị trí hành chính sang các nước chi phí thấp hoặc chuyển giao cho thuật toán.\n\nBody 2 (Ways to prepare people - Cách chuẩn bị cho tương lai):\n1. Định hướng nghề nghiệp thực tế từ phổ thông: Trang bị cho học sinh năng lực lựa chọn các ngành khó bị máy móc thay thế (sáng tạo, quản lý nhân sự, tư duy chiến lược).\n2. Cập nhật công nghệ & học tập suốt đời (Lifelong learning): Tích hợp kỹ năng số và công cụ AI vào công việc hàng ngày để duy trì tính cạnh tranh cá nhân.\n\nConclusion: Tóm tắt lại: biến động việc làm bắt nguồn từ làn sóng công nghệ; chìa khóa sinh tồn là sự chủ động thích nghi và liên tục nâng cao kỹ năng."
+  },
+  {
+    "id": "T2_077",
+    "taskType": "Task 2",
+    "questionType": "Two-part Question",
+    "topicId": "technology",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Đề thi thật ngày 04/05/2019 - ZIM Two-part Collection",
+    "yearDate": "2019",
+    "title": "Trẻ em mê trò chơi điện tử hơn thể thao (04/05/2019)",
+    "promptText": "These days, a great number of children prefer spending time on computer games rather than on sports. Why is it? Is it a positive or negative development?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase xu hướng trẻ em dành phần lớn thời gian chơi game trên máy tính thay vì tập luyện thể thao. Khẳng định: nguyên nhân đến từ sức hút đồ họa/cốt truyện và tính kết nối mạng xã hội; đây hoàn toàn là xu hướng tiêu cực đối với thể chất và kỹ năng sống của trẻ.\n\nBody 1 (Why is it? - Nguyên nhân ưa chuộng game hơn thể thao):\n1. Cốt truyện lôi cuốn và phần thưởng tức thì: Trò chơi điện tử kích thích trí tưởng tượng và sự tò mò mạnh mẽ hơn các hoạt động vận động thể chất tốn sức.\n2. Sự gắn kết bạn bè ảo (Virtual connectivity): Tính năng nhiều người chơi (multiplayer) giúp trẻ dễ dàng trò chuyện và tương tác với bạn bè mà không cần ra ngoài sân vận động.\n\nBody 2 (Positive or Negative? - Đánh giá xu hướng):\n- Đánh giá: Xu hướng tiêu cực nghiêm trọng (Distinctly negative):\n1. Suy giảm sức khỏe thể chất (Sedentary lifestyle): Thiếu hụt tiêu hao calo dẫn đến béo phì học đường, các tật khúc xạ mắt và các vấn đề về cột sống.\n2. Hạn chế phát triển giao tiếp đời thực: Giảm thiểu cơ hội rèn luyện tinh thần đồng đội thực tế, khả năng ứng biến trong môi trường tự nhiên và đối mặt với rủi ro xã hội.\n\nConclusion: Trò chơi điện tử dù giải trí nhưng việc lấn át hoàn toàn thể thao mang lại nhiều tác hại thể chất và tinh thần lâu dài cho thế hệ trẻ."
+  },
+  {
+    "id": "T2_078",
+    "taskType": "Task 2",
+    "questionType": "Two-part Question",
+    "topicId": "globalization",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Đề thi thật ngày 01/06/2019 - ZIM Two-part Collection",
+    "yearDate": "2019",
+    "title": "Các nước đang phát triển mở rộng ngành du lịch (01/06/2019)",
+    "promptText": "Many developing countries are currently expanding their tourism industries. Why is this the case? Is it a positive development?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase việc nhiều quốc gia đang phát triển đẩy mạnh đầu tư mở rộng ngành công nghiệp không khói (du lịch). Khẳng định: nguyên nhân chủ yếu vì lợi ích ngoại tệ và ngoại giao văn hóa; đây nhìn chung là xu hướng tích cực nếu đi kèm các biện pháp kiểm soát môi trường bền vững.\n\nBody 1 (Why is this the case? - Động lực phát triển du lịch):\n1. Dòng tiền và nguồn thu ngoại tệ (Influx of foreign capital): Du lịch tạo sinh kế tức thì cho cư dân địa phương và thúc đẩy đầu tư cơ sở hạ tầng giao thông, khách sạn.\n2. Tăng cường ngoại giao và quảng bá văn hóa: Cơ hội vàng để các quốc gia chia sẻ phong tục, ẩm thực và nâng cao vị thế trên trường quốc tế.\n\nBody 2 (Positive development? - Đánh giá đa chiều):\n1. Tác động tích cực kinh tế vượt trội: Thúc đẩy GDP, giải quyết nạn thất nghiệp quy mô lớn ở các vùng nông thôn hẻo lánh.\n2. Thách thức môi trường & quá tải (Overtourism): Lượng rác thải nhựa khổng lồ và áp lực lên hệ sinh thái mong manh đòi hỏi chính quyền phải xây dựng cơ sở tái chế và du lịch sinh thái có trách nhiệm.\n\nConclusion: Mở rộng du lịch là bàn đạp kinh tế chiến lược cho thế giới đang phát triển, với điều kiện phải song hành cùng việc bảo vệ tài nguyên thiên nhiên."
+  },
+  {
+    "id": "T2_079",
+    "taskType": "Task 2",
+    "questionType": "Two-part Question",
+    "topicId": "society",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Đề thi thật ngày 04/01/2020 - ZIM Two-part Collection",
+    "yearDate": "2020",
+    "title": "Chênh lệch thời lượng phát sóng thể thao nam và nữ trên truyền hình (04/01/2020)",
+    "promptText": "Today, TV channels show more men’s sports than women’s sports. Why is this the case? Should TV channels give equal time for women’s sport and men’s sport?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase sự bất cân xứng trong thời lượng phủ sóng truyền hình giữa thể thao nam và thể thao nữ. Khẳng định: nguyên nhân xuất phát từ thị hiếu khán giả lịch sử và lợi ích thương mại; các đài truyền hình nên cân bằng thời lượng phát sóng nhằm thúc đẩy bình đẳng giới.\n\nBody 1 (Why is this the case? - Lý do nam giới áp đảo trên sóng TV):\n1. Thị hiếu lượng người xem và tính đối kháng: Khán giả nam chiếm số đông người xem thể thao truyền thống và đòi hỏi tốc độ, sức mạnh thể lực bùng nổ.\n2. Giá trị thương mại & tài trợ quảng cáo: Các giải đấu nam (như World Cup, Premier League) thu hút tài trợ khổng lồ, khiến các kênh truyền hình ưu tiên tối đa hóa lợi nhuận.\n\nBody 2 (Should equal time be given? - Có nên chia đều thời lượng?):\n1. Thúc đẩy công bằng và xóa bỏ định kiến giới: Thể thao nữ cần được công nhận công bằng để truyền cảm hứng cho trẻ em gái tập luyện và theo đuổi sự nghiệp vận động viên.\n2. Khai phóng thị trường tài trợ cho nữ vận động viên: Tăng độ phủ sóng truyền thông giúp các nữ vận động viên nhận được các hợp đồng quảng cáo tương xứng với nỗ lực phi thường của họ.\n\nConclusion: Dù quy luật thị trường ưu ái thể thao nam, truyền thông đại chúng có trách nhiệm xã hội trong việc phân bổ thời lượng công bằng cho thể thao nữ."
+  },
+  {
+    "id": "T2_080",
+    "taskType": "Task 2",
+    "questionType": "Two-part Question",
+    "topicId": "society",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Đề thi thật ngày 16/05/2020 - ZIM Two-part Collection",
+    "yearDate": "2020",
+    "title": "Cha mẹ ngày nay ít dành thời gian cho con cái & Hậu quả (16/05/2020)",
+    "promptText": "Today, parents spend little free time with their children. Why is this the case? Who are more affected: parents or children?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase việc cha mẹ hiện đại ít có thời gian rảnh rỗi bên con cái. Nêu 2 quan điểm: nguyên nhân do áp lực công việc ngoài giờ và sự phụ thuộc vào điện thoại thông minh; trẻ em là đối tượng chịu tổn thương nặng nề nhất về mặt tâm lý và nhân cách.\n\nBody 1 (Why is this the case? - Nguyên nhân khoảng cách cha mẹ và con):\n1. Áp lực công việc đè nặng (Heavy workloads & extra labour): Cuộc sống cạnh tranh buộc phụ huynh phải làm thêm giờ hoặc mang việc về nhà giải quyết.\n2. Cám dỗ từ thiết bị công nghệ số: Cả cha mẹ lẫn con cái bị cuốn vào màn hình điện thoại, mạng xã hội thay vì giao tiếp mặt đối mặt trong bữa cơm gia đình.\n\nBody 2 (Who are more affected? - Ai chịu thiệt thòi hơn?):\n- Khẳng định: Trẻ em chịu ảnh hưởng tiêu cực sâu sắc hơn (Children suffer more profoundly):\n1. Khủng hoảng cảm xúc & cô lập: Trẻ thiếu thốn sự ấm áp, dễ mắc trầm cảm và có hành vi chống đối xã hội.\n2. Khiếm khuyết trong định hình nhân cách: Thiếu sự hướng dẫn của phụ huynh dẫn đến nhận thức lệch lạc khi bước vào tuổi trưởng thành.\n\nConclusion: Công việc bận rộn và công nghệ làm giảm thời gian gia đình; phụ huynh cần chủ động sắp xếp thời gian vì sự phát triển lành mạnh của con cái không thể bù đắp bằng tiền bạc."
+  },
+  {
+    "id": "T2_081",
+    "taskType": "Task 2",
+    "questionType": "Two-part Question",
+    "topicId": "society",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Đề thi thật ngày 02/11/2019 - ZIM Two-part Collection",
+    "yearDate": "2019",
+    "title": "Quan niệm về xã hội lý tưởng & Con đường kiến tạo (02/11/2019)",
+    "promptText": "People often think about creating an ideal society, but most of the times fail in making this happen. What is your opinion about an ideal society? How can we create an ideal society?",
+    "difficulty": "Nâng cao (Band 7.5+)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase khát vọng xây dựng một xã hội lý tưởng và những thất bại trong lịch sử nhân loại. Nêu quan điểm: xã hội lý tưởng là nơi ngự trị của lòng vị tha thuần khiết (pure altruism); con đường khả thi duy nhất là giáo dục phẩm chất biết sẻ chia từ thời thơ ấu.\n\nBody 1 (What is an ideal society? - Định nghĩa xã hội lý tưởng):\n1. Sự thống trị của lòng vị tha trên mọi quyết sách: Người dân và lãnh đạo sẵn sàng từ bỏ lợi ích cá nhân ích kỷ để bảo vệ môi trường và sinh kế cho các thế hệ tương lai.\n2. Xóa bỏ sự thờ ơ trước đói nghèo: Một xã hội văn minh không thể chấp nhận sự tồn tại của cảnh khốn cùng, bẩn thỉu ngay trước thềm nhà các khu đô thị hào nhoáng.\n\nBody 2 (How can we create it? - Giải pháp kiến tạo):\n1. Bắt đầu từ giáo dục mầm non và gia đình: Nuôi dưỡng hành vi vị tha, dạy trẻ biết san sẻ đồ chơi và quan tâm người xung quanh ngay từ những năm tháng đầu đời.\n2. Củng cố bằng hệ thống giáo dục học đường: Đưa giáo dục nhân cách và hoạt động cộng đồng thành tiêu chuẩn cốt lõi nhằm định hướng quỹ đạo phát triển đạo đức cho trẻ.\n\nConclusion: Xã hội lý tưởng không nằm ở công nghệ hay của cải vật chất xa hoa mà nằm ở trái tim vị tha; đầu tư vào giáo dục đạo đức cho trẻ em là nền móng để hiện thực hóa ước mơ này."
+  },
+  {
+    "id": "T2_082",
+    "taskType": "Task 2",
+    "questionType": "Two-part Question",
+    "topicId": "society",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Đề thi thật ngày 13/01/2018 - ZIM Two-part Collection",
+    "yearDate": "2018",
+    "title": "Vấn nạn đô thị lớn & Chính sách khuyến khích dãn dân về thị trấn nhỏ (13/01/2018)",
+    "promptText": "People living in large cities today face many problems in their everyday life. What are these problems? Should governments encourage people to move to smaller regional towns?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase những thách thức gay gắt mà cư dân đô thị lớn đang đối mặt hàng ngày. Nêu rõ: hai vấn đề nổi cộm là ô nhiễm không khí trầm trọng và quá tải thông tin; chính phủ hoàn toàn nên khuyến khích chính sách dãn dân về các thị trấn vùng ven.\n\nBody 1 (What are these problems? - Các vấn nạn đô thị lớn):\n1. Ô nhiễm không khí và áp lực giao thông: Mật độ xe cộ khổng lồ thải khí độc hại, gây ra các bệnh mãn tính về đường hô hấp cho người dân.\n2. Quá tải thông tin & nhà ở chật chội: Cư dân bị bủa vây bởi tin giả, quảng cáo dồn dập và phải chen chúc trong những không gian sống bức bối, hủy hoại sức khỏe tâm thần.\n\nBody 2 (Should governments encourage relocation? - Khuyến khích di dời):\n1. Giảm thiểu áp lực giao thông và cải thiện môi trường: Giảm số lượng xe cộ tại trung tâm, trực tiếp trả lại bầu không khí trong lành hơn cho đô thị.\n2. Hạ nhiệt thị trường bất động sản & nâng cao chất lượng sống: Giúp người dân tiếp cận nhà ở rộng rãi, chi phí hợp lý tại các địa phương, đồng thời kích thích kinh tế vùng nông thôn.\n\nConclusion: Ô nhiễm và sự ngột ngạt đô thị đòi hỏi giải pháp mang tính quy hoạch chiến lược; khuyến khích di dân về thị trấn nhỏ là hướng đi bền vững cho toàn xã hội."
+  },
+  {
+    "id": "T2_083",
+    "taskType": "Task 2",
+    "questionType": "Two-part Question",
+    "topicId": "work_career",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Đề thi thật ngày 24/02/2018 - ZIM Two-part Collection",
+    "yearDate": "2018",
+    "title": "Bằng cấp học thuật vs Kinh nghiệm thực tế trong tuyển dụng (24/02/2018)",
+    "promptText": "Nowadays, some employers think that formal academic qualifications are more important than life experience or personal qualities when they look for new employees. Why is it the case? Is it a positive or negative development?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase việc nhiều nhà tuyển dụng ưu tiên bằng cấp học thuật chính quy hơn kinh nghiệm sống hay phẩm chất cá nhân khi tìm kiếm nhân sự. Khẳng định: nguyên nhân là bằng cấp là thước đo chuẩn hóa về kiến thức chuyên môn; đây nhìn chung là xu hướng tích cực đối với người học lẫn sự phát triển của xã hội.\n\nBody 1 (Why is it the case? - Lý do nhà tuyển dụng chuộng bằng cấp):\n1. Thước đo kiến thức chuyên sâu đã được kiểm định: Để tốt nghiệp đại học, sinh viên phải vượt qua hàng loạt kỳ thi khắt khe và các khóa thực hành, đảm bảo họ nắm vững chuyên môn.\n2. Giảm thiểu chi phí và thời gian đào tạo lại: Ứng viên thiếu nền tảng học thuật đòi hỏi doanh nghiệp phải đầu tư thời gian dài đào tạo lại các kiến thức cơ bản.\n\nBody 2 (Positive or negative? - Đánh giá xu hướng):\n- Đánh giá: Xu hướng tích cực (Positive development):\n1. Động lực học tập cho sinh viên: Thúc đẩy thanh niên theo đuổi học vấn bậc cao (tertiary education) để đảm bảo triển vọng nghề nghiệp tốt hơn.\n2. Nâng cao mặt bằng dân trí xã hội: Tạo ra lực lượng lao động tri thức, có tư duy phản biện và khả năng cạnh tranh kinh tế tri thức quốc tế.\n\nConclusion: Bằng cấp đại học cung cấp sự bảo chứng đáng tin cậy về năng lực ban đầu; việc coi trọng học vấn chính quy là động lực tích cực nâng tầm trình độ của toàn xã hội."
+  },
+  {
+    "id": "T2_084",
+    "taskType": "Task 2",
+    "questionType": "Two-part Question",
+    "topicId": "society",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Đề thi thật ngày 18/09/2018 - ZIM Two-part Collection",
+    "yearDate": "2018",
+    "title": "Tác động của tính cạnh tranh đối với cá nhân & Mối quan hệ xã hội (18/09/2018)",
+    "promptText": "Competitiveness is a positive quality for people in most societies. How does competitiveness affect individuals? Is it a positive or negative trend?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase quan điểm về tính cạnh tranh trong xã hội đương đại. Nêu rõ: cạnh tranh tác động mạnh mẽ đến tâm lý cá nhân và hiệu suất làm việc; đây là xu hướng có cả hai mặt tích cực lẫn tiêu cực, đòi hỏi con người phải biết cân bằng để tránh các hệ lụy độc hại.\n\nBody 1 (How does competitiveness affect individuals? - Tác động cá nhân & mặt trái):\n1. Nguy cơ tự phụ và rạn nứt mối quan hệ cá nhân: Người quá háo thắng thường trở nên ích kỷ (self-absorbed), khó dung hòa và từ chối thỏa hiệp với người thân hoặc bạn đời khi xung đột nảy sinh.\n2. Môi trường công sở độc hại: Áp lực cạnh tranh khốc liệt giữa các đồng nghiệp làm giảm tinh thần hợp tác, gây căng thẳng cực độ và thúc đẩy tỷ lệ nhảy việc.\n\nBody 2 (Positive or negative trend? - Mặt tích cực & Đánh giá tổng thể):\n1. Động lực tự hoàn thiện & tinh thần kiên trì (Resilience & Perseverance): Tinh thần tranh đua thúc đẩy cá nhân vượt qua giới hạn của bản thân, không bỏ cuộc khi gặp nghịch cảnh.\n2. Tinh thần học hỏi không ngừng (Constant learning): Giúp học sinh và người lao động nâng cao hiệu suất học tập và gặt hái thành tựu cao hơn trong sự nghiệp.\n\nConclusion: Cạnh tranh là con dao hai lưỡi: có thể thúc đẩy sự tiến bộ vượt bậc nhưng cũng có thể phá hoại các mối liên kết xã hội; chìa khóa thành công là tìm kiếm sự cân bằng nội tại."
   }
 ]

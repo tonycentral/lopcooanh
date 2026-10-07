@@ -1,4 +1,6 @@
 import { enrichVocabulary } from './vocabEnhancer.js';
+import promptsData from './databank/prompts.json';
+import vocabulariesData from './databank/vocabularies.json';
 
 const RAW_IELTS_TOPICS = [
   {
@@ -2658,7 +2660,101 @@ const RAW_IELTS_TOPICS = [
   }
 ];
 
-export const IELTS_TASK2_TOPICS = RAW_IELTS_TOPICS.map(topic => ({
+const TOPIC_ICONS = {
+  environment: 'Leaf',
+  education: 'GraduationCap',
+  technology: 'Cpu',
+  society: 'Users',
+  globalization: 'Globe',
+  health: 'HeartPulse',
+  work_career: 'Briefcase',
+  crime_law: 'Scale',
+  business: 'TrendingUp'
+};
+
+// Map vocabularies by topicId for fast access
+const vocabsByTopic = {};
+vocabulariesData.forEach(v => {
+  if (!vocabsByTopic[v.topicId]) vocabsByTopic[v.topicId] = [];
+  vocabsByTopic[v.topicId].push(v);
+});
+
+// Helper to check if a prompt from promptsData is already covered in RAW_IELTS_TOPICS
+function findMatchingCuratedTopic(prompt) {
+  const normPrompt = prompt.promptText.trim().slice(0, 35).toLowerCase();
+  return RAW_IELTS_TOPICS.find(t => 
+    t.id.toLowerCase() === prompt.id.toLowerCase() ||
+    (t.ieltsPrompt && t.ieltsPrompt.toLowerCase().includes(normPrompt)) ||
+    (t.name && t.name.toLowerCase() === prompt.title.toLowerCase())
+  );
+}
+
+// Generate topics for all Task 2 prompts in promptsData
+const task2Prompts = promptsData.filter(p => p.taskType === 'Task 2');
+const matchedCuratedIds = new Set();
+
+const allTask2TopicsRaw = task2Prompts.map(p => {
+  const existing = findMatchingCuratedTopic(p);
+  if (existing) {
+    matchedCuratedIds.add(existing.id);
+    return {
+      ...existing,
+      yearDate: p.yearDate || existing.yearDate || 'Kinh điển',
+      topicCategory: p.topicId || existing.topicCategory || 'society',
+      difficulty: p.difficulty || existing.difficulty || 'Trung bình (Band 6.5 - 7.0)',
+      outlineHints: p.outlineHints || existing.outlineHints || '',
+      sourceDetail: p.sourceDetail || existing.tag
+    };
+  }
+
+  // Pick matching vocabularies from vocabulariesData
+  const matchingVocabs = (vocabsByTopic[p.topicId] || []).slice(0, 8);
+  let vocabs = [...matchingVocabs];
+  if (vocabs.length < 5) {
+    const backup = (vocabsByTopic['society'] || []).slice(0, 5 - vocabs.length);
+    vocabs = [...vocabs, ...backup];
+  }
+
+  return {
+    id: p.id,
+    name: p.title,
+    vietnameseName: p.title,
+    tag: p.yearDate ? `${p.sourceType || 'IELTS'} ${p.yearDate}` : (p.sourceDetail || 'IELTS'),
+    icon: TOPIC_ICONS[p.topicId] || 'BookOpen',
+    ieltsPrompt: p.promptText,
+    yearDate: p.yearDate || 'Kinh điển',
+    topicCategory: p.topicId || 'society',
+    difficulty: p.difficulty || 'Trung bình (Band 6.5 - 7.0)',
+    outlineHints: p.outlineHints || '',
+    sourceDetail: p.sourceDetail || '',
+    vocabularies: vocabs.map((v, i) => ({
+      id: `${p.id}-v${i + 1}`,
+      word: v.word,
+      ipa: v.ipa,
+      partOfSpeech: v.partOfSpeech,
+      meaning: v.meaning,
+      basicEquivalent: v.basicEquivalent,
+      synonyms: v.synonyms,
+      collocations: v.collocations,
+      modelSentence: v.exampleSentence,
+      vietnameseSentence: v.meaning
+    }))
+  };
+});
+
+// Include foundational curated topics that may not have had a 1-to-1 prompt id match
+const remainingCurated = RAW_IELTS_TOPICS.filter(t => !matchedCuratedIds.has(t.id)).map(t => ({
+  ...t,
+  yearDate: t.yearDate || 'Kinh điển',
+  topicCategory: t.topicCategory || t.id
+}));
+
+const UNIFIED_RAW_TASK2_TOPICS = [
+  ...allTask2TopicsRaw,
+  ...remainingCurated
+];
+
+export const IELTS_TASK2_TOPICS = UNIFIED_RAW_TASK2_TOPICS.map(topic => ({
   ...topic,
   vocabularies: topic.vocabularies.map(v => enrichVocabulary(v, topic.name))
 }));

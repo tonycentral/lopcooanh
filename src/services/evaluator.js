@@ -418,7 +418,8 @@ export function evaluatePart2Translation(userSentence, vocab, targetBand = "7.0"
     detailedAnalysis,
     strengths,
     improvements,
-    detectedStructures
+    detectedStructures,
+    bandUpgrades: practiceData.bandUpgrades || {}
   };
 }
 
@@ -543,6 +544,7 @@ export function evaluatePart3Translation(userTranslation, vocab, targetBand = "7
     detectedCohesiveDevices,
     strengths,
     improvements,
-    detectedStructures
+    detectedStructures,
+    bandUpgrades: practiceData.bandUpgrades || {}
   };
 }

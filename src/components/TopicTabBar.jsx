@@ -1,5 +1,5 @@
-import React from 'react';
-import { Shuffle, BarChart3, Columns3, Columns2 } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { Shuffle, BarChart3, Columns3, Columns2, Calendar } from 'lucide-react';
 
 export default function TopicTabBar({ 
   topics, 
@@ -12,12 +12,70 @@ export default function TopicTabBar({
   onToggleTask1Layout
 }) {
   const list = topics && topics.length > 0 ? topics : [];
+  const [selectedYear, setSelectedYear] = useState('ALL');
+
+  // Extract available years for Task 2
+  const availableYears = useMemo(() => {
+    if (activeTask === 'task1') return [];
+    const years = new Set();
+    list.forEach(t => {
+      if (t.yearDate) years.add(t.yearDate);
+    });
+    const sortedYears = Array.from(years).sort().reverse();
+    return ['ALL', ...sortedYears];
+  }, [list, activeTask]);
+
+  // Filter topics by selected year
+  const displayTopics = useMemo(() => {
+    if (activeTask === 'task1' || selectedYear === 'ALL') return list;
+    return list.filter(t => (t.yearDate || 'Kinh điển') === selectedYear);
+  }, [list, activeTask, selectedYear]);
+
+  // Smart random within current filtered view
+  const handleRandomClick = () => {
+    if (displayTopics.length > 0) {
+      const candidates = displayTopics.filter(t => t.id !== selectedTopic?.id);
+      const pool = candidates.length > 0 ? candidates : displayTopics;
+      const random = pool[Math.floor(Math.random() * pool.length)];
+      onSelectTopic(random);
+    } else if (onRandomTopic) {
+      onRandomTopic();
+    }
+  };
 
   return (
     <div className="space-y-2">
+      {/* Year Filter Bar for Task 2 (Allows instant navigation across 2015-2026) */}
+      {activeTask === 'task2' && availableYears.length > 2 && (
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 scrollbar-thin">
+          <span className="text-[11px] font-bold text-slate-400 shrink-0 flex items-center gap-1 pl-1 pr-1">
+            <Calendar className="w-3.5 h-3.5 text-blue-400" />
+            <span>Năm:</span>
+          </span>
+          {availableYears.map(year => {
+            const isYearSelected = selectedYear === year;
+            const count = year === 'ALL' ? list.length : list.filter(t => (t.yearDate || 'Kinh điển') === year).length;
+            return (
+              <button
+                key={year}
+                type="button"
+                onClick={() => setSelectedYear(year)}
+                className={`px-2.5 py-1 rounded-xl text-xs font-bold transition cursor-pointer select-none shrink-0 ${
+                  isYearSelected
+                    ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm ring-1 ring-blue-400"
+                    : "bg-slate-900/90 hover:bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-800/80"
+                }`}
+              >
+                {year === 'ALL' ? `Tất cả (${count})` : `${year} (${count})`}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       {/* Horizontal Topic Tabs + Random Tab */}
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-thin">
-        {list.map((topic) => {
+        {displayTopics.map((topic) => {
           const isSelected = selectedTopic?.id === topic.id;
           // Short label prioritizing Vietnamese name
           const label = topic.vietnameseName ? topic.vietnameseName.split('&')[0].trim() : topic.name;
@@ -41,9 +99,9 @@ export default function TopicTabBar({
         {/* Dedicated Random Topic Tab */}
         <button
           type="button"
-          onClick={onRandomTopic}
+          onClick={handleRandomClick}
           className="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-600 hover:from-blue-600 hover:to-indigo-500 text-white shadow-md shadow-blue-600/25 transition cursor-pointer select-none shrink-0 flex items-center gap-1.5"
-          title="Chọn chủ đề ngẫu nhiên"
+          title="Chọn chủ đề ngẫu nhiên trong danh sách"
         >
           <Shuffle className="w-3.5 h-3.5" />
           <span>Ngẫu nhiên</span>

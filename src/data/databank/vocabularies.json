@@ -9,8 +9,17 @@
     "definitionEn": "to make something less harmful, unpleasant, or bad",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "reduce, lessen, make less bad",
-    "synonyms": ["alleviate", "diminish", "curb", "palliate"],
-    "collocations": ["mitigate environmental degradation", "mitigate climate risks", "mitigate carbon emissions"],
+    "synonyms": [
+      "alleviate",
+      "diminish",
+      "curb",
+      "palliate"
+    ],
+    "collocations": [
+      "mitigate environmental degradation",
+      "mitigate climate risks",
+      "mitigate carbon emissions"
+    ],
     "exampleSentence": "Governments must enforce stringent environmental laws to mitigate the detrimental effects of global warming.",
     "wordFamily": "mitigation (n), unmitigated (adj)"
   },
@@ -24,8 +33,16 @@
     "definitionEn": "to make something that is already bad even worse",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "worsen, make worse",
-    "synonyms": ["aggravate", "intensify", "compound"],
-    "collocations": ["exacerbate the environmental crisis", "exacerbate air pollution", "exacerbate ecological imbalance"],
+    "synonyms": [
+      "aggravate",
+      "intensify",
+      "compound"
+    ],
+    "collocations": [
+      "exacerbate the environmental crisis",
+      "exacerbate air pollution",
+      "exacerbate ecological imbalance"
+    ],
     "exampleSentence": "Unchecked deforestation has severely exacerbated soil erosion and biodiversity loss in tropical regions.",
     "wordFamily": "exacerbation (n)"
   },
@@ -39,8 +56,16 @@
     "definitionEn": "seeming to be everywhere at the same time",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "common, popular, everywhere",
-    "synonyms": ["omnipresent", "pervasive", "widespread"],
-    "collocations": ["become increasingly ubiquitous", "ubiquitous presence of smartphones", "ubiquitous surveillance"],
+    "synonyms": [
+      "omnipresent",
+      "pervasive",
+      "widespread"
+    ],
+    "collocations": [
+      "become increasingly ubiquitous",
+      "ubiquitous presence of smartphones",
+      "ubiquitous surveillance"
+    ],
     "exampleSentence": "Artificial intelligence algorithms have become ubiquitous across modern digital platforms.",
     "wordFamily": "ubiquity (n), ubiquitously (adv)"
   },
@@ -54,8 +79,16 @@
     "definitionEn": "to replace something or someone, often as a result of being more modern",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "replace, take the place of",
-    "synonyms": ["supersede", "displace", "substitute"],
-    "collocations": ["supplant traditional methods", "supplant human labor", "complement rather than supplant"],
+    "synonyms": [
+      "supersede",
+      "displace",
+      "substitute"
+    ],
+    "collocations": [
+      "supplant traditional methods",
+      "supplant human labor",
+      "complement rather than supplant"
+    ],
     "exampleSentence": "Automated software is unlikely to completely supplant empathetic and experienced teachers.",
     "wordFamily": "supplanter (n)"
   },
@@ -69,8 +102,16 @@
     "definitionEn": "relating to the methods and theory of teaching",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "teaching-related, educational",
-    "synonyms": ["instructional", "educational", "didactic"],
-    "collocations": ["pedagogical approaches", "pedagogical empathy", "pedagogical effectiveness"],
+    "synonyms": [
+      "instructional",
+      "educational",
+      "didactic"
+    ],
+    "collocations": [
+      "pedagogical approaches",
+      "pedagogical empathy",
+      "pedagogical effectiveness"
+    ],
     "exampleSentence": "Innovative pedagogical practices encourage students to foster critical thinking rather than rote learning.",
     "wordFamily": "pedagogy (n), pedagogue (n)"
   },
@@ -84,8 +125,15 @@
     "definitionEn": "relating to the structure and characteristics of populations",
     "cefrBand": "B2 (Band 6.5 - 7.0)",
     "basicEquivalent": "population-related",
-    "synonyms": ["population", "statistical"],
-    "collocations": ["demographic shift", "demographic transition", "aging demographic"],
+    "synonyms": [
+      "population",
+      "statistical"
+    ],
+    "collocations": [
+      "demographic shift",
+      "demographic transition",
+      "aging demographic"
+    ],
     "exampleSentence": "Many developed nations are currently grappling with profound demographic changes due to falling birth rates.",
     "wordFamily": "demography (n), demographics (n pl)"
   },
@@ -99,8 +147,16 @@
     "definitionEn": "to be the largest, most important, or most noticeable part of something",
     "cefrBand": "B2 (Band 6.5 - 7.0)",
     "basicEquivalent": "be the biggest part, account for most",
-    "synonyms": ["prevail", "command", "overwhelm"],
-    "collocations": ["dominate the expenditure", "dominate the chart", "clear dominant category"],
+    "synonyms": [
+      "prevail",
+      "command",
+      "overwhelm"
+    ],
+    "collocations": [
+      "dominate the expenditure",
+      "dominate the chart",
+      "clear dominant category"
+    ],
     "exampleSentence": "Housing expenditure dominated household budgets in Country A, accounting for nearly 40% of total spending.",
     "wordFamily": "dominance (n), dominant (adj)"
   },
@@ -114,8 +170,16 @@
     "definitionEn": "to be or become greater in amount, degree, or success than something else",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "exceed, surpass, overtake",
-    "synonyms": ["surpass", "overtake", "eclipse"],
-    "collocations": ["outstrip demand", "outstrip conventional energy", "comfortably outstrip"],
+    "synonyms": [
+      "surpass",
+      "overtake",
+      "eclipse"
+    ],
+    "collocations": [
+      "outstrip demand",
+      "outstrip conventional energy",
+      "comfortably outstrip"
+    ],
     "exampleSentence": "By 2030, clean energy generation is projected to comfortably outstrip that of traditional fossil fuels.",
     "wordFamily": "outstripped (pt), outstripping (ving)"
   },
@@ -129,8 +193,15 @@
     "definitionEn": "the use of medicine without professional medical advice",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "treating yourself with medicine",
-    "synonyms": ["unprescribed therapy", "self-treatment"],
-    "collocations": ["risks of self-medication", "practice self-medication", "unsupervised self-medication"],
+    "synonyms": [
+      "unprescribed therapy",
+      "self-treatment"
+    ],
+    "collocations": [
+      "risks of self-medication",
+      "practice self-medication",
+      "unsupervised self-medication"
+    ],
     "exampleSentence": "Widespread self-medication can lead to dangerous adverse drug reactions and exacerbate antibiotic resistance.",
     "wordFamily": "self-medicate (v)"
   },
@@ -144,8 +215,15 @@
     "definitionEn": "intended to stop something from happening before it occurs",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "preventing, stopping beforehand",
-    "synonyms": ["prophylactic", "precautionary"],
-    "collocations": ["preventative healthcare", "preventative measures", "preventative medicine"],
+    "synonyms": [
+      "prophylactic",
+      "precautionary"
+    ],
+    "collocations": [
+      "preventative healthcare",
+      "preventative measures",
+      "preventative medicine"
+    ],
     "exampleSentence": "Investing in preventative healthcare reduces long-term economic burdens on state-funded hospital systems.",
     "wordFamily": "prevent (v), prevention (n)"
   },
@@ -159,8 +237,15 @@
     "definitionEn": "a state of physical or mental exhaustion caused by prolonged stress",
     "cefrBand": "B2 (Band 6.5 - 7.0)",
     "basicEquivalent": "extreme tiredness from work",
-    "synonyms": ["physical exhaustion", "nervous collapse"],
-    "collocations": ["occupational burnout", "suffer from burnout", "mitigate workplace burnout"],
+    "synonyms": [
+      "physical exhaustion",
+      "nervous collapse"
+    ],
+    "collocations": [
+      "occupational burnout",
+      "suffer from burnout",
+      "mitigate workplace burnout"
+    ],
     "exampleSentence": "Chronic overtime without adequate psychological recuperation precipitates severe occupational burnout.",
     "wordFamily": "burn out (phr v)"
   },
@@ -174,8 +259,15 @@
     "definitionEn": "working from home using internet and telecommunication tools",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "working from home, remote work",
-    "synonyms": ["remote working", "home-based working"],
-    "collocations": ["adopt telecommuting", "telecommuting arrangements", "benefits of telecommuting"],
+    "synonyms": [
+      "remote working",
+      "home-based working"
+    ],
+    "collocations": [
+      "adopt telecommuting",
+      "telecommuting arrangements",
+      "benefits of telecommuting"
+    ],
     "exampleSentence": "The widespread adoption of telecommuting has eliminated commuting stress and revitalized work-life balance.",
     "wordFamily": "telecommute (v), telecommuter (n)"
   },
@@ -189,8 +281,16 @@
     "definitionEn": "a state of balance between opposing forces or aspects of life",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "good balance, harmony",
-    "synonyms": ["harmony", "stability", "parity"],
-    "collocations": ["work-life equilibrium", "delicate equilibrium", "restore psychological equilibrium"],
+    "synonyms": [
+      "harmony",
+      "stability",
+      "parity"
+    ],
+    "collocations": [
+      "work-life equilibrium",
+      "delicate equilibrium",
+      "restore psychological equilibrium"
+    ],
     "exampleSentence": "Compressing the workweek allows professionals to achieve a sustainable equilibrium between career ambitions and personal duties.",
     "wordFamily": "equilibria (pl n)"
   },
@@ -204,8 +304,16 @@
     "definitionEn": "to provide someone with an incentive for doing something",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "encourage with reward, motivate",
-    "synonyms": ["motivate", "stimulate", "spur"],
-    "collocations": ["incentivize employees", "financial packages that incentivize innovation", "strongly incentivized"],
+    "synonyms": [
+      "motivate",
+      "stimulate",
+      "spur"
+    ],
+    "collocations": [
+      "incentivize employees",
+      "financial packages that incentivize innovation",
+      "strongly incentivized"
+    ],
     "exampleSentence": "Progressive corporations incentivize performance through autonomy rather than punitive surveillance measures.",
     "wordFamily": "incentive (n)"
   },
@@ -219,8 +327,15 @@
     "definitionEn": "living for a long time; long life",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "long lifespan, living long",
-    "synonyms": ["life expectancy", "extended lifespan"],
-    "collocations": ["increased human longevity", "demographic challenges of longevity", "promote longevity"],
+    "synonyms": [
+      "life expectancy",
+      "extended lifespan"
+    ],
+    "collocations": [
+      "increased human longevity",
+      "demographic challenges of longevity",
+      "promote longevity"
+    ],
     "exampleSentence": "Unprecedented gains in human longevity have fundamentally transformed demographic dynamics worldwide.",
     "wordFamily": "long (adj)"
   },
@@ -234,8 +349,16 @@
     "definitionEn": "the feeling that you have no connection with the people around you",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "isolation, feeling left out",
-    "synonyms": ["estrangement", "isolation", "detachment"],
-    "collocations": ["emotional alienation", "social alienation among the elderly", "sense of alienation"],
+    "synonyms": [
+      "estrangement",
+      "isolation",
+      "detachment"
+    ],
+    "collocations": [
+      "emotional alienation",
+      "social alienation among the elderly",
+      "sense of alienation"
+    ],
     "exampleSentence": "Confining elderly parents to impersonal nursing facilities can trigger profound emotional alienation.",
     "wordFamily": "alienate (v), alienated (adj)"
   },
@@ -249,8 +372,16 @@
     "definitionEn": "the situation when the members of a group or society are united",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "sticking together, unity",
-    "synonyms": ["solidarity", "unity", "interconnectedness"],
-    "collocations": ["family cohesion", "social cohesion", "foster intergenerational cohesion"],
+    "synonyms": [
+      "solidarity",
+      "unity",
+      "interconnectedness"
+    ],
+    "collocations": [
+      "family cohesion",
+      "social cohesion",
+      "foster intergenerational cohesion"
+    ],
     "exampleSentence": "Multigenerational households reinforce familial cohesion through constant daily communication.",
     "wordFamily": "cohesive (adj), cohesively (adv)"
   },
@@ -264,8 +395,16 @@
     "definitionEn": "relating to the duty or attitude of a child towards their parents",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "about duty to parents, respectful",
-    "synonyms": ["dutiful", "devoted", "respectful"],
-    "collocations": ["filial piety", "filial obligation", "filial devotion"],
+    "synonyms": [
+      "dutiful",
+      "devoted",
+      "respectful"
+    ],
+    "collocations": [
+      "filial piety",
+      "filial obligation",
+      "filial devotion"
+    ],
     "exampleSentence": "Filial piety remains the bedrock of traditional family structures and elderly care across Asian cultures.",
     "wordFamily": "filially (adv)"
   },
@@ -279,8 +418,16 @@
     "definitionEn": "very noticeable or attracting attention, often in an ostentatious manner",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "obvious, showy, noticeable",
-    "synonyms": ["ostentatious", "noticeable", "flamboyant"],
-    "collocations": ["conspicuous consumption", "conspicuous display of wealth", "conspicuous luxury"],
+    "synonyms": [
+      "ostentatious",
+      "noticeable",
+      "flamboyant"
+    ],
+    "collocations": [
+      "conspicuous consumption",
+      "conspicuous display of wealth",
+      "conspicuous luxury"
+    ],
     "exampleSentence": "The proliferation of luxury brand marketing encourages conspicuous consumption among impressionable young consumers.",
     "wordFamily": "conspicuously (adv), conspicuousness (n)"
   },
@@ -294,8 +441,16 @@
     "definitionEn": "the belief that having money and possessions is the most important thing in life",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "money-driven lifestyle, valuing possessions",
-    "synonyms": ["consumerism", "greed", "worldliness"],
-    "collocations": ["rampant materialism", "fuel rampant materialism", "culture of materialism"],
+    "synonyms": [
+      "consumerism",
+      "greed",
+      "worldliness"
+    ],
+    "collocations": [
+      "rampant materialism",
+      "fuel rampant materialism",
+      "culture of materialism"
+    ],
     "exampleSentence": "An obsessive devotion to prestigious designer labels fuels rampant materialism and widens social disparity.",
     "wordFamily": "materialistic (adj), materialist (n)"
   },
@@ -309,8 +464,15 @@
     "definitionEn": "the activity of flying aircraft, or of designing, producing, and maintaining them",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "flying, air travel",
-    "synonyms": ["air transport", "aeronautics"],
-    "collocations": ["commercial aviation", "aviation emissions", "aviation industry"],
+    "synonyms": [
+      "air transport",
+      "aeronautics"
+    ],
+    "collocations": [
+      "commercial aviation",
+      "aviation emissions",
+      "aviation industry"
+    ],
     "exampleSentence": "Commercial aviation accounts for a disproportionate share of global greenhouse gas emissions relative to total passenger volume.",
     "wordFamily": "aviator (n)"
   },
@@ -324,8 +486,16 @@
     "definitionEn": "something that deters or prevents people from doing something by making them fear consequences",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "something that stops bad actions",
-    "synonyms": ["disincentive", "curb", "impediment"],
-    "collocations": ["effective deterrent", "financial deterrent", "act as a deterrent"],
+    "synonyms": [
+      "disincentive",
+      "curb",
+      "impediment"
+    ],
+    "collocations": [
+      "effective deterrent",
+      "financial deterrent",
+      "act as a deterrent"
+    ],
     "exampleSentence": "Imposing mandatory vehicle confiscation serves as an effective deterrent against habitual reckless driving.",
     "wordFamily": "deter (v)"
   },
@@ -339,8 +509,14 @@
     "definitionEn": "producing large amounts of carbon dioxide and other greenhouse gases",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "highly polluting",
-    "synonyms": ["emission-heavy", "fossil-dependent"],
-    "collocations": ["carbon-intensive transport", "carbon-intensive industries"],
+    "synonyms": [
+      "emission-heavy",
+      "fossil-dependent"
+    ],
+    "collocations": [
+      "carbon-intensive transport",
+      "carbon-intensive industries"
+    ],
     "exampleSentence": "Aviation remains the single most carbon-intensive mode of passenger transport per kilometer traveled.",
     "wordFamily": "carbon intensity (n)"
   },
@@ -354,8 +530,16 @@
     "definitionEn": "the process of making people obey a law or rule",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "making people follow laws",
-    "synonyms": ["implementation", "execution", "imposition"],
-    "collocations": ["rigorous law enforcement", "strict enforcement of traffic rules", "strengthen enforcement"],
+    "synonyms": [
+      "implementation",
+      "execution",
+      "imposition"
+    ],
+    "collocations": [
+      "rigorous law enforcement",
+      "strict enforcement of traffic rules",
+      "strengthen enforcement"
+    ],
     "exampleSentence": "Lax law enforcement encourages irresponsible motorists to disregard speed limits with relative impunity.",
     "wordFamily": "enforce (v), enforceable (adj)"
   },
@@ -369,8 +553,16 @@
     "definitionEn": "consisting of parts or people that are similar to each other or are of the same type",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "all the same, uniform",
-    "synonyms": ["uniform", "consistent", "standardized"],
-    "collocations": ["homogeneous ability groups", "homogeneous classrooms", "homogeneous grouping"],
+    "synonyms": [
+      "uniform",
+      "consistent",
+      "standardized"
+    ],
+    "collocations": [
+      "homogeneous ability groups",
+      "homogeneous classrooms",
+      "homogeneous grouping"
+    ],
     "exampleSentence": "Proponents argue that homogeneous classrooms allow instructors to tailor educational curricula without pacing disparities.",
     "wordFamily": "homogeneity (n), homogenize (v)"
   },
@@ -384,8 +576,16 @@
     "definitionEn": "the arrangement or classification of something into different groups or layers",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "dividing into levels, ranking",
-    "synonyms": ["hierarchical division", "categorization", "segregation"],
-    "collocations": ["academic stratification", "social stratification", "reinforce stratification"],
+    "synonyms": [
+      "hierarchical division",
+      "categorization",
+      "segregation"
+    ],
+    "collocations": [
+      "academic stratification",
+      "social stratification",
+      "reinforce stratification"
+    ],
     "exampleSentence": "Rigid ability grouping risks institutionalizing academic stratification and stigmatizing struggling students.",
     "wordFamily": "stratify (v), stratified (adj)"
   },
@@ -399,8 +599,17 @@
     "definitionEn": "careful and persistent work or effort",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "hard work, dedication",
-    "synonyms": ["industriousness", "assiduity", "perseverance", "conscientiousness"],
-    "collocations": ["reward diligence", "exceptional diligence", "unwavering diligence"],
+    "synonyms": [
+      "industriousness",
+      "assiduity",
+      "perseverance",
+      "conscientiousness"
+    ],
+    "collocations": [
+      "reward diligence",
+      "exceptional diligence",
+      "unwavering diligence"
+    ],
     "exampleSentence": "Unwavering diligence is indispensable for career progression, yet unmitigated overwork precipitates dangerous exhaustion.",
     "wordFamily": "diligent (adj), diligently (adv)"
   },
@@ -414,8 +623,16 @@
     "definitionEn": "containing people or elements from many different countries; broad-minded",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "global, international-minded",
-    "synonyms": ["global-minded", "worldly", "broad-minded"],
-    "collocations": ["cosmopolitan outlook", "cosmopolitan society", "foster a cosmopolitan mindset"],
+    "synonyms": [
+      "global-minded",
+      "worldly",
+      "broad-minded"
+    ],
+    "collocations": [
+      "cosmopolitan outlook",
+      "cosmopolitan society",
+      "foster a cosmopolitan mindset"
+    ],
     "exampleSentence": "Studying international news equips adolescents with a cosmopolitan outlook essential for modern multilateral diplomacy.",
     "wordFamily": "cosmopolitanism (n)"
   },
@@ -429,8 +646,16 @@
     "definitionEn": "naturally existing in a place or country rather than arriving from another place",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "native, local",
-    "synonyms": ["aboriginal", "native", "endemic"],
-    "collocations": ["indigenous culture", "indigenous heritage", "indigenous artifacts"],
+    "synonyms": [
+      "aboriginal",
+      "native",
+      "endemic"
+    ],
+    "collocations": [
+      "indigenous culture",
+      "indigenous heritage",
+      "indigenous artifacts"
+    ],
     "exampleSentence": "Museums fulfill an invaluable educational role by exhibiting the tangible craftsmanship of indigenous civilizations.",
     "wordFamily": "indigene (n)"
   },
@@ -444,8 +669,16 @@
     "definitionEn": "an object made by a human being, typically one of cultural or historical interest",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "historical object, antique",
-    "synonyms": ["relic", "antiquity", "specimen"],
-    "collocations": ["ancient artifacts", "preserve cultural artifacts", "archaeological artifacts"],
+    "synonyms": [
+      "relic",
+      "antiquity",
+      "specimen"
+    ],
+    "collocations": [
+      "ancient artifacts",
+      "preserve cultural artifacts",
+      "archaeological artifacts"
+    ],
     "exampleSentence": "Curators must meticulously preserve rare archaeological artifacts to convey historical narratives to posterity.",
     "wordFamily": "artifactual (adj)"
   },
@@ -459,8 +692,16 @@
     "definitionEn": "the return of someone or cultural property to their own country",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "sending back home, return",
-    "synonyms": ["restitution", "restoration", "return"],
-    "collocations": ["repatriation of stolen artifacts", "cultural repatriation", "demand repatriation"],
+    "synonyms": [
+      "restitution",
+      "restoration",
+      "return"
+    ],
+    "collocations": [
+      "repatriation of stolen artifacts",
+      "cultural repatriation",
+      "demand repatriation"
+    ],
     "exampleSentence": "Ethical debates surrounding the repatriation of colonial-era antiquities have prompted major institutions to re-evaluate their collections.",
     "wordFamily": "repatriate (v)"
   },
@@ -474,8 +715,16 @@
     "definitionEn": "to select, organize, and look after the objects or works of art in an exhibition",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "select and show art",
-    "synonyms": ["organize", "assemble", "oversee"],
-    "collocations": ["curate an exhibition", "carefully curated collection", "curate historical displays"],
+    "synonyms": [
+      "organize",
+      "assemble",
+      "oversee"
+    ],
+    "collocations": [
+      "curate an exhibition",
+      "carefully curated collection",
+      "curate historical displays"
+    ],
     "exampleSentence": "Galleries must thoughtfully curate international masterpieces to broaden the aesthetic appreciation of visitors.",
     "wordFamily": "curator (n), curation (n)"
   },
@@ -489,8 +738,16 @@
     "definitionEn": "showing only a narrow range of views, like people who live in small places",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "narrow-minded, local-only",
-    "synonyms": ["insular", "provincial", "myopic"],
-    "collocations": ["parochial mindset", "parochial perspective", "risk becoming parochial"],
+    "synonyms": [
+      "insular",
+      "provincial",
+      "myopic"
+    ],
+    "collocations": [
+      "parochial mindset",
+      "parochial perspective",
+      "risk becoming parochial"
+    ],
     "exampleSentence": "Excluding foreign artistic masterpieces risks cultivating an insular and parochial worldview among citizens.",
     "wordFamily": "parochialism (n)"
   },
@@ -504,8 +761,16 @@
     "definitionEn": "the place of origin or earliest known history of something, especially a work of art",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "origin, history of owner",
-    "synonyms": ["origin", "lineage", "derivation"],
-    "collocations": ["establish the provenance", "disputed provenance", "flawless provenance"],
+    "synonyms": [
+      "origin",
+      "lineage",
+      "derivation"
+    ],
+    "collocations": [
+      "establish the provenance",
+      "disputed provenance",
+      "flawless provenance"
+    ],
     "exampleSentence": "Documenting the ethical provenance of foreign antiquities prevents the illicit trafficking of stolen cultural property.",
     "wordFamily": "provenanced (adj)"
   },
@@ -519,8 +784,16 @@
     "definitionEn": "to make a bad or unpleasant situation better",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "improve, make better",
-    "synonyms": ["enhance", "alleviate", "better"],
-    "collocations": ["ameliorate living conditions", "ameliorate human suffering", "ameliorate hardship"],
+    "synonyms": [
+      "enhance",
+      "alleviate",
+      "better"
+    ],
+    "collocations": [
+      "ameliorate living conditions",
+      "ameliorate human suffering",
+      "ameliorate hardship"
+    ],
     "exampleSentence": "Scientific discoveries are fundamentally justified by their capacity to ameliorate human suffering and enhance daily life.",
     "wordFamily": "amelioration (n), ameliorative (adj)"
   },
@@ -534,8 +807,16 @@
     "definitionEn": "the attitude of caring about others and having a desire to help them",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "unselfishness, helping others",
-    "synonyms": ["benevolence", "selflessness", "philanthropy"],
-    "collocations": ["pure altruism", "act out of altruism", "foster social altruism"],
+    "synonyms": [
+      "benevolence",
+      "selflessness",
+      "philanthropy"
+    ],
+    "collocations": [
+      "pure altruism",
+      "act out of altruism",
+      "foster social altruism"
+    ],
     "exampleSentence": "Medical pioneers are often driven by genuine altruism rather than the pursuit of commercial remuneration.",
     "wordFamily": "altruistic (adj), altruistically (adv)"
   },
@@ -549,8 +830,15 @@
     "definitionEn": "the action of causing a country or area to have fewer people living in it",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "population decline, emptying of people",
-    "synonyms": ["demographic decline", "rural abandonment"],
-    "collocations": ["rural depopulation", "suffer rapid depopulation", "counter depopulation"],
+    "synonyms": [
+      "demographic decline",
+      "rural abandonment"
+    ],
+    "collocations": [
+      "rural depopulation",
+      "suffer rapid depopulation",
+      "counter depopulation"
+    ],
     "exampleSentence": "Rural depopulation leaves vast agricultural heartlands neglected while exacerbating urban housing pressures.",
     "wordFamily": "depopulate (v), depopulated (adj)"
   },
@@ -564,8 +852,16 @@
     "definitionEn": "involving two or more different subjects or areas of knowledge",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "cross-subject, multi-field",
-    "synonyms": ["cross-disciplinary", "multidisciplinary", "integrative"],
-    "collocations": ["interdisciplinary approach", "interdisciplinary research", "interdisciplinary curriculum"],
+    "synonyms": [
+      "cross-disciplinary",
+      "multidisciplinary",
+      "integrative"
+    ],
+    "collocations": [
+      "interdisciplinary approach",
+      "interdisciplinary research",
+      "interdisciplinary curriculum"
+    ],
     "exampleSentence": "An interdisciplinary curriculum empowers university graduates to synthesize disparate insights and solve complex real-world dilemmas.",
     "wordFamily": "interdisciplinarity (n)"
   },
@@ -579,8 +875,16 @@
     "definitionEn": "to pay part of the cost of something, usually by a government or organization",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "fund partly with public money",
-    "synonyms": ["underwrite", "sponsor", "fund"],
-    "collocations": ["heavily subsidize", "subsidize the arts", "state-subsidized public transport"],
+    "synonyms": [
+      "underwrite",
+      "sponsor",
+      "fund"
+    ],
+    "collocations": [
+      "heavily subsidize",
+      "subsidize the arts",
+      "state-subsidized public transport"
+    ],
     "exampleSentence": "Governments should actively subsidize classical arts to safeguard irreplaceable cultural traditions from commercial oblivion.",
     "wordFamily": "subsidy (n), subsidized (adj)"
   },
@@ -594,8 +898,16 @@
     "definitionEn": "the gradual reduction or destruction of something valuable over time",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "gradual loss, wearing away",
-    "synonyms": ["deterioration", "degradation", "decline"],
-    "collocations": ["erosion of moral values", "erosion of cultural identity", "gradual erosion of trust"],
+    "synonyms": [
+      "deterioration",
+      "degradation",
+      "decline"
+    ],
+    "collocations": [
+      "erosion of moral values",
+      "erosion of cultural identity",
+      "gradual erosion of trust"
+    ],
     "exampleSentence": "Unchecked consumerism precipitates the gradual erosion of familial loyalty and community solidarity.",
     "wordFamily": "erode (v), erosive (adj)"
   },
@@ -609,8 +921,17 @@
     "definitionEn": "done with full awareness of the likely consequences; carefully thought out",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "carefully planned, measured",
-    "synonyms": ["deliberate", "premeditated", "measured", "judicious"],
-    "collocations": ["take calculated risks", "calculated decision", "calculated gamble"],
+    "synonyms": [
+      "deliberate",
+      "premeditated",
+      "measured",
+      "judicious"
+    ],
+    "collocations": [
+      "take calculated risks",
+      "calculated decision",
+      "calculated gamble"
+    ],
     "exampleSentence": "Successful entrepreneurs do not gamble recklessly; rather, they take calculated risks based on thorough market scrutiny.",
     "wordFamily": "calculate (v), calculation (n)"
   },
@@ -624,8 +945,16 @@
     "definitionEn": "the large-scale emigration of a large group of individuals with technical skills or knowledge",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "talent loss, smart people leaving",
-    "synonyms": ["human capital flight", "talent exodus", "intellectual emigration"],
-    "collocations": ["suffer from severe brain drain", "stem the brain drain", "reverse the brain drain"],
+    "synonyms": [
+      "human capital flight",
+      "talent exodus",
+      "intellectual emigration"
+    ],
+    "collocations": [
+      "suffer from severe brain drain",
+      "stem the brain drain",
+      "reverse the brain drain"
+    ],
     "exampleSentence": "Developing nations suffer a severe brain drain when newly qualified physicians seek lucrative employment abroad.",
     "wordFamily": "drain (v)"
   },
@@ -639,8 +968,17 @@
     "definitionEn": "more than is needed; unnecessary and excessive",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "extra, not needed, too much",
-    "synonyms": ["redundant", "excessive", "gratuitous", "unneeded"],
-    "collocations": ["superfluous choices", "rendered superfluous", "eliminate superfluous clutter"],
+    "synonyms": [
+      "redundant",
+      "excessive",
+      "gratuitous",
+      "unneeded"
+    ],
+    "collocations": [
+      "superfluous choices",
+      "rendered superfluous",
+      "eliminate superfluous clutter"
+    ],
     "exampleSentence": "An abundance of superfluous consumer options frequently induces severe decision fatigue among modern buyers.",
     "wordFamily": "superfluity (n), superfluously (adv)"
   },
@@ -654,8 +992,16 @@
     "definitionEn": "relating to the enjoyment or study of beauty; visually pleasing",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "beautiful, art-related",
-    "synonyms": ["artistic", "visually pleasing", "refined"],
-    "collocations": ["aesthetic appeal", "aesthetic harmony", "enhance aesthetic qualities"],
+    "synonyms": [
+      "artistic",
+      "visually pleasing",
+      "refined"
+    ],
+    "collocations": [
+      "aesthetic appeal",
+      "aesthetic harmony",
+      "enhance aesthetic qualities"
+    ],
     "exampleSentence": "Urban planners must harmonize pragmatic utility with architectural aesthetic appeal to foster community pride.",
     "wordFamily": "aesthetically (adv), aesthetics (n)"
   },
@@ -669,8 +1015,16 @@
     "definitionEn": "the state of being which occurs when an object, service, or practice is no longer wanted even though it may still be in good working order",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "becoming outdated, going out of use",
-    "synonyms": ["outdatedness", "antiquation", "redundancy"],
-    "collocations": ["fall into obsolescence", "face obsolescence", "technological obsolescence"],
+    "synonyms": [
+      "outdatedness",
+      "antiquation",
+      "redundancy"
+    ],
+    "collocations": [
+      "fall into obsolescence",
+      "face obsolescence",
+      "technological obsolescence"
+    ],
     "exampleSentence": "The meteoric ascent of online news portals has driven traditional print media toward inevitable obsolescence.",
     "wordFamily": "obsolete (adj)"
   },
@@ -684,8 +1038,17 @@
     "definitionEn": "belonging to or used by a group of people rather than one single person",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "shared, public, for everyone",
-    "synonyms": ["collective", "shared", "public", "civic"],
-    "collocations": ["communal spaces", "communal harmony", "communal well-being"],
+    "synonyms": [
+      "collective",
+      "shared",
+      "public",
+      "civic"
+    ],
+    "collocations": [
+      "communal spaces",
+      "communal harmony",
+      "communal well-being"
+    ],
     "exampleSentence": "Expansive communal parks serve as vital urban sanctuaries where diverse social cohorts interact freely.",
     "wordFamily": "community (n), communally (adv)"
   },
@@ -699,8 +1062,15 @@
     "definitionEn": "the practice of changing your job very often",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "changing jobs frequently",
-    "synonyms": ["career mobility", "frequent job transition"],
-    "collocations": ["habitual job-hopping", "stigma of job-hopping", "trend of job-hopping"],
+    "synonyms": [
+      "career mobility",
+      "frequent job transition"
+    ],
+    "collocations": [
+      "habitual job-hopping",
+      "stigma of job-hopping",
+      "trend of job-hopping"
+    ],
     "exampleSentence": "Strategic job-hopping enables dynamic young professionals to accelerate their wage progression and expand their expertise.",
     "wordFamily": "job-hopper (n)"
   },
@@ -714,8 +1084,17 @@
     "definitionEn": "something that makes you suffer; a state of great pain or distress",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "suffering, mental pain, illness",
-    "synonyms": ["distress", "tribulation", "torment", "malady"],
-    "collocations": ["psychological affliction", "mental affliction", "endure severe affliction"],
+    "synonyms": [
+      "distress",
+      "tribulation",
+      "torment",
+      "malady"
+    ],
+    "collocations": [
+      "psychological affliction",
+      "mental affliction",
+      "endure severe affliction"
+    ],
     "exampleSentence": "Chronic sensory overload in dense metropolitan areas precipitates grave psychological afflictions among commuters.",
     "wordFamily": "afflict (v), afflicted (adj)"
   },
@@ -729,8 +1108,17 @@
     "definitionEn": "the quality of being new, original, or unusual",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "being new, freshness",
-    "synonyms": ["newness", "originality", "freshness", "uniqueness"],
-    "collocations": ["appeal of novelty", "transient novelty", "novelty value"],
+    "synonyms": [
+      "newness",
+      "originality",
+      "freshness",
+      "uniqueness"
+    ],
+    "collocations": [
+      "appeal of novelty",
+      "transient novelty",
+      "novelty value"
+    ],
     "exampleSentence": "Advertisers incessantly exploit the seductive appeal of novelty to artificially stimulate repetitive consumer purchases.",
     "wordFamily": "novel (adj)"
   },
@@ -744,8 +1132,16 @@
     "definitionEn": "the study of the methods and activities of teaching",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "teaching method",
-    "synonyms": ["instructional methodology", "teaching theory", "andragogy"],
-    "collocations": ["innovative pedagogy", "digital pedagogy", "educational pedagogy"],
+    "synonyms": [
+      "instructional methodology",
+      "teaching theory",
+      "andragogy"
+    ],
+    "collocations": [
+      "innovative pedagogy",
+      "digital pedagogy",
+      "educational pedagogy"
+    ],
     "exampleSentence": "Modern e-learning platforms demand transformative digital pedagogy rather than passive video lectures.",
     "wordFamily": "pedagogical (adj), pedagogue (n)"
   },
@@ -759,8 +1155,17 @@
     "definitionEn": "having no useful result; completely ineffective",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "pointless, useless",
-    "synonyms": ["fruitless", "ineffectual", "pointless", "vain"],
-    "collocations": ["futile gesture", "render efforts futile", "prove utterly futile"],
+    "synonyms": [
+      "fruitless",
+      "ineffectual",
+      "pointless",
+      "vain"
+    ],
+    "collocations": [
+      "futile gesture",
+      "render efforts futile",
+      "prove utterly futile"
+    ],
     "exampleSentence": "Individual recycling efforts feel utterly futile without statutory carbon caps on multinational industrial conglomerates.",
     "wordFamily": "futility (n), futilely (adv)"
   },
@@ -774,8 +1179,15 @@
     "definitionEn": "relating to, involving, or affecting several generations",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "between generations",
-    "synonyms": ["cross-generational", "transgenerational"],
-    "collocations": ["intergenerational equity", "intergenerational justice", "intergenerational solidarity"],
+    "synonyms": [
+      "cross-generational",
+      "transgenerational"
+    ],
+    "collocations": [
+      "intergenerational equity",
+      "intergenerational justice",
+      "intergenerational solidarity"
+    ],
     "exampleSentence": "Curtailing fossil fuel dependency represents a fundamental obligation of intergenerational climate justice.",
     "wordFamily": "intergenerationally (adv)"
   },
@@ -789,8 +1201,16 @@
     "definitionEn": "an agreement that allows you to borrow money from a bank to buy a house",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "home loan",
-    "synonyms": ["home loan", "property loan", "secured credit"],
-    "collocations": ["take out a mortgage", "pay off the mortgage", "mortgage repayments"],
+    "synonyms": [
+      "home loan",
+      "property loan",
+      "secured credit"
+    ],
+    "collocations": [
+      "take out a mortgage",
+      "pay off the mortgage",
+      "mortgage repayments"
+    ],
     "exampleSentence": "Shouldering an exorbitant thirty-year mortgage constrains young professionals from pursuing riskier entrepreneurial endeavors.",
     "wordFamily": "mortgage (v)"
   },
@@ -804,8 +1224,17 @@
     "definitionEn": "to cause someone to experience something, usually an emotion or a pain, less strongly than before",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "make numb, make stop caring",
-    "synonyms": ["numb", "immunize", "deaden", "harden"],
-    "collocations": ["desensitize consumers", "become desensitized to ads", "desensitize the public"],
+    "synonyms": [
+      "numb",
+      "immunize",
+      "deaden",
+      "harden"
+    ],
+    "collocations": [
+      "desensitize consumers",
+      "become desensitized to ads",
+      "desensitize the public"
+    ],
     "exampleSentence": "Incessant exposure to pop-up commercials desensitizes digital users, rendering conventional marketing pitches powerless.",
     "wordFamily": "desensitization (n)"
   },
@@ -819,8 +1248,17 @@
     "definitionEn": "not correct; based on a mistaken belief or fallacy",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "false, misleading, based on wrong ideas",
-    "synonyms": ["misleading", "erroneous", "spurious", "illogical"],
-    "collocations": ["fallacious premise", "fallacious assumption", "fallacious reasoning"],
+    "synonyms": [
+      "misleading",
+      "erroneous",
+      "spurious",
+      "illogical"
+    ],
+    "collocations": [
+      "fallacious premise",
+      "fallacious assumption",
+      "fallacious reasoning"
+    ],
     "exampleSentence": "Instilling the fallacious notion that desire guarantees success leaves adolescents unprepared for arbitrary real-world setbacks.",
     "wordFamily": "fallacy (n), fallaciously (adv)"
   },
@@ -834,8 +1272,16 @@
     "definitionEn": "the ability to make your own decisions without being controlled by anyone else",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "independence, self-control",
-    "synonyms": ["independence", "self-determination", "self-sufficiency"],
-    "collocations": ["personal autonomy", "foster autonomy", "financial autonomy"],
+    "synonyms": [
+      "independence",
+      "self-determination",
+      "self-sufficiency"
+    ],
+    "collocations": [
+      "personal autonomy",
+      "foster autonomy",
+      "financial autonomy"
+    ],
     "exampleSentence": "Living away from the parental home after secondary schooling nurtures personal autonomy and domestic self-reliance.",
     "wordFamily": "autonomous (adj), autonomously (adv)"
   },
@@ -849,8 +1295,17 @@
     "definitionEn": "much too large, especially in price or cost; far exceeding what is fair",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "very expensive, unreasonably high",
-    "synonyms": ["extravagant", "excessive", "inordinate", "astronomical"],
-    "collocations": ["exorbitant fees", "exorbitant salaries", "exorbitant prices"],
+    "synonyms": [
+      "extravagant",
+      "excessive",
+      "inordinate",
+      "astronomical"
+    ],
+    "collocations": [
+      "exorbitant fees",
+      "exorbitant salaries",
+      "exorbitant prices"
+    ],
     "exampleSentence": "The exorbitant remuneration commanded by media celebrities creates a profound sense of relative deprivation among public service professionals.",
     "wordFamily": "exorbitance (n), exorbitantly (adv)"
   },
@@ -864,8 +1319,16 @@
     "definitionEn": "a process of talking together in order to resolve problems or understand each other",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "conversation, talking together",
-    "synonyms": ["discourse", "interchange", "communication"],
-    "collocations": ["meaningful dialogue", "intra-familial dialogue", "open dialogue"],
+    "synonyms": [
+      "discourse",
+      "interchange",
+      "communication"
+    ],
+    "collocations": [
+      "meaningful dialogue",
+      "intra-familial dialogue",
+      "open dialogue"
+    ],
     "exampleSentence": "Cultivating meaningful intra-familial dialogue remains the foundational safeguard against emotional alienation in children.",
     "wordFamily": "dialogic (adj)"
   },
@@ -879,8 +1342,17 @@
     "definitionEn": "the belief that people cannot change the way events will happen and that events are decided by fate",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "belief that you cannot change bad things",
-    "synonyms": ["defeatism", "resignation", "predeterminism", "passivity"],
-    "collocations": ["succumb to fatalism", "sense of fatalism", "paralyzing fatalism"],
+    "synonyms": [
+      "defeatism",
+      "resignation",
+      "predeterminism",
+      "passivity"
+    ],
+    "collocations": [
+      "succumb to fatalism",
+      "sense of fatalism",
+      "paralyzing fatalism"
+    ],
     "exampleSentence": "Succumbing to passive fatalism paralyzes initiative and perpetuates impoverished socioeconomic conditions.",
     "wordFamily": "fatalist (n), fatalistic (adj)"
   },
@@ -894,8 +1366,16 @@
     "definitionEn": "the number and types of plants and animals that exist in a particular area or in the world",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "variety of plants and animals",
-    "synonyms": ["biological diversity", "ecological variety", "species richness"],
-    "collocations": ["preserve biodiversity", "catastrophic loss of biodiversity", "biodiversity hotspots"],
+    "synonyms": [
+      "biological diversity",
+      "ecological variety",
+      "species richness"
+    ],
+    "collocations": [
+      "preserve biodiversity",
+      "catastrophic loss of biodiversity",
+      "biodiversity hotspots"
+    ],
     "exampleSentence": "The rapid collapse of global biodiversity unravels ecological food chains essential for human agricultural security.",
     "wordFamily": "biodiverse (adj)"
   },
@@ -909,8 +1389,17 @@
     "definitionEn": "existing everywhere or involving everyone",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "worldwide, for everyone",
-    "synonyms": ["ubiquitous", "omnipresent", "all-embracing", "cosmic"],
-    "collocations": ["universal language", "universal appeal", "universal truth"],
+    "synonyms": [
+      "ubiquitous",
+      "omnipresent",
+      "all-embracing",
+      "cosmic"
+    ],
+    "collocations": [
+      "universal language",
+      "universal appeal",
+      "universal truth"
+    ],
     "exampleSentence": "Music acts as a genuinely universal language that transcends linguistic barriers and bridges deep ideological divides.",
     "wordFamily": "universality (n), universally (adv)"
   },
@@ -924,8 +1413,17 @@
     "definitionEn": "in a dangerous state because of not being safe or not being held in place firmly",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "unstable, unsafe, risky",
-    "synonyms": ["unstable", "insecure", "perilous", "volatile"],
-    "collocations": ["precarious financial situation", "precarious employment", "precarious existence"],
+    "synonyms": [
+      "unstable",
+      "insecure",
+      "perilous",
+      "volatile"
+    ],
+    "collocations": [
+      "precarious financial situation",
+      "precarious employment",
+      "precarious existence"
+    ],
     "exampleSentence": "Freelancers frequently endure precarious financial streams without standard corporate safety nets like paid medical leave.",
     "wordFamily": "precariously (adv), precariousness (n)"
   },
@@ -939,8 +1437,17 @@
     "definitionEn": "an innate quality or ability is one that you were born with, not one you have learned",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "born with, inborn",
-    "synonyms": ["inborn", "natural", "instinctive", "congenital"],
-    "collocations": ["innate talent", "innate ability", "innate athletic gift"],
+    "synonyms": [
+      "inborn",
+      "natural",
+      "instinctive",
+      "congenital"
+    ],
+    "collocations": [
+      "innate talent",
+      "innate ability",
+      "innate athletic gift"
+    ],
     "exampleSentence": "While innate physiological gifts confer an early advantage, world-class athletic mastery demands thousands of hours of deliberate practice.",
     "wordFamily": "innately (adv)"
   },
@@ -954,8 +1461,17 @@
     "definitionEn": "not complete and involving only the most obvious things; not showing serious thought",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "shallow, surface-level",
-    "synonyms": ["shallow", "surface-level", "facile", "cursory"],
-    "collocations": ["superficial interactions", "superficial relationships", "purely superficial"],
+    "synonyms": [
+      "shallow",
+      "surface-level",
+      "facile",
+      "cursory"
+    ],
+    "collocations": [
+      "superficial interactions",
+      "superficial relationships",
+      "purely superficial"
+    ],
     "exampleSentence": "Social networking platforms frequently substitute substantive interpersonal bonds with superficial digital validations.",
     "wordFamily": "superficiality (n), superficially (adv)"
   },
@@ -969,8 +1485,16 @@
     "definitionEn": "the process of becoming part of or more like something, such as a culture or community",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "fitting in completely, becoming like locals",
-    "synonyms": ["integration", "acculturation", "incorporation"],
-    "collocations": ["cultural assimilation", "linguistic assimilation", "hinder assimilation"],
+    "synonyms": [
+      "integration",
+      "acculturation",
+      "incorporation"
+    ],
+    "collocations": [
+      "cultural assimilation",
+      "linguistic assimilation",
+      "hinder assimilation"
+    ],
     "exampleSentence": "Persistent language barriers severely impede the seamless cultural assimilation of newly arrived immigrants.",
     "wordFamily": "assimilate (v), assimilative (adj)"
   },
@@ -984,8 +1508,16 @@
     "definitionEn": "relating to the methods and theory of teaching",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "teaching-related",
-    "synonyms": ["instructional", "educational", "didactic"],
-    "collocations": ["pedagogical approach", "pedagogical value", "pedagogical innovation"],
+    "synonyms": [
+      "instructional",
+      "educational",
+      "didactic"
+    ],
+    "collocations": [
+      "pedagogical approach",
+      "pedagogical value",
+      "pedagogical innovation"
+    ],
     "exampleSentence": "History lessons possess immense pedagogical value by cultivating critical civic judgment and historical empathy.",
     "wordFamily": "pedagogy (n), pedagogically (adv)"
   },
@@ -999,8 +1531,16 @@
     "definitionEn": "the science of soil management and crop production",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "farming science",
-    "synonyms": ["agricultural science", "crop science", "soil management"],
-    "collocations": ["advances in agronomy", "modern agronomy", "sustainable agronomy"],
+    "synonyms": [
+      "agricultural science",
+      "crop science",
+      "soil management"
+    ],
+    "collocations": [
+      "advances in agronomy",
+      "modern agronomy",
+      "sustainable agronomy"
+    ],
     "exampleSentence": "Epochal breakthroughs in modern agronomy have amplified crop yields yet failed to eradicate geopolitical food insecurity.",
     "wordFamily": "agronomic (adj), agronomist (n)"
   },
@@ -1014,8 +1554,17 @@
     "definitionEn": "a friendly feeling toward people with whom you share an experience or work together",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "team friendship, feeling united",
-    "synonyms": ["brotherhood", "solidarity", "fellowship", "companionship"],
-    "collocations": ["spirit of camaraderie", "foster camaraderie", "team camaraderie"],
+    "synonyms": [
+      "brotherhood",
+      "solidarity",
+      "fellowship",
+      "companionship"
+    ],
+    "collocations": [
+      "spirit of camaraderie",
+      "foster camaraderie",
+      "team camaraderie"
+    ],
     "exampleSentence": "Participating in team sports instills an enduring spirit of camaraderie and mutual accountability among adolescents.",
     "wordFamily": "comrade (n)"
   },
@@ -1029,8 +1578,16 @@
     "definitionEn": "providing skills and education that prepare you for a job",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "job-training, practical skills",
-    "synonyms": ["career-oriented", "occupational", "technical"],
-    "collocations": ["vocational training", "vocational education", "vocational qualification"],
+    "synonyms": [
+      "career-oriented",
+      "occupational",
+      "technical"
+    ],
+    "collocations": [
+      "vocational training",
+      "vocational education",
+      "vocational qualification"
+    ],
     "exampleSentence": "Prioritizing purely vocational training risks narrowing intellectual versatility and stifling long-term career adaptability.",
     "wordFamily": "vocation (n), vocationally (adv)"
   },
@@ -1044,8 +1601,17 @@
     "definitionEn": "designed to be useful rather than decorative or comfortable",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "practical, useful",
-    "synonyms": ["functional", "practical", "pragmatic", "serviceable"],
-    "collocations": ["utilitarian approach", "utilitarian consideration", "utilitarian value"],
+    "synonyms": [
+      "functional",
+      "practical",
+      "pragmatic",
+      "serviceable"
+    ],
+    "collocations": [
+      "utilitarian approach",
+      "utilitarian consideration",
+      "utilitarian value"
+    ],
     "exampleSentence": "While price appeals to utilitarian budget constraints, discerning buyers weigh long-term durability and ethical provenance.",
     "wordFamily": "utilitarianism (n)"
   },
@@ -1059,8 +1625,16 @@
     "definitionEn": "relating to the structure of populations",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "population-related",
-    "synonyms": ["population", "statistical", "census-based"],
-    "collocations": ["demographic dividend", "demographic transition", "demographic shift"],
+    "synonyms": [
+      "population",
+      "statistical",
+      "census-based"
+    ],
+    "collocations": [
+      "demographic dividend",
+      "demographic transition",
+      "demographic shift"
+    ],
     "exampleSentence": "Developing economies can reap an extraordinary demographic dividend by investing strategically in youth vocational competencies.",
     "wordFamily": "demographics (n), demographically (adv)"
   },
@@ -1074,8 +1648,16 @@
     "definitionEn": "the carrying of people or goods from one place to another, especially in public systems",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "public transport system",
-    "synonyms": ["mass transit", "public transportation", "conveyance"],
-    "collocations": ["mass transit network", "rapid transit", "public transit infrastructure"],
+    "synonyms": [
+      "mass transit",
+      "public transportation",
+      "conveyance"
+    ],
+    "collocations": [
+      "mass transit network",
+      "rapid transit",
+      "public transit infrastructure"
+    ],
     "exampleSentence": "Expanding urban rapid transit networks yields immediate relief for congested arterial roads and lowers carbon intensity.",
     "wordFamily": "transition (n), transitional (adj)"
   },
@@ -1089,8 +1671,17 @@
     "definitionEn": "the way in which you are treated and educated when you are young",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "child-rearing, raising a child",
-    "synonyms": ["child-rearing", "nurture", "parenting", "cultivation"],
-    "collocations": ["wholesome upbringing", "parental upbringing", "influence of upbringing"],
+    "synonyms": [
+      "child-rearing",
+      "nurture",
+      "parenting",
+      "cultivation"
+    ],
+    "collocations": [
+      "wholesome upbringing",
+      "parental upbringing",
+      "influence of upbringing"
+    ],
     "exampleSentence": "A compassionate and supportive upbringing instills the emotional security necessary for future academic success.",
     "wordFamily": "bring up (phr v)"
   },
@@ -1104,8 +1695,16 @@
     "definitionEn": "the process of organizing something primarily for financial profit",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "turning into a business, making commercial",
-    "synonyms": ["merchandising", "marketization", "monetization"],
-    "collocations": ["excessive commercialization", "commercialization of leisure", "resist commercialization"],
+    "synonyms": [
+      "merchandising",
+      "marketization",
+      "monetization"
+    ],
+    "collocations": [
+      "excessive commercialization",
+      "commercialization of leisure",
+      "resist commercialization"
+    ],
     "exampleSentence": "The rampant commercialization of public leisure deprives underprivileged youth of non-monetized recreational spaces.",
     "wordFamily": "commercialize (v), commercial (adj)"
   },
@@ -1119,8 +1718,17 @@
     "definitionEn": "able to experience feelings and sensations; possessing consciousness",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "having feelings, able to feel pain",
-    "synonyms": ["conscious", "feeling", "aware", "perceptive"],
-    "collocations": ["sentient beings", "sentient creatures", "harm sentient life"],
+    "synonyms": [
+      "conscious",
+      "feeling",
+      "aware",
+      "perceptive"
+    ],
+    "collocations": [
+      "sentient beings",
+      "sentient creatures",
+      "harm sentient life"
+    ],
     "exampleSentence": "Bioethicists assert that as sentient beings, animals possess intrinsic moral rights against gratuitous exploitation.",
     "wordFamily": "sentience (n)"
   },
@@ -1134,8 +1742,17 @@
     "definitionEn": "agreement between and support for the members of a group or people worldwide",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "unity, standing together",
-    "synonyms": ["unity", "fellowship", "harmony", "consensus"],
-    "collocations": ["global solidarity", "foster international solidarity", "demonstrate solidarity"],
+    "synonyms": [
+      "unity",
+      "fellowship",
+      "harmony",
+      "consensus"
+    ],
+    "collocations": [
+      "global solidarity",
+      "foster international solidarity",
+      "demonstrate solidarity"
+    ],
     "exampleSentence": "International sporting spectacles offer poignant symbols of universal solidarity in an otherwise fractured geopolitical world.",
     "wordFamily": "solidary (adj)"
   },
@@ -1149,8 +1766,17 @@
     "definitionEn": "in a state of disrepair or ruin as a result of age or neglect",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "run-down, falling apart",
-    "synonyms": ["ramshackle", "derelict", "decrepit", "crumbling"],
-    "collocations": ["dilapidated buildings", "dilapidated state", "dilapidated historic architecture"],
+    "synonyms": [
+      "ramshackle",
+      "derelict",
+      "decrepit",
+      "crumbling"
+    ],
+    "collocations": [
+      "dilapidated buildings",
+      "dilapidated state",
+      "dilapidated historic architecture"
+    ],
     "exampleSentence": "Restoring dilapidated heritage structures preserves the collective cultural memory of historic metropolitan centers.",
     "wordFamily": "dilapidation (n)"
   },
@@ -1164,8 +1790,17 @@
     "definitionEn": "to find a way in which two situations or beliefs that are opposed can both exist or be true",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "balance, bring together",
-    "synonyms": ["harmonize", "synthesize", "accommodate", "integrate"],
-    "collocations": ["reconcile economic growth with", "reconcile competing priorities", "reconcile conflicting views"],
+    "synonyms": [
+      "harmonize",
+      "synthesize",
+      "accommodate",
+      "integrate"
+    ],
+    "collocations": [
+      "reconcile economic growth with",
+      "reconcile competing priorities",
+      "reconcile conflicting views"
+    ],
     "exampleSentence": "Visionary leaders must reconcile relentless economic expansion with ecological integrity and citizen well-being.",
     "wordFamily": "reconciliation (n), reconcilable (adj)"
   },
@@ -1179,8 +1814,17 @@
     "definitionEn": "required by law or rules; compulsory",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "compulsory, required",
-    "synonyms": ["compulsory", "obligatory", "statutory", "binding"],
-    "collocations": ["mandatory recycling", "mandatory legislation", "mandatory requirements"],
+    "synonyms": [
+      "compulsory",
+      "obligatory",
+      "statutory",
+      "binding"
+    ],
+    "collocations": [
+      "mandatory recycling",
+      "mandatory legislation",
+      "mandatory requirements"
+    ],
     "exampleSentence": "Enacting mandatory waste sorting laws imposes enforceable civic accountability on household consumption.",
     "wordFamily": "mandate (n, v)"
   },
@@ -1194,8 +1838,15 @@
     "definitionEn": "the process of making a system or machine operate using electricity",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "switching to electricity",
-    "synonyms": ["electric transition", "decarbonization"],
-    "collocations": ["railway electrification", "widespread electrification", "fleet electrification"],
+    "synonyms": [
+      "electric transition",
+      "decarbonization"
+    ],
+    "collocations": [
+      "railway electrification",
+      "widespread electrification",
+      "fleet electrification"
+    ],
     "exampleSentence": "Comprehensive railway electrification drastically curtails greenhouse emissions across intercity transit corridors.",
     "wordFamily": "electrify (v), electric (adj)"
   },
@@ -1209,8 +1860,16 @@
     "definitionEn": "providing skills and education that prepare you for a job",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "job-related, practical work",
-    "synonyms": ["career-oriented", "occupational", "technical"],
-    "collocations": ["vocational training", "vocational curriculum", "vocational skills"],
+    "synonyms": [
+      "career-oriented",
+      "occupational",
+      "technical"
+    ],
+    "collocations": [
+      "vocational training",
+      "vocational curriculum",
+      "vocational skills"
+    ],
     "exampleSentence": "Integrating vocational apprenticeship alongside academic schooling equips secondary students with immediate livelihood skills.",
     "wordFamily": "vocation (n)"
   },
@@ -1224,8 +1883,16 @@
     "definitionEn": "involving more than two groups or countries",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "many-sided, international",
-    "synonyms": ["multinational", "plurilateral", "global-level"],
-    "collocations": ["multilateral cooperation", "multilateral treaties", "multilateral framework"],
+    "synonyms": [
+      "multinational",
+      "plurilateral",
+      "global-level"
+    ],
+    "collocations": [
+      "multilateral cooperation",
+      "multilateral treaties",
+      "multilateral framework"
+    ],
     "exampleSentence": "Arresting global biodiversity collapse requires binding multilateral treaties supported by equitable climate finance.",
     "wordFamily": "multilateralism (n)"
   },
@@ -1239,8 +1906,17 @@
     "definitionEn": "the ability to judge well and make clear moral distinctions",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "good judgment, telling right from wrong",
-    "synonyms": ["acumen", "perception", "shrewdness", "insight"],
-    "collocations": ["moral discernment", "exercise discernment", "lack of discernment"],
+    "synonyms": [
+      "acumen",
+      "perception",
+      "shrewdness",
+      "insight"
+    ],
+    "collocations": [
+      "moral discernment",
+      "exercise discernment",
+      "lack of discernment"
+    ],
     "exampleSentence": "Nurturing ethical discernment early in life prevents juvenile susceptibility to antisocial conduct.",
     "wordFamily": "discern (v), discerning (adj)"
   },
@@ -1254,8 +1930,17 @@
     "definitionEn": "a practical approach to problems and affairs rather than one based on theory",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "practical thinking, realism",
-    "synonyms": ["practicality", "realism", "utilitarianism", "matter-of-factness"],
-    "collocations": ["economic pragmatism", "educational pragmatism", "guided by pragmatism"],
+    "synonyms": [
+      "practicality",
+      "realism",
+      "utilitarianism",
+      "matter-of-factness"
+    ],
+    "collocations": [
+      "economic pragmatism",
+      "educational pragmatism",
+      "guided by pragmatism"
+    ],
     "exampleSentence": "Excessive educational pragmatism risks reducing venerable universities into mere vocational factories.",
     "wordFamily": "pragmatic (adj), pragmatist (n)"
   },
@@ -1269,8 +1954,16 @@
     "definitionEn": "the process of making things uniform or similar across diverse communities",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "making everything the same",
-    "synonyms": ["standardization", "uniformity", "assimilation"],
-    "collocations": ["cultural homogenization", "global homogenization", "accelerate homogenization"],
+    "synonyms": [
+      "standardization",
+      "uniformity",
+      "assimilation"
+    ],
+    "collocations": [
+      "cultural homogenization",
+      "global homogenization",
+      "accelerate homogenization"
+    ],
     "exampleSentence": "The ubiquitous expansion of multinational franchises accelerates the cultural homogenization of metropolitan high streets.",
     "wordFamily": "homogenize (v), homogeneous (adj)"
   },
@@ -1284,8 +1977,16 @@
     "definitionEn": "the quality of being easy to reach, enter, or obtain for people of all backgrounds",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "ease of reaching, open access",
-    "synonyms": ["availability", "approachability", "openness"],
-    "collocations": ["public accessibility", "universal accessibility", "impair accessibility"],
+    "synonyms": [
+      "availability",
+      "approachability",
+      "openness"
+    ],
+    "collocations": [
+      "public accessibility",
+      "universal accessibility",
+      "impair accessibility"
+    ],
     "exampleSentence": "Abolishing admission charges democratizes cultural accessibility, inviting underprivileged youth into world-class galleries.",
     "wordFamily": "access (n, v), accessible (adj)"
   },
@@ -1299,8 +2000,17 @@
     "definitionEn": "special permission not to do or pay something that others are required to do",
     "cefrBand": "C1 (Band 7.0 - 8.0)",
     "basicEquivalent": "being excused, freedom from rule",
-    "synonyms": ["immunity", "dispensation", "exception", "relief"],
-    "collocations": ["tax exemption", "seek exemption from", "blanket exemption"],
+    "synonyms": [
+      "immunity",
+      "dispensation",
+      "exception",
+      "relief"
+    ],
+    "collocations": [
+      "tax exemption",
+      "seek exemption from",
+      "blanket exemption"
+    ],
     "exampleSentence": "Granting tax exemptions to affluent private-school patrons threatens to starve the state educational budget.",
     "wordFamily": "exempt (v, adj)"
   },
@@ -1314,9 +2024,652 @@
     "definitionEn": "in its original condition; unspoiled and untouched by human activity",
     "cefrBand": "C2 (Band 8.5+)",
     "basicEquivalent": "completely clean, untouched",
-    "synonyms": ["unspoiled", "untouched", "virgin", "immaculate"],
-    "collocations": ["pristine wilderness", "pristine ecosystem", "pristine polar environment"],
+    "synonyms": [
+      "unspoiled",
+      "untouched",
+      "virgin",
+      "immaculate"
+    ],
+    "collocations": [
+      "pristine wilderness",
+      "pristine ecosystem",
+      "pristine polar environment"
+    ],
     "exampleSentence": "Unregulated tourism risks irreversibly contaminating the pristine Antarctic wilderness with plastic refuse and pathogens.",
     "wordFamily": "pristinely (adv)"
+  },
+  {
+    "id": "V089",
+    "topicId": "society",
+    "word": "monopoly",
+    "partOfSpeech": "noun",
+    "ipa": "/məˈnɒp.əl.i/",
+    "meaning": "Sự độc quyền, tình trạng một doanh nghiệp thống lĩnh và kiểm soát toàn bộ thị trường",
+    "definitionEn": "an organization or business that has complete control of something, especially an area of business, so that others have no share",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "total market control, exclusive dominance",
+    "synonyms": [
+      "dominance",
+      "market domination",
+      "exclusivity",
+      "sole ownership"
+    ],
+    "collocations": [
+      "prevent large-scale monopoly",
+      "corporate monopoly",
+      "break up a monopoly",
+      "monopoly power"
+    ],
+    "exampleSentence": "Without stringent government antitrust regulations, dominant multinational brands will eventually establish a monopoly and wipe out smaller rivals.",
+    "wordFamily": "monopolize (v), monopolistic (adj)"
+  },
+  {
+    "id": "V090",
+    "topicId": "work_career",
+    "word": "outsource",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈaʊt.sɔːs/",
+    "meaning": "Thuê ngoài, chuyển giao công việc hoặc quy trình sản xuất cho một đối tác bên ngoài để tiết kiệm chi phí",
+    "definitionEn": "to pay to have part of a company's work done by another company or person",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "contract out, hire external workers",
+    "synonyms": [
+      "subcontract",
+      "farm out",
+      "contract out",
+      "delegate"
+    ],
+    "collocations": [
+      "outsource manufacturing",
+      "outsource customer service",
+      "outsource overseas",
+      "heavily outsourced"
+    ],
+    "exampleSentence": "In an effort to trim overhead costs and maximize profit margins, many corporations choose to outsource their administrative tasks to overseas agencies.",
+    "wordFamily": "outsourcing (n)"
+  },
+  {
+    "id": "V091",
+    "topicId": "work_career",
+    "word": "automated",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˈɔː.tə.meɪ.tɪd/",
+    "meaning": "Được tự động hóa, vận hành hoàn toàn bằng máy móc hoặc máy tính thay vì con người",
+    "definitionEn": "done or operated by machines or computers, without the need for human workers",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "computerized, mechanical, robotized",
+    "synonyms": [
+      "computerized",
+      "mechanized",
+      "robotized",
+      "self-operating"
+    ],
+    "collocations": [
+      "automated processes",
+      "automated system",
+      "automated assembly line",
+      "fully automated"
+    ],
+    "exampleSentence": "Millions of factory positions are rapidly being replaced by automated processes that operate faster and with fewer human errors.",
+    "wordFamily": "automate (v), automation (n)"
+  },
+  {
+    "id": "V092",
+    "topicId": "technology",
+    "word": "autonomous vehicle",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ɔːˈtɒn.ə.məs ˈviː.ɪ.kəl/",
+    "meaning": "Phương tiện tự hành, xe tự lái điều khiển bằng trí tuệ nhân tạo và cảm biến",
+    "definitionEn": "a self-driving car or transport vehicle that uses artificial intelligence and sensors to travel without a human driver",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "driverless car, self-driving car",
+    "synonyms": [
+      "self-driving car",
+      "driverless vehicle",
+      "unmanned vehicle"
+    ],
+    "collocations": [
+      "fleet of autonomous vehicles",
+      "autonomous vehicle technology",
+      "deploy autonomous vehicles"
+    ],
+    "exampleSentence": "The commercial rollout of autonomous vehicles is poised to disrupt traditional taxi and long-haul freight transport across the globe.",
+    "wordFamily": "autonomously (adv), autonomy (n)"
+  },
+  {
+    "id": "V093",
+    "topicId": "technology",
+    "word": "immerse",
+    "partOfSpeech": "verb",
+    "ipa": "/ɪˈmɜːs/",
+    "meaning": "Đắm chìm, hoàn toàn tập trung và bị cuốn hút vào một thế giới hoặc hoạt động nào đó",
+    "definitionEn": "to become completely involved in something or to put someone into a particular environment or activity entirely",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "absorb, lose oneself in",
+    "synonyms": [
+      "engross",
+      "absorb",
+      "plunge",
+      "captivate"
+    ],
+    "collocations": [
+      "immerse oneself in a virtual world",
+      "immerse in a complex storyline",
+      "deeply immersed in"
+    ],
+    "exampleSentence": "Modern video games with hyper-realistic visuals allow teenagers to immerse themselves entirely in complex fantasy storylines for hours on end.",
+    "wordFamily": "immersion (n), immersive (adj)"
+  },
+  {
+    "id": "V094",
+    "topicId": "health",
+    "word": "physically demanding",
+    "partOfSpeech": "collocation",
+    "ipa": "/ˈfɪz.ɪ.kli dɪˈmɑːn.dɪŋ/",
+    "meaning": "Đòi hỏi nhiều sức lực thể chất, tiêu tốn năng lượng vận động nặng",
+    "definitionEn": "requiring a great deal of bodily effort, endurance, and physical exertion",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "strenuous, tiring, exhausting",
+    "synonyms": [
+      "strenuous",
+      "arduous",
+      "exhausting",
+      "laborious"
+    ],
+    "collocations": [
+      "physically demanding sports",
+      "physically demanding labor",
+      "physically demanding routine"
+    ],
+    "exampleSentence": "Many schoolchildren shun physically demanding sports such as football or track and field in favor of passive entertainment on their screens.",
+    "wordFamily": "demand (v, n), demanding (adj)"
+  },
+  {
+    "id": "V095",
+    "topicId": "health",
+    "word": "calorie expenditure",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈkæl.ər.i ɪkˈspen.dɪ.tʃər/",
+    "meaning": "Sự tiêu hao calo, mức độ giải phóng năng lượng của cơ thể qua vận động",
+    "definitionEn": "the amount of energy measured in calories that the body burns during physical movement and metabolic processes",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "burning calories, energy consumption",
+    "synonyms": [
+      "energy burn",
+      "metabolic expenditure",
+      "calorie consumption"
+    ],
+    "collocations": [
+      "maximize calorie expenditure",
+      "daily calorie expenditure",
+      "insufficient calorie expenditure"
+    ],
+    "exampleSentence": "Prolonged gaming without adequate calorie expenditure is recognized as a leading factor behind rising childhood obesity rates.",
+    "wordFamily": "expend (v), expense (n), expenditure (n)"
+  },
+  {
+    "id": "V096",
+    "topicId": "globalization",
+    "word": "influx",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈɪn.flʌks/",
+    "meaning": "Dòng đổ về ồ ạt (dòng tiền, làn sóng du khách, người di cư)",
+    "definitionEn": "the arrival of a large number of people or large amount of things at the same time",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "rush, incoming flood, surge",
+    "synonyms": [
+      "surge",
+      "inundation",
+      "inflow",
+      "inrush"
+    ],
+    "collocations": [
+      "an influx of money",
+      "a massive influx of tourists",
+      "an influx of foreign investment",
+      "stem the influx"
+    ],
+    "exampleSentence": "The sudden influx of international holidaymakers generated substantial foreign currency for the impoverished coastal province.",
+    "wordFamily": "influxes (pl)"
+  },
+  {
+    "id": "V097",
+    "topicId": "globalization",
+    "word": "facilitate",
+    "partOfSpeech": "verb",
+    "ipa": "/fəˈsɪl.ɪ.teɪt/",
+    "meaning": "Tạo điều kiện thuận lợi, làm cho một quá trình hay sự việc diễn ra dễ dàng hơn",
+    "definitionEn": "to make an action, process, or development easier or more possible",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "make easier, assist, enable",
+    "synonyms": [
+      "enable",
+      "foster",
+      "expedite",
+      "promote"
+    ],
+    "collocations": [
+      "facilitate cultural exchange",
+      "facilitate smooth trade",
+      "facilitate economic growth",
+      "facilitate learning"
+    ],
+    "exampleSentence": "Investing in upgraded international airports and multilingual signage helps facilitate memorable travel experiences for overseas visitors.",
+    "wordFamily": "facilitation (n), facilitator (n), facility (n)"
+  },
+  {
+    "id": "V098",
+    "topicId": "environment",
+    "word": "disrupt",
+    "partOfSpeech": "verb",
+    "ipa": "/dɪsˈrʌpt/",
+    "meaning": "Làm gián đoạn, phá vỡ trật tự hoặc gây xáo trộn nghiêm trọng đối với một hệ sinh thái hay quy trình",
+    "definitionEn": "to prevent something, especially a system, process, or event, from continuing as usual or as expected",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "disturb, upset, break up",
+    "synonyms": [
+      "interfere with",
+      "disturb",
+      "upend",
+      "destabilize"
+    ],
+    "collocations": [
+      "disrupt local ecosystems",
+      "disrupt wildlife habitats",
+      "disrupt daily routines",
+      "disrupt market balance"
+    ],
+    "exampleSentence": "Unregulated overtourism can severely disrupt local wildlife breeding grounds and vulnerable marine habitats.",
+    "wordFamily": "disruption (n), disruptive (adj), disruptively (adv)"
+  },
+  {
+    "id": "V099",
+    "topicId": "society",
+    "word": "dominance",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈdɒm.ɪ.nəns/",
+    "meaning": "Sự áp đảo, vị thế thống trị hoặc chiếm ưu thế vượt trội về số lượng hay quyền lực",
+    "definitionEn": "the situation in which one person, group, or thing has more power, influence, or visibility than others",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "supremacy, upper hand, control",
+    "synonyms": [
+      "ascendancy",
+      "supremacy",
+      "preponderance",
+      "predominance"
+    ],
+    "collocations": [
+      "dominance of men over women's sports",
+      "market dominance",
+      "cultural dominance",
+      "assert dominance"
+    ],
+    "exampleSentence": "The glaring dominance of male athletic competitions on television programming sidelines the extraordinary accomplishments of female athletes.",
+    "wordFamily": "dominate (v), dominant (adj), domineering (adj)"
+  },
+  {
+    "id": "V100",
+    "topicId": "society",
+    "word": "endorsement",
+    "partOfSpeech": "noun",
+    "ipa": "/ɪnˈdɔːs.mənt/",
+    "meaning": "Hợp đồng bảo chứng thương hiệu, sự quảng bá sản phẩm thông qua người nổi tiếng",
+    "definitionEn": "the act of a well-known person appearing in advertisements which praise a product or service",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "celebrity advertising, sponsorship deal",
+    "synonyms": [
+      "sponsorship",
+      "commercial backing",
+      "testimonial",
+      "advocacy"
+    ],
+    "collocations": [
+      "commercial endorsements",
+      "lucrative endorsement deals",
+      "celebrity endorsement",
+      "make money off endorsements"
+    ],
+    "exampleSentence": "Premier football stars earn millions of dollars annually from lucrative commercial endorsement deals with sportswear manufacturers.",
+    "wordFamily": "endorse (v), endorser (n)"
+  },
+  {
+    "id": "V101",
+    "topicId": "work_career",
+    "word": "entail",
+    "partOfSpeech": "verb",
+    "ipa": "/ɪnˈteɪl/",
+    "meaning": "Đòi hỏi, kéo theo như một hệ quả tất yếu (trách nhiệm, khối lượng công việc, rủi ro)",
+    "definitionEn": "to make something necessary, or to involve something as a necessary part or consequence",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "involve, require, necessitate",
+    "synonyms": [
+      "necessitate",
+      "involve",
+      "demand",
+      "require"
+    ],
+    "collocations": [
+      "entail heavy workloads",
+      "entail significant financial risks",
+      "entail immense sacrifices"
+    ],
+    "exampleSentence": "Senior roles in corporate finance and commercial banking invariably entail heavy workloads that cannot be handled during standard office hours.",
+    "wordFamily": "entailment (n)"
+  },
+  {
+    "id": "V102",
+    "topicId": "health",
+    "word": "emotional distress",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ɪˈməʊ.ʃən.əl dɪˈstres/",
+    "meaning": "Sự đau đớn, hoảng loạn hoặc khủng hoảng tinh thần kéo dài do thiếu thốn tình cảm hoặc áp lực",
+    "definitionEn": "a state of mental suffering, deep anxiety, or despair triggered by trauma, neglect, or chronic stressors",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "mental suffering, deep anxiety, emotional pain",
+    "synonyms": [
+      "psychological anguish",
+      "mental torment",
+      "acute anxiety",
+      "emotional trauma"
+    ],
+    "collocations": [
+      "suffer emotional distress",
+      "alleviate emotional distress",
+      "cause acute emotional distress"
+    ],
+    "exampleSentence": "Young children deprived of regular parental affection are prone to acute emotional distress, which can severely distort their emotional maturation.",
+    "wordFamily": "distress (v, n), distressing (adj)"
+  },
+  {
+    "id": "V103",
+    "topicId": "society",
+    "word": "antisocial",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˌæn.tiˈsəʊ.ʃəl/",
+    "meaning": "Chống đối xã hội, có hành vi gây rối phá vỡ quy chuẩn cộng đồng hoặc thu mình né tránh quan hệ xã hội",
+    "definitionEn": "harmful or annoying to other people, or not wanting to spend time with people and avoiding social contact",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "rebellious, unsociable, disruptive",
+    "synonyms": [
+      "disruptive",
+      "hostile",
+      "withdrawn",
+      "misanthropic"
+    ],
+    "collocations": [
+      "antisocial behaviors",
+      "antisocial tendencies",
+      "display antisocial conduct"
+    ],
+    "exampleSentence": "Without compassionate mentorship from their working parents, adolescents are noticeably more susceptible to exhibiting disruptive and antisocial behaviors.",
+    "wordFamily": "antisocially (adv), antisociality (n)"
+  },
+  {
+    "id": "V104",
+    "topicId": "society",
+    "word": "paradigm shift",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈpær.ə.daɪm ʃɪft/",
+    "meaning": "Sự chuyển dịch căn bản mang tính bước ngoặt trong tư duy, nhận thức hoặc mô hình phát triển xã hội",
+    "definitionEn": "a fundamental change in approach, basic assumptions, or the usual way of thinking about something",
+    "cefrBand": "C2 (Band 8.5+)",
+    "basicEquivalent": "fundamental revolution in thinking, radical change",
+    "synonyms": [
+      "radical overhaul",
+      "fundamental transformation",
+      "conceptual revolution",
+      "sea change"
+    ],
+    "collocations": [
+      "undergo a paradigm shift",
+      "prompt a paradigm shift",
+      "a paradigm shift in public policy"
+    ],
+    "exampleSentence": "To build an equitable society, humanity must undergo a paradigm shift away from materialistic individualism toward collective altruism.",
+    "wordFamily": "paradigmatic (adj)"
+  },
+  {
+    "id": "V105",
+    "topicId": "society",
+    "word": "trajectory",
+    "partOfSpeech": "noun",
+    "ipa": "/trəˈdʒek.tər.i/",
+    "meaning": "Quỹ đạo, chiều hướng diễn tiến hoặc tiến trình phát triển theo thời gian",
+    "definitionEn": "the curved path of an object through space, or the track, direction, or development followed by a person or process",
+    "cefrBand": "C2 (Band 8.5+)",
+    "basicEquivalent": "path of growth, career path, course",
+    "synonyms": [
+      "course",
+      "progression",
+      "pathway",
+      "trendline"
+    ],
+    "collocations": [
+      "trajectory of personality development",
+      "career trajectory",
+      "economic trajectory",
+      "alter the trajectory"
+    ],
+    "exampleSentence": "Educating children about empathy and generosity at an early age can beneficially shape the entire trajectory of their personality development.",
+    "wordFamily": "trajectories (pl)"
+  },
+  {
+    "id": "V106",
+    "topicId": "society",
+    "word": "livelihood",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈlaɪv.li.hʊd/",
+    "meaning": "Kế sinh nhai, nguồn thu nhập và phương tiện duy trì đời sống con người",
+    "definitionEn": "the money and resources people need in order to pay for food, a place to live, clothing, and daily necessities",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "source of income, means of living, daily sustenance",
+    "synonyms": [
+      "sustenance",
+      "means of support",
+      "subsistence",
+      "living"
+    ],
+    "collocations": [
+      "secure a livelihood",
+      "threaten the livelihoods of local farmers",
+      "livelihoods of future generations",
+      "earn a livelihood"
+    ],
+    "exampleSentence": "Short-sighted industrial exploitation endangers ecological equilibrium and imperils the essential livelihoods of future generations.",
+    "wordFamily": "live (v), lively (adj)"
+  },
+  {
+    "id": "V107",
+    "topicId": "society",
+    "word": "bombard",
+    "partOfSpeech": "verb",
+    "ipa": "/bɒmˈbɑːd/",
+    "meaning": "Tấn công dồn dập, bủa vây ai đó bằng lượng câu hỏi, thông tin hoặc quảng cáo khổng lồ",
+    "definitionEn": "to direct a continuous and overwhelming flow of questions, criticisms, information, or advertisements at someone",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "overwhelm, flood, pelt",
+    "synonyms": [
+      "inundate",
+      "overwhelm",
+      "swamp",
+      "deluge"
+    ],
+    "collocations": [
+      "be bombarded with advertisements",
+      "bombarded with sensational news",
+      "bombard citizens with notifications"
+    ],
+    "exampleSentence": "Residents of metropolitan cities are constantly bombarded with exaggerated commercial messages and sensationalist social media feeds.",
+    "wordFamily": "bombardment (n)"
+  },
+  {
+    "id": "V108",
+    "topicId": "society",
+    "word": "anarchy",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈæn.ə.ki/",
+    "meaning": "Tình trạng hỗn loạn, mất trật tự xã hội nghiêm trọng do thiếu vắng luật pháp hoặc sự quản lý hiệu quả",
+    "definitionEn": "a situation of disorder, lawlessness, and confusion, especially because there is no effective government or control",
+    "cefrBand": "C2 (Band 8.5+)",
+    "basicEquivalent": "chaos, lawlessness, total disorder",
+    "synonyms": [
+      "lawlessness",
+      "turmoil",
+      "chaos",
+      "pandemonium"
+    ],
+    "collocations": [
+      "descend into social anarchy",
+      "threat of anarchy",
+      "political anarchy"
+    ],
+    "exampleSentence": "Unregulated sensationalism in digital media can exacerbate public panic and nudge communities toward social anarchy.",
+    "wordFamily": "anarchist (n), anarchic (adj)"
+  },
+  {
+    "id": "V109",
+    "topicId": "education",
+    "word": "tertiary education",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈtɜː.ʃər.i ˌedʒ.ʊˈkeɪ.ʃən/",
+    "meaning": "Bậc giáo dục đại học và sau đại học, hệ đào tạo chuyên sâu sau bậc trung học phổ thông",
+    "definitionEn": "education at college or university level, following secondary school graduation",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "higher education, university schooling",
+    "synonyms": [
+      "higher education",
+      "post-secondary education",
+      "university study"
+    ],
+    "collocations": [
+      "pursue tertiary education",
+      "tertiary education sector",
+      "access to tertiary education",
+      "subsidize tertiary education"
+    ],
+    "exampleSentence": "Young school-leavers are strongly motivated to pursue tertiary education to secure commanding prospects in the competitive employment market.",
+    "wordFamily": "tertiary (adj)"
+  },
+  {
+    "id": "V110",
+    "topicId": "work_career",
+    "word": "career prospects",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/kəˈrɪər ˈprɒs.pekts/",
+    "meaning": "Triển vọng nghề nghiệp, cơ hội thăng tiến và phát triển sự nghiệp trong tương lai",
+    "definitionEn": "the probability or opportunities of future success, advancement, and promotion in one's profession",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "job opportunities, future job potential, career outlook",
+    "synonyms": [
+      "employment outlook",
+      "professional opportunities",
+      "advancement chances"
+    ],
+    "collocations": [
+      "enhance career prospects",
+      "dim career prospects",
+      "bright career prospects",
+      "for the sake of better career prospects"
+    ],
+    "exampleSentence": "Graduating with honors from an accredited university notably boosts a student's confidence and enhances their long-term career prospects.",
+    "wordFamily": "prospective (adj), prospect (n)"
+  },
+  {
+    "id": "V111",
+    "topicId": "society",
+    "word": "self-absorbed",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˌself.əbˈzɔːbd/",
+    "meaning": "Ích kỷ, chỉ biết chăm chăm vào bản thân và phớt lờ cảm xúc của người khác",
+    "definitionEn": "only interested in oneself and one's own activities, paying little or no attention to other people",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "selfish, egocentric, narcissistic",
+    "synonyms": [
+      "egocentric",
+      "narcissistic",
+      "self-centred",
+      "inward-looking"
+    ],
+    "collocations": [
+      "grow increasingly self-absorbed",
+      "conceited and self-absorbed",
+      "self-absorbed behavior"
+    ],
+    "exampleSentence": "Individuals blinded by aggressive career rivalry often become conceited and self-absorbed, straining relationships with family and colleagues.",
+    "wordFamily": "self-absorption (n)"
+  },
+  {
+    "id": "V112",
+    "topicId": "society",
+    "word": "conceited",
+    "partOfSpeech": "adjective",
+    "ipa": "/kənˈsiː.tɪd/",
+    "meaning": "Tự phụ, kiêu ngạo quá mức về năng lực, vị thế hoặc phẩm chất của bản thân",
+    "definitionEn": "too proud of yourself and your actions and abilities",
+    "cefrBand": "C2 (Band 8.5+)",
+    "basicEquivalent": "arrogant, vain, boastful",
+    "synonyms": [
+      "arrogant",
+      "pompous",
+      "egotistical",
+      "smug",
+      "vainglorious"
+    ],
+    "collocations": [
+      "arrogant and conceited",
+      "conceited attitude",
+      "dismissed as conceited"
+    ],
+    "exampleSentence": "An excessive thirst for winning can turn capable professionals into conceited individuals who refuse to compromise during workplace disputes.",
+    "wordFamily": "conceit (n), conceitedly (adv)"
+  },
+  {
+    "id": "V113",
+    "topicId": "education",
+    "word": "persevere",
+    "partOfSpeech": "verb",
+    "ipa": "/ˌpɜː.sɪˈvɪər/",
+    "meaning": "Kiên trì, bền bỉ nỗ lực vượt qua khó khăn nghịch cảnh để theo đuổi mục tiêu đến cùng",
+    "definitionEn": "to continue making an effort to do or achieve something, even when this is difficult or takes a long time",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "keep going, persist, never give up",
+    "synonyms": [
+      "persist",
+      "tenacious",
+      "endure",
+      "stand firm"
+    ],
+    "collocations": [
+      "persevere in the face of setbacks",
+      "persevere through adversity",
+      "persevere with one's studies"
+    ],
+    "exampleSentence": "Competitive students tend to persevere in the face of academic setbacks rather than succumb to defeatism.",
+    "wordFamily": "perseverance (n), persevering (adj)"
+  },
+  {
+    "id": "V114",
+    "topicId": "society",
+    "word": "sabotage",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈsæb.ə.tɑːʒ/",
+    "meaning": "Cố tình phá hoại, ngấm ngầm làm tổn hại hoặc hủy hoại các mối quan hệ hay kế hoạch của người khác",
+    "definitionEn": "to intentionally damage, destroy, or obstruct something, especially for political or personal advantage",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "undermine, ruin, intentionally damage",
+    "synonyms": [
+      "undermine",
+      "wreck",
+      "vitiate",
+      "subvert"
+    ],
+    "collocations": [
+      "sabotage personal relationships",
+      "sabotage team morale",
+      "sabotage one's own chances",
+      "deliberately sabotage"
+    ],
+    "exampleSentence": "A toxic level of workplace jealousy can sabotage healthy collaboration and cause talented staff members to resign.",
+    "wordFamily": "saboteur (n)"
   }
 ]
