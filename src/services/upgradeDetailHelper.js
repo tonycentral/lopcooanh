@@ -317,6 +317,90 @@ export const ACADEMIC_LEXICON = {
     pos: "adjective",
     meaning: "Thuộc về hệ sinh thái và môi trường tự nhiên",
     replaces: "environmental (Band 5)"
+  },
+  "articulate": {
+    word: "articulate",
+    ipa: "/ɑːˈtɪk.jə.leɪt/",
+    pos: "verb",
+    meaning: "Diễn đạt rõ ràng, gãy gọn các lập luận phức tạp",
+    replaces: "express / say clearly (Band 5-6)"
+  },
+  "persuasively": {
+    word: "persuasively",
+    ipa: "/pəˈsweɪ.sɪv.li/",
+    pos: "adverb",
+    meaning: "Một cách đầy sức thuyết phục và chặt chẽ",
+    replaces: "convincingly / well (Band 5)"
+  },
+  "critical thinking": {
+    word: "critical thinking",
+    ipa: "/ˌkrɪt.ɪ.kəl ˈθɪŋ.kɪŋ/",
+    pos: "noun phrase",
+    meaning: "Tư duy phản biện, phân tích lập luận đa chiều",
+    replaces: "good thinking (Band 5)"
+  },
+  "pedagogical": {
+    word: "pedagogical",
+    ipa: "/ˌped.əˈɡɒdʒ.ɪ.kəl/",
+    pos: "adjective",
+    meaning: "Thuộc về phương pháp sư phạm và nghệ thuật giảng dạy",
+    replaces: "teaching (Band 5)"
+  },
+  "holistic": {
+    word: "holistic",
+    ipa: "/həʊˈlɪs.tɪk/",
+    pos: "adjective",
+    meaning: "Toàn diện, nhìn nhận tổng thể đa diện",
+    replaces: "full / comprehensive (Band 5-6)"
+  },
+  "obsolete": {
+    word: "obsolete",
+    ipa: "/ˈɒb.sə.liːt/",
+    pos: "adjective",
+    meaning: "Lỗi thời, không còn phù hợp trong bối cảnh mới",
+    replaces: "old-fashioned / out of date (Band 5-6)"
+  },
+  "curriculum": {
+    word: "curriculum",
+    ipa: "/kəˈrɪk.jə.ləm/",
+    pos: "noun",
+    meaning: "Chương trình khung đào tạo giảng dạy",
+    replaces: "study plan / subjects (Band 5)"
+  },
+  "autonomy": {
+    word: "autonomy",
+    ipa: "/ɔːˈtɒn.ə.mi/",
+    pos: "noun",
+    meaning: "Tính tự chủ, quyền tự quyết độc lập",
+    replaces: "independence (Band 5)"
+  },
+  "collaborative": {
+    word: "collaborative",
+    ipa: "/kəˈlæb.ər.ə.tɪv/",
+    pos: "adjective",
+    meaning: "Mang tính cộng tác và phối hợp đa bên",
+    replaces: "teamwork / working together (Band 5)"
+  },
+  "empowering": {
+    word: "empowering",
+    ipa: "/ɪmˈpaʊ.ər.ɪŋ/",
+    pos: "verb (gerund)",
+    meaning: "Trao quyền, tiếp thêm năng lực chủ động",
+    replaces: "helping / allowing (Band 5)"
+  },
+  "multifaceted": {
+    word: "multifaceted",
+    ipa: "/ˌmʌl.tiˈfæs.ɪ.tɪd/",
+    pos: "adjective",
+    meaning: "Đa chiều, có nhiều khía cạnh phức tạp",
+    replaces: "complex / many-sided (Band 5-6)"
+  },
+  "resilience": {
+    word: "resilience",
+    ipa: "/rɪˈzɪl.jəns/",
+    pos: "noun",
+    meaning: "Khả năng chống chịu, phục hồi dẻo dai trước áp lực",
+    replaces: "strength / bouncing back (Band 5)"
   }
 };
 
@@ -387,17 +471,35 @@ export function analyzeUpgradeDetails({ upgradedSentence = "", vocab = {}, targe
       formula: "Gerund Phrase (V-ing / The implementation of...) làm Chủ ngữ",
       detail: "Biến đổi hành động thành một khái niệm trừu tượng làm chủ ngữ, giúp câu văn cô đọng và trang trọng đạt chuẩn Band 8.0+."
     });
-  } else if (/not only does/i.test(sentenceLower)) {
+  } else if (/not only does|not only do/i.test(sentenceLower)) {
     grammarPoints.push({
       title: "Cấu trúc Đảo ngữ nhấn mạnh (Negative Inversion)",
-      formula: "Not only does + S + V-bare..., but it also...",
+      formula: "Not only do/does + S + V-bare..., but it also...",
       detail: "Thể hiện khả năng kiểm soát ngữ pháp phức tạp (Grammatical Range Band 8.5) để làm nổi bật tác động kép của vấn đề."
     });
   } else if (/thereby \w+ing/i.test(sentenceLower)) {
     grammarPoints.push({
       title: "Mệnh đề phân từ rút gọn (Participle Clause)",
       formula: ", thereby + V-ing (hệ quả tất yếu)",
-      detail: "Kết nối hệ quả logic trực tiếp mà không cần dùng thêm mệnh đề phụ rườm rà, tạo nhịp điệu trôi chảy cho câu văn."
+      detail: "Kết nối hệ quả logic trực tiếp mà không cần dùng thêm mệnh đề phụ rườm rà, tạo nhịp điệu trôi chảy cho câu văn chuẩn Band 8.0+."
+    });
+  } else if (/serves to \w+/i.test(sentenceLower)) {
+    grammarPoints.push({
+      title: "Cấu trúc mục đích học thuật (Academic Infinitive Construction)",
+      formula: "Subject + serves to + V-bare",
+      detail: "Khẳng định công năng và vai trò cốt lõi của chủ ngữ trong văn cảnh trang trọng (Band 8.0-8.5)."
+    });
+  } else if (/^by (actively|ensuring|\w+ing)/i.test(sentenceLower)) {
+    grammarPoints.push({
+      title: "Cụm giới từ phân từ đầu câu (Prepositional Gerund Framing)",
+      formula: "By + V-ing..., Main Clause",
+      detail: "Nhấn mạnh giải pháp hoặc phương thức hành động ngay từ đầu câu, tạo sự mạch lạc cao trong bài thi IELTS."
+    });
+  } else if (/it is incumbent upon/i.test(sentenceLower)) {
+    grammarPoints.push({
+      title: "Cấu trúc nghĩa vụ khách quan (Academic Duty Structure)",
+      formula: "It is incumbent upon + O + to V",
+      detail: "Sử dụng từ vựng C2 chỉ bổn phận và trách nhiệm bắt buộc, nâng cao độ trang trọng tuyệt đối."
     });
   } else {
     grammarPoints.push({

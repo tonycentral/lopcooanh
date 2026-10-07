@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Scratch scripts and raw dump files
+*.py
+*.pdf
+*.txt
+extracted_zim_full.json
+zim_extracted_raw.json

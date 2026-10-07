@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useMemo } from 'react';
 import { 
   BookOpen, 
   Check, 
   ChevronRight, 
   ChevronLeft, 
   PenTool, 
-  CheckCircle2
+  CheckCircle2,
+  Layers
 } from 'lucide-react';
 import { getKnownWords, toggleKnownWord } from '../services/userService';
 
@@ -14,7 +14,8 @@ export default function VocabularyList({
   selectedVocab, 
   onSelectVocab, 
   studentEmail,
-  onStartPractice 
+  onStartPractice,
+  onOpenFlashcard
 }) {
   const [knownWordIds, setKnownWordIds] = useState(() => getKnownWords(studentEmail));
   const [pageIndex, setPageIndex] = useState(0);
@@ -110,8 +111,20 @@ export default function VocabularyList({
           </div>
         </div>
 
-        {/* Nút chọn 5 từ vựng tiếp theo */}
+        {/* Actions: Flashcard shortcut + Nút chọn 5 từ vựng tiếp theo */}
         <div className="flex items-center gap-1.5">
+          {onOpenFlashcard && (
+            <button
+              type="button"
+              onClick={onOpenFlashcard}
+              className="flex items-center gap-1 px-2 py-1 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 text-xs font-bold transition cursor-pointer"
+              title="Học bộ từ này theo dạng Flashcard Duolingo"
+            >
+              <Layers className="w-3 h-3" />
+              <span className="hidden sm:inline">Flashcard</span>
+            </button>
+          )}
+
           {totalPages > 1 && (
             <button
               type="button"

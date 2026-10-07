@@ -12,6 +12,7 @@ import CohesiveGuideModal from './components/CohesiveGuideModal';
 import Task1Visualizer from './components/Task1Visualizer';
 import Task1ChartModal from './components/Task1ChartModal';
 import AdminDashboard from './components/AdminDashboard';
+import FlashcardPage from './components/flashcards/FlashcardPage';
 
 
 import { 
@@ -246,6 +247,20 @@ export default function App() {
       {/* If view is 'admin', render AdminDashboard (Truy cập qua link ẩn) */}
       {currentView === 'admin' ? (
         <AdminDashboard onExitAdmin={handleExitAdmin} />
+      ) : currentView === 'flashcard' ? (
+        <FlashcardPage
+          currentTopic={selectedTopic}
+          task1Topics={IELTS_TASK1_TOPICS}
+          task2Topics={IELTS_TASK2_TOPICS}
+          onClose={() => setCurrentView('practice')}
+          onGoWritingPractice={(topic) => {
+            if (topic) {
+              setSelectedTopic(topic);
+              setSelectedVocab(topic.vocabularies?.[0] || null);
+            }
+            setCurrentView('practice');
+          }}
+        />
       ) : currentView === 'welcome' ? (
         <WelcomePage
           studentEmail={studentEmail}
@@ -257,6 +272,7 @@ export default function App() {
             recordUserVisit();
             setCurrentView('practice');
           }}
+          onStartFlashcard={() => setCurrentView('flashcard')}
           onOpenContactModal={() => setIsContactModalOpen(true)}
         />
       ) : (
@@ -272,6 +288,8 @@ export default function App() {
             onOpenContact={() => setIsContactModalOpen(true)}
             onChangeEmail={() => setIsEmailModalOpen(true)}
             onGoWelcome={() => setCurrentView('welcome')}
+            onOpenFlashcard={() => setCurrentView('flashcard')}
+            onGoPractice={() => setCurrentView('practice')}
             studentEmail={studentEmail}
             activeTask={activeTask}
             onToggleTask={handleToggleTask}
@@ -315,6 +333,7 @@ export default function App() {
                       onSelectVocab={setSelectedVocab}
                       studentEmail={studentEmail}
                       onStartPractice={(vocab) => setSelectedVocab(vocab)}
+                      onOpenFlashcard={() => setCurrentView('flashcard')}
                     />
                   </div>
 
@@ -356,6 +375,7 @@ export default function App() {
                         onSelectVocab={setSelectedVocab}
                         studentEmail={studentEmail}
                         onStartPractice={(vocab) => setSelectedVocab(vocab)}
+                        onOpenFlashcard={() => setCurrentView('flashcard')}
                       />
                     </div>
                   </div>
@@ -388,6 +408,7 @@ export default function App() {
                     onSelectVocab={setSelectedVocab}
                     studentEmail={studentEmail}
                     onStartPractice={(vocab) => setSelectedVocab(vocab)}
+                    onOpenFlashcard={() => setCurrentView('flashcard')}
                   />
                 </div>
 

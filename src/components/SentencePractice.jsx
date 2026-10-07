@@ -20,6 +20,7 @@ import {
   evaluatePart2Translation, 
   evaluatePart3Translation 
 } from '../services/evaluator';
+import { evaluateWithGemini } from '../services/geminiService';
 import { saveHistoryEntry } from '../services/storage';
 
 /**
@@ -162,6 +163,7 @@ export default function SentencePractice({
   topic, 
   targetBand = "7.0", 
   selectedVocab, 
+  apiKey,
   studentEmail,
   activeTask,
   onOpenChartModal,
@@ -226,12 +228,42 @@ export default function SentencePractice({
   };
 
   // ---------------- HANDLER PHẦN 2: DỊCH 1 CÂU ----------------
-  const handleGradePart2 = () => {
+  const handleGradePart2 = async () => {
     if (!selectedVocab || !part2Input.trim()) return;
     setIsEvaluatingPart2(true);
 
     try {
-      const res = evaluatePart2Translation(part2Input, selectedVocab, targetBand);
+      let res = evaluatePart2Translation(part2Input, selectedVocab, targetBand);
+
+      // Nếu người dùng cấu hình API Key trong Cài đặt, có thể tận dụng chấm điểm từ AI Examiner
+      if (apiKey) {
+        try {
+          const aiRes = await evaluateWithGemini("translation_single", {
+            targetBand,
+            targetWord: selectedVocab.word,
+            synonyms: selectedVocab.synonyms,
+            topicName: topic?.name,
+            vietnamesePrompt: sentencePracticeData.vietnamesePrompt,
+            modelSentence: sentencePracticeData.modelTranslation,
+            studentSentence: part2Input
+          }, apiKey);
+
+          if (aiRes && aiRes.scores) {
+            res = {
+              ...res,
+              scores: aiRes.scores,
+              isTargetMet: (aiRes.scores.overallBand || 0) >= parseFloat(targetBand),
+              upgradedSentence: aiRes.upgradedSentence || res.upgradedSentence,
+              strengths: aiRes.strengths?.length ? aiRes.strengths : res.strengths,
+              improvements: aiRes.improvements?.length ? aiRes.improvements : res.improvements,
+              isAiGraded: true
+            };
+          }
+        } catch (aiErr) {
+          console.warn("Lỗi gọi Gemini AI, tự động chuyển về bộ chấm NLP ngoại tuyến:", aiErr);
+        }
+      }
+
       setPart2Result(res);
 
       if (res.isTargetMet) {

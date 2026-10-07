@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
 import { 
   ArrowRight, 
   Check, 
   PhoneCall, 
-  Mail 
+  Mail,
+  Layers 
 } from 'lucide-react';
 import { BAND_OPTIONS } from '../data/bandDescriptors';
 
 export default function WelcomePage({ 
   onStartPractice, 
+  onStartFlashcard,
   onOpenContactModal,
   onChangeEmail,
   studentEmail,
@@ -160,15 +161,31 @@ export default function WelcomePage({
             </div>
           </div>
 
-          {/* Nút Bắt Đầu Luyện Tập */}
-          <button
-            type="button"
-            onClick={onStartPractice}
-            className="w-full py-3.5 px-4 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm transition shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
-          >
-            <span>Bắt đầu luyện tập (Band {targetBand} • {selectedTask === "task1" ? "Task 1" : "Task 2"})</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
+          {/* Nút Bắt Đầu Luyện Tập & Học Nhanh Flashcard */}
+          <div className="space-y-2.5">
+            <button
+              type="button"
+              onClick={onStartPractice}
+              className="w-full py-3.5 px-4 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm transition shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
+            >
+              <span>Luyện viết câu (Band {targetBand} • {selectedTask === "task1" ? "Task 1" : "Task 2"})</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+
+            {onStartFlashcard && (
+              <button
+                type="button"
+                onClick={onStartFlashcard}
+                className="w-full py-3 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-bold text-xs sm:text-sm transition shadow-lg shadow-emerald-900/30 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
+              >
+                <Layers className="w-4 h-4" />
+                <span>Học nhanh Flashcard từ vựng (Kiểu Duolingo)</span>
+                <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-white/20 text-white font-black">
+                  Mới
+                </span>
+              </button>
+            )}
+          </div>
 
         </div>
 

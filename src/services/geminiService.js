@@ -5,7 +5,38 @@ export async function evaluateWithGemini(type, data, apiKey) {
 
   try {
     let prompt = "";
-    if (type === "vocabulary") {
+    if (type === "translation_single") {
+      prompt = `
+You are a senior British Council IELTS Writing Task 2 Examiner.
+Evaluate this student's English translation of the following Vietnamese sentence.
+
+Context:
+- Target Band: ${data.targetBand}
+- Vietnamese Sentence to Translate: "${data.vietnamesePrompt}"
+- Target Word: "${data.targetWord}"
+- Synonyms: ${data.synonyms?.join(", ")}
+- Topic: ${data.topicName}
+- Model Translation: "${data.modelSentence}"
+- Student's English Translation: "${data.studentSentence}"
+
+CRITICAL INSTRUCTIONS:
+1. The student is practicing translating the specific Vietnamese sentence above into academic English.
+2. Any "upgradedSentence" MUST STRICTLY preserve the semantic meaning, subject, and context of the Vietnamese sentence ("${data.vietnamesePrompt}").
+3. DO NOT switch to another topic or produce an unrelated sentence. Elevate the grammar and lexical precision to meet IELTS Band ${data.targetBand}+ standard while staying 100% faithful to the Vietnamese sentence.
+
+Respond ONLY with valid JSON with this exact schema (no markdown formatting, no code blocks):
+{
+  "scores": {
+    "overallBand": 7.5,
+    "lexicalResource": 7.5,
+    "grammarRange": 7.5
+  },
+  "upgradedSentence": "An academically elevated English translation of the exact Vietnamese sentence above at Band ${data.targetBand}+",
+  "strengths": ["string in Vietnamese praising accurate translation points"],
+  "improvements": ["string in Vietnamese offering constructive grammar or vocabulary tips"]
+}
+`;
+    } else if (type === "vocabulary") {
       prompt = `
 You are a senior British Council IELTS Writing Task 2 Examiner.
 Evaluate this student's sentence written to practice the target vocabulary item in an academic essay context.

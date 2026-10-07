@@ -1,6 +1,6 @@
 // Evaluator for IELTS Writing Sentences
 // Checks Grammar, Lexical Resource, and Coherence & Cohesion
-import { analyzeUpgradeDetails } from './upgradeDetailHelper';
+import { analyzeUpgradeDetails } from './upgradeDetailHelper.js';
 
 const INFORMAL_PATTERNS = [
   { regex: /\b(don't|doesn't|didn't|won't|can't|couldn't|shouldn't|isn't|aren't|wasn't|weren't)\b/gi, message: "Tránh dùng dạng viết tắt (contractions) trong IELTS Academic Writing. Nên viết rõ (do not, cannot, etc.)." },
@@ -373,7 +373,7 @@ export function evaluatePart2Translation(userSentence, vocab, targetBand = "7.0"
   // Retrieve upgraded sentence tailored to target band
   const practiceData = vocab.sentencePractice || {};
   const bandKey = parseFloat(targetBand) >= 8.5 ? "8.5" : parseFloat(targetBand) >= 8.0 ? "8.0" : parseFloat(targetBand) >= 7.5 ? "7.5" : parseFloat(targetBand) >= 7.0 ? "7.0" : "6.5";
-  const upgradedSentence = practiceData.bandUpgrades?.[bandKey] || practiceData.bandUpgrades?.["7.5"] || practiceData.modelTranslation || `It is imperative that authorities take decisive measures to ${vocab.word} adverse developments.`;
+  const upgradedSentence = practiceData.bandUpgrades?.[bandKey] || practiceData.bandUpgrades?.["7.5"] || practiceData.modelTranslation || vocab.modelSentence || "";
 
   // Generate deep breakdown of vocabulary (IPA + Vietnamese meaning), grammar & style
   const detailedAnalysis = analyzeUpgradeDetails({
@@ -484,7 +484,7 @@ export function evaluatePart3Translation(userTranslation, vocab, targetBand = "7
   // Retrieve upgraded 2 sentences tailored to target band
   const practiceData = vocab.twoSentencePractice || {};
   const bandKey = parseFloat(targetBand) >= 8.5 ? "8.5" : parseFloat(targetBand) >= 8.0 ? "8.0" : parseFloat(targetBand) >= 7.5 ? "7.5" : parseFloat(targetBand) >= 7.0 ? "7.0" : "6.5";
-  const upgradedPair = practiceData.bandUpgrades?.[bandKey] || practiceData.bandUpgrades?.["7.5"] || practiceData.modelTranslation || `The primary cause remains unaddressed. Consequently, authorities must act promptly to ${vocab.word} adverse outcomes.`;
+  const upgradedPair = practiceData.bandUpgrades?.[bandKey] || practiceData.bandUpgrades?.["7.5"] || practiceData.modelTranslation || "";
 
   // Generate deep breakdown of vocabulary (IPA + Vietnamese meaning), grammar & cohesion
   const detailedAnalysis = analyzeUpgradeDetails({

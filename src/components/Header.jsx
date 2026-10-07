@@ -1,4 +1,3 @@
-import React from 'react';
 import { 
   Target, 
   History, 
@@ -7,7 +6,10 @@ import {
   Home,
   FileText,
   BarChart3,
-  Mail
+  Mail,
+  Layers,
+  Sparkles,
+  PenTool
 } from 'lucide-react';
 
 export default function Header({ 
@@ -18,6 +20,8 @@ export default function Header({
   onOpenContact,
   onChangeEmail,
   onGoWelcome,
+  onOpenFlashcard,
+  onGoPractice,
   studentEmail,
   activeTask,
   onToggleTask,
@@ -58,17 +62,48 @@ export default function Header({
         {/* Center: Task Toggle, 1-Line Target Band & 7-Day Current Status */}
         <div className="flex items-center gap-2">
           
-          {/* Welcome Navigation Button if currently in practice mode */}
-          {currentView === 'practice' && (
+          {/* Welcome Navigation Button if currently in practice or flashcard mode */}
+          {(currentView === 'practice' || currentView === 'flashcard') && (
             <button
               onClick={onGoWelcome}
-              className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 text-xs font-semibold text-slate-300 hover:text-white transition cursor-pointer"
+              className="hidden xl:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 text-xs font-semibold text-slate-300 hover:text-white transition cursor-pointer"
               title="Quay lại Trang Chào Mừng"
             >
               <Home className="w-3.5 h-3.5 text-blue-400" />
               <span>Trang chủ</span>
             </button>
           )}
+
+          {/* Mode Switcher: Luyện Viết vs Flashcard Duolingo */}
+          <div className="flex items-center p-0.5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs shadow-inner">
+            <button
+              onClick={onGoPractice}
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-bold transition cursor-pointer ${
+                currentView === 'practice'
+                  ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
+                  : "text-slate-400 hover:text-white"
+              }`}
+              title="Khu vực Luyện Viết Task 1 & Task 2"
+            >
+              <PenTool className="w-3 h-3" />
+              <span className="hidden sm:inline">Luyện Viết</span>
+            </button>
+            <button
+              onClick={onOpenFlashcard}
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-bold transition cursor-pointer ${
+                currentView === 'flashcard'
+                  ? "bg-gradient-to-r from-emerald-600 to-green-600 text-white shadow-md shadow-emerald-600/30"
+                  : "text-emerald-400 hover:text-emerald-300"
+              }`}
+              title="Học Nhanh Từ Vựng (Phong cách Duolingo)"
+            >
+              <Layers className="w-3 h-3" />
+              <span>Flashcard</span>
+              <span className="text-[9px] px-1 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 font-black border border-emerald-500/30 animate-pulse hidden xs:inline">
+                Duo
+              </span>
+            </button>
+          </div>
 
           {/* Quick Task 1 / Task 2 Switcher */}
           {onToggleTask && (

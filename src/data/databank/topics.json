@@ -72,6 +72,15 @@
     "subTopics": ["prison rehabilitation", "capital punishment", "juvenile crime", "surveillance cameras", "cybercrime"]
   },
   {
+    "id": "business",
+    "name": "Business & Economy",
+    "vietnameseName": "Kinh doanh & Kinh tế",
+    "taskScope": "Both",
+    "icon": "TrendingUp",
+    "tag": "Thực tế",
+    "subTopics": ["economic growth", "advertising & consumerism", "corporate responsibility", "local business vs multinationals", "cashless economy", "market regulation"]
+  },
+  {
     "id": "task1_bar_chart",
     "name": "Task 1 - Bar Chart (Biểu đồ cột)",
     "vietnameseName": "Biểu đồ cột so sánh",
