@@ -53,7 +53,7 @@ CREATE POLICY "Users can insert their own writing history"
 ON public.writing_history FOR INSERT 
 WITH CHECK (auth.uid() = user_id);
 
--- 3. Bảng tiến độ học từ vựng Flashcard Duolingo (flashcard_progress)
+-- 3. Bảng tiến độ học từ vựng Flashcard tương tác (flashcard_progress)
 CREATE TABLE IF NOT EXISTS public.flashcard_progress (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
