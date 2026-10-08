@@ -1,6 +1,7 @@
 import { enrichVocabulary } from './vocabEnhancer.js';
 import promptsData from './databank/prompts.json';
 import vocabulariesData from './databank/vocabularies.json';
+import { getMasterCategoryId, getMasterCategoryMeta, MASTER_TOPIC_CATEGORIES } from './topicCategories.js';
 
 const RAW_IELTS_TOPICS = [
   {
@@ -2791,20 +2792,24 @@ const RAW_IELTS_TOPICS = [
 ];
 
 const TOPIC_ICONS = {
-  environment: 'Leaf',
   education: 'GraduationCap',
   technology: 'Cpu',
+  environment: 'Leaf',
   society: 'Users',
-  globalization: 'Globe',
-  health: 'HeartPulse',
+  economy_law: 'Scale',
   work_career: 'Briefcase',
+  business: 'TrendingUp',
   crime_law: 'Scale',
-  business: 'TrendingUp'
+  globalization: 'Globe',
+  health: 'HeartPulse'
 };
 
-// Map vocabularies by topicId for fast access
+// Map vocabularies by master category for rich, diverse vocabulary pools
 const vocabsByTopic = {};
 vocabulariesData.forEach(v => {
+  const masterCat = getMasterCategoryId(v);
+  if (!vocabsByTopic[masterCat]) vocabsByTopic[masterCat] = [];
+  vocabsByTopic[masterCat].push(v);
   if (!vocabsByTopic[v.topicId]) vocabsByTopic[v.topicId] = [];
   vocabsByTopic[v.topicId].push(v);
 });
@@ -2825,12 +2830,17 @@ const matchedCuratedIds = new Set();
 
 const allTask2TopicsRaw = task2Prompts.map(p => {
   const existing = findMatchingCuratedTopic(p);
+  const masterCatId = getMasterCategoryId(p);
+  const masterMeta = getMasterCategoryMeta(masterCatId);
+
   if (existing) {
     matchedCuratedIds.add(existing.id);
     return {
       ...existing,
       yearDate: p.yearDate || existing.yearDate || 'Kinh điển',
-      topicCategory: p.topicId || existing.topicCategory || 'society',
+      topicCategory: masterCatId,
+      categoryName: masterMeta.name,
+      categoryVietnameseName: masterMeta.vietnameseName,
       difficulty: p.difficulty || existing.difficulty || 'Trung bình (Band 6.5 - 7.0)',
       outlineHints: p.outlineHints || existing.outlineHints || '',
       sourceDetail: p.sourceDetail || existing.tag
@@ -2838,7 +2848,7 @@ const allTask2TopicsRaw = task2Prompts.map(p => {
   }
 
   // Pick matching vocabularies from vocabulariesData
-  const matchingVocabs = (vocabsByTopic[p.topicId] || []).slice(0, 8);
+  const matchingVocabs = (vocabsByTopic[masterCatId] || []).slice(0, 8);
   let vocabs = [...matchingVocabs];
   if (vocabs.length < 5) {
     const backup = (vocabsByTopic['society'] || []).slice(0, 5 - vocabs.length);
@@ -2850,10 +2860,12 @@ const allTask2TopicsRaw = task2Prompts.map(p => {
     name: p.title,
     vietnameseName: p.title,
     tag: p.yearDate ? `${p.sourceType || 'IELTS'} ${p.yearDate}` : (p.sourceDetail || 'IELTS'),
-    icon: TOPIC_ICONS[p.topicId] || 'BookOpen',
+    icon: masterMeta.icon || TOPIC_ICONS[masterCatId] || 'BookOpen',
     ieltsPrompt: p.promptText,
     yearDate: p.yearDate || 'Kinh điển',
-    topicCategory: p.topicId || 'society',
+    topicCategory: masterCatId,
+    categoryName: masterMeta.name,
+    categoryVietnameseName: masterMeta.vietnameseName,
     difficulty: p.difficulty || 'Trung bình (Band 6.5 - 7.0)',
     outlineHints: p.outlineHints || '',
     sourceDetail: p.sourceDetail || '',
@@ -2873,16 +2885,24 @@ const allTask2TopicsRaw = task2Prompts.map(p => {
 });
 
 // Include foundational curated topics that may not have had a 1-to-1 prompt id match
-const remainingCurated = RAW_IELTS_TOPICS.filter(t => !matchedCuratedIds.has(t.id)).map(t => ({
-  ...t,
-  yearDate: t.yearDate || 'Kinh điển',
-  topicCategory: t.topicCategory || t.id
-}));
+const remainingCurated = RAW_IELTS_TOPICS.filter(t => !matchedCuratedIds.has(t.id)).map(t => {
+  const masterCatId = getMasterCategoryId(t);
+  const masterMeta = getMasterCategoryMeta(masterCatId);
+  return {
+    ...t,
+    yearDate: t.yearDate || 'Kinh điển',
+    topicCategory: masterCatId,
+    categoryName: masterMeta.name,
+    categoryVietnameseName: masterMeta.vietnameseName
+  };
+});
 
 const UNIFIED_RAW_TASK2_TOPICS = [
   ...allTask2TopicsRaw,
   ...remainingCurated
 ];
+
+export { MASTER_TOPIC_CATEGORIES, getMasterCategoryId, getMasterCategoryMeta };
 
 export const IELTS_TASK2_TOPICS = UNIFIED_RAW_TASK2_TOPICS.map(topic => ({
   ...topic,
@@ -3466,6 +3486,1606 @@ const RAW_IELTS_TASK1_TOPICS = [
         collocations: ["reach an equilibrium", "maintain energetic equilibrium"],
         modelSentence: "Natural gas generation maintains a near equilibrium, oscillating modestly around 25% to 28%.",
         vietnameseSentence: "Sản lượng điện từ khí tự nhiên duy trì trạng thái gần như cân bằng, chỉ dao động nhẹ quanh mức 25% đến 28%."
+      }
+    ]
+  }
+,
+  {
+    id: "task1-zim-01-tunnels",
+    name: "Diagram & Maps: Sydney & Brisbane Road Tunnels (08/09/2018)",
+    vietnameseName: "Sơ đồ & Bản đồ: So sánh hai đường hầm giao thông Sydney & Brisbane (08/09/2018)",
+    tag: "Task 1: Sơ đồ so sánh (Diagram / Maps)",
+    icon: "MapPin",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_zim-01-tunnels.png",
+    chartData: {
+      title: "Diagram & Maps: Sydney & Brisbane Road Tunnels (08/09/2018)",
+      imageUrl: "/charts/task1/task1_zim-01-tunnels.png",
+      keyNotes: [
+        "Thời gian xây dựng & chiều dài: Hầm Sydney dài hơn (1.8km vs 1.4km), thi công trong 6 năm (1998-2004), trong khi hầm Brisbane chỉ mất 4 năm (2008-2011).",
+        "Chi phí xây dựng: Hầm Brisbane tốn kém gấp gần 3 lần hầm Sydney ($3.2 tỷ AUD so với $1.1 tỷ AUD).",
+        "Lưu lượng & Mức phí: Hầm Brisbane đón lượng phương tiện đông hơn (45,000 xe/ngày vs 38,000 xe/ngày) và có mức phí cầu đường cao hơn ($4.50 AUD vs $3.00 AUD)."
+]
+    },
+    ieltsPrompt: "The diagrams below give information about two road tunnels in two Australian cities. Summarise the information by selecting and reporting the main features and make comparisons where relevant.",
+    keyNotes: [
+        "Thời gian xây dựng & chiều dài: Hầm Sydney dài hơn (1.8km vs 1.4km), thi công trong 6 năm (1998-2004), trong khi hầm Brisbane chỉ mất 4 năm (2008-2011).",
+        "Chi phí xây dựng: Hầm Brisbane tốn kém gấp gần 3 lần hầm Sydney ($3.2 tỷ AUD so với $1.1 tỷ AUD).",
+        "Lưu lượng & Mức phí: Hầm Brisbane đón lượng phương tiện đông hơn (45,000 xe/ngày vs 38,000 xe/ngày) và có mức phí cầu đường cao hơn ($4.50 AUD vs $3.00 AUD)."
+],
+    modelEssay: "The given maps illustrate two different underground tunnel systems for cars in two Australian cities.\n\nOverall, there are a number of differences between the two road tunnels, with the Brisbane tunnel having higher costs, shorter construction time, and carrying more daily traffic despite being shorter in total length.\n\nIn terms of construction, the Sydney tunnel took six years to build, from 1998 to 2004, and measures 1.8 kilometres in length. In contrast, the Brisbane tunnel was completed in just four years between 2008 and 2011, and was slightly shorter at 1.4 kilometres. However, despite its smaller scale and shorter construction period, the Brisbane tunnel required a staggering budget of 3.2 billion AUD, which was nearly triple the 1.1 billion AUD expended on the Sydney project.\n\nRegarding vehicular usage and operating fees, the tunnel in Brisbane accommodates approximately 45,000 vehicles each day, noticeably higher than the 38,000 cars recorded in Sydney. Furthermore, commuters using the Brisbane tunnel are charged a 4.50 AUD toll, compared to a lower charge of 3.00 AUD in Sydney.",
+    vocabularies: [
+      {
+        id: "t1-zim01-1",
+        word: "underground tunnel",
+        ipa: "/ˈʌndəɡraʊnd ˈtʌnl/",
+        partOfSpeech: "noun",
+        meaning: "Đường hầm ngầm dưới lòng đất",
+        basicEquivalent: "subway road (Band 5)",
+        synonyms: ["subterranean passage", "tunnel system", "underground passageway"],
+        collocations: ["construct an underground tunnel", "traffic tunnel"],
+        modelSentence: "The underground tunnel was designed to relieve chronic surface traffic congestion.",
+        vietnameseSentence: "Tuyến đường hầm ngầm được thiết kế nhằm giải tỏa tình trạng ùn tắc giao thông bề mặt kéo dài."
+      },
+      {
+        id: "t1-zim01-2",
+        word: "construction period",
+        ipa: "/kənˈstrʌkʃn ˈpɪəriəd/",
+        partOfSpeech: "noun",
+        meaning: "Thời gian thi công xây dựng",
+        basicEquivalent: "building time (Band 5)",
+        synonyms: ["building timeframe", "construction duration"],
+        collocations: ["span a construction period", "shorten the construction period"],
+        modelSentence: "The Brisbane project boasted a significantly shorter construction period of only four years.",
+        vietnameseSentence: "Dự án Brisbane nổi bật với thời gian thi công ngắn hơn đáng kể, chỉ kéo dài bốn năm."
+      },
+      {
+        id: "t1-zim01-3",
+        word: "capital expenditure",
+        ipa: "/ˈkæpɪtl ɪkˈspendɪtʃər/",
+        partOfSpeech: "noun",
+        meaning: "Chi phí đầu tư vốn xây dựng cơ sở hạ tầng",
+        basicEquivalent: "building cost (Band 5)",
+        synonyms: ["construction cost", "investment budget", "financial outlay"],
+        collocations: ["incur heavy capital expenditure", "initial expenditure"],
+        modelSentence: "The capital expenditure for the Brisbane tunnel was nearly triple that of the Sydney project.",
+        vietnameseSentence: "Chi phí đầu tư vốn cho hầm Brisbane cao gấp gần ba lần so với dự án ở Sydney."
+      },
+      {
+        id: "t1-zim01-4",
+        word: "vehicular traffic",
+        ipa: "/viˈhɪkjələr ˈtræfɪk/",
+        partOfSpeech: "noun",
+        meaning: "Lưu lượng xe cộ qua lại",
+        basicEquivalent: "car traffic (Band 5)",
+        synonyms: ["motor traffic", "vehicle volume", "traffic flow"],
+        collocations: ["accommodate vehicular traffic", "heavy vehicular traffic"],
+        modelSentence: "The modern bypass accommodates an average of 45,000 vehicular traffic units on a daily basis.",
+        vietnameseSentence: "Tuyến đường vòng hiện đại đáp ứng lưu lượng xe trung bình 45.000 phương tiện mỗi ngày."
+      },
+      {
+        id: "t1-zim01-5",
+        word: "toll fee",
+        ipa: "/təʊl fiː/",
+        partOfSpeech: "noun",
+        meaning: "Phí cầu đường / phí qua hầm",
+        basicEquivalent: "road price (Band 5)",
+        synonyms: ["toll charge", "transit levy", "road fee"],
+        collocations: ["levy a toll fee", "pay the toll fee"],
+        modelSentence: "Motorists must pay a mandatory toll fee of 4.50 AUD upon entering the tunnel.",
+        vietnameseSentence: "Người điều khiển phương tiện phải trả mức phí cầu đường bắt buộc là 4.50 AUD khi đi vào hầm."
+      },
+      {
+        id: "t1-zim01-6",
+        word: "completion timeframe",
+        ipa: "/kəmˈpliːʃn ˈtreɪmfeɪm/",
+        partOfSpeech: "noun",
+        meaning: "Khung thời gian hoàn thành công trình",
+        basicEquivalent: "time to finish (Band 5)",
+        synonyms: ["completion schedule", "delivery timeline"],
+        collocations: ["meet the completion timeframe", "expedite completion"],
+        modelSentence: "The engineering team maintained an ambitious completion timeframe despite challenging bedrock excavation.",
+        vietnameseSentence: "Đội ngũ kỹ thuật đã duy trì khung thời gian hoàn thành đầy tham vọng bất chấp việc đào bới nền đá phức tạp."
+      },
+      {
+        id: "t1-zim01-7",
+        word: "commuter",
+        ipa: "/kəˈmjuːtər/",
+        partOfSpeech: "noun",
+        meaning: "Người tham gia giao thông đi lại hằng ngày",
+        basicEquivalent: "driver / traveler (Band 5)",
+        synonyms: ["daily traveler", "motorist", "road user"],
+        collocations: ["daily commuters", "urban commuters"],
+        modelSentence: "Thousands of urban commuters benefit daily from the newly opened bypass.",
+        vietnameseSentence: "Hàng ngàn người tham gia giao thông hằng ngày được hưởng lợi từ tuyến đường tránh mới thông xe."
+      },
+      {
+        id: "t1-zim01-8",
+        word: "exorbitant",
+        ipa: "/ɪɡˈzɔːbɪtənt/",
+        partOfSpeech: "adjective",
+        meaning: "Đắt đỏ, tốn kém vượt trội",
+        basicEquivalent: "very expensive (Band 5)",
+        synonyms: ["hefty", "astronomical", "costly"],
+        collocations: ["exorbitant cost", "exorbitant financial budget"],
+        modelSentence: "Despite its exorbitant construction expense, the tunnel resolved critical arterial bottlenecks.",
+        vietnameseSentence: "Dù chi phí thi công vô cùng đắt đỏ, đường hầm đã giải quyết dứt điểm các điểm nghẽn giao thông trọng yếu."
+      }
+    ]
+  },
+  {
+    id: "task1-zim-02-fruits",
+    name: "Pie & Bar: Fresh Citrus Fruit Exports in 2010 (11/10/2018)",
+    vietnameseName: "Biểu đồ kết hợp: Xuất khẩu các loại quả có múi tươi năm 2010 (11/10/2018)",
+    tag: "Task 1: Biểu đồ kết hợp (Pie & Bar)",
+    icon: "BarChart3",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_zim-02-fruits.png",
+    chartData: {
+      title: "Pie & Bar: Fresh Citrus Fruit Exports in 2010 (11/10/2018)",
+      imageUrl: "/charts/task1/task1_zim-02-fruits.png",
+      keyNotes: [
+        "Tỷ trọng các loại quả: Cam (Oranges) áp đảo hoàn toàn thị trường xuất khẩu quả có múi, vượt xa chanh (lemons/limes) và bưởi (grapefruits).",
+        "Xuất khẩu cam: Nam Phi và Tây Ban Nha là hai quốc gia xuất khẩu cam lớn nhất thế giới, vượt mốc 1.000 nghìn tấn mỗi nước.",
+        "Xuất khẩu chanh & bưởi: Mexico dẫn đầu tuyệt đối về xuất khẩu chanh, trong khi Mỹ và Thổ Nhĩ Kỳ chiếm ưu thế trong thị trường bưởi tươi."
+]
+    },
+    ieltsPrompt: "The charts show fresh fruit exports in 2010. Summarise the information by selecting and reporting the main features and make comparisons where relevant.",
+    keyNotes: [
+        "Tỷ trọng các loại quả: Cam (Oranges) áp đảo hoàn toàn thị trường xuất khẩu quả có múi, vượt xa chanh (lemons/limes) và bưởi (grapefruits).",
+        "Xuất khẩu cam: Nam Phi và Tây Ban Nha là hai quốc gia xuất khẩu cam lớn nhất thế giới, vượt mốc 1.000 nghìn tấn mỗi nước.",
+        "Xuất khẩu chanh & bưởi: Mexico dẫn đầu tuyệt đối về xuất khẩu chanh, trong khi Mỹ và Thổ Nhĩ Kỳ chiếm ưu thế trong thị trường bưởi tươi."
+],
+    modelEssay: "The charts compare different types of citrus fruit exports from a number of different countries in 2010.\n\nOverall, oranges were by far the fruit that was exported in the greatest volume among the citrus varieties examined. Additionally, while South Africa and Spain dominated orange shipments, Mexico spearheaded the lemon and lime sector, and the United States led grapefruit exports.\n\nIn terms of orange exports, total global trade exceeded 6,000 thousand tons. South Africa and Spain emerged as the two foremost exporters, supplying roughly 1,050 and 1,020 thousand tons respectively. Turkey, the United States, and Egypt also contributed substantial volumes, each exporting between 500 and 800 thousand tons.\n\nBy contrast, exports of lemons, limes, and grapefruits remained significantly lower. Mexico dominated lemon and lime exports with approximately 500 thousand tons, followed by Spain and Argentina at around 250 thousand tons each. For grapefruits, the United States stood as the premier supplier at nearly 250 thousand tons, while South Africa and Turkey recorded lower figures between 150 and 200 thousand tons.",
+    vocabularies: [
+      {
+        id: "t1-zim02-1",
+        word: "citrus fruit",
+        ipa: "/ˈsɪtrəs fruːt/",
+        partOfSpeech: "noun",
+        meaning: "Trái cây họ cam quýt có múi",
+        basicEquivalent: "orange-like fruits (Band 5)",
+        synonyms: ["citrus varieties", "citrus produce"],
+        collocations: ["citrus fruit exports", "citrus production"],
+        modelSentence: "Global trade in citrus fruit experienced robust expansion throughout 2010.",
+        vietnameseSentence: "Thương mại toàn cầu đối với trái cây họ cam quýt chứng kiến mức tăng trưởng mạnh mẽ trong suốt năm 2010."
+      },
+      {
+        id: "t1-zim02-2",
+        word: "export volume",
+        ipa: "/ˈekspɔːt ˈvɒljuːm/",
+        partOfSpeech: "noun",
+        meaning: "Sản lượng / khối lượng xuất khẩu",
+        basicEquivalent: "amount of exported goods (Band 5)",
+        synonyms: ["export tonnage", "shipment volume", "outbound tonnage"],
+        collocations: ["recorded export volume", "surge in export volume"],
+        modelSentence: "South Africa registered an impressive export volume exceeding one million metric tons.",
+        vietnameseSentence: "Nam Phi ghi nhận sản lượng xuất khẩu ấn tượng vượt trên một triệu tấn."
+      },
+      {
+        id: "t1-zim02-3",
+        word: "dominate",
+        ipa: "/ˈdɒmɪneɪt/",
+        partOfSpeech: "verb",
+        meaning: "Chiếm ưu thế áp đảo",
+        basicEquivalent: "be the biggest (Band 5)",
+        synonyms: ["command the market", "lead by a wide margin", "monopolize"],
+        collocations: ["dominate the export share", "dominate global trade"],
+        modelSentence: "Oranges heavily dominated the chart, outstripping all other fruit categories combined.",
+        vietnameseSentence: "Cam áp đảo mạnh mẽ trên biểu đồ, vượt xa tất cả các nhóm trái cây khác cộng lại."
+      },
+      {
+        id: "t1-zim02-4",
+        word: "premier supplier",
+        ipa: "/ˈpremiər səˈplaɪər/",
+        partOfSpeech: "noun",
+        meaning: "Nhà cung cấp hàng đầu",
+        basicEquivalent: "top seller (Band 5)",
+        synonyms: ["leading exporter", "foremost producer", "primary source"],
+        collocations: ["act as the premier supplier", "emerge as premier supplier"],
+        modelSentence: "Mexico emerged as the premier supplier of fresh limes to international markets.",
+        vietnameseSentence: "Mexico đã vươn lên thành nhà cung cấp chanh tươi hàng đầu cho các thị trường quốc tế."
+      },
+      {
+        id: "t1-zim02-5",
+        word: "spearhead",
+        ipa: "/ˈspɪəhed/",
+        partOfSpeech: "verb",
+        meaning: "Dẫn đầu, giữ vai trò mũi nhọn tiên phong",
+        basicEquivalent: "lead (Band 5)",
+        synonyms: ["pioneer", "lead the way", "head"],
+        collocations: ["spearhead the sector", "spearhead export growth"],
+        modelSentence: "Spain spearheaded European citrus shipments with over a million tons exported.",
+        vietnameseSentence: "Tây Ban Nha dẫn đầu các chuyến hàng xuất khẩu cam quýt của Châu Âu với hơn một triệu tấn được xuất khẩu."
+      },
+      {
+        id: "t1-zim02-6",
+        word: "dwarf",
+        ipa: "/dwɔːf/",
+        partOfSpeech: "verb",
+        meaning: "Làm cho cái khác trở nên nhỏ bé, áp đảo hoàn toàn",
+        basicEquivalent: "be much bigger than (Band 5)",
+        synonyms: ["overshadow", "eclipse", "surpass significantly"],
+        collocations: ["dwarf other categories", "dwarf competing figures"],
+        modelSentence: "The volume of oranges dwarfed the modest output generated by lemon cultivators.",
+        vietnameseSentence: "Khối lượng cam đã áp đảo hoàn toàn sản lượng khiêm tốn do những người trồng chanh tạo ra."
+      },
+      {
+        id: "t1-zim02-7",
+        word: "breakdown",
+        ipa: "/ˈbreɪkdaʊn/",
+        partOfSpeech: "noun",
+        meaning: "Sự phân chia chi tiết tỉ lệ từng phần",
+        basicEquivalent: "division of data (Band 5)",
+        synonyms: ["composition", "proportional distribution", "segmentation"],
+        collocations: ["percentage breakdown", "detailed breakdown"],
+        modelSentence: "The pie chart outlines a clear breakdown of global consumer demand across three fruits.",
+        vietnameseSentence: "Biểu đồ tròn phác thảo sự phân chia tỉ lệ rõ ràng về nhu cầu tiêu dùng toàn cầu đối với ba loại quả."
+      },
+      {
+        id: "t1-zim02-8",
+        word: "outstrip",
+        ipa: "/aʊtˈstrɪp/",
+        partOfSpeech: "verb",
+        meaning: "Vượt trội hơn, bỏ xa",
+        basicEquivalent: "be higher than (Band 5)",
+        synonyms: ["exceed", "surpass", "outrun"],
+        collocations: ["outstrip demand", "outstrip rival nations"],
+        modelSentence: "South African fruit shipments outstripped Spanish totals by a slim margin of 30 thousand tons.",
+        vietnameseSentence: "Lượng hàng trái cây của Nam Phi đã vượt qua tổng số của Tây Ban Nha với khoảng cách sít sao 30 nghìn tấn."
+      }
+    ]
+  },
+  {
+    id: "task1-zim-03-igloo",
+    name: "Process: How an Igloo is Built from Snow (02/03/2019)",
+    vietnameseName: "Quy trình: Kỹ thuật xây dựng lều tuyết Igloo truyền thống (02/03/2019)",
+    tag: "Task 1: Sơ đồ quy trình (Process)",
+    icon: "Layers",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_zim-03-igloo.png",
+    chartData: {
+      title: "Process: How an Igloo is Built from Snow (02/03/2019)",
+      imageUrl: "/charts/task1/task1_zim-03-igloo.png",
+      keyNotes: [
+        "Các giai đoạn chính: 5 công đoạn liên tiếp từ việc nén tuyết, cưa các khối băng, xếp vòng xoắn ốc tạo vòm, đục lỗ thông hơi & đường hầm lối vào, đến việc trát tuyết mịn làm kín khe hở.",
+        "Nguyên vật liệu & Dụng cụ: Sử dụng hoàn toàn băng tuyết tự nhiên, dao/cưa cầm tay chuyên dụng để định hình các khối tuyết.",
+        "Đặc điểm cấu trúc: Cấu trúc mái vòm chịu lực dạng xoắn ốc (spiral) cùng một hầm thông gió chìm giúp giữ nhiệt độ ấm áp bên trong."
+]
+    },
+    ieltsPrompt: "The illustration shows information about how an igloo is built from snow. Summarise the information by selecting and reporting the main features and make comparisons where relevant.",
+    keyNotes: [
+        "Các giai đoạn chính: 5 công đoạn liên tiếp từ việc nén tuyết, cưa các khối băng, xếp vòng xoắn ốc tạo vòm, đục lỗ thông hơi & đường hầm lối vào, đến việc trát tuyết mịn làm kín khe hở.",
+        "Nguyên vật liệu & Dụng cụ: Sử dụng hoàn toàn băng tuyết tự nhiên, dao/cưa cầm tay chuyên dụng để định hình các khối tuyết.",
+        "Đặc điểm cấu trúc: Cấu trúc mái vòm chịu lực dạng xoắn ốc (spiral) cùng một hầm thông gió chìm giúp giữ nhiệt độ ấm áp bên trong."
+],
+    modelEssay: "The diagram illustrates the process that is used to build an igloo from snow.\n\nThere are five main stages in this process, starting with the harvesting and cutting of hard-packed snow blocks and culminating in the sealing and smoothing of the dome shelter.\n\nFirst of all, hard-packed snow is collected and cut into large rectangular blocks using a saw. The builder then begins laying these blocks in a circular foundation on the ground. As the building progresses, the blocks are laid in an ascending spiral pattern, with each successive layer leaning slightly inward to gradually form a dome shape.\n\nOnce the main dome is enclosed, a small ventilation hole is carved at the very top of the roof to allow smoke and stale air to escape while admitting fresh air. Next, the builder digs an underground entrance tunnel beneath the wall, which prevents freezing wind from entering the living quarters. Finally, soft snow is shoveled over the exterior to pack into crevices and seal any openings, before the outer surface is carefully smoothed to ensure structural stability and thermal insulation.",
+    vocabularies: [
+      {
+        id: "t1-zim03-1",
+        word: "hard-packed snow",
+        ipa: "/hɑːd pækt snəʊ/",
+        partOfSpeech: "noun",
+        meaning: "Tuyết được nén cứng, đóng tảng chắc chắn",
+        basicEquivalent: "hard snow (Band 5)",
+        synonyms: ["compressed snow", "dense snowpack"],
+        collocations: ["cut hard-packed snow", "harvest hard-packed snow"],
+        modelSentence: "Only dense, hard-packed snow possesses sufficient structural integrity to build an igloo.",
+        vietnameseSentence: "Chỉ có tuyết nén cứng và đậm đặc mới có đủ độ bền kết cấu để xây dựng lều tuyết."
+      },
+      {
+        id: "t1-zim03-2",
+        word: "spiral pattern",
+        ipa: "/ˈspaɪrəl ˈpætn/",
+        partOfSpeech: "noun",
+        meaning: "Khuôn mẫu vòng xoắn ốc",
+        basicEquivalent: "circle shape (Band 5)",
+        synonyms: ["spiral formation", "helical arrangement"],
+        collocations: ["laid in a spiral pattern", "ascending spiral pattern"],
+        modelSentence: "The snow blocks are arranged in an ascending spiral pattern to create a self-supporting dome.",
+        vietnameseSentence: "Các khối tuyết được sắp đặt theo khuôn mẫu vòng xoắn ốc nâng dần để tạo nên mái vòm tự chịu lực."
+      },
+      {
+        id: "t1-zim03-3",
+        word: "ventilation hole",
+        ipa: "/ˌventɪˈleɪʃn həʊl/",
+        partOfSpeech: "noun",
+        meaning: "Lỗ thông hơi, khe thông gió",
+        basicEquivalent: "air hole (Band 5)",
+        synonyms: ["air vent", "ventilation opening", "chimney flue"],
+        collocations: ["carve a ventilation hole", "rooftop ventilation hole"],
+        modelSentence: "A small ventilation hole is carved at the apex to prevent suffocation inside the shelter.",
+        vietnameseSentence: "Một lỗ thông hơi nhỏ được khoét ở phần đỉnh để chống ngạt thở bên trong nơi trú ẩn."
+      },
+      {
+        id: "t1-zim03-4",
+        word: "entrance tunnel",
+        ipa: "/ˈentrəns ˈtʌnl/",
+        partOfSpeech: "noun",
+        meaning: "Đường hầm lối ra vào",
+        basicEquivalent: "door way (Band 5)",
+        synonyms: ["sunken passageway", "entry corridor"],
+        collocations: ["dig an entrance tunnel", "submerged entrance tunnel"],
+        modelSentence: "The entrance tunnel is purposely excavated below ground level to trap warm air indoors.",
+        vietnameseSentence: "Đường hầm lối vào được cố ý đào chìm dưới mặt đất để giữ không khí ấm bên trong."
+      },
+      {
+        id: "t1-zim03-5",
+        word: "thermal insulation",
+        ipa: "/ˈθɜːml ˌɪnsjʊˈleɪʃn/",
+        partOfSpeech: "noun",
+        meaning: "Khả năng cách nhiệt, giữ ấm",
+        basicEquivalent: "warm keeping (Band 5)",
+        synonyms: ["heat retention", "thermal barrier"],
+        collocations: ["provide thermal insulation", "enhance thermal insulation"],
+        modelSentence: "Packing snow into exterior crevices greatly enhances the structure's thermal insulation.",
+        vietnameseSentence: "Trát tuyết vào các khe hở bên ngoài giúp nâng cao đáng kể khả năng cách nhiệt của công trình."
+      },
+      {
+        id: "t1-zim03-6",
+        word: "crevice",
+        ipa: "/ˈkrevɪs/",
+        partOfSpeech: "noun",
+        meaning: "Khe hở, kẽ nứt giữa các khối đá/băng",
+        basicEquivalent: "crack / hole (Band 5)",
+        synonyms: ["crack", "fissure", "gap", "chink"],
+        collocations: ["seal crevices", "fill tiny crevices"],
+        modelSentence: "Loose powdery snow is firmly packed into remaining crevices to deflect biting winds.",
+        vietnameseSentence: "Tuyết xốp tơi được nén chặt vào các khe nứt còn lại để ngăn những luồng gió buốt giá."
+      },
+      {
+        id: "t1-zim03-7",
+        word: "culminate in",
+        ipa: "/ˈkʌlmɪneɪt ɪn/",
+        partOfSpeech: "verb",
+        meaning: "Kết thúc bằng, đạt đến đỉnh điểm ở bước",
+        basicEquivalent: "end with (Band 5)",
+        synonyms: ["conclude with", "climax in", "finish with"],
+        collocations: ["culminate in the final stage", "culminate in completion"],
+        modelSentence: "The assembly culminates in the smoothing of the exterior dome with handheld wooden trowels.",
+        vietnameseSentence: "Quy trình xây dựng kết thúc bằng việc làm mịn bề mặt vòm ngoài bằng bàn chà gỗ cầm tay."
+      },
+      {
+        id: "t1-zim03-8",
+        word: "dome-shaped",
+        ipa: "/dəʊm ʃeɪpt/",
+        partOfSpeech: "adjective",
+        meaning: "Có hình dạng mái vòm tròn",
+        basicEquivalent: "round like a ball (Band 5)",
+        synonyms: ["hemispherical", "vaulted", "curved"],
+        collocations: ["dome-shaped shelter", "dome-shaped architecture"],
+        modelSentence: "The dome-shaped structure successfully withstands howling blizzards and seismic tremors.",
+        vietnameseSentence: "Cấu trúc hình mái vòm có khả năng chống chịu thành công những trận bão tuyết dữ dội và rung chấn."
+      }
+    ]
+  },
+  {
+    id: "task1-zim-04-driving-license",
+    name: "Flowchart: US Driving License Examination Procedures (14/03/2019)",
+    vietnameseName: "Lưu đồ quy trình: Các bước thi lấy bằng lái xe tại Mỹ (14/03/2019)",
+    tag: "Task 1: Lưu đồ quy trình (Flowchart)",
+    icon: "Layers",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_zim-04-driving-license.png",
+    chartData: {
+      title: "Flowchart: US Driving License Examination Procedures (14/03/2019)",
+      imageUrl: "/charts/task1/task1_zim-04-driving-license.png",
+      keyNotes: [
+        "Ba bài kiểm tra bắt buộc: Kiểm tra thị lực (eyesight test), thi lý thuyết viết (written theoretical test), và thi thực hành lái xe trên đường (road test).",
+        "Điều kiện tiên quyết: Trượt kiểm tra mắt sẽ bị loại ngay từ đầu; nếu đỗ mới được nộp lệ phí để thi lý thuyết.",
+        "Quy chế thi lại & Cấp bằng: Thí sinh được thi lại lý thuyết tối đa 2 lần. Cần vượt qua cả lý thuyết và thực hành để chính thức nhận bằng lái xe."
+]
+    },
+    ieltsPrompt: "The flow chart below shows the procedures to get a driving license in US. Summarise the information by selecting and reporting the main features and make comparisons where relevant.",
+    keyNotes: [
+        "Ba bài kiểm tra bắt buộc: Kiểm tra thị lực (eyesight test), thi lý thuyết viết (written theoretical test), và thi thực hành lái xe trên đường (road test).",
+        "Điều kiện tiên quyết: Trượt kiểm tra mắt sẽ bị loại ngay từ đầu; nếu đỗ mới được nộp lệ phí để thi lý thuyết.",
+        "Quy chế thi lại & Cấp bằng: Thí sinh được thi lại lý thuyết tối đa 2 lần. Cần vượt qua cả lý thuyết và thực hành để chính thức nhận bằng lái xe."
+],
+    modelEssay: "The given diagram details the process of obtaining a driving license in the US.\n\nIn general, it can be seen that there are three tests that need to be passed in order to get a driving license, which are an eyesight test, a written theoretical examination, and a practical driving road test.\n\nThe first thing one needs to do to get a driver's license is to register at a driving license centre and fill out the appropriate application forms. After that, an eyesight test is required. If the applicant fails this vision screening, the application is rejected immediately; however, if they pass, they are permitted to proceed to the next stage.\n\nAfter paying the prescribed administrative fees, candidates take a written theoretical test, with up to two extra chances to retake the test if they fail initially. Once the written examination is successfully cleared, candidates must undertake a practical on-road examination. It is obligatory to pass both the theory and practical tests in order to receive the driving license. Should an applicant fail the road test, they are required to pay the fees once more and reattempt the examination.",
+    vocabularies: [
+      {
+        id: "t1-zim04-1",
+        word: "eyesight test",
+        ipa: "/ˈaɪsaɪt test/",
+        partOfSpeech: "noun",
+        meaning: "Bài kiểm tra thị lực / kiểm tra mắt",
+        basicEquivalent: "eye check (Band 5)",
+        synonyms: ["vision screening", "ocular examination"],
+        collocations: ["undergo an eyesight test", "pass the eyesight test"],
+        modelSentence: "Passing the mandatory eyesight test is a prerequisite before booking any theory exam.",
+        vietnameseSentence: "Vượt qua bài kiểm tra thị lực bắt buộc là điều kiện tiên quyết trước khi đăng ký thi bất kỳ bài lý thuyết nào."
+      },
+      {
+        id: "t1-zim04-2",
+        word: "theoretical examination",
+        ipa: "/ˌθɪəˈretɪkl ɪɡˌzæmɪˈneɪʃn/",
+        partOfSpeech: "noun",
+        meaning: "Kỳ thi lý thuyết luật giao thông",
+        basicEquivalent: "paper test (Band 5)",
+        synonyms: ["written test", "theory examination", "knowledge assessment"],
+        collocations: ["sit a theoretical examination", "written theoretical test"],
+        modelSentence: "The theoretical examination evaluates the applicant's grasp of traffic regulations and road signs.",
+        vietnameseSentence: "Kỳ thi lý thuyết đánh giá mức độ am hiểu của người nộp đơn về luật lệ và biển báo giao thông."
+      },
+      {
+        id: "t1-zim04-3",
+        word: "practical road exam",
+        ipa: "/ˈpræktɪkl rəʊd ɪɡˈzæm/",
+        partOfSpeech: "noun",
+        meaning: "Bài thi thực hành lái xe trên đường thực tế",
+        basicEquivalent: "driving test (Band 5)",
+        synonyms: ["behind-the-wheel assessment", "on-road driving test"],
+        collocations: ["conduct a practical road exam", "road evaluation"],
+        modelSentence: "Examiners observe lane discipline and safety reflexes during the practical road exam.",
+        vietnameseSentence: "Các giám khảo quan sát kỹ năng đi đúng làn đường và phản xạ an toàn trong suốt bài thi thực hành lái xe."
+      },
+      {
+        id: "t1-zim04-4",
+        word: "obligatory",
+        ipa: "/əˈblɪɡətri/",
+        partOfSpeech: "adjective",
+        meaning: "Có tính chất bắt buộc theo luật định",
+        basicEquivalent: "must do (Band 5)",
+        synonyms: ["compulsory", "mandatory", "imperative"],
+        collocations: ["it is obligatory to pass", "obligatory requirement"],
+        modelSentence: "It is obligatory for candidates to pass both assessments prior to receiving full driving privileges.",
+        vietnameseSentence: "Người thi bắt buộc phải vượt qua cả hai bài kiểm tra trước khi được nhận đầy đủ quyền điều khiển phương tiện."
+      },
+      {
+        id: "t1-zim04-5",
+        word: "retake",
+        ipa: "/ˌriːˈteɪk/",
+        partOfSpeech: "verb",
+        meaning: "Thi lại (sau khi bị trượt)",
+        basicEquivalent: "do the test again (Band 5)",
+        synonyms: ["resit", "reattempt"],
+        collocations: ["retake the exam", "eligible to retake"],
+        modelSentence: "Applicants who fail the written section are permitted to retake it twice within ninety days.",
+        vietnameseSentence: "Những ứng viên trượt phần thi viết được phép thi lại hai lần trong vòng chín mươi ngày."
+      },
+      {
+        id: "t1-zim04-6",
+        word: "application form",
+        ipa: "/ˌæplɪˈkeɪʃn fɔːm/",
+        partOfSpeech: "noun",
+        meaning: "Mẫu đơn xin cấp / hồ sơ đăng ký",
+        basicEquivalent: "signup paper (Band 5)",
+        synonyms: ["registration document", "filing document"],
+        collocations: ["submit an application form", "fill out the application form"],
+        modelSentence: "Prospective motorists must first complete and sign an official application form.",
+        vietnameseSentence: "Những người có nguyện vọng lái xe trước hết phải điền và ký vào mẫu đơn đăng ký chính thức."
+      },
+      {
+        id: "t1-zim04-7",
+        word: "administrative fee",
+        ipa: "/ədˈmɪnɪstrətɪv fiː/",
+        partOfSpeech: "noun",
+        meaning: "Phí quản lý hành chính / lệ phí hồ sơ",
+        basicEquivalent: "service price (Band 5)",
+        synonyms: ["licensing fee", "processing surcharge"],
+        collocations: ["pay the administrative fee", "non-refundable administrative fee"],
+        modelSentence: "Each reattempt incurs a standard administrative fee payable at the reception kiosk.",
+        vietnameseSentence: "Mỗi lần thi lại đều phải nộp một khoản lệ phí hành chính tiêu chuẩn tại quầy tiếp tân."
+      },
+      {
+        id: "t1-zim04-8",
+        word: "prerequisite",
+        ipa: "/ˌpriːˈrekwəzɪt/",
+        partOfSpeech: "noun",
+        meaning: "Điều kiện tiên quyết phải đạt trước",
+        basicEquivalent: "first requirement (Band 5)",
+        synonyms: ["essential condition", "precondition"],
+        collocations: ["a prerequisite for getting a license", "essential prerequisite"],
+        modelSentence: "Passing visual acuity tests functions as an absolute prerequisite for subsequent examinations.",
+        vietnameseSentence: "Vượt qua bài đo độ sắc nét thị giác đóng vai trò là điều kiện tiên quyết tuyệt đối cho các kỳ thi sau."
+      }
+    ]
+  },
+  {
+    id: "task1-zim-05-teacher-salaries",
+    name: "Table: High School Teachers Salaries in 5 Countries (20/03/2019)",
+    vietnameseName: "Bảng số liệu: Tiền lương giáo viên trung học phổ thông năm 2009 (20/03/2019)",
+    tag: "Task 1: Bảng số liệu (Table)",
+    icon: "BarChart3",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_zim-05-teacher-salaries.png",
+    chartData: {
+      title: "Table: High School Teachers Salaries in 5 Countries (20/03/2019)",
+      imageUrl: "/charts/task1/task1_zim-05-teacher-salaries.png",
+      keyNotes: [
+        "Mức lương cao nhất & thấp nhất: Giáo viên tại Luxembourg nhận mức đãi ngộ cao vượt trội ($80,000 khởi điểm đến $119,000 tối đa). Ngược lại, Australia ghi nhận mức lương khởi điểm thấp nhất ($28,000).",
+        "Mức lương sau 15 năm: Giáo viên Luxembourg nhận $119,000, giáo viên Nhật Bản nhận $65,000, trong khi giáo viên tại Australia và Hàn Quốc chỉ đạt $48,000.",
+        "Thời gian chạm đỉnh lương: Giáo viên ở Australia và Đan Mạch mất ít thời gian nhất (dưới 10 năm) để đạt mức lương kịch trần, trong khi các nước còn lại phải mất ít nhất 30 năm."
+]
+    },
+    ieltsPrompt: "The table below shows the salaries of secondary/high school teachers in 2009. Summarise the information by selecting and reporting the main features and make comparisons where relevant.",
+    keyNotes: [
+        "Mức lương cao nhất & thấp nhất: Giáo viên tại Luxembourg nhận mức đãi ngộ cao vượt trội ($80,000 khởi điểm đến $119,000 tối đa). Ngược lại, Australia ghi nhận mức lương khởi điểm thấp nhất ($28,000).",
+        "Mức lương sau 15 năm: Giáo viên Luxembourg nhận $119,000, giáo viên Nhật Bản nhận $65,000, trong khi giáo viên tại Australia và Hàn Quốc chỉ đạt $48,000.",
+        "Thời gian chạm đỉnh lương: Giáo viên ở Australia và Đan Mạch mất ít thời gian nhất (dưới 10 năm) để đạt mức lương kịch trần, trong khi các nước còn lại phải mất ít nhất 30 năm."
+],
+    modelEssay: "The table compares secondary and high school teachers' salaries in five countries in 2009.\n\nOverall, while teachers in Luxembourg were by far the most well-paid across all career stages, those from Australia received the lowest compensation. Additionally, it took educators in Australia and Denmark significantly less time to attain their maximum salary compared to teachers in the other surveyed nations.\n\nSecondary and high school educators in Luxembourg commenced with a handsome starting salary of $80,000 per annum, which was nearly double the figure for Danish teachers ($45,000). By contrast, an inexperienced teacher in Australia, Japan, and Korea started with noticeably lower earnings, hovering around $28,000 to $34,000.\n\nAfter 15 years of service, educators in Luxembourg saw their compensation climb to $119,000, which also represented their ceiling. Meanwhile, counterparts in Japan and Denmark made $65,000 and $54,000 respectively, while Australian and Korean teachers with equivalent seniority earned the lowest remuneration at $48,000. Remarkably, teachers in Australia and Denmark reached their top earning tier in under 10 years, whereas educators in Japan and Korea had to wait for at least 30 to 37 years.",
+    vocabularies: [
+      {
+        id: "t1-zim05-1",
+        word: "well-paid",
+        ipa: "/ˌwel ˈpeɪd/",
+        partOfSpeech: "adjective",
+        meaning: "Được trả lương cao, thu nhập hậu hĩnh",
+        basicEquivalent: "get high money (Band 5)",
+        synonyms: ["highly compensated", "lucrative", "generously remunerated"],
+        collocations: ["most well-paid profession", "well-paid educators"],
+        modelSentence: "Luxembourgish teachers were consistently the most well-paid among the surveyed nations.",
+        vietnameseSentence: "Giáo viên tại Luxembourg luôn là những người được trả lương cao nhất trong số các quốc gia được khảo sát."
+      },
+      {
+        id: "t1-zim05-2",
+        word: "starting salary",
+        ipa: "/ˈstɑːtɪŋ ˈsæləri/",
+        partOfSpeech: "noun",
+        meaning: "Mức lương khởi điểm khi mới vào nghề",
+        basicEquivalent: "first pay (Band 5)",
+        synonyms: ["entry-level salary", "initial earnings", "commencing wage"],
+        collocations: ["earn a starting salary", "modest starting salary"],
+        modelSentence: "A novice high school instructor in Denmark received an entry-level starting salary of $45,000.",
+        vietnameseSentence: "Một giáo viên trung học mới vào nghề tại Đan Mạch nhận mức lương khởi điểm là 45.000 USD."
+      },
+      {
+        id: "t1-zim05-3",
+        word: "inexperienced",
+        ipa: "/ˌɪnɪkˈspɪəriənst/",
+        partOfSpeech: "adjective",
+        meaning: "Chưa có kinh nghiệm, mới vào nghề",
+        basicEquivalent: "new worker (Band 5)",
+        synonyms: ["novice", "entry-level", "unseasoned"],
+        collocations: ["inexperienced teacher", "inexperienced candidate"],
+        modelSentence: "Inexperienced educators in Australia drew the lowest baseline compensation in the dataset.",
+        vietnameseSentence: "Các giáo viên chưa có kinh nghiệm ở Úc nhận mức thù lao cơ bản thấp nhất trong bộ số liệu."
+      },
+      {
+        id: "t1-zim05-4",
+        word: "seniority",
+        ipa: "/ˌsiːniˈɒrəti/",
+        partOfSpeech: "noun",
+        meaning: "Thâm niên công tác lâu năm",
+        basicEquivalent: "years of work (Band 5)",
+        synonyms: ["tenure", "length of service", "professional experience"],
+        collocations: ["accumulate seniority", "based on seniority"],
+        modelSentence: "Salary increments were strictly determined by years of professional seniority.",
+        vietnameseSentence: "Các bậc tăng lương được xác định nghiêm ngặt dựa theo số năm thâm niên nghề nghiệp."
+      },
+      {
+        id: "t1-zim05-5",
+        word: "salary ceiling",
+        ipa: "/ˈsæləri ˈsiːlɪŋ/",
+        partOfSpeech: "noun",
+        meaning: "Mức lương tối đa kịch trần có thể đạt được",
+        basicEquivalent: "highest money limit (Band 5)",
+        synonyms: ["maximum salary", "upper pay threshold", "earnings cap"],
+        collocations: ["reach the salary ceiling", "attain the maximum salary"],
+        modelSentence: "Danish instructors reached their salary ceiling within a brisk nine-year span.",
+        vietnameseSentence: "Các giảng viên Đan Mạch đã chạm mức lương tối đa của họ chỉ trong khoảng thời gian nhanh gọn 9 năm."
+      },
+      {
+        id: "t1-zim05-6",
+        word: "remuneration",
+        ipa: "/rɪˌmjuːnəˈreɪʃn/",
+        partOfSpeech: "noun",
+        meaning: "Thù lao, tiền công chi trả cho người lao động",
+        basicEquivalent: "payment / money (Band 5)",
+        synonyms: ["compensation package", "financial reward", "earnings"],
+        collocations: ["adequate remuneration", "generous remuneration"],
+        modelSentence: "Educational authorities offered generous remuneration packages to attract talented educators.",
+        vietnameseSentence: "Nhà chức trách giáo dục đã đưa ra các gói thù lao hậu hĩnh để thu hút các nhà giáo tài năng."
+      },
+      {
+        id: "t1-zim05-7",
+        word: "counterpart",
+        ipa: "/ˈkaʊntəpɑːt/",
+        partOfSpeech: "noun",
+        meaning: "Đối tượng tương đương ở nước hoặc đơn vị khác",
+        basicEquivalent: "the same person in another place (Band 5)",
+        synonyms: ["equivalent colleague", "peer"],
+        collocations: ["Asian counterparts", "European counterparts"],
+        modelSentence: "Japanese teachers earned considerably more than their Australian counterparts after 15 years.",
+        vietnameseSentence: "Giáo viên Nhật Bản kiếm được nhiều hơn đáng kể so với các đồng nghiệp tương đương ở Úc sau 15 năm."
+      },
+      {
+        id: "t1-zim05-8",
+        word: "disparity",
+        ipa: "/dɪˈspærəti/",
+        partOfSpeech: "noun",
+        meaning: "Sự chênh lệch lớn giữa các đối tượng",
+        basicEquivalent: "big difference (Band 5)",
+        synonyms: ["gap", "divergence", "inequality"],
+        collocations: ["wide wage disparity", "stark disparity"],
+        modelSentence: "The table underlines a stark disparity in public education investments across the OECD.",
+        vietnameseSentence: "Bảng số liệu nhấn mạnh sự chênh lệch rõ rệt trong đầu tư giáo dục công lập giữa các nước OECD."
+      }
+    ]
+  },
+  {
+    id: "task1-zim-06-water-costs",
+    name: "Table: Cost of Residential Water in 5 Australian Cities (27/07/2019)",
+    vietnameseName: "Bảng số liệu: Chi phí sử dụng nước sinh hoạt tại 5 thành phố Úc (27/07/2019)",
+    tag: "Task 1: Bảng số liệu (Table)",
+    icon: "BarChart3",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_zim-06-water-costs.png",
+    chartData: {
+      title: "Table: Cost of Residential Water in 5 Australian Cities (27/07/2019)",
+      imageUrl: "/charts/task1/task1_zim-06-water-costs.png",
+      keyNotes: [
+        "Hai khung định mức sử dụng: Mức tiêu thụ cơ bản dưới 125 KL và mức vượt định mức trên 125 KL cùng hóa đơn trung bình năm.",
+        "Sự biến động giá nước: Perth có giá nước bậc 1 rẻ nhất ($0.42/KL) nhưng lại tăng vọt lên $1.50/KL cho lượng dùng vượt 125 KL. Sydney giữ mức giá cố định duy nhất ($0.98/KL cho cả 2 bậc).",
+        "Hóa đơn trung bình hằng năm: Hộ gia đình tại Perth chi trả hóa đơn trung bình cao nhất ($332), bám sát là Sydney ($319), trong khi Melbourne thấp nhất ($253)."
+]
+    },
+    ieltsPrompt: "The table shows the cost of water in 5 cities in Australia. Summarize the information by selecting and reporting the main features and make comparisons where relevant.",
+    keyNotes: [
+        "Hai khung định mức sử dụng: Mức tiêu thụ cơ bản dưới 125 KL và mức vượt định mức trên 125 KL cùng hóa đơn trung bình năm.",
+        "Sự biến động giá nước: Perth có giá nước bậc 1 rẻ nhất ($0.42/KL) nhưng lại tăng vọt lên $1.50/KL cho lượng dùng vượt 125 KL. Sydney giữ mức giá cố định duy nhất ($0.98/KL cho cả 2 bậc).",
+        "Hóa đơn trung bình hằng năm: Hộ gia đình tại Perth chi trả hóa đơn trung bình cao nhất ($332), bám sát là Sydney ($319), trong khi Melbourne thấp nhất ($253)."
+],
+    modelEssay: "The table compares the cost of domestic water across five major Australian cities, evaluating pricing under and over 125 kilolitres (KL) alongside the average annual household bill.\n\nOverall, while consumers in Perth faced the cheapest rate for baseline water consumption, their tariff surged drastically when exceeding 125 KL, resulting in the highest average annual bill. Conversely, Sydney implemented a uniform pricing system across both usage brackets.\n\nLooking first at unit tariffs, Perth provided the lowest entry rate at just $0.42 per kilolitre for usage up to 125 KL. However, for consumption beyond this threshold, the price soared more than threefold to $1.50 per KL. A similar progressive pricing tier was seen in Brisbane, where unit charges escalated from $0.81 to $1.22 per KL. By contrast, Sydney maintained an identical rate of $0.98 per kilolitre regardless of consumption volume.\n\nIn terms of average expenditure, households in Perth incurred the heftiest annual water expenses, amounting to $332. Sydney trailed closely behind with an average annual bill of $319, followed by Adelaide ($312) and Brisbane ($310). In contrast, residents of Melbourne enjoyed the most economical annual water expenses, paying an average of only $253.",
+    vocabularies: [
+      {
+        id: "t1-zim06-1",
+        word: "domestic water",
+        ipa: "/dəˈmestɪk ˈwɔːtər/",
+        partOfSpeech: "noun",
+        meaning: "Nước dùng cho mục đích sinh hoạt gia đình",
+        basicEquivalent: "home water (Band 5)",
+        synonyms: ["residential water", "household water supply"],
+        collocations: ["cost of domestic water", "domestic water consumption"],
+        modelSentence: "Metropolitan tariffs on domestic water are designed to curb excessive waste during droughts.",
+        vietnameseSentence: "Biểu giá đô thị đối với nước sinh hoạt được thiết kế nhằm hạn chế lãng phí quá mức trong mùa khô hạn."
+      },
+      {
+        id: "t1-zim06-2",
+        word: "progressive tariff",
+        ipa: "/prəˈɡresɪv ˈtærɪf/",
+        partOfSpeech: "noun",
+        meaning: "Biểu giá lũy tiến (dùng càng nhiều giá càng tăng)",
+        basicEquivalent: "tiered pricing (Band 5)",
+        synonyms: ["tiered pricing structure", "stepped tariff"],
+        collocations: ["implement a progressive tariff", "progressive water tariff"],
+        modelSentence: "Perth utility companies enforce a steep progressive tariff to penalize high water consumers.",
+        vietnameseSentence: "Các công ty cấp nước tại Perth áp dụng biểu giá lũy tiến dốc để phạt những người tiêu thụ nhiều nước."
+      },
+      {
+        id: "t1-zim06-3",
+        word: "consumption threshold",
+        ipa: "/kənˈsʌmpʃn ˈθreʃhəʊld/",
+        partOfSpeech: "noun",
+        meaning: "Ngưỡng định mức tiêu thụ",
+        basicEquivalent: "usage limit (Band 5)",
+        synonyms: ["usage limit", "baseline quota", "allowance cap"],
+        collocations: ["exceed the consumption threshold", "surpass the 125 KL threshold"],
+        modelSentence: "Surpassing the 125-kilolitre consumption threshold automatically triggers punitive billing brackets.",
+        vietnameseSentence: "Việc dùng vượt ngưỡng định mức 125 kilolít sẽ tự động kích hoạt khung giá lũy tiến cao hơn."
+      },
+      {
+        id: "t1-zim06-4",
+        word: "uniform rate",
+        ipa: "/ˈjuːnɪfɔːm reɪt/",
+        partOfSpeech: "noun",
+        meaning: "Mức giá đồng nhất, cào bằng không phân tầng",
+        basicEquivalent: "same price (Band 5)",
+        synonyms: ["flat tariff", "constant pricing", "invariant rate"],
+        collocations: ["charge a uniform rate", "maintain a uniform rate"],
+        modelSentence: "Sydney opted for a uniform rate of $0.98 per kilolitre across all volumetric categories.",
+        vietnameseSentence: "Sydney đã lựa chọn một mức giá đồng nhất là 0.98 USD mỗi kilolít cho tất cả các khối lượng sử dụng."
+      },
+      {
+        id: "t1-zim06-5",
+        word: "soar",
+        ipa: "/sɔːr/",
+        partOfSpeech: "verb",
+        meaning: "Tăng vọt đột biến",
+        basicEquivalent: "go up quickly (Band 5)",
+        synonyms: ["surge", "escalate", "skyrocket"],
+        collocations: ["tariffs soar", "costs soar drastically"],
+        modelSentence: "Water expenditure soared dramatically once household consumption surpassed the benchmark.",
+        vietnameseSentence: "Chi phí tiền nước tăng vọt đột biến một khi lượng tiêu thụ của hộ gia đình vượt qua mức chuẩn."
+      },
+      {
+        id: "t1-zim06-6",
+        word: "hefty",
+        ipa: "/ˈhefti/",
+        partOfSpeech: "adjective",
+        meaning: "Lớn, đắt đỏ, nặng nề (về tiền bạc)",
+        basicEquivalent: "big / high (Band 5)",
+        synonyms: ["substantial", "sizeable", "burdensome"],
+        collocations: ["hefty bill", "hefty financial commitment"],
+        modelSentence: "Perth homeowners incurred the heftiest annual water bill among all five metropolises.",
+        vietnameseSentence: "Các chủ hộ tại Perth phải gánh chịu hóa đơn tiền nước thường niên đắt đỏ nhất trong cả năm đô thị."
+      },
+      {
+        id: "t1-zim06-7",
+        word: "economical",
+        ipa: "/ˌiːkəˈnɒmɪkl/",
+        partOfSpeech: "adjective",
+        meaning: "Tiết kiệm, ít tốn kém chi phí",
+        basicEquivalent: "cheap (Band 5)",
+        synonyms: ["cost-effective", "budget-friendly", "inexpensive"],
+        collocations: ["most economical option", "economical water usage"],
+        modelSentence: "Melbourne represented the most economical urban location regarding utility expenditures.",
+        vietnameseSentence: "Melbourne là địa điểm đô thị tiết kiệm nhất xét về các khoản chi phí tiện ích sinh hoạt."
+      },
+      {
+        id: "t1-zim06-8",
+        word: "annual outlay",
+        ipa: "/ˈænjuəl ˈaʊtleɪ/",
+        partOfSpeech: "noun",
+        meaning: "Khoản chi tiêu xuất quỹ hằng năm",
+        basicEquivalent: "yearly spending (Band 5)",
+        synonyms: ["annual expenditure", "yearly bill", "annual spending"],
+        collocations: ["average annual outlay", "minimize annual outlay"],
+        modelSentence: "The average annual outlay on residential water in Melbourne remained limited to $253.",
+        vietnameseSentence: "Khoản chi tiêu hằng năm trung bình cho nước sinh hoạt tại Melbourne chỉ dừng lại ở mức 253 USD."
+      }
+    ]
+  },
+  {
+    id: "task1-zim-07-city-evolution",
+    name: "Maps: City Spatial Changes from 1950 to Present Day (14/12/2019)",
+    vietnameseName: "Bản đồ quy hoạch: Sự biến đổi không gian thành phố từ 1950 đến nay (14/12/2019)",
+    tag: "Task 1: Bản đồ quy hoạch (Maps)",
+    icon: "MapPin",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_zim-07-city-evolution.png",
+    chartData: {
+      title: "Maps: City Spatial Changes from 1950 to Present Day (14/12/2019)",
+      imageUrl: "/charts/task1/task1_zim-07-city-evolution.png",
+      keyNotes: [
+        "Tăng trưởng dân số bùng nổ: Dân số tăng gấp 10 lần, từ 20,000 người năm 1950 lên 200,000 người hiện nay.",
+        "Mở rộng khu dân cư & hạ tầng: Khu dân cư (residential areas) lan rộng bao quanh trung tâm hành chính; xây mới cầu, đập thủy điện và hệ thống đường sá hiện đại.",
+        "Các công trình giữ nguyên: Vị trí của sân bay (airport) và dòng sông (river) không thay đổi vị trí địa lý."
+]
+    },
+    ieltsPrompt: "The maps show changes in a city in 1950 and now. Summarize the information by selecting and reporting the main features and make comparison where relevant.",
+    keyNotes: [
+        "Tăng trưởng dân số bùng nổ: Dân số tăng gấp 10 lần, từ 20,000 người năm 1950 lên 200,000 người hiện nay.",
+        "Mở rộng khu dân cư & hạ tầng: Khu dân cư (residential areas) lan rộng bao quanh trung tâm hành chính; xây mới cầu, đập thủy điện và hệ thống đường sá hiện đại.",
+        "Các công trình giữ nguyên: Vị trí của sân bay (airport) và dòng sông (river) không thay đổi vị trí địa lý."
+],
+    modelEssay: "The given maps illustrate a number of changes taking place in a city between 1950 and the present day.\n\nOverall, the most significant modification after nearly seven decades is the dramatic expansion of residential zones to accommodate a ten-fold population boom, along with upgraded infrastructure, while the river and airport remained in their original locations.\n\nIn 1950, the city was home to a modest population of 20,000 residents, with housing concentrated predominantly directly north and south of the commercial centre. By contrast, the present population has multiplied tenfold to 200,000. To support this growth, residential districts have sprawled substantially across both riverbanks, completely encircling the business and government quarters.\n\nRegarding transport and communal amenities, several major changes are noticeable. While there was only a solitary bridge crossing the river in 1950, additional road links and crossings have since been constructed. A modern dam has been established along the river to regulate water flow and form an artificial reservoir, whereas the airport situated on the northeastern fringe and the central government complex have retained their initial layouts.",
+    vocabularies: [
+      {
+        id: "t1-zim07-1",
+        word: "residential zone",
+        ipa: "/ˌrezɪˈdenʃl zəʊn/",
+        partOfSpeech: "noun",
+        meaning: "Khu dân cư, khu nhà ở của người dân",
+        basicEquivalent: "housing area (Band 5)",
+        synonyms: ["housing district", "residential quarter", "suburb"],
+        collocations: ["expansion of residential zones", "densely populated residential zone"],
+        modelSentence: "Vast residential zones have expanded outward to cater to incoming urban migrants.",
+        vietnameseSentence: "Các khu dân cư rộng lớn đã mở rộng ra bên ngoài để phục vụ lượng người di cư đến thành phố."
+      },
+      {
+        id: "t1-zim07-2",
+        word: "sprawl",
+        ipa: "/sprɔːl/",
+        partOfSpeech: "verb",
+        meaning: "Lan rộng, bành trướng không gian (đô thị)",
+        basicEquivalent: "grow bigger (Band 5)",
+        synonyms: ["expand outward", "proliferate", "spread"],
+        collocations: ["urban sprawl", "sprawl across both banks"],
+        modelSentence: "Residential neighbourhoods have sprawled extensively across both sides of the waterway.",
+        vietnameseSentence: "Các khu phố nhà ở đã lan rộng đáng kể sang cả hai bờ nguồn nước."
+      },
+      {
+        id: "t1-zim07-3",
+        word: "tenfold",
+        ipa: "/ˈtenfəʊld/",
+        partOfSpeech: "adverb",
+        meaning: "Gấp 10 lần",
+        basicEquivalent: "ten times (Band 5)",
+        synonyms: ["by a factor of ten", "decavalent"],
+        collocations: ["multiply tenfold", "a tenfold increase"],
+        modelSentence: "The city experienced a staggering tenfold population growth from 20,000 to 200,000.",
+        vietnameseSentence: "Thành phố chứng kiến mức tăng trưởng dân số kinh ngạc gấp mười lần từ 20.000 lên 200.000 người."
+      },
+      {
+        id: "t1-zim07-4",
+        word: "encircle",
+        ipa: "/ɪnˈsɜːkl/",
+        partOfSpeech: "verb",
+        meaning: "Bao quanh, ôm trọn lấy khu vực",
+        basicEquivalent: "surround (Band 5)",
+        synonyms: ["encompass", "surround", "border"],
+        collocations: ["encircle the city center", "completely encircle"],
+        modelSentence: "Modern housing developments now almost completely encircle the historic commercial core.",
+        vietnameseSentence: "Các khu đô thị mới hiện nay gần như bao bọc hoàn toàn khu lõi thương mại lịch sử."
+      },
+      {
+        id: "t1-zim07-5",
+        word: "retain its position",
+        ipa: "/rɪˈteɪn ɪts pəˈzɪʃn/",
+        partOfSpeech: "verb",
+        meaning: "Duy trì nguyên vẹn vị trí, không thay đổi",
+        basicEquivalent: "stay in the same place (Band 5)",
+        synonyms: ["remain unchanged", "stay intact", "persist"],
+        collocations: ["retain its initial layout", "retain geographic position"],
+        modelSentence: "The municipal aerodrome retained its position on the northeastern periphery without structural alterations.",
+        vietnameseSentence: "Sân bay đô thị vẫn giữ nguyên vị trí ở vùng ven đông bắc mà không có thay đổi kết cấu nào."
+      },
+      {
+        id: "t1-zim07-6",
+        word: "hydroelectric dam",
+        ipa: "/ˌhaɪdrəʊɪˈlektrɪk dæm/",
+        partOfSpeech: "noun",
+        meaning: "Đập thủy điện / đập ngăn nước",
+        basicEquivalent: "water dam (Band 5)",
+        synonyms: ["water barrier", "weir", "impoundment"],
+        collocations: ["construct a dam", "erect a modern dam"],
+        modelSentence: "A downstream dam was erected along the river to guarantee consistent tap water supplies.",
+        vietnameseSentence: "Một con đập ở hạ lưu đã được xây dựng dọc theo sông nhằm đảm bảo nguồn nước sinh hoạt ổn định."
+      },
+      {
+        id: "t1-zim07-7",
+        word: "arterial road",
+        ipa: "/ɑːˈtɪəriəl rəʊd/",
+        partOfSpeech: "noun",
+        meaning: "Trục đường huyết mạch, đường giao thông chính",
+        basicEquivalent: "main street (Band 5)",
+        synonyms: ["thoroughfare", "major roadway", "arterial highway"],
+        collocations: ["network of arterial roads", "widen arterial roads"],
+        modelSentence: "Additional arterial roads were introduced to link peripheral settlements to downtown office towers.",
+        vietnameseSentence: "Các trục đường huyết mạch bổ sung đã được mở để kết nối các khu dân cư ngoại vi với các tòa nhà văn phòng trung tâm."
+      },
+      {
+        id: "t1-zim07-8",
+        word: "metamorphosis",
+        ipa: "/ˌmetəˈmɔːfəsɪs/",
+        partOfSpeech: "noun",
+        meaning: "Sự chuyển mình biến đổi hoàn toàn diện mạo",
+        basicEquivalent: "big change (Band 5)",
+        synonyms: ["transformation", "urban redevelopment", "structural evolution"],
+        collocations: ["undergo a complete metamorphosis", "urban metamorphosis"],
+        modelSentence: "The town underwent a profound spatial metamorphosis from a quiet outpost into a bustling metropolis.",
+        vietnameseSentence: "Thị trấn đã trải qua một sự chuyển mình không gian sâu sắc từ một trạm tiền tiêu vắng vẻ thành một đại đô thị sầm uất."
+      }
+    ]
+  },
+  {
+    id: "task1-zim-08-road-safety",
+    name: "Maps: Road Redesign for Accident Reduction (23/05/2019)",
+    vietnameseName: "Bản đồ nút giao: Hiện trạng & đề xuất quy hoạch giảm tai nạn giao thông (23/05/2019)",
+    tag: "Task 1: Bản đồ cải tạo (Maps)",
+    icon: "MapPin",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_zim-08-road-safety.png",
+    chartData: {
+      title: "Maps: Road Redesign for Accident Reduction (23/05/2019)",
+      imageUrl: "/charts/task1/task1_zim-08-road-safety.png",
+      keyNotes: [
+        "Hiện trạng giao thông: Nút giao cắt giữa City Road và Low Lane thường xuyên xảy ra tai nạn do tầm nhìn khuất và thiếu hệ thống đèn tín hiệu điều tiết.",
+        "Quy hoạch đề xuất: Thay thế giao lộ nguy hiểm bằng một bùng binh/vòng xuyến lớn (roundabout), lắp đặt hệ thống đèn giao thông (traffic lights), và xây dựng các lối qua đường an toàn cho người đi bộ.",
+        "Mục tiêu cốt lõi: Giảm thiểu xung đột giữa các luồng xe chuyển hướng và bảo vệ an toàn cho cả người điều khiển phương tiện lẫn người đi bộ."
+]
+    },
+    ieltsPrompt: "The maps show a road system as it is now and the proposed changes in the future to reduce the number of accidents. Summarize the information by selecting and reporting the main features and make comparison where relevant.",
+    keyNotes: [
+        "Hiện trạng giao thông: Nút giao cắt giữa City Road và Low Lane thường xuyên xảy ra tai nạn do tầm nhìn khuất và thiếu hệ thống đèn tín hiệu điều tiết.",
+        "Quy hoạch đề xuất: Thay thế giao lộ nguy hiểm bằng một bùng binh/vòng xuyến lớn (roundabout), lắp đặt hệ thống đèn giao thông (traffic lights), và xây dựng các lối qua đường an toàn cho người đi bộ.",
+        "Mục tiêu cốt lõi: Giảm thiểu xung đột giữa các luồng xe chuyển hướng và bảo vệ an toàn cho cả người điều khiển phương tiện lẫn người đi bộ."
+],
+    modelEssay: "The maps provide information about a current road system and proposed changes to increase the safety of its users.\n\nOverall, the main changes being proposed include the introduction of a major roundabout, the installation of several sets of traffic lights, and the restructuring of intersecting roadways to eliminate hazardous accident blackspots.\n\nCurrently, the intersection connecting City Road and Low Lane forms a high-risk junction without traffic control mechanisms, resulting in frequent vehicular collisions. Moreover, pedestrians crossing the roadway face considerable peril due to the lack of designated crossings and oncoming high-speed traffic.\n\nUnder the proposed urban development blueprint, a sizable roundabout will be constructed at the primary intersection to regulate vehicle speeds and smooth out traffic flow. Additionally, sets of automated traffic lights will be erected at strategic points along Low Lane and City Road to coordinate turning vehicles. Safe zebra crossings and pedestrian refuge islands will also be installed, thereby mitigating accident risks for commuters and local residents alike.",
+    vocabularies: [
+      {
+        id: "t1-zim08-1",
+        word: "accident blackspot",
+        ipa: "/ˈæksɪdənt ˈblækspɒt/",
+        partOfSpeech: "noun",
+        meaning: "Điểm đen tai nạn giao thông",
+        basicEquivalent: "dangerous road place (Band 5)",
+        synonyms: ["hazardous intersection", "high-collision zone"],
+        collocations: ["eliminate accident blackspots", "identify blackspots"],
+        modelSentence: "The outdated crossroad had long been condemned as an notorious accident blackspot.",
+        vietnameseSentence: "Giao lộ cũ kỹ từ lâu đã bị xem là một điểm đen tai nạn giao thông khét tiếng."
+      },
+      {
+        id: "t1-zim08-2",
+        word: "roundabout",
+        ipa: "/ˈraʊndəbaʊt/",
+        partOfSpeech: "noun",
+        meaning: "Vòng xuyến, bùng binh giao thông",
+        basicEquivalent: "circle road (Band 5)",
+        synonyms: ["traffic circle", "rotary"],
+        collocations: ["install a roundabout", "navigate the roundabout"],
+        modelSentence: "Planners intend to replace the uncontrolled junction with a multi-lane roundabout.",
+        vietnameseSentence: "Các nhà quy hoạch dự định thay thế ngã tư không kiểm soát bằng một vòng xuyến đa làn xe."
+      },
+      {
+        id: "t1-zim08-3",
+        word: "traffic lights",
+        ipa: "/ˈtræfɪk laɪts/",
+        partOfSpeech: "noun",
+        meaning: "Hệ thống đèn tín hiệu giao thông",
+        basicEquivalent: "stop lights (Band 5)",
+        synonyms: ["automated traffic signals", "signaling system"],
+        collocations: ["sets of traffic lights", "signalized intersection"],
+        modelSentence: "Several sets of traffic lights will be strategically positioned to meter arterial traffic flows.",
+        vietnameseSentence: "Nhiều cụm đèn tín hiệu giao thông sẽ được bố trí hợp lý để điều tiết lưu lượng xe cộ trên trục chính."
+      },
+      {
+        id: "t1-zim08-4",
+        word: "pedestrian crossing",
+        ipa: "/pəˈdestriən ˈkrɒsɪŋ/",
+        partOfSpeech: "noun",
+        meaning: "Vạch kẻ / lối đi bộ an toàn qua đường",
+        basicEquivalent: "walk path on road (Band 5)",
+        synonyms: ["zebra crossing", "signalized crosswalk"],
+        collocations: ["designated pedestrian crossing", "crosswalk safety"],
+        modelSentence: "A dedicated pedestrian crossing ensures pupils can cross the boulevard without danger.",
+        vietnameseSentence: "Một lối qua đường dành riêng cho người đi bộ đảm bảo học sinh có thể qua đại lộ mà không gặp nguy hiểm."
+      },
+      {
+        id: "t1-zim08-5",
+        word: "mitigate",
+        ipa: "/ˈmɪtɪɡeɪt/",
+        partOfSpeech: "verb",
+        meaning: "Làm giảm bớt, xoa dịu mức độ nghiêm trọng",
+        basicEquivalent: "reduce (Band 5)",
+        synonyms: ["alleviate", "lessen", "curb"],
+        collocations: ["mitigate risks", "mitigate traffic collisions"],
+        modelSentence: "The infrastructural revamp aims primarily to mitigate fatal vehicular crashes.",
+        vietnameseSentence: "Việc nâng cấp hạ tầng nhằm mục tiêu chủ yếu là giảm thiểu các vụ va chạm giao thông gây tử vong."
+      },
+      {
+        id: "t1-zim08-6",
+        word: "intersection",
+        ipa: "/ˌɪntəˈsekʃn/",
+        partOfSpeech: "noun",
+        meaning: "Ngã ba, ngã tư giao nhau",
+        basicEquivalent: "crossing (Band 5)",
+        synonyms: ["junction", "crossroad"],
+        collocations: ["busy intersection", "perilous intersection"],
+        modelSentence: "Reconfiguring the blind intersection will substantially widen sightlines for motorists.",
+        vietnameseSentence: "Việc tái cấu trúc lại ngã tư khuất tầm nhìn sẽ mở rộng đáng kể tầm quan sát cho người lái xe."
+      },
+      {
+        id: "t1-zim08-7",
+        word: "refuge island",
+        ipa: "/ˈrefjuːdʒ ˈaɪlənd/",
+        partOfSpeech: "noun",
+        meaning: "Đảo dừng chân an toàn giữa lòng đường cho người đi bộ",
+        basicEquivalent: "middle safety stop (Band 5)",
+        synonyms: ["pedestrian island", "safety median"],
+        collocations: ["install refuge islands", "central refuge island"],
+        modelSentence: "Central refuge islands allow elderly pedestrians to cross wide roadways in two manageable stages.",
+        vietnameseSentence: "Các đảo dừng chân giữa đường cho phép người cao tuổi qua đường phố rộng theo hai chặng an toàn."
+      },
+      {
+        id: "t1-zim08-8",
+        word: "restructure",
+        ipa: "/ˌriːˈstrʌktʃər/",
+        partOfSpeech: "verb",
+        meaning: "Tổ chức lại, tái định hình cơ cấu mạng lưới",
+        basicEquivalent: "change the system (Band 5)",
+        synonyms: ["reconfigure", "remodel", "overhaul"],
+        collocations: ["restructure the road layout", "reorganize traffic lanes"],
+        modelSentence: "Engineers plan to restructure the adjoining slip roads to prevent bottleneck queues.",
+        vietnameseSentence: "Các kỹ sư dự định tổ chức lại các nhánh đường nhánh phụ cận để chống ùn tắc kéo dài."
+      }
+    ]
+  },
+  {
+    id: "task1-zim-09-rainwater",
+    name: "Process: Rainwater Harvesting for Drinking in Australia (25/05/2019)",
+    vietnameseName: "Quy trình: Thu gom và lọc nước mưa thành nước uống tại thị trấn Úc (25/05/2019)",
+    tag: "Task 1: Quy trình sinh hoạt (Process)",
+    icon: "Layers",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_zim-09-rainwater.png",
+    chartData: {
+      title: "Process: Rainwater Harvesting for Drinking in Australia (25/05/2019)",
+      imageUrl: "/charts/task1/task1_zim-09-rainwater.png",
+      keyNotes: [
+        "Quy trình gồm 6 bước liên hoàn: Nước mưa rơi xuống mái nhà -> dẫn qua đường ống máng xối -> đi qua bộ lọc nước -> trữ tại bồn chứa -> bơm vào bồn xử lý hóa chất diệt khuẩn -> phân phối đến vòi nước hộ gia đình.",
+        "Điểm then chốt: Nước được lọc thô trước khi vào bể chứa, sau đó mới được xử lý hóa chất để đạt chuẩn nước uống tinh khiết (potable drinking water).",
+        "Mạng lưới khép kín: Sử dụng hệ thống máy bơm (pump) và đường ống ngầm liên kết tới từng hộ dân."
+]
+    },
+    ieltsPrompt: "The diagram shows how rainwater is collected for the use of drinking water in an Australia town. Summarize the information by selecting and reporting the main features and make comparison where relevant.",
+    keyNotes: [
+        "Quy trình gồm 6 bước liên hoàn: Nước mưa rơi xuống mái nhà -> dẫn qua đường ống máng xối -> đi qua bộ lọc nước -> trữ tại bồn chứa -> bơm vào bồn xử lý hóa chất diệt khuẩn -> phân phối đến vòi nước hộ gia đình.",
+        "Điểm then chốt: Nước được lọc thô trước khi vào bể chứa, sau đó mới được xử lý hóa chất để đạt chuẩn nước uống tinh khiết (potable drinking water).",
+        "Mạng lưới khép kín: Sử dụng hệ thống máy bơm (pump) và đường ống ngầm liên kết tới từng hộ dân."
+],
+    modelEssay: "The diagram illustrates the process of harvesting rainwater in order to provide drinking water for residents in an Australian town.\n\nOverall, there are approximately six stages in the process of rainwater harvesting, beginning with the collection of rain on residential rooftops and culminating in the delivery of treated potable drinking water to household faucets.\n\nFirstly, rain is caught on the rooftops of houses and runs down through a system of connected gutter pipes which lead directly to a water filter. Once the water has been filtered to remove debris, it then moves through underground pipes into a large storage tank.\n\nWhen water is required by the community, it is transferred through another pipe into a water treatment tank where chemicals are added to sanitize and make it safe for human consumption. Finally, once the purification is complete, the potable water is pumped through another network of distribution pipes connecting to individual homes, where residents can access it directly via their kitchen taps.",
+    vocabularies: [
+      {
+        id: "t1-zim09-1",
+        word: "rainwater harvesting",
+        ipa: "/ˈreɪnwɔːtər ˈhɑːvɪstɪŋ/",
+        partOfSpeech: "noun",
+        meaning: "Việc thu gom và lưu trữ nước mưa tự nhiên",
+        basicEquivalent: "collecting rain water (Band 5)",
+        synonyms: ["rain catchment", "precipitation collection"],
+        collocations: ["rainwater harvesting system", "rooftop rainwater harvesting"],
+        modelSentence: "Rooftop rainwater harvesting offers a sustainable solution for drought-prone rural settlements.",
+        vietnameseSentence: "Thu gom nước mưa trên mái nhà đem lại giải pháp bền vững cho các khu định cư nông thôn dễ bị hạn hán."
+      },
+      {
+        id: "t1-zim09-2",
+        word: "potable water",
+        ipa: "/ˈpəʊtəbl ˈwɔːtər/",
+        partOfSpeech: "noun",
+        meaning: "Nước uống được, an toàn cho sức khỏe",
+        basicEquivalent: "drinkable water (Band 5)",
+        synonyms: ["drinking water", "safe drinking supply"],
+        collocations: ["generate potable water", "potable water standards"],
+        modelSentence: "The multi-stage plant converts contaminated runoff into certified potable water.",
+        vietnameseSentence: "Nhà máy đa công đoạn chuyển đổi dòng chảy ô nhiễm thành nước uống đạt chuẩn kiểm định."
+      },
+      {
+        id: "t1-zim09-3",
+        word: "drain pipe",
+        ipa: "/dreɪn paɪp/",
+        partOfSpeech: "noun",
+        meaning: "Ống thoát nước, ống xả nước",
+        basicEquivalent: "water tube (Band 5)",
+        synonyms: ["gutter conduit", "downpipe", "drainage conduit"],
+        collocations: ["connected drain pipes", "gutter and drain pipe"],
+        modelSentence: "Water cascades down steep tiled roofs through heavy-duty drain pipes into the filtration unit.",
+        vietnameseSentence: "Nước chảy tràn xuống mái ngói dốc qua các ống thoát nước chịu lực vào bộ phận lọc."
+      },
+      {
+        id: "t1-zim09-4",
+        word: "storage tank",
+        ipa: "/ˈstɔːrɪdʒ tæŋk/",
+        partOfSpeech: "noun",
+        meaning: "Bể trữ nước, bồn chứa nước dung tích lớn",
+        basicEquivalent: "water box (Band 5)",
+        synonyms: ["cistern", "reservoir tank", "holding chamber"],
+        collocations: ["large storage tank", "underground storage tank"],
+        modelSentence: "Filtered runoff is safeguarded in a sealed storage tank to protect it against mosquito larvae.",
+        vietnameseSentence: "Nước sau lọc được bảo quản an toàn trong bồn chứa kín để phòng ngừa ấu trùng muỗi."
+      },
+      {
+        id: "t1-zim09-5",
+        word: "chemical treatment",
+        ipa: "/ˈkemɪkl ˈtriːtmənt/",
+        partOfSpeech: "noun",
+        meaning: "Xử lý bằng hóa chất (khử trùng, clo hóa)",
+        basicEquivalent: "clean with chemicals (Band 5)",
+        synonyms: ["chemical dosing", "chemical disinfection"],
+        collocations: ["undergo chemical treatment", "water chemical treatment"],
+        modelSentence: "During the chemical treatment phase, chlorine neutralizes pathogenic microbes.",
+        vietnameseSentence: "Trong giai đoạn xử lý bằng hóa chất, clo sẽ tiêu diệt và vô hiệu hóa các vi khuẩn gây bệnh."
+      },
+      {
+        id: "t1-zim09-6",
+        word: "water faucet",
+        ipa: "/ˈwɔːtər ˈfɔːsɪt/",
+        partOfSpeech: "noun",
+        meaning: "Vòi nước sinh hoạt",
+        basicEquivalent: "water tap (Band 5)",
+        synonyms: ["household tap", "water spigot"],
+        collocations: ["domestic water faucet", "turn on the faucet"],
+        modelSentence: "Treated pure water is finally pressurized and piped straight to kitchen water faucets.",
+        vietnameseSentence: "Nước tinh khiết sau xử lý cuối cùng được tạo áp suất và dẫn thẳng tới vòi nước nhà bếp."
+      },
+      {
+        id: "t1-zim09-7",
+        word: "filtration unit",
+        ipa: "/fɪlˈtreɪʃn ˈjuːnɪt/",
+        partOfSpeech: "noun",
+        meaning: "Bộ phận lọc, màng lọc cơ học",
+        basicEquivalent: "filter machine (Band 5)",
+        synonyms: ["screening filter", "purifying filter"],
+        collocations: ["pass through a filtration unit", "water filter"],
+        modelSentence: "The initial filtration unit strains out suspended sediment, airborne dust, and tree leaves.",
+        vietnameseSentence: "Bộ phận lọc ban đầu giữ lại cặn lơ lửng, bụi trong không khí và lá cây rụng."
+      },
+      {
+        id: "t1-zim09-8",
+        word: "pump",
+        ipa: "/pʌmp/",
+        partOfSpeech: "verb",
+        meaning: "Bơm, đẩy chất lỏng bằng máy bơm",
+        basicEquivalent: "push water (Band 5)",
+        synonyms: ["propel", "pressurize", "deliver via pumps"],
+        collocations: ["pump through pipes", "pump to residential households"],
+        modelSentence: "Electrical booster pumps pump treated liquid through municipal supply mains.",
+        vietnameseSentence: "Các máy bơm tăng áp chạy điện bơm đẩy chất lỏng đã xử lý qua đường ống cấp nước của thành phố."
+      }
+    ]
+  },
+  {
+    id: "task1-zim-10-stormwater",
+    name: "Process: Stormwater Recycling in an Australian City (06/06/2019)",
+    vietnameseName: "Quy trình: Tái chế nước bão đô thị tại thành phố Úc (06/06/2019)",
+    tag: "Task 1: Quy trình sinh thái (Process)",
+    icon: "Layers",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_zim-10-stormwater.png",
+    chartData: {
+      title: "Process: Stormwater Recycling in an Australian City (06/06/2019)",
+      imageUrl: "/charts/task1/task1_zim-10-stormwater.png",
+      keyNotes: [
+        "Quy trình sinh thái phức tạp gồm 9 bước: Thu gom nước bão đô thị -> Lưới chắn rác -> Vùng đầm lầy sinh học (wetland bio-filter) -> Bể lắng -> Xử lý hóa chất/khử trùng clo -> Bơm nạp vào tầng ngậm nước ngầm (aquifer) -> Khai thác lại và tái phân phối.",
+        "Điểm khác biệt so với nước mưa: Sử dụng đầm lầy tự nhiên để phân hủy sinh học chất ô nhiễm hữu cơ và lưu trữ trong tầng ngậm nước địa chất ngầm.",
+        "Tái sử dụng đô thị: Nguồn nước sau tái chế được cấp cho tưới tiêu công viên, nhà máy và dội rửa vệ sinh đô thị."
+]
+    },
+    ieltsPrompt: "The diagram below describes how storm water is recycled in an Australian city. Summarize the information by selecting and reporting the main features and make comparison where relevant.",
+    keyNotes: [
+        "Quy trình sinh thái phức tạp gồm 9 bước: Thu gom nước bão đô thị -> Lưới chắn rác -> Vùng đầm lầy sinh học (wetland bio-filter) -> Bể lắng -> Xử lý hóa chất/khử trùng clo -> Bơm nạp vào tầng ngậm nước ngầm (aquifer) -> Khai thác lại và tái phân phối.",
+        "Điểm khác biệt so với nước mưa: Sử dụng đầm lầy tự nhiên để phân hủy sinh học chất ô nhiễm hữu cơ và lưu trữ trong tầng ngậm nước địa chất ngầm.",
+        "Tái sử dụng đô thị: Nguồn nước sau tái chế được cấp cho tưới tiêu công viên, nhà máy và dội rửa vệ sinh đô thị."
+],
+    modelEssay: "The diagram illustrates the sequential stages involved in recycling urban stormwater within an Australian city.\n\nOverall, the stormwater reclamation process comprises nine comprehensive steps, which combine mechanical screening, biological wetland filtration, chemical disinfection, and underground aquifer storage before reclaimed water is returned to the municipal grid.\n\nThe procedure begins when heavy rain generates stormwater runoff across urban pavements. This runoff is channeled into drainage intakes fitted with coarse screen grates to trap bulky debris and trash. Next, the water flows into engineered constructed wetlands, where aquatic plants and microbes break down dissolved organic nutrients and heavy contaminants naturally.\n\nFollowing wetland bio-filtration, the water is routed into settlement basins before undergoing chemical chlorination to eliminate harmful bacteria and pathogens. Rather than being stored in exposed surface tanks, the purified liquid is pumped deep into subterranean geological aquifers for long-term safe storage. Whenever demand peaks, specialized pump stations extract this recycled water from underground aquifers and pump it into the city's auxiliary distribution grid for industrial cooling, irrigation, and municipal reuse.",
+    vocabularies: [
+      {
+        id: "t1-zim10-1",
+        word: "stormwater runoff",
+        ipa: "/ˈstɔːmwɔːtər ˈrʌnɒf/",
+        partOfSpeech: "noun",
+        meaning: "Dòng nước mưa bão chảy tràn trên mặt đất đô thị",
+        basicEquivalent: "storm water on streets (Band 5)",
+        synonyms: ["urban runoff", "surface water discharge"],
+        collocations: ["collect stormwater runoff", "filter stormwater runoff"],
+        modelSentence: "Uncontrolled stormwater runoff frequently washes vehicular oil and litter into municipal gutters.",
+        vietnameseSentence: "Dòng nước mưa bão chảy tràn mất kiểm soát thường cuốn dầu xe và rác thải vào các mương máng đô thị."
+      },
+      {
+        id: "t1-zim10-2",
+        word: "constructed wetland",
+        ipa: "/kənˈstrʌktɪd ˈwetlænd/",
+        partOfSpeech: "noun",
+        meaning: "Vùng đất ngập nước / đầm lầy nhân tạo để lọc sinh học",
+        basicEquivalent: "water pond with plants (Band 5)",
+        synonyms: ["engineered reed bed", "bio-retention basin"],
+        collocations: ["flow into constructed wetlands", "wetland bio-filter"],
+        modelSentence: "Vegetation within the constructed wetland naturally digests hazardous nitrogen compounds.",
+        vietnameseSentence: "Thực vật bên trong vùng đầm lầy nhân tạo phân hủy tự nhiên các hợp chất nitơ độc hại."
+      },
+      {
+        id: "t1-zim10-3",
+        word: "subterranean aquifer",
+        ipa: "/ˌsʌbtəˈreɪniən ˈækwɪfər/",
+        partOfSpeech: "noun",
+        meaning: "Tầng ngậm nước ngầm dưới lòng đất",
+        basicEquivalent: "underground water rock (Band 5)",
+        synonyms: ["underground water reservoir", "deep geological aquifer"],
+        collocations: ["injected into an aquifer", "pump from the aquifer"],
+        modelSentence: "Surplus recycled storm runoff is injected into a deep subterranean aquifer to prevent evaporation.",
+        vietnameseSentence: "Nước bão tái chế dư thừa được bơm nạp vào tầng ngậm nước ngầm sâu để chống bốc hơi thất thoát."
+      },
+      {
+        id: "t1-zim10-4",
+        word: "chlorination",
+        ipa: "/ˌklɒrɪˈneɪʃn/",
+        partOfSpeech: "noun",
+        meaning: "Quá trình khử trùng bằng clo",
+        basicEquivalent: "cleaning with chlorine (Band 5)",
+        synonyms: ["chlorine disinfection", "chemical sanitization"],
+        collocations: ["undergo chlorination", "water chlorination"],
+        modelSentence: "Chlorination guarantees that remaining pathogenic bacteria are neutralized prior to aquifer storage.",
+        vietnameseSentence: "Quá trình clo hóa đảm bảo vi khuẩn gây bệnh còn sót lại bị tiêu diệt trước khi đưa vào tầng ngậm nước."
+      },
+      {
+        id: "t1-zim10-5",
+        word: "reclamation",
+        ipa: "/ˌrekləˈmeɪʃn/",
+        partOfSpeech: "noun",
+        meaning: "Sự tái tạo, thu hồi và tái sinh tài nguyên",
+        basicEquivalent: "recycling (Band 5)",
+        synonyms: ["water recycling", "resource recovery"],
+        collocations: ["stormwater reclamation", "wastewater reclamation"],
+        modelSentence: "The city established an ambitious stormwater reclamation scheme to counter chronic droughts.",
+        vietnameseSentence: "Thành phố đã thiết lập chương trình tái sinh nước bão đầy tham vọng nhằm ứng phó với các đợt hạn hán kéo dài."
+      },
+      {
+        id: "t1-zim10-6",
+        word: "coarse screen",
+        ipa: "/kɔːs skriːn/",
+        partOfSpeech: "noun",
+        meaning: "Lưới chắn rác thô",
+        basicEquivalent: "trash net (Band 5)",
+        synonyms: ["debris grating", "bar screen"],
+        collocations: ["pass through a coarse screen", "coarse screen filter"],
+        modelSentence: "The coarse screen captures plastic bags and tree branches before the fluid enters pipework.",
+        vietnameseSentence: "Lưới chắn rác thô giữ lại túi nilon và cành cây trước khi chất lỏng đi vào hệ thống đường ống."
+      },
+      {
+        id: "t1-zim10-7",
+        word: "settlement basin",
+        ipa: "/ˈsetlmənt ˈbeɪsn/",
+        partOfSpeech: "noun",
+        meaning: "Bể lắng cặn",
+        basicEquivalent: "settling pool (Band 5)",
+        synonyms: ["sedimentation tank", "clarifier basin"],
+        collocations: ["drain into a settlement basin", "settlement chamber"],
+        modelSentence: "Heavy silt and suspended grit settle by gravity at the base of the concrete settlement basin.",
+        vietnameseSentence: "Bùn nặng và cát sạn lơ lửng lắng đọng nhờ trọng lực dưới đáy bể lắng bằng bê tông."
+      },
+      {
+        id: "t1-zim10-8",
+        word: "auxiliary grid",
+        ipa: "/ɔːɡˈzɪliəri ɡrɪd/",
+        partOfSpeech: "noun",
+        meaning: "Hệ thống mạng lưới đường ống phụ trợ (dùng cho nước tưới/vệ sinh)",
+        basicEquivalent: "second pipe network (Band 5)",
+        synonyms: ["secondary distribution network", "dual reticulation network"],
+        collocations: ["pipe into the auxiliary grid", "auxiliary water pipeline"],
+        modelSentence: "Non-potable water is channeled via a purple auxiliary grid solely reserved for landscape irrigation.",
+        vietnameseSentence: "Nước không dùng để uống được dẫn qua mạng lưới phụ trợ đường ống màu tím chuyên dành cho tưới cây cảnh quan."
+      }
+    ]
+  },
+  {
+    id: "task1-zim-11-water-supply",
+    name: "Diagram: Water Supply Evolution in Australia: Present vs Future (12/12/2019)",
+    vietnameseName: "Sơ đồ công nghệ: Hệ thống cấp nước tại Úc hiện tại và tương lai (12/12/2019)",
+    tag: "Task 1: Sơ đồ so sánh (Diagram)",
+    icon: "Layers",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_zim-11-water-supply.png",
+    chartData: {
+      title: "Diagram: Water Supply Evolution in Australia: Present vs Future (12/12/2019)",
+      imageUrl: "/charts/task1/task1_zim-11-water-supply.png",
+      keyNotes: [
+        "Mô hình hiện tại (Present System): Tuyến tính một chiều, phụ thuộc hoàn toàn vào đập/hồ chứa (dam/storage) và nhà máy nước truyền thống; nước mưa và nước thải xả thẳng ra sông gây lãng phí.",
+        "Mô hình tương lai (Future System): Khép kín tuần hoàn; tích hợp nhà máy tái chế nước thải (waste water recycling) và hệ thống thu gom nước mưa (stormwater collection) để tái tạo nước sạch tuần hoàn cấp lại cho đô thị.",
+        "Lợi ích cốt lõi: Giảm áp lực khai thác nước từ sông hồ tự nhiên, triệt tiêu ô nhiễm nguồn nước mặt và đảm bảo an ninh nguồn nước bền vững."
+]
+    },
+    ieltsPrompt: "The diagrams below show the water supply system in Australia at present and in the future. Summarize the information by selecting and reporting the main features and make comparison where relevant.",
+    keyNotes: [
+        "Mô hình hiện tại (Present System): Tuyến tính một chiều, phụ thuộc hoàn toàn vào đập/hồ chứa (dam/storage) và nhà máy nước truyền thống; nước mưa và nước thải xả thẳng ra sông gây lãng phí.",
+        "Mô hình tương lai (Future System): Khép kín tuần hoàn; tích hợp nhà máy tái chế nước thải (waste water recycling) và hệ thống thu gom nước mưa (stormwater collection) để tái tạo nước sạch tuần hoàn cấp lại cho đô thị.",
+        "Lợi ích cốt lõi: Giảm áp lực khai thác nước từ sông hồ tự nhiên, triệt tiêu ô nhiễm nguồn nước mặt và đảm bảo an ninh nguồn nước bền vững."
+],
+    modelEssay: "The diagrams illustrate the current configuration of the water supply infrastructure in Australia alongside a projected blueprint for the future.\n\nOverall, the water network is forecasted to shift from a linear, disposable paradigm to an eco-friendly circular closed loop, incorporating extensive stormwater and wastewater recycling facilities.\n\nCurrently, the Australian water system relies solely on water accumulated in dams and reservoirs, which is processed by a conventional water treatment plant before being distributed as pure water to households, factories, and commercial shops across the city. After utilization, stormwater and wastewater are discharged directly into rivers, leading to substantial environmental discharge and squandered freshwater resources.\n\nIn the proposed future system, significant structural enhancements will be introduced. While pure water will continue to be supplied from storage dams, discharged wastewater from municipal and commercial premises will no longer be flushed into the river. Instead, it will be channeled into a cutting-edge wastewater recycling plant to be purified and returned directly to the city grid. Similarly, urban stormwater will also be captured, treated, and integrated back into the supply stream, effectively curtailing raw extraction from natural river basins.",
+    vocabularies: [
+      {
+        id: "t1-zim11-1",
+        word: "linear paradigm",
+        ipa: "/ˈlɪniər ˈpærədaɪm/",
+        partOfSpeech: "noun",
+        meaning: "Mô hình tuyến tính một chiều (khai thác - sử dụng - thải bỏ)",
+        basicEquivalent: "one-way system (Band 5)",
+        synonyms: ["one-way flow", "unidirectional model"],
+        collocations: ["shift from a linear paradigm", "traditional linear paradigm"],
+        modelSentence: "The historic supply model was a linear paradigm where used water was casually abandoned into rivers.",
+        vietnameseSentence: "Mô hình cấp nước trước đây là một mô hình tuyến tính, nơi nước đã qua sử dụng bị thải bỏ tự do ra sông ngòi."
+      },
+      {
+        id: "t1-zim11-2",
+        word: "circular loop",
+        ipa: "/ˈsɜːkjələr luːp/",
+        partOfSpeech: "noun",
+        meaning: "Vòng tuần hoàn khép kín",
+        basicEquivalent: "round recycling circle (Band 5)",
+        synonyms: ["closed-loop system", "circular recycling circuit"],
+        collocations: ["form a circular loop", "closed circular loop"],
+        modelSentence: "Future urban engineering establishes a circular loop that continually purifies and recirculates effluents.",
+        vietnameseSentence: "Kỹ thuật đô thị tương lai thiết lập một vòng tuần hoàn khép kín liên tục làm sạch và tái lưu thông nước thải."
+      },
+      {
+        id: "t1-zim11-3",
+        word: "wastewater recycling plant",
+        ipa: "/ˈweɪstwɔːtər ˌriːˈsaɪklɪŋ plɑːnt/",
+        partOfSpeech: "noun",
+        meaning: "Nhà máy tái chế nước thải",
+        basicEquivalent: "dirty water cleaning factory (Band 5)",
+        synonyms: ["effluent reclamation facility", "sewage treatment plant"],
+        collocations: ["build a wastewater recycling plant", "divert to the plant"],
+        modelSentence: "The planned wastewater recycling plant will remove dissolved solids using reverse osmosis membranes.",
+        vietnameseSentence: "Nhà máy tái chế nước thải trong quy hoạch sẽ loại bỏ các chất rắn hòa tan bằng màng lọc thẩm thấu ngược."
+      },
+      {
+        id: "t1-zim11-4",
+        word: "effluent",
+        ipa: "/ˈefluənt/",
+        partOfSpeech: "noun",
+        meaning: "Nước thải từ các khu công nghiệp hoặc đô thị xả ra",
+        basicEquivalent: "waste dirty water (Band 5)",
+        synonyms: ["liquid waste", "discharge sewage", "spent water"],
+        collocations: ["industrial effluents", "discharge untreated effluent"],
+        modelSentence: "Discharging untreated municipal effluents into local rivers threatens fragile aquatic ecosystems.",
+        vietnameseSentence: "Việc xả nước thải đô thị chưa qua xử lý ra các con sông địa phương đe dọa các hệ sinh thái thủy sinh mỏng manh."
+      },
+      {
+        id: "t1-zim11-5",
+        word: "storage dam",
+        ipa: "/ˈstɔːrɪdʒ dæm/",
+        partOfSpeech: "noun",
+        meaning: "Đập trữ nước, hồ thủy lợi tích nước",
+        basicEquivalent: "water reservoir (Band 5)",
+        synonyms: ["holding reservoir", "water impoundment"],
+        collocations: ["water accumulated in storage dams", "dam water levels"],
+        modelSentence: "Rainfall collected behind the storage dam supplies high-pressure pipelines entering the city.",
+        vietnameseSentence: "Lượng mưa tích tụ sau đập trữ nước cung cấp cho các đường ống áp lực cao dẫn vào đô thị."
+      },
+      {
+        id: "t1-zim11-6",
+        word: "curtail",
+        ipa: "/kɜːˈteɪl/",
+        partOfSpeech: "verb",
+        meaning: "Cắt giảm, hạn chế đáng kể",
+        basicEquivalent: "reduce / cut down (Band 5)",
+        synonyms: ["diminish", "slash", "scale back"],
+        collocations: ["curtail water extraction", "curtail reliance on rivers"],
+        modelSentence: "Recycling greywater effectively curtails municipal extraction from environmentally stressed watersheds.",
+        vietnameseSentence: "Tái chế nước thải sinh hoạt giúp cắt giảm hiệu quả lượng nước khai thác từ các lưu vực sông đang chịu áp lực môi trường."
+      },
+      {
+        id: "t1-zim11-7",
+        word: "recirculation",
+        ipa: "/ˌriːˌsɜːkjəˈleɪʃn/",
+        partOfSpeech: "noun",
+        meaning: "Sự tái tuần hoàn, tái lưu thông",
+        basicEquivalent: "flowing back again (Band 5)",
+        synonyms: ["continuous recirculation", "recycling redistribution"],
+        collocations: ["water recirculation", "continuous recirculation"],
+        modelSentence: "Constant water recirculation shields cities from unpredictable drought spells.",
+        vietnameseSentence: "Việc tái tuần hoàn nước liên tục bảo vệ các thành phố trước những đợt hạn hán thất thường."
+      },
+      {
+        id: "t1-zim11-8",
+        word: "blueprint",
+        ipa: "/ˈbluːprɪnt/",
+        partOfSpeech: "noun",
+        meaning: "Bản vẽ thiết kế, kế hoạch định hướng tương lai",
+        basicEquivalent: "plan map (Band 5)",
+        synonyms: ["master plan", "architectural scheme", "strategic design"],
+        collocations: ["future infrastructure blueprint", "engineering blueprint"],
+        modelSentence: "The master blueprint envisages a zero-waste hydraulic framework for all major Australian conurbations.",
+        vietnameseSentence: "Bản kế hoạch định hướng tổng thể dự kiến xây dựng khung thủy lực không rác thải cho mọi vùng đô thị lớn ở Úc."
+      }
+    ]
+  },
+  {
+    id: "task1-zim-12-student-rooms",
+    name: "Plans: University Student Single vs Double Room Floor Plans (25/07/2020)",
+    vietnameseName: "Bản vẽ mặt bằng: Thiết kế phòng ký túc xá đơn và phòng đôi tại đại học (25/07/2020)",
+    tag: "Task 1: Bản vẽ mặt bằng (Plans)",
+    icon: "MapPin",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_zim-12-student-rooms.png",
+    chartData: {
+      title: "Plans: University Student Single vs Double Room Floor Plans (25/07/2020)",
+      imageUrl: "/charts/task1/task1_zim-12-student-rooms.png",
+      keyNotes: [
+        "Diện tích & Giá thuê: Phòng đôi (Double room) rộng 6m x 4m (24 m²), giá $350/tuần. Phòng đơn (Single room) rộng 6m x 3m (18 m²), giá $200/tuần.",
+        "Nội thất cơ bản: Cả hai phòng đều trang bị phòng tắm khép kín (bathroom), góc bếp nấu ăn (kitchenette) và khu vực học tập.",
+        "Khác biệt bố trí: Phòng đôi được trang bị 2 bàn học, 2 giường đơn và một tủ quần áo ngăn đôi; phòng đơn chỉ có 1 giường và 1 bàn học rộng rãi cạnh cửa sổ."
+]
+    },
+    ieltsPrompt: "The plans below show a student room for two people and a student room for one person at an Australian university. Summarize the information by selecting and reporting the main features and make comparisons where relevant.",
+    keyNotes: [
+        "Diện tích & Giá thuê: Phòng đôi (Double room) rộng 6m x 4m (24 m²), giá $350/tuần. Phòng đơn (Single room) rộng 6m x 3m (18 m²), giá $200/tuần.",
+        "Nội thất cơ bản: Cả hai phòng đều trang bị phòng tắm khép kín (bathroom), góc bếp nấu ăn (kitchenette) và khu vực học tập.",
+        "Khác biệt bố trí: Phòng đôi được trang bị 2 bàn học, 2 giường đơn và một tủ quần áo ngăn đôi; phòng đơn chỉ có 1 giường và 1 bàn học rộng rãi cạnh cửa sổ."
+],
+    modelEssay: "The plans show the layouts of a single room and a double room for students at an Australian University.\n\nOverall, it is clear that both room types provide very similar basic amenities; however, the double room offers a larger floor area and commands a substantially higher weekly rental fee than its single counterpart.\n\nIn terms of dimensions and pricing, the double room measures 6 metres by 4 metres, creating a total floor space of 24 square metres, and costs $350 per week. By comparison, the single room is narrower at 6 metres by 3 metres (18 square metres) and is more economical, costing $200 weekly.\n\nRegarding internal furnishings, both rooms contain an enclosed ensuite bathroom with a toilet and shower in the top corner, as well as an adjacent kitchenette counter. The double accommodation features two single beds placed along opposite walls, two separate study desks, and a partitioned wardrobe closet. In contrast, the single room accommodates a single bed, a lone study desk with television access positioned along the exterior window wall, and a smaller singular cupboard.",
+    vocabularies: [
+      {
+        id: "t1-zim12-1",
+        word: "floor plan",
+        ipa: "/flɔː plæn/",
+        partOfSpeech: "noun",
+        meaning: "Bản vẽ mặt bằng kiến trúc nội thất",
+        basicEquivalent: "room drawing (Band 5)",
+        synonyms: ["architectural layout", "spatial blueprint"],
+        collocations: ["examine the floor plan", "floor plan layout"],
+        modelSentence: "The architectural floor plan clearly denotes the dimensions of both residential quarters.",
+        vietnameseSentence: "Bản vẽ mặt bằng kiến trúc thể hiện rõ kích thước của cả hai không gian phòng ở."
+      },
+      {
+        id: "t1-zim12-2",
+        word: "ensuite bathroom",
+        ipa: "/ˌɒn ˈswiːt ˈbɑːθruːm/",
+        partOfSpeech: "noun",
+        meaning: "Phòng tắm vệ sinh khép kín trong phòng ngủ",
+        basicEquivalent: "private toilet (Band 5)",
+        synonyms: ["private washroom", "attached bathroom"],
+        collocations: ["fitted with an ensuite bathroom", "ensuite amenities"],
+        modelSentence: "Each student accommodation module is outfitted with a private ensuite bathroom.",
+        vietnameseSentence: "Mỗi mô-đun phòng ở của sinh viên đều được trang bị một phòng tắm vệ sinh khép kín riêng biệt."
+      },
+      {
+        id: "t1-zim12-3",
+        word: "kitchenette",
+        ipa: "/ˌkɪtʃɪˈnet/",
+        partOfSpeech: "noun",
+        meaning: "Khu bếp nhỏ tự nấu ăn trong phòng",
+        basicEquivalent: "small cooking corner (Band 5)",
+        synonyms: ["cooking counter", "pantry alcove"],
+        collocations: ["compact kitchenette", "equipped kitchenette"],
+        modelSentence: "A compact kitchenette allows undergraduates to reheat meals and brew tea without leaving the room.",
+        vietnameseSentence: "Một góc bếp nhỏ gọn cho phép sinh viên hâm nóng thức ăn và pha trà mà không cần ra khỏi phòng."
+      },
+      {
+        id: "t1-zim12-4",
+        word: "weekly rental fee",
+        ipa: "/ˈwiːkli ˈrentl fiː/",
+        partOfSpeech: "noun",
+        meaning: "Giá thuê phòng theo tuần",
+        basicEquivalent: "rent each week (Band 5)",
+        synonyms: ["weekly rate", "leasing cost per week"],
+        collocations: ["charge a weekly rental fee", "affordable rental fee"],
+        modelSentence: "The weekly rental fee for the double occupancy room is fixed at $350 AUD.",
+        vietnameseSentence: "Giá thuê phòng theo tuần đối với phòng đôi được quy định cố định ở mức 350 AUD."
+      },
+      {
+        id: "t1-zim12-5",
+        word: "furnishings",
+        ipa: "/ˈfɜːnɪʃɪŋz/",
+        partOfSpeech: "noun",
+        meaning: "Đồ đạc nội thất trang bị trong phòng",
+        basicEquivalent: "furniture (Band 5)",
+        synonyms: ["interior fittings", "amenities", "room appointments"],
+        collocations: ["standard furnishings", "interior furnishings"],
+        modelSentence: "Internal furnishings in both living units follow a functional, space-saving arrangement.",
+        vietnameseSentence: "Đồ đạc nội thất trong cả hai căn phòng đều tuân thủ cách bài trí tiện dụng và tiết kiệm không gian."
+      },
+      {
+        id: "t1-zim12-6",
+        word: "partitioned",
+        ipa: "/pɑːˈtɪʃnd/",
+        partOfSpeech: "adjective",
+        meaning: "Được ngăn đôi, chia ngăn riêng biệt",
+        basicEquivalent: "divided into two (Band 5)",
+        synonyms: ["divided", "compartmentalized", "segregated"],
+        collocations: ["partitioned wardrobe", "partitioned closet"],
+        modelSentence: "The dual-occupant suite includes a partitioned wardrobe so each tenant possesses personal storage.",
+        vietnameseSentence: "Phòng đôi bao gồm một tủ quần áo ngăn đôi để mỗi người thuê đều có không gian cất đồ cá nhân."
+      },
+      {
+        id: "t1-zim12-7",
+        word: "floor space",
+        ipa: "/flɔː speɪs/",
+        partOfSpeech: "noun",
+        meaning: "Diện tích mặt sàn sử dụng",
+        basicEquivalent: "room size (Band 5)",
+        synonyms: ["surface area", "square meterage", "living area"],
+        collocations: ["total floor space", "usable floor space"],
+        modelSentence: "The double room provides 24 square metres of floor space, a third larger than the single unit.",
+        vietnameseSentence: "Phòng đôi có 24 mét vuông diện tích mặt sàn, rộng hơn một phần ba so với căn phòng đơn."
+      },
+      {
+        id: "t1-zim12-8",
+        word: "adjacent to",
+        ipa: "/əˈdʒeɪsnt tuː/",
+        partOfSpeech: "adjective",
+        meaning: "Nằm sát ngay cạnh bên",
+        basicEquivalent: "next to (Band 5)",
+        synonyms: ["adjoining", "bordering", "neighboring"],
+        collocations: ["located adjacent to", "situated adjacent to the entrance"],
+        modelSentence: "The sink and induction hob are situated adjacent to the primary entryway.",
+        vietnameseSentence: "Bồn rửa và bếp từ được bố trí nằm sát ngay cạnh lối ra vào chính."
+      }
+    ]
+  },
+  {
+    id: "task1-zim-13-stone-tools",
+    name: "Diagram: Development of Stone Age Cutting Tools (28/11/2020)",
+    vietnameseName: "Biểu đồ tiến hóa: Sự phát triển công cụ cắt gọt thời kỳ đồ đá (28/11/2020)",
+    tag: "Task 1: Sơ đồ tiến hóa (Diagram)",
+    icon: "Layers",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_zim-13-stone-tools.png",
+    chartData: {
+      title: "Diagram: Development of Stone Age Cutting Tools (28/11/2020)",
+      imageUrl: "/charts/task1/task1_zim-13-stone-tools.png",
+      keyNotes: [
+        "Khoảng thời gian khảo cổ: So sánh Công cụ A (Tool A - cách đây 1.4 triệu năm) và Công cụ B (Tool B - cách đây 0.8 triệu năm).",
+        "Công cụ A (1.4 triệu năm trước): Kích thước lớn, hình thù thô sơ, ghè đẽo góc cạnh đơn giản, bề mặt lồi lõm sần sùi và lưỡi cắt cùn.",
+        "Công cụ B (0.8 triệu năm trước): Tiến hóa rõ rệt thành dạng hình giọt nước (teardrop shape), mài dẹp đối xứng hai bên, lưỡi cắt sắc bén và kỹ thuật chế tác tinh xảo vượt bậc."
+]
+    },
+    ieltsPrompt: "The diagram below shows the development of the cutting tool in the Stone Age. Summarise the information by selecting and reporting the main features and make comparisons where relevant.",
+    keyNotes: [
+        "Khoảng thời gian khảo cổ: So sánh Công cụ A (Tool A - cách đây 1.4 triệu năm) và Công cụ B (Tool B - cách đây 0.8 triệu năm).",
+        "Công cụ A (1.4 triệu năm trước): Kích thước lớn, hình thù thô sơ, ghè đẽo góc cạnh đơn giản, bề mặt lồi lõm sần sùi và lưỡi cắt cùn.",
+        "Công cụ B (0.8 triệu năm trước): Tiến hóa rõ rệt thành dạng hình giọt nước (teardrop shape), mài dẹp đối xứng hai bên, lưỡi cắt sắc bén và kỹ thuật chế tác tinh xảo vượt bậc."
+],
+    modelEssay: "The diagram illustrates the evolution of the cutting tool during the period from 1.4 million years ago to 0.8 million years ago in the Stone Age.\n\nIt can be seen that a number of upgrades were made in the shape, sharpness, and craftsmanship of the tool so that it could become a far more effective cutting instrument over 600,000 years of human evolution.\n\n1.4 million years ago, Tool A was primitive and rough in appearance. Viewed from the front and back, it had an irregular, bulbous oval outline with minimal intentional shaping. The side profile shows that the tool was relatively thick and bulky, featuring coarse, unevenly chipped edges that would have provided only limited cutting efficiency.\n\nBy contrast, Tool B, dating back 0.8 million years ago, displayed significant technological refinement. It had evolved into a streamlined teardrop shape with a tapered, pointed tip. When examined from the side, Tool B was noticeably flatter and thinner than Tool A, with symmetrically flaked edges that formed a continuous, sharp cutting rim along its perimeter, reflecting advanced prehistoric knapping techniques.",
+    vocabularies: [
+      {
+        id: "t1-zim13-1",
+        word: "primitive",
+        ipa: "/ˈprɪmətɪv/",
+        partOfSpeech: "adjective",
+        meaning: "Nguyên thủy, thô sơ",
+        basicEquivalent: "simple and old (Band 5)",
+        synonyms: ["rudimentary", "crude", "archaic"],
+        collocations: ["primitive tool", "primitive craftsmanship"],
+        modelSentence: "Early hominids relied on primitive flaked stones for basic butchering chores.",
+        vietnameseSentence: "Người vượn thời kỳ đầu dựa vào những hòn đá ghè đẽo thô sơ cho các công việc pha thịt cơ bản."
+      },
+      {
+        id: "t1-zim13-2",
+        word: "teardrop-shaped",
+        ipa: "/ˈtɪədrɒp ʃeɪpt/",
+        partOfSpeech: "adjective",
+        meaning: "Có hình dáng giọt nước thon gọn",
+        basicEquivalent: "water drop shape (Band 5)",
+        synonyms: ["pear-shaped", "cordiform"],
+        collocations: ["teardrop-shaped hand axe", "teardrop silhouette"],
+        modelSentence: "The later artifact evolved into an iconic teardrop-shaped hand axe with balanced proportions.",
+        vietnameseSentence: "Hiện vật thời kỳ sau đã tiến hóa thành chiếc rìu tay hình giọt nước mang tính biểu tượng với tỷ lệ cân đối."
+      },
+      {
+        id: "t1-zim13-3",
+        word: "pointed tip",
+        ipa: "/ˈpɔɪntɪd tɪp/",
+        partOfSpeech: "noun",
+        meaning: "Mũi nhọn ở đỉnh đầu công cụ",
+        basicEquivalent: "sharp point (Band 5)",
+        synonyms: ["tapered apex", "sharp point"],
+        collocations: ["feature a pointed tip", "sharp pointed tip"],
+        modelSentence: "A distinct pointed tip enabled Paleolithic hunters to pierce tough animal hides effortlessly.",
+        vietnameseSentence: "Một mũi nhọn rõ nét cho phép thợ săn thời kỳ đồ đá cũ đâm thủng da thú dai một cách dễ dàng."
+      },
+      {
+        id: "t1-zim13-4",
+        word: "craftsmanship",
+        ipa: "/ˈkrɑːftsmənʃɪp/",
+        partOfSpeech: "noun",
+        meaning: "Tay nghề chế tác, kỹ thuật tinh xảo",
+        basicEquivalent: "making skill (Band 5)",
+        synonyms: ["artistry", "workmanship", "knapping skill"],
+        collocations: ["flawless craftsmanship", "refine craftsmanship"],
+        modelSentence: "The symmetry of Tool B highlights a monumental leap forward in cognitive craftsmanship.",
+        vietnameseSentence: "Tính đối xứng của Công cụ B nêu bật một bước nhảy vọt vĩ đại về tư duy chế tác thủ công."
+      },
+      {
+        id: "t1-zim13-5",
+        word: "flaked edge",
+        ipa: "/fleɪkt edʒ/",
+        partOfSpeech: "noun",
+        meaning: "Cạnh được ghè đẽo, gọt mài tạo lưỡi sắc",
+        basicEquivalent: "cut side (Band 5)",
+        synonyms: ["knapped rim", "beveled margin", "cutting edge"],
+        collocations: ["symmetrically flaked edge", "sharp flaked edge"],
+        modelSentence: "Carefully flaked edges surrounded the entire perimeter of the advanced implement.",
+        vietnameseSentence: "Những cạnh được ghè đẽo cẩn thận bao quanh toàn bộ chu vi của công cụ cải tiến."
+      },
+      {
+        id: "t1-zim13-6",
+        word: "cutting rim",
+        ipa: "/ˈkʌtɪŋ rɪm/",
+        partOfSpeech: "noun",
+        meaning: "Mép lưỡi cắt sắc bén",
+        basicEquivalent: "sharp border (Band 5)",
+        synonyms: ["blade edge", "cutting periphery"],
+        collocations: ["continuous cutting rim", "sharpen the cutting rim"],
+        modelSentence: "The continuous cutting rim vastly widened the practical utility of the tool.",
+        vietnameseSentence: "Mép lưỡi cắt liền mạch đã mở rộng đáng kể công năng thực tế của dụng cụ."
+      },
+      {
+        id: "t1-zim13-7",
+        word: "side profile",
+        ipa: "/saɪd ˈprəʊfaɪl/",
+        partOfSpeech: "noun",
+        meaning: "Góc nhìn nghiêng cạnh bên",
+        basicEquivalent: "side view (Band 5)",
+        synonyms: ["lateral perspective", "side cross-section"],
+        collocations: ["revealed in the side profile", "tapered side profile"],
+        modelSentence: "Viewed from the side profile, Tool B exhibits an exceptionally slim and aerodynamic contour.",
+        vietnameseSentence: "Nhìn từ góc nghiêng cạnh bên, Công cụ B sở hữu đường nét cực kỳ mỏng và khí động học."
+      },
+      {
+        id: "t1-zim13-8",
+        word: "knapping technique",
+        ipa: "/ˈnæpɪŋ tekˈniːk/",
+        partOfSpeech: "noun",
+        meaning: "Kỹ thuật ghè đẽo đá thời tiền sử",
+        basicEquivalent: "stone making method (Band 5)",
+        synonyms: ["lithic reduction technique", "flintknapping"],
+        collocations: ["master knapping techniques", "sophisticated knapping technique"],
+        modelSentence: "Sophisticated knapping techniques allowed artisans to shave off wafer-thin stone flakes.",
+        vietnameseSentence: "Kỹ thuật ghè đẽo đá tinh vi cho phép những người thợ bóc tách những mảnh đá mỏng như cánh hoa."
       }
     ]
   }

@@ -1,24 +1,9 @@
 [
   {
-    "id": "environment",
-    "name": "Environment & Climate Change",
-    "vietnameseName": "Môi trường & Biến đổi khí hậu",
-    "taskScope": "Both",
-    "icon": "Leaf",
-    "tag": "Phổ biến nhất",
-    "subTopics": [
-      "global warming",
-      "carbon footprint",
-      "renewable energy",
-      "plastic pollution",
-      "biodiversity loss"
-    ]
-  },
-  {
     "id": "education",
     "name": "Education & Schooling",
     "vietnameseName": "Giáo dục & Học đường",
-    "taskScope": "Both",
+    "taskScope": "Task 2",
     "icon": "GraduationCap",
     "tag": "Trọng tâm",
     "subTopics": [
@@ -26,14 +11,15 @@
       "tuition fees",
       "online learning",
       "curriculum reform",
-      "teachers vs AI"
+      "teachers vs AI",
+      "practical skills vs academic"
     ]
   },
   {
     "id": "technology",
     "name": "Technology & Artificial Intelligence",
     "vietnameseName": "Công nghệ & Trí tuệ nhân tạo",
-    "taskScope": "Both",
+    "taskScope": "Task 2",
     "icon": "Cpu",
     "tag": "Xu hướng 2024+",
     "subTopics": [
@@ -41,98 +27,55 @@
       "workplace automation",
       "social media addiction",
       "smartphones",
-      "data privacy"
+      "data privacy",
+      "digital communication"
+    ]
+  },
+  {
+    "id": "environment",
+    "name": "Environment & Transportation",
+    "vietnameseName": "Môi trường & Giao thông",
+    "taskScope": "Task 2",
+    "icon": "Leaf",
+    "tag": "Phổ biến nhất",
+    "subTopics": [
+      "global warming",
+      "carbon footprint",
+      "renewable energy",
+      "plastic pollution",
+      "biodiversity loss",
+      "green transport & aviation"
     ]
   },
   {
     "id": "society",
-    "name": "Society & Modern Lifestyle",
-    "vietnameseName": "Xã hội & Đời sống hiện đại",
+    "name": "Society, Health & Modern Lifestyle",
+    "vietnameseName": "Xã hội, Y tế & Lối sống",
     "taskScope": "Task 2",
     "icon": "Users",
     "tag": "Kinh điển",
     "subTopics": [
       "aging population",
-      "consumerism",
-      "work-life balance",
-      "urbanization",
-      "wealth gap"
+      "public health & mental wellbeing",
+      "family & parenting",
+      "urbanization & housing",
+      "culture & heritage preservation"
     ]
   },
   {
-    "id": "globalization",
-    "name": "Globalization & Culture",
-    "vietnameseName": "Toàn cầu hóa & Văn hóa",
-    "taskScope": "Task 2",
-    "icon": "Globe",
-    "tag": "Nâng cao",
-    "subTopics": [
-      "cultural preservation",
-      "mass tourism",
-      "language endangerment",
-      "westernization",
-      "traditional values"
-    ]
-  },
-  {
-    "id": "health",
-    "name": "Public Health & Healthcare",
-    "vietnameseName": "Y tế & Sức khỏe cộng đồng",
-    "taskScope": "Both",
-    "icon": "HeartPulse",
-    "tag": "Thực tế",
-    "subTopics": [
-      "sedentary lifestyle",
-      "fast food taxes",
-      "universal healthcare",
-      "mental health",
-      "preventive medicine"
-    ]
-  },
-  {
-    "id": "work_career",
-    "name": "Work & Careers",
-    "vietnameseName": "Việc làm & Nghề nghiệp",
-    "taskScope": "Both",
-    "icon": "Briefcase",
-    "tag": "Thực tế",
-    "subTopics": [
-      "remote working",
-      "job automation",
-      "retirement age",
-      "job-hopping",
-      "gig economy"
-    ]
-  },
-  {
-    "id": "crime_law",
-    "name": "Crime & Legal System",
-    "vietnameseName": "Tội phạm & Pháp luật",
+    "id": "economy_law",
+    "name": "Economy, Career & Law",
+    "vietnameseName": "Kinh tế, Việc làm & Pháp luật",
     "taskScope": "Task 2",
     "icon": "Scale",
-    "tag": "Nâng cao",
+    "tag": "Thực tế & Nâng cao",
     "subTopics": [
-      "prison rehabilitation",
-      "capital punishment",
-      "juvenile crime",
-      "surveillance cameras",
-      "cybercrime"
-    ]
-  },
-  {
-    "id": "business",
-    "name": "Business & Economy",
-    "vietnameseName": "Kinh doanh & Kinh tế",
-    "taskScope": "Both",
-    "icon": "TrendingUp",
-    "tag": "Thực tế",
-    "subTopics": [
-      "economic growth",
+      "four-day workweek",
+      "job automation & freelancing",
+      "economic growth & social metrics",
       "advertising & consumerism",
-      "corporate responsibility",
-      "local business vs multinationals",
-      "cashless economy",
-      "market regulation"
+      "labor market dynamics",
+      "crime & legal system"
     ]
   },
   {
@@ -181,29 +124,29 @@
   {
     "id": "task1_pie_chart",
     "name": "Task 1 - Pie Chart (Biểu đồ tròn)",
-    "vietnameseName": "Biểu đồ tròn tỉ lệ",
+    "vietnameseName": "Biểu đồ tròn cơ cấu",
     "taskScope": "Task 1",
     "icon": "PieChart",
     "tag": "Task 1 Tỉ lệ",
     "subTopics": [
-      "single pie chart",
-      "multiple pie charts",
-      "percentage shares",
-      "proportions"
+      "proportions",
+      "percentage comparison",
+      "shifts over time",
+      "dominant sectors"
     ]
   },
   {
     "id": "task1_table",
     "name": "Task 1 - Table (Bảng số liệu)",
-    "vietnameseName": "Bảng số liệu so sánh",
+    "vietnameseName": "Bảng số liệu tổng hợp",
     "taskScope": "Task 1",
     "icon": "Table",
-    "tag": "Task 1 Dữ liệu",
+    "tag": "Task 1 Chi tiết",
     "subTopics": [
-      "multi-variable table",
-      "changes over time",
-      "category ranking",
-      "static comparisons"
+      "multi-category comparison",
+      "dense data sets",
+      "rankings",
+      "temporal changes"
     ]
   },
   {
@@ -211,13 +154,13 @@
     "name": "Task 1 - Map & Plan (Bản đồ & Sơ đồ)",
     "vietnameseName": "Bản đồ & Sơ đồ quy hoạch",
     "taskScope": "Task 1",
-    "icon": "Compass",
-    "tag": "Task 1 Không gian",
+    "icon": "Map",
+    "tag": "Task 1 Quy hoạch",
     "subTopics": [
-      "urban redevelopment",
-      "village expansion",
-      "building floor plans",
-      "site selection"
+      "urban developments",
+      "layout renovations",
+      "facility expansions",
+      "before and after"
     ]
   }
 ]

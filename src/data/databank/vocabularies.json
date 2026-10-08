@@ -185,7 +185,7 @@
   },
   {
     "id": "V009",
-    "topicId": "health",
+    "topicId": "society",
     "word": "self-medication",
     "partOfSpeech": "noun",
     "ipa": "/ˌself.med.ɪˈkeɪ.ʃən/",
@@ -207,7 +207,7 @@
   },
   {
     "id": "V010",
-    "topicId": "health",
+    "topicId": "society",
     "word": "preventative",
     "partOfSpeech": "adjective",
     "ipa": "/prɪˈven.tə.tɪv/",
@@ -229,7 +229,7 @@
   },
   {
     "id": "V011",
-    "topicId": "health",
+    "topicId": "society",
     "word": "burnout",
     "partOfSpeech": "noun",
     "ipa": "/ˈbɜːn.aʊt/",
@@ -251,7 +251,7 @@
   },
   {
     "id": "V012",
-    "topicId": "work_career",
+    "topicId": "economy_law",
     "word": "telecommuting",
     "partOfSpeech": "noun",
     "ipa": "/ˈtel.ɪ.kəˌmjuː.tɪŋ/",
@@ -273,7 +273,7 @@
   },
   {
     "id": "V013",
-    "topicId": "work_career",
+    "topicId": "economy_law",
     "word": "equilibrium",
     "partOfSpeech": "noun",
     "ipa": "/ˌiː.kwɪˈlɪb.ri.əm/",
@@ -296,7 +296,7 @@
   },
   {
     "id": "V014",
-    "topicId": "work_career",
+    "topicId": "economy_law",
     "word": "incentivize",
     "partOfSpeech": "verb",
     "ipa": "/ɪnˈsen.tɪ.vaɪz/",
@@ -478,7 +478,7 @@
   },
   {
     "id": "V022",
-    "topicId": "crime_law",
+    "topicId": "economy_law",
     "word": "deterrent",
     "partOfSpeech": "noun",
     "ipa": "/dɪˈter.ənt/",
@@ -522,7 +522,7 @@
   },
   {
     "id": "V024",
-    "topicId": "crime_law",
+    "topicId": "economy_law",
     "word": "enforcement",
     "partOfSpeech": "noun",
     "ipa": "/ɪnˈfɔːs.mənt/",
@@ -591,7 +591,7 @@
   },
   {
     "id": "V027",
-    "topicId": "work_career",
+    "topicId": "economy_law",
     "word": "diligence",
     "partOfSpeech": "noun",
     "ipa": "/ˈdɪl.ɪ.dʒəns/",
@@ -638,7 +638,7 @@
   },
   {
     "id": "V029",
-    "topicId": "globalization",
+    "topicId": "society",
     "word": "indigenous",
     "partOfSpeech": "adjective",
     "ipa": "/ɪnˈdɪdʒ.ɪ.nəs/",
@@ -661,7 +661,7 @@
   },
   {
     "id": "V030",
-    "topicId": "globalization",
+    "topicId": "society",
     "word": "artifact",
     "partOfSpeech": "noun",
     "ipa": "/ˈɑː.tɪ.fækt/",
@@ -684,7 +684,7 @@
   },
   {
     "id": "V031",
-    "topicId": "globalization",
+    "topicId": "society",
     "word": "repatriation",
     "partOfSpeech": "noun",
     "ipa": "/ˌriː.pæt.riˈeɪ.ʃən/",
@@ -707,7 +707,7 @@
   },
   {
     "id": "V032",
-    "topicId": "globalization",
+    "topicId": "society",
     "word": "curate",
     "partOfSpeech": "verb",
     "ipa": "/kjʊəˈreɪt/",
@@ -730,7 +730,7 @@
   },
   {
     "id": "V033",
-    "topicId": "globalization",
+    "topicId": "society",
     "word": "parochial",
     "partOfSpeech": "adjective",
     "ipa": "/pəˈrəʊ.ki.əl/",
@@ -753,7 +753,7 @@
   },
   {
     "id": "V034",
-    "topicId": "globalization",
+    "topicId": "society",
     "word": "provenance",
     "partOfSpeech": "noun",
     "ipa": "/ˈprɒv.ən.əns/",
@@ -913,7 +913,7 @@
   },
   {
     "id": "V041",
-    "topicId": "work_career",
+    "topicId": "economy_law",
     "word": "calculated",
     "partOfSpeech": "adjective",
     "ipa": "/ˈkæl.kjə.leɪ.tɪd/",
@@ -1054,7 +1054,7 @@
   },
   {
     "id": "V047",
-    "topicId": "work_career",
+    "topicId": "economy_law",
     "word": "job-hopping",
     "partOfSpeech": "noun",
     "ipa": "/ˈdʒɒbˌhɒp.ɪŋ/",
@@ -1076,7 +1076,7 @@
   },
   {
     "id": "V048",
-    "topicId": "health",
+    "topicId": "society",
     "word": "affliction",
     "partOfSpeech": "noun",
     "ipa": "/əˈflɪk.ʃən/",
@@ -1100,7 +1100,7 @@
   },
   {
     "id": "V049",
-    "topicId": "business",
+    "topicId": "economy_law",
     "word": "novelty",
     "partOfSpeech": "noun",
     "ipa": "/ˈnɒv.əl.ti/",
@@ -1216,7 +1216,7 @@
   },
   {
     "id": "V054",
-    "topicId": "business",
+    "topicId": "economy_law",
     "word": "desensitize",
     "partOfSpeech": "verb",
     "ipa": "/diːˈsen.sɪ.taɪz/",
@@ -1405,7 +1405,7 @@
   },
   {
     "id": "V062",
-    "topicId": "work_career",
+    "topicId": "economy_law",
     "word": "precarious",
     "partOfSpeech": "adjective",
     "ipa": "/prɪˈkeə.ri.əs/",
@@ -1546,7 +1546,7 @@
   },
   {
     "id": "V068",
-    "topicId": "health",
+    "topicId": "society",
     "word": "camaraderie",
     "partOfSpeech": "noun",
     "ipa": "/ˌkæm.əˈrɑː.dər.i/",
@@ -1593,7 +1593,7 @@
   },
   {
     "id": "V070",
-    "topicId": "business",
+    "topicId": "economy_law",
     "word": "utilitarian",
     "partOfSpeech": "adjective",
     "ipa": "/ˌjuː.tɪ.lɪˈteə.ri.ən/",
@@ -1782,7 +1782,7 @@
   },
   {
     "id": "V078",
-    "topicId": "business",
+    "topicId": "economy_law",
     "word": "reconcile",
     "partOfSpeech": "verb",
     "ipa": "/ˈrek.ən.saɪl/",
@@ -2065,7 +2065,7 @@
   },
   {
     "id": "V090",
-    "topicId": "work_career",
+    "topicId": "economy_law",
     "word": "outsource",
     "partOfSpeech": "verb",
     "ipa": "/ˈaʊt.sɔːs/",
@@ -2090,7 +2090,7 @@
   },
   {
     "id": "V091",
-    "topicId": "work_career",
+    "topicId": "economy_law",
     "word": "automated",
     "partOfSpeech": "adjective",
     "ipa": "/ˈɔː.tə.meɪ.tɪd/",
@@ -2162,7 +2162,7 @@
   },
   {
     "id": "V094",
-    "topicId": "health",
+    "topicId": "society",
     "word": "physically demanding",
     "partOfSpeech": "collocation",
     "ipa": "/ˈfɪz.ɪ.kli dɪˈmɑːn.dɪŋ/",
@@ -2186,7 +2186,7 @@
   },
   {
     "id": "V095",
-    "topicId": "health",
+    "topicId": "society",
     "word": "calorie expenditure",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˈkæl.ər.i ɪkˈspen.dɪ.tʃər/",
@@ -2209,7 +2209,7 @@
   },
   {
     "id": "V096",
-    "topicId": "globalization",
+    "topicId": "society",
     "word": "influx",
     "partOfSpeech": "noun",
     "ipa": "/ˈɪn.flʌks/",
@@ -2234,7 +2234,7 @@
   },
   {
     "id": "V097",
-    "topicId": "globalization",
+    "topicId": "society",
     "word": "facilitate",
     "partOfSpeech": "verb",
     "ipa": "/fəˈsɪl.ɪ.teɪt/",
@@ -2334,7 +2334,7 @@
   },
   {
     "id": "V101",
-    "topicId": "work_career",
+    "topicId": "economy_law",
     "word": "entail",
     "partOfSpeech": "verb",
     "ipa": "/ɪnˈteɪl/",
@@ -2358,7 +2358,7 @@
   },
   {
     "id": "V102",
-    "topicId": "health",
+    "topicId": "society",
     "word": "emotional distress",
     "partOfSpeech": "noun phrase",
     "ipa": "/ɪˈməʊ.ʃən.əl dɪˈstres/",
@@ -2552,7 +2552,7 @@
   },
   {
     "id": "V110",
-    "topicId": "work_career",
+    "topicId": "economy_law",
     "word": "career prospects",
     "partOfSpeech": "noun phrase",
     "ipa": "/kəˈrɪər ˈprɒs.pekts/",
@@ -2745,7 +2745,7 @@
   },
   {
     "id": "V118",
-    "topicId": "business",
+    "topicId": "economy_law",
     "word": "fairtrade",
     "partOfSpeech": "noun",
     "ipa": "/ˈfeə.treɪd/",
@@ -2862,7 +2862,7 @@
   },
   {
     "id": "V123",
-    "topicId": "globalization",
+    "topicId": "society",
     "word": "foreign aid",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˈfɒr.ən eɪd/",
@@ -2886,7 +2886,7 @@
   },
   {
     "id": "V124",
-    "topicId": "globalization",
+    "topicId": "society",
     "word": "national interest",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˈnæʃ.nəl ˈɪn.trəst/",
@@ -2932,7 +2932,7 @@
   },
   {
     "id": "V126",
-    "topicId": "business",
+    "topicId": "economy_law",
     "word": "differential pricing",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˌdɪf.əˈren.ʃəl ˈpraɪ.sɪŋ/",
@@ -2980,7 +2980,7 @@
   },
   {
     "id": "V128",
-    "topicId": "health",
+    "topicId": "society",
     "word": "animal testing",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˈæn.ɪ.məl ˈtes.tɪŋ/",
@@ -3099,7 +3099,7 @@
   },
   {
     "id": "V133",
-    "topicId": "work_career",
+    "topicId": "economy_law",
     "word": "job satisfaction",
     "partOfSpeech": "noun phrase",
     "ipa": "/dʒɒb ˌsæt.ɪsˈfæk.ʃən/",
@@ -3169,7 +3169,7 @@
   },
   {
     "id": "V136",
-    "topicId": "crime_law",
+    "topicId": "economy_law",
     "word": "reformed offender",
     "partOfSpeech": "noun phrase",
     "ipa": "/rɪˈfɔːmd əˈfen.dər/",
@@ -3192,7 +3192,7 @@
   },
   {
     "id": "V137",
-    "topicId": "crime_law",
+    "topicId": "economy_law",
     "word": "deterrent",
     "partOfSpeech": "noun",
     "ipa": "/dɪˈter.ənt/",
@@ -3216,7 +3216,7 @@
   },
   {
     "id": "V138",
-    "topicId": "business",
+    "topicId": "economy_law",
     "word": "corporate social responsibility",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˈkɔː.pər.ət ˈsəʊ.ʃəl rɪˌspɒn.sɪˈbɪl.ə.ti/",
@@ -3239,7 +3239,7 @@
   },
   {
     "id": "V139",
-    "topicId": "business",
+    "topicId": "economy_law",
     "word": "ethical practice",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˈeθ.ɪ.kəl ˈpræk.tɪs/",
@@ -3262,7 +3262,7 @@
   },
   {
     "id": "V140",
-    "topicId": "health",
+    "topicId": "society",
     "word": "extreme sports",
     "partOfSpeech": "noun phrase",
     "ipa": "/ɪkˈstriːm spɔːts/",
@@ -3283,5 +3283,2971 @@
     ],
     "exampleSentence": "While extreme sports such as wingsuit flying entail undeniable hazards, advocates maintain that adults possess the fundamental right to embrace personal risks.",
     "wordFamily": "extremity (n), extreme (adj)"
+  },
+  {
+    "id": "V141",
+    "topicId": "task1-zim-01-tunnels",
+    "word": "underground tunnel",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈʌndəɡraʊnd ˈtʌnl/",
+    "meaning": "Đường hầm ngầm dưới lòng đất",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram & Maps: Sydney & Brisbane Road Tunnels (08/09/2018)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "subway road (Band 5)",
+    "synonyms": [
+      "subterranean passage",
+      "tunnel system",
+      "underground passageway"
+    ],
+    "collocations": [
+      "construct an underground tunnel",
+      "traffic tunnel"
+    ],
+    "exampleSentence": "The underground tunnel was designed to relieve chronic surface traffic congestion.",
+    "vietnameseSentence": "Tuyến đường hầm ngầm được thiết kế nhằm giải tỏa tình trạng ùn tắc giao thông bề mặt kéo dài.",
+    "wordFamily": "underground tunnel (IELTS Task 1)"
+  },
+  {
+    "id": "V142",
+    "topicId": "task1-zim-01-tunnels",
+    "word": "construction period",
+    "partOfSpeech": "noun",
+    "ipa": "/kənˈstrʌkʃn ˈpɪəriəd/",
+    "meaning": "Thời gian thi công xây dựng",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram & Maps: Sydney & Brisbane Road Tunnels (08/09/2018)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "building time (Band 5)",
+    "synonyms": [
+      "building timeframe",
+      "construction duration"
+    ],
+    "collocations": [
+      "span a construction period",
+      "shorten the construction period"
+    ],
+    "exampleSentence": "The Brisbane project boasted a significantly shorter construction period of only four years.",
+    "vietnameseSentence": "Dự án Brisbane nổi bật với thời gian thi công ngắn hơn đáng kể, chỉ kéo dài bốn năm.",
+    "wordFamily": "construction period (IELTS Task 1)"
+  },
+  {
+    "id": "V143",
+    "topicId": "task1-zim-01-tunnels",
+    "word": "capital expenditure",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈkæpɪtl ɪkˈspendɪtʃər/",
+    "meaning": "Chi phí đầu tư vốn xây dựng cơ sở hạ tầng",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram & Maps: Sydney & Brisbane Road Tunnels (08/09/2018)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "building cost (Band 5)",
+    "synonyms": [
+      "construction cost",
+      "investment budget",
+      "financial outlay"
+    ],
+    "collocations": [
+      "incur heavy capital expenditure",
+      "initial expenditure"
+    ],
+    "exampleSentence": "The capital expenditure for the Brisbane tunnel was nearly triple that of the Sydney project.",
+    "vietnameseSentence": "Chi phí đầu tư vốn cho hầm Brisbane cao gấp gần ba lần so với dự án ở Sydney.",
+    "wordFamily": "capital expenditure (IELTS Task 1)"
+  },
+  {
+    "id": "V144",
+    "topicId": "task1-zim-01-tunnels",
+    "word": "vehicular traffic",
+    "partOfSpeech": "noun",
+    "ipa": "/viˈhɪkjələr ˈtræfɪk/",
+    "meaning": "Lưu lượng xe cộ qua lại",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram & Maps: Sydney & Brisbane Road Tunnels (08/09/2018)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "car traffic (Band 5)",
+    "synonyms": [
+      "motor traffic",
+      "vehicle volume",
+      "traffic flow"
+    ],
+    "collocations": [
+      "accommodate vehicular traffic",
+      "heavy vehicular traffic"
+    ],
+    "exampleSentence": "The modern bypass accommodates an average of 45,000 vehicular traffic units on a daily basis.",
+    "vietnameseSentence": "Tuyến đường vòng hiện đại đáp ứng lưu lượng xe trung bình 45.000 phương tiện mỗi ngày.",
+    "wordFamily": "vehicular traffic (IELTS Task 1)"
+  },
+  {
+    "id": "V145",
+    "topicId": "task1-zim-01-tunnels",
+    "word": "toll fee",
+    "partOfSpeech": "noun",
+    "ipa": "/təʊl fiː/",
+    "meaning": "Phí cầu đường / phí qua hầm",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram & Maps: Sydney & Brisbane Road Tunnels (08/09/2018)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "road price (Band 5)",
+    "synonyms": [
+      "toll charge",
+      "transit levy",
+      "road fee"
+    ],
+    "collocations": [
+      "levy a toll fee",
+      "pay the toll fee"
+    ],
+    "exampleSentence": "Motorists must pay a mandatory toll fee of 4.50 AUD upon entering the tunnel.",
+    "vietnameseSentence": "Người điều khiển phương tiện phải trả mức phí cầu đường bắt buộc là 4.50 AUD khi đi vào hầm.",
+    "wordFamily": "toll fee (IELTS Task 1)"
+  },
+  {
+    "id": "V146",
+    "topicId": "task1-zim-01-tunnels",
+    "word": "completion timeframe",
+    "partOfSpeech": "noun",
+    "ipa": "/kəmˈpliːʃn ˈtreɪmfeɪm/",
+    "meaning": "Khung thời gian hoàn thành công trình",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram & Maps: Sydney & Brisbane Road Tunnels (08/09/2018)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "time to finish (Band 5)",
+    "synonyms": [
+      "completion schedule",
+      "delivery timeline"
+    ],
+    "collocations": [
+      "meet the completion timeframe",
+      "expedite completion"
+    ],
+    "exampleSentence": "The engineering team maintained an ambitious completion timeframe despite challenging bedrock excavation.",
+    "vietnameseSentence": "Đội ngũ kỹ thuật đã duy trì khung thời gian hoàn thành đầy tham vọng bất chấp việc đào bới nền đá phức tạp.",
+    "wordFamily": "completion timeframe (IELTS Task 1)"
+  },
+  {
+    "id": "V147",
+    "topicId": "task1-zim-01-tunnels",
+    "word": "commuter",
+    "partOfSpeech": "noun",
+    "ipa": "/kəˈmjuːtər/",
+    "meaning": "Người tham gia giao thông đi lại hằng ngày",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram & Maps: Sydney & Brisbane Road Tunnels (08/09/2018)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "driver / traveler (Band 5)",
+    "synonyms": [
+      "daily traveler",
+      "motorist",
+      "road user"
+    ],
+    "collocations": [
+      "daily commuters",
+      "urban commuters"
+    ],
+    "exampleSentence": "Thousands of urban commuters benefit daily from the newly opened bypass.",
+    "vietnameseSentence": "Hàng ngàn người tham gia giao thông hằng ngày được hưởng lợi từ tuyến đường tránh mới thông xe.",
+    "wordFamily": "commuter (IELTS Task 1)"
+  },
+  {
+    "id": "V148",
+    "topicId": "task1-zim-02-fruits",
+    "word": "citrus fruit",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈsɪtrəs fruːt/",
+    "meaning": "Trái cây họ cam quýt có múi",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Pie & Bar: Fresh Citrus Fruit Exports in 2010 (11/10/2018)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "orange-like fruits (Band 5)",
+    "synonyms": [
+      "citrus varieties",
+      "citrus produce"
+    ],
+    "collocations": [
+      "citrus fruit exports",
+      "citrus production"
+    ],
+    "exampleSentence": "Global trade in citrus fruit experienced robust expansion throughout 2010.",
+    "vietnameseSentence": "Thương mại toàn cầu đối với trái cây họ cam quýt chứng kiến mức tăng trưởng mạnh mẽ trong suốt năm 2010.",
+    "wordFamily": "citrus fruit (IELTS Task 1)"
+  },
+  {
+    "id": "V149",
+    "topicId": "task1-zim-02-fruits",
+    "word": "export volume",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈekspɔːt ˈvɒljuːm/",
+    "meaning": "Sản lượng / khối lượng xuất khẩu",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Pie & Bar: Fresh Citrus Fruit Exports in 2010 (11/10/2018)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "amount of exported goods (Band 5)",
+    "synonyms": [
+      "export tonnage",
+      "shipment volume",
+      "outbound tonnage"
+    ],
+    "collocations": [
+      "recorded export volume",
+      "surge in export volume"
+    ],
+    "exampleSentence": "South Africa registered an impressive export volume exceeding one million metric tons.",
+    "vietnameseSentence": "Nam Phi ghi nhận sản lượng xuất khẩu ấn tượng vượt trên một triệu tấn.",
+    "wordFamily": "export volume (IELTS Task 1)"
+  },
+  {
+    "id": "V150",
+    "topicId": "task1-zim-02-fruits",
+    "word": "premier supplier",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈpremiər səˈplaɪər/",
+    "meaning": "Nhà cung cấp hàng đầu",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Pie & Bar: Fresh Citrus Fruit Exports in 2010 (11/10/2018)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "top seller (Band 5)",
+    "synonyms": [
+      "leading exporter",
+      "foremost producer",
+      "primary source"
+    ],
+    "collocations": [
+      "act as the premier supplier",
+      "emerge as premier supplier"
+    ],
+    "exampleSentence": "Mexico emerged as the premier supplier of fresh limes to international markets.",
+    "vietnameseSentence": "Mexico đã vươn lên thành nhà cung cấp chanh tươi hàng đầu cho các thị trường quốc tế.",
+    "wordFamily": "premier supplier (IELTS Task 1)"
+  },
+  {
+    "id": "V151",
+    "topicId": "task1-zim-02-fruits",
+    "word": "spearhead",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈspɪəhed/",
+    "meaning": "Dẫn đầu, giữ vai trò mũi nhọn tiên phong",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Pie & Bar: Fresh Citrus Fruit Exports in 2010 (11/10/2018)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "lead (Band 5)",
+    "synonyms": [
+      "pioneer",
+      "lead the way",
+      "head"
+    ],
+    "collocations": [
+      "spearhead the sector",
+      "spearhead export growth"
+    ],
+    "exampleSentence": "Spain spearheaded European citrus shipments with over a million tons exported.",
+    "vietnameseSentence": "Tây Ban Nha dẫn đầu các chuyến hàng xuất khẩu cam quýt của Châu Âu với hơn một triệu tấn được xuất khẩu.",
+    "wordFamily": "spearhead (IELTS Task 1)"
+  },
+  {
+    "id": "V152",
+    "topicId": "task1-zim-02-fruits",
+    "word": "dwarf",
+    "partOfSpeech": "verb",
+    "ipa": "/dwɔːf/",
+    "meaning": "Làm cho cái khác trở nên nhỏ bé, áp đảo hoàn toàn",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Pie & Bar: Fresh Citrus Fruit Exports in 2010 (11/10/2018)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "be much bigger than (Band 5)",
+    "synonyms": [
+      "overshadow",
+      "eclipse",
+      "surpass significantly"
+    ],
+    "collocations": [
+      "dwarf other categories",
+      "dwarf competing figures"
+    ],
+    "exampleSentence": "The volume of oranges dwarfed the modest output generated by lemon cultivators.",
+    "vietnameseSentence": "Khối lượng cam đã áp đảo hoàn toàn sản lượng khiêm tốn do những người trồng chanh tạo ra.",
+    "wordFamily": "dwarf (IELTS Task 1)"
+  },
+  {
+    "id": "V153",
+    "topicId": "task1-zim-02-fruits",
+    "word": "breakdown",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈbreɪkdaʊn/",
+    "meaning": "Sự phân chia chi tiết tỉ lệ từng phần",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Pie & Bar: Fresh Citrus Fruit Exports in 2010 (11/10/2018)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "division of data (Band 5)",
+    "synonyms": [
+      "composition",
+      "proportional distribution",
+      "segmentation"
+    ],
+    "collocations": [
+      "percentage breakdown",
+      "detailed breakdown"
+    ],
+    "exampleSentence": "The pie chart outlines a clear breakdown of global consumer demand across three fruits.",
+    "vietnameseSentence": "Biểu đồ tròn phác thảo sự phân chia tỉ lệ rõ ràng về nhu cầu tiêu dùng toàn cầu đối với ba loại quả.",
+    "wordFamily": "breakdown (IELTS Task 1)"
+  },
+  {
+    "id": "V154",
+    "topicId": "task1-zim-03-igloo",
+    "word": "hard-packed snow",
+    "partOfSpeech": "noun",
+    "ipa": "/hɑːd pækt snəʊ/",
+    "meaning": "Tuyết được nén cứng, đóng tảng chắc chắn",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: How an Igloo is Built from Snow (02/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "hard snow (Band 5)",
+    "synonyms": [
+      "compressed snow",
+      "dense snowpack"
+    ],
+    "collocations": [
+      "cut hard-packed snow",
+      "harvest hard-packed snow"
+    ],
+    "exampleSentence": "Only dense, hard-packed snow possesses sufficient structural integrity to build an igloo.",
+    "vietnameseSentence": "Chỉ có tuyết nén cứng và đậm đặc mới có đủ độ bền kết cấu để xây dựng lều tuyết.",
+    "wordFamily": "hard-packed snow (IELTS Task 1)"
+  },
+  {
+    "id": "V155",
+    "topicId": "task1-zim-03-igloo",
+    "word": "spiral pattern",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈspaɪrəl ˈpætn/",
+    "meaning": "Khuôn mẫu vòng xoắn ốc",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: How an Igloo is Built from Snow (02/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "circle shape (Band 5)",
+    "synonyms": [
+      "spiral formation",
+      "helical arrangement"
+    ],
+    "collocations": [
+      "laid in a spiral pattern",
+      "ascending spiral pattern"
+    ],
+    "exampleSentence": "The snow blocks are arranged in an ascending spiral pattern to create a self-supporting dome.",
+    "vietnameseSentence": "Các khối tuyết được sắp đặt theo khuôn mẫu vòng xoắn ốc nâng dần để tạo nên mái vòm tự chịu lực.",
+    "wordFamily": "spiral pattern (IELTS Task 1)"
+  },
+  {
+    "id": "V156",
+    "topicId": "task1-zim-03-igloo",
+    "word": "ventilation hole",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌventɪˈleɪʃn həʊl/",
+    "meaning": "Lỗ thông hơi, khe thông gió",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: How an Igloo is Built from Snow (02/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "air hole (Band 5)",
+    "synonyms": [
+      "air vent",
+      "ventilation opening",
+      "chimney flue"
+    ],
+    "collocations": [
+      "carve a ventilation hole",
+      "rooftop ventilation hole"
+    ],
+    "exampleSentence": "A small ventilation hole is carved at the apex to prevent suffocation inside the shelter.",
+    "vietnameseSentence": "Một lỗ thông hơi nhỏ được khoét ở phần đỉnh để chống ngạt thở bên trong nơi trú ẩn.",
+    "wordFamily": "ventilation hole (IELTS Task 1)"
+  },
+  {
+    "id": "V157",
+    "topicId": "task1-zim-03-igloo",
+    "word": "entrance tunnel",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈentrəns ˈtʌnl/",
+    "meaning": "Đường hầm lối ra vào",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: How an Igloo is Built from Snow (02/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "door way (Band 5)",
+    "synonyms": [
+      "sunken passageway",
+      "entry corridor"
+    ],
+    "collocations": [
+      "dig an entrance tunnel",
+      "submerged entrance tunnel"
+    ],
+    "exampleSentence": "The entrance tunnel is purposely excavated below ground level to trap warm air indoors.",
+    "vietnameseSentence": "Đường hầm lối vào được cố ý đào chìm dưới mặt đất để giữ không khí ấm bên trong.",
+    "wordFamily": "entrance tunnel (IELTS Task 1)"
+  },
+  {
+    "id": "V158",
+    "topicId": "task1-zim-03-igloo",
+    "word": "thermal insulation",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈθɜːml ˌɪnsjʊˈleɪʃn/",
+    "meaning": "Khả năng cách nhiệt, giữ ấm",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: How an Igloo is Built from Snow (02/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "warm keeping (Band 5)",
+    "synonyms": [
+      "heat retention",
+      "thermal barrier"
+    ],
+    "collocations": [
+      "provide thermal insulation",
+      "enhance thermal insulation"
+    ],
+    "exampleSentence": "Packing snow into exterior crevices greatly enhances the structure's thermal insulation.",
+    "vietnameseSentence": "Trát tuyết vào các khe hở bên ngoài giúp nâng cao đáng kể khả năng cách nhiệt của công trình.",
+    "wordFamily": "thermal insulation (IELTS Task 1)"
+  },
+  {
+    "id": "V159",
+    "topicId": "task1-zim-03-igloo",
+    "word": "crevice",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈkrevɪs/",
+    "meaning": "Khe hở, kẽ nứt giữa các khối đá/băng",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: How an Igloo is Built from Snow (02/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "crack / hole (Band 5)",
+    "synonyms": [
+      "crack",
+      "fissure",
+      "gap",
+      "chink"
+    ],
+    "collocations": [
+      "seal crevices",
+      "fill tiny crevices"
+    ],
+    "exampleSentence": "Loose powdery snow is firmly packed into remaining crevices to deflect biting winds.",
+    "vietnameseSentence": "Tuyết xốp tơi được nén chặt vào các khe nứt còn lại để ngăn những luồng gió buốt giá.",
+    "wordFamily": "crevice (IELTS Task 1)"
+  },
+  {
+    "id": "V160",
+    "topicId": "task1-zim-03-igloo",
+    "word": "culminate in",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈkʌlmɪneɪt ɪn/",
+    "meaning": "Kết thúc bằng, đạt đến đỉnh điểm ở bước",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: How an Igloo is Built from Snow (02/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "end with (Band 5)",
+    "synonyms": [
+      "conclude with",
+      "climax in",
+      "finish with"
+    ],
+    "collocations": [
+      "culminate in the final stage",
+      "culminate in completion"
+    ],
+    "exampleSentence": "The assembly culminates in the smoothing of the exterior dome with handheld wooden trowels.",
+    "vietnameseSentence": "Quy trình xây dựng kết thúc bằng việc làm mịn bề mặt vòm ngoài bằng bàn chà gỗ cầm tay.",
+    "wordFamily": "culminate in (IELTS Task 1)"
+  },
+  {
+    "id": "V161",
+    "topicId": "task1-zim-03-igloo",
+    "word": "dome-shaped",
+    "partOfSpeech": "adjective",
+    "ipa": "/dəʊm ʃeɪpt/",
+    "meaning": "Có hình dạng mái vòm tròn",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: How an Igloo is Built from Snow (02/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "round like a ball (Band 5)",
+    "synonyms": [
+      "hemispherical",
+      "vaulted",
+      "curved"
+    ],
+    "collocations": [
+      "dome-shaped shelter",
+      "dome-shaped architecture"
+    ],
+    "exampleSentence": "The dome-shaped structure successfully withstands howling blizzards and seismic tremors.",
+    "vietnameseSentence": "Cấu trúc hình mái vòm có khả năng chống chịu thành công những trận bão tuyết dữ dội và rung chấn.",
+    "wordFamily": "dome-shaped (IELTS Task 1)"
+  },
+  {
+    "id": "V162",
+    "topicId": "task1-zim-04-driving-license",
+    "word": "eyesight test",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈaɪsaɪt test/",
+    "meaning": "Bài kiểm tra thị lực / kiểm tra mắt",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Flowchart: US Driving License Examination Procedures (14/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "eye check (Band 5)",
+    "synonyms": [
+      "vision screening",
+      "ocular examination"
+    ],
+    "collocations": [
+      "undergo an eyesight test",
+      "pass the eyesight test"
+    ],
+    "exampleSentence": "Passing the mandatory eyesight test is a prerequisite before booking any theory exam.",
+    "vietnameseSentence": "Vượt qua bài kiểm tra thị lực bắt buộc là điều kiện tiên quyết trước khi đăng ký thi bất kỳ bài lý thuyết nào.",
+    "wordFamily": "eyesight test (IELTS Task 1)"
+  },
+  {
+    "id": "V163",
+    "topicId": "task1-zim-04-driving-license",
+    "word": "theoretical examination",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌθɪəˈretɪkl ɪɡˌzæmɪˈneɪʃn/",
+    "meaning": "Kỳ thi lý thuyết luật giao thông",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Flowchart: US Driving License Examination Procedures (14/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "paper test (Band 5)",
+    "synonyms": [
+      "written test",
+      "theory examination",
+      "knowledge assessment"
+    ],
+    "collocations": [
+      "sit a theoretical examination",
+      "written theoretical test"
+    ],
+    "exampleSentence": "The theoretical examination evaluates the applicant's grasp of traffic regulations and road signs.",
+    "vietnameseSentence": "Kỳ thi lý thuyết đánh giá mức độ am hiểu của người nộp đơn về luật lệ và biển báo giao thông.",
+    "wordFamily": "theoretical examination (IELTS Task 1)"
+  },
+  {
+    "id": "V164",
+    "topicId": "task1-zim-04-driving-license",
+    "word": "practical road exam",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈpræktɪkl rəʊd ɪɡˈzæm/",
+    "meaning": "Bài thi thực hành lái xe trên đường thực tế",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Flowchart: US Driving License Examination Procedures (14/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "driving test (Band 5)",
+    "synonyms": [
+      "behind-the-wheel assessment",
+      "on-road driving test"
+    ],
+    "collocations": [
+      "conduct a practical road exam",
+      "road evaluation"
+    ],
+    "exampleSentence": "Examiners observe lane discipline and safety reflexes during the practical road exam.",
+    "vietnameseSentence": "Các giám khảo quan sát kỹ năng đi đúng làn đường và phản xạ an toàn trong suốt bài thi thực hành lái xe.",
+    "wordFamily": "practical road exam (IELTS Task 1)"
+  },
+  {
+    "id": "V165",
+    "topicId": "task1-zim-04-driving-license",
+    "word": "obligatory",
+    "partOfSpeech": "adjective",
+    "ipa": "/əˈblɪɡətri/",
+    "meaning": "Có tính chất bắt buộc theo luật định",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Flowchart: US Driving License Examination Procedures (14/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "must do (Band 5)",
+    "synonyms": [
+      "compulsory",
+      "mandatory",
+      "imperative"
+    ],
+    "collocations": [
+      "it is obligatory to pass",
+      "obligatory requirement"
+    ],
+    "exampleSentence": "It is obligatory for candidates to pass both assessments prior to receiving full driving privileges.",
+    "vietnameseSentence": "Người thi bắt buộc phải vượt qua cả hai bài kiểm tra trước khi được nhận đầy đủ quyền điều khiển phương tiện.",
+    "wordFamily": "obligatory (IELTS Task 1)"
+  },
+  {
+    "id": "V166",
+    "topicId": "task1-zim-04-driving-license",
+    "word": "retake",
+    "partOfSpeech": "verb",
+    "ipa": "/ˌriːˈteɪk/",
+    "meaning": "Thi lại (sau khi bị trượt)",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Flowchart: US Driving License Examination Procedures (14/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "do the test again (Band 5)",
+    "synonyms": [
+      "resit",
+      "reattempt"
+    ],
+    "collocations": [
+      "retake the exam",
+      "eligible to retake"
+    ],
+    "exampleSentence": "Applicants who fail the written section are permitted to retake it twice within ninety days.",
+    "vietnameseSentence": "Những ứng viên trượt phần thi viết được phép thi lại hai lần trong vòng chín mươi ngày.",
+    "wordFamily": "retake (IELTS Task 1)"
+  },
+  {
+    "id": "V167",
+    "topicId": "task1-zim-04-driving-license",
+    "word": "application form",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌæplɪˈkeɪʃn fɔːm/",
+    "meaning": "Mẫu đơn xin cấp / hồ sơ đăng ký",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Flowchart: US Driving License Examination Procedures (14/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "signup paper (Band 5)",
+    "synonyms": [
+      "registration document",
+      "filing document"
+    ],
+    "collocations": [
+      "submit an application form",
+      "fill out the application form"
+    ],
+    "exampleSentence": "Prospective motorists must first complete and sign an official application form.",
+    "vietnameseSentence": "Những người có nguyện vọng lái xe trước hết phải điền và ký vào mẫu đơn đăng ký chính thức.",
+    "wordFamily": "application form (IELTS Task 1)"
+  },
+  {
+    "id": "V168",
+    "topicId": "task1-zim-04-driving-license",
+    "word": "administrative fee",
+    "partOfSpeech": "noun",
+    "ipa": "/ədˈmɪnɪstrətɪv fiː/",
+    "meaning": "Phí quản lý hành chính / lệ phí hồ sơ",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Flowchart: US Driving License Examination Procedures (14/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "service price (Band 5)",
+    "synonyms": [
+      "licensing fee",
+      "processing surcharge"
+    ],
+    "collocations": [
+      "pay the administrative fee",
+      "non-refundable administrative fee"
+    ],
+    "exampleSentence": "Each reattempt incurs a standard administrative fee payable at the reception kiosk.",
+    "vietnameseSentence": "Mỗi lần thi lại đều phải nộp một khoản lệ phí hành chính tiêu chuẩn tại quầy tiếp tân.",
+    "wordFamily": "administrative fee (IELTS Task 1)"
+  },
+  {
+    "id": "V169",
+    "topicId": "task1-zim-04-driving-license",
+    "word": "prerequisite",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌpriːˈrekwəzɪt/",
+    "meaning": "Điều kiện tiên quyết phải đạt trước",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Flowchart: US Driving License Examination Procedures (14/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "first requirement (Band 5)",
+    "synonyms": [
+      "essential condition",
+      "precondition"
+    ],
+    "collocations": [
+      "a prerequisite for getting a license",
+      "essential prerequisite"
+    ],
+    "exampleSentence": "Passing visual acuity tests functions as an absolute prerequisite for subsequent examinations.",
+    "vietnameseSentence": "Vượt qua bài đo độ sắc nét thị giác đóng vai trò là điều kiện tiên quyết tuyệt đối cho các kỳ thi sau.",
+    "wordFamily": "prerequisite (IELTS Task 1)"
+  },
+  {
+    "id": "V170",
+    "topicId": "task1-zim-05-teacher-salaries",
+    "word": "well-paid",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˌwel ˈpeɪd/",
+    "meaning": "Được trả lương cao, thu nhập hậu hĩnh",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Table: High School Teachers Salaries in 5 Countries (20/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "get high money (Band 5)",
+    "synonyms": [
+      "highly compensated",
+      "lucrative",
+      "generously remunerated"
+    ],
+    "collocations": [
+      "most well-paid profession",
+      "well-paid educators"
+    ],
+    "exampleSentence": "Luxembourgish teachers were consistently the most well-paid among the surveyed nations.",
+    "vietnameseSentence": "Giáo viên tại Luxembourg luôn là những người được trả lương cao nhất trong số các quốc gia được khảo sát.",
+    "wordFamily": "well-paid (IELTS Task 1)"
+  },
+  {
+    "id": "V171",
+    "topicId": "task1-zim-05-teacher-salaries",
+    "word": "starting salary",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈstɑːtɪŋ ˈsæləri/",
+    "meaning": "Mức lương khởi điểm khi mới vào nghề",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Table: High School Teachers Salaries in 5 Countries (20/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "first pay (Band 5)",
+    "synonyms": [
+      "entry-level salary",
+      "initial earnings",
+      "commencing wage"
+    ],
+    "collocations": [
+      "earn a starting salary",
+      "modest starting salary"
+    ],
+    "exampleSentence": "A novice high school instructor in Denmark received an entry-level starting salary of $45,000.",
+    "vietnameseSentence": "Một giáo viên trung học mới vào nghề tại Đan Mạch nhận mức lương khởi điểm là 45.000 USD.",
+    "wordFamily": "starting salary (IELTS Task 1)"
+  },
+  {
+    "id": "V172",
+    "topicId": "task1-zim-05-teacher-salaries",
+    "word": "inexperienced",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˌɪnɪkˈspɪəriənst/",
+    "meaning": "Chưa có kinh nghiệm, mới vào nghề",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Table: High School Teachers Salaries in 5 Countries (20/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "new worker (Band 5)",
+    "synonyms": [
+      "novice",
+      "entry-level",
+      "unseasoned"
+    ],
+    "collocations": [
+      "inexperienced teacher",
+      "inexperienced candidate"
+    ],
+    "exampleSentence": "Inexperienced educators in Australia drew the lowest baseline compensation in the dataset.",
+    "vietnameseSentence": "Các giáo viên chưa có kinh nghiệm ở Úc nhận mức thù lao cơ bản thấp nhất trong bộ số liệu.",
+    "wordFamily": "inexperienced (IELTS Task 1)"
+  },
+  {
+    "id": "V173",
+    "topicId": "task1-zim-05-teacher-salaries",
+    "word": "seniority",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌsiːniˈɒrəti/",
+    "meaning": "Thâm niên công tác lâu năm",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Table: High School Teachers Salaries in 5 Countries (20/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "years of work (Band 5)",
+    "synonyms": [
+      "tenure",
+      "length of service",
+      "professional experience"
+    ],
+    "collocations": [
+      "accumulate seniority",
+      "based on seniority"
+    ],
+    "exampleSentence": "Salary increments were strictly determined by years of professional seniority.",
+    "vietnameseSentence": "Các bậc tăng lương được xác định nghiêm ngặt dựa theo số năm thâm niên nghề nghiệp.",
+    "wordFamily": "seniority (IELTS Task 1)"
+  },
+  {
+    "id": "V174",
+    "topicId": "task1-zim-05-teacher-salaries",
+    "word": "salary ceiling",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈsæləri ˈsiːlɪŋ/",
+    "meaning": "Mức lương tối đa kịch trần có thể đạt được",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Table: High School Teachers Salaries in 5 Countries (20/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "highest money limit (Band 5)",
+    "synonyms": [
+      "maximum salary",
+      "upper pay threshold",
+      "earnings cap"
+    ],
+    "collocations": [
+      "reach the salary ceiling",
+      "attain the maximum salary"
+    ],
+    "exampleSentence": "Danish instructors reached their salary ceiling within a brisk nine-year span.",
+    "vietnameseSentence": "Các giảng viên Đan Mạch đã chạm mức lương tối đa của họ chỉ trong khoảng thời gian nhanh gọn 9 năm.",
+    "wordFamily": "salary ceiling (IELTS Task 1)"
+  },
+  {
+    "id": "V175",
+    "topicId": "task1-zim-05-teacher-salaries",
+    "word": "remuneration",
+    "partOfSpeech": "noun",
+    "ipa": "/rɪˌmjuːnəˈreɪʃn/",
+    "meaning": "Thù lao, tiền công chi trả cho người lao động",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Table: High School Teachers Salaries in 5 Countries (20/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "payment / money (Band 5)",
+    "synonyms": [
+      "compensation package",
+      "financial reward",
+      "earnings"
+    ],
+    "collocations": [
+      "adequate remuneration",
+      "generous remuneration"
+    ],
+    "exampleSentence": "Educational authorities offered generous remuneration packages to attract talented educators.",
+    "vietnameseSentence": "Nhà chức trách giáo dục đã đưa ra các gói thù lao hậu hĩnh để thu hút các nhà giáo tài năng.",
+    "wordFamily": "remuneration (IELTS Task 1)"
+  },
+  {
+    "id": "V176",
+    "topicId": "task1-zim-05-teacher-salaries",
+    "word": "counterpart",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈkaʊntəpɑːt/",
+    "meaning": "Đối tượng tương đương ở nước hoặc đơn vị khác",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Table: High School Teachers Salaries in 5 Countries (20/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "the same person in another place (Band 5)",
+    "synonyms": [
+      "equivalent colleague",
+      "peer"
+    ],
+    "collocations": [
+      "Asian counterparts",
+      "European counterparts"
+    ],
+    "exampleSentence": "Japanese teachers earned considerably more than their Australian counterparts after 15 years.",
+    "vietnameseSentence": "Giáo viên Nhật Bản kiếm được nhiều hơn đáng kể so với các đồng nghiệp tương đương ở Úc sau 15 năm.",
+    "wordFamily": "counterpart (IELTS Task 1)"
+  },
+  {
+    "id": "V177",
+    "topicId": "task1-zim-05-teacher-salaries",
+    "word": "disparity",
+    "partOfSpeech": "noun",
+    "ipa": "/dɪˈspærəti/",
+    "meaning": "Sự chênh lệch lớn giữa các đối tượng",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Table: High School Teachers Salaries in 5 Countries (20/03/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "big difference (Band 5)",
+    "synonyms": [
+      "gap",
+      "divergence",
+      "inequality"
+    ],
+    "collocations": [
+      "wide wage disparity",
+      "stark disparity"
+    ],
+    "exampleSentence": "The table underlines a stark disparity in public education investments across the OECD.",
+    "vietnameseSentence": "Bảng số liệu nhấn mạnh sự chênh lệch rõ rệt trong đầu tư giáo dục công lập giữa các nước OECD.",
+    "wordFamily": "disparity (IELTS Task 1)"
+  },
+  {
+    "id": "V178",
+    "topicId": "task1-zim-06-water-costs",
+    "word": "domestic water",
+    "partOfSpeech": "noun",
+    "ipa": "/dəˈmestɪk ˈwɔːtər/",
+    "meaning": "Nước dùng cho mục đích sinh hoạt gia đình",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Table: Cost of Residential Water in 5 Australian Cities (27/07/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "home water (Band 5)",
+    "synonyms": [
+      "residential water",
+      "household water supply"
+    ],
+    "collocations": [
+      "cost of domestic water",
+      "domestic water consumption"
+    ],
+    "exampleSentence": "Metropolitan tariffs on domestic water are designed to curb excessive waste during droughts.",
+    "vietnameseSentence": "Biểu giá đô thị đối với nước sinh hoạt được thiết kế nhằm hạn chế lãng phí quá mức trong mùa khô hạn.",
+    "wordFamily": "domestic water (IELTS Task 1)"
+  },
+  {
+    "id": "V179",
+    "topicId": "task1-zim-06-water-costs",
+    "word": "progressive tariff",
+    "partOfSpeech": "noun",
+    "ipa": "/prəˈɡresɪv ˈtærɪf/",
+    "meaning": "Biểu giá lũy tiến (dùng càng nhiều giá càng tăng)",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Table: Cost of Residential Water in 5 Australian Cities (27/07/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "tiered pricing (Band 5)",
+    "synonyms": [
+      "tiered pricing structure",
+      "stepped tariff"
+    ],
+    "collocations": [
+      "implement a progressive tariff",
+      "progressive water tariff"
+    ],
+    "exampleSentence": "Perth utility companies enforce a steep progressive tariff to penalize high water consumers.",
+    "vietnameseSentence": "Các công ty cấp nước tại Perth áp dụng biểu giá lũy tiến dốc để phạt những người tiêu thụ nhiều nước.",
+    "wordFamily": "progressive tariff (IELTS Task 1)"
+  },
+  {
+    "id": "V180",
+    "topicId": "task1-zim-06-water-costs",
+    "word": "consumption threshold",
+    "partOfSpeech": "noun",
+    "ipa": "/kənˈsʌmpʃn ˈθreʃhəʊld/",
+    "meaning": "Ngưỡng định mức tiêu thụ",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Table: Cost of Residential Water in 5 Australian Cities (27/07/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "usage limit (Band 5)",
+    "synonyms": [
+      "usage limit",
+      "baseline quota",
+      "allowance cap"
+    ],
+    "collocations": [
+      "exceed the consumption threshold",
+      "surpass the 125 KL threshold"
+    ],
+    "exampleSentence": "Surpassing the 125-kilolitre consumption threshold automatically triggers punitive billing brackets.",
+    "vietnameseSentence": "Việc dùng vượt ngưỡng định mức 125 kilolít sẽ tự động kích hoạt khung giá lũy tiến cao hơn.",
+    "wordFamily": "consumption threshold (IELTS Task 1)"
+  },
+  {
+    "id": "V181",
+    "topicId": "task1-zim-06-water-costs",
+    "word": "uniform rate",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈjuːnɪfɔːm reɪt/",
+    "meaning": "Mức giá đồng nhất, cào bằng không phân tầng",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Table: Cost of Residential Water in 5 Australian Cities (27/07/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "same price (Band 5)",
+    "synonyms": [
+      "flat tariff",
+      "constant pricing",
+      "invariant rate"
+    ],
+    "collocations": [
+      "charge a uniform rate",
+      "maintain a uniform rate"
+    ],
+    "exampleSentence": "Sydney opted for a uniform rate of $0.98 per kilolitre across all volumetric categories.",
+    "vietnameseSentence": "Sydney đã lựa chọn một mức giá đồng nhất là 0.98 USD mỗi kilolít cho tất cả các khối lượng sử dụng.",
+    "wordFamily": "uniform rate (IELTS Task 1)"
+  },
+  {
+    "id": "V182",
+    "topicId": "task1-zim-06-water-costs",
+    "word": "soar",
+    "partOfSpeech": "verb",
+    "ipa": "/sɔːr/",
+    "meaning": "Tăng vọt đột biến",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Table: Cost of Residential Water in 5 Australian Cities (27/07/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "go up quickly (Band 5)",
+    "synonyms": [
+      "surge",
+      "escalate",
+      "skyrocket"
+    ],
+    "collocations": [
+      "tariffs soar",
+      "costs soar drastically"
+    ],
+    "exampleSentence": "Water expenditure soared dramatically once household consumption surpassed the benchmark.",
+    "vietnameseSentence": "Chi phí tiền nước tăng vọt đột biến một khi lượng tiêu thụ của hộ gia đình vượt qua mức chuẩn.",
+    "wordFamily": "soar (IELTS Task 1)"
+  },
+  {
+    "id": "V183",
+    "topicId": "task1-zim-06-water-costs",
+    "word": "hefty",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˈhefti/",
+    "meaning": "Lớn, đắt đỏ, nặng nề (về tiền bạc)",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Table: Cost of Residential Water in 5 Australian Cities (27/07/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "big / high (Band 5)",
+    "synonyms": [
+      "substantial",
+      "sizeable",
+      "burdensome"
+    ],
+    "collocations": [
+      "hefty bill",
+      "hefty financial commitment"
+    ],
+    "exampleSentence": "Perth homeowners incurred the heftiest annual water bill among all five metropolises.",
+    "vietnameseSentence": "Các chủ hộ tại Perth phải gánh chịu hóa đơn tiền nước thường niên đắt đỏ nhất trong cả năm đô thị.",
+    "wordFamily": "hefty (IELTS Task 1)"
+  },
+  {
+    "id": "V184",
+    "topicId": "task1-zim-06-water-costs",
+    "word": "economical",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˌiːkəˈnɒmɪkl/",
+    "meaning": "Tiết kiệm, ít tốn kém chi phí",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Table: Cost of Residential Water in 5 Australian Cities (27/07/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "cheap (Band 5)",
+    "synonyms": [
+      "cost-effective",
+      "budget-friendly",
+      "inexpensive"
+    ],
+    "collocations": [
+      "most economical option",
+      "economical water usage"
+    ],
+    "exampleSentence": "Melbourne represented the most economical urban location regarding utility expenditures.",
+    "vietnameseSentence": "Melbourne là địa điểm đô thị tiết kiệm nhất xét về các khoản chi phí tiện ích sinh hoạt.",
+    "wordFamily": "economical (IELTS Task 1)"
+  },
+  {
+    "id": "V185",
+    "topicId": "task1-zim-06-water-costs",
+    "word": "annual outlay",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈænjuəl ˈaʊtleɪ/",
+    "meaning": "Khoản chi tiêu xuất quỹ hằng năm",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Table: Cost of Residential Water in 5 Australian Cities (27/07/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "yearly spending (Band 5)",
+    "synonyms": [
+      "annual expenditure",
+      "yearly bill",
+      "annual spending"
+    ],
+    "collocations": [
+      "average annual outlay",
+      "minimize annual outlay"
+    ],
+    "exampleSentence": "The average annual outlay on residential water in Melbourne remained limited to $253.",
+    "vietnameseSentence": "Khoản chi tiêu hằng năm trung bình cho nước sinh hoạt tại Melbourne chỉ dừng lại ở mức 253 USD.",
+    "wordFamily": "annual outlay (IELTS Task 1)"
+  },
+  {
+    "id": "V186",
+    "topicId": "task1-zim-07-city-evolution",
+    "word": "residential zone",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌrezɪˈdenʃl zəʊn/",
+    "meaning": "Khu dân cư, khu nhà ở của người dân",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Maps: City Spatial Changes from 1950 to Present Day (14/12/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "housing area (Band 5)",
+    "synonyms": [
+      "housing district",
+      "residential quarter",
+      "suburb"
+    ],
+    "collocations": [
+      "expansion of residential zones",
+      "densely populated residential zone"
+    ],
+    "exampleSentence": "Vast residential zones have expanded outward to cater to incoming urban migrants.",
+    "vietnameseSentence": "Các khu dân cư rộng lớn đã mở rộng ra bên ngoài để phục vụ lượng người di cư đến thành phố.",
+    "wordFamily": "residential zone (IELTS Task 1)"
+  },
+  {
+    "id": "V187",
+    "topicId": "task1-zim-07-city-evolution",
+    "word": "sprawl",
+    "partOfSpeech": "verb",
+    "ipa": "/sprɔːl/",
+    "meaning": "Lan rộng, bành trướng không gian (đô thị)",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Maps: City Spatial Changes from 1950 to Present Day (14/12/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "grow bigger (Band 5)",
+    "synonyms": [
+      "expand outward",
+      "proliferate",
+      "spread"
+    ],
+    "collocations": [
+      "urban sprawl",
+      "sprawl across both banks"
+    ],
+    "exampleSentence": "Residential neighbourhoods have sprawled extensively across both sides of the waterway.",
+    "vietnameseSentence": "Các khu phố nhà ở đã lan rộng đáng kể sang cả hai bờ nguồn nước.",
+    "wordFamily": "sprawl (IELTS Task 1)"
+  },
+  {
+    "id": "V188",
+    "topicId": "task1-zim-07-city-evolution",
+    "word": "tenfold",
+    "partOfSpeech": "adverb",
+    "ipa": "/ˈtenfəʊld/",
+    "meaning": "Gấp 10 lần",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Maps: City Spatial Changes from 1950 to Present Day (14/12/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "ten times (Band 5)",
+    "synonyms": [
+      "by a factor of ten",
+      "decavalent"
+    ],
+    "collocations": [
+      "multiply tenfold",
+      "a tenfold increase"
+    ],
+    "exampleSentence": "The city experienced a staggering tenfold population growth from 20,000 to 200,000.",
+    "vietnameseSentence": "Thành phố chứng kiến mức tăng trưởng dân số kinh ngạc gấp mười lần từ 20.000 lên 200.000 người.",
+    "wordFamily": "tenfold (IELTS Task 1)"
+  },
+  {
+    "id": "V189",
+    "topicId": "task1-zim-07-city-evolution",
+    "word": "encircle",
+    "partOfSpeech": "verb",
+    "ipa": "/ɪnˈsɜːkl/",
+    "meaning": "Bao quanh, ôm trọn lấy khu vực",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Maps: City Spatial Changes from 1950 to Present Day (14/12/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "surround (Band 5)",
+    "synonyms": [
+      "encompass",
+      "surround",
+      "border"
+    ],
+    "collocations": [
+      "encircle the city center",
+      "completely encircle"
+    ],
+    "exampleSentence": "Modern housing developments now almost completely encircle the historic commercial core.",
+    "vietnameseSentence": "Các khu đô thị mới hiện nay gần như bao bọc hoàn toàn khu lõi thương mại lịch sử.",
+    "wordFamily": "encircle (IELTS Task 1)"
+  },
+  {
+    "id": "V190",
+    "topicId": "task1-zim-07-city-evolution",
+    "word": "retain its position",
+    "partOfSpeech": "verb",
+    "ipa": "/rɪˈteɪn ɪts pəˈzɪʃn/",
+    "meaning": "Duy trì nguyên vẹn vị trí, không thay đổi",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Maps: City Spatial Changes from 1950 to Present Day (14/12/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "stay in the same place (Band 5)",
+    "synonyms": [
+      "remain unchanged",
+      "stay intact",
+      "persist"
+    ],
+    "collocations": [
+      "retain its initial layout",
+      "retain geographic position"
+    ],
+    "exampleSentence": "The municipal aerodrome retained its position on the northeastern periphery without structural alterations.",
+    "vietnameseSentence": "Sân bay đô thị vẫn giữ nguyên vị trí ở vùng ven đông bắc mà không có thay đổi kết cấu nào.",
+    "wordFamily": "retain its position (IELTS Task 1)"
+  },
+  {
+    "id": "V191",
+    "topicId": "task1-zim-07-city-evolution",
+    "word": "hydroelectric dam",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌhaɪdrəʊɪˈlektrɪk dæm/",
+    "meaning": "Đập thủy điện / đập ngăn nước",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Maps: City Spatial Changes from 1950 to Present Day (14/12/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "water dam (Band 5)",
+    "synonyms": [
+      "water barrier",
+      "weir",
+      "impoundment"
+    ],
+    "collocations": [
+      "construct a dam",
+      "erect a modern dam"
+    ],
+    "exampleSentence": "A downstream dam was erected along the river to guarantee consistent tap water supplies.",
+    "vietnameseSentence": "Một con đập ở hạ lưu đã được xây dựng dọc theo sông nhằm đảm bảo nguồn nước sinh hoạt ổn định.",
+    "wordFamily": "hydroelectric dam (IELTS Task 1)"
+  },
+  {
+    "id": "V192",
+    "topicId": "task1-zim-07-city-evolution",
+    "word": "arterial road",
+    "partOfSpeech": "noun",
+    "ipa": "/ɑːˈtɪəriəl rəʊd/",
+    "meaning": "Trục đường huyết mạch, đường giao thông chính",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Maps: City Spatial Changes from 1950 to Present Day (14/12/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "main street (Band 5)",
+    "synonyms": [
+      "thoroughfare",
+      "major roadway",
+      "arterial highway"
+    ],
+    "collocations": [
+      "network of arterial roads",
+      "widen arterial roads"
+    ],
+    "exampleSentence": "Additional arterial roads were introduced to link peripheral settlements to downtown office towers.",
+    "vietnameseSentence": "Các trục đường huyết mạch bổ sung đã được mở để kết nối các khu dân cư ngoại vi với các tòa nhà văn phòng trung tâm.",
+    "wordFamily": "arterial road (IELTS Task 1)"
+  },
+  {
+    "id": "V193",
+    "topicId": "task1-zim-07-city-evolution",
+    "word": "metamorphosis",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌmetəˈmɔːfəsɪs/",
+    "meaning": "Sự chuyển mình biến đổi hoàn toàn diện mạo",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Maps: City Spatial Changes from 1950 to Present Day (14/12/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "big change (Band 5)",
+    "synonyms": [
+      "transformation",
+      "urban redevelopment",
+      "structural evolution"
+    ],
+    "collocations": [
+      "undergo a complete metamorphosis",
+      "urban metamorphosis"
+    ],
+    "exampleSentence": "The town underwent a profound spatial metamorphosis from a quiet outpost into a bustling metropolis.",
+    "vietnameseSentence": "Thị trấn đã trải qua một sự chuyển mình không gian sâu sắc từ một trạm tiền tiêu vắng vẻ thành một đại đô thị sầm uất.",
+    "wordFamily": "metamorphosis (IELTS Task 1)"
+  },
+  {
+    "id": "V194",
+    "topicId": "task1-zim-08-road-safety",
+    "word": "accident blackspot",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈæksɪdənt ˈblækspɒt/",
+    "meaning": "Điểm đen tai nạn giao thông",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Maps: Road Redesign for Accident Reduction (23/05/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "dangerous road place (Band 5)",
+    "synonyms": [
+      "hazardous intersection",
+      "high-collision zone"
+    ],
+    "collocations": [
+      "eliminate accident blackspots",
+      "identify blackspots"
+    ],
+    "exampleSentence": "The outdated crossroad had long been condemned as an notorious accident blackspot.",
+    "vietnameseSentence": "Giao lộ cũ kỹ từ lâu đã bị xem là một điểm đen tai nạn giao thông khét tiếng.",
+    "wordFamily": "accident blackspot (IELTS Task 1)"
+  },
+  {
+    "id": "V195",
+    "topicId": "task1-zim-08-road-safety",
+    "word": "roundabout",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈraʊndəbaʊt/",
+    "meaning": "Vòng xuyến, bùng binh giao thông",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Maps: Road Redesign for Accident Reduction (23/05/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "circle road (Band 5)",
+    "synonyms": [
+      "traffic circle",
+      "rotary"
+    ],
+    "collocations": [
+      "install a roundabout",
+      "navigate the roundabout"
+    ],
+    "exampleSentence": "Planners intend to replace the uncontrolled junction with a multi-lane roundabout.",
+    "vietnameseSentence": "Các nhà quy hoạch dự định thay thế ngã tư không kiểm soát bằng một vòng xuyến đa làn xe.",
+    "wordFamily": "roundabout (IELTS Task 1)"
+  },
+  {
+    "id": "V196",
+    "topicId": "task1-zim-08-road-safety",
+    "word": "traffic lights",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈtræfɪk laɪts/",
+    "meaning": "Hệ thống đèn tín hiệu giao thông",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Maps: Road Redesign for Accident Reduction (23/05/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "stop lights (Band 5)",
+    "synonyms": [
+      "automated traffic signals",
+      "signaling system"
+    ],
+    "collocations": [
+      "sets of traffic lights",
+      "signalized intersection"
+    ],
+    "exampleSentence": "Several sets of traffic lights will be strategically positioned to meter arterial traffic flows.",
+    "vietnameseSentence": "Nhiều cụm đèn tín hiệu giao thông sẽ được bố trí hợp lý để điều tiết lưu lượng xe cộ trên trục chính.",
+    "wordFamily": "traffic lights (IELTS Task 1)"
+  },
+  {
+    "id": "V197",
+    "topicId": "task1-zim-08-road-safety",
+    "word": "pedestrian crossing",
+    "partOfSpeech": "noun",
+    "ipa": "/pəˈdestriən ˈkrɒsɪŋ/",
+    "meaning": "Vạch kẻ / lối đi bộ an toàn qua đường",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Maps: Road Redesign for Accident Reduction (23/05/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "walk path on road (Band 5)",
+    "synonyms": [
+      "zebra crossing",
+      "signalized crosswalk"
+    ],
+    "collocations": [
+      "designated pedestrian crossing",
+      "crosswalk safety"
+    ],
+    "exampleSentence": "A dedicated pedestrian crossing ensures pupils can cross the boulevard without danger.",
+    "vietnameseSentence": "Một lối qua đường dành riêng cho người đi bộ đảm bảo học sinh có thể qua đại lộ mà không gặp nguy hiểm.",
+    "wordFamily": "pedestrian crossing (IELTS Task 1)"
+  },
+  {
+    "id": "V198",
+    "topicId": "task1-zim-08-road-safety",
+    "word": "intersection",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌɪntəˈsekʃn/",
+    "meaning": "Ngã ba, ngã tư giao nhau",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Maps: Road Redesign for Accident Reduction (23/05/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "crossing (Band 5)",
+    "synonyms": [
+      "junction",
+      "crossroad"
+    ],
+    "collocations": [
+      "busy intersection",
+      "perilous intersection"
+    ],
+    "exampleSentence": "Reconfiguring the blind intersection will substantially widen sightlines for motorists.",
+    "vietnameseSentence": "Việc tái cấu trúc lại ngã tư khuất tầm nhìn sẽ mở rộng đáng kể tầm quan sát cho người lái xe.",
+    "wordFamily": "intersection (IELTS Task 1)"
+  },
+  {
+    "id": "V199",
+    "topicId": "task1-zim-08-road-safety",
+    "word": "refuge island",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈrefjuːdʒ ˈaɪlənd/",
+    "meaning": "Đảo dừng chân an toàn giữa lòng đường cho người đi bộ",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Maps: Road Redesign for Accident Reduction (23/05/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "middle safety stop (Band 5)",
+    "synonyms": [
+      "pedestrian island",
+      "safety median"
+    ],
+    "collocations": [
+      "install refuge islands",
+      "central refuge island"
+    ],
+    "exampleSentence": "Central refuge islands allow elderly pedestrians to cross wide roadways in two manageable stages.",
+    "vietnameseSentence": "Các đảo dừng chân giữa đường cho phép người cao tuổi qua đường phố rộng theo hai chặng an toàn.",
+    "wordFamily": "refuge island (IELTS Task 1)"
+  },
+  {
+    "id": "V200",
+    "topicId": "task1-zim-08-road-safety",
+    "word": "restructure",
+    "partOfSpeech": "verb",
+    "ipa": "/ˌriːˈstrʌktʃər/",
+    "meaning": "Tổ chức lại, tái định hình cơ cấu mạng lưới",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Maps: Road Redesign for Accident Reduction (23/05/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "change the system (Band 5)",
+    "synonyms": [
+      "reconfigure",
+      "remodel",
+      "overhaul"
+    ],
+    "collocations": [
+      "restructure the road layout",
+      "reorganize traffic lanes"
+    ],
+    "exampleSentence": "Engineers plan to restructure the adjoining slip roads to prevent bottleneck queues.",
+    "vietnameseSentence": "Các kỹ sư dự định tổ chức lại các nhánh đường nhánh phụ cận để chống ùn tắc kéo dài.",
+    "wordFamily": "restructure (IELTS Task 1)"
+  },
+  {
+    "id": "V201",
+    "topicId": "task1-zim-09-rainwater",
+    "word": "rainwater harvesting",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈreɪnwɔːtər ˈhɑːvɪstɪŋ/",
+    "meaning": "Việc thu gom và lưu trữ nước mưa tự nhiên",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: Rainwater Harvesting for Drinking in Australia (25/05/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "collecting rain water (Band 5)",
+    "synonyms": [
+      "rain catchment",
+      "precipitation collection"
+    ],
+    "collocations": [
+      "rainwater harvesting system",
+      "rooftop rainwater harvesting"
+    ],
+    "exampleSentence": "Rooftop rainwater harvesting offers a sustainable solution for drought-prone rural settlements.",
+    "vietnameseSentence": "Thu gom nước mưa trên mái nhà đem lại giải pháp bền vững cho các khu định cư nông thôn dễ bị hạn hán.",
+    "wordFamily": "rainwater harvesting (IELTS Task 1)"
+  },
+  {
+    "id": "V202",
+    "topicId": "task1-zim-09-rainwater",
+    "word": "potable water",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈpəʊtəbl ˈwɔːtər/",
+    "meaning": "Nước uống được, an toàn cho sức khỏe",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: Rainwater Harvesting for Drinking in Australia (25/05/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "drinkable water (Band 5)",
+    "synonyms": [
+      "drinking water",
+      "safe drinking supply"
+    ],
+    "collocations": [
+      "generate potable water",
+      "potable water standards"
+    ],
+    "exampleSentence": "The multi-stage plant converts contaminated runoff into certified potable water.",
+    "vietnameseSentence": "Nhà máy đa công đoạn chuyển đổi dòng chảy ô nhiễm thành nước uống đạt chuẩn kiểm định.",
+    "wordFamily": "potable water (IELTS Task 1)"
+  },
+  {
+    "id": "V203",
+    "topicId": "task1-zim-09-rainwater",
+    "word": "drain pipe",
+    "partOfSpeech": "noun",
+    "ipa": "/dreɪn paɪp/",
+    "meaning": "Ống thoát nước, ống xả nước",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: Rainwater Harvesting for Drinking in Australia (25/05/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "water tube (Band 5)",
+    "synonyms": [
+      "gutter conduit",
+      "downpipe",
+      "drainage conduit"
+    ],
+    "collocations": [
+      "connected drain pipes",
+      "gutter and drain pipe"
+    ],
+    "exampleSentence": "Water cascades down steep tiled roofs through heavy-duty drain pipes into the filtration unit.",
+    "vietnameseSentence": "Nước chảy tràn xuống mái ngói dốc qua các ống thoát nước chịu lực vào bộ phận lọc.",
+    "wordFamily": "drain pipe (IELTS Task 1)"
+  },
+  {
+    "id": "V204",
+    "topicId": "task1-zim-09-rainwater",
+    "word": "storage tank",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈstɔːrɪdʒ tæŋk/",
+    "meaning": "Bể trữ nước, bồn chứa nước dung tích lớn",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: Rainwater Harvesting for Drinking in Australia (25/05/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "water box (Band 5)",
+    "synonyms": [
+      "cistern",
+      "reservoir tank",
+      "holding chamber"
+    ],
+    "collocations": [
+      "large storage tank",
+      "underground storage tank"
+    ],
+    "exampleSentence": "Filtered runoff is safeguarded in a sealed storage tank to protect it against mosquito larvae.",
+    "vietnameseSentence": "Nước sau lọc được bảo quản an toàn trong bồn chứa kín để phòng ngừa ấu trùng muỗi.",
+    "wordFamily": "storage tank (IELTS Task 1)"
+  },
+  {
+    "id": "V205",
+    "topicId": "task1-zim-09-rainwater",
+    "word": "chemical treatment",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈkemɪkl ˈtriːtmənt/",
+    "meaning": "Xử lý bằng hóa chất (khử trùng, clo hóa)",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: Rainwater Harvesting for Drinking in Australia (25/05/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "clean with chemicals (Band 5)",
+    "synonyms": [
+      "chemical dosing",
+      "chemical disinfection"
+    ],
+    "collocations": [
+      "undergo chemical treatment",
+      "water chemical treatment"
+    ],
+    "exampleSentence": "During the chemical treatment phase, chlorine neutralizes pathogenic microbes.",
+    "vietnameseSentence": "Trong giai đoạn xử lý bằng hóa chất, clo sẽ tiêu diệt và vô hiệu hóa các vi khuẩn gây bệnh.",
+    "wordFamily": "chemical treatment (IELTS Task 1)"
+  },
+  {
+    "id": "V206",
+    "topicId": "task1-zim-09-rainwater",
+    "word": "water faucet",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈwɔːtər ˈfɔːsɪt/",
+    "meaning": "Vòi nước sinh hoạt",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: Rainwater Harvesting for Drinking in Australia (25/05/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "water tap (Band 5)",
+    "synonyms": [
+      "household tap",
+      "water spigot"
+    ],
+    "collocations": [
+      "domestic water faucet",
+      "turn on the faucet"
+    ],
+    "exampleSentence": "Treated pure water is finally pressurized and piped straight to kitchen water faucets.",
+    "vietnameseSentence": "Nước tinh khiết sau xử lý cuối cùng được tạo áp suất và dẫn thẳng tới vòi nước nhà bếp.",
+    "wordFamily": "water faucet (IELTS Task 1)"
+  },
+  {
+    "id": "V207",
+    "topicId": "task1-zim-09-rainwater",
+    "word": "filtration unit",
+    "partOfSpeech": "noun",
+    "ipa": "/fɪlˈtreɪʃn ˈjuːnɪt/",
+    "meaning": "Bộ phận lọc, màng lọc cơ học",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: Rainwater Harvesting for Drinking in Australia (25/05/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "filter machine (Band 5)",
+    "synonyms": [
+      "screening filter",
+      "purifying filter"
+    ],
+    "collocations": [
+      "pass through a filtration unit",
+      "water filter"
+    ],
+    "exampleSentence": "The initial filtration unit strains out suspended sediment, airborne dust, and tree leaves.",
+    "vietnameseSentence": "Bộ phận lọc ban đầu giữ lại cặn lơ lửng, bụi trong không khí và lá cây rụng.",
+    "wordFamily": "filtration unit (IELTS Task 1)"
+  },
+  {
+    "id": "V208",
+    "topicId": "task1-zim-09-rainwater",
+    "word": "pump",
+    "partOfSpeech": "verb",
+    "ipa": "/pʌmp/",
+    "meaning": "Bơm, đẩy chất lỏng bằng máy bơm",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: Rainwater Harvesting for Drinking in Australia (25/05/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "push water (Band 5)",
+    "synonyms": [
+      "propel",
+      "pressurize",
+      "deliver via pumps"
+    ],
+    "collocations": [
+      "pump through pipes",
+      "pump to residential households"
+    ],
+    "exampleSentence": "Electrical booster pumps pump treated liquid through municipal supply mains.",
+    "vietnameseSentence": "Các máy bơm tăng áp chạy điện bơm đẩy chất lỏng đã xử lý qua đường ống cấp nước của thành phố.",
+    "wordFamily": "pump (IELTS Task 1)"
+  },
+  {
+    "id": "V209",
+    "topicId": "task1-zim-10-stormwater",
+    "word": "stormwater runoff",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈstɔːmwɔːtər ˈrʌnɒf/",
+    "meaning": "Dòng nước mưa bão chảy tràn trên mặt đất đô thị",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: Stormwater Recycling in an Australian City (06/06/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "storm water on streets (Band 5)",
+    "synonyms": [
+      "urban runoff",
+      "surface water discharge"
+    ],
+    "collocations": [
+      "collect stormwater runoff",
+      "filter stormwater runoff"
+    ],
+    "exampleSentence": "Uncontrolled stormwater runoff frequently washes vehicular oil and litter into municipal gutters.",
+    "vietnameseSentence": "Dòng nước mưa bão chảy tràn mất kiểm soát thường cuốn dầu xe và rác thải vào các mương máng đô thị.",
+    "wordFamily": "stormwater runoff (IELTS Task 1)"
+  },
+  {
+    "id": "V210",
+    "topicId": "task1-zim-10-stormwater",
+    "word": "constructed wetland",
+    "partOfSpeech": "noun",
+    "ipa": "/kənˈstrʌktɪd ˈwetlænd/",
+    "meaning": "Vùng đất ngập nước / đầm lầy nhân tạo để lọc sinh học",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: Stormwater Recycling in an Australian City (06/06/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "water pond with plants (Band 5)",
+    "synonyms": [
+      "engineered reed bed",
+      "bio-retention basin"
+    ],
+    "collocations": [
+      "flow into constructed wetlands",
+      "wetland bio-filter"
+    ],
+    "exampleSentence": "Vegetation within the constructed wetland naturally digests hazardous nitrogen compounds.",
+    "vietnameseSentence": "Thực vật bên trong vùng đầm lầy nhân tạo phân hủy tự nhiên các hợp chất nitơ độc hại.",
+    "wordFamily": "constructed wetland (IELTS Task 1)"
+  },
+  {
+    "id": "V211",
+    "topicId": "task1-zim-10-stormwater",
+    "word": "subterranean aquifer",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌsʌbtəˈreɪniən ˈækwɪfər/",
+    "meaning": "Tầng ngậm nước ngầm dưới lòng đất",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: Stormwater Recycling in an Australian City (06/06/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "underground water rock (Band 5)",
+    "synonyms": [
+      "underground water reservoir",
+      "deep geological aquifer"
+    ],
+    "collocations": [
+      "injected into an aquifer",
+      "pump from the aquifer"
+    ],
+    "exampleSentence": "Surplus recycled storm runoff is injected into a deep subterranean aquifer to prevent evaporation.",
+    "vietnameseSentence": "Nước bão tái chế dư thừa được bơm nạp vào tầng ngậm nước ngầm sâu để chống bốc hơi thất thoát.",
+    "wordFamily": "subterranean aquifer (IELTS Task 1)"
+  },
+  {
+    "id": "V212",
+    "topicId": "task1-zim-10-stormwater",
+    "word": "chlorination",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌklɒrɪˈneɪʃn/",
+    "meaning": "Quá trình khử trùng bằng clo",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: Stormwater Recycling in an Australian City (06/06/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "cleaning with chlorine (Band 5)",
+    "synonyms": [
+      "chlorine disinfection",
+      "chemical sanitization"
+    ],
+    "collocations": [
+      "undergo chlorination",
+      "water chlorination"
+    ],
+    "exampleSentence": "Chlorination guarantees that remaining pathogenic bacteria are neutralized prior to aquifer storage.",
+    "vietnameseSentence": "Quá trình clo hóa đảm bảo vi khuẩn gây bệnh còn sót lại bị tiêu diệt trước khi đưa vào tầng ngậm nước.",
+    "wordFamily": "chlorination (IELTS Task 1)"
+  },
+  {
+    "id": "V213",
+    "topicId": "task1-zim-10-stormwater",
+    "word": "reclamation",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌrekləˈmeɪʃn/",
+    "meaning": "Sự tái tạo, thu hồi và tái sinh tài nguyên",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: Stormwater Recycling in an Australian City (06/06/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "recycling (Band 5)",
+    "synonyms": [
+      "water recycling",
+      "resource recovery"
+    ],
+    "collocations": [
+      "stormwater reclamation",
+      "wastewater reclamation"
+    ],
+    "exampleSentence": "The city established an ambitious stormwater reclamation scheme to counter chronic droughts.",
+    "vietnameseSentence": "Thành phố đã thiết lập chương trình tái sinh nước bão đầy tham vọng nhằm ứng phó với các đợt hạn hán kéo dài.",
+    "wordFamily": "reclamation (IELTS Task 1)"
+  },
+  {
+    "id": "V214",
+    "topicId": "task1-zim-10-stormwater",
+    "word": "coarse screen",
+    "partOfSpeech": "noun",
+    "ipa": "/kɔːs skriːn/",
+    "meaning": "Lưới chắn rác thô",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: Stormwater Recycling in an Australian City (06/06/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "trash net (Band 5)",
+    "synonyms": [
+      "debris grating",
+      "bar screen"
+    ],
+    "collocations": [
+      "pass through a coarse screen",
+      "coarse screen filter"
+    ],
+    "exampleSentence": "The coarse screen captures plastic bags and tree branches before the fluid enters pipework.",
+    "vietnameseSentence": "Lưới chắn rác thô giữ lại túi nilon và cành cây trước khi chất lỏng đi vào hệ thống đường ống.",
+    "wordFamily": "coarse screen (IELTS Task 1)"
+  },
+  {
+    "id": "V215",
+    "topicId": "task1-zim-10-stormwater",
+    "word": "settlement basin",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈsetlmənt ˈbeɪsn/",
+    "meaning": "Bể lắng cặn",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: Stormwater Recycling in an Australian City (06/06/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "settling pool (Band 5)",
+    "synonyms": [
+      "sedimentation tank",
+      "clarifier basin"
+    ],
+    "collocations": [
+      "drain into a settlement basin",
+      "settlement chamber"
+    ],
+    "exampleSentence": "Heavy silt and suspended grit settle by gravity at the base of the concrete settlement basin.",
+    "vietnameseSentence": "Bùn nặng và cát sạn lơ lửng lắng đọng nhờ trọng lực dưới đáy bể lắng bằng bê tông.",
+    "wordFamily": "settlement basin (IELTS Task 1)"
+  },
+  {
+    "id": "V216",
+    "topicId": "task1-zim-10-stormwater",
+    "word": "auxiliary grid",
+    "partOfSpeech": "noun",
+    "ipa": "/ɔːɡˈzɪliəri ɡrɪd/",
+    "meaning": "Hệ thống mạng lưới đường ống phụ trợ (dùng cho nước tưới/vệ sinh)",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Process: Stormwater Recycling in an Australian City (06/06/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "second pipe network (Band 5)",
+    "synonyms": [
+      "secondary distribution network",
+      "dual reticulation network"
+    ],
+    "collocations": [
+      "pipe into the auxiliary grid",
+      "auxiliary water pipeline"
+    ],
+    "exampleSentence": "Non-potable water is channeled via a purple auxiliary grid solely reserved for landscape irrigation.",
+    "vietnameseSentence": "Nước không dùng để uống được dẫn qua mạng lưới phụ trợ đường ống màu tím chuyên dành cho tưới cây cảnh quan.",
+    "wordFamily": "auxiliary grid (IELTS Task 1)"
+  },
+  {
+    "id": "V217",
+    "topicId": "task1-zim-11-water-supply",
+    "word": "linear paradigm",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈlɪniər ˈpærədaɪm/",
+    "meaning": "Mô hình tuyến tính một chiều (khai thác - sử dụng - thải bỏ)",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram: Water Supply Evolution in Australia: Present vs Future (12/12/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "one-way system (Band 5)",
+    "synonyms": [
+      "one-way flow",
+      "unidirectional model"
+    ],
+    "collocations": [
+      "shift from a linear paradigm",
+      "traditional linear paradigm"
+    ],
+    "exampleSentence": "The historic supply model was a linear paradigm where used water was casually abandoned into rivers.",
+    "vietnameseSentence": "Mô hình cấp nước trước đây là một mô hình tuyến tính, nơi nước đã qua sử dụng bị thải bỏ tự do ra sông ngòi.",
+    "wordFamily": "linear paradigm (IELTS Task 1)"
+  },
+  {
+    "id": "V218",
+    "topicId": "task1-zim-11-water-supply",
+    "word": "circular loop",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈsɜːkjələr luːp/",
+    "meaning": "Vòng tuần hoàn khép kín",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram: Water Supply Evolution in Australia: Present vs Future (12/12/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "round recycling circle (Band 5)",
+    "synonyms": [
+      "closed-loop system",
+      "circular recycling circuit"
+    ],
+    "collocations": [
+      "form a circular loop",
+      "closed circular loop"
+    ],
+    "exampleSentence": "Future urban engineering establishes a circular loop that continually purifies and recirculates effluents.",
+    "vietnameseSentence": "Kỹ thuật đô thị tương lai thiết lập một vòng tuần hoàn khép kín liên tục làm sạch và tái lưu thông nước thải.",
+    "wordFamily": "circular loop (IELTS Task 1)"
+  },
+  {
+    "id": "V219",
+    "topicId": "task1-zim-11-water-supply",
+    "word": "wastewater recycling plant",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈweɪstwɔːtər ˌriːˈsaɪklɪŋ plɑːnt/",
+    "meaning": "Nhà máy tái chế nước thải",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram: Water Supply Evolution in Australia: Present vs Future (12/12/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "dirty water cleaning factory (Band 5)",
+    "synonyms": [
+      "effluent reclamation facility",
+      "sewage treatment plant"
+    ],
+    "collocations": [
+      "build a wastewater recycling plant",
+      "divert to the plant"
+    ],
+    "exampleSentence": "The planned wastewater recycling plant will remove dissolved solids using reverse osmosis membranes.",
+    "vietnameseSentence": "Nhà máy tái chế nước thải trong quy hoạch sẽ loại bỏ các chất rắn hòa tan bằng màng lọc thẩm thấu ngược.",
+    "wordFamily": "wastewater recycling plant (IELTS Task 1)"
+  },
+  {
+    "id": "V220",
+    "topicId": "task1-zim-11-water-supply",
+    "word": "effluent",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈefluənt/",
+    "meaning": "Nước thải từ các khu công nghiệp hoặc đô thị xả ra",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram: Water Supply Evolution in Australia: Present vs Future (12/12/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "waste dirty water (Band 5)",
+    "synonyms": [
+      "liquid waste",
+      "discharge sewage",
+      "spent water"
+    ],
+    "collocations": [
+      "industrial effluents",
+      "discharge untreated effluent"
+    ],
+    "exampleSentence": "Discharging untreated municipal effluents into local rivers threatens fragile aquatic ecosystems.",
+    "vietnameseSentence": "Việc xả nước thải đô thị chưa qua xử lý ra các con sông địa phương đe dọa các hệ sinh thái thủy sinh mỏng manh.",
+    "wordFamily": "effluent (IELTS Task 1)"
+  },
+  {
+    "id": "V221",
+    "topicId": "task1-zim-11-water-supply",
+    "word": "storage dam",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈstɔːrɪdʒ dæm/",
+    "meaning": "Đập trữ nước, hồ thủy lợi tích nước",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram: Water Supply Evolution in Australia: Present vs Future (12/12/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "water reservoir (Band 5)",
+    "synonyms": [
+      "holding reservoir",
+      "water impoundment"
+    ],
+    "collocations": [
+      "water accumulated in storage dams",
+      "dam water levels"
+    ],
+    "exampleSentence": "Rainfall collected behind the storage dam supplies high-pressure pipelines entering the city.",
+    "vietnameseSentence": "Lượng mưa tích tụ sau đập trữ nước cung cấp cho các đường ống áp lực cao dẫn vào đô thị.",
+    "wordFamily": "storage dam (IELTS Task 1)"
+  },
+  {
+    "id": "V222",
+    "topicId": "task1-zim-11-water-supply",
+    "word": "curtail",
+    "partOfSpeech": "verb",
+    "ipa": "/kɜːˈteɪl/",
+    "meaning": "Cắt giảm, hạn chế đáng kể",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram: Water Supply Evolution in Australia: Present vs Future (12/12/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "reduce / cut down (Band 5)",
+    "synonyms": [
+      "diminish",
+      "slash",
+      "scale back"
+    ],
+    "collocations": [
+      "curtail water extraction",
+      "curtail reliance on rivers"
+    ],
+    "exampleSentence": "Recycling greywater effectively curtails municipal extraction from environmentally stressed watersheds.",
+    "vietnameseSentence": "Tái chế nước thải sinh hoạt giúp cắt giảm hiệu quả lượng nước khai thác từ các lưu vực sông đang chịu áp lực môi trường.",
+    "wordFamily": "curtail (IELTS Task 1)"
+  },
+  {
+    "id": "V223",
+    "topicId": "task1-zim-11-water-supply",
+    "word": "recirculation",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌriːˌsɜːkjəˈleɪʃn/",
+    "meaning": "Sự tái tuần hoàn, tái lưu thông",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram: Water Supply Evolution in Australia: Present vs Future (12/12/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "flowing back again (Band 5)",
+    "synonyms": [
+      "continuous recirculation",
+      "recycling redistribution"
+    ],
+    "collocations": [
+      "water recirculation",
+      "continuous recirculation"
+    ],
+    "exampleSentence": "Constant water recirculation shields cities from unpredictable drought spells.",
+    "vietnameseSentence": "Việc tái tuần hoàn nước liên tục bảo vệ các thành phố trước những đợt hạn hán thất thường.",
+    "wordFamily": "recirculation (IELTS Task 1)"
+  },
+  {
+    "id": "V224",
+    "topicId": "task1-zim-11-water-supply",
+    "word": "blueprint",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈbluːprɪnt/",
+    "meaning": "Bản vẽ thiết kế, kế hoạch định hướng tương lai",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram: Water Supply Evolution in Australia: Present vs Future (12/12/2019)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "plan map (Band 5)",
+    "synonyms": [
+      "master plan",
+      "architectural scheme",
+      "strategic design"
+    ],
+    "collocations": [
+      "future infrastructure blueprint",
+      "engineering blueprint"
+    ],
+    "exampleSentence": "The master blueprint envisages a zero-waste hydraulic framework for all major Australian conurbations.",
+    "vietnameseSentence": "Bản kế hoạch định hướng tổng thể dự kiến xây dựng khung thủy lực không rác thải cho mọi vùng đô thị lớn ở Úc.",
+    "wordFamily": "blueprint (IELTS Task 1)"
+  },
+  {
+    "id": "V225",
+    "topicId": "task1-zim-12-student-rooms",
+    "word": "floor plan",
+    "partOfSpeech": "noun",
+    "ipa": "/flɔː plæn/",
+    "meaning": "Bản vẽ mặt bằng kiến trúc nội thất",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Plans: University Student Single vs Double Room Floor Plans (25/07/2020)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "room drawing (Band 5)",
+    "synonyms": [
+      "architectural layout",
+      "spatial blueprint"
+    ],
+    "collocations": [
+      "examine the floor plan",
+      "floor plan layout"
+    ],
+    "exampleSentence": "The architectural floor plan clearly denotes the dimensions of both residential quarters.",
+    "vietnameseSentence": "Bản vẽ mặt bằng kiến trúc thể hiện rõ kích thước của cả hai không gian phòng ở.",
+    "wordFamily": "floor plan (IELTS Task 1)"
+  },
+  {
+    "id": "V226",
+    "topicId": "task1-zim-12-student-rooms",
+    "word": "ensuite bathroom",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌɒn ˈswiːt ˈbɑːθruːm/",
+    "meaning": "Phòng tắm vệ sinh khép kín trong phòng ngủ",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Plans: University Student Single vs Double Room Floor Plans (25/07/2020)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "private toilet (Band 5)",
+    "synonyms": [
+      "private washroom",
+      "attached bathroom"
+    ],
+    "collocations": [
+      "fitted with an ensuite bathroom",
+      "ensuite amenities"
+    ],
+    "exampleSentence": "Each student accommodation module is outfitted with a private ensuite bathroom.",
+    "vietnameseSentence": "Mỗi mô-đun phòng ở của sinh viên đều được trang bị một phòng tắm vệ sinh khép kín riêng biệt.",
+    "wordFamily": "ensuite bathroom (IELTS Task 1)"
+  },
+  {
+    "id": "V227",
+    "topicId": "task1-zim-12-student-rooms",
+    "word": "kitchenette",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌkɪtʃɪˈnet/",
+    "meaning": "Khu bếp nhỏ tự nấu ăn trong phòng",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Plans: University Student Single vs Double Room Floor Plans (25/07/2020)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "small cooking corner (Band 5)",
+    "synonyms": [
+      "cooking counter",
+      "pantry alcove"
+    ],
+    "collocations": [
+      "compact kitchenette",
+      "equipped kitchenette"
+    ],
+    "exampleSentence": "A compact kitchenette allows undergraduates to reheat meals and brew tea without leaving the room.",
+    "vietnameseSentence": "Một góc bếp nhỏ gọn cho phép sinh viên hâm nóng thức ăn và pha trà mà không cần ra khỏi phòng.",
+    "wordFamily": "kitchenette (IELTS Task 1)"
+  },
+  {
+    "id": "V228",
+    "topicId": "task1-zim-12-student-rooms",
+    "word": "weekly rental fee",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈwiːkli ˈrentl fiː/",
+    "meaning": "Giá thuê phòng theo tuần",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Plans: University Student Single vs Double Room Floor Plans (25/07/2020)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "rent each week (Band 5)",
+    "synonyms": [
+      "weekly rate",
+      "leasing cost per week"
+    ],
+    "collocations": [
+      "charge a weekly rental fee",
+      "affordable rental fee"
+    ],
+    "exampleSentence": "The weekly rental fee for the double occupancy room is fixed at $350 AUD.",
+    "vietnameseSentence": "Giá thuê phòng theo tuần đối với phòng đôi được quy định cố định ở mức 350 AUD.",
+    "wordFamily": "weekly rental fee (IELTS Task 1)"
+  },
+  {
+    "id": "V229",
+    "topicId": "task1-zim-12-student-rooms",
+    "word": "furnishings",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈfɜːnɪʃɪŋz/",
+    "meaning": "Đồ đạc nội thất trang bị trong phòng",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Plans: University Student Single vs Double Room Floor Plans (25/07/2020)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "furniture (Band 5)",
+    "synonyms": [
+      "interior fittings",
+      "amenities",
+      "room appointments"
+    ],
+    "collocations": [
+      "standard furnishings",
+      "interior furnishings"
+    ],
+    "exampleSentence": "Internal furnishings in both living units follow a functional, space-saving arrangement.",
+    "vietnameseSentence": "Đồ đạc nội thất trong cả hai căn phòng đều tuân thủ cách bài trí tiện dụng và tiết kiệm không gian.",
+    "wordFamily": "furnishings (IELTS Task 1)"
+  },
+  {
+    "id": "V230",
+    "topicId": "task1-zim-12-student-rooms",
+    "word": "partitioned",
+    "partOfSpeech": "adjective",
+    "ipa": "/pɑːˈtɪʃnd/",
+    "meaning": "Được ngăn đôi, chia ngăn riêng biệt",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Plans: University Student Single vs Double Room Floor Plans (25/07/2020)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "divided into two (Band 5)",
+    "synonyms": [
+      "divided",
+      "compartmentalized",
+      "segregated"
+    ],
+    "collocations": [
+      "partitioned wardrobe",
+      "partitioned closet"
+    ],
+    "exampleSentence": "The dual-occupant suite includes a partitioned wardrobe so each tenant possesses personal storage.",
+    "vietnameseSentence": "Phòng đôi bao gồm một tủ quần áo ngăn đôi để mỗi người thuê đều có không gian cất đồ cá nhân.",
+    "wordFamily": "partitioned (IELTS Task 1)"
+  },
+  {
+    "id": "V231",
+    "topicId": "task1-zim-12-student-rooms",
+    "word": "floor space",
+    "partOfSpeech": "noun",
+    "ipa": "/flɔː speɪs/",
+    "meaning": "Diện tích mặt sàn sử dụng",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Plans: University Student Single vs Double Room Floor Plans (25/07/2020)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "room size (Band 5)",
+    "synonyms": [
+      "surface area",
+      "square meterage",
+      "living area"
+    ],
+    "collocations": [
+      "total floor space",
+      "usable floor space"
+    ],
+    "exampleSentence": "The double room provides 24 square metres of floor space, a third larger than the single unit.",
+    "vietnameseSentence": "Phòng đôi có 24 mét vuông diện tích mặt sàn, rộng hơn một phần ba so với căn phòng đơn.",
+    "wordFamily": "floor space (IELTS Task 1)"
+  },
+  {
+    "id": "V232",
+    "topicId": "task1-zim-12-student-rooms",
+    "word": "adjacent to",
+    "partOfSpeech": "adjective",
+    "ipa": "/əˈdʒeɪsnt tuː/",
+    "meaning": "Nằm sát ngay cạnh bên",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Plans: University Student Single vs Double Room Floor Plans (25/07/2020)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "next to (Band 5)",
+    "synonyms": [
+      "adjoining",
+      "bordering",
+      "neighboring"
+    ],
+    "collocations": [
+      "located adjacent to",
+      "situated adjacent to the entrance"
+    ],
+    "exampleSentence": "The sink and induction hob are situated adjacent to the primary entryway.",
+    "vietnameseSentence": "Bồn rửa và bếp từ được bố trí nằm sát ngay cạnh lối ra vào chính.",
+    "wordFamily": "adjacent to (IELTS Task 1)"
+  },
+  {
+    "id": "V233",
+    "topicId": "task1-zim-13-stone-tools",
+    "word": "primitive",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˈprɪmətɪv/",
+    "meaning": "Nguyên thủy, thô sơ",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram: Development of Stone Age Cutting Tools (28/11/2020)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "simple and old (Band 5)",
+    "synonyms": [
+      "rudimentary",
+      "crude",
+      "archaic"
+    ],
+    "collocations": [
+      "primitive tool",
+      "primitive craftsmanship"
+    ],
+    "exampleSentence": "Early hominids relied on primitive flaked stones for basic butchering chores.",
+    "vietnameseSentence": "Người vượn thời kỳ đầu dựa vào những hòn đá ghè đẽo thô sơ cho các công việc pha thịt cơ bản.",
+    "wordFamily": "primitive (IELTS Task 1)"
+  },
+  {
+    "id": "V234",
+    "topicId": "task1-zim-13-stone-tools",
+    "word": "teardrop-shaped",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˈtɪədrɒp ʃeɪpt/",
+    "meaning": "Có hình dáng giọt nước thon gọn",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram: Development of Stone Age Cutting Tools (28/11/2020)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "water drop shape (Band 5)",
+    "synonyms": [
+      "pear-shaped",
+      "cordiform"
+    ],
+    "collocations": [
+      "teardrop-shaped hand axe",
+      "teardrop silhouette"
+    ],
+    "exampleSentence": "The later artifact evolved into an iconic teardrop-shaped hand axe with balanced proportions.",
+    "vietnameseSentence": "Hiện vật thời kỳ sau đã tiến hóa thành chiếc rìu tay hình giọt nước mang tính biểu tượng với tỷ lệ cân đối.",
+    "wordFamily": "teardrop-shaped (IELTS Task 1)"
+  },
+  {
+    "id": "V235",
+    "topicId": "task1-zim-13-stone-tools",
+    "word": "pointed tip",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈpɔɪntɪd tɪp/",
+    "meaning": "Mũi nhọn ở đỉnh đầu công cụ",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram: Development of Stone Age Cutting Tools (28/11/2020)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "sharp point (Band 5)",
+    "synonyms": [
+      "tapered apex",
+      "sharp point"
+    ],
+    "collocations": [
+      "feature a pointed tip",
+      "sharp pointed tip"
+    ],
+    "exampleSentence": "A distinct pointed tip enabled Paleolithic hunters to pierce tough animal hides effortlessly.",
+    "vietnameseSentence": "Một mũi nhọn rõ nét cho phép thợ săn thời kỳ đồ đá cũ đâm thủng da thú dai một cách dễ dàng.",
+    "wordFamily": "pointed tip (IELTS Task 1)"
+  },
+  {
+    "id": "V236",
+    "topicId": "task1-zim-13-stone-tools",
+    "word": "craftsmanship",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈkrɑːftsmənʃɪp/",
+    "meaning": "Tay nghề chế tác, kỹ thuật tinh xảo",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram: Development of Stone Age Cutting Tools (28/11/2020)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "making skill (Band 5)",
+    "synonyms": [
+      "artistry",
+      "workmanship",
+      "knapping skill"
+    ],
+    "collocations": [
+      "flawless craftsmanship",
+      "refine craftsmanship"
+    ],
+    "exampleSentence": "The symmetry of Tool B highlights a monumental leap forward in cognitive craftsmanship.",
+    "vietnameseSentence": "Tính đối xứng của Công cụ B nêu bật một bước nhảy vọt vĩ đại về tư duy chế tác thủ công.",
+    "wordFamily": "craftsmanship (IELTS Task 1)"
+  },
+  {
+    "id": "V237",
+    "topicId": "task1-zim-13-stone-tools",
+    "word": "flaked edge",
+    "partOfSpeech": "noun",
+    "ipa": "/fleɪkt edʒ/",
+    "meaning": "Cạnh được ghè đẽo, gọt mài tạo lưỡi sắc",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram: Development of Stone Age Cutting Tools (28/11/2020)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "cut side (Band 5)",
+    "synonyms": [
+      "knapped rim",
+      "beveled margin",
+      "cutting edge"
+    ],
+    "collocations": [
+      "symmetrically flaked edge",
+      "sharp flaked edge"
+    ],
+    "exampleSentence": "Carefully flaked edges surrounded the entire perimeter of the advanced implement.",
+    "vietnameseSentence": "Những cạnh được ghè đẽo cẩn thận bao quanh toàn bộ chu vi của công cụ cải tiến.",
+    "wordFamily": "flaked edge (IELTS Task 1)"
+  },
+  {
+    "id": "V238",
+    "topicId": "task1-zim-13-stone-tools",
+    "word": "cutting rim",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈkʌtɪŋ rɪm/",
+    "meaning": "Mép lưỡi cắt sắc bén",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram: Development of Stone Age Cutting Tools (28/11/2020)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "sharp border (Band 5)",
+    "synonyms": [
+      "blade edge",
+      "cutting periphery"
+    ],
+    "collocations": [
+      "continuous cutting rim",
+      "sharpen the cutting rim"
+    ],
+    "exampleSentence": "The continuous cutting rim vastly widened the practical utility of the tool.",
+    "vietnameseSentence": "Mép lưỡi cắt liền mạch đã mở rộng đáng kể công năng thực tế của dụng cụ.",
+    "wordFamily": "cutting rim (IELTS Task 1)"
+  },
+  {
+    "id": "V239",
+    "topicId": "task1-zim-13-stone-tools",
+    "word": "side profile",
+    "partOfSpeech": "noun",
+    "ipa": "/saɪd ˈprəʊfaɪl/",
+    "meaning": "Góc nhìn nghiêng cạnh bên",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram: Development of Stone Age Cutting Tools (28/11/2020)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "side view (Band 5)",
+    "synonyms": [
+      "lateral perspective",
+      "side cross-section"
+    ],
+    "collocations": [
+      "revealed in the side profile",
+      "tapered side profile"
+    ],
+    "exampleSentence": "Viewed from the side profile, Tool B exhibits an exceptionally slim and aerodynamic contour.",
+    "vietnameseSentence": "Nhìn từ góc nghiêng cạnh bên, Công cụ B sở hữu đường nét cực kỳ mỏng và khí động học.",
+    "wordFamily": "side profile (IELTS Task 1)"
+  },
+  {
+    "id": "V240",
+    "topicId": "task1-zim-13-stone-tools",
+    "word": "knapping technique",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈnæpɪŋ tekˈniːk/",
+    "meaning": "Kỹ thuật ghè đẽo đá thời tiền sử",
+    "definitionEn": "Key IELTS Task 1 vocabulary for Diagram: Development of Stone Age Cutting Tools (28/11/2020)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "stone making method (Band 5)",
+    "synonyms": [
+      "lithic reduction technique",
+      "flintknapping"
+    ],
+    "collocations": [
+      "master knapping techniques",
+      "sophisticated knapping technique"
+    ],
+    "exampleSentence": "Sophisticated knapping techniques allowed artisans to shave off wafer-thin stone flakes.",
+    "vietnameseSentence": "Kỹ thuật ghè đẽo đá tinh vi cho phép những người thợ bóc tách những mảnh đá mỏng như cánh hoa.",
+    "wordFamily": "knapping technique (IELTS Task 1)"
+  },
+  {
+    "id": "V241",
+    "topicId": "education",
+    "word": "curriculum",
+    "partOfSpeech": "noun",
+    "ipa": "/kəˈrɪk.jə.ləm/",
+    "meaning": "Khung chương trình giảng dạy, toàn bộ các môn học và nội dung đào tạo tại một cơ sở giáo dục",
+    "definitionEn": "the subjects comprising a course of study in a school or college, or the overall educational content offered",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "school syllabus, subjects taught",
+    "synonyms": [
+      "syllabus",
+      "programme of study",
+      "course of study",
+      "academic modules"
+    ],
+    "collocations": [
+      "national curriculum",
+      "reform the school curriculum",
+      "core curriculum",
+      "broad and balanced curriculum"
+    ],
+    "exampleSentence": "Educational reformers argue that computer programming and financial literacy should be integrated into the core school curriculum.",
+    "wordFamily": "curricular (adj), extra-curricular (adj), curricula (pl)"
+  },
+  {
+    "id": "V242",
+    "topicId": "education",
+    "word": "bursary",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈbɜː.sər.i/",
+    "meaning": "Học bổng / khoản trợ cấp tài chính dành cho học sinh, sinh viên có hoàn cảnh khó khăn",
+    "definitionEn": "a financial grant or scholarship awarded to a student to enable them to study, typically based on financial need rather than academic merit alone",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "student grant, financial aid for needy students",
+    "synonyms": [
+      "financial aid",
+      "stipend",
+      "grant",
+      "allowance"
+    ],
+    "collocations": [
+      "award a bursary",
+      "apply for a bursary",
+      "means-tested bursary",
+      "university bursary scheme"
+    ],
+    "exampleSentence": "Many talented youths from impoverished backgrounds depend on university bursaries to cover accommodation and tuition expenses.",
+    "wordFamily": "bursar (n), bursarial (adj)"
+  },
+  {
+    "id": "V243",
+    "topicId": "education",
+    "word": "inquisitive",
+    "partOfSpeech": "adjective",
+    "ipa": "/ɪnˈkwɪz.ə.tɪv/",
+    "meaning": "Tò mò, ham học hỏi, luôn khao khát tìm hiểu và đặt câu hỏi về thế giới xung quanh",
+    "definitionEn": "having or showing an active interest in learning things and asking questions; intellectually curious",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "curious, eager to learn",
+    "synonyms": [
+      "curious",
+      "enquiring",
+      "intellectually curious",
+      "questing"
+    ],
+    "collocations": [
+      "inquisitive mind",
+      "foster an inquisitive nature",
+      "naturally inquisitive child"
+    ],
+    "exampleSentence": "Progressive pedagogy seeks to nurture inquisitive minds rather than forcing children into passive rote memorization.",
+    "wordFamily": "inquisitively (adv), inquisitiveness (n)"
+  },
+  {
+    "id": "V244",
+    "topicId": "education",
+    "word": "compulsory",
+    "partOfSpeech": "adjective",
+    "ipa": "/kəmˈpʌl.sər.i/",
+    "meaning": "Bắt buộc, được quy định bởi luật pháp hoặc quy chế giáo dục",
+    "definitionEn": "required by law or a rule; obligatory rather than elective or voluntary",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "mandatory, obligatory, required",
+    "synonyms": [
+      "mandatory",
+      "obligatory",
+      "statutory",
+      "requisite"
+    ],
+    "collocations": [
+      "compulsory education",
+      "compulsory subject",
+      "make physical education compulsory"
+    ],
+    "exampleSentence": "Primary and secondary schooling is compulsory in most nations to ensure baseline literacy for every citizen.",
+    "wordFamily": "compel (v), compulsion (n), compulsorily (adv)"
+  },
+  {
+    "id": "V245",
+    "topicId": "education",
+    "word": "dissertation",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌdɪs.əˈteɪ.ʃən/",
+    "meaning": "Luận văn, luận án tốt nghiệp, công trình nghiên cứu học thuật chuyên sâu ở bậc đại học hoặc cao học",
+    "definitionEn": "a long piece of formal academic writing on a particular subject, especially one submitted for a university degree",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "thesis, long research paper",
+    "synonyms": [
+      "thesis",
+      "treatise",
+      "research paper",
+      "monograph"
+    ],
+    "collocations": [
+      "submit a master's dissertation",
+      "write a dissertation on",
+      "defend a doctoral dissertation"
+    ],
+    "exampleSentence": "Undergraduate seniors are required to complete an independent dissertation demonstrating original research and critical analysis.",
+    "wordFamily": "dissertate (v)"
+  },
+  {
+    "id": "V246",
+    "topicId": "environment",
+    "word": "endemic",
+    "partOfSpeech": "adjective",
+    "ipa": "/enˈdem.ɪk/",
+    "meaning": "Đặc hữu, chỉ sinh sống hoặc tồn tại tự nhiên ở một khu vực địa lý hay quần xã nhất định",
+    "definitionEn": "regularly found in and restricted to a particular region or environment (of a plant, animal, or condition)",
+    "cefrBand": "C2 (Band 8.5+)",
+    "basicEquivalent": "native only to one place, unique to an area",
+    "synonyms": [
+      "indigenous",
+      "native",
+      "confined",
+      "localized"
+    ],
+    "collocations": [
+      "endemic species",
+      "endemic wildlife",
+      "endemic to tropical rainforests"
+    ],
+    "exampleSentence": "Island ecosystems like Madagascar harbor dozens of endemic lemur species that exist nowhere else on the planet.",
+    "wordFamily": "endemicity (n), endemism (n)"
+  },
+  {
+    "id": "V247",
+    "topicId": "environment",
+    "word": "habitat loss",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈhæb.ɪ.tæt lɒs/",
+    "meaning": "Sự mất môi trường sống tự nhiên, tình trạng sinh cảnh bị phá hủy do hoạt động của con người",
+    "definitionEn": "the process by which a natural habitat becomes incapable of supporting its native species due to deforestation, urbanization, or mining",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "destruction of natural homes, loss of living space for animals",
+    "synonyms": [
+      "habitat destruction",
+      "habitat fragmentation",
+      "ecological displacement"
+    ],
+    "collocations": [
+      "widespread habitat loss",
+      "mitigate habitat loss",
+      "lead to catastrophic habitat loss"
+    ],
+    "exampleSentence": "Rapid urban expansion and logging are driving widespread habitat loss, pushing endangered carnivores toward extinction.",
+    "wordFamily": "habitat (n), habitation (n), inhabit (v)"
+  },
+  {
+    "id": "V248",
+    "topicId": "environment",
+    "word": "contamination",
+    "partOfSpeech": "noun",
+    "ipa": "/kənˌtæm.ɪˈneɪ.ʃən/",
+    "meaning": "Sự nhiễm bẩn, sự lẫn tạp chất độc hại vào nguồn nước, đất đai hoặc thực phẩm",
+    "definitionEn": "the action or state of making or being made impure by polluting or poisoning, especially by unwanted chemical or biological substances",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "pollution, poisoning, making dirty",
+    "synonyms": [
+      "pollution",
+      "adulteration",
+      "tainting",
+      "fouling"
+    ],
+    "collocations": [
+      "groundwater contamination",
+      "soil contamination",
+      "toxic contamination",
+      "radioactive contamination"
+    ],
+    "exampleSentence": "Excessive runoff of chemical fertilizers causes severe contamination of subterranean aquifers and freshwater reservoirs.",
+    "wordFamily": "contaminate (v), contaminant (n), contaminated (adj)"
+  },
+  {
+    "id": "V249",
+    "topicId": "environment",
+    "word": "pesticide",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈpes.tɪ.saɪd/",
+    "meaning": "Thuốc trừ sâu, hóa chất bảo vệ thực vật dùng để tiêu diệt sâu bọ và dịch hại nông nghiệp",
+    "definitionEn": "a chemical substance used for destroying insects or other organisms harmful to cultivated plants or to animals",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "insect killer, agricultural chemical",
+    "synonyms": [
+      "insecticide",
+      "herbicide",
+      "chemical spray",
+      "agro-chemical"
+    ],
+    "collocations": [
+      "excessive pesticide use",
+      "ban toxic pesticides",
+      "pesticide residues in food",
+      "spray pesticides"
+    ],
+    "exampleSentence": "Overreliance on chemical pesticides not only contaminates topsoil but also decimates vital pollinator populations like bees.",
+    "wordFamily": "pest (n)"
+  },
+  {
+    "id": "V250",
+    "topicId": "environment",
+    "word": "hazardous waste",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈhæz.ə.dəs weɪst/",
+    "meaning": "Chất thải nguy hại, rác thải công nghiệp có độc tính cao hoặc dễ gây nổ, ăn mòn nguy hiểm",
+    "definitionEn": "waste materials with properties that make them dangerous or capable of having a harmful effect on human health or the environment",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "dangerous trash, toxic industrial refuse",
+    "synonyms": [
+      "toxic refuse",
+      "chemical effluent",
+      "dangerous by-products"
+    ],
+    "collocations": [
+      "dispose of hazardous waste",
+      "hazardous waste management",
+      "illegal dumping of hazardous waste"
+    ],
+    "exampleSentence": "Stringent international conventions compel chemical factories to neutralize hazardous waste before discharging it into disposal sites.",
+    "wordFamily": "hazard (n), hazardous (adj)"
+  },
+  {
+    "id": "V251",
+    "topicId": "health",
+    "word": "malnutrition",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌmæl.njuːˈtrɪʃ.ən/",
+    "meaning": "Tình trạng suy dinh dưỡng, thể trạng kiệt quệ do thiếu hụt hoặc mất cân bằng nghiêm trọng các chất dinh dưỡng",
+    "definitionEn": "lack of proper nutrition, caused by not having enough to eat, not eating enough of the right things, or being unable to use the food that one does eat",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "poor nutrition, undernourishment, starvation",
+    "synonyms": [
+      "undernourishment",
+      "dietary deficiency",
+      "starvation",
+      "nutrient deficit"
+    ],
+    "collocations": [
+      "suffer from chronic malnutrition",
+      "eradicate childhood malnutrition",
+      "severe malnutrition"
+    ],
+    "exampleSentence": "Prolonged droughts in sub-Saharan regions have plunged vulnerable infant populations into life-threatening malnutrition.",
+    "wordFamily": "malnourished (adj), nutrition (n), nutritious (adj)"
+  },
+  {
+    "id": "V252",
+    "topicId": "health",
+    "word": "preservative",
+    "partOfSpeech": "noun",
+    "ipa": "/prɪˈzɜː.və.tɪv/",
+    "meaning": "Chất bảo quản, hóa chất phụ gia giúp thực phẩm tươi lâu và ngăn ngừa sự ôi thiu",
+    "definitionEn": "a chemical substance used to prevent food, wood, or other materials from decaying or decomposing",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "chemical additive for keeping food fresh",
+    "synonyms": [
+      "chemical additive",
+      "curing agent",
+      "antimicrobial agent"
+    ],
+    "collocations": [
+      "free from artificial preservatives",
+      "chemical food preservatives",
+      "laden with preservatives"
+    ],
+    "exampleSentence": "Health advocates urge consumers to choose fresh whole produce over processed convenience meals laden with artificial preservatives.",
+    "wordFamily": "preserve (v), preservation (n), preservable (adj)"
+  },
+  {
+    "id": "V253",
+    "topicId": "health",
+    "word": "staple food",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈsteɪ.pəl fuːd/",
+    "meaning": "Lương thực chủ lực, loại thực phẩm cơ bản được tiêu thụ thường xuyên và cung cấp phần lớn năng lượng",
+    "definitionEn": "a food that is eaten routinely and in such quantities that it constitutes a dominant portion of a standard diet for a given population",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "basic food, everyday sustenance",
+    "synonyms": [
+      "dietary mainstay",
+      "essential foodstuff",
+      "basic carbohydrate"
+    ],
+    "collocations": [
+      "rice as a staple food",
+      "staple food crops",
+      "global staple food supply"
+    ],
+    "exampleSentence": "Rice and wheat serve as indispensable staple foods that sustain over half of the global human population.",
+    "wordFamily": "staple (n, adj)"
+  },
+  {
+    "id": "V254",
+    "topicId": "health",
+    "word": "dietary requirement",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈdaɪ.ə.tər.i rɪˈkwaɪə.mənt/",
+    "meaning": "Nhu cầu / chế độ ăn uống chuyên biệt (do bệnh lý dị ứng, tôn giáo hoặc lối sống ăn chay)",
+    "definitionEn": "the specific nutritional intake or dietary restriction that a person needs to follow due to health conditions, allergies, or ethical beliefs",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "special diet needs, food restrictions",
+    "synonyms": [
+      "nutritional needs",
+      "dietary restrictions",
+      "eating regimen"
+    ],
+    "collocations": [
+      "accommodate special dietary requirements",
+      "meet daily dietary requirements",
+      "complex dietary requirements"
+    ],
+    "exampleSentence": "Modern school cafeterias provide specialized menu options to cater for students with varied allergies and dietary requirements.",
+    "wordFamily": "diet (n), dietician (n)"
+  },
+  {
+    "id": "V255",
+    "topicId": "health",
+    "word": "chronic",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˈkrɒn.ɪk/",
+    "meaning": "Mãn tính, bệnh tật kéo dài dai dẳng và tái phát liên tục theo thời gian",
+    "definitionEn": "persisting for a long time or constantly recurring (especially of an illness, pain, or social problem)",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "long-lasting, incurable, ongoing",
+    "synonyms": [
+      "long-standing",
+      "persistent",
+      "incurable",
+      "deep-seated"
+    ],
+    "collocations": [
+      "chronic diseases",
+      "chronic fatigue",
+      "chronic back pain",
+      "chronic shortage of healthcare staff"
+    ],
+    "exampleSentence": "Sedentary work habits and poor diet dramatically amplify the risk of chronic conditions such as diabetes and hypertension.",
+    "wordFamily": "chronically (adv), chronicity (n)"
+  },
+  {
+    "id": "V256",
+    "topicId": "health",
+    "word": "fatigue",
+    "partOfSpeech": "noun",
+    "ipa": "/fəˈtiːɡ/",
+    "meaning": "Tình trạng kiệt sức, sự mệt mỏi rã rời cả về thể chất lẫn tinh thần sau thời gian dài căng thẳng",
+    "definitionEn": "extreme tiredness, typically resulting from mental or physical exertion or illness",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "extreme tiredness, exhaustion, burnout",
+    "synonyms": [
+      "exhaustion",
+      "lethargy",
+      "weariness",
+      "burnout"
+    ],
+    "collocations": [
+      "mental fatigue",
+      "chronic fatigue syndrome",
+      "suffer from debilitating fatigue",
+      "alleviate muscle fatigue"
+    ],
+    "exampleSentence": "Prolonged overtime work causes severe psychological fatigue, reducing cognitive precision and raising workplace accident rates.",
+    "wordFamily": "fatigued (adj), fatiguing (adj)"
+  },
+  {
+    "id": "V257",
+    "topicId": "globalization",
+    "word": "emerging economy",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ɪˈmɜː.dʒɪŋ ɪˈkɒn.ə.mi/",
+    "meaning": "Nền kinh tế mới nổi, quốc gia đang trong quá trình công nghiệp hóa và tăng trưởng kinh tế nhanh chóng",
+    "definitionEn": "a developing nation that is becoming more engaged with global markets as it grows, characterized by rapid industrial growth and market reform",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "developing country growing fast, booming market",
+    "synonyms": [
+      "emerging market",
+      "rapidly developing nation",
+      "transitional economy"
+    ],
+    "collocations": [
+      "investment in emerging economies",
+      "burgeoning middle class in emerging economies",
+      "leading emerging economy"
+    ],
+    "exampleSentence": "Multinational corporations are channeling billions of dollars into emerging economies to capitalize on abundant labor and expanding domestic markets.",
+    "wordFamily": "emerge (v), emergence (n)"
+  },
+  {
+    "id": "V258",
+    "topicId": "globalization",
+    "word": "global village",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˌɡləʊ.bəl ˈvɪl.ɪdʒ/",
+    "meaning": "Ngôi làng toàn cầu, khái niệm thế giới được kết nối chặt chẽ và phẳng hơn nhờ viễn thông và internet",
+    "definitionEn": "the world considered as a single community linked by telecommunications, internet networks, and rapid transportation",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "connected world, global community",
+    "synonyms": [
+      "borderless world",
+      "globalized community",
+      "interconnected planet"
+    ],
+    "collocations": [
+      "living in a global village",
+      "concept of the global village",
+      "transformation into a global village"
+    ],
+    "exampleSentence": "High-speed digital communications have transformed our planet into a compact global village where news travels instantaneously across borders.",
+    "wordFamily": "global (adj), globalize (v)"
+  },
+  {
+    "id": "V259",
+    "topicId": "globalization",
+    "word": "trade barrier",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/treɪd ˈbær.i.ər/",
+    "meaning": "Rào cản thương mại, các biện pháp của chính phủ như thuế quan và hạn ngạch nhằm bảo hộ sản xuất trong nước",
+    "definitionEn": "a government-imposed restriction on the free international exchange of goods or services, such as tariffs, quotas, or import duties",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "import tax, border restriction on goods",
+    "synonyms": [
+      "tariff restriction",
+      "import tariff",
+      "protectionist barrier",
+      "commercial obstacle"
+    ],
+    "collocations": [
+      "dismantle trade barriers",
+      "impose punitive trade barriers",
+      "erect bilateral trade barriers"
+    ],
+    "exampleSentence": "Free trade agreements aim to dismantle punitive trade barriers, allowing cross-border commerce to flourish unhindered.",
+    "wordFamily": "barrier (n)"
+  },
+  {
+    "id": "V260",
+    "topicId": "globalization",
+    "word": "cultural homogenization",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈkʌl.tʃər.əl həˌmɒdʒ.ə.naɪˈzeɪ.ʃən/",
+    "meaning": "Sự đồng nhất hóa văn hóa, hiện tượng các nền văn hóa bản địa bị mai một và rập khuôn theo văn hóa phương Tây",
+    "definitionEn": "the process by which local cultures are transformed or absorbed by a dominant outside culture, leading to the loss of cultural diversity",
+    "cefrBand": "C2 (Band 8.5+)",
+    "basicEquivalent": "cultural uniformity, loss of unique local cultures",
+    "synonyms": [
+      "cultural uniformity",
+      "Westernization",
+      "cultural leveling",
+      "monoculturalism"
+    ],
+    "collocations": [
+      "threat of cultural homogenization",
+      "resist cultural homogenization",
+      "accelerate cultural homogenization"
+    ],
+    "exampleSentence": "Critics argue that the ubiquitous dominance of American fast-food chains and entertainment franchises accelerates cultural homogenization.",
+    "wordFamily": "homogenize (v), homogeneous (adj)"
+  },
+  {
+    "id": "V261",
+    "topicId": "technology",
+    "word": "cutting-edge",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˌkʌt.ɪŋ ˈedʒ/",
+    "meaning": "Tân tiến, hiện đại bậc nhất, đi đầu trong lĩnh vực nghiên cứu và ứng dụng công nghệ",
+    "definitionEn": "highly advanced; innovative or pioneering in development or design",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "most modern, state-of-the-art, latest",
+    "synonyms": [
+      "state-of-the-art",
+      "groundbreaking",
+      "avant-garde",
+      "pioneering",
+      "ultra-modern"
+    ],
+    "collocations": [
+      "cutting-edge technology",
+      "cutting-edge research facility",
+      "at the cutting edge of science"
+    ],
+    "exampleSentence": "Leading tech enterprises allocate huge capital reserves to develop cutting-edge artificial intelligence models.",
+    "wordFamily": "edge (n)"
+  },
+  {
+    "id": "V262",
+    "topicId": "technology",
+    "word": "tech-savvy",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˈtek ˌsæv.i/",
+    "meaning": "Am hiểu công nghệ, thành thạo trong việc sử dụng các thiết bị số và phần mềm hiện đại",
+    "definitionEn": "well informed about or proficient in the use of modern technology, computers, and digital devices",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "good with technology, computer literate",
+    "synonyms": [
+      "digitally literate",
+      "technologically adept",
+      "computer-savvy",
+      "cyber-literate"
+    ],
+    "collocations": [
+      "tech-savvy generation",
+      "tech-savvy consumers",
+      "cultivate a tech-savvy workforce"
+    ],
+    "exampleSentence": "Millennials and Gen Z are inherently tech-savvy cohorts who seamlessly integrate digital applications into every facet of daily life.",
+    "wordFamily": "savvy (n, adj)"
+  },
+  {
+    "id": "V263",
+    "topicId": "technology",
+    "word": "obsolete",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˌɒb.səˈliːt/",
+    "meaning": "Lỗi thời, bị đào thải và không còn giá trị sử dụng do công nghệ mới ra đời thay thế",
+    "definitionEn": "no longer produced or used; out of date, replaced by something newer or more effective",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "out of date, outdated, useless now",
+    "synonyms": [
+      "outdated",
+      "antiquated",
+      "defunct",
+      "superseded",
+      "anachronistic"
+    ],
+    "collocations": [
+      "render older machinery obsolete",
+      "become completely obsolete",
+      "technologically obsolete"
+    ],
+    "exampleSentence": "The proliferation of cloud storage has rendered physical floppy disks and CDs virtually obsolete in modern data centers.",
+    "wordFamily": "obsolescence (n)"
+  },
+  {
+    "id": "V264",
+    "topicId": "technology",
+    "word": "digital divide",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˌdɪdʒ.ɪ.təl dɪˈvaɪd/",
+    "meaning": "Khoảng cách số, sự bất bình đẳng giữa người có điều kiện tiếp cận công nghệ thông tin và người bị cô lập kỹ thuật số",
+    "definitionEn": "the gulf between those who have ready access to computers and the internet, and those who do not, often along socioeconomic or regional lines",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "technology gap between rich and poor",
+    "synonyms": [
+      "technological gap",
+      "digital inequality",
+      "connectivity chasm"
+    ],
+    "collocations": [
+      "bridge the digital divide",
+      "narrow the digital divide",
+      "widen the digital divide"
+    ],
+    "exampleSentence": "Governments must subsidize broadband networks in remote rural schools to bridge the widening digital divide.",
+    "wordFamily": "digital (adj), divide (n, v)"
+  },
+  {
+    "id": "V265",
+    "topicId": "crime_law",
+    "word": "juvenile delinquency",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˌdʒuː.vən.aɪl dɪˈlɪŋ.kwən.si/",
+    "meaning": "Tội phạm tuổi vị thành niên, hành vi phạm pháp hoặc vi phạm chuẩn mực đạo đức của người dưới độ tuổi trưởng thành",
+    "definitionEn": "habitual committing of criminal acts or antisocial behavior by individuals who are below the statutory age of adulthood",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "youth crime, teenage lawbreaking",
+    "synonyms": [
+      "youth crime",
+      "underage offending",
+      "adolescent lawlessness"
+    ],
+    "collocations": [
+      "rates of juvenile delinquency",
+      "combat juvenile delinquency",
+      "causes of juvenile delinquency"
+    ],
+    "exampleSentence": "Social workers emphasize that combating juvenile delinquency requires positive community mentorship and structured extracurricular outlets.",
+    "wordFamily": "juvenile (n, adj), delinquent (n, adj)"
+  },
+  {
+    "id": "V266",
+    "topicId": "crime_law",
+    "word": "custodial sentence",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/kʌsˈtəʊ.di.əl ˈsen.təns/",
+    "meaning": "Án tù giam, hình phạt tư pháp tước quyền tự do của phạm nhân bằng việc giam giữ trong nhà tù",
+    "definitionEn": "a judicial sentence that mandates imprisonment or confinement in a correctional facility",
+    "cefrBand": "C2 (Band 8.5+)",
+    "basicEquivalent": "prison term, jail time",
+    "synonyms": [
+      "prison sentence",
+      "term of imprisonment",
+      "incarceration"
+    ],
+    "collocations": [
+      "impose a custodial sentence",
+      "serve a custodial sentence",
+      "avoid a custodial sentence"
+    ],
+    "exampleSentence": "Magistrates decided that community service was more fitting than a custodial sentence for the first-time non-violent offender.",
+    "wordFamily": "custody (n), sentence (n, v)"
+  },
+  {
+    "id": "V267",
+    "topicId": "crime_law",
+    "word": "rehabilitation",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌriː.həˌbɪl.ɪˈteɪ.ʃən/",
+    "meaning": "Sự cải tạo / phục hồi nhân phẩm, quá trình giáo dục và rèn luyện giúp người phạm tội trở lại hòa nhập cộng đồng",
+    "definitionEn": "the action of restoring someone to health or normal life through training and therapy after imprisonment, addiction, or illness",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "reforming criminals, helping prisoners change",
+    "synonyms": [
+      "reform",
+      "reintegration",
+      "social re-entry",
+      "restoration"
+    ],
+    "collocations": [
+      "focus on prisoner rehabilitation",
+      "vocational rehabilitation programs",
+      "rehabilitation of ex-offenders"
+    ],
+    "exampleSentence": "Progressive penal systems prioritize educational rehabilitation over harsh retribution, resulting in substantially lower recidivism rates.",
+    "wordFamily": "rehabilitate (v), rehabilitative (adj)"
+  },
+  {
+    "id": "V268",
+    "topicId": "society",
+    "word": "space exploration",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/speɪs ˌek.spləˈreɪ.ʃən/",
+    "meaning": "Hoạt động thám hiểm và khám phá không gian vũ trụ bằng tàu vũ trụ và kính thiên văn",
+    "definitionEn": "the physical investigation of the reaches of the universe, outer space, and extraterrestrial bodies using piloted and robotic spacecraft",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "exploring outer space, missions to planets",
+    "synonyms": [
+      "cosmic exploration",
+      "space missions",
+      "astronomical discovery"
+    ],
+    "collocations": [
+      "fund space exploration",
+      "manned space exploration",
+      "commercial space exploration"
+    ],
+    "exampleSentence": "Advocates argue that funding space exploration drives technological breakthroughs that yield transformative benefits back on Earth.",
+    "wordFamily": "explore (v), explorer (n)"
+  },
+  {
+    "id": "V269",
+    "topicId": "society",
+    "word": "aesthetics",
+    "partOfSpeech": "noun",
+    "ipa": "/esˈθet.ɪks/",
+    "meaning": "Mỹ học, triết học và các nguyên tắc nghiên cứu cảm thụ về vẻ đẹp và sự thẩm mỹ trong nghệ thuật",
+    "definitionEn": "a set of principles concerned with the nature and appreciation of beauty, especially in art, design, and architecture",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "study of beauty, artistic style",
+    "synonyms": [
+      "philosophy of beauty",
+      "artistic sensibility",
+      "visual appeal"
+    ],
+    "collocations": [
+      "modern architecture aesthetics",
+      "standards of aesthetics",
+      "aesthetics of fine art"
+    ],
+    "exampleSentence": "Classical sculptors adhered to rigorous standards of symmetry and proportional aesthetics to reflect idealized human perfection.",
+    "wordFamily": "aesthetic (adj), aesthetically (adv)"
+  },
+  {
+    "id": "V270",
+    "topicId": "society",
+    "word": "cultural heritage",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈkʌl.tʃər.əl ˈher.ɪ.tɪdʒ/",
+    "meaning": "Di sản văn hóa, những giá trị vật thể và phi vật thể do các thế hệ đi trước truyền lại cho tương lai",
+    "definitionEn": "an expression of the ways of living developed by a community and passed on from generation to generation, including customs, practices, places, objects, and artistic expressions",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "historic cultural treasures, inherited traditions",
+    "synonyms": [
+      "cultural legacy",
+      "national patrimony",
+      "historic legacy"
+    ],
+    "collocations": [
+      "preserve cultural heritage",
+      "intangible cultural heritage",
+      "safeguard national cultural heritage"
+    ],
+    "exampleSentence": "Restoring centuries-old monuments is crucial for safeguarding a nation's unique cultural heritage amidst accelerating modernization.",
+    "wordFamily": "heritage (n), inherit (v)"
   }
 ]
