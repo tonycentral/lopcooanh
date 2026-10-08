@@ -34,59 +34,59 @@ const CATEGORY_ICONS = {
 
 const CATEGORY_STYLES = {
   ALL: {
-    active: "bg-blue-600 text-white shadow-md shadow-blue-600/30 ring-1 ring-blue-400",
-    badgeActive: "bg-blue-500/40 text-blue-100",
-    badgeInactive: "bg-slate-800 text-slate-400"
+    active: "bg-[#4A5D4E] text-white shadow-sm",
+    badgeActive: "bg-[#3D4E41] text-[#E0EAE1]",
+    badgeInactive: "bg-[#E8E2D8] text-[#736C63]"
   },
   education: {
-    active: "bg-amber-600 text-white shadow-md shadow-amber-600/30 ring-1 ring-amber-400",
-    badgeActive: "bg-amber-500/40 text-amber-100",
-    badgeInactive: "bg-slate-800 text-slate-400"
+    active: "bg-[#B08050] text-white shadow-sm",
+    badgeActive: "bg-[#946A3E] text-[#FDF4EB]",
+    badgeInactive: "bg-[#E8E2D8] text-[#736C63]"
   },
   technology: {
-    active: "bg-cyan-600 text-white shadow-md shadow-cyan-600/30 ring-1 ring-cyan-400",
-    badgeActive: "bg-cyan-500/40 text-cyan-100",
-    badgeInactive: "bg-slate-800 text-slate-400"
+    active: "bg-[#55696E] text-white shadow-sm",
+    badgeActive: "bg-[#435458] text-[#E7EFF1]",
+    badgeInactive: "bg-[#E8E2D8] text-[#736C63]"
   },
   environment: {
-    active: "bg-emerald-600 text-white shadow-md shadow-emerald-600/30 ring-1 ring-emerald-400",
-    badgeActive: "bg-emerald-500/40 text-emerald-100",
-    badgeInactive: "bg-slate-800 text-slate-400"
+    active: "bg-[#566B50] text-white shadow-sm",
+    badgeActive: "bg-[#43543E] text-[#ECF4EB]",
+    badgeInactive: "bg-[#E8E2D8] text-[#736C63]"
   },
   transport: {
-    active: "bg-teal-600 text-white shadow-md shadow-teal-600/30 ring-1 ring-teal-400",
-    badgeActive: "bg-teal-500/40 text-teal-100",
-    badgeInactive: "bg-slate-800 text-slate-400"
+    active: "bg-[#4F6A6E] text-white shadow-sm",
+    badgeActive: "bg-[#3E5558] text-[#E6F0F2]",
+    badgeInactive: "bg-[#E8E2D8] text-[#736C63]"
   },
   health: {
-    active: "bg-rose-600 text-white shadow-md shadow-rose-600/30 ring-1 ring-rose-400",
-    badgeActive: "bg-rose-500/40 text-rose-100",
-    badgeInactive: "bg-slate-800 text-slate-400"
+    active: "bg-[#B06352] text-white shadow-sm",
+    badgeActive: "bg-[#935041] text-[#FCEEEA]",
+    badgeInactive: "bg-[#E8E2D8] text-[#736C63]"
   },
   work_career: {
-    active: "bg-indigo-600 text-white shadow-md shadow-indigo-600/30 ring-1 ring-indigo-400",
-    badgeActive: "bg-indigo-500/40 text-indigo-100",
-    badgeInactive: "bg-slate-800 text-slate-400"
+    active: "bg-[#546073] text-white shadow-sm",
+    badgeActive: "bg-[#424D5E] text-[#EAEEF5]",
+    badgeInactive: "bg-[#E8E2D8] text-[#736C63]"
   },
   business: {
-    active: "bg-violet-600 text-white shadow-md shadow-violet-600/30 ring-1 ring-violet-400",
-    badgeActive: "bg-violet-500/40 text-violet-100",
-    badgeInactive: "bg-slate-800 text-slate-400"
+    active: "bg-[#7A6150] text-white shadow-sm",
+    badgeActive: "bg-[#624D3E] text-[#F4EDE7]",
+    badgeInactive: "bg-[#E8E2D8] text-[#736C63]"
   },
   society_family: {
-    active: "bg-purple-600 text-white shadow-md shadow-purple-600/30 ring-1 ring-purple-400",
-    badgeActive: "bg-purple-500/40 text-purple-100",
-    badgeInactive: "bg-slate-800 text-slate-400"
+    active: "bg-[#7E5C6A] text-white shadow-sm",
+    badgeActive: "bg-[#664955] text-[#F5ECEF]",
+    badgeInactive: "bg-[#E8E2D8] text-[#736C63]"
   },
   crime_law: {
-    active: "bg-red-600 text-white shadow-md shadow-red-600/30 ring-1 ring-red-400",
-    badgeActive: "bg-red-500/40 text-red-100",
-    badgeInactive: "bg-slate-800 text-slate-400"
+    active: "bg-[#8A5852] text-white shadow-sm",
+    badgeActive: "bg-[#714540] text-[#F7ECEB]",
+    badgeInactive: "bg-[#E8E2D8] text-[#736C63]"
   },
   culture_arts: {
-    active: "bg-orange-600 text-white shadow-md shadow-orange-600/30 ring-1 ring-orange-400",
-    badgeActive: "bg-orange-500/40 text-orange-100",
-    badgeInactive: "bg-slate-800 text-slate-400"
+    active: "bg-[#AD6D49] text-white shadow-sm",
+    badgeActive: "bg-[#8E5637] text-[#FAF0EA]",
+    badgeInactive: "bg-[#E8E2D8] text-[#736C63]"
   }
 };
 
@@ -173,7 +173,7 @@ export default function TopicTabBar({
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer select-none shrink-0 ${
                   isCatSelected
                     ? style.active
-                    : "bg-slate-900/90 hover:bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-800/80"
+                    : "bg-white hover:bg-[#FAF8F5] text-[#6E675E] hover:text-[#2B2826] border border-[#E7E2D9] shadow-sm"
                 }`}
                 title={cat.description}
               >
@@ -202,10 +202,10 @@ export default function TopicTabBar({
               key={topic.id}
               type="button"
               onClick={() => onSelectTopic(topic)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer select-none shrink-0 ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer select-none shrink-0 shadow-sm ${
                 isSelected
-                  ? "bg-blue-600 text-white shadow-md shadow-blue-600/30 ring-1 ring-blue-400"
-                  : "bg-slate-900/90 hover:bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-800"
+                  ? "bg-[#4A5D4E] text-white shadow-sm ring-1 ring-[#3D4E41]"
+                  : "bg-white hover:bg-[#FAF8F5] text-[#6E675E] hover:text-[#2B2826] border border-[#E7E2D9]"
               }`}
             >
               <span>{label}</span>
@@ -217,7 +217,7 @@ export default function TopicTabBar({
         <button
           type="button"
           onClick={handleRandomClick}
-          className="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-600 hover:from-blue-600 hover:to-indigo-500 text-white shadow-md shadow-blue-600/25 transition cursor-pointer select-none shrink-0 flex items-center gap-1.5"
+          className="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-[#655243] hover:bg-[#544436] text-white shadow-sm transition cursor-pointer select-none shrink-0 flex items-center gap-1.5"
           title="Chọn chủ đề ngẫu nhiên trong nhóm này"
         >
           <Shuffle className="w-3.5 h-3.5" />
@@ -227,26 +227,26 @@ export default function TopicTabBar({
 
       {/* Prominent, Legible IELTS Prompt Card (Larger Font & Task 1 Bar Chart Action) */}
       {selectedTopic && (
-        <div className="px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-slate-900/95 border border-slate-800 shadow-lg space-y-1.5">
+        <div className="px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-2xl bg-white border border-[#E7E2D9] shadow-sm space-y-1.5">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2 flex-wrap">
               <span className={`text-[10px] sm:text-xs font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
                 activeTask === 'task1'
-                  ? 'bg-blue-500/15 text-blue-300 border-blue-500/30'
-                  : 'bg-blue-600/15 text-blue-300 border-blue-500/30'
+                  ? 'bg-[#EDF3EE] text-[#3D5240] border-[#CAD8C8]'
+                  : 'bg-[#EDF3EE] text-[#3D5240] border-[#CAD8C8]'
               }`}>
                 {activeTask === 'task1' ? 'Đề bài Task 1' : 'Đề bài Task 2'}
               </span>
               {selectedTopic.categoryVietnameseName && activeTask === 'task2' && (
-                <span className="text-[10px] px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-300 border border-blue-500/20 font-bold">
+                <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#F5EFE7] text-[#755940] border border-[#E5DACF] font-bold">
                   {selectedTopic.categoryVietnameseName}
                 </span>
               )}
-              <span className="text-xs font-semibold text-slate-300">
+              <span className="text-xs font-semibold text-[#5A524A]">
                 {selectedTopic.vietnameseName || selectedTopic.name}
               </span>
               {selectedTopic.tag && (
-                <span className="text-[10px] px-2 py-0.5 rounded-md bg-slate-800 text-slate-400 hidden md:inline">
+                <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#F2EFE9] text-[#7A7369] hidden md:inline">
                   {selectedTopic.tag}
                 </span>
               )}
@@ -255,14 +255,14 @@ export default function TopicTabBar({
             <div className="flex items-center gap-2 shrink-0">
               {/* Layout Switcher for Task 1: 3 Cột song song vs 2 Cột gộp */}
               {activeTask === 'task1' && onToggleTask1Layout && (
-                <div className="flex items-center bg-slate-950/80 p-0.5 rounded-xl border border-slate-800 text-xs">
+                <div className="flex items-center bg-[#EFECE5] p-0.5 rounded-xl border border-[#DDD6CB] text-xs">
                   <button
                     type="button"
                     onClick={() => onToggleTask1Layout('three-col')}
                     className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
                       task1Layout === 'three-col'
-                        ? 'bg-blue-600 text-white shadow-sm shadow-blue-600/30 ring-1 ring-blue-400'
-                        : 'text-slate-400 hover:text-white'
+                        ? 'bg-[#4A5D4E] text-white shadow-sm'
+                        : 'text-[#6E675E] hover:text-[#2B2826]'
                     }`}
                     title="Chế độ 3 Cột song song: Luôn thấy Đề/Biểu đồ & Từ vựng & Luyện tập"
                   >
@@ -274,8 +274,8 @@ export default function TopicTabBar({
                     onClick={() => onToggleTask1Layout('stacked')}
                     className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
                       task1Layout === 'stacked'
-                        ? 'bg-blue-600 text-white shadow-sm shadow-blue-600/30 ring-1 ring-blue-400'
-                        : 'text-slate-400 hover:text-white'
+                        ? 'bg-[#4A5D4E] text-white shadow-sm'
+                        : 'text-[#6E675E] hover:text-[#2B2826]'
                     }`}
                     title="Chế độ Cột trái 2 tầng: Nửa trên Biểu đồ, nửa dưới Từ vựng"
                   >
@@ -290,10 +290,10 @@ export default function TopicTabBar({
                 <button
                   type="button"
                   onClick={onOpenChartModal}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 hover:text-white border border-blue-500/40 text-xs font-bold transition cursor-pointer shrink-0 shadow-sm"
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-[#EDF3EE] hover:bg-[#E2ECE3] text-[#344837] border border-[#CAD8C8] text-xs font-bold transition cursor-pointer shrink-0 shadow-sm"
                   title="Mở biểu đồ số liệu toàn màn hình"
                 >
-                  <BarChart3 className="w-3.5 h-3.5 text-blue-400" />
+                  <BarChart3 className="w-3.5 h-3.5 text-[#4A5D4E]" />
                   <span>Phóng to</span>
                 </button>
               )}
@@ -301,7 +301,7 @@ export default function TopicTabBar({
           </div>
 
           {/* Prompt description - Large, clear font, no truncation */}
-          <p className="text-sm sm:text-[15px] font-medium text-slate-100 leading-snug font-sans select-text">
+          <p className="text-sm sm:text-[15px] font-medium text-[#2B2826] leading-relaxed font-sans select-text">
             "{selectedTopic.ieltsPrompt}"
           </p>
         </div>
