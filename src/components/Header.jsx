@@ -192,27 +192,21 @@ export default function Header({
           </button>
 
           {/* User Account / Login Button */}
-          {currentUser || studentEmail ? (
+          {currentUser ? (
             <div className="flex items-center gap-1">
               <button
-                onClick={onOpenAuth || onChangeEmail}
-                className="flex items-center gap-1.5 p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-xs text-slate-200 transition cursor-pointer"
-                title={currentUser ? "Tài khoản Supabase đã đồng bộ" : "Bấm để liên kết tài khoản Supabase"}
+                onClick={onOpenAuth}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-800 border border-emerald-500/40 text-xs text-white transition cursor-pointer"
+                title="Tài khoản đám mây Supabase (Đã kết nối)"
               >
-                {currentUser ? (
-                  <Cloud className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                ) : (
-                  <Mail className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
-                )}
-                <span className="font-medium hidden md:inline max-w-[130px] truncate">
-                  {currentUser?.user_metadata?.full_name || currentUser?.email || studentEmail}
+                <Cloud className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span className="font-semibold text-emerald-300 max-w-[120px] sm:max-w-[160px] truncate">
+                  {currentUser?.user_metadata?.full_name || currentUser?.email}
                 </span>
-                {currentUser && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse hidden lg:inline" title="Đã đồng bộ đám mây" />
-                )}
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" title="Đã đồng bộ đám mây" />
               </button>
 
-              {currentUser && onSignOut && (
+              {onSignOut && (
                 <button
                   onClick={onSignOut}
                   className="p-1.5 sm:p-2 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition cursor-pointer"
@@ -225,11 +219,11 @@ export default function Header({
           ) : (
             <button
               onClick={onOpenAuth}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-md shadow-blue-600/30 cursor-pointer active:scale-95"
-              title="Đăng nhập để đồng bộ tiến độ đám mây"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-md shadow-blue-600/30 cursor-pointer active:scale-95 shrink-0"
+              title="Đăng nhập / Đăng ký để đồng bộ bài viết và từ vựng"
             >
               <User className="w-3.5 h-3.5" />
-              <span>Đăng Nhập</span>
+              <span className="font-bold">Đăng Nhập</span>
             </button>
           )}
 

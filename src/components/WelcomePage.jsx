@@ -6,7 +6,8 @@ import {
   Mail,
   Layers,
   User,
-  Cloud 
+  Cloud,
+  LogOut
 } from 'lucide-react';
 import { BAND_OPTIONS } from '../data/bandDescriptors';
 
@@ -16,6 +17,7 @@ export default function WelcomePage({
   onOpenContactModal,
   onChangeEmail,
   onOpenAuth,
+  onSignOut,
   currentUser,
   studentEmail,
   targetBand = "7.0",
@@ -58,28 +60,35 @@ export default function WelcomePage({
         </div>
 
         {/* Student Email / Login Button */}
-        {currentUser || studentEmail ? (
-          <button
-            onClick={onOpenAuth || onChangeEmail}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs text-slate-300 hover:text-white transition cursor-pointer max-w-[220px]"
-            title={currentUser ? "Tài khoản đám mây Supabase đã kết nối" : "Đổi địa chỉ email học viên"}
-          >
-            {currentUser ? (
+        {currentUser ? (
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onOpenAuth}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-emerald-500/40 text-xs text-white transition cursor-pointer max-w-[220px]"
+              title="Tài khoản đám mây Supabase (Đã kết nối)"
+            >
               <Cloud className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-            ) : (
-              <Mail className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+              <span className="font-semibold text-emerald-300 truncate">{currentUser?.user_metadata?.full_name || currentUser?.email}</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            </button>
+            {onSignOut && (
+              <button
+                onClick={onSignOut}
+                className="p-1.5 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition cursor-pointer"
+                title="Đăng xuất tài khoản"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+              </button>
             )}
-            <span className="truncate">{currentUser?.user_metadata?.full_name || currentUser?.email || studentEmail}</span>
-            <span className="text-[10px] text-slate-500 shrink-0">• Đổi</span>
-          </button>
+          </div>
         ) : (
           <button
             onClick={onOpenAuth}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-md shadow-blue-600/30 cursor-pointer active:scale-95"
-            title="Đăng nhập để đồng bộ tiến độ"
+            className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-md shadow-blue-600/30 cursor-pointer active:scale-95"
+            title="Đăng nhập hoặc đăng ký tài khoản để đồng bộ tiến độ"
           >
             <User className="w-3.5 h-3.5" />
-            <span>Đăng Nhập</span>
+            <span>Đăng Nhập / Đăng Ký</span>
           </button>
         )}
       </header>
@@ -116,6 +125,45 @@ export default function WelcomePage({
         {/* Minimalist Card */}
         <div className="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl shadow-blue-950/20">
           
+          {/* Cloud Account Prompt Card */}
+          {currentUser ? (
+            <div className="flex items-center justify-between p-3 rounded-2xl bg-emerald-950/30 border border-emerald-500/30 text-xs">
+              <div className="flex items-center gap-2">
+                <Cloud className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span className="text-slate-300">
+                  Tài khoản: <strong className="text-emerald-300">{currentUser?.user_metadata?.full_name || currentUser?.email}</strong>
+                </span>
+              </div>
+              <span className="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                ☁️ Đã đồng bộ
+              </span>
+            </div>
+          ) : (
+            <div 
+              onClick={onOpenAuth}
+              className="flex items-center justify-between p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-blue-950/50 to-indigo-950/40 border border-blue-500/40 hover:border-blue-400/80 transition cursor-pointer group shadow-sm"
+              title="Nhấn để đăng nhập hoặc tạo tài khoản miễn phí"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-blue-600/20 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
+                  <User className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-xs sm:text-sm font-bold text-white group-hover:text-blue-300 transition flex items-center gap-1.5">
+                    <span>Đăng nhập tài khoản học viên</span>
+                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-300 font-medium">0đ Miễn phí</span>
+                  </div>
+                  <div className="text-[11px] text-slate-400">
+                    Lưu lịch sử bài viết & đồng bộ từ vựng đã nhớ giữa máy tính và điện thoại
+                  </div>
+                </div>
+              </div>
+              <span className="text-xs font-bold text-blue-400 group-hover:translate-x-0.5 transition shrink-0 ml-2">
+                Đăng nhập &rarr;
+              </span>
+            </div>
+          )}
+
           {/* Thanh Bar Chọn Band */}
           <div className="space-y-2.5">
             <div className="flex items-center justify-between text-xs">

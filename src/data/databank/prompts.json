@@ -2859,5 +2859,277 @@
     "status": "Active",
     "outlineHints": "Introduction: Nêu vấn đề báo chí lá cải soi mói đời tư nghệ sĩ; khẳng định quan điểm quyền riêng tư tối thiểu phải được bảo vệ. Body 1: Phân tích vì sao truyền thông soi mói: Người nổi tiếng tự nguyện dùng sự chú ý để kiếm tiền, công chúng tò mò, vai trò giám sát sự giả tạo/vi phạm pháp luật. Body 2: Phân tích tác hại của việc xâm phạm riêng tư: Xâm phạm nhân quyền, gây khủng hoảng tâm lý (trầm cảm, nguy hiểm thể xác), làm tổn thương con nhỏ vô tội. Conclusion: Khẳng định kết luận: Phân định rạch ròi giữa hoạt động nghề nghiệp và đời sống cá nhân; cần chế tài pháp luật xử phạt báo chí lá cải xâm phạm đời tư.",
     "modelEssay": "The relentless media obsession with the private affairs of celebrities—ranging from romantic relationships to family disputes—has become a hallmark of contemporary tabloid journalism. While proponents claim that public visibility is the natural price of fame, I firmly believe that the press must respect reasonable boundaries of privacy, and that the exploitation of intimate personal lives causes profound psychological harm.\n\nOn the one hand, sensationalist publications argue that scrutiny is part of the unspoken bargain of stardom. High-profile actors, musicians, and athletes deliberately court publicity to elevate their commercial brand, secure corporate endorsements, and boost album or ticket sales. Having willingly leveraged public curiosity to attain immense wealth and influence, critics argue they cannot suddenly demand complete opacity when media coverage turns inconvenient. Furthermore, in cases involving public morality, lawbreaking, or hypocritical behavior, investigative reporting serves a legitimate whistleblowing function.\n\nOn the other hand, the entitlement to basic human dignity and psychological safety does not vanish upon achieving fame. The relentless pursuit by paparazzi and paparazzi drones crosses ethical lines into stalking and harassment. Relentless intrusion into intimate domestic realms strips individuals of their fundamental sanctuary, frequently provoking severe depression, substance abuse, and even physical endangerment. More deplorably, media intrusion routinely targets celebrities' innocent children, who never chose public life and deserve uncompromised shielding from toxic public voyeurism.\n\nIn conclusion, a clear distinction must be established between public professional activities and inviolable domestic sanctuaries. While journalists have every right to critique an artist's professional output or expose genuine malfeasance, stalking their private homes and harassing their families represents an unacceptable abuse of press freedom that warrants stringent regulatory penalties."
+  },
+  {
+    "id": "T1_033",
+    "taskType": "Task 1",
+    "questionType": "Line Graph",
+    "topicId": "task1-roche-01-kpb-shares",
+    "sourceType": "Sách IELTS Writing Masterclass 8.5 (Marc Roche)",
+    "sourceDetail": "Masterclass 8.5 - Chapter 1, p. 32-34",
+    "yearDate": "2020",
+    "title": "Line Graph: Stock Price Fluctuations of KPB (2006 - 2010)",
+    "promptText": "The graph shows the changes and the overall decline in the share price of KPB over a five-year period from 2006 to 2010. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    "difficulty": "Nâng cao (Band 7.5+)",
+    "status": "Active",
+    "imageUrl": "/charts/task1/task1_roche-01-kpb-shares.png",
+    "chartData": {
+      "chartType": "image",
+      "title": "Line Graph: Stock Price Fluctuations of KPB (2006 - 2010)",
+      "imageUrl": "/charts/task1/task1_roche-01-kpb-shares.png",
+      "keyNotes": [
+        "Biến động mạnh mẽ trong 5 năm: Giá cổ phiếu KPB trải qua nhiều chu kỳ tăng giảm liên tục từ 2006 đến 2010, nhưng xu hướng chung ghi nhận mức sụt giảm nhẹ khoảng 1 USD/cổ phiếu sau 5 năm.",
+        "Đỉnh cao nhất cuối năm 2006: Khởi điểm ở mức 13 USD/cổ phiếu, giá tăng vọt đột ngột từ 21 USD lên đỉnh kỷ lục 31 USD/cổ phiếu vào cuối 2006.",
+        "Đáy sâu năm 2008 & Hồi phục: Lao dốc mạnh từ giữa năm 2008 xuống đáy thấp nhất kỳ ở mức chỉ hơn 7 USD, trước khi hồi phục lên đỉnh thứ hai 17 USD vào đầu 2010 rồi thoái lui về 12 USD vào cuối 2010."
+      ]
+    },
+    "outlineHints": "Overview: Nêu 2 xu hướng chính: Giá cổ phiếu biến động dữ dội qua nhiều đợt sóng và xu hướng chung cả kỳ là giảm nhẹ 1 USD. Thân bài 1: Diễn biến từ 2006 đến đỉnh điểm và cú sụt giảm: từ 13 USD tăng vọt lên 31 USD cuối 2006, sau đó dao động và rơi tự do xuống đáy hơn 7 USD vào cuối 2008. Thân bài 2: Quá trình phục hồi và thoái trào 2009-2010: hồi phục lên đỉnh thứ hai 17 USD đầu 2010 rồi giảm dần về 12 USD cuối kỳ.",
+    "modelEssay": "The graph shows the changes and the overall decline in the share price of KPB over a five-year period from 2006 to 2010.\n\nAt the beginning of the period the share price was at USD 13 per share. There were several fluctuations until late 2006 when there was a sudden increase from USD 21 to USD 31 per share. This higher price did not last long, however, and it fell before rising strongly again in 2008. From mid-2008 there was a sharp downward trend until the end of the year when it fell to the lowest point in this period at just over USD 7 per share. After that the share price recovered and, despite some fluctuations, continued to rise until it reached a peak of USD 17 in early 2010. Until late 2010 the trend was downward again, ending the year at just over USD 12.\n\nOverall, KPB made significant gains and losses during this period but registered a slight net decrease of around USD 1 per share over the five years."
+  },
+  {
+    "id": "T1_034",
+    "taskType": "Task 1",
+    "questionType": "Bar Chart",
+    "topicId": "task1-roche-02-gulf-fertility",
+    "sourceType": "Sách IELTS Writing Masterclass 8.5 (Marc Roche)",
+    "sourceDetail": "Masterclass 8.5 - Chapter 3, p. 64-69",
+    "yearDate": "2020",
+    "title": "Bar Chart: Fertility Rates per Woman in Six Gulf States (1990 vs 2000)",
+    "promptText": "The chart provides information regarding the fertility in births per woman in six Gulf states from 1990 to 2000. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    "difficulty": "Nâng cao (Band 7.5+)",
+    "status": "Active",
+    "imageUrl": "/charts/task1/task1_roche-02-gulf-fertility.png",
+    "chartData": {
+      "chartType": "image",
+      "title": "Bar Chart: Fertility Rates per Woman in Six Gulf States (1990 vs 2000)",
+      "imageUrl": "/charts/task1/task1_roche-02-gulf-fertility.png",
+      "keyNotes": [
+        "Xu hướng suy giảm đồng loạt: Tỷ lệ sinh ở cả 6 quốc gia Vùng Vịnh (Saudi Arabia, Oman, UAE, Qatar, Kuwait, Bahrain) đều sụt giảm đáng kể trong thập kỷ 1990-2000.",
+        "Nhóm sinh nở cao nhất: Oman và Saudi Arabia ghi nhận mức sinh cao ngất ngưởng trên 7 con/phụ nữ năm 1990, sau đó giảm 20% xuống còn 5.5 con năm 2000.",
+        "Nhóm sinh nở thấp hơn: UAE, Bahrain và Kuwait giảm từ mức 3.75 - 4 con xuống dưới 3 con/phụ nữ vào năm 2000 (UAE giảm mạnh nhất trên 25%)."
+      ]
+    },
+    "outlineHints": "Overview: Nêu 2 đặc điểm cốt lõi: Tỷ lệ sinh giảm rõ rệt ở tất cả các nước Vùng Vịnh; tuy nhiên sự phân hóa vùng miền rất lớn khi Oman & Saudi Arabia luôn duy trì tỷ lệ sinh cao gấp đôi các nước còn lại. Thân bài 1: Nhóm tỷ lệ sinh cao: Phân tích Oman và Saudi Arabia (trên 7 con năm 1990, giảm 20% xuống 5.5 con năm 2000). Thân bài 2: Nhóm tỷ lệ sinh vừa và thấp: Phân tích UAE, Bahrain, Kuwait và Qatar (UAE sụt giảm hơn 25% xuống dưới 3 con, đồng mức với Bahrain và Kuwait).",
+    "modelEssay": "The chart represents changes in the fertility rates of female members of the population in six different Gulf countries, namely Saudi Arabia, Oman, the UAE, Kuwait, Bahrain and Qatar between 1990 and 2000.\n\nOverall, it can be seen that there were major falls in birth rates across all six nations, although some countries in the region retained significantly higher fertility rates than others throughout the period.\n\nFrom 1990 to 2000, there was a consistent contraction in the average number of children born per woman across the entire region. The most notable shifts occurred in two nations that already recorded comparatively low fertility at the beginning of the decade: the UAE and Bahrain. By 2000, rates in the UAE had contracted by over 25%, dropping below three births per woman, mirroring similar levels seen in Bahrain and Kuwait.\n\nIn contrast, wide regional variations remained evident. Oman and Saudi Arabia displayed the highest fertility rates in 1990, each exceeding seven births per woman. Although both nations experienced an approximate 20% reduction over the ten-year timeframe, their rates remained substantially elevated compared to their regional peers, standing at approximately 5.5 births per woman by the end of the timeframe."
+  },
+  {
+    "id": "T1_035",
+    "taskType": "Task 1",
+    "questionType": "Multiple Charts",
+    "topicId": "task1-roche-03-uk-alcohol",
+    "sourceType": "Sách IELTS Writing Masterclass 8.5 (Marc Roche)",
+    "sourceDetail": "Masterclass 8.5 - Chapter 4, p. 72-79",
+    "yearDate": "2020",
+    "title": "Multiple Charts: UK Alcohol Consumption - Adults Exceeding Limits vs Youth Trends",
+    "promptText": "The bar chart displays the percentage of British adults drinking more than the recommended guidelines on at least one day a week in 2004, while the line graph illustrates the average alcohol consumption of children in England, aged 11-15, who drank in the previous week between 1990 and 2004. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    "difficulty": "Nâng cao (Band 7.5+)",
+    "status": "Active",
+    "imageUrl": "/charts/task1/task1_roche-03-uk-alcohol.png",
+    "chartData": {
+      "chartType": "image",
+      "title": "Multiple Charts: UK Alcohol Consumption - Adults Exceeding Limits vs Youth Trends",
+      "imageUrl": "/charts/task1/task1_roche-03-uk-alcohol.png",
+      "keyNotes": [
+        "Hành vi uống quá liều ở người lớn: Gần 50% nam giới 18-44 tuổi uống vượt hướng dẫn an toàn; tỷ lệ ở nữ cùng tuổi là 39% nhưng nhóm 25-64 tuổi chỉ bằng một nửa nam giới. Nhóm người già (>65) uống ít nhất (nữ 5%, nam 20%).",
+        "Mức tiêu thụ cồn ở thanh thiếu niên: Số đơn vị cồn trẻ em uống tăng gấp đôi từ 1990 đến 2004; tăng vọt mạnh nhất 1994-1998 (nam đạt >11 đơn vị, nữ đạt >8 đơn vị).",
+        "Xu hướng thu hẹp khoảng cách giới tính: Sau năm 2000, lượng cồn của nam sinh giảm nhẹ trong khi nữ sinh tiếp tục tăng chạm đỉnh trên 10 đơn vị vào năm 2004."
+      ]
+    },
+    "outlineHints": "Overview: Nêu 2 điểm chính: Nam giới trưởng thành uống vượt chuẩn nhiều hơn nữ giới ở mọi lứa tuổi năm 2004; lượng cồn thanh thiếu niên tăng gấp đôi trong 14 năm với khoảng cách giữa nam và nữ ngày càng thu hẹp. Thân bài 1: Phân tích biểu đồ cột người lớn: so sánh tỷ lệ vượt ngưỡng ở các nhóm tuổi 18-24, 25-44, 45-64 và sự sụt giảm ở người già trên 65. Thân bài 2: Phân tích biểu đồ đường trẻ em 11-15 tuổi: đà tăng nhân đôi từ 1990 đến 2004, đợt tăng vọt 1994-1998, và đỉnh điểm 10 đơn vị của trẻ em gái năm 2004.",
+    "modelEssay": "Both charts illustrate levels of alcohol consumption across different demographic groups in the United Kingdom.\n\nOverall, adult men were consistently more prone to exceeding recommended limits than women in 2004, particularly in younger cohorts. Concurrently, alcohol consumption among English children experienced a substantial expansion over the fourteen-year timeframe, with consumption levels among young girls steadily closing the gap with boys.\n\nLooking at adult drinking habits in 2004, nearly 50% of men aged 18 to 44 exceeded daily recommended alcohol thresholds. While the percentage was also comparatively elevated for women aged 18-24 (39%), figures for female cohorts aged 25-64 stood at roughly half the proportion of their male counterparts. Furthermore, consumption plummeted among senior citizens over 65, with only 5% of women and 20% of men drinking beyond guidelines.\n\nRegarding underage drinking between 1990 and 2004, the volume of alcohol consumed by children approximately doubled. The sharpest increase occurred between 1994 and 1998, with boy and girl intake escalating to over 11 and 8 units respectively. While boy consumption subsequently moderated after 2000, girls' intake maintained an upward trajectory, attaining a peak of just over 10 units in 2004."
+  },
+  {
+    "id": "T1_036",
+    "taskType": "Task 1",
+    "questionType": "Pie Chart",
+    "topicId": "task1-roche-04-uk-spending",
+    "sourceType": "Sách IELTS Writing Masterclass 8.5 (Marc Roche)",
+    "sourceDetail": "Masterclass 8.5 - Chapter 5, p. 81-87",
+    "yearDate": "2020",
+    "title": "Pie Charts: British Household Expenditure Allocation (1966 vs 1996)",
+    "promptText": "The pie charts display changes in UK spending patterns across different expenditure categories from 1966 to 1996. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    "difficulty": "Nâng cao (Band 7.5+)",
+    "status": "Active",
+    "imageUrl": "/charts/task1/task1_roche-04-uk-spending.png",
+    "chartData": {
+      "chartType": "image",
+      "title": "Pie Charts: British Household Expenditure Allocation (1966 vs 1996)",
+      "imageUrl": "/charts/task1/task1_roche-04-uk-spending.png",
+      "keyNotes": [
+        "Sự đảo chiều giữa Thực phẩm và Ô tô: Thực phẩm và xe hơi luôn chiếm trên 50% tổng chi tiêu; tuy nhiên Thực phẩm co lại 2/3 (từ 44% xuống 14%), trong khi Ô tô tăng gần gấp đôi (từ 23% lên 45%).",
+        "Tăng trưởng dịch vụ và máy tính: Ăn uống nhà hàng tăng gấp đôi từ 7% lên 14%; chi tiêu máy tính cá nhân bùng nổ gấp 10 lần (từ 1% lên 10%).",
+        "Sụt giảm sách báo in ấn: Sách sụt giảm thê thảm từ 6% xuống chỉ còn 1%; chi phí xăng dầu và đồ nội thất duy trì ổn định không đổi."
+      ]
+    },
+    "outlineHints": "Overview: Nêu 2 đặc điểm cốt lõi: Ngân sách gia đình Anh chuyển hướng mạnh mẽ từ thực phẩm thiết yếu sang phương tiện ô tô và giải trí; chi tiêu máy tính và nhà hàng tăng vọt trong khi sách báo sụt giảm gần như triệt để. Thân bài 1: So sánh 2 hạng mục lớn nhất (Thực phẩm và Ô tô): diễn biến đảo chiều của Food (44% xuống 14%) và Cars (23% lên 45%). Thân bài 2: Phân tích các nhóm còn lại: Nhà hàng (7% lên 14%), Máy tính (1% lên 10%), Sách báo (rơi tự do từ 6% xuống 1%) và sự ổn định của Xăng xe/Nội thất.",
+    "modelEssay": "The pie charts display changes in United Kingdom household expenditure patterns between 1966 and 1996.\n\nOverall, the period witnessed dramatic structural reallocations of family budgets. Spending on motor cars, dining out, and computing experienced remarkable surges, largely at the expense of traditional necessities such as groceries and literature.\n\nIn both years, food and automotive transport accounted for over half of all household outlays. However, their trajectories diverged starkly: food comprised 44% of total expenditure in 1966 before shrinking by more than two-thirds to just 14% by 1996. Conversely, expenditure on cars doubled from 23% to 45%, establishing private vehicles as the single largest budget component.\n\nSubstantial shifts were also evident across leisure and modern technology. Dining in restaurants grew twofold from 7% to 14%, while spending on personal computers escalated tenfold from 1% to 10%. In sharp contrast, outlays on books plummeted from 6% down to a negligible 1%. Other areas, notably furniture and petrol, remained relatively stable across the three decades."
+  },
+  {
+    "id": "T1_037",
+    "taskType": "Task 1",
+    "questionType": "Table",
+    "topicId": "task1-roche-05-consumer-spending",
+    "sourceType": "Sách IELTS Writing Masterclass 8.5 (Marc Roche)",
+    "sourceDetail": "Masterclass 8.5 - Chapter 6, p. 96",
+    "yearDate": "2020",
+    "title": "Table: Proportions of Consumer Spending across Five European Countries (2002)",
+    "promptText": "The table reveals proportions of consumer spending for three categories of products and services in Italy, Spain, Sweden, Ireland, and Turkey in 2002. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    "difficulty": "Nâng cao (Band 7.5+)",
+    "status": "Active",
+    "imageUrl": "/charts/task1/task1_roche-05-consumer-spending.png",
+    "chartData": {
+      "chartType": "image",
+      "title": "Table: Proportions of Consumer Spending across Five European Countries (2002)",
+      "imageUrl": "/charts/task1/task1_roche-05-consumer-spending.png",
+      "keyNotes": [
+        "Thực phẩm/Đồ uống/Thuốc lá áp đảo: Luôn là khoản chi lớn nhất ở cả 5 nước; dẫn đầu là Thổ Nhĩ Kỳ (32.14%) và Ireland (~29%), thấp nhất là Thụy Điển (15.77%).",
+        "Giải trí/Giáo dục khiêm tốn nhất: Chiếm tỷ lệ thấp nhất ở toàn bộ các nước (từ dưới 2% ở Tây Ban Nha đến 4.35% ở Thổ Nhĩ Kỳ).",
+        "May mặc & Giày dép: Ý chi tiêu cao nhất cho thời trang (9%), vượt trội hẳn 4 nước còn lại (Thụy Điển chỉ 5.4%)."
+      ]
+    },
+    "outlineHints": "Overview: Nêu 2 xu hướng nổi bật: Chi tiêu cho thực phẩm/đồ uống/thuốc lá luôn chiếm tỷ trọng áp đảo ở mọi quốc gia; trong khi dịch vụ giải trí và giáo dục luôn ghi nhận tỷ lệ thấp nhất. Thân bài 1: So sánh chi tiêu danh mục Thực phẩm/Đồ uống/Thuốc lá: Thổ Nhĩ Kỳ và Ireland chi nhiều nhất (>28-32%), Tây Ban Nha và Ý ở mức trung bình (~16-19%), Thụy Điển thấp nhất (15.77%). Thân bài 2: So sánh Quần áo/Giày dép và Giải trí/Giáo dục: Ý dẫn đầu về may mặc (9%); Thổ Nhĩ Kỳ dẫn đầu về giải trí (4.35%), trong khi Tây Ban Nha chi ít nhất cho giáo dục/giải trí (1.98%).",
+    "modelEssay": "The table reveals proportions of consumer spending across three broad categories of goods and services in Italy, Spain, Sweden, Ireland, and Turkey in the year 2002.\n\nOverall, food, drinks, and tobacco constituted the largest expenditure category across all five nations, whereas leisure and education consistently represented the smallest proportion of family budgets.\n\nConsumer expenditure on food, beverages, and tobacco was noticeably higher in developing and peripheral markets, led by Turkey at 32.14% and Ireland at nearly 29%. By contrast, Sweden dedicated the lowest proportion to sustenance items, at just 15.77%, with Italy and Spain registering intermediate shares of approximately 16% and 19% respectively.\n\nRegarding the remaining sectors, clothing and footwear absorbed 9% of consumer budgets in Italy, noticeably higher than any other nation surveyed. In contrast, recreation and educational services recorded the lowest allocations across the board, ranging from a mere 1.98% in Spain to a modest peak of 4.35% in Turkey."
+  },
+  {
+    "id": "T1_038",
+    "taskType": "Task 1",
+    "questionType": "Process Diagram",
+    "topicId": "task1-roche-06-water-cycle",
+    "sourceType": "Sách IELTS Writing Masterclass 8.5 (Marc Roche)",
+    "sourceDetail": "Masterclass 8.5 - Chapter 7, p. 101-103",
+    "yearDate": "2020",
+    "title": "Process: The Global Water Cycle and Groundwater Saltwater Intrusion",
+    "promptText": "The diagram illustrates the natural water cycle and the movement of water between the oceans, atmosphere, and land. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    "difficulty": "Nâng cao (Band 7.5+)",
+    "status": "Active",
+    "imageUrl": "/charts/task1/task1_roche-06-water-cycle.png",
+    "chartData": {
+      "chartType": "image",
+      "title": "Process: The Global Water Cycle and Groundwater Saltwater Intrusion",
+      "imageUrl": "/charts/task1/task1_roche-06-water-cycle.png",
+      "keyNotes": [
+        "Bốc hơi & Ngưng tụ trên khí quyển: Nhiệt lượng mặt trời làm bốc hơi nước biển (chiếm khoảng 80% hơi ẩm); hơi nước bay lên cao gặp lạnh ngưng tụ thành các đám mây.",
+        "Giáng thủy & Thấm lọc mặt đất: Mây tích tụ ngưng tụ tạo mưa và tuyết (precipitation) rơi xuống ao hồ hoặc thấm vào đất (absorption).",
+        "Dòng chảy mặt & Xâm nhập mặn ngầm: Nước ngầm chảy tràn bề mặt (surface runoff) hồi quy về biển; song song đó nước mặn đại dương thấm ngược vào các tầng ngậm nước ngọt (saltwater intrusion)."
+      ]
+    },
+    "outlineHints": "Overview: Khái quát vòng tuần hoàn nước tự nhiên vận hành liên tục dưới tác động nhiệt của mặt trời, gồm 3 pha chính: bốc hơi ngưng tụ, giáng thủy tạo mưa tuyết, và hồi quy nguồn nước cùng hiện tượng xâm nhập mặn ven bờ. Thân bài 1: Pha khí quyển: Bốc hơi từ đại dương (80%), bốc hơi nước bề mặt, bốc lên cao ngưng tụ thành mây và ngưng tụ đến giới hạn tạo mưa/tuyết. Thân bài 2: Pha mặt đất và lòng đất: Nước rơi xuống hồ, thấm vào đất, chảy tràn mặt đất ra biển, và nước mặn thẩm thấu vào các túi nước ngọt ngầm.",
+    "modelEssay": "The diagram illustrates the sequential stages of the hydrological cycle, detailing the movement of water from oceanic reservoirs into the atmosphere, onto the terrestrial landscape, and back through surface and subterranean channels.\n\nOverall, the water cycle is a continuous cyclical mechanism driven by solar radiation, encompassing three primary phases: evaporation, precipitation, and terrestrial percolation returning to the sea, alongside subterranean saltwater intrusion.\n\nIn the initial phase, thermal energy from the sun heats surface waters, causing massive evaporation. Approximately 80% of all atmospheric moisture originates directly from oceans. As warm water vapor ascends into higher altitudes, it cools and condenses to formulate cloud systems. Once moisture accumulation reaches saturation, clouds discharge precipitation in the form of rainfall and snowfall.\n\nSubsequently, precipitation reaches the Earth's surface, filling freshwater bodies or permeating into porous soil layers. While a significant portion flows unimpeded back to the ocean via surface runoff, subterranean groundwater percolates downwards toward impervious bedrock. Concurrently, seawater seeps inland through porous coastal strata, resulting in saltwater intrusion into coastal freshwater aquifers."
+  },
+  {
+    "id": "T1_039",
+    "taskType": "Task 1",
+    "questionType": "Maps",
+    "topicId": "task1-roche-07-island-tourism",
+    "sourceType": "Sách IELTS Writing Masterclass 8.5 (Marc Roche)",
+    "sourceDetail": "Masterclass 8.5 - Chapter 8, p. 111-114",
+    "yearDate": "2020",
+    "title": "Maps: Development and Transformation of an Island for Tourism",
+    "promptText": "The two maps illustrate the changes which have taken place on a small island, before and after it was developed for tourism. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    "difficulty": "Nâng cao (Band 7.5+)",
+    "status": "Active",
+    "imageUrl": "/charts/task1/task1_roche-07-island-tourism.png",
+    "chartData": {
+      "chartType": "image",
+      "title": "Maps: Development and Transformation of an Island for Tourism",
+      "imageUrl": "/charts/task1/task1_roche-07-island-tourism.png",
+      "keyNotes": [
+        "Chuyển đổi từ đảo hoang thành khu nghỉ dưỡng: Đảo hoang sơ trước đây hoàn toàn không có công trình xây dựng, sau quy hoạch đã biến thành khu du lịch tiện nghi đầy đủ.",
+        "Hệ thống bungalow lưu trú: Xây mới 15 căn nhà tròn (6 căn phía Tây, 9 căn ở trung tâm) kết nối bởi đường dạo bộ (footpaths) bao quanh quầy lễ tân và nhà hàng.",
+        "Hạ tầng cầu tàu & khu giải trí: Bờ biển phía Nam xây dựng bến tàu (pier) nối đường xe cơ giới tới lễ tân; bãi biển phía Tây mở khu bơi lội an toàn ngoài khơi; cây cối tự nhiên vẫn được bảo tồn."
+      ]
+    },
+    "outlineHints": "Overview: Nêu 2 thay đổi chính: Đảo hoang sơ được hiện đại hóa toàn diện với hệ thống lưu trú, ăn uống và cầu cảng du lịch; trong khi các yếu tố thiên nhiên như thảm thực vật cây cối được giữ nguyên vẹn. Thân bài 1: Miêu tả tình trạng ban đầu (chỉ có bãi cát phía tây và các lùm cây rải rác) và cụm lưu trú mới (15 nhà gỗ tròn ở phía tây và trung tâm nối bằng lối đi bộ, tòa lễ tân và nhà hàng). Thân bài 2: Miêu tả hạ tầng giao thông và dịch vụ bãi biển: Cầu cảng (pier) phía nam nối đường chính vào trung tâm, khu bơi lội quy hoạch an toàn ngoài khơi bãi biển tây.",
+    "modelEssay": "The two maps illustrate the transformation of a small uninhabited island before and after being redeveloped to support commercial tourism infrastructure.\n\nOverall, the island has been substantially modernized with the addition of comprehensive visitor accommodation and leisure amenities, while natural landscape elements, such as scattered palm trees, have been largely preserved.\n\nPrior to development, the island was entirely devoid of human structures, featuring solely sandy beaches along its western rim and sparse clusters of trees across its terrain. Following redevelopment, tourist accommodation was established through the construction of fifteen circular huts, with six located in the western quarter and nine situated around the central core. These residential quarters are interconnected via an organized network of pedestrian footpaths connecting to a central reception desk and a dining restaurant.\n\nTransportation and recreational access were also systematically enhanced. A vehicular road now links the reception building to a newly constructed marine pier along the southern coastline, facilitating boat transfers. Furthermore, a designated offshore swimming area was created off the western shore, while the natural flora was retained without extensive deforestation."
+  },
+  {
+    "id": "T2_106",
+    "taskType": "Task 2",
+    "questionType": "Discuss Both Views",
+    "topicId": "t2-media-violence-censorship",
+    "sourceType": "Sách IELTS Writing Masterclass 8.5 (Marc Roche)",
+    "sourceDetail": "Masterclass 8.5 - Chapter 10, p. 127-129",
+    "yearDate": "2020",
+    "title": "Media Ethics: Violent Content in Television & Video Games - Censorship vs Freedom",
+    "promptText": "Many programs on television and computer games include violent scenes, especially action and horror movies. Some believe they should not be allowed, while others disagree. Discuss both sides and give your opinion.",
+    "difficulty": "Nâng cao (Band 8.5 Masterclass)",
+    "status": "Active",
+    "outlineHints": "Introduction: Dẫn dắt mức độ phổ biến của cảnh bạo lực trong phim ảnh và game; nêu 2 quan điểm và khẳng định lập trường ủng hộ siết chặt kiểm duyệt và độ tuổi. Body 1: Tác hại của bạo lực truyền thông: Nghiên cứu cho thấy người xem thường xuyên bị lo âu về an toàn cá nhân dẫn đến phản ứng hung hăng với người lạ; trẻ em bắt chước hành vi hung bạo. Body 2: Luận điểm phản biện của phía ủng hộ tự do: Bạo lực là bản tính con người xuất hiện từ trước thời kỳ tivi/game; hệ thống phân loại độ tuổi hiện nay đã đủ và phụ huynh phải có trách nhiệm. Conclusion: Khẳng định rằng cơ chế kiểm soát hiện tại còn lỏng lẻo; tác hại bắt chước ở trẻ em lấn át hoàn toàn lợi ích tự do tiếp cận; cần áp dụng chế tài kỹ thuật số nghiêm ngặt hơn.",
+    "modelEssay": "Nobody would dispute the fact that many programs on television and computer games include violent scenes, especially action and horror movies. I hold the view that they should not be allowed, however many people disagree with this opinion. In this essay, I will discuss both sides and give reasons for my opinion.\n\nFirstly, research suggests that people who watch violent programs and play violent computer games may worry more about their own safety, which can lead to problems in society. For instance, when people are worried about their safety, they are more likely to react aggressively towards strangers. Secondly, few people would contest that some children copy what they see on television and in computer games. Hence, if they are watching and interacting with violence on a daily basis it is likely that they may become desensitized to violent acts or even copy them at school or in the streets.\n\nHowever, there are those who argue that violence is not something we learn from television and computer games. For example, nobody would contest the fact that there were murders before television and videogames were invented. In addition, it is often claimed that children cannot watch violent programs and play inappropriate videogames easily. For instance, there are restrictions for some programs and games, and many parents do not allow their children to watch television after a certain time.\n\nTo conclude, although there are some reasonable arguments against higher restrictions on violent videogames and programs for children, there can be no doubt that the potential disadvantages of children copying what they see and hear in these programs and games far outweigh the advantages of having free access to them. Furthermore, current restrictions are ineffective and need to be tightened."
+  },
+  {
+    "id": "T2_107",
+    "taskType": "Task 2",
+    "questionType": "Discuss Both Views",
+    "topicId": "t2-space-exploration-funding",
+    "sourceType": "Sách IELTS Writing Masterclass 8.5 (Marc Roche)",
+    "sourceDetail": "Masterclass 8.5 - Chapter 9, p. 116-119",
+    "yearDate": "2020",
+    "title": "Public Spending: Astronomical Space Exploration Budgets vs Urgent Terrestrial Needs",
+    "promptText": "Some people think that more money should be invested into space exploration as it is a vital form of investigation for the future of humanity, while others believe it is a waste of vital funding which could otherwise be used towards more important projects here on earth. Discuss both views and give your opinion.",
+    "difficulty": "Nâng cao (Band 8.5 Masterclass)",
+    "status": "Active",
+    "outlineHints": "Introduction: Giới thiệu cuộc tranh luận về tính chính đáng của các dự án vũ trụ tỷ đô đối chiếu với nghèo đói và y tế Trái Đất; nêu lập trường cân bằng ngân sách. Body 1: Phê phán chi tiêu vũ trụ: Hàng trăm tỷ đô la bị tiêu tốn trong khi hàng triệu người thiếu nước sạch, nạn đói lan rộng và biến đổi khí hậu đe dọa sinh tồn trước mắt. Body 2: Ủng hộ nghiên cứu vũ trụ: Tạo ra đột phá công nghệ vệ tinh, quan sát khí hậu, vật liệu mới y tế, và phòng ngừa nguy cơ tuyệt chủng lâu dài của nhân loại. Conclusion: Khẳng định sự cần thiết của việc chia sẻ chi phí thông qua liên doanh công-tư (commercial spaceflight), để ngân sách thuế nhà nước ưu tiên cho an sinh Trái Đất.",
+    "modelEssay": "The allocation of colossal national budgets toward space exploration remains one of the most contentious geopolitical debates. While detractors argue that financing interstellar missions is an unconscionable luxury when acute crises persist on Earth, proponents contend that astronomical research is indispensable for our species' long-term preservation. In my opinion, while humanitarian needs must remain paramount, prudent investment in space science yields technological spin-offs that actively benefit terrestrial civilization.\n\nOn the one hand, critics of space exploration articulate a compelling moral case centered on immediate planetary crises. Millions of people across underdeveloped regions endure severe food deprivation, precarious healthcare systems, and degraded infrastructure. Funneling hundreds of billions of dollars into Martian orbiters and lunar probes appears inexcusably wasteful when such capital could eradicate preventable diseases or accelerate the global transition to renewable energy. From this perspective, governments have a fundamental duty to resolve terrestrial emergencies before pursuing cosmic ambitions that offer no immediate return to vulnerable populations.\n\nOn the other hand, defenders of cosmic research argue that space investigation is the supreme catalyst for human scientific advancement. Crucial innovations that modern society takes for granted—such as satellite telecommunications, global meteorological tracking, water purification technologies, and lightweight solar cells—were originally conceived as solutions for aerospace challenges. Furthermore, Earth possesses finite mineral resources and remains vulnerable to catastrophic asteroid impacts or environmental collapse. Pioneering extraterrestrial habitats and asteroid mining provides a vital survival buffer against existential risks that could otherwise extinguish human civilization.\n\nIn conclusion, rather than viewing space research and terrestrial welfare as mutually exclusive endeavors, governments should adopt a hybrid model. Public funding should primarily focus on resolving immediate socio-economic inequalities, while space initiatives should be co-financed through private-public partnerships to maximize innovation without straining public coffers."
+  },
+  {
+    "id": "T2_108",
+    "taskType": "Task 2",
+    "questionType": "Problems and Solutions",
+    "topicId": "t2-sedentary-lifestyle-health",
+    "sourceType": "Sách IELTS Writing Masterclass 8.5 (Marc Roche)",
+    "sourceDetail": "Masterclass 8.5 - Chapter 9, p. 117-118",
+    "yearDate": "2020",
+    "title": "Public Health: The Paradox of Proliferating Gyms and Widespread Sedentary Lifestyles",
+    "promptText": "Despite a large number of gyms and fitness centers, a sedentary lifestyle is gaining popularity in the contemporary world. What problems are associated with this? What solutions can you suggest?",
+    "difficulty": "Nâng cao (Band 8.5 Masterclass)",
+    "status": "Active",
+    "outlineHints": "Introduction: Dẫn dắt nghịch lý hiện đại: cơ sở tập gym mọc lên khắp nơi nhưng tỷ lệ lười vận động thể chất vẫn tăng cao; tóm tắt các hệ lụy và biện pháp. Body 1: Các vấn đề sức khỏe và xã hội: Bệnh mãn tính không lây (tiểu đường, tim mạch, béo phì), suy giảm sức khỏe tâm thần, và gánh nặng viện phí khổng lồ cho hệ thống an sinh y tế. Body 2: Các giải pháp toàn diện: Văn hóa doanh nghiệp linh hoạt (bàn đứng, giải lao vận động bắt buộc) và quy hoạch đô thị ưu tiên làn xe đạp, công viên công cộng miễn phí. Conclusion: Khẳng định việc khắc phục lối sống thụ động đòi hỏi tích hợp vận động vào thói quen thường nhật thay vì chỉ trông cậy vào việc đến phòng gym.",
+    "modelEssay": "In recent decades, urban centers have witnessed an unprecedented boom in fitness clubs and commercial wellness centers. Paradoxically, public health data indicates that hypokinetic and sedentary lifestyles are more entrenched than ever. This disconnect fosters grave physiological vulnerabilities and calls for comprehensive systemic interventions rather than superficial consumer remedies.\n\nThe repercussions of widespread physical inactivity are profound and multifaceted. At an individual physiological level, protracted sitting is inextricably linked to non-communicable illnesses, including cardiovascular diseases, type 2 diabetes, postural deformities, and morbid obesity. In addition to physical deterioration, prolonged inactivity exacerbates chronic mental health conditions such as workplace anxiety and depressive disorders, as human neurobiology relies heavily on regular exertion to regulate endorphins and cortisol. At a macro-economic level, this physical malaise places an unsustainable strain on state medical budgets and undermines workplace productivity through escalating sick leave and chronic fatigue.\n\nTo dismantle this sedentary trend, a multifaceted strategy is imperative. Firstly, corporate employers must radically reconfigure modern office environments. Because long desk hours are the primary driver of physical inertia, businesses should introduce ergonomic standing desks, mandate structured movement breaks, and sponsor active commuting programs. Secondly, municipal authorities must invest aggressively in active urban architecture. While commercial gyms charge prohibitive membership subscriptions that exclude lower-income demographics, cities should build accessible pedestrian promenades, segregated cycling networks, and open-air public workout parks. Transforming everyday movement into an effortless, cost-free default option eliminates the behavioral barriers associated with private gym attendance.\n\nIn conclusion, the proliferation of private fitness facilities cannot mask the urgent public health crisis posed by sedentary habits. Only by integrating active movement into corporate structures and urban planning can societies reverse physical stagnation and foster lasting public vitality."
+  },
+  {
+    "id": "T2_109",
+    "taskType": "Task 2",
+    "questionType": "Problems and Solutions",
+    "topicId": "t2-corruption-capital-flight",
+    "sourceType": "Sách IELTS Writing Masterclass 8.5 (Marc Roche)",
+    "sourceDetail": "Masterclass 8.5 - Chapter 10, p. 131-133",
+    "yearDate": "2020",
+    "title": "Governance & Economics: Institutional Corruption and Capital Flight in Developing Nations",
+    "promptText": "In many developing nations, institutional corruption and the rapid outflow of private investments represent the greatest impediments to economic prosperity. What are the consequences of these issues, and how can governments effectively mitigate them?",
+    "difficulty": "Nâng cao (Band 8.5 Masterclass)",
+    "status": "Active",
+    "outlineHints": "Introduction: Khẳng định tham nhũng trong bộ máy công quyền và tình trạng thất thoát vốn đầu tư là hai khối u kìm hãm sự trỗi dậy của các nền kinh tế đang phát triển. Body 1: Các hậu quả tai hại: Lãng phí công quỹ, suy giảm niềm tin vào thể chế pháp luật, làm các nhà đầu tư nước ngoài tháo chạy vì sợ rủi ro pháp lý, đào sâu nghèo đói. Body 2: Các giải pháp khắc phục: Số hóa dịch vụ công và minh bạch đấu thầu để triệt tiêu hối lộ, củng cố tính độc lập của tòa án, và ban hành chính sách ưu đãi giữ chân dòng vốn đầu tư trong nước. Conclusion: Tái khẳng định minh bạch thể chế và thượng tôn pháp luật là điều kiện tiên quyết để giữ chân tư bản và thúc đẩy thịnh vượng bền vững.",
+    "modelEssay": "For emerging economies striving for sustainable modern development, structural integrity and financial stability are fundamental prerequisites. However, systemic corruption within positions of power, coupled with the rapid flight of private capital, continues to cripple economic growth across developing nations. Addressing these formidable barriers requires vigorous institutional reforms and transparent fiscal management.\n\nThe ramifications of unchecked institutional graft and investment flight are devastating for national progress. Firstly, political and bureaucratic corruption misallocates vital public funds away from schools, hospitals, and critical transport networks into the private pockets of corrupt officials. This systemic malfeasance distorts market competition and erodes the rule of law. Consequently, international corporations and domestic entrepreneurs lose confidence in the regulatory landscape; fearing extortion and arbitrary confiscation, they withdraw liquid assets, precipitating rapid capital flight. As foreign and domestic capital flees overseas, currency reserves depreciate, unemployment accelerates, and vulnerable populations are pushed deeper into generational poverty.\n\nTo effectively neutralize these crises, governments must implement uncompromising administrative overhauls. The primary measure is the total digitization of public procurement, tax collection, and commercial licensing. By deploying transparent electronic portals and automated audit algorithms, administrations can eliminate human discretion—the primary breeding ground for illicit bribery. Furthermore, states must guarantee genuine judicial independence and establish autonomous anti-corruption commissions empowered to prosecute high-ranking offenders without political interference. In tandem with strict enforcement, governments should establish stable macroeconomic policies, including robust property rights and tax incentives for domestic reinvestment, thereby reassuring investors that their capital remains secure within national borders.\n\nIn conclusion, corruption in official corridors and the ensuing loss of investment represent existential threats to developing economies. Through aggressive digital transparency, uncompromising legal enforcement, and investor protection, nations can restore institutional credibility and establish a resilient foundation for long-term prosperity."
+  },
+  {
+    "id": "T2_110",
+    "taskType": "Task 2",
+    "questionType": "Opinion / Discussion",
+    "topicId": "t2-journalism-ethics-distortion",
+    "sourceType": "Sách IELTS Writing Masterclass 8.5 (Marc Roche)",
+    "sourceDetail": "Masterclass 8.5 - Chapter 10, p. 124-126",
+    "yearDate": "2020",
+    "title": "Media Literacy: Distortion of Truth in Commercial Journalism vs Public Accountability",
+    "promptText": "It is often argued that newspapers and modern digital media channels frequently distort the truth to pursue commercial profit, thereby misleading the general public. To what extent do you agree or disagree with this view?",
+    "difficulty": "Nâng cao (Band 8.5 Masterclass)",
+    "status": "Active",
+    "outlineHints": "Introduction: Dẫn dắt vấn đề truyền thông bóp méo thông tin nhằm câu view kiếm tiền quảng cáo; khẳng định đồng tình phần lớn nhưng nhấn mạnh vẫn tồn tại nền báo chí điều tra có đạo đức. Body 1: Nguyên nhân truyền thông bóp méo sự thật: Áp lực doanh thu số, cạnh tranh giật gân (sensationalism), thuật toán mạng xã hội ưu tiên cảm xúc tiêu cực, và việc cắt tỉa ngữ cảnh để dắt mũi dư luận. Body 2: Mặt đối lập và vai trò của báo chí chân chính: Các tổ chức báo chí độc lập tôn trọng sự thật, thực hiện vai trò cơ quan quyền lực thứ tư kiểm tra quyền lực và phanh phui gian dối. Conclusion: Khẳng định giải pháp không phải là bài xích báo chí mà là nâng cao năng lực thẩm định thông tin (media literacy) của độc giả và xử phạt nghiêm minh tin giả cố ý.",
+    "modelEssay": "It is probably true to say that newspapers, digital publishers, and social media newsfeeds frequently distort the truth in contemporary society. In an era dominated by instantaneous digital circulation and commercial advertising metrics, the temptation to sensationalize reporting has compromised journalistic integrity. While I agree that profit incentives routinely skew media narratives, it is important to recognize that responsible, truth-seeking journalism still plays a vital democratic role.\n\nThe commercial model of 21st-century media undeniably incentivizes the manipulation of facts. Traditional print publications once depended on loyal subscriptions, but contemporary digital platforms survive purely on algorithmic engagement, user clicks, and viral sharing. Because shocking headlines and partisan controversies trigger far greater emotional reactions than nuanced analysis, media corporations frequently employ hyperbolic phrasing, quote out of context, and omit countervailing evidence. Furthermore, media consolidation has placed influential broadcasting networks into the hands of corporate conglomerates and political oligarchs who deliberately manufacture public consent to protect their vested financial interests.\n\nNevertheless, dismissing all journalistic output as dishonest fabrications would be an unwarranted oversimplification. Reputable news organizations and independent investigative journalists continue to adhere to strict ethical codes, rigorous fact-checking, and cross-verification before publishing sensitive stories. Across history and within modern societies, intrepid reporters have risked personal safety to expose governmental corruption, environmental crimes, and corporate malpractice. Without dedicated investigative journalists holding powerful entities accountable, democratic oversight would collapse entirely.\n\nIn conclusion, while commercial pressures and engagement algorithms undoubtedly induce many news outlets to distort reality for financial gain, legitimate investigative journalism remains a foundational bulwark of a free society. Rather than succumbing to cynical mistrust, citizens must cultivate sharp media literacy skills to distinguish between sensationalist manipulation and rigorous, evidence-based reporting."
+  },
+  {
+    "id": "T2_111",
+    "taskType": "Task 2",
+    "questionType": "Discuss Both Views",
+    "topicId": "t2-university-vs-gap-year",
+    "sourceType": "Sách IELTS Writing Masterclass 8.5 (Marc Roche)",
+    "sourceDetail": "Masterclass 8.5 - Chapter 9, p. 116",
+    "yearDate": "2020",
+    "title": "Higher Education: Direct University Matriculation vs The Merits of an Experiential Gap Year",
+    "promptText": "Some people believe that it is better to take a gap year before going to university, while others think that this can be a waste of time and that going straight into higher education is the best option. Discuss both views and give your opinion.",
+    "difficulty": "Nâng cao (Band 8.5 Masterclass)",
+    "status": "Active",
+    "outlineHints": "Introduction: Giới thiệu cuộc tranh luận giữa việc học thẳng lên đại học và dành một năm gap year trải nghiệm; nêu rõ luận điểm ủng hộ gap year có kế hoạch mục tiêu. Body 1: Lập luận ủng hộ học thẳng đại học: Giữ vững quán tính học tập (scholastic momentum), tốt nghiệp sớm để gia nhập lực lượng lao động, tránh nguy cơ xao nhãng và lãng phí thời gian. Body 2: Lợi ích vượt trội của một kỳ gap year có cấu trúc: Tích lũy kỹ năng thực tế, làm quen môi trường làm việc, định vị lại sở thích và mục tiêu giúp chọn đúng ngành nghề, tránh bỏ học giữa chừng. Conclusion: Khẳng định gap year là bệ phóng vô giá nếu được lên kế hoạch chu đáo, vượt trội hơn việc bước vào giảng đường khi chưa sẵn sàng định hướng cuộc đời.",
+    "modelEssay": "The transition between secondary education and tertiary academia is a defining crossroad in a student's life. While traditionalists argue that matriculating directly into higher education maintains academic discipline and accelerates career entry, an increasing body of opinion favors taking a structured gap year. In my view, provided it is approached with deliberate purpose, an experiential gap year enriches personal maturity and yields significantly more focused undergraduates.\n\nOn the one hand, proponents of continuous education emphasize scholastic momentum and economic efficiency. Students transitioning directly from high school retain active study habits, examination techniques, and intellectual discipline, allowing them to adapt quickly to university-level academic rigor. In contrast, those who take a twelve-month sabbatical frequently suffer cognitive rustiness and struggle to re-establish rigorous study routines. Furthermore, immediate enrollment ensures that students graduate at a younger age, allowing them to enter the competitive labor market earlier, accumulate professional seniority, and begin building long-term financial stability without incurring gap-year living expenses.\n\nOn the other hand, the benefits of a productive hiatus are profound. High school graduates who enter tertiary institutions immediately often do so out of unexamined social expectation, possessing minimal worldly experience or vocational self-awareness. Consequently, vast numbers of undergraduates experience burnout, change majors mid-way through their degree, or drop out after squandering substantial tuition fees. By contrast, young adults who spend a gap year working entry-level jobs, volunteering abroad, or mastering practical languages gain emotional resilience, financial literacy, and cultural adaptability. These transformative experiences clarify their professional passions, enabling them to select their degree specialization with genuine conviction.\n\nIn conclusion, although an unstructured gap year risks breeding complacency and academic detachment, a purposeful twelve-month period of work or exploration offers immense developmental dividends. Direct university enrollment guarantees efficiency, but an intentional gap year produces mature, resilient students equipped to maximize their university education."
   }
 ]

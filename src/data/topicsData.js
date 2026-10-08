@@ -3432,8 +3432,434 @@ const RAW_IELTS_TOPICS = [
       }
     ]
   }
+,
+  {
+    id: "t2-media-violence-censorship",
+    name: "Media Ethics: Violent Content in Television & Video Games - Censorship vs Freedom",
+    vietnameseName: "Đạo đức truyền thông: Cảnh bạo lực trên Tivi & Trò chơi điện tử - Kiểm duyệt vs Tự do",
+    tag: "Truyền thông & Đạo đức xã hội",
+    icon: "ShieldAlert",
+    ieltsPrompt: "Many programs on television and computer games include violent scenes, especially action and horror movies. Some believe they should not be allowed, while others disagree. Discuss both sides and give your opinion.",
+    modelEssay: "Nobody would dispute the fact that many programs on television and computer games include violent scenes, especially action and horror movies. I hold the view that they should not be allowed, however many people disagree with this opinion. In this essay, I will discuss both sides and give reasons for my opinion.\n\nFirstly, research suggests that people who watch violent programs and play violent computer games may worry more about their own safety, which can lead to problems in society. For instance, when people are worried about their safety, they are more likely to react aggressively towards strangers. Secondly, few people would contest that some children copy what they see on television and in computer games. Hence, if they are watching and interacting with violence on a daily basis it is likely that they may become desensitized to violent acts or even copy them at school or in the streets.\n\nHowever, there are those who argue that violence is not something we learn from television and computer games. For example, nobody would contest the fact that there were murders before television and videogames were invented. In addition, it is often claimed that children cannot watch violent programs and play inappropriate videogames easily. For instance, there are restrictions for some programs and games, and many parents do not allow their children to watch television after a certain time.\n\nTo conclude, although there are some reasonable arguments against higher restrictions on violent videogames and programs for children, there can be no doubt that the potential disadvantages of children copying what they see and hear in these programs and games far outweigh the advantages of having free access to them. Furthermore, current restrictions are ineffective and need to be tightened.",
+    vocabularies: [
+      {
+        id: "t2-mv-1",
+        word: "desensitization to violence",
+        ipa: "/diːˌsensətaɪˈzeɪʃn tuː ˈvaɪələns/",
+        partOfSpeech: "noun",
+        meaning: "Hiện tượng chai sạn cảm xúc trước các hành vi bạo lực",
+        basicEquivalent: "getting used to violence (Band 5)",
+        synonyms: ["emotional numbing", "callousness toward brutality"],
+        collocations: ["lead to desensitization to violence", "exhibit desensitization"],
+        modelSentence: "Chronic exposure to graphic horror movies leads to gradual desensitization to real-world violence among adolescents.",
+        vietnameseSentence: "Việc tiếp xúc triền miên với phim kinh dị rùng rợn dẫn tới sự chai sạn cảm xúc dần dần trước bạo lực đời thực ở thanh thiếu niên."
+      },
+      {
+        id: "t2-mv-2",
+        word: "imitative behavior",
+        ipa: "/ˈɪmɪtətɪv bɪˈheɪvjə/",
+        partOfSpeech: "noun",
+        meaning: "Hành vi sao chép, bắt chước theo khuôn mẫu quan sát được",
+        basicEquivalent: "copying what you see (Band 5)",
+        synonyms: ["emulative actions", "mimetic conduct"],
+        collocations: ["trigger imitative behavior", "copycat violence"],
+        modelSentence: "Psychologists caution that graphic fight simulations frequently trigger dangerous imitative behavior on school playgrounds.",
+        vietnameseSentence: "Các nhà tâm lý học cảnh báo rằng mô phỏng đấm đá bạo lực thường kích hoạt hành vi bắt chước nguy hiểm trên sân trường."
+      },
+      {
+        id: "t2-mv-3",
+        word: "age-gate verification",
+        ipa: "/ˈeɪdʒ ɡeɪt ˌverɪfɪˈkeɪʃn/",
+        partOfSpeech: "noun",
+        meaning: "Cơ chế xác thực độ tuổi nghiêm ngặt trên nền tảng kỹ thuật số",
+        basicEquivalent: "checking age before playing (Band 5)",
+        synonyms: ["age-verification hurdle", "digital identity check"],
+        collocations: ["enforce age-gate verification", "robust age-gate verification"],
+        modelSentence: "Online video platforms should enforce stringent biometric age-gate verification to shield minors from explicit media.",
+        vietnameseSentence: "Các nền tảng video trực tuyến nên thực thi cơ chế xác thực độ tuổi sinh trắc học nghiêm ngặt để bảo vệ trẻ vị thành niên khỏi nội dung nhạy cảm."
+      },
+      {
+        id: "t2-mv-4",
+        word: "amplify public anxiety",
+        ipa: "/ˈæmplɪfaɪ ˈpʌblɪk æŋˈzaɪəti/",
+        partOfSpeech: "phrase",
+        meaning: "Khuếch đại nỗi hoang mang lo âu của công chúng",
+        basicEquivalent: "make people more scared (Band 5)",
+        synonyms: ["heighten collective fear", "fuel social paranoia"],
+        collocations: ["tend to amplify public anxiety", "media amplify public anxiety"],
+        modelSentence: "Sensationalist media crime broadcasts amplify public anxiety regarding everyday personal safety.",
+        vietnameseSentence: "Các chương trình tội phạm giật gân khuếch đại nỗi lo âu của công chúng về an toàn thường nhật."
+      },
+      {
+        id: "t2-mv-5",
+        word: "unfounded assertion",
+        ipa: "/ʌnˈfaʊndɪd əˈsɜːʃn/",
+        partOfSpeech: "noun",
+        meaning: "Lời khẳng định vô căn cứ thiếu dữ liệu thực nghiệm",
+        basicEquivalent: "saying things without proof (Band 5)",
+        synonyms: ["baseless claim", "unsubstantiated allegation"],
+        collocations: ["dismiss as an unfounded assertion", "make unfounded assertions"],
+        modelSentence: "Claiming that video games are the sole cause of youth delinquency is an unfounded assertion.",
+        vietnameseSentence: "Khẳng định rằng trò chơi điện tử là nguyên nhân duy nhất dẫn đến phạm pháp vị thành niên là một lời khẳng định vô căn cứ."
+      }
+    ]
+  },
+  {
+    id: "t2-space-exploration-funding",
+    name: "Public Spending: Astronomical Space Exploration Budgets vs Urgent Terrestrial Needs",
+    vietnameseName: "Chi tiêu công: Ngân sách thám hiểm không gian vũ trụ vs Nhu cầu cấp bách trên Trái Đất",
+    tag: "Chính phủ & Khoa học vũ trụ",
+    icon: "Rocket",
+    ieltsPrompt: "Some people think that more money should be invested into space exploration as it is a vital form of investigation for the future of humanity, while others believe it is a waste of vital funding which could otherwise be used towards more important projects here on earth. Discuss both views and give your opinion.",
+    modelEssay: "The allocation of colossal national budgets toward space exploration remains one of the most contentious geopolitical debates. While detractors argue that financing interstellar missions is an unconscionable luxury when acute crises persist on Earth, proponents contend that astronomical research is indispensable for our species' long-term preservation. In my opinion, while humanitarian needs must remain paramount, prudent investment in space science yields technological spin-offs that actively benefit terrestrial civilization.\n\nOn the one hand, critics of space exploration articulate a compelling moral case centered on immediate planetary crises. Millions of people across underdeveloped regions endure severe food deprivation, precarious healthcare systems, and degraded infrastructure. Funneling hundreds of billions of dollars into Martian orbiters and lunar probes appears inexcusably wasteful when such capital could eradicate preventable diseases or accelerate the global transition to renewable energy. From this perspective, governments have a fundamental duty to resolve terrestrial emergencies before pursuing cosmic ambitions that offer no immediate return to vulnerable populations.\n\nOn the other hand, defenders of cosmic research argue that space investigation is the supreme catalyst for human scientific advancement. Crucial innovations that modern society takes for granted—such as satellite telecommunications, global meteorological tracking, water purification technologies, and lightweight solar cells—were originally conceived as solutions for aerospace challenges. Furthermore, Earth possesses finite mineral resources and remains vulnerable to catastrophic asteroid impacts or environmental collapse. Pioneering extraterrestrial habitats and asteroid mining provides a vital survival buffer against existential risks that could otherwise extinguish human civilization.\n\nIn conclusion, rather than viewing space research and terrestrial welfare as mutually exclusive endeavors, governments should adopt a hybrid model. Public funding should primarily focus on resolving immediate socio-economic inequalities, while space initiatives should be co-financed through private-public partnerships to maximize innovation without straining public coffers.",
+    vocabularies: [
+      {
+        id: "t2-space-1",
+        word: "terrestrial priorities",
+        ipa: "/təˈrestriəl praɪˈɒrətiz/",
+        partOfSpeech: "noun",
+        meaning: "Các mục tiêu cấp bách cần ưu tiên giải quyết trên Trái Đất",
+        basicEquivalent: "earth problems (Band 5)",
+        synonyms: ["planetary emergencies", "domestic welfare needs"],
+        collocations: ["address terrestrial priorities", "focus on terrestrial priorities"],
+        modelSentence: "Opponents of Mars expeditions argue that taxpayer billions should directly target urgent terrestrial priorities like famine.",
+        vietnameseSentence: "Những người phản đối thám hiểm sao Hỏa cho rằng tiền thuế hàng tỷ đô nên nhắm thẳng vào các mục tiêu ưu tiên trên Trái Đất như nạn đói."
+      },
+      {
+        id: "t2-space-2",
+        word: "astronomical fiscal burden",
+        ipa: "/ˌæstrəˈnɒmɪkl ˈfɪskl ˈbɜːdn/",
+        partOfSpeech: "noun",
+        meaning: "Gánh nặng tài khóa khổng lồ đè nặng lên ngân sách nhà nước",
+        basicEquivalent: "huge cost for country (Band 5)",
+        synonyms: ["colossal budgetary drain", "monumental public expenditure"],
+        collocations: ["impose an astronomical fiscal burden", "alleviate astronomical burdens"],
+        modelSentence: "Financing deep-space colonization missions imposes an astronomical fiscal burden on heavily indebted public treasuries.",
+        vietnameseSentence: "Tài trợ cho các sứ mệnh định cư ngoài vũ trụ sâu đè nặng một gánh nặng tài khóa khổng lồ lên ngân khố quốc gia đang nợ nần."
+      },
+      {
+        id: "t2-space-3",
+        word: "technological spin-off",
+        ipa: "/ˌteknəˈlɒdʒɪkl ˈspɪn ɒf/",
+        partOfSpeech: "noun",
+        meaning: "Sản phẩm công nghệ phụ phát sinh hữu ích cho đời sống",
+        basicEquivalent: "useful byproduct invention (Band 5)",
+        synonyms: ["ancillary breakthrough", "derivative innovation"],
+        collocations: ["produce valuable technological spin-offs", "civilian spin-offs"],
+        modelSentence: "Aerospace research produced myriad technological spin-offs, including memory foam and advanced water purification filtration.",
+        vietnameseSentence: "Nghiên cứu hàng không vũ trụ đã tạo ra vô số phát minh phụ hữu ích, bao gồm bọt đệm hoạt tính và lọc nước tinh khiết tân tiến."
+      },
+      {
+        id: "t2-space-4",
+        word: "public-private consortium",
+        ipa: "/ˈpʌblɪk ˈpraɪvət kənˈsɔːtiəm/",
+        partOfSpeech: "noun",
+        meaning: "Liên danh hợp tác giữa chính phủ và khối doanh nghiệp tư",
+        basicEquivalent: "government and company team (Band 5)",
+        synonyms: ["joint public-private syndicate", "collaborative venture"],
+        collocations: ["form a public-private consortium", "financed by a consortium"],
+        modelSentence: "Commercial space exploration is increasingly financed through a public-private consortium rather than solely by state coffers.",
+        vietnameseSentence: "Thám hiểm không gian thương mại đang ngày càng được tài trợ qua liên danh công-tư thay vì chỉ dựa vào ngân sách nhà nước."
+      },
+      {
+        id: "t2-space-5",
+        word: "existential buffer",
+        ipa: "/ˌeɡzɪˈstenʃl ˈbʌfə/",
+        partOfSpeech: "noun",
+        meaning: "Vùng đệm phòng ngừa nguy cơ tuyệt chủng của nhân loại",
+        basicEquivalent: "way to save humans (Band 5)",
+        synonyms: ["civilizational safeguard", "survival backup"],
+        collocations: ["provide an existential buffer", "serve as an existential buffer"],
+        modelSentence: "Establishing self-sustaining extraterrestrial colonies provides an existential buffer against catastrophic planetary collisions.",
+        vietnameseSentence: "Thành lập các tiền đồn ngoài hành tinh tự duy trì tạo ra một vùng đệm sinh tồn phòng ngừa các vụ va chạm thiên thể thảm khốc."
+      }
+    ]
+  },
+  {
+    id: "t2-sedentary-lifestyle-health",
+    name: "Public Health: The Paradox of Proliferating Gyms and Widespread Sedentary Lifestyles",
+    vietnameseName: "Y tế công cộng: Nghịch lý bùng nổ phòng gym nhưng lối sống lười vận động vẫn lan rộng",
+    tag: "Sức khỏe cộng đồng & Đô thị",
+    icon: "HeartPulse",
+    ieltsPrompt: "Despite a large number of gyms and fitness centers, a sedentary lifestyle is gaining popularity in the contemporary world. What problems are associated with this? What solutions can you suggest?",
+    modelEssay: "In recent decades, urban centers have witnessed an unprecedented boom in fitness clubs and commercial wellness centers. Paradoxically, public health data indicates that hypokinetic and sedentary lifestyles are more entrenched than ever. This disconnect fosters grave physiological vulnerabilities and calls for comprehensive systemic interventions rather than superficial consumer remedies.\n\nThe repercussions of widespread physical inactivity are profound and multifaceted. At an individual physiological level, protracted sitting is inextricably linked to non-communicable illnesses, including cardiovascular diseases, type 2 diabetes, postural deformities, and morbid obesity. In addition to physical deterioration, prolonged inactivity exacerbates chronic mental health conditions such as workplace anxiety and depressive disorders, as human neurobiology relies heavily on regular exertion to regulate endorphins and cortisol. At a macro-economic level, this physical malaise places an unsustainable strain on state medical budgets and undermines workplace productivity through escalating sick leave and chronic fatigue.\n\nTo dismantle this sedentary trend, a multifaceted strategy is imperative. Firstly, corporate employers must radically reconfigure modern office environments. Because long desk hours are the primary driver of physical inertia, businesses should introduce ergonomic standing desks, mandate structured movement breaks, and sponsor active commuting programs. Secondly, municipal authorities must invest aggressively in active urban architecture. While commercial gyms charge prohibitive membership subscriptions that exclude lower-income demographics, cities should build accessible pedestrian promenades, segregated cycling networks, and open-air public workout parks. Transforming everyday movement into an effortless, cost-free default option eliminates the behavioral barriers associated with private gym attendance.\n\nIn conclusion, the proliferation of private fitness facilities cannot mask the urgent public health crisis posed by sedentary habits. Only by integrating active movement into corporate structures and urban planning can societies reverse physical stagnation and foster lasting public vitality.",
+    vocabularies: [
+      {
+        id: "t2-sed-1",
+        word: "hypokinetic diseases",
+        ipa: "/ˌhaɪpəʊkɪˈnetɪk dɪˈziːzɪz/",
+        partOfSpeech: "noun",
+        meaning: "Các bệnh lý mãn tính phát sinh do thiếu hụt vận động thể chất",
+        basicEquivalent: "illnesses from not moving (Band 5)",
+        synonyms: ["inactivity-induced ailments", "sedentary afflictions"],
+        collocations: ["suffer from hypokinetic diseases", "combat hypokinetic conditions"],
+        modelSentence: "Cardiovascular disorders and hypertension are prominent hypokinetic diseases afflicting sedentary desk-bound executives.",
+        vietnameseSentence: "Rối loạn tim mạch và cao huyết áp là những bệnh lý thiếu vận động nổi cộm đang hành hạ giới văn phòng ngồi nhiều."
+      },
+      {
+        id: "t2-sed-2",
+        word: "screen dependency",
+        ipa: "/skriːn dɪˈpendənsi/",
+        partOfSpeech: "noun",
+        meaning: "Hội chứng lệ thuộc quá mức vào màn hình kỹ thuật số",
+        basicEquivalent: "looking at phones too much (Band 5)",
+        synonyms: ["digital fixation", "electronic addiction"],
+        collocations: ["alleviate screen dependency", "severe screen dependency"],
+        modelSentence: "Unchecked screen dependency severely curtails the daily physical activity of contemporary adolescents.",
+        vietnameseSentence: "Hội chứng lệ thuộc màn hình không kiểm soát làm cắt giảm nghiêm trọng hoạt động thể chất hàng ngày của thanh thiếu niên thời nay."
+      },
+      {
+        id: "t2-sed-3",
+        word: "ergonomic workplace intervention",
+        ipa: "/ˌɜːɡəˈnɒmɪk ˈwɜːkpleɪs ˌɪntəˈvenʃn/",
+        partOfSpeech: "noun",
+        meaning: "Giải pháp can thiệp công thái học cải thiện môi trường làm việc",
+        basicEquivalent: "making office healthy (Band 5)",
+        synonyms: ["occupational postural reform", "workplace health design"],
+        collocations: ["implement ergonomic workplace interventions", "subsidize ergonomic changes"],
+        modelSentence: "Introducing sit-stand workstations is a cost-effective ergonomic workplace intervention that combats spinal compression.",
+        vietnameseSentence: "Áp dụng bàn làm việc đứng-ngồi là một can thiệp công thái học tiết kiệm chi phí giúp chống lại chứng chèn ép cột sống."
+      },
+      {
+        id: "t2-sed-4",
+        word: "inextricably linked",
+        ipa: "/ˌɪnɪkˈstrɪkəbli lɪŋkt/",
+        partOfSpeech: "phrase",
+        meaning: "Gắn kết hữu cơ chặt chẽ không thể tách rời",
+        basicEquivalent: "connected strongly (Band 5)",
+        synonyms: ["inseparable", "integrally tied"],
+        collocations: ["are inextricably linked with", "inextricably interwoven"],
+        modelSentence: "Mental equilibrium and regular physical exertion are inextricably linked within human evolutionary biology.",
+        vietnameseSentence: "Sự cân bằng tâm thần và hoạt động thể chất thường xuyên gắn kết chặt chẽ không thể tách rời trong sinh học tiến hóa."
+      },
+      {
+        id: "t2-sed-5",
+        word: "active urban architecture",
+        ipa: "/ˈæktɪv ˈɜːbən ˈɑːkɪtektʃə/",
+        partOfSpeech: "noun",
+        meaning: "Quy hoạch kiến trúc đô thị khuyến khích vận động thể chất",
+        basicEquivalent: "city design for walking (Band 5)",
+        synonyms: ["pedestrian-centric urbanism", "walkable city design"],
+        collocations: ["invest in active urban architecture", "principles of active urban architecture"],
+        modelSentence: "Cities investing in active urban architecture boast lower cardiovascular hospitalization rates among citizens.",
+        vietnameseSentence: "Các thành phố đầu tư vào kiến trúc đô thị khuyến khích vận động ghi nhận tỷ lệ nhập viện vì tim mạch thấp hơn ở người dân."
+      }
+    ]
+  },
+  {
+    id: "t2-corruption-capital-flight",
+    name: "Governance & Economics: Institutional Corruption and Capital Flight in Developing Nations",
+    vietnameseName: "Quản trị công & Kinh tế: Nạn tham nhũng thể chế và dòng vốn tháo chạy ở các nước nghèo",
+    tag: "Kinh tế vĩ mô & Quản trị công",
+    icon: "Landmark",
+    ieltsPrompt: "In many developing nations, institutional corruption and the rapid outflow of private investments represent the greatest impediments to economic prosperity. What are the consequences of these issues, and how can governments effectively mitigate them?",
+    modelEssay: "For emerging economies striving for sustainable modern development, structural integrity and financial stability are fundamental prerequisites. However, systemic corruption within positions of power, coupled with the rapid flight of private capital, continues to cripple economic growth across developing nations. Addressing these formidable barriers requires vigorous institutional reforms and transparent fiscal management.\n\nThe ramifications of unchecked institutional graft and investment flight are devastating for national progress. Firstly, political and bureaucratic corruption misallocates vital public funds away from schools, hospitals, and critical transport networks into the private pockets of corrupt officials. This systemic malfeasance distorts market competition and erodes the rule of law. Consequently, international corporations and domestic entrepreneurs lose confidence in the regulatory landscape; fearing extortion and arbitrary confiscation, they withdraw liquid assets, precipitating rapid capital flight. As foreign and domestic capital flees overseas, currency reserves depreciate, unemployment accelerates, and vulnerable populations are pushed deeper into generational poverty.\n\nTo effectively neutralize these crises, governments must implement uncompromising administrative overhauls. The primary measure is the total digitization of public procurement, tax collection, and commercial licensing. By deploying transparent electronic portals and automated audit algorithms, administrations can eliminate human discretion—the primary breeding ground for illicit bribery. Furthermore, states must guarantee genuine judicial independence and establish autonomous anti-corruption commissions empowered to prosecute high-ranking offenders without political interference. In tandem with strict enforcement, governments should establish stable macroeconomic policies, including robust property rights and tax incentives for domestic reinvestment, thereby reassuring investors that their capital remains secure within national borders.\n\nIn conclusion, corruption in official corridors and the ensuing loss of investment represent existential threats to developing economies. Through aggressive digital transparency, uncompromising legal enforcement, and investor protection, nations can restore institutional credibility and establish a resilient foundation for long-term prosperity.",
+    vocabularies: [
+      {
+        id: "t2-corr-1",
+        word: "institutional graft",
+        ipa: "/ˌɪnstɪˈtjuːʃənl ɡrɑːft/",
+        partOfSpeech: "noun",
+        meaning: "Tình trạng tham nhũng ăn sâu vào bộ máy thể chế công quyền",
+        basicEquivalent: "corruption in offices (Band 5)",
+        synonyms: ["systemic venality", "bureaucratic embezzlement"],
+        collocations: ["combat institutional graft", "endemic institutional graft"],
+        modelSentence: "Endemic institutional graft severely depresses the efficiency of capital allocation across state infrastructure contracts.",
+        vietnameseSentence: "Nạn tham nhũng thể chế thâm căn cố đế làm suy giảm nghiêm trọng hiệu quả phân bổ vốn trong các dự án hạ tầng công."
+      },
+      {
+        id: "t2-corr-2",
+        word: "illicit capital flight",
+        ipa: "/ɪˈlɪsɪt ˈkæpɪtl flaɪt/",
+        partOfSpeech: "noun",
+        meaning: "Hiện tượng tháo chạy dòng vốn bất hợp pháp ra nước ngoài",
+        basicEquivalent: "money running out illegally (Band 5)",
+        synonyms: ["unauthorized asset relocation", "clandestine wealth drainage"],
+        collocations: ["halt illicit capital flight", "accelerate capital flight"],
+        modelSentence: "Developing economies lose billions each year due to illicit capital flight shielded behind complex offshore banking havens.",
+        vietnameseSentence: "Các nền kinh tế đang phát triển thất thoát hàng tỷ đô mỗi năm do dòng vốn tháo chạy phi pháp ẩn sau các thiên đường thuế bí mật."
+      },
+      {
+        id: "t2-corr-3",
+        word: "judicial independence",
+        ipa: "/dʒuːˈdɪʃl ˌɪndɪˈpendəns/",
+        partOfSpeech: "noun",
+        meaning: "Tính độc lập không bị chi phối chính trị của ngành tòa án",
+        basicEquivalent: "judges being fair (Band 5)",
+        synonyms: ["autonomous judiciary", "unbiased legal administration"],
+        collocations: ["uphold judicial independence", "threaten judicial independence"],
+        modelSentence: "Foreign investors demand rock-solid judicial independence before committing long-term private manufacturing capital.",
+        vietnameseSentence: "Các nhà đầu tư nước ngoài đòi hỏi tính độc lập tư pháp vững chắc như bàn thạch trước khi cam kết rót vốn sản xuất dài hạn."
+      },
+      {
+        id: "t2-corr-4",
+        word: "precipitate rapid flight",
+        ipa: "/prɪˈsɪpɪteɪt ˈræpɪd flaɪt/",
+        partOfSpeech: "phrase",
+        meaning: "Làm bùng phát cuộc tháo chạy tài sản đột ngột",
+        basicEquivalent: "cause money to run away (Band 5)",
+        synonyms: ["trigger asset exodus", "spark capital withdrawal"],
+        collocations: ["political instability precipitates rapid flight", "tax hikes precipitate flight"],
+        modelSentence: "Threats of arbitrary asset expropriation precipitate rapid flight of foreign venture funding.",
+        vietnameseSentence: "Các nguy cơ quốc hữu hóa tài sản tùy tiện làm bùng phát cuộc tháo chạy nhanh chóng của vốn đầu tư mạo hiểm nước ngoài."
+      },
+      {
+        id: "t2-corr-5",
+        word: "dismantle systemic bribery",
+        ipa: "/dɪsˈmæntl sɪˈstemɪk ˈbraɪbəri/",
+        partOfSpeech: "phrase",
+        meaning: "Triệt tiêu nạn đưa nhận hối lộ có hệ thống",
+        basicEquivalent: "stop bribery everywhere (Band 5)",
+        synonyms: ["eradicate institutional kickbacks", "purge corrupt practices"],
+        collocations: ["measures to dismantle systemic bribery", "campaign to dismantle bribery"],
+        modelSentence: "Deploying automated procurement portals helped the ministry dismantle systemic bribery within road construction contracts.",
+        vietnameseSentence: "Việc triển khai cổng đấu thầu tự động đã giúp bộ triệt tiêu nạn đưa hối lộ có hệ thống trong các gói thầu làm đường."
+      }
+    ]
+  },
+  {
+    id: "t2-journalism-ethics-distortion",
+    name: "Media Literacy: Distortion of Truth in Commercial Journalism vs Public Accountability",
+    vietnameseName: "Tư duy truyền thông: Sự bóp méo sự thật trong báo chí thương mại vs Trách nhiệm giải trình",
+    tag: "Báo chí & Đạo đức truyền thông",
+    icon: "Newspaper",
+    ieltsPrompt: "It is often argued that newspapers and modern digital media channels frequently distort the truth to pursue commercial profit, thereby misleading the general public. To what extent do you agree or disagree with this view?",
+    modelEssay: "It is probably true to say that newspapers, digital publishers, and social media newsfeeds frequently distort the truth in contemporary society. In an era dominated by instantaneous digital circulation and commercial advertising metrics, the temptation to sensationalize reporting has compromised journalistic integrity. While I agree that profit incentives routinely skew media narratives, it is important to recognize that responsible, truth-seeking journalism still plays a vital democratic role.\n\nThe commercial model of 21st-century media undeniably incentivizes the manipulation of facts. Traditional print publications once depended on loyal subscriptions, but contemporary digital platforms survive purely on algorithmic engagement, user clicks, and viral sharing. Because shocking headlines and partisan controversies trigger far greater emotional reactions than nuanced analysis, media corporations frequently employ hyperbolic phrasing, quote out of context, and omit countervailing evidence. Furthermore, media consolidation has placed influential broadcasting networks into the hands of corporate conglomerates and political oligarchs who deliberately manufacture public consent to protect their vested financial interests.\n\nNevertheless, dismissing all journalistic output as dishonest fabrications would be an unwarranted oversimplification. Reputable news organizations and independent investigative journalists continue to adhere to strict ethical codes, rigorous fact-checking, and cross-verification before publishing sensitive stories. Across history and within modern societies, intrepid reporters have risked personal safety to expose governmental corruption, environmental crimes, and corporate malpractice. Without dedicated investigative journalists holding powerful entities accountable, democratic oversight would collapse entirely.\n\nIn conclusion, while commercial pressures and engagement algorithms undoubtedly induce many news outlets to distort reality for financial gain, legitimate investigative journalism remains a foundational bulwark of a free society. Rather than succumbing to cynical mistrust, citizens must cultivate sharp media literacy skills to distinguish between sensationalist manipulation and rigorous, evidence-based reporting.",
+    vocabularies: [
+      {
+        id: "t2-journ-1",
+        word: "sensationalist distortion",
+        ipa: "/senˈseɪʃənəlɪst dɪˈstɔːʃn/",
+        partOfSpeech: "noun",
+        meaning: "Sự bóp méo tin tức giật gân rẻ tiền để câu kéo tương tác",
+        basicEquivalent: "making news shocking on purpose (Band 5)",
+        synonyms: ["tabloid hyperbole", "lurid misrepresentation"],
+        collocations: ["rely on sensationalist distortion", "criticize sensationalist distortions"],
+        modelSentence: "Sensationalist distortion of medical breakthroughs generates unwarranted euphoria followed by public disillusionment.",
+        vietnameseSentence: "Sự bóp méo giật gân các đột phá y học tạo ra tâm lý phấn khích vô căn cứ rồi kéo theo sự vỡ mộng của công chúng."
+      },
+      {
+        id: "t2-journ-2",
+        word: "media literacy",
+        ipa: "/ˈmiːdiə ˈlɪtərəsi/",
+        partOfSpeech: "noun",
+        meaning: "Năng lực tư duy phản biện và thẩm định thông tin truyền thông",
+        basicEquivalent: "knowing how to spot fake news (Band 5)",
+        synonyms: ["information appraisal competence", "analytical news awareness"],
+        collocations: ["cultivate critical media literacy", "incorporate media literacy"],
+        modelSentence: "Secondary schools should teach media literacy so young citizens can recognize biased political disinformation.",
+        vietnameseSentence: "Các trường trung học nên giảng dạy năng lực thẩm định truyền thông để học sinh nhận biết các thông tin chính trị sai lệch."
+      },
+      {
+        id: "t2-journ-3",
+        word: "investigative journalism",
+        ipa: "/ɪnˈvestɪɡətɪv ˈdʒɜːnəlɪzəm/",
+        partOfSpeech: "noun",
+        meaning: "Nền báo chí điều tra chuyên sâu phanh phui tiêu cực",
+        basicEquivalent: "deep research on crimes (Band 5)",
+        synonyms: ["watchdog reporting", "in-depth public interest exposés"],
+        collocations: ["vital role of investigative journalism", "undercover investigative journalism"],
+        modelSentence: "Fearless investigative journalism is indispensable for uncovering corporate dumping of hazardous manufacturing byproducts.",
+        vietnameseSentence: "Nền báo chí điều tra quả cảm là không thể thiếu để phanh phui hành vi xả thải chất độc hại của các doanh nghiệp sản xuất."
+      },
+      {
+        id: "t2-journ-4",
+        word: "erode public confidence",
+        ipa: "/ɪˈrəʊd ˈpʌblɪk ˈkɒnfɪdəns/",
+        partOfSpeech: "phrase",
+        meaning: "Làm xói mòn niềm tin của công chúng vào xã hội",
+        basicEquivalent: "make people lose trust (Band 5)",
+        synonyms: ["undermine public trust", "corrode popular faith"],
+        collocations: ["partisan rhetoric erodes public confidence", "scandals erode confidence"],
+        modelSentence: "Retracting fabricated news stories repeatedly erodes public confidence in traditional journalistic institutions.",
+        vietnameseSentence: "Việc liên tục phải đính chính các bài báo bịa đặt làm xói mòn niềm tin của công chúng vào các định chế báo chí truyền thống."
+      },
+      {
+        id: "t2-journ-5",
+        word: "manufacture public consent",
+        ipa: "/ˌmænjuˈfæktʃə ˈpʌblɪk kənˈsent/",
+        partOfSpeech: "phrase",
+        meaning: "Thao túng truyền thông để định hướng sự đồng thuận giả tạo của đám đông",
+        basicEquivalent: "make everyone agree by tricks (Band 5)",
+        synonyms: ["engineer collective agreement", "manipulate mass opinion"],
+        collocations: ["media used to manufacture public consent", "mechanisms that manufacture consent"],
+        modelSentence: "Biased coverage was orchestrated across regional networks to manufacture public consent for unpopular mining concessions.",
+        vietnameseSentence: "Việc đưa tin thiên lệch đã được sắp đặt trên các kênh địa phương nhằm tạo ra sự đồng thuận giả tạo của công chúng cho các nhượng bộ khai khoáng."
+      }
+    ]
+  },
+  {
+    id: "t2-university-vs-gap-year",
+    name: "Higher Education: Direct University Matriculation vs The Merits of an Experiential Gap Year",
+    vietnameseName: "Giáo dục đại học: Học thẳng đại học vs Giá trị của một năm gap year trải nghiệm thực tế",
+    tag: "Đại học & Định hướng nghề nghiệp",
+    icon: "GraduationCap",
+    ieltsPrompt: "Some people believe that it is better to take a gap year before going to university, while others think that this can be a waste of time and that going straight into higher education is the best option. Discuss both views and give your opinion.",
+    modelEssay: "The transition between secondary education and tertiary academia is a defining crossroad in a student's life. While traditionalists argue that matriculating directly into higher education maintains academic discipline and accelerates career entry, an increasing body of opinion favors taking a structured gap year. In my view, provided it is approached with deliberate purpose, an experiential gap year enriches personal maturity and yields significantly more focused undergraduates.\n\nOn the one hand, proponents of continuous education emphasize scholastic momentum and economic efficiency. Students transitioning directly from high school retain active study habits, examination techniques, and intellectual discipline, allowing them to adapt quickly to university-level academic rigor. In contrast, those who take a twelve-month sabbatical frequently suffer cognitive rustiness and struggle to re-establish rigorous study routines. Furthermore, immediate enrollment ensures that students graduate at a younger age, allowing them to enter the competitive labor market earlier, accumulate professional seniority, and begin building long-term financial stability without incurring gap-year living expenses.\n\nOn the other hand, the benefits of a productive hiatus are profound. High school graduates who enter tertiary institutions immediately often do so out of unexamined social expectation, possessing minimal worldly experience or vocational self-awareness. Consequently, vast numbers of undergraduates experience burnout, change majors mid-way through their degree, or drop out after squandering substantial tuition fees. By contrast, young adults who spend a gap year working entry-level jobs, volunteering abroad, or mastering practical languages gain emotional resilience, financial literacy, and cultural adaptability. These transformative experiences clarify their professional passions, enabling them to select their degree specialization with genuine conviction.\n\nIn conclusion, although an unstructured gap year risks breeding complacency and academic detachment, a purposeful twelve-month period of work or exploration offers immense developmental dividends. Direct university enrollment guarantees efficiency, but an intentional gap year produces mature, resilient students equipped to maximize their university education.",
+    vocabularies: [
+      {
+        id: "t2-ugy-1",
+        word: "scholastic momentum",
+        ipa: "/skəˈlæstɪk məˈmentəm/",
+        partOfSpeech: "noun",
+        meaning: "Quán tính và nề nếp học tập không bị gián đoạn",
+        basicEquivalent: "habit of studying continuously (Band 5)",
+        synonyms: ["academic continuity", "unbroken study discipline"],
+        collocations: ["maintain scholastic momentum", "loss of scholastic momentum"],
+        modelSentence: "Matriculating directly into university allows undergraduates to maintain uninterrupted scholastic momentum.",
+        vietnameseSentence: "Nhập học đại học trực tiếp cho phép sinh viên duy trì được quán tính học tập liên tục không bị ngắt quãng."
+      },
+      {
+        id: "t2-ugy-2",
+        word: "experiential maturity",
+        ipa: "/ɪkˌspɪəriˈenʃl məˈtʃʊərəti/",
+        partOfSpeech: "noun",
+        meaning: "Sự chín chắn và vốn sống tích lũy qua trải nghiệm thực tế",
+        basicEquivalent: "growing up from life (Band 5)",
+        synonyms: ["worldly wisdom", "practical adult competence"],
+        collocations: ["foster experiential maturity", "gain experiential maturity"],
+        modelSentence: "Spending a gap year independently managing personal living finances develops invaluable experiential maturity.",
+        vietnameseSentence: "Dành một năm gap year tự quản lý tài chính sinh hoạt cá nhân giúp rèn luyện sự chín chắn trải nghiệm vô giá."
+      },
+      {
+        id: "t2-ugy-3",
+        word: "vocational clarity",
+        ipa: "/vəʊˈkeɪʃənl ˈklærəti/",
+        partOfSpeech: "noun",
+        meaning: "Sự thấu suốt và định hướng rõ ràng về con đường nghề nghiệp",
+        basicEquivalent: "knowing what job you want (Band 5)",
+        synonyms: ["career certainty", "professional purpose"],
+        collocations: ["achieve vocational clarity", "lack vocational clarity"],
+        modelSentence: "Real-world apprenticeships during a gap year grant school-leavers vocational clarity before selecting university degrees.",
+        vietnameseSentence: "Thực tập thực tế trong kỳ gap year mang lại cho học sinh sự thấu suốt nghề nghiệp trước khi lựa chọn chuyên ngành đại học."
+      },
+      {
+        id: "t2-ugy-4",
+        word: "academic detachment",
+        ipa: "/ˌækəˈdemɪk dɪˈtætʃmənt/",
+        partOfSpeech: "noun",
+        meaning: "Tâm lý xa rời, mất liên kết với môi trường học thuật",
+        basicEquivalent: "getting bored of school (Band 5)",
+        synonyms: ["scholastic disengagement", "intellectual alienation"],
+        collocations: ["risk breeding academic detachment", "suffer academic detachment"],
+        modelSentence: "Unstructured gap years lacking intellectual stimulation often induce lingering academic detachment.",
+        vietnameseSentence: "Những năm gap year vô định thiếu kích thích trí tuệ thường dẫn tới sự xa rời môi trường học thuật kéo dài."
+      },
+      {
+        id: "t2-ugy-5",
+        word: "enrich personal maturity",
+        ipa: "/ɪnˈrɪtʃ ˈpɜːsənl məˈtʃʊərəti/",
+        partOfSpeech: "phrase",
+        meaning: "Làm phong phú và trưởng thành bản thân",
+        basicEquivalent: "help someone grow up (Band 5)",
+        synonyms: ["cultivate adult character", "deepen personal growth"],
+        collocations: ["experiential challenges enrich maturity", "travel enriches personal maturity"],
+        modelSentence: "Independent solo travel through developing territories enriches personal maturity and cross-cultural empathy.",
+        vietnameseSentence: "Du lịch bụi độc lập qua các vùng đất đang phát triển làm giàu thêm sự chín chắn cá nhân và lòng thấu cảm đa văn hóa."
+      }
+    ]
+  }
 ];
-
 const TOPIC_ICONS = {
   education: 'GraduationCap',
   technology: 'Cpu',
@@ -6471,8 +6897,617 @@ const RAW_IELTS_TASK1_TOPICS = [
       }
     ]
   }
+,
+  {
+    id: "task1-roche-01-kpb-shares",
+    name: "Line Graph: Stock Price Fluctuations of KPB (2006 - 2010)",
+    vietnameseName: "Biểu đồ đường: Biến động giá cổ phiếu công ty KPB qua 5 năm (2006 - 2010)",
+    tag: "Task 1: Biểu đồ đường (Line Graph)",
+    icon: "TrendingDown",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_roche-01-kpb-shares.png",
+    chartData: {
+      title: "Line Graph: Stock Price Fluctuations of KPB (2006 - 2010)",
+      imageUrl: "/charts/task1/task1_roche-01-kpb-shares.png",
+      keyNotes: [
+        "Biến động mạnh mẽ trong 5 năm: Giá cổ phiếu KPB trải qua nhiều chu kỳ tăng giảm liên tục từ 2006 đến 2010, nhưng xu hướng chung ghi nhận mức sụt giảm nhẹ khoảng 1 USD/cổ phiếu sau 5 năm.",
+        "Đỉnh cao nhất cuối năm 2006: Khởi điểm ở mức 13 USD/cổ phiếu, giá tăng vọt đột ngột từ 21 USD lên đỉnh kỷ lục 31 USD/cổ phiếu vào cuối 2006.",
+        "Đáy sâu năm 2008 & Hồi phục: Lao dốc mạnh từ giữa năm 2008 xuống đáy thấp nhất kỳ ở mức chỉ hơn 7 USD, trước khi hồi phục lên đỉnh thứ hai 17 USD vào đầu 2010 rồi thoái lui về 12 USD vào cuối 2010."
+      ]
+    },
+    ieltsPrompt: "The graph shows the changes and the overall decline in the share price of KPB over a five-year period from 2006 to 2010. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    keyNotes: [
+      "Biến động mạnh mẽ trong 5 năm: Giá cổ phiếu KPB trải qua nhiều chu kỳ tăng giảm liên tục từ 2006 đến 2010, nhưng xu hướng chung ghi nhận mức sụt giảm nhẹ khoảng 1 USD/cổ phiếu sau 5 năm.",
+      "Đỉnh cao nhất cuối năm 2006: Khởi điểm ở mức 13 USD/cổ phiếu, giá tăng vọt đột ngột từ 21 USD lên đỉnh kỷ lục 31 USD/cổ phiếu vào cuối 2006.",
+      "Đáy sâu năm 2008 & Hồi phục: Lao dốc mạnh từ giữa năm 2008 xuống đáy thấp nhất kỳ ở mức chỉ hơn 7 USD, trước khi hồi phục lên đỉnh thứ hai 17 USD vào đầu 2010 rồi thoái lui về 12 USD vào cuối 2010."
+    ],
+    modelEssay: "The graph shows the changes and the overall decline in the share price of KPB over a five-year period from 2006 to 2010.\n\nAt the beginning of the period the share price was at USD 13 per share. There were several fluctuations until late 2006 when there was a sudden increase from USD 21 to USD 31 per share. This higher price did not last long, however, and it fell before rising strongly again in 2008. From mid-2008 there was a sharp downward trend until the end of the year when it fell to the lowest point in this period at just over USD 7 per share. After that the share price recovered and, despite some fluctuations, continued to rise until it reached a peak of USD 17 in early 2010. Until late 2010 the trend was downward again, ending the year at just over USD 12.\n\nOverall, KPB made significant gains and losses during this period but registered a slight net decrease of around USD 1 per share over the five years.",
+    vocabularies: [
+      {
+        id: "t1-r01-1",
+        word: "share price fluctuations",
+        ipa: "/ʃeə praɪs ˌflʌktʃuˈeɪʃnz/",
+        partOfSpeech: "noun",
+        meaning: "Sự biến động lên xuống của giá cổ phiếu",
+        basicEquivalent: "stock price going up and down (Band 5)",
+        synonyms: ["equity volatility", "stock market swings"],
+        collocations: ["witness share price fluctuations", "undergo sharp fluctuations"],
+        modelSentence: "The five-year survey revealed dramatic share price fluctuations driven by global financial volatility.",
+        vietnameseSentence: "Cuộc khảo sát năm năm đã tiết lộ sự biến động giá cổ phiếu kịch tính do bất ổn tài chính toàn cầu."
+      },
+      {
+        id: "t1-r01-2",
+        word: "cyclical peak",
+        ipa: "/ˈsɪklɪkl piːk/",
+        partOfSpeech: "noun",
+        meaning: "Đỉnh điểm cao nhất trong chu kỳ biến động",
+        basicEquivalent: "highest point (Band 5)",
+        synonyms: ["all-time high", "zenith of the cycle"],
+        collocations: ["attain a cyclical peak", "touch a peak of"],
+        modelSentence: "KPB stock attained a cyclical peak of 31 USD per share in late 2006 before undergoing a steep correction.",
+        vietnameseSentence: "Cổ phiếu KPB đã đạt đỉnh chu kỳ ở mức 31 USD/cổ phiếu vào cuối năm 2006 trước khi trải qua đợt điều chỉnh sâu."
+      },
+      {
+        id: "t1-r01-3",
+        word: "cyclical nadir",
+        ipa: "/ˈsɪklɪkl ˈneɪdɪə/",
+        partOfSpeech: "noun",
+        meaning: "Đáy sâu nhất, điểm thấp nhất trong chu kỳ",
+        basicEquivalent: "lowest bottom point (Band 5)",
+        synonyms: ["trough", "lowest ebb"],
+        collocations: ["touch a cyclical nadir", "plunge to its nadir"],
+        modelSentence: "The share price touched its cyclical nadir at slightly above seven dollars during the winter of 2008.",
+        vietnameseSentence: "Giá cổ phiếu đã chạm đáy sâu nhất của chu kỳ ở mức chỉ hơn bảy đô la trong mùa đông năm 2008."
+      },
+      {
+        id: "t1-r01-4",
+        word: "downward slide",
+        ipa: "/ˈdaʊnwəd slaɪd/",
+        partOfSpeech: "noun",
+        meaning: "Đà trượt dốc đều đặn qua các mốc thời gian",
+        basicEquivalent: "falling down (Band 5)",
+        synonyms: ["uninterrupted decline", "progressive contraction"],
+        collocations: ["a steady downward slide", "halt the downward slide"],
+        modelSentence: "From mid-2008, KPB equity recorded a sharp downward slide, touching its cyclical nadir at seven dollars.",
+        vietnameseSentence: "Từ giữa năm 2008, cổ phiếu KPB ghi nhận một đà trượt dốc mạnh, chạm đáy chu kỳ ở mức bảy đô la."
+      },
+      {
+        id: "t1-r01-5",
+        word: "net decrease",
+        ipa: "/net dɪˈkriːs/",
+        partOfSpeech: "noun",
+        meaning: "Mức giảm ròng tổng thể sau khi đã bù trừ tăng giảm",
+        basicEquivalent: "overall smaller number (Band 5)",
+        synonyms: ["overall contraction", "net loss"],
+        collocations: ["register a net decrease", "suffer a net decrease of"],
+        modelSentence: "Despite energetic intermittent rallies, the equity suffered a net decrease of approximately one dollar per share.",
+        vietnameseSentence: "Dù có những đợt tăng điểm gián đoạn sôi nổi, cổ phiếu vẫn ghi nhận mức giảm ròng khoảng một đô la mỗi cổ phiếu."
+      }
+    ]
+  },
+  {
+    id: "task1-roche-02-gulf-fertility",
+    name: "Bar Chart: Fertility Rates per Woman in Six Gulf States (1990 vs 2000)",
+    vietnameseName: "Biểu đồ cột: Tỷ lệ sinh con ở phụ nữ tại 6 quốc gia Vùng Vịnh (1990 vs 2000)",
+    tag: "Task 1: Biểu đồ cột (Bar Chart)",
+    icon: "BarChart2",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_roche-02-gulf-fertility.png",
+    chartData: {
+      title: "Bar Chart: Fertility Rates per Woman in Six Gulf States (1990 vs 2000)",
+      imageUrl: "/charts/task1/task1_roche-02-gulf-fertility.png",
+      keyNotes: [
+        "Xu hướng suy giảm đồng loạt: Tỷ lệ sinh ở cả 6 quốc gia Vùng Vịnh (Saudi Arabia, Oman, UAE, Qatar, Kuwait, Bahrain) đều sụt giảm đáng kể trong thập kỷ 1990-2000.",
+        "Nhóm sinh nở cao nhất: Oman và Saudi Arabia ghi nhận mức sinh cao ngất ngưởng trên 7 con/phụ nữ năm 1990, sau đó giảm 20% xuống còn 5.5 con năm 2000.",
+        "Nhóm sinh nở thấp hơn: UAE, Bahrain và Kuwait giảm từ mức 3.75 - 4 con xuống dưới 3 con/phụ nữ vào năm 2000 (UAE giảm mạnh nhất trên 25%)."
+      ]
+    },
+    ieltsPrompt: "The chart provides information regarding the fertility in births per woman in six Gulf states from 1990 to 2000. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    keyNotes: [
+      "Xu hướng suy giảm đồng loạt: Tỷ lệ sinh ở cả 6 quốc gia Vùng Vịnh (Saudi Arabia, Oman, UAE, Qatar, Kuwait, Bahrain) đều sụt giảm đáng kể trong thập kỷ 1990-2000.",
+      "Nhóm sinh nở cao nhất: Oman và Saudi Arabia ghi nhận mức sinh cao ngất ngưởng trên 7 con/phụ nữ năm 1990, sau đó giảm 20% xuống còn 5.5 con năm 2000.",
+      "Nhóm sinh nở thấp hơn: UAE, Bahrain và Kuwait giảm từ mức 3.75 - 4 con xuống dưới 3 con/phụ nữ vào năm 2000 (UAE giảm mạnh nhất trên 25%)."
+    ],
+    modelEssay: "The chart represents changes in the fertility rates of female members of the population in six different Gulf countries, namely Saudi Arabia, Oman, the UAE, Kuwait, Bahrain and Qatar between 1990 and 2000.\n\nOverall, it can be seen that there were major falls in birth rates across all six nations, although some countries in the region retained significantly higher fertility rates than others throughout the period.\n\nFrom 1990 to 2000, there was a consistent contraction in the average number of children born per woman across the entire region. The most notable shifts occurred in two nations that already recorded comparatively low fertility at the beginning of the decade: the UAE and Bahrain. By 2000, rates in the UAE had contracted by over 25%, dropping below three births per woman, mirroring similar levels seen in Bahrain and Kuwait.\n\nIn contrast, wide regional variations remained evident. Oman and Saudi Arabia displayed the highest fertility rates in 1990, each exceeding seven births per woman. Although both nations experienced an approximate 20% reduction over the ten-year timeframe, their rates remained substantially elevated compared to their regional peers, standing at approximately 5.5 births per woman by the end of the timeframe.",
+    vocabularies: [
+      {
+        id: "t1-r02-1",
+        word: "fertility rate",
+        ipa: "/fəˈtɪləti reɪt/",
+        partOfSpeech: "noun",
+        meaning: "Tỷ lệ sinh con tính trung bình trên mỗi phụ nữ",
+        basicEquivalent: "number of babies per woman (Band 5)",
+        synonyms: ["birth rate", "natality index"],
+        collocations: ["declining fertility rate", "average fertility rate"],
+        modelSentence: "Urbanization and female higher education contributed to a plummeting national fertility rate.",
+        vietnameseSentence: "Đô thị hóa và giáo dục đại học cho phụ nữ đã góp phần làm tỷ lệ sinh quốc gia sụt giảm nhanh chóng."
+      },
+      {
+        id: "t1-r02-2",
+        word: "sustained contraction",
+        ipa: "/səˈsteɪnd kənˈtrækʃn/",
+        partOfSpeech: "noun",
+        meaning: "Sự sụt giảm co hẹp liên tục trong thời gian dài",
+        basicEquivalent: "continuous decrease (Band 5)",
+        synonyms: ["prolonged decline", "unbroken downturn"],
+        collocations: ["experience sustained contraction", "period of sustained contraction"],
+        modelSentence: "All six Gulf states observed a sustained contraction in average fertility rates per female citizen.",
+        vietnameseSentence: "Cả sáu quốc gia Vùng Vịnh đều chứng kiến sự co hẹp liên tục của tỷ lệ sinh trung bình tính trên mỗi nữ công dân."
+      },
+      {
+        id: "t1-r02-3",
+        word: "regional disparity",
+        ipa: "/ˈriːdʒənl dɪˈspærəti/",
+        partOfSpeech: "noun",
+        meaning: "Sự phân hóa chênh lệch rõ nét giữa các quốc gia trong khu vực",
+        basicEquivalent: "big difference between countries (Band 5)",
+        synonyms: ["geographic inequality", "spatial divergence"],
+        collocations: ["marked regional disparity", "highlight regional disparity"],
+        modelSentence: "The chart highlights marked regional disparity, with Oman doubling the fertility figures of Bahrain.",
+        vietnameseSentence: "Biểu đồ nêu bật sự chênh lệch khu vực rõ rệt, khi Oman có tỷ lệ sinh cao gấp đôi Bahrain."
+      },
+      {
+        id: "t1-r02-4",
+        word: "substantially elevated",
+        ipa: "/səbˈstænʃəli ˈelɪveɪtɪd/",
+        partOfSpeech: "phrase",
+        meaning: "Duy trì ở mức cao vượt trội so với các đối tượng khác",
+        basicEquivalent: "much higher (Band 5)",
+        synonyms: ["considerably higher", "markedly superior"],
+        collocations: ["remain substantially elevated", "rates were substantially elevated"],
+        modelSentence: "Birth rates in Saudi Arabia remained substantially elevated despite widespread economic modernization.",
+        vietnameseSentence: "Tỷ lệ sinh ở Ả Rập Xê Út vẫn duy trì ở mức cao vượt trội dù kinh tế hiện đại hóa sâu rộng."
+      },
+      {
+        id: "t1-r02-5",
+        word: "mirror similar levels",
+        ipa: "/ˈmɪrə ˈsɪmələ ˈlevlz/",
+        partOfSpeech: "phrase",
+        meaning: "Phản ánh các mức độ số liệu tương đồng nhau",
+        basicEquivalent: "look the same as (Band 5)",
+        synonyms: ["exhibit comparable rates", "match figures"],
+        collocations: ["trends mirror similar levels", "mirror the patterns"],
+        modelSentence: "Fertility indices in the UAE mirrored similar levels seen in neighboring Bahrain by the end of the century.",
+        vietnameseSentence: "Chỉ số sinh sản tại UAE phản ánh các mức tương đồng như tại nước láng giềng Bahrain vào cuối thế kỷ."
+      }
+    ]
+  },
+  {
+    id: "task1-roche-03-uk-alcohol",
+    name: "Multiple Charts: UK Alcohol Consumption - Adults Exceeding Limits vs Youth Trends",
+    vietnameseName: "Biểu đồ kết hợp: Tỷ lệ người lớn Anh uống vượt ngưỡng an toàn vs Lượng cồn ở thiếu niên",
+    tag: "Task 1: Biểu đồ kết hợp (Bar & Line)",
+    icon: "Wine",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_roche-03-uk-alcohol.png",
+    chartData: {
+      title: "Multiple Charts: UK Alcohol Consumption - Adults Exceeding Limits vs Youth Trends",
+      imageUrl: "/charts/task1/task1_roche-03-uk-alcohol.png",
+      keyNotes: [
+        "Hành vi uống quá liều ở người lớn: Gần 50% nam giới 18-44 tuổi uống vượt hướng dẫn an toàn; tỷ lệ ở nữ cùng tuổi là 39% nhưng nhóm 25-64 tuổi chỉ bằng một nửa nam giới. Nhóm người già (>65) uống ít nhất (nữ 5%, nam 20%).",
+        "Mức tiêu thụ cồn ở thanh thiếu niên: Số đơn vị cồn trẻ em uống tăng gấp đôi từ 1990 đến 2004; tăng vọt mạnh nhất 1994-1998 (nam đạt >11 đơn vị, nữ đạt >8 đơn vị).",
+        "Xu hướng thu hẹp khoảng cách giới tính: Sau năm 2000, lượng cồn của nam sinh giảm nhẹ trong khi nữ sinh tiếp tục tăng chạm đỉnh trên 10 đơn vị vào năm 2004."
+      ]
+    },
+    ieltsPrompt: "The bar chart displays the percentage of British adults drinking more than the recommended guidelines on at least one day a week in 2004, while the line graph illustrates the average alcohol consumption of children in England, aged 11-15, who drank in the previous week between 1990 and 2004. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    keyNotes: [
+      "Hành vi uống quá liều ở người lớn: Gần 50% nam giới 18-44 tuổi uống vượt hướng dẫn an toàn; tỷ lệ ở nữ cùng tuổi là 39% nhưng nhóm 25-64 tuổi chỉ bằng một nửa nam giới. Nhóm người già (>65) uống ít nhất (nữ 5%, nam 20%).",
+      "Mức tiêu thụ cồn ở thanh thiếu niên: Số đơn vị cồn trẻ em uống tăng gấp đôi từ 1990 đến 2004; tăng vọt mạnh nhất 1994-1998 (nam đạt >11 đơn vị, nữ đạt >8 đơn vị).",
+      "Xu hướng thu hẹp khoảng cách giới tính: Sau năm 2000, lượng cồn của nam sinh giảm nhẹ trong khi nữ sinh tiếp tục tăng chạm đỉnh trên 10 đơn vị vào năm 2004."
+    ],
+    modelEssay: "Both charts illustrate levels of alcohol consumption across different demographic groups in the United Kingdom.\n\nOverall, adult men were consistently more prone to exceeding recommended limits than women in 2004, particularly in younger cohorts. Concurrently, alcohol consumption among English children experienced a substantial expansion over the fourteen-year timeframe, with consumption levels among young girls steadily closing the gap with boys.\n\nLooking at adult drinking habits in 2004, nearly 50% of men aged 18 to 44 exceeded daily recommended alcohol thresholds. While the percentage was also comparatively elevated for women aged 18-24 (39%), figures for female cohorts aged 25-64 stood at roughly half the proportion of their male counterparts. Furthermore, consumption plummeted among senior citizens over 65, with only 5% of women and 20% of men drinking beyond guidelines.\n\nRegarding underage drinking between 1990 and 2004, the volume of alcohol consumed by children approximately doubled. The sharpest increase occurred between 1994 and 1998, with boy and girl intake escalating to over 11 and 8 units respectively. While boy consumption subsequently moderated after 2000, girls' intake maintained an upward trajectory, attaining a peak of just over 10 units in 2004.",
+    vocabularies: [
+      {
+        id: "t1-r03-1",
+        word: "recommended guidelines",
+        ipa: "/ˌrekəˈmendɪd ˈɡaɪdlaɪnz/",
+        partOfSpeech: "noun",
+        meaning: "Các hướng dẫn tiêu chuẩn an toàn do cơ quan y tế khuyến cáo",
+        basicEquivalent: "official health advice (Band 5)",
+        synonyms: ["statutory thresholds", "advisory limits"],
+        collocations: ["exceed recommended guidelines", "adhere to guidelines"],
+        modelSentence: "Over forty percent of young male adults regularly exceeded recommended guidelines regarding alcohol intake.",
+        vietnameseSentence: "Hơn bốn mươi phần trăm nam thanh niên thường xuyên vượt quá các hướng dẫn khuyến nghị về lượng cồn hấp thụ."
+      },
+      {
+        id: "t1-r03-2",
+        word: "underage drinking",
+        ipa: "/ˌʌndərˈeɪdʒ ˈdrɪŋkɪŋ/",
+        partOfSpeech: "noun",
+        meaning: "Nạn uống rượu bia khi chưa đủ tuổi vị thành niên",
+        basicEquivalent: "children drinking alcohol (Band 5)",
+        synonyms: ["minor alcohol consumption", "adolescent drinking"],
+        collocations: ["curb underage drinking", "rates of underage drinking"],
+        modelSentence: "Public awareness campaigns were deployed in secondary schools to suppress underage drinking.",
+        vietnameseSentence: "Các chiến dịch nâng cao nhận thức cộng đồng đã được triển khai tại các trường cấp hai để kiềm chế nạn uống rượu ở tuổi vị thành niên."
+      },
+      {
+        id: "t1-r03-3",
+        word: "reach a plateau",
+        ipa: "/riːtʃ ə plæˈtəʊ/",
+        partOfSpeech: "phrase",
+        meaning: "Chạm ngưỡng đi ngang bình ổn sau một giai đoạn tăng trưởng",
+        basicEquivalent: "stay flat / stop changing (Band 5)",
+        synonyms: ["level off", "stabilize at"],
+        collocations: ["consumption reached a plateau", "plateaued in 2000"],
+        modelSentence: "Underage alcohol consumption reached a plateau after 2000 before girl intake experienced a secondary surge.",
+        vietnameseSentence: "Lượng tiêu thụ cồn ở trẻ vị thành niên đã đi ngang bình ổn sau năm 2000 trước khi lượng uống của nữ sinh tăng trở lại."
+      },
+      {
+        id: "t1-r03-4",
+        word: "narrow the gender gap",
+        ipa: "/ˈnærəʊ ðə ˈdʒendə ɡæp/",
+        partOfSpeech: "phrase",
+        meaning: "Thu hẹp khoảng cách chênh lệch giữa nam và nữ",
+        basicEquivalent: "make the boy-girl difference smaller (Band 5)",
+        synonyms: ["bridge the gender divide", "converge across genders"],
+        collocations: ["succeed in narrowing the gender gap", "data narrow the gap"],
+        modelSentence: "Escalating alcohol unit consumption among adolescent girls significantly narrowed the gender gap by 2004.",
+        vietnameseSentence: "Mức tiêu thụ đơn vị cồn leo thang ở nữ sinh vị thành niên đã thu hẹp đáng kể khoảng cách giới tính vào năm 2004."
+      },
+      {
+        id: "t1-r03-5",
+        word: "senior cohorts",
+        ipa: "/ˈsiːniə ˈkəʊhɔːts/",
+        partOfSpeech: "noun",
+        meaning: "Nhóm người thuộc độ tuổi người cao tuổi (>65)",
+        basicEquivalent: "old people group (Band 5)",
+        synonyms: ["elderly demographic", "retiree age bracket"],
+        collocations: ["consumption among senior cohorts", "survey senior cohorts"],
+        modelSentence: "Excessive alcohol consumption plummeted among senior cohorts aged sixty-five and over.",
+        vietnameseSentence: "Việc tiêu thụ rượu bia quá mức đã tụt dốc ở nhóm người cao tuổi từ 65 tuổi trở lên."
+      }
+    ]
+  },
+  {
+    id: "task1-roche-04-uk-spending",
+    name: "Pie Charts: British Household Expenditure Allocation (1966 vs 1996)",
+    vietnameseName: "Biểu đồ tròn: Cơ cấu chi tiêu hộ gia đình tại Anh (1966 vs 1996)",
+    tag: "Task 1: Biểu đồ tròn (Pie Charts)",
+    icon: "PieChart",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_roche-04-uk-spending.png",
+    chartData: {
+      title: "Pie Charts: British Household Expenditure Allocation (1966 vs 1996)",
+      imageUrl: "/charts/task1/task1_roche-04-uk-spending.png",
+      keyNotes: [
+        "Sự đảo chiều giữa Thực phẩm và Ô tô: Thực phẩm và xe hơi luôn chiếm trên 50% tổng chi tiêu; tuy nhiên Thực phẩm co lại 2/3 (từ 44% xuống 14%), trong khi Ô tô tăng gần gấp đôi (từ 23% lên 45%).",
+        "Tăng trưởng dịch vụ và máy tính: Ăn uống nhà hàng tăng gấp đôi từ 7% lên 14%; chi tiêu máy tính cá nhân bùng nổ gấp 10 lần (từ 1% lên 10%).",
+        "Sụt giảm sách báo in ấn: Sách sụt giảm thê thảm từ 6% xuống chỉ còn 1%; chi phí xăng dầu và đồ nội thất duy trì ổn định không đổi."
+      ]
+    },
+    ieltsPrompt: "The pie charts display changes in UK spending patterns across different expenditure categories from 1966 to 1996. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    keyNotes: [
+      "Sự đảo chiều giữa Thực phẩm và Ô tô: Thực phẩm và xe hơi luôn chiếm trên 50% tổng chi tiêu; tuy nhiên Thực phẩm co lại 2/3 (từ 44% xuống 14%), trong khi Ô tô tăng gần gấp đôi (từ 23% lên 45%).",
+      "Tăng trưởng dịch vụ và máy tính: Ăn uống nhà hàng tăng gấp đôi từ 7% lên 14%; chi tiêu máy tính cá nhân bùng nổ gấp 10 lần (từ 1% lên 10%).",
+      "Sụt giảm sách báo in ấn: Sách sụt giảm thê thảm từ 6% xuống chỉ còn 1%; chi phí xăng dầu và đồ nội thất duy trì ổn định không đổi."
+    ],
+    modelEssay: "The pie charts display changes in United Kingdom household expenditure patterns between 1966 and 1996.\n\nOverall, the period witnessed dramatic structural reallocations of family budgets. Spending on motor cars, dining out, and computing experienced remarkable surges, largely at the expense of traditional necessities such as groceries and literature.\n\nIn both years, food and automotive transport accounted for over half of all household outlays. However, their trajectories diverged starkly: food comprised 44% of total expenditure in 1966 before shrinking by more than two-thirds to just 14% by 1996. Conversely, expenditure on cars doubled from 23% to 45%, establishing private vehicles as the single largest budget component.\n\nSubstantial shifts were also evident across leisure and modern technology. Dining in restaurants grew twofold from 7% to 14%, while spending on personal computers escalated tenfold from 1% to 10%. In sharp contrast, outlays on books plummeted from 6% down to a negligible 1%. Other areas, notably furniture and petrol, remained relatively stable across the three decades.",
+    vocabularies: [
+      {
+        id: "t1-r04-1",
+        word: "household outlay",
+        ipa: "/ˈhaʊshəʊld ˈaʊtleɪ/",
+        partOfSpeech: "noun",
+        meaning: "Khoản tiền chi tiêu của hộ gia đình",
+        basicEquivalent: "family spending (Band 5)",
+        synonyms: ["domestic expenditure", "household budget allocation"],
+        collocations: ["major household outlays", "total household outlay"],
+        modelSentence: "Automotive expenses absorbed the vast majority of total household outlay by the close of the century.",
+        vietnameseSentence: "Chi phí xe cộ đã hấp thụ đại đa số tổng chi tiêu hộ gia đình vào cuối thế kỷ."
+      },
+      {
+        id: "t1-r04-2",
+        word: "diverge starkly",
+        ipa: "/daɪˈvɜːdʒ ˈstɑːkli/",
+        partOfSpeech: "phrase",
+        meaning: "Phân kỳ rẽ hướng đối lập nhau một cách vô cùng rõ rệt",
+        basicEquivalent: "go opposite ways (Band 5)",
+        synonyms: ["deviate radically", "exhibit sharp divergence"],
+        collocations: ["trajectories diverged starkly", "trends diverged"],
+        modelSentence: "Household allocations for food and private motoring diverged starkly over the surveyed three decades.",
+        vietnameseSentence: "Phân bổ ngân sách gia đình cho thực phẩm và xe hơi cá nhân đã phân kỳ đối lập nhau một cách rõ rệt qua 3 thập kỷ."
+      },
+      {
+        id: "t1-r04-3",
+        word: "twofold increase",
+        ipa: "/ˈtuːfəʊld ˈɪŋkriːs/",
+        partOfSpeech: "noun",
+        meaning: "Mức tăng trưởng gấp hai lần quy mô ban đầu",
+        basicEquivalent: "doubling (Band 5)",
+        synonyms: ["twofold expansion", "doubled volume"],
+        collocations: ["witness a twofold increase", "represent a twofold surge"],
+        modelSentence: "Restaurant dining experienced a twofold increase over the thirty-year timeframe, rising from 7% to 14%.",
+        vietnameseSentence: "Ăn uống tại nhà hàng chứng kiến mức tăng gấp hai lần qua 30 năm, leo từ 7% lên 14% ngân sách."
+      },
+      {
+        id: "t1-r04-4",
+        word: "tenfold escalation",
+        ipa: "/ˈtenfəʊld ˌeskəˈleɪʃn/",
+        partOfSpeech: "noun",
+        meaning: "Mức leo thang tăng vọt gấp mười lần",
+        basicEquivalent: "ten times higher (Band 5)",
+        synonyms: ["decifold rise", "tenfold multiplication"],
+        collocations: ["tenfold escalation in sales", "record a tenfold escalation"],
+        modelSentence: "Expenditure on domestic personal computing recorded a tenfold escalation from a modest 1% up to 10%.",
+        vietnameseSentence: "Chi tiêu cho máy tính cá nhân gia đình ghi nhận mức tăng gấp mười lần từ mức khiêm tốn 1% lên tới 10%."
+      },
+      {
+        id: "t1-r04-5",
+        word: "plummet to negligible levels",
+        ipa: "/ˈplʌmɪt tuː ˈneɡlɪdʒəbl ˈlevlz/",
+        partOfSpeech: "phrase",
+        meaning: "Tụt dốc không phanh xuống mức cực kỳ nhỏ bé không đáng kể",
+        basicEquivalent: "drop down to almost zero (Band 5)",
+        synonyms: ["collapse to marginal figures", "shrink to insignificance"],
+        collocations: ["outlays plummeted to negligible levels", "plummet to a mere 1%"],
+        modelSentence: "Household outlays on printed literature plummeted to negligible levels of barely one percent by 1996.",
+        vietnameseSentence: "Khoản chi của gia đình cho sách báo in ấn đã tụt dốc xuống mức không đáng kể, vỏn vẹn một phần trăm vào năm 1996."
+      }
+    ]
+  },
+  {
+    id: "task1-roche-05-consumer-spending",
+    name: "Table: Proportions of Consumer Spending across Five European Countries (2002)",
+    vietnameseName: "Bảng số liệu: Tỷ lệ chi tiêu tiêu dùng tại 5 quốc gia Châu Âu (2002)",
+    tag: "Task 1: Bảng số liệu (Table)",
+    icon: "Table",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_roche-05-consumer-spending.png",
+    chartData: {
+      title: "Table: Proportions of Consumer Spending across Five European Countries (2002)",
+      imageUrl: "/charts/task1/task1_roche-05-consumer-spending.png",
+      keyNotes: [
+        "Thực phẩm/Đồ uống/Thuốc lá áp đảo: Luôn là khoản chi lớn nhất ở cả 5 nước; dẫn đầu là Thổ Nhĩ Kỳ (32.14%) và Ireland (~29%), thấp nhất là Thụy Điển (15.77%).",
+        "Giải trí/Giáo dục khiêm tốn nhất: Chiếm tỷ lệ thấp nhất ở toàn bộ các nước (từ dưới 2% ở Tây Ban Nha đến 4.35% ở Thổ Nhĩ Kỳ).",
+        "May mặc & Giày dép: Ý chi tiêu cao nhất cho thời trang (9%), vượt trội hẳn 4 nước còn lại (Thụy Điển chỉ 5.4%)."
+      ]
+    },
+    ieltsPrompt: "The table reveals proportions of consumer spending for three categories of products and services in Italy, Spain, Sweden, Ireland, and Turkey in 2002. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    keyNotes: [
+      "Thực phẩm/Đồ uống/Thuốc lá áp đảo: Luôn là khoản chi lớn nhất ở cả 5 nước; dẫn đầu là Thổ Nhĩ Kỳ (32.14%) và Ireland (~29%), thấp nhất là Thụy Điển (15.77%).",
+      "Giải trí/Giáo dục khiêm tốn nhất: Chiếm tỷ lệ thấp nhất ở toàn bộ các nước (từ dưới 2% ở Tây Ban Nha đến 4.35% ở Thổ Nhĩ Kỳ).",
+      "May mặc & Giày dép: Ý chi tiêu cao nhất cho thời trang (9%), vượt trội hẳn 4 nước còn lại (Thụy Điển chỉ 5.4%)."
+    ],
+    modelEssay: "The table reveals proportions of consumer spending across three broad categories of goods and services in Italy, Spain, Sweden, Ireland, and Turkey in the year 2002.\n\nOverall, food, drinks, and tobacco constituted the largest expenditure category across all five nations, whereas leisure and education consistently represented the smallest proportion of family budgets.\n\nConsumer expenditure on food, beverages, and tobacco was noticeably higher in developing and peripheral markets, led by Turkey at 32.14% and Ireland at nearly 29%. By contrast, Sweden dedicated the lowest proportion to sustenance items, at just 15.77%, with Italy and Spain registering intermediate shares of approximately 16% and 19% respectively.\n\nRegarding the remaining sectors, clothing and footwear absorbed 9% of consumer budgets in Italy, noticeably higher than any other nation surveyed. In contrast, recreation and educational services recorded the lowest allocations across the board, ranging from a mere 1.98% in Spain to a modest peak of 4.35% in Turkey.",
+    vocabularies: [
+      {
+        id: "t1-r05-1",
+        word: "consumer expenditure",
+        ipa: "/kənˈsjuːmər ɪkˈspendɪtʃə/",
+        partOfSpeech: "noun",
+        meaning: "Tổng mức chi tiêu mua sắm của người tiêu dùng",
+        basicEquivalent: "people's spending (Band 5)",
+        synonyms: ["retail spending", "private consumption outlay"],
+        collocations: ["track consumer expenditure", "aggregate consumer expenditure"],
+        modelSentence: "Macroeconomic indicators track consumer expenditure to forecast future quarterly gross domestic product.",
+        vietnameseSentence: "Các chỉ số kinh tế vĩ mô theo dõi chi tiêu của người tiêu dùng để dự báo tổng sản phẩm quốc nội quý tới."
+      },
+      {
+        id: "t1-r05-2",
+        word: "comprise the bulk of",
+        ipa: "/kəmˈpraɪz ðə bʌlk əv/",
+        partOfSpeech: "phrase",
+        meaning: "Chiếm đại đa số tỷ trọng trong toàn bộ cơ cấu",
+        basicEquivalent: "be the biggest part of (Band 5)",
+        synonyms: ["constitute the vast majority of", "account for the lion's share"],
+        collocations: ["comprise the bulk of expenditure", "comprise the bulk of sales"],
+        modelSentence: "Food, drinks, and tobacco comprised the bulk of consumer budgets across developing European economies.",
+        vietnameseSentence: "Thực phẩm, đồ uống và thuốc lá chiếm đại đa số tỷ trọng ngân sách người tiêu dùng tại các nền kinh tế châu Âu đang phát triển."
+      },
+      {
+        id: "t1-r05-3",
+        word: "sustenance items",
+        ipa: "/ˈsʌstɪnəns ˈaɪtəmz/",
+        partOfSpeech: "noun",
+        meaning: "Các mặt hàng thiết yếu duy trì sự sống (thực phẩm, nước uống)",
+        basicEquivalent: "basic food and drinks (Band 5)",
+        synonyms: ["dietary staples", "essential nourishment"],
+        collocations: ["spending on sustenance items", "procure sustenance items"],
+        modelSentence: "Developing households inevitably dedicate higher budget proportions strictly to basic sustenance items.",
+        vietnameseSentence: "Các hộ gia đình ở các nước đang phát triển tất yếu phải dành tỷ trọng ngân sách lớn hơn cho các mặt hàng sinh tồn cơ bản."
+      },
+      {
+        id: "t1-r05-4",
+        word: "negligible share",
+        ipa: "/ˈneɡlɪdʒəbl ʃeər/",
+        partOfSpeech: "noun",
+        meaning: "Tỷ trọng nhỏ bé không đáng kể trong biểu đồ",
+        basicEquivalent: "tiny part (Band 5)",
+        synonyms: ["infinitesimal fraction", "marginal proportion"],
+        collocations: ["represent a negligible share", "shrink to a negligible share"],
+        modelSentence: "Expenditure on educational pastimes in Spain accounted for a negligible share of under two percent.",
+        vietnameseSentence: "Chi tiêu cho giải trí giáo dục tại Tây Ban Nha chỉ chiếm một tỷ trọng nhỏ bé không đáng kể dưới hai phần trăm."
+      },
+      {
+        id: "t1-r05-5",
+        word: "absorb consumer budgets",
+        ipa: "/əbˈzɔːb kənˈsjuːmə ˈbʌdʒɪts/",
+        partOfSpeech: "phrase",
+        meaning: "Hấp thụ, chiếm dụng phần lớn túi tiền của người dân",
+        basicEquivalent: "take a lot of money (Band 5)",
+        synonyms: ["command personal income", "exhaust disposable wages"],
+        collocations: ["necessities absorb consumer budgets", "rent absorbs budgets"],
+        modelSentence: "Designer apparel and footwear absorbed an impressive nine percent of Italian household expenditure.",
+        vietnameseSentence: "Trang phục và giày dép hàng hiệu đã hấp thụ tới chín phần trăm ấn tượng trong chi tiêu gia đình người Ý."
+      }
+    ]
+  },
+  {
+    id: "task1-roche-06-water-cycle",
+    name: "Process: The Global Water Cycle and Groundwater Saltwater Intrusion",
+    vietnameseName: "Quy trình: Vòng tuần hoàn nước tự nhiên và hiện tượng xâm nhập mặn ngầm ven biển",
+    tag: "Task 1: Sơ đồ quy trình (Process Diagram)",
+    icon: "Droplets",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_roche-06-water-cycle.png",
+    chartData: {
+      title: "Process: The Global Water Cycle and Groundwater Saltwater Intrusion",
+      imageUrl: "/charts/task1/task1_roche-06-water-cycle.png",
+      keyNotes: [
+        "Bốc hơi & Ngưng tụ trên khí quyển: Nhiệt lượng mặt trời làm bốc hơi nước biển (chiếm khoảng 80% hơi ẩm); hơi nước bay lên cao gặp lạnh ngưng tụ thành các đám mây.",
+        "Giáng thủy & Thấm lọc mặt đất: Mây tích tụ ngưng tụ tạo mưa và tuyết (precipitation) rơi xuống ao hồ hoặc thấm vào đất (absorption).",
+        "Dòng chảy mặt & Xâm nhập mặn ngầm: Nước ngầm chảy tràn bề mặt (surface runoff) hồi quy về biển; song song đó nước mặn đại dương thấm ngược vào các tầng ngậm nước ngọt (saltwater intrusion)."
+      ]
+    },
+    ieltsPrompt: "The diagram illustrates the natural water cycle and the movement of water between the oceans, atmosphere, and land. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    keyNotes: [
+      "Bốc hơi & Ngưng tụ trên khí quyển: Nhiệt lượng mặt trời làm bốc hơi nước biển (chiếm khoảng 80% hơi ẩm); hơi nước bay lên cao gặp lạnh ngưng tụ thành các đám mây.",
+      "Giáng thủy & Thấm lọc mặt đất: Mây tích tụ ngưng tụ tạo mưa và tuyết (precipitation) rơi xuống ao hồ hoặc thấm vào đất (absorption).",
+      "Dòng chảy mặt & Xâm nhập mặn ngầm: Nước ngầm chảy tràn bề mặt (surface runoff) hồi quy về biển; song song đó nước mặn đại dương thấm ngược vào các tầng ngậm nước ngọt (saltwater intrusion)."
+    ],
+    modelEssay: "The diagram illustrates the sequential stages of the hydrological cycle, detailing the movement of water from oceanic reservoirs into the atmosphere, onto the terrestrial landscape, and back through surface and subterranean channels.\n\nOverall, the water cycle is a continuous cyclical mechanism driven by solar radiation, encompassing three primary phases: evaporation, precipitation, and terrestrial percolation returning to the sea, alongside subterranean saltwater intrusion.\n\nIn the initial phase, thermal energy from the sun heats surface waters, causing massive evaporation. Approximately 80% of all atmospheric moisture originates directly from oceans. As warm water vapor ascends into higher altitudes, it cools and condenses to formulate cloud systems. Once moisture accumulation reaches saturation, clouds discharge precipitation in the form of rainfall and snowfall.\n\nSubsequently, precipitation reaches the Earth's surface, filling freshwater bodies or permeating into porous soil layers. While a significant portion flows unimpeded back to the ocean via surface runoff, subterranean groundwater percolates downwards toward impervious bedrock. Concurrently, seawater seeps inland through porous coastal strata, resulting in saltwater intrusion into coastal freshwater aquifers.",
+    vocabularies: [
+      {
+        id: "t1-r06-1",
+        word: "hydrological cycle",
+        ipa: "/ˌhaɪdrəˈlɒdʒɪkl ˈsaɪkl/",
+        partOfSpeech: "noun",
+        meaning: "Vòng tuần hoàn nước tự nhiên giữa đất liền, đại dương và khí quyển",
+        basicEquivalent: "water cycle (Band 5)",
+        synonyms: ["global water cycle", "aquatic circulation"],
+        collocations: ["stages of the hydrological cycle", "driven by the hydrological cycle"],
+        modelSentence: "Solar radiation serves as the primary energetic engine driving the planet's hydrological cycle.",
+        vietnameseSentence: "Bức xạ mặt trời đóng vai trò là động cơ năng lượng chính vận hành vòng tuần hoàn nước của hành tinh."
+      },
+      {
+        id: "t1-r06-2",
+        word: "accumulate condensation",
+        ipa: "/əˈkjuːmjəleɪt ˌkɒndenˈseɪʃn/",
+        partOfSpeech: "phrase",
+        meaning: "Tích tụ lượng hơi nước ngưng tụ tạo thành mây dày",
+        basicEquivalent: "gather water drops into clouds (Band 5)",
+        synonyms: ["build up condensed vapor", "gather precipitation moisture"],
+        collocations: ["clouds accumulate condensation", "accumulate condensation rapidly"],
+        modelSentence: "As moisture-laden updrafts accumulate condensation, extensive cumulonimbus precipitation systems develop.",
+        vietnameseSentence: "Khi các luồng khí bốc lên mang hơi ẩm tích tụ ngưng tụ, các hệ thống mây tích mưa diện rộng sẽ phát triển."
+      },
+      {
+        id: "t1-r06-3",
+        word: "discharge precipitation",
+        ipa: "/dɪsˈtʃɑːdʒ prɪˌsɪpɪˈteɪʃn/",
+        partOfSpeech: "phrase",
+        meaning: "Giáng thủy, trút nước mưa hoặc tuyết xuống bề mặt đất",
+        basicEquivalent: "make rain or snow fall (Band 5)",
+        synonyms: ["release rainfall", "unleash downpours"],
+        collocations: ["clouds discharge precipitation", "discharge heavy precipitation"],
+        modelSentence: "Saturated storm fronts discharge heavy precipitation over coastal mountain ranges.",
+        vietnameseSentence: "Các khối không khí bão bão hòa trút những cơn mưa giáng thủy nặng hạt xuống các dãy núi ven biển."
+      },
+      {
+        id: "t1-r06-4",
+        word: "surface runoff",
+        ipa: "/ˈsɜːfɪs ˈrʌnɒf/",
+        partOfSpeech: "noun",
+        meaning: "Dòng chảy tràn bề mặt của nước mưa đổ ra sông suối và biển",
+        basicEquivalent: "water flowing on the ground (Band 5)",
+        synonyms: ["overland flow", "stormwater discharge"],
+        collocations: ["generate surface runoff", "prevent excessive surface runoff"],
+        modelSentence: "Rainfall that fails to percolate through soil horizons drains back into marine reservoirs via surface runoff.",
+        vietnameseSentence: "Nước mưa không kịp thấm qua các tầng đất sẽ thoát trở lại các hồ chứa đại dương qua dòng chảy tràn bề mặt."
+      },
+      {
+        id: "t1-r06-5",
+        word: "saltwater intrusion",
+        ipa: "/ˈsɔːltwɔːtər ɪnˈtruːʒn/",
+        partOfSpeech: "noun",
+        meaning: "Hiện tượng xâm nhập mặn của nước biển vào tầng nước ngầm",
+        basicEquivalent: "sea water going into drinking water (Band 5)",
+        synonyms: ["saline seepage", "marine aquifer contamination"],
+        collocations: ["prevent saltwater intrusion", "combat saltwater intrusion"],
+        modelSentence: "Over-extracting fresh coastal aquifers accelerates saltwater intrusion from adjacent ocean depths.",
+        vietnameseSentence: "Việc khai thác quá mức các túi nước ngọt ven biển sẽ đẩy nhanh hiện tượng xâm nhập mặn từ đại dương lân cận."
+      }
+    ]
+  },
+  {
+    id: "task1-roche-07-island-tourism",
+    name: "Maps: Development and Transformation of an Island for Tourism",
+    vietnameseName: "Bản đồ quy hoạch: Sự biến đổi và phát triển của một hòn đảo phục vụ du lịch",
+    tag: "Task 1: Bản đồ quy hoạch (Maps)",
+    icon: "MapPin",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_roche-07-island-tourism.png",
+    chartData: {
+      title: "Maps: Development and Transformation of an Island for Tourism",
+      imageUrl: "/charts/task1/task1_roche-07-island-tourism.png",
+      keyNotes: [
+        "Chuyển đổi từ đảo hoang thành khu nghỉ dưỡng: Đảo hoang sơ trước đây hoàn toàn không có công trình xây dựng, sau quy hoạch đã biến thành khu du lịch tiện nghi đầy đủ.",
+        "Hệ thống bungalow lưu trú: Xây mới 15 căn nhà tròn (6 căn phía Tây, 9 căn ở trung tâm) kết nối bởi đường dạo bộ (footpaths) bao quanh quầy lễ tân và nhà hàng.",
+        "Hạ tầng cầu tàu & khu giải trí: Bờ biển phía Nam xây dựng bến tàu (pier) nối đường xe cơ giới tới lễ tân; bãi biển phía Tây mở khu bơi lội an toàn ngoài khơi; cây cối tự nhiên vẫn được bảo tồn."
+      ]
+    },
+    ieltsPrompt: "The two maps illustrate the changes which have taken place on a small island, before and after it was developed for tourism. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    keyNotes: [
+      "Chuyển đổi từ đảo hoang thành khu nghỉ dưỡng: Đảo hoang sơ trước đây hoàn toàn không có công trình xây dựng, sau quy hoạch đã biến thành khu du lịch tiện nghi đầy đủ.",
+      "Hệ thống bungalow lưu trú: Xây mới 15 căn nhà tròn (6 căn phía Tây, 9 căn ở trung tâm) kết nối bởi đường dạo bộ (footpaths) bao quanh quầy lễ tân và nhà hàng.",
+      "Hạ tầng cầu tàu & khu giải trí: Bờ biển phía Nam xây dựng bến tàu (pier) nối đường xe cơ giới tới lễ tân; bãi biển phía Tây mở khu bơi lội an toàn ngoài khơi; cây cối tự nhiên vẫn được bảo tồn."
+    ],
+    modelEssay: "The two maps illustrate the transformation of a small uninhabited island before and after being redeveloped to support commercial tourism infrastructure.\n\nOverall, the island has been substantially modernized with the addition of comprehensive visitor accommodation and leisure amenities, while natural landscape elements, such as scattered palm trees, have been largely preserved.\n\nPrior to development, the island was entirely devoid of human structures, featuring solely sandy beaches along its western rim and sparse clusters of trees across its terrain. Following redevelopment, tourist accommodation was established through the construction of fifteen circular huts, with six located in the western quarter and nine situated around the central core. These residential quarters are interconnected via an organized network of pedestrian footpaths connecting to a central reception desk and a dining restaurant.\n\nTransportation and recreational access were also systematically enhanced. A vehicular road now links the reception building to a newly constructed marine pier along the southern coastline, facilitating boat transfers. Furthermore, a designated offshore swimming area was created off the western shore, while the natural flora was retained without extensive deforestation.",
+    vocabularies: [
+      {
+        id: "t1-r07-1",
+        word: "commercial redevelopment",
+        ipa: "/kəˈmɜːʃl ˌriːdɪˈveləpmənt/",
+        partOfSpeech: "noun",
+        meaning: "Quy hoạch tái thiết vì mục đích thương mại dịch vụ",
+        basicEquivalent: "building new business buildings (Band 5)",
+        synonyms: ["tourism modernizing overhaul", "infrastructural transformation"],
+        collocations: ["undergo commercial redevelopment", "plans for commercial redevelopment"],
+        modelSentence: "The uninhabited islet underwent rapid commercial redevelopment to accommodate luxury eco-tourists.",
+        vietnameseSentence: "Hòn đảo nhỏ không người ở đã trải qua quá trình tái thiết thương mại nhanh chóng để tiếp đón khách du lịch sinh thái cao cấp."
+      },
+      {
+        id: "t1-r07-2",
+        word: "ample accommodation",
+        ipa: "/ˈæmpl əˌkɒməˈdeɪʃn/",
+        partOfSpeech: "noun",
+        meaning: "Cơ sở lưu trú dồi dào, phong phú cho du khách",
+        basicEquivalent: "plenty of rooms to sleep (Band 5)",
+        synonyms: ["plentiful lodging", "abundant guest quarters"],
+        collocations: ["provide ample accommodation", "boast ample accommodation"],
+        modelSentence: "Following intensive architectural redevelopment, the resort island now boasts ample accommodation for vacationers.",
+        vietnameseSentence: "Sau khi tái thiết kiến trúc mạnh mẽ, hòn đảo nghỉ dưỡng nay tự hào sở hữu cơ sở lưu trú dồi dào cho du khách."
+      },
+      {
+        id: "t1-r07-3",
+        word: "pedestrian footpaths",
+        ipa: "/pəˈdestriən ˈfʊtpɑːðz/",
+        partOfSpeech: "noun",
+        meaning: "Đường mòn dạo bộ dành riêng cho người đi bộ",
+        basicEquivalent: "walking paths (Band 5)",
+        synonyms: ["walkways", "foot trails", "pedestrian lanes"],
+        collocations: ["network of pedestrian footpaths", "paved pedestrian footpaths"],
+        modelSentence: "Guest accommodation chalets are interconnected by an organized grid of timber pedestrian footpaths.",
+        vietnameseSentence: "Các căn nhà gỗ nghỉ dưỡng của khách được kết nối với nhau bởi mạng lưới đường dạo bộ bằng gỗ quy củ."
+      },
+      {
+        id: "t1-r07-4",
+        word: "marine pier",
+        ipa: "/məˈriːn pɪə/",
+        partOfSpeech: "noun",
+        meaning: "Cầu cảng trên biển để tàu thuyền neo đậu cập bến",
+        basicEquivalent: "dock for boats (Band 5)",
+        synonyms: ["jetty", "boat landing terminal"],
+        collocations: ["construct a marine pier", "ferries dock at the pier"],
+        modelSentence: "A modern marine pier was constructed along the southern shoreline to allow passenger catamarans to dock safely.",
+        vietnameseSentence: "Một cầu cảng biển hiện đại đã được xây dựng dọc theo bờ biển phía nam để tàu hai thân chở khách cập bến an toàn."
+      },
+      {
+        id: "t1-r07-5",
+        word: "designated swimming area",
+        ipa: "/ˈdezɪɡneɪtɪd ˈswɪmɪŋ ˈeəriə/",
+        partOfSpeech: "noun",
+        meaning: "Khu vực bãi tắm được quy hoạch an toàn cho bơi lội",
+        basicEquivalent: "safe place to swim (Band 5)",
+        synonyms: ["marked bathing zone", "cordoned aquatic zone"],
+        collocations: ["a designated swimming area offshore", "establish a designated swimming area"],
+        modelSentence: "A designated swimming area was demarcated off the western beach to safeguard vacationers from coastal boat traffic.",
+        vietnameseSentence: "Một khu vực bơi lội quy hoạch đã được khoanh vùng ngoài khơi bãi biển phía tây để bảo vệ du khách khỏi tàu thuyền ven bờ."
+      }
+    ]
+  }
 ];
-
 export const IELTS_TASK1_TOPICS = RAW_IELTS_TASK1_TOPICS.map(topic => ({
   ...topic,
   vocabularies: topic.vocabularies.map(v => enrichVocabulary(v, topic.name))

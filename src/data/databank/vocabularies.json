@@ -8299,5 +8299,2048 @@
     "exampleSentence": "Broadcasting unvetted footage of celebrities' grief merely serves toxic public voyeurism.",
     "vietnameseSentence": "Phát sóng các thước phim chưa được kiểm chứng về nỗi đau buồn của người nổi tiếng chỉ nhằm phục vụ thói tò mò nhìn trộm độc hại của đám đông.",
     "wordFamily": "public voyeurism (IELTS Academic)"
+  },
+  {
+    "id": "V363",
+    "topicId": "t2-space-exploration-funding",
+    "word": "accelerate",
+    "partOfSpeech": "verb",
+    "ipa": "/əkˈseləreɪt/",
+    "meaning": "Đẩy nhanh tiến độ, làm tăng tốc độ phát triển",
+    "definitionEn": "Academic vocabulary for IELTS: accelerate in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "speed up (Band 5)",
+    "synonyms": [
+      "quicken",
+      "expedite",
+      "precipitate"
+    ],
+    "collocations": [
+      "accelerate economic growth",
+      "accelerate the transition"
+    ],
+    "exampleSentence": "Technological investments will accelerate the adoption of clean energy across developing regions.",
+    "vietnameseSentence": "Các khoản đầu tư công nghệ sẽ đẩy nhanh việc áp dụng năng lượng sạch tại các khu vực đang phát triển.",
+    "wordFamily": "accelerate (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V364",
+    "topicId": "t2-media-violence-censorship",
+    "word": "amplify",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈæmplɪfaɪ/",
+    "meaning": "Khuếch đại, làm gia tăng cường độ hoặc ảnh hưởng",
+    "definitionEn": "Academic vocabulary for IELTS: amplify in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "make bigger (Band 5)",
+    "synonyms": [
+      "magnify",
+      "intensify",
+      "escalate"
+    ],
+    "collocations": [
+      "amplify public anxiety",
+      "amplify the impact"
+    ],
+    "exampleSentence": "Sensationalist headlines amplify public anxiety regarding violent crimes.",
+    "vietnameseSentence": "Những tiêu đề báo giật gân khuếch đại nỗi lo âu của công chúng về các vụ án bạo lực.",
+    "wordFamily": "amplify (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V365",
+    "topicId": "t2-corruption-capital-flight",
+    "word": "dismantle",
+    "partOfSpeech": "verb",
+    "ipa": "/dɪsˈmæntl/",
+    "meaning": "Tháo dỡ, triệt tiêu có hệ thống cấu trúc tiêu cực",
+    "definitionEn": "Academic vocabulary for IELTS: dismantle in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "take apart / stop (Band 5)",
+    "synonyms": [
+      "deconstruct",
+      "demolish",
+      "eradicate"
+    ],
+    "collocations": [
+      "dismantle systemic corruption",
+      "dismantle trade barriers"
+    ],
+    "exampleSentence": "The administration enacted new digital laws to dismantle systemic bribery within customs departments.",
+    "vietnameseSentence": "Chính quyền ban hành luật số hóa mới nhằm triệt tiêu nạn hối lộ có hệ thống trong ngành hải quan.",
+    "wordFamily": "dismantle (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V366",
+    "topicId": "t2-journalism-ethics-distortion",
+    "word": "ignite",
+    "partOfSpeech": "verb",
+    "ipa": "/ɪɡˈnaɪt/",
+    "meaning": "Châm ngòi, kích thích bùng nổ tranh luận hoặc phong trào",
+    "definitionEn": "Academic vocabulary for IELTS: ignite in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "start / cause (Band 5)",
+    "synonyms": [
+      "trigger",
+      "spark",
+      "kindle"
+    ],
+    "collocations": [
+      "ignite fierce public debate",
+      "ignite economic reform"
+    ],
+    "exampleSentence": "The revelation of corporate tax evasion ignited fierce public debate regarding wealth inequality.",
+    "vietnameseSentence": "Việc phanh phui trốn thuế của doanh nghiệp đã châm ngòi cho cuộc tranh luận công chúng nảy lửa về bất bình đẳng giàu nghèo.",
+    "wordFamily": "ignite (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V367",
+    "topicId": "t2-journalism-ethics-distortion",
+    "word": "illuminate",
+    "partOfSpeech": "verb",
+    "ipa": "/ɪˈluːmɪneɪt/",
+    "meaning": "Làm sáng tỏ, soi rọi bản chất của vấn đề phức tạp",
+    "definitionEn": "Academic vocabulary for IELTS: illuminate in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "explain clearly (Band 5)",
+    "synonyms": [
+      "clarify",
+      "elucidate",
+      "shed light on"
+    ],
+    "collocations": [
+      "illuminate the underlying causes",
+      "illuminate key findings"
+    ],
+    "exampleSentence": "The investigative documentary served to illuminate the hidden environmental costs of fast fashion.",
+    "vietnameseSentence": "Bộ phim tài liệu điều tra đã giúp làm sáng tỏ những cái giá môi trường tiềm ẩn của thời trang nhanh.",
+    "wordFamily": "illuminate (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V368",
+    "topicId": "t2-space-exploration-funding",
+    "word": "leverage",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈliːvərɪdʒ/",
+    "meaning": "Tận dụng đòn bẩy nguồn lực để tối đa hóa hiệu quả",
+    "definitionEn": "Academic vocabulary for IELTS: leverage in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "use well (Band 5)",
+    "synonyms": [
+      "harness",
+      "capitalize on",
+      "utilize strategically"
+    ],
+    "collocations": [
+      "leverage private capital",
+      "leverage technological advantages"
+    ],
+    "exampleSentence": "Emerging nations must leverage private-public partnerships to finance advanced space research.",
+    "vietnameseSentence": "Các quốc gia mới nổi phải tận dụng đòn bẩy hợp tác công-tư để tài trợ cho nghiên cứu không gian tân tiến.",
+    "wordFamily": "leverage (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V369",
+    "topicId": "t2-space-exploration-funding",
+    "word": "mobilize",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈməʊbəlaɪz/",
+    "meaning": "Huy động tối đa nguồn lực, lực lượng cho mục tiêu lớn",
+    "definitionEn": "Academic vocabulary for IELTS: mobilize in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "gather together (Band 5)",
+    "synonyms": [
+      "marshal",
+      "rally",
+      "convene"
+    ],
+    "collocations": [
+      "mobilize public resources",
+      "mobilize collective action"
+    ],
+    "exampleSentence": "Governments must mobilize financial resources immediately to combat catastrophic coastal flooding.",
+    "vietnameseSentence": "Các chính phủ phải huy động các nguồn lực tài chính ngay lập tức để chống chọi với triều cường ven biển thảm khốc.",
+    "wordFamily": "mobilize (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V370",
+    "topicId": "t2-media-violence-censorship",
+    "word": "penetrate",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈpenətreɪt/",
+    "meaning": "Thâm nhập sâu rộng vào thị trường hoặc nhận thức",
+    "definitionEn": "Academic vocabulary for IELTS: penetrate in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "enter deeply (Band 5)",
+    "synonyms": [
+      "infiltrate",
+      "permeate",
+      "pervade"
+    ],
+    "collocations": [
+      "penetrate international markets",
+      "penetrate cultural barriers"
+    ],
+    "exampleSentence": "Digital streaming services have penetrated almost every household, transforming entertainment habits.",
+    "vietnameseSentence": "Các dịch vụ phát trực tuyến kỹ thuật số đã thâm nhập gần như mọi gia đình, làm biến đổi thói quen giải trí.",
+    "wordFamily": "penetrate (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V371",
+    "topicId": "t2-corruption-capital-flight",
+    "word": "snowball",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈsnəʊbɔːl/",
+    "meaning": "Gia tăng cấp số nhân theo hiệu ứng hòn tuyết lăn",
+    "definitionEn": "Academic vocabulary for IELTS: snowball in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "grow very fast (Band 5)",
+    "synonyms": [
+      "escalate exponentially",
+      "compound",
+      "balloon"
+    ],
+    "collocations": [
+      "snowball into a major crisis",
+      "snowball rapidly"
+    ],
+    "exampleSentence": "Minor regulatory oversights quickly snowballed into an unmanageable financial banking crisis.",
+    "vietnameseSentence": "Những sơ suất quản lý nhỏ đã nhanh chóng phình to theo hiệu ứng tuyết lăn thành một cuộc khủng hoảng ngân hàng mất kiểm soát.",
+    "wordFamily": "snowball (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V372",
+    "topicId": "task1-roche-04-uk-spending",
+    "word": "soar",
+    "partOfSpeech": "verb",
+    "ipa": "/sɔːr/",
+    "meaning": "Tăng vọt lên ngưỡng rất cao trong thời gian ngắn",
+    "definitionEn": "Academic vocabulary for IELTS: soar in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "go up high (Band 5)",
+    "synonyms": [
+      "skyrocket",
+      "surge",
+      "escalate dramatically"
+    ],
+    "collocations": [
+      "soar to record heights",
+      "temperatures soared"
+    ],
+    "exampleSentence": "During the post-war industrial era, domestic vehicle ownership soared to unprecedented heights.",
+    "vietnameseSentence": "Trong kỷ nguyên công nghiệp hậu chiến, tỷ lệ sở hữu xe hơi gia đình đã tăng vọt lên tầm cao chưa từng có.",
+    "wordFamily": "soar (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V373",
+    "topicId": "t2-university-vs-gap-year",
+    "word": "unleash",
+    "partOfSpeech": "verb",
+    "ipa": "/ʌnˈliːʃ/",
+    "meaning": "Giải phóng sức mạnh hoặc khơi mào làn sóng mạnh mẽ",
+    "definitionEn": "Academic vocabulary for IELTS: unleash in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "let out / release (Band 5)",
+    "synonyms": [
+      "unchain",
+      "liberate",
+      "trigger"
+    ],
+    "collocations": [
+      "unleash human potential",
+      "unleash economic prosperity"
+    ],
+    "exampleSentence": "Encouraging independent research will unleash groundbreaking innovations in sustainable transport.",
+    "vietnameseSentence": "Khuyến khích nghiên cứu độc lập sẽ giải phóng những sáng kiến đột phá trong giao thông bền vững.",
+    "wordFamily": "unleash (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V374",
+    "topicId": "t2-space-exploration-funding",
+    "word": "whittle down",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈwɪtl daʊn/",
+    "meaning": "Gọt giũa, cắt giảm thu hẹp dần dần",
+    "definitionEn": "Academic vocabulary for IELTS: whittle down in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "cut down slowly (Band 5)",
+    "synonyms": [
+      "diminish gradually",
+      "curtail",
+      "pare down"
+    ],
+    "collocations": [
+      "whittle down public debt",
+      "whittle down expenditure"
+    ],
+    "exampleSentence": "Rigorous austerity measures helped whittle down the nation's burgeoning fiscal deficits.",
+    "vietnameseSentence": "Các biện pháp thắt lưng buộc bụng nghiêm ngặt đã giúp gọt giũa dần khoản thâm hụt tài khóa đang phình to của quốc gia.",
+    "wordFamily": "whittle down (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V375",
+    "topicId": "t2-corruption-capital-flight",
+    "word": "sidestep",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈsaɪdstep/",
+    "meaning": "Né tránh khéo léo một vấn đề hoặc nghĩa vụ pháp lý",
+    "definitionEn": "Academic vocabulary for IELTS: sidestep in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "avoid (Band 5)",
+    "synonyms": [
+      "circumvent",
+      "bypass",
+      "evade"
+    ],
+    "collocations": [
+      "sidestep legal regulations",
+      "sidestep the controversy"
+    ],
+    "exampleSentence": "Corrupt corporate executives frequently use offshore shell corporations to sidestep tax liabilities.",
+    "vietnameseSentence": "Những giám đốc doanh nghiệp tha hóa thường sử dụng công ty bình phong ở nước ngoài để né tránh nghĩa vụ thuế.",
+    "wordFamily": "sidestep (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V376",
+    "topicId": "t2-journalism-ethics-distortion",
+    "word": "defuse",
+    "partOfSpeech": "verb",
+    "ipa": "/diːˈfjuːz/",
+    "meaning": "Tháo ngòi, xoa dịu nguy cơ xung đột căng thẳng",
+    "definitionEn": "Academic vocabulary for IELTS: defuse in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "calm down (Band 5)",
+    "synonyms": [
+      "mollify",
+      "alleviate",
+      "de-escalate"
+    ],
+    "collocations": [
+      "defuse social tensions",
+      "defuse diplomatic hostilities"
+    ],
+    "exampleSentence": "Transparent town-hall consultations helped defuse public anger regarding proposed airport expansions.",
+    "vietnameseSentence": "Các buổi tham vấn đối thoại minh bạch đã giúp tháo ngòi sự phẫn nộ của công chúng về kế hoạch mở rộng sân bay.",
+    "wordFamily": "defuse (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V377",
+    "topicId": "t2-university-vs-gap-year",
+    "word": "bridge",
+    "partOfSpeech": "verb",
+    "ipa": "/brɪdʒ/",
+    "meaning": "Thu hẹp khoảng cách bất bình đẳng hoặc bất đồng",
+    "definitionEn": "Academic vocabulary for IELTS: bridge in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "reduce the gap (Band 5)",
+    "synonyms": [
+      "reconcile",
+      "narrow",
+      "close the chasm"
+    ],
+    "collocations": [
+      "bridge the digital divide",
+      "bridge socioeconomic disparities"
+    ],
+    "exampleSentence": "Subsidized public education is vital to bridge the growing wealth divide between rural and urban populations.",
+    "vietnameseSentence": "Giáo dục công lập được trợ cấp là điều cốt yếu để thu hẹp khoảng cách giàu nghèo ngày càng lớn giữa nông thôn và thành thị.",
+    "wordFamily": "bridge (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V378",
+    "topicId": "t2-sedentary-lifestyle-health",
+    "word": "diagnose",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈdaɪəɡnəʊz/",
+    "meaning": "Nhận diện, chẩn đoán căn nguyên của một vấn đề xã hội",
+    "definitionEn": "Academic vocabulary for IELTS: diagnose in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "find the cause (Band 5)",
+    "synonyms": [
+      "identify",
+      "pinpoint",
+      "ascertain"
+    ],
+    "collocations": [
+      "diagnose structural flaws",
+      "diagnose the root problem"
+    ],
+    "exampleSentence": "Sociologists must accurately diagnose the psychological drivers behind adolescent smartphone addiction.",
+    "vietnameseSentence": "Các nhà xã hội học phải nhận diện chính xác các động lực tâm lý đằng sau thói nghiện điện thoại thông minh ở thanh thiếu niên.",
+    "wordFamily": "diagnose (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V379",
+    "topicId": "t2-space-exploration-funding",
+    "word": "heighten",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈhaɪtn/",
+    "meaning": "Làm tăng cao, làm sâu sắc thêm nhận thức hoặc rủi ro",
+    "definitionEn": "Academic vocabulary for IELTS: heighten in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "increase (Band 5)",
+    "synonyms": [
+      "intensify",
+      "augment",
+      "elevate"
+    ],
+    "collocations": [
+      "heighten public awareness",
+      "heighten security precautions"
+    ],
+    "exampleSentence": "International environmental summits heighten global awareness regarding plastic marine contamination.",
+    "vietnameseSentence": "Các hội nghị thượng đỉnh môi trường quốc tế làm nâng cao nhận thức toàn cầu về ô nhiễm nhựa đại dương.",
+    "wordFamily": "heighten (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V380",
+    "topicId": "t2-sedentary-lifestyle-health",
+    "word": "stimulate",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈstɪmjuleɪt/",
+    "meaning": "Kích thích, thúc đẩy sự vận động và phát triển tích cực",
+    "definitionEn": "Academic vocabulary for IELTS: stimulate in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "make active (Band 5)",
+    "synonyms": [
+      "invigorate",
+      "catalyze",
+      "galvanize"
+    ],
+    "collocations": [
+      "stimulate economic recovery",
+      "stimulate cognitive development"
+    ],
+    "exampleSentence": "Engaging in structured athletic activities stimulates cognitive functioning and mitigates work stress.",
+    "vietnameseSentence": "Tham gia các hoạt động thể thao bài bản kích thích chức năng nhận thức và giảm bớt căng thẳng công việc.",
+    "wordFamily": "stimulate (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V381",
+    "topicId": "task1-roche-07-island-tourism",
+    "word": "transform",
+    "partOfSpeech": "verb",
+    "ipa": "/trænsˈfɔːm/",
+    "meaning": "Chuyển hóa căn bản diện mạo, cấu trúc hoặc tính chất",
+    "definitionEn": "Academic vocabulary for IELTS: transform in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "change completely (Band 5)",
+    "synonyms": [
+      "revolutionize",
+      "metamorphose",
+      "transfigure"
+    ],
+    "collocations": [
+      "transform the urban landscape",
+      "transform traditional pedagogy"
+    ],
+    "exampleSentence": "The redevelopment plan transformed the desolate rural island into a flourishing leisure retreat.",
+    "vietnameseSentence": "Kế hoạch tái thiết đã chuyển hóa hòn đảo hoang sơ thành một khu nghỉ dưỡng giải trí phồn thịnh.",
+    "wordFamily": "transform (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V382",
+    "topicId": "t2-university-vs-gap-year",
+    "word": "bolster",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈbəʊlstə/",
+    "meaning": "Củng cố, gia cố thêm sức mạnh và độ tin cậy",
+    "definitionEn": "Academic vocabulary for IELTS: bolster in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "make stronger (Band 5)",
+    "synonyms": [
+      "reinforce",
+      "buttress",
+      "fortify"
+    ],
+    "collocations": [
+      "bolster national reserves",
+      "bolster self-confidence"
+    ],
+    "exampleSentence": "Working in diverse entry-level environments during a gap year bolsters young adults' emotional resilience.",
+    "vietnameseSentence": "Làm việc trong các môi trường khởi điểm đa dạng trong kỳ gap year củng cố sự bản lĩnh cảm xúc của thanh niên.",
+    "wordFamily": "bolster (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V383",
+    "topicId": "t2-sedentary-lifestyle-health",
+    "word": "curb",
+    "partOfSpeech": "verb",
+    "ipa": "/kɜːb/",
+    "meaning": "Kiềm chế, kiểm soát một xu hướng nguy hiểm hoặc lãng phí",
+    "definitionEn": "Academic vocabulary for IELTS: curb in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "limit / stop (Band 5)",
+    "synonyms": [
+      "restrain",
+      "suppress",
+      "check"
+    ],
+    "collocations": [
+      "curb greenhouse emissions",
+      "curb wasteful spending"
+    ],
+    "exampleSentence": "Stricter advertising regulations are essential to curb childhood consumption of hyper-processed snacks.",
+    "vietnameseSentence": "Các quy định quảng cáo chặt chẽ hơn là thiết yếu để kiềm chế trẻ em tiêu thụ đồ ăn vặt chế biến sẵn.",
+    "wordFamily": "curb (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V384",
+    "topicId": "t2-journalism-ethics-distortion",
+    "word": "erode",
+    "partOfSpeech": "verb",
+    "ipa": "/ɪˈrəʊd/",
+    "meaning": "Làm xói mòn dần giá trị hoặc niềm tin qua thời gian",
+    "definitionEn": "Academic vocabulary for IELTS: erode in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "wear away / ruin slowly (Band 5)",
+    "synonyms": [
+      "undermine",
+      "corrode",
+      "deteriorate"
+    ],
+    "collocations": [
+      "erode trust in democracy",
+      "erode moral standards"
+    ],
+    "exampleSentence": "Rampant dissemination of unverified clickbait articles erodes public confidence in journalism.",
+    "vietnameseSentence": "Sự lan truyền tràn lan các bài báo giật gân chưa kiểm chứng làm xói mòn niềm tin của công chúng vào báo chí.",
+    "wordFamily": "erode (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V385",
+    "topicId": "t2-university-vs-gap-year",
+    "word": "foster",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈfɒstə/",
+    "meaning": "Nuôi dưỡng, khuyến khích sự hình thành giá trị tốt đẹp",
+    "definitionEn": "Academic vocabulary for IELTS: foster in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "help grow (Band 5)",
+    "synonyms": [
+      "nurture",
+      "cultivate",
+      "encourage"
+    ],
+    "collocations": [
+      "foster international cooperation",
+      "foster creative thinking"
+    ],
+    "exampleSentence": "Universities should foster an intellectual atmosphere where dissenting perspectives are debated civilly.",
+    "vietnameseSentence": "Các trường đại học nên nuôi dưỡng một bầu không khí học thuật nơi các góc nhìn trái chiều được tranh luận văn minh.",
+    "wordFamily": "foster (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V386",
+    "topicId": "t2-sedentary-lifestyle-health",
+    "word": "mitigate",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈmɪtɪɡeɪt/",
+    "meaning": "Làm dịu bớt, giảm nhẹ mức độ tác hại hoặc rủi ro",
+    "definitionEn": "Academic vocabulary for IELTS: mitigate in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "make less bad (Band 5)",
+    "synonyms": [
+      "alleviate",
+      "attenuate",
+      "lessen"
+    ],
+    "collocations": [
+      "mitigate environmental fallout",
+      "mitigate health risks"
+    ],
+    "exampleSentence": "Urban tree plantings substantially mitigate the heat-island effect across densely populated metropolitan hubs.",
+    "vietnameseSentence": "Trồng cây xanh đô thị giúp giảm nhẹ đáng kể hiệu ứng đảo nhiệt tại các đô thị đông đúc.",
+    "wordFamily": "mitigate (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V387",
+    "topicId": "task1-roche-01-kpb-shares",
+    "word": "rebound",
+    "partOfSpeech": "verb",
+    "ipa": "/rɪˈbaʊnd/",
+    "meaning": "Bật dậy, hồi phục trở lại sau khi chạm đáy suy thoái",
+    "definitionEn": "Academic vocabulary for IELTS: rebound in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "bounce back (Band 5)",
+    "synonyms": [
+      "recover",
+      "rally",
+      "resurge"
+    ],
+    "collocations": [
+      "rebound strongly",
+      "the economy rebounded"
+    ],
+    "exampleSentence": "After plunging to seven dollars during the crisis, KPB equity valuations rebounded strongly in early 2010.",
+    "vietnameseSentence": "Sau khi lao dốc xuống bảy đô la trong khủng hoảng, định giá cổ phiếu KPB đã hồi phục mạnh mẽ vào đầu năm 2010.",
+    "wordFamily": "rebound (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V388",
+    "topicId": "task1-roche-04-uk-spending",
+    "word": "stabilize",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈsteɪbəlaɪz/",
+    "meaning": "Bình ổn trở lại sau giai đoạn biến động hỗn loạn",
+    "definitionEn": "Academic vocabulary for IELTS: stabilize in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "become stable (Band 5)",
+    "synonyms": [
+      "settle",
+      "steady",
+      "equilibrate"
+    ],
+    "collocations": [
+      "stabilize prices",
+      "the market stabilized"
+    ],
+    "exampleSentence": "Following years of radical price swings, consumer expenditure on household furnishings stabilized by 1996.",
+    "vietnameseSentence": "Sau nhiều năm biến động giá dữ dội, chi tiêu của người tiêu dùng cho đồ nội thất gia đình đã bình ổn vào năm 1996.",
+    "wordFamily": "stabilize (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V389",
+    "topicId": "task1-roche-02-gulf-fertility",
+    "word": "surpass",
+    "partOfSpeech": "verb",
+    "ipa": "/səˈpɑːs/",
+    "meaning": "Vượt qua ngưỡng quy định hoặc số liệu của đối tượng khác",
+    "definitionEn": "Academic vocabulary for IELTS: surpass in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "go over / beat (Band 5)",
+    "synonyms": [
+      "eclipsed",
+      "outstrip",
+      "exceed"
+    ],
+    "collocations": [
+      "surpass previous records",
+      "surpass expectations"
+    ],
+    "exampleSentence": "Projections suggest renewable electricity generation will surpass coal capacity within the current decade.",
+    "vietnameseSentence": "Các dự báo cho thấy sản lượng điện tái tạo sẽ vượt qua công suất than đá ngay trong thập kỷ hiện tại.",
+    "wordFamily": "surpass (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V390",
+    "topicId": "t2-journalism-ethics-distortion",
+    "word": "project impartiality",
+    "partOfSpeech": "phrase",
+    "ipa": "/prəˈdʒekt ˌɪmˌpɑːʃiˈæləti/",
+    "meaning": "Thể hiện lập trường khách quan, không thiên vị khi tranh luận",
+    "definitionEn": "Academic vocabulary for IELTS: project impartiality in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "be neutral in writing (Band 5)",
+    "synonyms": [
+      "exhibit neutrality",
+      "dispassionate stance"
+    ],
+    "collocations": [
+      "project an aura of impartiality",
+      "maintain scholarly impartiality"
+    ],
+    "exampleSentence": "Scholarly essayists must project impartiality by carefully evaluating evidence from competing ideological camps.",
+    "vietnameseSentence": "Các nhà tiểu luận học thuật phải thể hiện tính khách quan bằng cách đánh giá cẩn trọng bằng chứng từ các phe phái đối lập.",
+    "wordFamily": "project impartiality (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V391",
+    "topicId": "t2-media-violence-censorship",
+    "word": "unfounded assertion",
+    "partOfSpeech": "noun",
+    "ipa": "/ʌnˈfaʊndɪd əˈsɜːʃn/",
+    "meaning": "Lời khẳng định vô căn cứ, không có dữ liệu thực nghiệm chứng minh",
+    "definitionEn": "Academic vocabulary for IELTS: unfounded assertion in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "saying something without proof (Band 5)",
+    "synonyms": [
+      "baseless claim",
+      "unsubstantiated allegation"
+    ],
+    "collocations": [
+      "dismiss as an unfounded assertion",
+      "make unfounded assertions"
+    ],
+    "exampleSentence": "Claiming that video games are the sole cause of youth delinquency is an unfounded assertion.",
+    "vietnameseSentence": "Khẳng định rằng trò chơi điện tử là nguyên nhân duy nhất dẫn đến phạm pháp vị thành niên là một lời khẳng định vô căn cứ.",
+    "wordFamily": "unfounded assertion (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V392",
+    "topicId": "t2-corruption-capital-flight",
+    "word": "oversimplification",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌəʊvəsɪmplɪfɪˈkeɪʃn/",
+    "meaning": "Sự đơn giản hóa vấn đề một cách phiến diện, làm méo mó bản chất",
+    "definitionEn": "Academic vocabulary for IELTS: oversimplification in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "making it too simple (Band 5)",
+    "synonyms": [
+      "reductionism",
+      "shallow characterization"
+    ],
+    "collocations": [
+      "gross oversimplification",
+      "guilty of oversimplification"
+    ],
+    "exampleSentence": "Attributing complex economic downturns solely to personal corruption is a gross oversimplification.",
+    "vietnameseSentence": "Quy kết những cuộc suy thoái kinh tế phức tạp hoàn toàn cho tham nhũng cá nhân là một sự đơn giản hóa phiến diện.",
+    "wordFamily": "oversimplification (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V393",
+    "topicId": "t2-sedentary-lifestyle-health",
+    "word": "growing body of opinion",
+    "partOfSpeech": "phrase",
+    "ipa": "/ˈɡrəʊɪŋ ˈbɒdi əv əˈpɪnjən/",
+    "meaning": "Luồng quan điểm, sự đồng thuận học thuật ngày càng đông đảo",
+    "definitionEn": "Academic vocabulary for IELTS: growing body of opinion in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "more and more people think (Band 5)",
+    "synonyms": [
+      "mounting consensus",
+      "broadening perspective"
+    ],
+    "collocations": [
+      "a growing body of opinion suggests",
+      "align with a growing body of opinion"
+    ],
+    "exampleSentence": "There is a growing body of opinion that prolonged sedentary office hours constitute a silent public health crisis.",
+    "vietnameseSentence": "Có một luồng quan điểm ngày càng đông đảo cho rằng ngồi bàn giấy kéo dài là một cuộc khủng hoảng y tế thầm lặng.",
+    "wordFamily": "growing body of opinion (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V394",
+    "topicId": "t2-sedentary-lifestyle-health",
+    "word": "compelling evidence",
+    "partOfSpeech": "noun",
+    "ipa": "/kəmˈpelɪŋ ˈevɪdəns/",
+    "meaning": "Bằng chứng thuyết phục, đanh thép không thể chối cãi",
+    "definitionEn": "Academic vocabulary for IELTS: compelling evidence in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "very strong proof (Band 5)",
+    "synonyms": [
+      "irrefutable proof",
+      "cogent corroboration"
+    ],
+    "collocations": [
+      "provide compelling evidence",
+      "lack compelling evidence"
+    ],
+    "exampleSentence": "Neurological research provides compelling evidence that aerobic exercise alleviates adolescent clinical anxiety.",
+    "vietnameseSentence": "Nghiên cứu thần kinh học cung cấp bằng chứng thuyết phục rằng tập thể dục nhịp điệu giúp giảm bớt lo âu ở thanh thiếu niên.",
+    "wordFamily": "compelling evidence (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V395",
+    "topicId": "t2-space-exploration-funding",
+    "word": "reconcile opposing views",
+    "partOfSpeech": "phrase",
+    "ipa": "/ˈrekənsaɪl əˈpəʊzɪŋ vjuːz/",
+    "meaning": "Dung hòa hai góc nhìn đối lập để tìm giải pháp thỏa đáng",
+    "definitionEn": "Academic vocabulary for IELTS: reconcile opposing views in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "bring two sides together (Band 5)",
+    "synonyms": [
+      "harmonize divergent stances",
+      "synthesize viewpoints"
+    ],
+    "collocations": [
+      "attempt to reconcile opposing views",
+      "reconcile conflicting theories"
+    ],
+    "exampleSentence": "Policymakers must reconcile opposing views regarding environmental preservation and mineral exploration.",
+    "vietnameseSentence": "Các nhà hoạch định chính sách phải dung hòa các góc nhìn đối lập về bảo tồn thiên nhiên và khai khoáng.",
+    "wordFamily": "reconcile opposing views (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V396",
+    "topicId": "t2-space-exploration-funding",
+    "word": "judicious assessment",
+    "partOfSpeech": "noun",
+    "ipa": "/dʒuːˈdɪʃəs əˈsesmənt/",
+    "meaning": "Sự đánh giá sáng suốt, thận trọng dựa trên phân tích đa chiều",
+    "definitionEn": "Academic vocabulary for IELTS: judicious assessment in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "smart careful thinking (Band 5)",
+    "synonyms": [
+      "prudent evaluation",
+      "discerning judgment"
+    ],
+    "collocations": [
+      "make a judicious assessment",
+      "require judicious assessment"
+    ],
+    "exampleSentence": "Allocating taxpayer billions to space programs requires a judicious assessment of terrestrial opportunity costs.",
+    "vietnameseSentence": "Việc phân bổ hàng tỷ đô la thuế cho các chương trình vũ trụ đòi hỏi sự đánh giá sáng suốt về chi phí cơ hội trên Trái Đất.",
+    "wordFamily": "judicious assessment (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V397",
+    "topicId": "t2-journalism-ethics-distortion",
+    "word": "distort the truth",
+    "partOfSpeech": "phrase",
+    "ipa": "/dɪˈstɔːt ðə truːθ/",
+    "meaning": "Bóp méo sự thật, làm sai lệch thực tế vì mục đích tư lợi",
+    "definitionEn": "Academic vocabulary for IELTS: distort the truth in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "tell lies (Band 5)",
+    "synonyms": [
+      "misrepresent facts",
+      "falsify reality"
+    ],
+    "collocations": [
+      "deliberately distort the truth",
+      "distort the historical truth"
+    ],
+    "exampleSentence": "Partisan media outlets deliberately distort the truth to maintain viewer outrage and maximize advertising profits.",
+    "vietnameseSentence": "Các kênh truyền thông đảng phái cố tình bóp méo sự thật để duy trì sự phẫn nộ của khán giả và tối đa hóa lợi nhuận quảng cáo.",
+    "wordFamily": "distort the truth (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V398",
+    "topicId": "t2-university-vs-gap-year",
+    "word": "scholastic rigor",
+    "partOfSpeech": "noun",
+    "ipa": "/skəˈlæstɪk ˈrɪɡər/",
+    "meaning": "Sự nghiêm ngặt, chuẩn mực khắt khe về mặt học thuật",
+    "definitionEn": "Academic vocabulary for IELTS: scholastic rigor in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "serious studying rules (Band 5)",
+    "synonyms": [
+      "academic integrity",
+      "intellectual discipline"
+    ],
+    "collocations": [
+      "maintain scholastic rigor",
+      "lack of scholastic rigor"
+    ],
+    "exampleSentence": "Students who transition directly from secondary schooling to university preserve their scholastic rigor.",
+    "vietnameseSentence": "Những sinh viên chuyển tiếp trực tiếp từ bậc phổ thông lên đại học sẽ bảo tồn được tính kỷ luật học thuật nghiêm ngặt.",
+    "wordFamily": "scholastic rigor (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V399",
+    "topicId": "t2-space-exploration-funding",
+    "word": "prudent approach",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈpruːdnt əˈprəʊtʃ/",
+    "meaning": "Cách tiếp cận thận trọng, khôn ngoan nhằm phòng ngừa rủi ro",
+    "definitionEn": "Academic vocabulary for IELTS: prudent approach in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "careful way (Band 5)",
+    "synonyms": [
+      "circumspect methodology",
+      "sagacious strategy"
+    ],
+    "collocations": [
+      "adopt a prudent approach",
+      "a prudent approach to fiscal policy"
+    ],
+    "exampleSentence": "Governments should adopt a prudent approach by subsidizing renewable alternatives alongside conventional energy.",
+    "vietnameseSentence": "Chính phủ nên áp dụng cách tiếp cận thận trọng bằng việc trợ cấp năng lượng tái tạo song song với năng lượng truyền thống.",
+    "wordFamily": "prudent approach (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V400",
+    "topicId": "t2-journalism-ethics-distortion",
+    "word": "substantiate",
+    "partOfSpeech": "verb",
+    "ipa": "/səbˈstænʃieɪt/",
+    "meaning": "Chứng minh luận điểm bằng dữ liệu hoặc tài liệu xác thực",
+    "definitionEn": "Academic vocabulary for IELTS: substantiate in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "prove with facts (Band 5)",
+    "synonyms": [
+      "corroborate",
+      "authenticate",
+      "validate"
+    ],
+    "collocations": [
+      "substantiate claims",
+      "substantiate allegations"
+    ],
+    "exampleSentence": "Scientific writers must substantiate every causal claim with peer-reviewed empirical datasets.",
+    "vietnameseSentence": "Các tác giả khoa học phải chứng minh mọi nhận định nhân quả bằng các bộ dữ liệu thực nghiệm đã được bình duyệt.",
+    "wordFamily": "substantiate (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V401",
+    "topicId": "t2-sedentary-lifestyle-health",
+    "word": "corroborate",
+    "partOfSpeech": "verb",
+    "ipa": "/kəˈrɒbəreɪt/",
+    "meaning": "Củng cố, làm tăng độ tin cậy của thông tin qua nguồn độc lập",
+    "definitionEn": "Academic vocabulary for IELTS: corroborate in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "back up with evidence (Band 5)",
+    "synonyms": [
+      "confirm",
+      "verify",
+      "substantiate"
+    ],
+    "collocations": [
+      "corroborate initial findings",
+      "witness testimonies corroborate"
+    ],
+    "exampleSentence": "Subsequent epidemiological surveys corroborated that excessive salt consumption escalates vascular hypertension.",
+    "vietnameseSentence": "Các cuộc khảo sát dịch tễ học sau đó đã củng cố phát hiện rằng việc tiêu thụ quá nhiều muối làm tăng huyết áp tim mạch.",
+    "wordFamily": "corroborate (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V402",
+    "topicId": "t2-sedentary-lifestyle-health",
+    "word": "tenable proposition",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈtenəbl ˌprɒpəˈzɪʃn/",
+    "meaning": "Luận điểm vững chắc, có căn cứ và bảo vệ được trước phản biện",
+    "definitionEn": "Academic vocabulary for IELTS: tenable proposition in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "an idea that can be defended (Band 5)",
+    "synonyms": [
+      "defensible hypothesis",
+      "sound contention"
+    ],
+    "collocations": [
+      "a scientifically tenable proposition",
+      "remain a tenable proposition"
+    ],
+    "exampleSentence": "The hypothesis that physical inactivity causes cognitive decline has become an entirely tenable proposition.",
+    "vietnameseSentence": "Giả thuyết rằng thiếu vận động gây suy giảm nhận thức đã trở thành một luận điểm hoàn toàn vững chắc.",
+    "wordFamily": "tenable proposition (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V403",
+    "topicId": "t2-media-violence-censorship",
+    "word": "fallacious argument",
+    "partOfSpeech": "noun",
+    "ipa": "/fəˈleɪʃəs ˈɑːɡjumənt/",
+    "meaning": "Lập luận ngụy biện, chứa khiếm khuyết logic sai lầm",
+    "definitionEn": "Academic vocabulary for IELTS: fallacious argument in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "wrong logic (Band 5)",
+    "synonyms": [
+      "spurious reasoning",
+      "specious claim"
+    ],
+    "collocations": [
+      "expose a fallacious argument",
+      "rely on fallacious arguments"
+    ],
+    "exampleSentence": "Attributing all juvenile crime strictly to video gameplay is a fallacious argument that ignores poverty.",
+    "vietnameseSentence": "Quy chụp mọi tội phạm vị thành niên hoàn toàn do chơi game là một lập luận ngụy biện phớt lờ thực tế đói nghèo.",
+    "wordFamily": "fallacious argument (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V404",
+    "topicId": "t2-corruption-capital-flight",
+    "word": "precipitate",
+    "partOfSpeech": "verb",
+    "ipa": "/prɪˈsɪpɪteɪt/",
+    "meaning": "Làm bùng phát đột ngột, châm ngòi cho biến cố hoặc khủng hoảng",
+    "definitionEn": "Academic vocabulary for IELTS: precipitate in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "cause suddenly (Band 5)",
+    "synonyms": [
+      "instigate",
+      "spark off",
+      "trigger prematurely"
+    ],
+    "collocations": [
+      "precipitate an economic crisis",
+      "precipitate political unrest"
+    ],
+    "exampleSentence": "Arbitrary tax increases precipitated widespread capital flight as multinational corporations moved headquarters.",
+    "vietnameseSentence": "Việc tăng thuế tùy tiện đã làm bùng phát nạn tháo chạy vốn diện rộng khi các tập đoàn chuyển trụ sở ra nước ngoài.",
+    "wordFamily": "precipitate (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V405",
+    "topicId": "t2-space-exploration-funding",
+    "word": "catalyst",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈkætəlɪst/",
+    "meaning": "Chất xúc tác thúc đẩy sự thay đổi nhanh chóng",
+    "definitionEn": "Academic vocabulary for IELTS: catalyst in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "something that makes change happen (Band 5)",
+    "synonyms": [
+      "impetus",
+      "spark",
+      "prime mover"
+    ],
+    "collocations": [
+      "act as a catalyst for",
+      "a powerful catalyst"
+    ],
+    "exampleSentence": "International space missions acted as a powerful catalyst for modern satellite communication breakthroughs.",
+    "vietnameseSentence": "Các sứ mệnh không gian quốc tế đã đóng vai trò như một chất xúc tác mạnh mẽ cho đột phá viễn thông vệ tinh.",
+    "wordFamily": "catalyst (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V406",
+    "topicId": "t2-sedentary-lifestyle-health",
+    "word": "corollary",
+    "partOfSpeech": "noun",
+    "ipa": "/kəˈrɒləri/",
+    "meaning": "Hệ quả tất yếu hiển nhiên đi kèm sau một hành động",
+    "definitionEn": "Academic vocabulary for IELTS: corollary in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "natural result (Band 5)",
+    "synonyms": [
+      "concomitant",
+      "byproduct",
+      "natural outgrowth"
+    ],
+    "collocations": [
+      "an inevitable corollary of",
+      "direct corollary"
+    ],
+    "exampleSentence": "Increased workplace stress is an inevitable corollary of hyper-competitive modern corporate cultures.",
+    "vietnameseSentence": "Căng thẳng công sở gia tăng là một hệ quả tất yếu của văn hóa doanh nghiệp cạnh tranh khốc liệt ngày nay.",
+    "wordFamily": "corollary (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V407",
+    "topicId": "t2-journalism-ethics-distortion",
+    "word": "engender",
+    "partOfSpeech": "verb",
+    "ipa": "/ɪnˈdʒendə/",
+    "meaning": "Làm nảy sinh, sản sinh ra thái độ hoặc tình huống mới",
+    "definitionEn": "Academic vocabulary for IELTS: engender in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "give birth to / cause (Band 5)",
+    "synonyms": [
+      "breed",
+      "foster",
+      "beget"
+    ],
+    "collocations": [
+      "engender deep public cynicism",
+      "engender mutual trust"
+    ],
+    "exampleSentence": "Intrusive paparazzi surveillance engenders deep psychological paranoia among prominent public figures.",
+    "vietnameseSentence": "Sự rình rập xâm phạm của paparazzi làm nảy sinh tâm lý hoang tưởng lo âu sâu sắc ở những người nổi tiếng.",
+    "wordFamily": "engender (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V408",
+    "topicId": "t2-corruption-capital-flight",
+    "word": "culminate in",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈkʌlmɪneɪt ɪn/",
+    "meaning": "Lên đến đỉnh điểm, dẫn tới kết cục cuối cùng",
+    "definitionEn": "Academic vocabulary for IELTS: culminate in in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "end with (Band 5)",
+    "synonyms": [
+      "climax in",
+      "terminate in",
+      "lead up to"
+    ],
+    "collocations": [
+      "culminate in a historic victory",
+      "culminate in disaster"
+    ],
+    "exampleSentence": "Persistent regulatory corruption culminated in the catastrophic collapse of substandard residential high-rises.",
+    "vietnameseSentence": "Nạn tham nhũng quản lý kéo dài đã dẫn tới đỉnh điểm là sự sụp đổ thảm khốc của các tòa chung cư kém chất lượng.",
+    "wordFamily": "culminate in (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V409",
+    "topicId": "t2-sedentary-lifestyle-health",
+    "word": "inextricably linked",
+    "partOfSpeech": "phrase",
+    "ipa": "/ˌɪnɪkˈstrɪkəbli lɪŋkt/",
+    "meaning": "Gắn kết hữu cơ chặt chẽ không thể tách rời",
+    "definitionEn": "Academic vocabulary for IELTS: inextricably linked in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "connected strongly (Band 5)",
+    "synonyms": [
+      "inseparable",
+      "integrally tied"
+    ],
+    "collocations": [
+      "are inextricably linked with",
+      "inextricably interwoven"
+    ],
+    "exampleSentence": "Mental equilibrium and regular physical exertion are inextricably linked within human evolutionary biology.",
+    "vietnameseSentence": "Sự cân bằng tâm thần và hoạt động thể chất thường xuyên gắn kết chặt chẽ không thể tách rời trong sinh học tiến hóa.",
+    "wordFamily": "inextricably linked (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V410",
+    "topicId": "t2-corruption-capital-flight",
+    "word": "ramification",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌræmɪfɪˈkeɪʃn/",
+    "meaning": "Hệ lụy phân nhánh phức tạp sâu xa của một quyết định",
+    "definitionEn": "Academic vocabulary for IELTS: ramification in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "far-reaching result (Band 5)",
+    "synonyms": [
+      "consequence",
+      "aftermath",
+      "repercussion"
+    ],
+    "collocations": [
+      "far-reaching ramifications",
+      "consider the ramifications"
+    ],
+    "exampleSentence": "Economists failed to anticipate the severe international ramifications of uncurbed capital outflows.",
+    "vietnameseSentence": "Các nhà kinh tế đã không lường trước được những hệ lụy quốc tế sâu xa của dòng vốn tháo chạy không kiểm soát.",
+    "wordFamily": "ramification (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V411",
+    "topicId": "t2-corruption-capital-flight",
+    "word": "impediment",
+    "partOfSpeech": "noun",
+    "ipa": "/ɪmˈpedɪmənt/",
+    "meaning": "Chướng ngại vật, rào cản ngăn trở tiến trình phát triển",
+    "definitionEn": "Academic vocabulary for IELTS: impediment in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "obstacle / barrier (Band 5)",
+    "synonyms": [
+      "hindrance",
+      "stumbling block",
+      "bottleneck"
+    ],
+    "collocations": [
+      "a major impediment to progress",
+      "remove impediments"
+    ],
+    "exampleSentence": "Pervasive bribery within judicial ranks represents the greatest impediment to sustainable foreign investment.",
+    "vietnameseSentence": "Nạn nhận hối lộ tràn lan trong ngành tư pháp đại diện cho rào cản lớn nhất đối với dòng vốn đầu tư nước ngoài.",
+    "wordFamily": "impediment (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V412",
+    "topicId": "t2-sedentary-lifestyle-health",
+    "word": "conducive to",
+    "partOfSpeech": "adjective",
+    "ipa": "/kənˈdjuːsɪv tuː/",
+    "meaning": "Tạo điều kiện hết sức thuận lợi, trợ lực cho điều gì",
+    "definitionEn": "Academic vocabulary for IELTS: conducive to in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "good for / helpful (Band 5)",
+    "synonyms": [
+      "propitious for",
+      "favorable to",
+      "beneficial for"
+    ],
+    "collocations": [
+      "conducive to academic learning",
+      "conducive to good health"
+    ],
+    "exampleSentence": "Ergonomic furniture and daylight-filled offices are highly conducive to sustained worker productivity.",
+    "vietnameseSentence": "Nội thất công thái học và văn phòng tràn ngập ánh sáng tự nhiên rất thuận lợi cho việc duy trì năng suất lao động.",
+    "wordFamily": "conducive to (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V413",
+    "topicId": "t2-media-violence-censorship",
+    "word": "underlying determinant",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌʌndəˈlaɪɪŋ dɪˈtɜːmɪnənt/",
+    "meaning": "Yếu tố quyết định căn cốt bên dưới hiện tượng",
+    "definitionEn": "Academic vocabulary for IELTS: underlying determinant in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "main hidden cause (Band 5)",
+    "synonyms": [
+      "root causal factor",
+      "fundamental driver"
+    ],
+    "collocations": [
+      "identify the underlying determinant",
+      "key underlying determinant"
+    ],
+    "exampleSentence": "Poverty and lack of parental educational attainment remain the underlying determinants of juvenile delinquency.",
+    "vietnameseSentence": "Đói nghèo và thiếu hụt học vấn của cha mẹ vẫn là những yếu tố quyết định cốt lõi bên dưới của tội phạm tuổi vị thành niên.",
+    "wordFamily": "underlying determinant (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V414",
+    "topicId": "task1-roche-03-uk-alcohol",
+    "word": "reach a plateau",
+    "partOfSpeech": "phrase",
+    "ipa": "/riːtʃ ə plæˈtəʊ/",
+    "meaning": "Chạm ngưỡng đi ngang bình ổn sau một giai đoạn biến động",
+    "definitionEn": "Academic vocabulary for IELTS: reach a plateau in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "stay flat / stop changing (Band 5)",
+    "synonyms": [
+      "level off",
+      "flatten out",
+      "stabilize at"
+    ],
+    "collocations": [
+      "reach a plateau in 2005",
+      "levels reached a plateau"
+    ],
+    "exampleSentence": "Underage alcohol consumption reached a plateau after 2000 before girl intake experienced a secondary surge.",
+    "vietnameseSentence": "Lượng tiêu thụ cồn ở trẻ vị thành niên đã đi ngang bình ổn sau năm 2000 trước khi lượng uống của nữ sinh tăng trở lại.",
+    "wordFamily": "reach a plateau (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V415",
+    "topicId": "task1-roche-01-kpb-shares",
+    "word": "downward slide",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈdaʊnwəd slaɪd/",
+    "meaning": "Đà trượt dốc đều đặn qua các mốc thời gian",
+    "definitionEn": "Academic vocabulary for IELTS: downward slide in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "falling down (Band 5)",
+    "synonyms": [
+      "uninterrupted decline",
+      "progressive contraction"
+    ],
+    "collocations": [
+      "a steady downward slide",
+      "halt the downward slide"
+    ],
+    "exampleSentence": "From mid-2008, KPB equity recorded a sharp downward slide, touching its cyclical nadir at seven dollars.",
+    "vietnameseSentence": "Từ giữa năm 2008, cổ phiếu KPB ghi nhận một đà trượt dốc mạnh, chạm đáy chu kỳ ở mức bảy đô la.",
+    "wordFamily": "downward slide (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V416",
+    "topicId": "task1-roche-04-uk-spending",
+    "word": "twofold increase",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈtuːfəʊld ˈɪŋkriːs/",
+    "meaning": "Mức tăng trưởng gấp hai lần quy mô ban đầu",
+    "definitionEn": "Academic vocabulary for IELTS: twofold increase in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "doubling (Band 5)",
+    "synonyms": [
+      "twofold expansion",
+      "doubled volume"
+    ],
+    "collocations": [
+      "witness a twofold increase",
+      "represent a twofold surge"
+    ],
+    "exampleSentence": "Restaurant dining experienced a twofold increase over the thirty-year timeframe, rising from 7% to 14%.",
+    "vietnameseSentence": "Ăn uống tại nhà hàng chứng kiến mức tăng gấp hai lần qua 30 năm, leo từ 7% lên 14% ngân sách.",
+    "wordFamily": "twofold increase (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V417",
+    "topicId": "task1-roche-04-uk-spending",
+    "word": "tenfold escalation",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈtenfəʊld ˌeskəˈleɪʃn/",
+    "meaning": "Mức leo thang tăng vọt gấp mười lần",
+    "definitionEn": "Academic vocabulary for IELTS: tenfold escalation in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "ten times higher (Band 5)",
+    "synonyms": [
+      "decifold rise",
+      "tenfold multiplication"
+    ],
+    "collocations": [
+      "a tenfold escalation in sales",
+      "witness a tenfold escalation"
+    ],
+    "exampleSentence": "Expenditure on domestic personal computing recorded a tenfold escalation from a modest 1% up to 10%.",
+    "vietnameseSentence": "Chi tiêu cho máy tính cá nhân gia đình ghi nhận mức tăng gấp mười lần từ mức khiêm tốn 1% lên tới 10%.",
+    "wordFamily": "tenfold escalation (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V418",
+    "topicId": "task1-roche-04-uk-spending",
+    "word": "plummet",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈplʌmɪt/",
+    "meaning": "Tụt dốc không phanh xuống mức cực thấp",
+    "definitionEn": "Academic vocabulary for IELTS: plummet in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "fall down very fast (Band 5)",
+    "synonyms": [
+      "nosedive",
+      "collapse precipitously",
+      "tumble"
+    ],
+    "collocations": [
+      "plummet to historic lows",
+      "shares plummeted"
+    ],
+    "exampleSentence": "Household spending on printed literature plummeted from 6% in 1966 to a negligible 1% by 1996.",
+    "vietnameseSentence": "Chi tiêu hộ gia đình cho sách báo in ấn tụt dốc không phanh từ 6% năm 1966 xuống còn 1% không đáng kể vào năm 1996.",
+    "wordFamily": "plummet (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V419",
+    "topicId": "task1-roche-05-consumer-spending",
+    "word": "comprise the bulk of",
+    "partOfSpeech": "phrase",
+    "ipa": "/kəmˈpraɪz ðə bʌlk əv/",
+    "meaning": "Chiếm đại đa số tỷ trọng trong toàn bộ cơ cấu",
+    "definitionEn": "Academic vocabulary for IELTS: comprise the bulk of in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "be the biggest part of (Band 5)",
+    "synonyms": [
+      "constitute the vast majority of",
+      "account for the lion's share"
+    ],
+    "collocations": [
+      "comprise the bulk of expenditure",
+      "comprise the bulk of exports"
+    ],
+    "exampleSentence": "Food, drinks, and tobacco comprised the bulk of consumer budgets across developing European economies.",
+    "vietnameseSentence": "Thực phẩm, đồ uống và thuốc lá chiếm đại đa số tỷ trọng ngân sách người tiêu dùng tại các nền kinh tế châu Âu đang phát triển.",
+    "wordFamily": "comprise the bulk of (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V420",
+    "topicId": "task1-roche-05-consumer-spending",
+    "word": "negligible share",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈneɡlɪdʒəbl ʃeər/",
+    "meaning": "Tỷ trọng nhỏ bé không đáng kể, gần như bằng không",
+    "definitionEn": "Academic vocabulary for IELTS: negligible share in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "tiny part (Band 5)",
+    "synonyms": [
+      "infinitesimal fraction",
+      "marginal proportion"
+    ],
+    "collocations": [
+      "represent a negligible share",
+      "shrink to a negligible share"
+    ],
+    "exampleSentence": "Expenditure on educational pastimes in Spain accounted for a negligible share of under two percent.",
+    "vietnameseSentence": "Chi tiêu cho giải trí giáo dục tại Tây Ban Nha chỉ chiếm một tỷ trọng nhỏ bé không đáng kể dưới hai phần trăm.",
+    "wordFamily": "negligible share (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V421",
+    "topicId": "task1-roche-04-uk-spending",
+    "word": "diverge starkly",
+    "partOfSpeech": "phrase",
+    "ipa": "/daɪˈvɜːdʒ ˈstɑːkli/",
+    "meaning": "Phân kỳ đối lập nhau một cách vô cùng rõ rệt",
+    "definitionEn": "Academic vocabulary for IELTS: diverge starkly in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "go in opposite directions (Band 5)",
+    "synonyms": [
+      "deviate radically",
+      "exhibit sharp divergence"
+    ],
+    "collocations": [
+      "trends diverged starkly",
+      "paths diverged starkly"
+    ],
+    "exampleSentence": "Household allocations for food and private motoring diverged starkly over the surveyed three decades.",
+    "vietnameseSentence": "Phân bổ ngân sách gia đình cho thực phẩm và xe hơi cá nhân đã phân kỳ đối lập nhau một cách rõ rệt qua 3 thập kỷ.",
+    "wordFamily": "diverge starkly (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V422",
+    "topicId": "task1-roche-02-gulf-fertility",
+    "word": "sustained contraction",
+    "partOfSpeech": "noun",
+    "ipa": "/səˈsteɪnd kənˈtrækʃn/",
+    "meaning": "Sự co hẹp suy giảm liên tục trong thời gian dài",
+    "definitionEn": "Academic vocabulary for IELTS: sustained contraction in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "keeping shrinking (Band 5)",
+    "synonyms": [
+      "prolonged downturn",
+      "continuous dwindling"
+    ],
+    "collocations": [
+      "experience sustained contraction",
+      "a period of sustained contraction"
+    ],
+    "exampleSentence": "All six Gulf states observed a sustained contraction in average fertility rates per female citizen.",
+    "vietnameseSentence": "Cả sáu quốc gia Vùng Vịnh đều chứng kiến sự co hẹp liên tục của tỷ lệ sinh trung bình tính trên mỗi nữ công dân.",
+    "wordFamily": "sustained contraction (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V423",
+    "topicId": "task1-roche-06-water-cycle",
+    "word": "impervious bedrock",
+    "partOfSpeech": "noun",
+    "ipa": "/ɪmˈpɜːviəs ˈbedrɒk/",
+    "meaning": "Tầng đá nền cứng không thấm nước",
+    "definitionEn": "Academic vocabulary for IELTS: impervious bedrock in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "hard rock water cannot pass (Band 5)",
+    "synonyms": [
+      "impermeable geological stratum",
+      "non-porous subterranean rock"
+    ],
+    "collocations": [
+      "reach the impervious bedrock",
+      "overlie impervious bedrock"
+    ],
+    "exampleSentence": "Percolating groundwater eventually encounters impervious bedrock, redirecting subterranean water tables.",
+    "vietnameseSentence": "Nước ngầm thấm lọc cuối cùng sẽ chạm tới tầng đá nền không thấm nước, làm chuyển hướng các túi nước ngầm.",
+    "wordFamily": "impervious bedrock (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V424",
+    "topicId": "task1-roche-06-water-cycle",
+    "word": "saltwater intrusion",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈsɔːltwɔːtər ɪnˈtruːʒn/",
+    "meaning": "Hiện tượng xâm nhập mặn của nước biển vào tầng nước ngầm",
+    "definitionEn": "Academic vocabulary for IELTS: saltwater intrusion in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "salty sea water going into ground water (Band 5)",
+    "synonyms": [
+      "saline seepage",
+      "marine aquifer contamination"
+    ],
+    "collocations": [
+      "prevent saltwater intrusion",
+      "combat saltwater intrusion"
+    ],
+    "exampleSentence": "Over-extracting fresh coastal aquifers accelerates saltwater intrusion from adjacent ocean depths.",
+    "vietnameseSentence": "Việc khai thác quá mức các túi nước ngọt ven biển sẽ đẩy nhanh hiện tượng xâm nhập mặn từ đại dương lân cận.",
+    "wordFamily": "saltwater intrusion (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V425",
+    "topicId": "task1-roche-06-water-cycle",
+    "word": "accumulate condensation",
+    "partOfSpeech": "phrase",
+    "ipa": "/əˈkjuːmjəleɪt ˌkɒndenˈseɪʃn/",
+    "meaning": "Tích tụ lượng hơi nước ngưng tụ tạo thành mây dày",
+    "definitionEn": "Academic vocabulary for IELTS: accumulate condensation in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "gather water drops into clouds (Band 5)",
+    "synonyms": [
+      "build up condensed vapor",
+      "gather precipitation moisture"
+    ],
+    "collocations": [
+      "accumulate condensation rapidly",
+      "clouds accumulate condensation"
+    ],
+    "exampleSentence": "As moisture-laden updrafts accumulate condensation, extensive cumulonimbus precipitation systems develop.",
+    "vietnameseSentence": "Khi các luồng khí bốc lên mang hơi ẩm tích tụ ngưng tụ, các hệ thống mây tích mưa diện rộng sẽ phát triển.",
+    "wordFamily": "accumulate condensation (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V426",
+    "topicId": "task1-roche-06-water-cycle",
+    "word": "surface runoff",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈsɜːfɪs ˈrʌnɒf/",
+    "meaning": "Dòng chảy tràn bề mặt của nước mưa đổ ra sông biển",
+    "definitionEn": "Academic vocabulary for IELTS: surface runoff in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "water flowing on ground (Band 5)",
+    "synonyms": [
+      "overland flow",
+      "stormwater discharge"
+    ],
+    "collocations": [
+      "generate surface runoff",
+      "prevent excessive surface runoff"
+    ],
+    "exampleSentence": "Rainfall that fails to percolate through soil horizons drains back into marine reservoirs via surface runoff.",
+    "vietnameseSentence": "Nước mưa không kịp thấm qua các tầng đất sẽ thoát trở lại các hồ chứa đại dương qua dòng chảy tràn bề mặt.",
+    "wordFamily": "surface runoff (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V427",
+    "topicId": "task1-roche-06-water-cycle",
+    "word": "sequential mechanism",
+    "partOfSpeech": "noun",
+    "ipa": "/sɪˈkwenʃl ˈmekənɪzəm/",
+    "meaning": "Cơ chế diễn tiến tuần tự theo từng công đoạn kế tiếp",
+    "definitionEn": "Academic vocabulary for IELTS: sequential mechanism in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "step-by-step process (Band 5)",
+    "synonyms": [
+      "stepwise succession",
+      "chronological progression"
+    ],
+    "collocations": [
+      "operate through a sequential mechanism",
+      "a precise sequential mechanism"
+    ],
+    "exampleSentence": "The global water cycle represents a perpetual sequential mechanism transforming ocean brine into freshwater.",
+    "vietnameseSentence": "Vòng tuần hoàn nước toàn cầu đại diện cho một cơ chế diễn tiến tuần tự vĩnh cửu biến nước mặn đại dương thành nước ngọt.",
+    "wordFamily": "sequential mechanism (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V428",
+    "topicId": "task1-roche-06-water-cycle",
+    "word": "percolate",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈpɜːkəleɪt/",
+    "meaning": "Thấm lọc từ từ qua các tầng đất xốp",
+    "definitionEn": "Academic vocabulary for IELTS: percolate in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "seep into dirt (Band 5)",
+    "synonyms": [
+      "infiltrate",
+      "permeate subterranean layers",
+      "filter downwards"
+    ],
+    "collocations": [
+      "percolate through soil strata",
+      "liquids percolate down"
+    ],
+    "exampleSentence": "Precipitation percolates through porous sand formations before replenishing subterranean aquifers.",
+    "vietnameseSentence": "Lượng mưa thấm lọc qua các tầng cát xốp trước khi tái nạp cho các tầng ngậm nước dưới lòng đất.",
+    "wordFamily": "percolate (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V429",
+    "topicId": "task1-roche-06-water-cycle",
+    "word": "coastal aquifers",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈkəʊstl ˈækwɪfəz/",
+    "meaning": "Các tầng ngậm nước ngọt ngầm ven biển",
+    "definitionEn": "Academic vocabulary for IELTS: coastal aquifers in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "underground water pockets near the sea (Band 5)",
+    "synonyms": [
+      "littoral groundwater reserves",
+      "subterranean freshwater reservoirs"
+    ],
+    "collocations": [
+      "recharge coastal aquifers",
+      "deplete coastal aquifers"
+    ],
+    "exampleSentence": "Excessive domestic pumping severely jeopardizes the mineral purity of vulnerable coastal aquifers.",
+    "vietnameseSentence": "Việc bơm nước sinh hoạt quá mức gây đe dọa nghiêm trọng tới độ tinh khiết khoáng chất của các tầng ngậm nước ven biển.",
+    "wordFamily": "coastal aquifers (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V430",
+    "topicId": "task1-roche-07-island-tourism",
+    "word": "demolish to make way for",
+    "partOfSpeech": "phrase",
+    "ipa": "/dɪˈmɒlɪʃ tə meɪk weɪ fɔːr/",
+    "meaning": "Phá dỡ công trình cũ để nhường chỗ xây dựng công trình mới",
+    "definitionEn": "Academic vocabulary for IELTS: demolish to make way for in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "knock down to build new things (Band 5)",
+    "synonyms": [
+      "razed to facilitate",
+      "pulled down to accommodate"
+    ],
+    "collocations": [
+      "were demolished to make way for",
+      "demolish old structures"
+    ],
+    "exampleSentence": "Derelict warehouses were demolished to make way for an ultramodern multi-story recreational complex.",
+    "vietnameseSentence": "Những nhà kho cũ nát đã bị phá dỡ để nhường chỗ xây dựng khu phức hợp giải trí cao tầng tối tân.",
+    "wordFamily": "demolish to make way for (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V431",
+    "topicId": "task1-roche-07-island-tourism",
+    "word": "pedestrian footpaths",
+    "partOfSpeech": "noun",
+    "ipa": "/pəˈdestriən ˈfʊtpɑːðz/",
+    "meaning": "Đường mòn dạo bộ dành riêng cho người đi bộ",
+    "definitionEn": "Academic vocabulary for IELTS: pedestrian footpaths in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "walking paths (Band 5)",
+    "synonyms": [
+      "walkways",
+      "foot trails",
+      "pedestrian lanes"
+    ],
+    "collocations": [
+      "network of pedestrian footpaths",
+      "paved pedestrian footpaths"
+    ],
+    "exampleSentence": "Guest accommodation chalets are interconnected by an organized grid of timber pedestrian footpaths.",
+    "vietnameseSentence": "Các căn nhà gỗ nghỉ dưỡng của khách được kết nối với nhau bởi mạng lưới đường dạo bộ bằng gỗ quy củ.",
+    "wordFamily": "pedestrian footpaths (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V432",
+    "topicId": "task1-roche-07-island-tourism",
+    "word": "ample accommodation",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈæmpl əˌkɒməˈdeɪʃn/",
+    "meaning": "Cơ sở lưu trú dồi dào, phong phú cho du khách",
+    "definitionEn": "Academic vocabulary for IELTS: ample accommodation in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "plenty of rooms to sleep (Band 5)",
+    "synonyms": [
+      "plentiful lodging",
+      "abundant guest quarters"
+    ],
+    "collocations": [
+      "provide ample accommodation",
+      "boast ample accommodation"
+    ],
+    "exampleSentence": "Following intensive architectural redevelopment, the resort island now boasts ample accommodation for vacationers.",
+    "vietnameseSentence": "Sau khi tái thiết kiến trúc mạnh mẽ, hòn đảo nghỉ dưỡng nay tự hào sở hữu cơ sở lưu trú dồi dào cho du khách.",
+    "wordFamily": "ample accommodation (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V433",
+    "topicId": "task1-roche-07-island-tourism",
+    "word": "designated swimming area",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈdezɪɡneɪtɪd ˈswɪmɪŋ ˈeəriə/",
+    "meaning": "Khu vực bãi tắm được quy hoạch an toàn cho bơi lội",
+    "definitionEn": "Academic vocabulary for IELTS: designated swimming area in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "safe place to swim (Band 5)",
+    "synonyms": [
+      "marked bathing zone",
+      "cordoned aquatic zone"
+    ],
+    "collocations": [
+      "a designated swimming area offshore",
+      "establish a designated swimming area"
+    ],
+    "exampleSentence": "A designated swimming area was demarcated off the western beach to safeguard vacationers from coastal boat traffic.",
+    "vietnameseSentence": "Một khu vực bơi lội quy hoạch đã được khoanh vùng ngoài khơi bãi biển phía tây để bảo vệ du khách khỏi tàu thuyền ven bờ.",
+    "wordFamily": "designated swimming area (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V434",
+    "topicId": "task1-roche-01-kpb-shares",
+    "word": "cyclical pattern",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈsɪklɪkl ˈpætn/",
+    "meaning": "Quy luật biến động tuần hoàn theo chu kỳ lặp lại",
+    "definitionEn": "Academic vocabulary for IELTS: cyclical pattern in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "pattern repeating again and again (Band 5)",
+    "synonyms": [
+      "recurrent rhythm",
+      "periodic fluctuation"
+    ],
+    "collocations": [
+      "follow a cyclical pattern",
+      "exhibit cyclical patterns"
+    ],
+    "exampleSentence": "Corporate stock evaluations followed a cyclical pattern marked by dramatic speculative bubbles and steep corrections.",
+    "vietnameseSentence": "Định giá cổ phiếu doanh nghiệp tuân theo một quy luật chu kỳ nổi bật bởi bong bóng đầu cơ và các đợt điều chỉnh sâu.",
+    "wordFamily": "cyclical pattern (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V435",
+    "topicId": "t2-media-violence-censorship",
+    "word": "desensitization to violence",
+    "partOfSpeech": "noun",
+    "ipa": "/diːˌsensətaɪˈzeɪʃn tuː ˈvaɪələns/",
+    "meaning": "Hiện tượng chai sạn cảm xúc trước các hành vi bạo lực",
+    "definitionEn": "Academic vocabulary for IELTS: desensitization to violence in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "getting used to violence (Band 5)",
+    "synonyms": [
+      "emotional numbing",
+      "callousness toward brutality"
+    ],
+    "collocations": [
+      "lead to desensitization to violence",
+      "exhibit desensitization"
+    ],
+    "exampleSentence": "Chronic exposure to graphic horror movies leads to gradual desensitization to real-world violence among adolescents.",
+    "vietnameseSentence": "Việc tiếp xúc triền miên với phim kinh dị rùng rợn dẫn tới sự chai sạn cảm xúc dần dần trước bạo lực đời thực ở thanh thiếu niên.",
+    "wordFamily": "desensitization to violence (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V436",
+    "topicId": "t2-media-violence-censorship",
+    "word": "age-gate verification",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈeɪdʒ ɡeɪt ˌverɪfɪˈkeɪʃn/",
+    "meaning": "Cơ chế xác thực độ tuổi nghiêm ngặt trên nền tảng kỹ thuật số",
+    "definitionEn": "Academic vocabulary for IELTS: age-gate verification in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "checking age before playing (Band 5)",
+    "synonyms": [
+      "age-verification hurdle",
+      "digital identity check"
+    ],
+    "collocations": [
+      "enforce age-gate verification",
+      "robust age-gate verification"
+    ],
+    "exampleSentence": "Online video platforms should enforce stringent biometric age-gate verification to shield minors from explicit media.",
+    "vietnameseSentence": "Các nền tảng video trực tuyến nên thực thi cơ chế xác thực độ tuổi sinh trắc học nghiêm ngặt để bảo vệ trẻ vị thành niên khỏi nội dung nhạy cảm.",
+    "wordFamily": "age-gate verification (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V437",
+    "topicId": "t2-media-violence-censorship",
+    "word": "imitative behavior",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈɪmɪtətɪv bɪˈheɪvjə/",
+    "meaning": "Hành vi sao chép, bắt chước theo khuôn mẫu quan sát được",
+    "definitionEn": "Academic vocabulary for IELTS: imitative behavior in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "copying what you see (Band 5)",
+    "synonyms": [
+      "emulative actions",
+      "mimetic conduct"
+    ],
+    "collocations": [
+      "trigger imitative behavior",
+      "copycat violence"
+    ],
+    "exampleSentence": "Psychologists caution that graphic fight simulations frequently trigger dangerous imitative behavior on school playgrounds.",
+    "vietnameseSentence": "Các nhà tâm lý học cảnh báo rằng mô phỏng đấm đá bạo lực thường kích hoạt hành vi bắt chước nguy hiểm trên sân trường.",
+    "wordFamily": "imitative behavior (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V438",
+    "topicId": "t2-space-exploration-funding",
+    "word": "terrestrial priorities",
+    "partOfSpeech": "noun",
+    "ipa": "/təˈrestriəl praɪˈɒrətiz/",
+    "meaning": "Các mục tiêu cấp bách cần ưu tiên giải quyết trên Trái Đất",
+    "definitionEn": "Academic vocabulary for IELTS: terrestrial priorities in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "earth problems (Band 5)",
+    "synonyms": [
+      "planetary emergencies",
+      "domestic welfare needs"
+    ],
+    "collocations": [
+      "address terrestrial priorities",
+      "focus on terrestrial priorities"
+    ],
+    "exampleSentence": "Opponents of Mars expeditions argue that taxpayer billions should directly target urgent terrestrial priorities like famine.",
+    "vietnameseSentence": "Những người phản đối thám hiểm sao Hỏa cho rằng tiền thuế hàng tỷ đô nên nhắm thẳng vào các mục tiêu ưu tiên trên Trái Đất như nạn đói.",
+    "wordFamily": "terrestrial priorities (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V439",
+    "topicId": "t2-space-exploration-funding",
+    "word": "astronomical fiscal burden",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌæstrəˈnɒmɪkl ˈfɪskl ˈbɜːdn/",
+    "meaning": "Gánh nặng tài khóa khổng lồ đè nặng lên ngân sách nhà nước",
+    "definitionEn": "Academic vocabulary for IELTS: astronomical fiscal burden in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "huge cost for country (Band 5)",
+    "synonyms": [
+      "colossal budgetary drain",
+      "monumental public expenditure"
+    ],
+    "collocations": [
+      "impose an astronomical fiscal burden",
+      "alleviate astronomical burdens"
+    ],
+    "exampleSentence": "Financing deep-space colonization missions imposes an astronomical fiscal burden on heavily indebted public treasuries.",
+    "vietnameseSentence": "Tài trợ cho các sứ mệnh định cư ngoài vũ trụ sâu đè nặng một gánh nặng tài khóa khổng lồ lên ngân khố quốc gia đang nợ nần.",
+    "wordFamily": "astronomical fiscal burden (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V440",
+    "topicId": "t2-space-exploration-funding",
+    "word": "technological spin-off",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌteknəˈlɒdʒɪkl ˈspɪn ɒf/",
+    "meaning": "Sản phẩm công nghệ phụ phát sinh hữu ích cho đời sống",
+    "definitionEn": "Academic vocabulary for IELTS: technological spin-off in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "useful byproduct invention (Band 5)",
+    "synonyms": [
+      "ancillary breakthrough",
+      "derivative innovation"
+    ],
+    "collocations": [
+      "produce valuable technological spin-offs",
+      "civilian spin-offs"
+    ],
+    "exampleSentence": "Aerospace research produced myriad technological spin-offs, including memory foam and advanced water purification filtration.",
+    "vietnameseSentence": "Nghiên cứu hàng không vũ trụ đã tạo ra vô số phát minh phụ hữu ích, bao gồm bọt đệm hoạt tính và lọc nước tinh khiết tân tiến.",
+    "wordFamily": "technological spin-off (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V441",
+    "topicId": "t2-space-exploration-funding",
+    "word": "public-private consortium",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈpʌblɪk ˈpraɪvət kənˈsɔːtiəm/",
+    "meaning": "Liên danh hợp tác liên kết giữa chính phủ và khối doanh nghiệp tư",
+    "definitionEn": "Academic vocabulary for IELTS: public-private consortium in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "government and private companies working together (Band 5)",
+    "synonyms": [
+      "joint public-private syndicate",
+      "collaborative venture"
+    ],
+    "collocations": [
+      "form a public-private consortium",
+      "financed by a consortium"
+    ],
+    "exampleSentence": "Commercial space exploration is increasingly financed through a public-private consortium rather than solely by state coffers.",
+    "vietnameseSentence": "Thám hiểm không gian thương mại đang ngày càng được tài trợ qua liên danh công-tư thay vì chỉ dựa vào ngân sách nhà nước.",
+    "wordFamily": "public-private consortium (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V442",
+    "topicId": "t2-sedentary-lifestyle-health",
+    "word": "hypokinetic diseases",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌhaɪpəʊkɪˈnetɪk dɪˈziːzɪz/",
+    "meaning": "Các bệnh mãn tính phát sinh do thiếu hụt vận động thể chất",
+    "definitionEn": "Academic vocabulary for IELTS: hypokinetic diseases in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "illnesses from not moving (Band 5)",
+    "synonyms": [
+      "inactivity-induced ailments",
+      "sedentary afflictions"
+    ],
+    "collocations": [
+      "suffer from hypokinetic diseases",
+      "combat hypokinetic conditions"
+    ],
+    "exampleSentence": "Cardiovascular disorders and hypertension are prominent hypokinetic diseases afflicting sedentary desk-bound executives.",
+    "vietnameseSentence": "Rối loạn tim mạch và cao huyết áp là những bệnh lý thiếu vận động nổi cộm đang hành hạ giới văn phòng ngồi nhiều.",
+    "wordFamily": "hypokinetic diseases (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V443",
+    "topicId": "t2-sedentary-lifestyle-health",
+    "word": "screen dependency",
+    "partOfSpeech": "noun",
+    "ipa": "/skriːn dɪˈpendənsi/",
+    "meaning": "Hội chứng lệ thuộc quá mức vào màn hình kỹ thuật số",
+    "definitionEn": "Academic vocabulary for IELTS: screen dependency in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "looking at phones too much (Band 5)",
+    "synonyms": [
+      "digital fixation",
+      "electronic addiction"
+    ],
+    "collocations": [
+      "alleviate screen dependency",
+      "severe screen dependency"
+    ],
+    "exampleSentence": "Unchecked screen dependency severely curtails the daily physical activity of contemporary adolescents.",
+    "vietnameseSentence": "Hội chứng lệ thuộc màn hình không kiểm soát làm cắt giảm nghiêm trọng hoạt động thể chất hàng ngày của thanh thiếu niên thời nay.",
+    "wordFamily": "screen dependency (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V444",
+    "topicId": "t2-sedentary-lifestyle-health",
+    "word": "ergonomic workplace intervention",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌɜːɡəˈnɒmɪk ˈwɜːkpleɪs ˌɪntəˈvenʃn/",
+    "meaning": "Giải pháp can thiệp công thái học cải thiện môi trường làm việc",
+    "definitionEn": "Academic vocabulary for IELTS: ergonomic workplace intervention in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "making office healthy to work in (Band 5)",
+    "synonyms": [
+      "occupational postural reform",
+      "workplace health design"
+    ],
+    "collocations": [
+      "implement ergonomic workplace interventions",
+      "subsidize ergonomic changes"
+    ],
+    "exampleSentence": "Introducing sit-stand workstations is a cost-effective ergonomic workplace intervention that combats spinal compression.",
+    "vietnameseSentence": "Áp dụng bàn làm việc đứng-ngồi là một can thiệp công thái học tiết kiệm chi phí giúp chống lại chứng chèn ép cột sống.",
+    "wordFamily": "ergonomic workplace intervention (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V445",
+    "topicId": "t2-corruption-capital-flight",
+    "word": "institutional graft",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌɪnstɪˈtjuːʃənl ɡrɑːft/",
+    "meaning": "Tình trạng tham nhũng ăn sâu vào bộ máy thể chế công quyền",
+    "definitionEn": "Academic vocabulary for IELTS: institutional graft in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "corruption in government offices (Band 5)",
+    "synonyms": [
+      "systemic venality",
+      "bureaucratic embezzlement"
+    ],
+    "collocations": [
+      "combat institutional graft",
+      "endemic institutional graft"
+    ],
+    "exampleSentence": "Endemic institutional graft severely depresses the efficiency of capital allocation across state infrastructure contracts.",
+    "vietnameseSentence": "Nạn tham nhũng thể chế thâm căn cố đế làm suy giảm nghiêm trọng hiệu quả phân bổ vốn trong các dự án hạ tầng công.",
+    "wordFamily": "institutional graft (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V446",
+    "topicId": "t2-corruption-capital-flight",
+    "word": "illicit capital flight",
+    "partOfSpeech": "noun",
+    "ipa": "/ɪˈlɪsɪt ˈkæpɪtl flaɪt/",
+    "meaning": "Hiện tượng tháo chạy dòng vốn bất hợp pháp ra nước ngoài",
+    "definitionEn": "Academic vocabulary for IELTS: illicit capital flight in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "money running out of country illegally (Band 5)",
+    "synonyms": [
+      "unauthorized asset relocation",
+      "clandestine wealth drainage"
+    ],
+    "collocations": [
+      "halt illicit capital flight",
+      "accelerate capital flight"
+    ],
+    "exampleSentence": "Developing economies lose billions each year due to illicit capital flight shielded behind complex offshore banking havens.",
+    "vietnameseSentence": "Các nền kinh tế đang phát triển thất thoát hàng tỷ đô mỗi năm do dòng vốn tháo chạy phi pháp ẩn sau các thiên đường thuế bí mật.",
+    "wordFamily": "illicit capital flight (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V447",
+    "topicId": "t2-corruption-capital-flight",
+    "word": "judicial independence",
+    "partOfSpeech": "noun",
+    "ipa": "/dʒuːˈdɪʃl ˌɪndɪˈpendəns/",
+    "meaning": "Tính độc lập không bị chi phối chính trị của ngành tòa án",
+    "definitionEn": "Academic vocabulary for IELTS: judicial independence in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "judges being fair without boss pressure (Band 5)",
+    "synonyms": [
+      "autonomous judiciary",
+      "unbiased legal administration"
+    ],
+    "collocations": [
+      "uphold judicial independence",
+      "threaten judicial independence"
+    ],
+    "exampleSentence": "Foreign investors demand rock-solid judicial independence before committing long-term private manufacturing capital.",
+    "vietnameseSentence": "Các nhà đầu tư nước ngoài đòi hỏi tính độc lập tư pháp vững chắc như bàn thạch trước khi cam kết rót vốn sản xuất dài hạn.",
+    "wordFamily": "judicial independence (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V448",
+    "topicId": "t2-journalism-ethics-distortion",
+    "word": "sensationalist distortion",
+    "partOfSpeech": "noun",
+    "ipa": "/senˈseɪʃənəlɪst dɪˈstɔːʃn/",
+    "meaning": "Sự bóp méo tin tức giật gân rẻ tiền để câu kéo tương tác",
+    "definitionEn": "Academic vocabulary for IELTS: sensationalist distortion in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "making news shocking on purpose (Band 5)",
+    "synonyms": [
+      "tabloid hyperbole",
+      "lurid misrepresentation"
+    ],
+    "collocations": [
+      "rely on sensationalist distortion",
+      "criticize sensationalist distortions"
+    ],
+    "exampleSentence": "Sensationalist distortion of medical breakthroughs generates unwarranted euphoria followed by public disillusionment.",
+    "vietnameseSentence": "Sự bóp méo giật gân các đột phá y học tạo ra tâm lý phấn khích vô căn cứ rồi kéo theo sự vỡ mộng của công chúng.",
+    "wordFamily": "sensationalist distortion (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V449",
+    "topicId": "t2-journalism-ethics-distortion",
+    "word": "media literacy",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈmiːdiə ˈlɪtərəsi/",
+    "meaning": "Năng lực tư duy phản biện và thẩm định thông tin truyền thông",
+    "definitionEn": "Academic vocabulary for IELTS: media literacy in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "knowing how to spot fake news (Band 5)",
+    "synonyms": [
+      "information appraisal competence",
+      "analytical news awareness"
+    ],
+    "collocations": [
+      "cultivate critical media literacy",
+      "incorporate media literacy"
+    ],
+    "exampleSentence": "Secondary schools should teach media literacy so young citizens can recognize biased political disinformation.",
+    "vietnameseSentence": "Các trường trung học nên giảng dạy năng lực thẩm định truyền thông để học sinh nhận biết các thông tin chính trị sai lệch.",
+    "wordFamily": "media literacy (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V450",
+    "topicId": "t2-journalism-ethics-distortion",
+    "word": "investigative journalism",
+    "partOfSpeech": "noun",
+    "ipa": "/ɪnˈvestɪɡətɪv ˈdʒɜːnəlɪzəm/",
+    "meaning": "Nền báo chí điều tra chuyên sâu phanh phui tiêu cực",
+    "definitionEn": "Academic vocabulary for IELTS: investigative journalism in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "deep newspaper research on crimes (Band 5)",
+    "synonyms": [
+      "watchdog reporting",
+      "in-depth public interest exposés"
+    ],
+    "collocations": [
+      "vital role of investigative journalism",
+      "undercover investigative journalism"
+    ],
+    "exampleSentence": "Fearless investigative journalism is indispensable for uncovering corporate dumping of hazardous manufacturing byproducts.",
+    "vietnameseSentence": "Nền báo chí điều tra quả cảm là không thể thiếu để phanh phui hành vi xả thải chất độc hại của các doanh nghiệp sản xuất.",
+    "wordFamily": "investigative journalism (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V451",
+    "topicId": "t2-university-vs-gap-year",
+    "word": "scholastic momentum",
+    "partOfSpeech": "noun",
+    "ipa": "/skəˈlæstɪk məˈmentəm/",
+    "meaning": "Quán tính và nề nếp học tập không bị gián đoạn",
+    "definitionEn": "Academic vocabulary for IELTS: scholastic momentum in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "habit of studying continuously (Band 5)",
+    "synonyms": [
+      "academic continuity",
+      "unbroken study discipline"
+    ],
+    "collocations": [
+      "maintain scholastic momentum",
+      "loss of scholastic momentum"
+    ],
+    "exampleSentence": "Matriculating directly into university allows undergraduates to maintain uninterrupted scholastic momentum.",
+    "vietnameseSentence": "Nhập học đại học trực tiếp cho phép sinh viên duy trì được quán tính học tập liên tục không bị ngắt quãng.",
+    "wordFamily": "scholastic momentum (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V452",
+    "topicId": "t2-university-vs-gap-year",
+    "word": "experiential maturity",
+    "partOfSpeech": "noun",
+    "ipa": "/ɪkˌspɪəriˈenʃl məˈtʃʊərəti/",
+    "meaning": "Sự chín chắn và vốn sống tích lũy qua trải nghiệm thực tế",
+    "definitionEn": "Academic vocabulary for IELTS: experiential maturity in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "growing up from life experience (Band 5)",
+    "synonyms": [
+      "worldly wisdom",
+      "practical adult competence"
+    ],
+    "collocations": [
+      "foster experiential maturity",
+      "gain experiential maturity"
+    ],
+    "exampleSentence": "Spending a gap year independently managing personal living finances develops invaluable experiential maturity.",
+    "vietnameseSentence": "Dành một năm gap year tự quản lý tài chính sinh hoạt cá nhân giúp rèn luyện sự chín chắn trải nghiệm vô giá.",
+    "wordFamily": "experiential maturity (IELTS Masterclass 8.5)"
+  },
+  {
+    "id": "V453",
+    "topicId": "t2-university-vs-gap-year",
+    "word": "vocational clarity",
+    "partOfSpeech": "noun",
+    "ipa": "/vəʊˈkeɪʃənl ˈklærəti/",
+    "meaning": "Sự thấu suốt và định hướng rõ ràng về con đường nghề nghiệp",
+    "definitionEn": "Academic vocabulary for IELTS: vocational clarity in writing and critical discourse",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "knowing what job you really want (Band 5)",
+    "synonyms": [
+      "career certainty",
+      "professional purpose"
+    ],
+    "collocations": [
+      "achieve vocational clarity",
+      "lack vocational clarity"
+    ],
+    "exampleSentence": "Real-world apprenticeships during a gap year grant school-leavers vocational clarity before selecting university degrees.",
+    "vietnameseSentence": "Thực tập thực tế trong kỳ gap year mang lại cho học sinh sự thấu suốt nghề nghiệp trước khi lựa chọn chuyên ngành đại học.",
+    "wordFamily": "vocational clarity (IELTS Masterclass 8.5)"
   }
 ]

@@ -357,6 +357,7 @@ export default function App() {
           onSettingsChange={handleSettingsChange}
           onChangeEmail={() => setIsAuthModalOpen(true)}
           onOpenAuth={() => setIsAuthModalOpen(true)}
+          onSignOut={handleSignOut}
           onStartPractice={() => {
             recordUserVisit();
             setCurrentView('practice');
