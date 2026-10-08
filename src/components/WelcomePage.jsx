@@ -231,7 +231,13 @@ export default function WelcomePage({
           <div className="space-y-2.5">
             <button
               type="button"
-              onClick={onStartPractice}
+              onClick={() => {
+                if (!currentUser) {
+                  onOpenAuth();
+                  return;
+                }
+                onStartPractice();
+              }}
               className="w-full py-3.5 px-4 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm transition shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
             >
               <span>Luyện viết câu (Band {targetBand} • {selectedTask === "task1" ? "Task 1" : "Task 2"})</span>
@@ -241,7 +247,13 @@ export default function WelcomePage({
             {onStartFlashcard && (
               <button
                 type="button"
-                onClick={onStartFlashcard}
+                onClick={() => {
+                  if (!currentUser) {
+                    onOpenAuth();
+                    return;
+                  }
+                  onStartFlashcard();
+                }}
                 className="w-full py-3 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-bold text-xs sm:text-sm transition shadow-lg shadow-emerald-900/30 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
               >
                 <Layers className="w-4 h-4" />

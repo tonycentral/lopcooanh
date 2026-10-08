@@ -13,7 +13,9 @@
       "curriculum reform",
       "teachers vs AI",
       "practical skills vs academic"
-    ]
+    ],
+    "promptCount": 39,
+    "vocabCount": 249
   },
   {
     "id": "technology",
@@ -29,7 +31,9 @@
       "smartphones",
       "digital communication",
       "data privacy"
-    ]
+    ],
+    "promptCount": 26,
+    "vocabCount": 225
   },
   {
     "id": "environment",
@@ -45,7 +49,9 @@
       "plastic pollution",
       "biodiversity loss",
       "environmental legislation"
-    ]
+    ],
+    "promptCount": 32,
+    "vocabCount": 237
   },
   {
     "id": "transport",
@@ -61,7 +67,9 @@
       "urban planning & green spaces",
       "rural-to-urban migration",
       "housing ownership vs renting"
-    ]
+    ],
+    "promptCount": 25,
+    "vocabCount": 214
   },
   {
     "id": "health",
@@ -76,7 +84,9 @@
       "urban mental health",
       "sports & physical exercise",
       "bioethics & medical testing"
-    ]
+    ],
+    "promptCount": 23,
+    "vocabCount": 220
   },
   {
     "id": "work_career",
@@ -92,7 +102,9 @@
       "degrees vs practical experience",
       "career risk-taking",
       "salary vs job satisfaction"
-    ]
+    ],
+    "promptCount": 26,
+    "vocabCount": 211
   },
   {
     "id": "business",
@@ -107,7 +119,9 @@
       "advertising power & marketing novelty",
       "shopping mall leisure",
       "corporate social responsibility"
-    ]
+    ],
+    "promptCount": 27,
+    "vocabCount": 214
   },
   {
     "id": "society_family",
@@ -122,7 +136,9 @@
       "youth independence",
       "celebrity influencers & youth icons",
       "social cohesion & competitive mindset"
-    ]
+    ],
+    "promptCount": 32,
+    "vocabCount": 307
   },
   {
     "id": "crime_law",
@@ -137,7 +153,9 @@
       "juvenile delinquency",
       "surveillance & crime deterrence",
       "capital punishment & legal frameworks"
-    ]
+    ],
+    "promptCount": 18,
+    "vocabCount": 216
   },
   {
     "id": "culture_arts",
@@ -153,7 +171,9 @@
       "language barriers & social integration",
       "international tourism in developing nations",
       "music as a unifying force"
-    ]
+    ],
+    "promptCount": 28,
+    "vocabCount": 217
   },
   {
     "id": "task1_bar_chart",
@@ -167,7 +187,9 @@
       "stacked bars",
       "single-year comparison",
       "cross-country comparison"
-    ]
+    ],
+    "promptCount": 8,
+    "vocabCount": 1
   },
   {
     "id": "task1_line_graph",
@@ -182,7 +204,9 @@
       "overtaking",
       "peak and plateau",
       "projections"
-    ]
+    ],
+    "promptCount": 9,
+    "vocabCount": 1
   },
   {
     "id": "task1_process",
@@ -196,7 +220,9 @@
       "natural life cycles",
       "recycling phases",
       "linear vs cyclic"
-    ]
+    ],
+    "promptCount": 9,
+    "vocabCount": 0
   },
   {
     "id": "task1_pie_chart",
@@ -210,7 +236,9 @@
       "percentage comparison",
       "shifts over time",
       "dominant sectors"
-    ]
+    ],
+    "promptCount": 6,
+    "vocabCount": 0
   },
   {
     "id": "task1_table",
@@ -224,7 +252,9 @@
       "dense data sets",
       "rankings",
       "temporal changes"
-    ]
+    ],
+    "promptCount": 6,
+    "vocabCount": 0
   },
   {
     "id": "task1_map",
@@ -238,6 +268,8 @@
       "layout renovations",
       "facility expansions",
       "before and after"
-    ]
+    ],
+    "promptCount": 7,
+    "vocabCount": 0
   }
 ]

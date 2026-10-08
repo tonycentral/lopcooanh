@@ -3897,10 +3897,42 @@ function findMatchingCuratedTopic(prompt) {
 const task2Prompts = promptsData.filter(p => p.taskType === 'Task 2');
 const matchedCuratedIds = new Set();
 
+// Pre-enrich vocabularies per category for maximum performance and instant access
+const ENRICHED_VOCABS_BY_CATEGORY = {};
+
+function getEnrichedVocabsForCategory(catId, categoryName) {
+  if (!ENRICHED_VOCABS_BY_CATEGORY[catId]) {
+    const rawList = vocabsByTopic[catId] || [];
+    ENRICHED_VOCABS_BY_CATEGORY[catId] = rawList.map((v, i) => enrichVocabulary({
+      id: v.id || `${catId}-v${i + 1}`,
+      word: v.word,
+      ipa: v.ipa,
+      partOfSpeech: v.partOfSpeech,
+      meaning: v.meaning,
+      basicEquivalent: v.basicEquivalent,
+      synonyms: v.synonyms,
+      collocations: v.collocations,
+      modelSentence: v.exampleSentence || v.modelSentence || "",
+      vietnameseSentence: v.meaning
+    }, categoryName || catId));
+  }
+  return ENRICHED_VOCABS_BY_CATEGORY[catId];
+}
+
 const allTask2TopicsRaw = task2Prompts.map(p => {
   const existing = findMatchingCuratedTopic(p);
   const masterCatId = getMasterCategoryId(p);
   const masterMeta = getMasterCategoryMeta(masterCatId);
+
+  const categoryVocabs = getEnrichedVocabsForCategory(masterCatId, masterMeta.name);
+  let finalVocabs = categoryVocabs;
+
+  if (existing && existing.vocabularies && existing.vocabularies.length > 0) {
+    const enrichedExisting = existing.vocabularies.map(v => enrichVocabulary(v, existing.name));
+    const existingWords = new Set(enrichedExisting.map(v => v.word.toLowerCase().trim()));
+    const remaining = categoryVocabs.filter(v => !existingWords.has(v.word.toLowerCase().trim()));
+    finalVocabs = [...enrichedExisting, ...remaining];
+  }
 
   if (existing) {
     matchedCuratedIds.add(existing.id);
@@ -3912,16 +3944,9 @@ const allTask2TopicsRaw = task2Prompts.map(p => {
       categoryVietnameseName: masterMeta.vietnameseName,
       difficulty: p.difficulty || existing.difficulty || 'Trung bình (Band 6.5 - 7.0)',
       outlineHints: p.outlineHints || existing.outlineHints || '',
-      sourceDetail: p.sourceDetail || existing.tag
+      sourceDetail: p.sourceDetail || existing.tag,
+      vocabularies: finalVocabs
     };
-  }
-
-  // Pick matching vocabularies from vocabulariesData
-  const matchingVocabs = (vocabsByTopic[masterCatId] || []).slice(0, 8);
-  let vocabs = [...matchingVocabs];
-  if (vocabs.length < 5) {
-    const backup = (vocabsByTopic['society_family'] || vocabsByTopic['society'] || []).slice(0, 5 - vocabs.length);
-    vocabs = [...vocabs, ...backup];
   }
 
   return {
@@ -3938,18 +3963,7 @@ const allTask2TopicsRaw = task2Prompts.map(p => {
     difficulty: p.difficulty || 'Trung bình (Band 6.5 - 7.0)',
     outlineHints: p.outlineHints || '',
     sourceDetail: p.sourceDetail || '',
-    vocabularies: vocabs.map((v, i) => ({
-      id: `${p.id}-v${i + 1}`,
-      word: v.word,
-      ipa: v.ipa,
-      partOfSpeech: v.partOfSpeech,
-      meaning: v.meaning,
-      basicEquivalent: v.basicEquivalent,
-      synonyms: v.synonyms,
-      collocations: v.collocations,
-      modelSentence: v.exampleSentence,
-      vietnameseSentence: v.meaning
-    }))
+    vocabularies: finalVocabs
   };
 });
 
@@ -3957,12 +3971,19 @@ const allTask2TopicsRaw = task2Prompts.map(p => {
 const remainingCurated = RAW_IELTS_TOPICS.filter(t => !matchedCuratedIds.has(t.id)).map(t => {
   const masterCatId = getMasterCategoryId(t);
   const masterMeta = getMasterCategoryMeta(masterCatId);
+  const categoryVocabs = getEnrichedVocabsForCategory(masterCatId, masterMeta.name);
+  const enrichedExisting = (t.vocabularies || []).map(v => enrichVocabulary(v, t.name));
+  const existingWords = new Set(enrichedExisting.map(v => v.word.toLowerCase().trim()));
+  const remaining = categoryVocabs.filter(v => !existingWords.has(v.word.toLowerCase().trim()));
+  const finalVocabs = [...enrichedExisting, ...remaining];
+
   return {
     ...t,
     yearDate: t.yearDate || 'Kinh điển',
     topicCategory: masterCatId,
     categoryName: masterMeta.name,
-    categoryVietnameseName: masterMeta.vietnameseName
+    categoryVietnameseName: masterMeta.vietnameseName,
+    vocabularies: finalVocabs
   };
 });
 
@@ -3973,12 +3994,10 @@ const UNIFIED_RAW_TASK2_TOPICS = [
 
 export { MASTER_TOPIC_CATEGORIES, getMasterCategoryId, getMasterCategoryMeta };
 
-export const IELTS_TASK2_TOPICS = UNIFIED_RAW_TASK2_TOPICS.map(topic => ({
-  ...topic,
-  vocabularies: topic.vocabularies.map(v => enrichVocabulary(v, topic.name))
-}));
+export const IELTS_TASK2_TOPICS = UNIFIED_RAW_TASK2_TOPICS;
 
 export const IELTS_TOPICS = IELTS_TASK2_TOPICS;
+
 
 const RAW_IELTS_TASK1_TOPICS = [
   {

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import WelcomePage from './components/WelcomePage';
 import ContactModal from './components/ContactModal';
-import EmailModal from './components/EmailModal';
 import BandSelectorModal from './components/BandSelectorModal';
 import TopicTabBar from './components/TopicTabBar';
 import VocabularyList from './components/VocabularyList';
@@ -120,7 +119,6 @@ export default function App() {
 
   // Student Email State
   const [studentEmail, setStudentEmail] = useState(() => getSavedEmail());
-  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
 
   // Lắng nghe thay đổi trạng thái đăng nhập từ Supabase & đồng bộ hồ sơ Cloud
   useEffect(() => {
@@ -134,6 +132,9 @@ export default function App() {
             if (profile.selected_task) setActiveTask(profile.selected_task);
           }
         });
+      } else {
+        // Chưa đăng nhập: Học viên bắt buộc phải ở màn hình Chào Mừng & Đăng Nhập
+        setCurrentView(prev => (prev === 'admin' ? 'admin' : 'welcome'));
       }
     });
 
@@ -146,6 +147,8 @@ export default function App() {
           if (profile.target_band) setTargetBand(profile.target_band);
           if (profile.selected_task) setActiveTask(profile.selected_task);
         }
+      } else {
+        setCurrentView(prev => (prev === 'admin' ? 'admin' : 'welcome'));
       }
     });
 
@@ -157,6 +160,8 @@ export default function App() {
   const handleSignOut = async () => {
     await signOut();
     setCurrentUser(null);
+    setCurrentView('welcome');
+    setIsAuthModalOpen(true);
   };
 
   // 7-Day Average Status Score
@@ -211,27 +216,6 @@ export default function App() {
   const [isChartModalOpen, setIsChartModalOpen] = useState(false);
   const [isSourcesModalOpen, setIsSourcesModalOpen] = useState(false);
 
-  // Handle saving email from mandatory first-time pop-up
-  const handleSaveEmail = (email) => {
-    const profile = saveCurrentEmail(email);
-    setStudentEmail(email);
-    setCurrent7DayScore(getAverageScoreLast7Days(email));
-
-    if (profile) {
-      const band = profile.targetBand || "7.0";
-      const task = profile.selectedTask || "task2";
-      setTargetBand(band);
-      setActiveTask(task);
-      saveTargetBand(band);
-
-      const topics = task === 'task1' ? IELTS_TASK1_TOPICS : IELTS_TASK2_TOPICS;
-      if (topics && topics.length > 0) {
-        setSelectedTopic(topics[0]);
-        setSelectedVocab(topics[0].vocabularies[0] || null);
-      }
-    }
-    setIsEmailModalOpen(false);
-  };
 
   // Handle settings change from Welcome Page (auto-saved per email)
   const handleSettingsChange = ({ targetBand: newBand, selectedTask: newTask }) => {
@@ -359,10 +343,20 @@ export default function App() {
           onOpenAuth={() => setIsAuthModalOpen(true)}
           onSignOut={handleSignOut}
           onStartPractice={() => {
+            if (!currentUser) {
+              setIsAuthModalOpen(true);
+              return;
+            }
             recordUserVisit();
             setCurrentView('practice');
           }}
-          onStartFlashcard={() => setCurrentView('flashcard')}
+          onStartFlashcard={() => {
+            if (!currentUser) {
+              setIsAuthModalOpen(true);
+              return;
+            }
+            setCurrentView('flashcard');
+          }}
           onOpenContactModal={() => setIsContactModalOpen(true)}
         />
       ) : (
@@ -379,8 +373,20 @@ export default function App() {
             onOpenSources={() => setIsSourcesModalOpen(true)}
             onChangeEmail={() => setIsAuthModalOpen(true)}
             onGoWelcome={() => setCurrentView('welcome')}
-            onOpenFlashcard={() => setCurrentView('flashcard')}
-            onGoPractice={() => setCurrentView('practice')}
+            onOpenFlashcard={() => {
+              if (!currentUser) {
+                setIsAuthModalOpen(true);
+                return;
+              }
+              setCurrentView('flashcard');
+            }}
+            onGoPractice={() => {
+              if (!currentUser) {
+                setIsAuthModalOpen(true);
+                return;
+              }
+              setCurrentView('practice');
+            }}
             currentUser={currentUser}
             onOpenAuth={() => setIsAuthModalOpen(true)}
             onSignOut={handleSignOut}
@@ -542,12 +548,6 @@ export default function App() {
         </div>
       )}
 
-      {/* Mandatory First-Time Email Pop-Up Modal */}
-      <EmailModal
-        isOpen={isEmailModalOpen}
-        onSaveEmail={handleSaveEmail}
-      />
-
       {/* Modals */}
       <ContactModal
         isOpen={isContactModalOpen}
@@ -588,16 +588,22 @@ export default function App() {
         totalVocabCount={currentTopics.reduce((acc, t) => acc + (t.vocabularies?.length || 0), 0)}
       />
 
-      {/* Tài Khoản & Đồng Bộ Đám Mây Supabase Auth Modal */}
+      {/* Tài Khoản & Đồng Bộ Đám Mây Supabase Auth Modal (Không cho phép Guest Mode) */}
       <AuthModal
         isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
+        onClose={() => {
+          if (currentUser) {
+            setIsAuthModalOpen(false);
+          }
+        }}
+        isRequired={!currentUser}
         onAuthSuccess={(user) => {
           setCurrentUser(user);
           if (user?.email) {
             setStudentEmail(user.email);
             saveCurrentEmail(user.email);
           }
+          setIsAuthModalOpen(false);
         }}
       />
 

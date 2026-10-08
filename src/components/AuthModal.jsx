@@ -31,7 +31,8 @@ import {
 export default function AuthModal({ 
   isOpen, 
   onClose, 
-  onAuthSuccess 
+  onAuthSuccess,
+  isRequired = false 
 }) {
   const [tab, setTab] = useState('login'); // 'login' | 'signup' | 'config'
   const [email, setEmail] = useState('');
@@ -130,7 +131,12 @@ export default function AuthModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+      onClick={() => {
+        if (!isRequired) onClose();
+      }}
+    >
       <div 
         className="bg-slate-900 border border-slate-700/80 rounded-3xl w-full max-w-md max-h-[92vh] overflow-hidden flex flex-col shadow-2xl"
         onClick={(e) => e.stopPropagation()}
@@ -142,21 +148,33 @@ export default function AuthModal({
               <Cloud className="w-5 h-5 text-blue-400" />
             </div>
             <div>
-              <h3 className="font-extrabold text-base text-white">
-                Tài Khoản Lớp Cô Oanh
-              </h3>
+              <div className="flex items-center gap-2">
+                <h3 className="font-extrabold text-base text-white">
+                  Tài Khoản Lớp Cô Oanh
+                </h3>
+                {isRequired && (
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                    Bắt buộc
+                  </span>
+                )}
+              </div>
               <p className="text-[11px] text-slate-400">
-                Đồng bộ đám mây Supabase • Học mọi lúc mọi nơi
+                {isRequired 
+                  ? "Vui lòng đăng nhập hoặc tạo tài khoản để vào học" 
+                  : "Đồng bộ đám mây Supabase • Học mọi lúc mọi nơi"}
               </p>
             </div>
           </div>
 
-          <button
-            onClick={onClose}
-            className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          {!isRequired && (
+            <button
+              onClick={onClose}
+              className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer"
+              title="Đóng"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          )}
         </div>
 
         {/* Tab Switcher: Đăng Nhập / Đăng Ký / Cấu Hình */}
@@ -381,15 +399,12 @@ export default function AuthModal({
 
         </div>
 
-        {/* Modal Footer: Guest Mode Action */}
+        {/* Modal Footer: Enforced Student Policy */}
         <div className="px-5 sm:px-6 py-3.5 border-t border-slate-800 bg-slate-900/90 flex items-center justify-between text-xs">
-          <button
-            type="button"
-            onClick={onClose}
-            className="text-slate-400 hover:text-white underline cursor-pointer"
-          >
-            Học thử không cần tài khoản
-          </button>
+          <div className="flex items-center gap-1.5 text-slate-400 text-[11px]">
+            <Lock className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+            <span>Chỉ dành cho học viên có tài khoản Lớp Cô Oanh</span>
+          </div>
 
           {!isSupabaseConfigured && tab !== 'config' && (
             <button
