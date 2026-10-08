@@ -1360,5 +1360,821 @@
     "difficulty": "Trung bình (Band 6.5 - 7.0)",
     "status": "Active",
     "outlineHints": "Introduction: Paraphrase quan điểm về tính cạnh tranh trong xã hội đương đại. Nêu rõ: cạnh tranh tác động mạnh mẽ đến tâm lý cá nhân và hiệu suất làm việc; đây là xu hướng có cả hai mặt tích cực lẫn tiêu cực, đòi hỏi con người phải biết cân bằng để tránh các hệ lụy độc hại.\n\nBody 1 (How does competitiveness affect individuals? - Tác động cá nhân & mặt trái):\n1. Nguy cơ tự phụ và rạn nứt mối quan hệ cá nhân: Người quá háo thắng thường trở nên ích kỷ (self-absorbed), khó dung hòa và từ chối thỏa hiệp với người thân hoặc bạn đời khi xung đột nảy sinh.\n2. Môi trường công sở độc hại: Áp lực cạnh tranh khốc liệt giữa các đồng nghiệp làm giảm tinh thần hợp tác, gây căng thẳng cực độ và thúc đẩy tỷ lệ nhảy việc.\n\nBody 2 (Positive or negative trend? - Mặt tích cực & Đánh giá tổng thể):\n1. Động lực tự hoàn thiện & tinh thần kiên trì (Resilience & Perseverance): Tinh thần tranh đua thúc đẩy cá nhân vượt qua giới hạn của bản thân, không bỏ cuộc khi gặp nghịch cảnh.\n2. Tinh thần học hỏi không ngừng (Constant learning): Giúp học sinh và người lao động nâng cao hiệu suất học tập và gặt hái thành tựu cao hơn trong sự nghiệp.\n\nConclusion: Cạnh tranh là con dao hai lưỡi: có thể thúc đẩy sự tiến bộ vượt bậc nhưng cũng có thể phá hoại các mối liên kết xã hội; chìa khóa thành công là tìm kiếm sự cân bằng nội tại."
+  },
+  {
+    "id": "T1_004",
+    "taskType": "Task 1",
+    "questionType": "Process",
+    "topicId": "task1_process",
+    "sourceType": "Cambridge IELTS",
+    "sourceDetail": "Cam 10 - Test 1 / Simon IELTS",
+    "yearDate": "2015",
+    "title": "The Life Cycle of a Salmon (From Egg to Adult)",
+    "promptText": "The diagram below shows the life cycle of a salmon, from egg to adult fish. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "chartData": {
+      "chartType": "process",
+      "title": "Life Stages of the Salmon",
+      "processType": "natural_cycle",
+      "steps": [
+        {
+          "step": 1,
+          "name": "Spawning",
+          "action": "Đẻ trứng & Thụ tinh",
+          "detail": "Salmon begin life as eggs hidden among reeds and small stones in slow-moving upper river reaches (5-6 months incubation)."
+        },
+        {
+          "step": 2,
+          "name": "Fry stage",
+          "action": "Giai đoạn cá bột",
+          "detail": "Hatched fry measure roughly 3 to 8 cm and reside in the river for around 4 years."
+        },
+        {
+          "step": 3,
+          "name": "Smolt stage",
+          "action": "Giai đoạn cá con (Smolt)",
+          "detail": "Fish grow to 12-15 cm and migrate downstream to the river estuary to acclimatize."
+        },
+        {
+          "step": 4,
+          "name": "Adult migration",
+          "action": "Trưởng thành ở đại dương",
+          "detail": "Maturing salmon migrate to the open ocean, living for about 5 years and growing into full adults (70-76 cm)."
+        },
+        {
+          "step": 5,
+          "name": "Upstream return",
+          "action": "Bơi ngược dòng đẻ trứng",
+          "detail": "Adult fish swim back upstream to their original birthplace in the upper river to spawn and complete the cycle."
+        }
+      ],
+      "keyNotes": [
+        "Vòng tuần hoàn tự nhiên khép kín gồm 3 môi trường nước riêng biệt: thượng nguồn sông (nước ngọt), cửa sông (nước lợ), và đại dương (nước mặn).",
+        "Kích thước cá tăng từ trứng nhỏ bé -> 3-8cm (fry) -> 12-15cm (smolt) -> 70-76cm (adult).",
+        "Tổng vòng đời kéo dài khoảng 9-10 năm trước khi cá quay lại điểm xuất phát để đẻ trứng."
+      ]
+    },
+    "outlineHints": "Introduction: Paraphrase đề bài (The diagram illustrates the stages in the life of the salmon, from birth to maturity). Overview: Nêu 3 môi trường sống chính (upper river, lower river estuary, ocean) và chu kỳ khép kín kéo dài gần một thập kỷ. Body 1: Mô tả giai đoạn đầu ở sông (trứng nở thành fry sau 5-6 tháng, fry sống 4 năm và phát triển thành smolt ở cửa sông). Body 2: Mô tả giai đoạn biển khơi và hoàn thành chu kỳ (smolt bơi ra biển, sống 5 năm thành adult 70-76cm, sau đó bơi ngược dòng về đúng nơi sinh ra để sinh sản)."
+  },
+  {
+    "id": "T1_005",
+    "taskType": "Task 1",
+    "questionType": "Line Graph",
+    "topicId": "task1_line_graph",
+    "sourceType": "Official Sample",
+    "sourceDetail": "Simon IELTS Model / Actual Exam",
+    "yearDate": "2016",
+    "title": "Waste Production Trends across Three Companies (2000 - 2015)",
+    "promptText": "The graph below shows the amounts of waste produced by three companies over a period of 15 years. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    "difficulty": "Cơ bản (Band 5.5 - 6.5)",
+    "status": "Active",
+    "chartData": {
+      "chartType": "line",
+      "title": "Annual Waste Output of Companies A, B, and C (Tonnes)",
+      "unit": "tonnes",
+      "timePeriods": [
+        "2000",
+        "2005",
+        "2010",
+        "2015"
+      ],
+      "lines": [
+        {
+          "name": "Company A",
+          "color": "#2563eb",
+          "points": [
+            12,
+            11,
+            8.5,
+            8
+          ]
+        },
+        {
+          "name": "Company B",
+          "color": "#10b981",
+          "points": [
+            8,
+            10,
+            7,
+            3
+          ]
+        },
+        {
+          "name": "Company C",
+          "color": "#ef4444",
+          "points": [
+            4,
+            6,
+            8.5,
+            10
+          ]
+        }
+      ],
+      "keyNotes": [
+        "Company A và Company B có xu hướng giảm rác thải sau 15 năm, đặc biệt Company B giảm mạnh nhất từ 8 xuống 3 tấn.",
+        "Company C đi ngược xu hướng hoàn toàn: tăng liên tục từ 4 lên 10 tấn, soán ngôi Company A trở thành nguồn xả thải lớn nhất vào năm 2015.",
+        "Năm 2010 là điểm giao thoa khi Company A và Company C đều cùng tạo ra khoảng 8.5 tấn rác."
+      ]
+    },
+    "outlineHints": "Introduction: Paraphrase đề bài (The line graph compares three companies in terms of their waste output between 2000 and 2015). Overview: Nêu sự phân hóa rõ rệt: Company A và B giảm sản lượng xả thải trong khi Company C tăng mạnh mẽ. Body 1: Phân tích Company A (bắt đầu cao nhất ở 12 tấn, giảm dần xuống 8 tấn) và Company B (tăng nhẹ lên 10 tấn năm 2005 rồi tụt dốc còn 3 tấn). Body 2: Phân tích diễn biến Company C (bắt đầu thấp nhất ở 4 tấn, tăng bền bỉ qua từng kỳ và vượt qua cả A và B để đạt đỉnh 10 tấn năm 2015)."
+  },
+  {
+    "id": "T1_006",
+    "taskType": "Task 1",
+    "questionType": "Table",
+    "topicId": "task1_table",
+    "sourceType": "Cambridge IELTS",
+    "sourceDetail": "Cam 11 - Test 1 / Simon IELTS",
+    "yearDate": "2016",
+    "title": "Sales of Fairtrade-Labelled Coffee and Bananas in 5 European Countries (1999 & 2004)",
+    "promptText": "The tables below give information about sales of Fairtrade-labelled coffee and bananas in 1999 and 2004 in five European countries. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "chartData": {
+      "chartType": "table",
+      "title": "Fairtrade Sales Revenue (Millions of Euros)",
+      "unit": "million euros",
+      "tables": [
+        {
+          "tableName": "Coffee Sales",
+          "columns": [
+            "Country",
+            "1999",
+            "2004"
+          ],
+          "rows": [
+            [
+              "UK",
+              "1.5",
+              "20.0"
+            ],
+            [
+              "Switzerland",
+              "3.0",
+              "6.0"
+            ],
+            [
+              "Denmark",
+              "1.8",
+              "2.0"
+            ],
+            [
+              "Belgium",
+              "1.0",
+              "1.7"
+            ],
+            [
+              "Sweden",
+              "0.8",
+              "1.0"
+            ]
+          ]
+        },
+        {
+          "tableName": "Banana Sales",
+          "columns": [
+            "Country",
+            "1999",
+            "2004"
+          ],
+          "rows": [
+            [
+              "Switzerland",
+              "15.0",
+              "47.0"
+            ],
+            [
+              "UK",
+              "1.0",
+              "5.5"
+            ],
+            [
+              "Belgium",
+              "0.6",
+              "4.0"
+            ],
+            [
+              "Sweden",
+              "1.8",
+              "1.0"
+            ],
+            [
+              "Denmark",
+              "2.0",
+              "0.9"
+            ]
+          ]
+        }
+      ],
+      "keyNotes": [
+        "Doanh thu cà phê Fairtrade tăng ở toàn bộ 5 quốc gia, trong đó UK tăng phi mã từ 1.5 triệu lên 20 triệu euro (gấp hơn 13 lần).",
+        "Doanh thu chuối Fairtrade tăng mạnh ở Thụy Sĩ (từ 15 lên 47 triệu euro), UK và Bỉ; nhưng lại giảm sút ở Thụy Điển và Đan Mạch.",
+        "Thụy Sĩ và Vương quốc Anh là hai thị trường tiêu thụ áp đảo vượt bậc so với 3 nước còn lại."
+      ]
+    },
+    "outlineHints": "Introduction: Paraphrase đề bài giới thiệu hai bảng số liệu doanh thu cà phê và chuối mang nhãn Fairtrade tại 5 nước châu Âu. Overview: Doanh số cà phê tăng ở tất cả 5 nước (UK tăng trưởng kỷ lục), trong khi chuối tăng ở 3 nước và giảm ở 2 nước; UK và Thụy Sĩ là người tiêu dùng lớn nhất. Body 1: Phân tích bảng Coffee (UK bùng nổ từ 1.5 lên 20 triệu euro, Thụy Sĩ tăng gấp đôi lên 6 triệu, các nước còn lại tăng nhẹ quanh 1-2 triệu). Body 2: Phân tích bảng Bananas (Thụy Sĩ dẫn đầu áp đảo từ 15 lên 47 triệu euro, UK và Bỉ tăng mạnh, đối nghịch là Thụy Điển và Đan Mạch giảm còn khoảng 1 triệu euro)."
+  },
+  {
+    "id": "T1_007",
+    "taskType": "Task 1",
+    "questionType": "Pie Chart",
+    "topicId": "task1_pie_chart",
+    "sourceType": "Cambridge IELTS",
+    "sourceDetail": "Cam 11 - Test 2 / Simon IELTS",
+    "yearDate": "2016",
+    "title": "Water Consumption Breakdown: San Diego, California, and Worldwide",
+    "promptText": "The pie charts below compare water usage in San Diego, California and the rest of the world. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "chartData": {
+      "chartType": "pie",
+      "title": "Proportion of Water Used Across Three Sectors (%)",
+      "unit": "%",
+      "sectors": [
+        {
+          "name": "Residential / Domestic",
+          "color": "#3b82f6"
+        },
+        {
+          "name": "Industry",
+          "color": "#f59e0b"
+        },
+        {
+          "name": "Agriculture",
+          "color": "#10b981"
+        }
+      ],
+      "pies": [
+        {
+          "region": "San Diego County",
+          "values": {
+            "Residential / Domestic": 60,
+            "Industry": 23,
+            "Agriculture": 17
+          }
+        },
+        {
+          "region": "California State",
+          "values": {
+            "Residential / Domestic": 39,
+            "Industry": 33,
+            "Agriculture": 28
+          }
+        },
+        {
+          "region": "Worldwide",
+          "values": {
+            "Residential / Domestic": 8,
+            "Industry": 23,
+            "Agriculture": 69
+          }
+        }
+      ],
+      "keyNotes": [
+        "Xu hướng sử dụng nước tại San Diego và California hoàn toàn đối lập với mức trung bình của toàn thế giới.",
+        "Trên bình diện toàn cầu, Nông nghiệp ngốn lượng nước khổng lồ (69%), trong khi Sinh hoạt dân cư chỉ chiếm vỏn vẹn 8%.",
+        "Ngược lại, ở San Diego và California, nước chủ yếu phục vụ sinh hoạt hộ gia đình (60% và 39%), Nông nghiệp chỉ chiếm tỷ trọng khiêm tốn (17% và 28%)."
+      ]
+    },
+    "outlineHints": "Introduction: Paraphrase đề bài (The pie charts compare the proportion of water used for residential, industrial, and agricultural purposes in San Diego, California, and globally). Overview: San Diego và California dành tỷ lệ nước lớn nhất cho sinh hoạt dân cư, trái ngược hoàn toàn với xu thế toàn cầu khi nông nghiệp chiếm hơn 2/3 tổng lượng nước. Body 1: Phân tích San Diego và California (San Diego chi 60% cho sinh hoạt, California 39%; công nghiệp chiếm lần lượt 23% và 33%; nông nghiệp chỉ chiếm thiểu số 17% và 28%). Body 2: Phân tích bức tranh toàn cầu và làm nổi bật sự tương phản (69% nước thế giới tưới tiêu nông nghiệp, 23% cho công nghiệp, và chỉ có 8% cho sinh hoạt gia đình)."
+  },
+  {
+    "id": "T1_008",
+    "taskType": "Task 1",
+    "questionType": "Process",
+    "topicId": "task1_process",
+    "sourceType": "Official Sample",
+    "sourceDetail": "Simon IELTS Band 9 Model",
+    "yearDate": "2017",
+    "title": "The Natural Water Cycle (Ocean, Atmosphere, and Land)",
+    "promptText": "The diagram below shows the water cycle, which is the continuous movement of water on, above and below the surface of the Earth. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "chartData": {
+      "chartType": "process",
+      "title": "The Global Hydrological Cycle",
+      "processType": "natural_cycle",
+      "steps": [
+        {
+          "step": 1,
+          "name": "Evaporation",
+          "action": "Bốc hơi nước",
+          "detail": "Solar heat warms water surfaces; 80% of total atmospheric water vapour evaporates from oceans, while inland lakes/vegetation contribute the remaining 20%."
+        },
+        {
+          "step": 2,
+          "name": "Condensation",
+          "action": "Ngưng tụ mây",
+          "detail": "As warm moist air ascends into cooler high altitudes, water vapour condenses to form rainclouds."
+        },
+        {
+          "step": 3,
+          "name": "Precipitation",
+          "action": "Giáng thủy (mưa/tuyết)",
+          "detail": "Clouds precipitate, falling as rain or snow across terrestrial landmasses and mountain ranges."
+        },
+        {
+          "step": 4,
+          "name": "Surface runoff & Percolation",
+          "action": "Dòng chảy mặt & Ngấm nước ngầm",
+          "detail": "Rainwater flows into rivers, lakes, or permeates deep into the soil as groundwater aquifers."
+        },
+        {
+          "step": 5,
+          "name": "Ocean return",
+          "action": "Hồi lưu về biển khơi",
+          "detail": "Surface runoff and subterranean groundwater streams empty back into the ocean, sustaining the perpetual cycle."
+        }
+      ],
+      "keyNotes": [
+        "Quy trình tự nhiên tuần hoàn vô tận không có điểm bắt đầu hay kết thúc tuyệt đối.",
+        "3 giai đoạn khí tượng vật lý chủ đạo: Bốc hơi (evaporation) -> Ngưng tụ (condensation) -> Giáng thủy & hồi lưu (precipitation & runoff).",
+        "Đại dương đóng vai trò là bể chứa và nguồn bốc hơi nước khổng lồ nhất (chiếm 80% hơi ẩm khí quyển)."
+      ]
+    },
+    "outlineHints": "Introduction: Paraphrase đề bài (The picture illustrates the way in which water passes from ocean to air to land during the natural hydrological process known as the water cycle). Overview: Tóm tắt 3 giai đoạn chính (nước bốc hơi, ngưng tụ rơi thành mưa, và chảy hồi lưu về đại dương). Body 1: Mô tả quá trình bốc hơi và ngưng tụ (nhiệt lượng mặt trời làm bốc hơi 80% từ đại dương, hơi ẩm bốc lên cao gặp lạnh ngưng tụ tạo thành mây). Body 2: Mô tả giai đoạn giáng thủy và hồi lưu (mây tích tụ trút mưa xuống mặt đất, nước mưa tạo dòng chảy mặt và ngấm xuống mạch nước ngầm để cuối cùng đổ ngược về biển)."
+  },
+  {
+    "id": "T1_009",
+    "taskType": "Task 1",
+    "questionType": "Map",
+    "topicId": "task1_map",
+    "sourceType": "Cambridge IELTS",
+    "sourceDetail": "Cam 5 - Test 3 / Simon IELTS",
+    "yearDate": "2015",
+    "title": "Town of Garlsdon: Supermarket Site Selection (S1 vs S2)",
+    "promptText": "The map below is of the town of Garlsdon. A new supermarket (S) is planned for the town. The map shows two possible sites for the supermarket. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    "difficulty": "Nâng cao (Band 7.5+)",
+    "status": "Active",
+    "chartData": {
+      "chartType": "map",
+      "title": "Proposed Supermarket Locations in Garlsdon",
+      "mapType": "site_selection",
+      "features": [
+        {
+          "feature": "Site 1 (S1)",
+          "location": "North-west outskirts in countryside",
+          "advantages": "Close to residential housing and main road linking Cransdon (pop. 30,000) and Hindon (pop. 10,000).",
+          "restrictions": "Far from railway; outside urban core."
+        },
+        {
+          "feature": "Site 2 (S2)",
+          "location": "Central pedestrianized town centre",
+          "advantages": "Direct railway access; equidistant to industrial and residential quarters; convenient for Garlsdon citizens (pop. 65,000).",
+          "restrictions": "Vehicles prohibited in pedestrian zone without access permits."
+        },
+        {
+          "feature": "Transport infrastructure",
+          "location": "Radial main roads and railway line",
+          "details": "Railway runs west-to-east connecting Bransdon (pop. 15,000) through town centre to Cransdon. Main roads connect all surrounding satellite towns."
+        }
+      ],
+      "keyNotes": [
+        "Bản đồ quy hoạch so sánh hai vị trí tiềm năng: S1 ở vùng ngoại ô nông thôn phía Tây Bắc và S2 ở ngay trung tâm thương mại nội thị.",
+        "Garlsdon có dân số 65,000 người, bao quanh bởi 3 thị trấn vệ tinh: Hindon (10,000), Bransdon (15,000), Cransdon (30,000).",
+        "S2 có lợi thế kết nối đường sắt và trung tâm mua sắm nhưng vướng khu vực đi bộ cấm xe cơ giới (no-traffic zone); S1 thuận lợi giao thông đường bộ từ Cransdon và Hindon."
+      ]
+    },
+    "outlineHints": "Introduction: Paraphrase đề bài (The map shows two potential locations, S1 and S2, for a new supermarket in the town of Garlsdon). Overview: S1 nằm ở ngoại ô vùng quê phía Tây Bắc, trong khi S2 nằm ngay trung tâm thị trấn; cả hai địa điểm đều hưởng lợi từ mạng lưới giao thông đường bộ và đường sắt tới các thị trấn lân cận. Body 1: Phân tích địa điểm S1 (nằm ngoài vành đai đô thị, giáp khu dân cư và tuyến đường bộ chính nối Hindon và Cransdon, thuận tiện cho cư dân lái xe từ các thị trấn này). Body 2: Phân tích địa điểm S2 (nằm ngay lõi trung tâm Garlsdon với 65.000 dân, cạnh tuyến đường sắt nối Bransdon và Cransdon, tuy nhiên nằm trong khu vực cấm xe ô tô nên khách hàng phải đi bộ hoặc dùng phương tiện công cộng)."
+  },
+  {
+    "id": "T1_010",
+    "taskType": "Task 1",
+    "questionType": "Line Graph",
+    "topicId": "task1_line_graph",
+    "sourceType": "Cambridge IELTS",
+    "sourceDetail": "Cam 5 - Test 1 / Simon IELTS",
+    "yearDate": "2015",
+    "title": "Proportion of Elderly Population Aged 65 and Over (1940 - 2040)",
+    "promptText": "The graph below shows the proportion of the population aged 65 and over between 1940 and 2040 in three different countries. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "chartData": {
+      "chartType": "line",
+      "title": "Percentage of Elderly Citizens (Japan, Sweden, USA)",
+      "unit": "%",
+      "timePeriods": [
+        "1940",
+        "1960",
+        "1980",
+        "2000",
+        "2020 (proj.)",
+        "2040 (proj.)"
+      ],
+      "lines": [
+        {
+          "name": "USA",
+          "color": "#2563eb",
+          "points": [
+            9,
+            10,
+            15,
+            14,
+            18,
+            23
+          ]
+        },
+        {
+          "name": "Sweden",
+          "color": "#10b981",
+          "points": [
+            7,
+            10,
+            14,
+            20,
+            21,
+            25
+          ]
+        },
+        {
+          "name": "Japan",
+          "color": "#ef4444",
+          "points": [
+            5,
+            4,
+            4,
+            8,
+            11,
+            27
+          ]
+        }
+      ],
+      "keyNotes": [
+        "Cả ba quốc gia đều chứng kiến xu hướng già hóa dân số rõ nét trong suốt thế kỷ (1940 - 2040).",
+        "Mỹ và Thụy Điển tăng trưởng liên tục và dẫn đầu trong phần lớn giai đoạn lịch sử.",
+        "Nhật Bản bắt đầu thấp nhất (5%) và duy trì mức dưới 5% đến tận năm 1980, nhưng được dự báo sẽ tăng vọt ngoạn mục từ sau năm 2000 để vươn lên dẫn đầu với 27% vào năm 2040."
+      ]
+    },
+    "outlineHints": "Introduction: Paraphrase đề bài (The line graph compares the percentage of people aged 65 or more in Japan, Sweden and the USA over a 100-year period from 1940 to 2040). Overview: Tỷ lệ người già tăng ở cả ba nước; Nhật Bản chứng kiến biến động kịch tính nhất từ vị trí thấp nhất vươn lên dẫn đầu. Body 1: Phân tích Mỹ và Thụy Điển (năm 1940 Mỹ đạt 9% và Thụy Điển 7%, cả hai cùng tăng đều đặn đạt khoảng 14-20% năm 2000 và dự kiến chạm mốc 23% và 25% vào 2040). Body 2: Phân tích Nhật Bản (năm 1940 chỉ 5%, giữ mức thấp dưới 5% suốt 4 thập kỷ, nhưng sau năm 2000 tăng tốc độ chóng mặt và vượt qua cả Mỹ lẫn Thụy Điển để đạt 27% vào 2040)."
+  },
+  {
+    "id": "T1_011",
+    "taskType": "Task 1",
+    "questionType": "Map",
+    "topicId": "task1_map",
+    "sourceType": "Cambridge IELTS",
+    "sourceDetail": "Cam 9 - Test 1 / Simon IELTS",
+    "yearDate": "2015",
+    "title": "Island Development Before and After Tourism Facilities Construction",
+    "promptText": "The two maps below show an island, before and after the construction of some tourist facilities. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "chartData": {
+      "chartType": "map",
+      "title": "Tourist Infrastructure Transformation of an Island",
+      "mapType": "before_and_after",
+      "features": [
+        {
+          "feature": "Before",
+          "description": "Completely untouched natural island, approximately 250m long, with palm trees scattered on the western and eastern shores and an empty sandy beach to the far west."
+        },
+        {
+          "feature": "Accommodation",
+          "description": "Two circular clusters of tourist accommodation huts erected in the western and central areas, interconnected by footpaths."
+        },
+        {
+          "feature": "Amenities & Transport",
+          "description": "Pier constructed on the southern coast for tourist boats, linked by a vehicle track to a central reception building and a large dining restaurant to the north."
+        },
+        {
+          "feature": "Leisure",
+          "description": "Western beach designated as a swimming area with a footpath connecting it directly to the accommodation quarter."
+        }
+      ],
+      "keyNotes": [
+        "Hòn đảo hoang sơ ban đầu hoàn toàn không có công trình xây dựng của con người.",
+        "Sau khi phát triển du lịch, 6 công trình chính xuất hiện: cầu cảng (pier), quầy lễ tân (reception), nhà hàng (restaurant), 2 cụm nhà nghỉ (accommodation huts), đường xe chạy và lối đi bộ.",
+        "Khu vực bãi biển phía Tây được quy hoạch thành bãi tắm giải trí; các rặng dừa tự nhiên được giữ lại xen kẽ các công trình."
+      ]
+    },
+    "outlineHints": "Introduction: Paraphrase đề bài (The diagrams illustrate changes to a small island which has been developed for tourism). Overview: Hòn đảo hoang sơ đã biến đổi toàn diện thành một khu nghỉ dưỡng với nhiều tiện ích lưu trú, ẩm thực và cầu cảng mới. Body 1: Mô tả các công trình trung tâm và giao thông (cầu cảng mới ở bờ biển phía Nam đón tàu du lịch, đường xe cơ giới dẫn thẳng vào nhà tiếp tân trung tâm và nhà hàng lớn phía Bắc). Body 2: Mô tả khu lưu trú và bãi biển (hai cụm bungalow hình tròn được dựng ở hai bên, kết nối bằng mạng lưới đường đi bộ lát đá; bãi cát phía Tây chuyển đổi thành bãi tắm an toàn cho du khách)."
+  },
+  {
+    "id": "T1_012",
+    "taskType": "Task 1",
+    "questionType": "Process",
+    "topicId": "task1_process",
+    "sourceType": "Official Sample",
+    "sourceDetail": "Simon IELTS Band 9 Model",
+    "yearDate": "2017",
+    "title": "The 6-Stage Process of Waste Paper Recycling",
+    "promptText": "The chart below shows the process of waste paper recycling. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "chartData": {
+      "chartType": "process",
+      "title": "Industrial Waste Paper Recycling Stages",
+      "processType": "man_made",
+      "steps": [
+        {
+          "step": 1,
+          "name": "Collection",
+          "action": "Thu gom",
+          "detail": "Waste paper is gathered from public paper banks and corporate commercial offices."
+        },
+        {
+          "step": 2,
+          "name": "Hand Sorting",
+          "action": "Phân loại thủ công",
+          "detail": "Workers inspect and segregate paper by grade, discarding unsuitable or contaminated items."
+        },
+        {
+          "step": 3,
+          "name": "Transportation & Pulping",
+          "action": "Vận chuyển & Nghiền bột",
+          "detail": "Sorted paper is transported to paper mills and immersed in water and chemicals to create pulp."
+        },
+        {
+          "step": 4,
+          "name": "De-inking & Cleaning",
+          "action": "Khử mực & Làm sạch",
+          "detail": "Pulp is washed and treated with soap/chemicals to remove printing inks and adhesive residues."
+        },
+        {
+          "step": 5,
+          "name": "Refining & Rolling",
+          "action": "Tinh chế & Cán phẳng",
+          "detail": "Clean pulp passes through heavy heated industrial rollers to squeeze out moisture and flatten into sheets."
+        },
+        {
+          "step": 6,
+          "name": "Final Production",
+          "action": "Thành phẩm mới",
+          "detail": "Dried sheets are rolled into massive rolls of usable recycled paper ready for distribution."
+        }
+      ],
+      "keyNotes": [
+        "Quy trình sản xuất nhân tạo tuyến tính gồm 6 công đoạn liên hoàn chặt chẽ.",
+        "Khởi đầu từ thu gom rác phế liệu công cộng và kết thúc bằng các cuộn giấy tái chế thương mại hoàn chỉnh.",
+        "Công đoạn xử lý hóa chất then chốt nằm ở khâu ngâm nghiền bột (pulping) và khử mực in (de-inking)."
+      ]
+    },
+    "outlineHints": "Introduction: Paraphrase đề bài (The flow chart illustrates how waste paper is recycled into usable commercial paper). Overview: Có 6 giai đoạn rõ rệt, từ khâu thu gom phân loại ban đầu đến xử lý hóa học và cán mỏng thành phẩm. Body 1: Mô tả 3 giai đoạn đầu (thu gom từ thùng rác công cộng/doanh nghiệp, phân loại bằng tay theo cấp độ giấy, vận chuyển đến nhà máy để nghiền thành bột với nước và hóa chất). Body 2: Mô tả 3 giai đoạn cuối (quá trình khử mực và chất kết dính, đưa bột giấy sạch qua trục lăn nhiệt công nghiệp để vắt khô ép phẳng, và cuộn thành các cuộn giấy tái chế mới)."
+  },
+  {
+    "id": "T1_013",
+    "taskType": "Task 1",
+    "questionType": "Bar Chart",
+    "topicId": "task1_bar_chart",
+    "sourceType": "Official Sample",
+    "sourceDetail": "UK Office for National Statistics / Simon IELTS",
+    "yearDate": "2016",
+    "title": "Single-Occupant Households in England: Age, Gender, and Bedrooms (2011)",
+    "promptText": "The bar chart below shows the proportions of English men and women of different ages who were living alone in 2011. The pie chart compares the numbers of bedrooms in these one-person households. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    "difficulty": "Nâng cao (Band 7.5+)",
+    "status": "Active",
+    "chartData": {
+      "chartType": "mixed",
+      "title": "Living Alone in England by Demographic and Bedroom Counts (2011)",
+      "barData": {
+        "ageGroups": [
+          "16-34",
+          "35-49",
+          "50-64",
+          "65-74",
+          "75-84",
+          "85+"
+        ],
+        "males": [
+          55,
+          65,
+          53,
+          44,
+          28,
+          24
+        ],
+        "females": [
+          45,
+          35,
+          47,
+          56,
+          72,
+          76
+        ]
+      },
+      "pieData": {
+        "oneBedroom": 28.0,
+        "twoBedrooms": 35.4,
+        "threeBedrooms": 29.8,
+        "fourPlusBedrooms": 6.8
+      },
+      "keyNotes": [
+        "Nam giới chiếm đa số trong số người sống độc thân ở độ tuổi trẻ và trung niên (đạt đỉnh 65% ở nhóm 35-49 tuổi).",
+        "Phụ nữ chiếm ưu thế áp đảo hoàn toàn ở nhóm người cao tuổi sống một mình (72% ở độ tuổi 75-84 và 76% ở nhóm 85 tuổi trở lên).",
+        "Căn hộ 2 phòng ngủ là lựa chọn phổ biến nhất cho người sống độc thân (35.4%), theo sau là 3 phòng ngủ (29.8%) và 1 phòng ngủ (28.0%); căn hộ 4 phòng ngủ trở lên chỉ chiếm chưa đầy 7%."
+      ]
+    },
+    "outlineHints": "Introduction: Paraphrase đề bài (The two charts give information about single-occupant households in England in 2011, comparing occupant age/gender with bedroom distributions). Overview: Nam giới sống một mình chiếm tỷ lệ cao hơn ở các lứa tuổi dưới 65, trong khi phụ nữ áp đảo ở lứa tuổi già; phần lớn người sống độc thân cư trú trong nhà 1 đến 3 phòng ngủ. Body 1: Phân tích biểu đồ cột theo lứa tuổi và giới tính (nhóm 35-49 tuổi nam chiếm 65%, nhưng từ 65 tuổi trở đi phụ nữ vượt trội, đạt đỉnh 76% ở người từ 85 tuổi trở lên do tuổi thọ trung bình cao hơn). Body 2: Phân tích biểu đồ tròn về số phòng ngủ (nhà 2 phòng ngủ chiếm tỷ trọng cao nhất 35.4%, 3 phòng ngủ chiếm 29.8%, 1 phòng ngủ 28%, trong khi nhà rộng từ 4 phòng ngủ trở lên chỉ chiếm thiểu số 6.8%)."
+  },
+  {
+    "id": "T2_085",
+    "taskType": "Task 2",
+    "questionType": "Agree or Disagree",
+    "topicId": "globalization",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Simon IELTS Band 9 Model",
+    "yearDate": "2016",
+    "title": "Ưu tiên hỗ trợ cộng đồng trong nước vs Viện trợ quốc tế",
+    "promptText": "We cannot help everyone in the world that needs help, so we should only be concerned with our own communities and countries. To what extent do you agree or disagree with this statement?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase ý kiến cho rằng nguồn lực có hạn nên chỉ nên tập trung giúp đỡ cộng đồng bản địa thay vì cứu trợ quốc tế. Khẳng định quan điểm: Hoàn toàn không đồng ý, vì nhân loại có nghĩa vụ đạo đức và lợi ích song phương trong việc hỗ trợ các dân tộc gặp nạn.\n\nBody 1 (Tại sao hỗ trợ trong nước là quan trọng nhưng chưa đủ):\n1. Quốc gia cần chăm lo công dân của mình: Chính phủ có trách nhiệm đối với người nộp thuế trong việc giải quyết nạn vô gia cư, thất nghiệp và y tế nội địa.\n2. Tuy nhiên, sự cô lập quốc tế là thiển cận: Những nước nghèo đối mặt với nạn đói, thiên tai thảm khốc và xung đột vũ trang vượt quá khả năng tự lực của họ.\n\nBody 2 (Lý do viện trợ quốc tế mang lại lợi ích chung):\n1. Nghĩa vụ nhân đạo phổ quát (Moral obligation): Các quốc gia phát triển giàu có có trách nhiệm san sẻ của cải để bảo vệ sự sống con người trên toàn cầu.\n2. Lợi ích an ninh và kinh tế toàn cầu: Giúp đỡ các nước nghèo ổn định dịch bệnh và nghèo đói sẽ ngăn chặn làn sóng tị nạn bất hợp pháp và mở rộng thị trường thương mại quốc tế trong tương lai.\n\nConclusion: Khẳng định lại quan điểm: dù trách nhiệm trong nước là ưu tiên hàng đầu, các quốc gia thịnh vượng vẫn cần tích cực tham gia các chương trình cứu trợ nhân đạo xuyên biên giới."
+  },
+  {
+    "id": "T2_086",
+    "taskType": "Task 2",
+    "questionType": "Agree or Disagree",
+    "topicId": "society",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Simon IELTS Band 9 Model",
+    "yearDate": "2017",
+    "title": "Sở thích đòi hỏi thử thách khó khăn vs Giải trí thư giãn nhẹ nhàng",
+    "promptText": "Some people believe that hobbies need to be difficult to be enjoyable. To what extent do you agree or disagree?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase nhận định cho rằng một sở thích phải có độ khó và thử thách cao thì mới đem lại sự thú vị. Khẳng định: Hoàn toàn không đồng ý (hoặc chỉ đồng ý một phần), vì niềm vui từ sở thích đến từ cả cảm giác chinh phục lẫn sự thư giãn tinh thần đơn thuần.\n\nBody 1 (Sở thích khó đem lại sự thỏa mãn như thế nào):\n1. Cảm giác chinh phục thành tựu (Sense of accomplishment): Chơi nhạc cụ phức tạp (piano, violin), học ngoại ngữ hay leo núi đòi hỏi tính kiên trì, khi làm chủ được sẽ mang lại sự tự hào và nâng cao giá trị bản thân.\n2. Động lực rèn luyện tư duy: Thử thách kích thích não bộ và ngăn ngừa sự nhàm chán.\n\nBody 2 (Giá trị của các sở thích đơn giản, nhẹ nhàng):\n1. Xả stress và phục hồi năng lượng: Đọc tiểu thuyết, nghe nhạc, làm vườn, nấu ăn hay đi dạo không đòi hỏi độ khó cao nhưng giúp giải tỏa căng thẳng công việc hữu hiệu.\n2. Bản chất của sở thích là tự nguyện: Mục đích tối hậu của thú vui tiêu khiển là niềm vui cá nhân chứ không phải áp lực thi thố thành tích.\n\nConclusion: Khẳng định lại rằng niềm vui trong sở thích rất đa dạng; sở thích khó mang lại sự tự hào chinh phục, nhưng các hoạt động nhẹ nhàng cũng quan trọng không kém đối với sức khỏe tinh thần."
+  },
+  {
+    "id": "T2_087",
+    "taskType": "Task 2",
+    "questionType": "Agree or Disagree",
+    "topicId": "globalization",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Simon IELTS Band 9 Model",
+    "yearDate": "2016",
+    "title": "Chính sách phụ thu vé tham quan di tích đối với khách quốc tế",
+    "promptText": "Foreign visitors should pay more than local visitors for cultural and historical attractions. To what extent do you agree or disagree with this opinion?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase tranh cãi về việc thu phí vé vào cửa cao hơn đối với khách du lịch nước ngoài tại các điểm di tích văn hóa lịch sử. Nêu quan điểm: Đồng ý với chính sách này vì tính công bằng ngân sách và khả năng chi trả của du khách.\n\nBody 1 (Lý do khách địa phương xứng đáng được hưởng giá vé ưu đãi):\n1. Người dân bản địa đã đóng góp thuế: Tiền thuế của công dân trong nước được chính phủ dùng để trùng tu, bảo tồn và vận hành các di tích này qua nhiều thế hệ.\n2. Khuyến khích giáo dục lịch sử dân tộc: Giá vé rẻ giúp học sinh, sinh viên và người có thu nhập thấp dễ dàng tiếp cận di sản của cha ông.\n\nBody 2 (Lý do khách nước ngoài trả giá cao hơn là hợp lý):\n1. Khả năng tài chính và chi phí du lịch: Khách quốc tế đã sẵn sàng chi ngân sách lớn cho vé máy bay và khách sạn, khoản chênh lệch vé tham quan là rất nhỏ đối với họ.\n2. Bổ sung nguồn thu bảo tồn di sản: Doanh thu từ du khách nước ngoài cung cấp nguồn ngoại tệ quý giá để nâng cấp cơ sở vật chất và dịch vụ thuyết minh đa ngôn ngữ.\n\nConclusion: Khẳng định chính sách định giá hai bậc (differential pricing) là hoàn toàn chính đáng, vừa tri ân người nộp thuế bản địa vừa tối ưu hóa nguồn thu bảo tồn di sản."
+  },
+  {
+    "id": "T2_088",
+    "taskType": "Task 2",
+    "questionType": "Discuss Both Views",
+    "topicId": "society",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Simon IELTS Band 9 Model",
+    "yearDate": "2017",
+    "title": "Hỗ trợ tài chính từ chính phủ cho nghệ sĩ sáng tạo vs Nguồn vốn tư nhân",
+    "promptText": "Some people think that governments should give financial support to creative artists such as painters and musicians. Others believe that creative artists should be funded by alternative sources. Discuss both views and give your own opinion.",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase cuộc tranh luận giữa việc nhà nước cấp ngân sách cho nghệ sĩ sáng tạo (họa sĩ, nhạc sĩ) vs việc họ phải tìm kiếm các nguồn tài trợ thay thế từ thị trường tư nhân. Nêu quan điểm: Cần kết hợp cả hai, nhưng sự bảo trợ của chính phủ là then chốt để giữ gìn di sản phi thương mại.\n\nBody 1 (Quan điểm 1: Nghệ sĩ nên tìm nguồn tài trợ tư nhân hoặc tự chủ thương mại):\n1. Ngân sách nhà nước nên ưu tiên dịch vụ thiết yếu: Y tế, giáo dục, quốc phòng và hạ tầng giao thông có tính cấp bách cao hơn đối với toàn dân.\n2. Thị trường tự do thúc đẩy nghệ thuật ứng dụng: Nghệ sĩ tài năng có thể bán tác phẩm, biểu diễn thương mại hoặc nhận tài trợ từ các tập đoàn và nhà hảo tâm.\n\nBody 2 (Quan điểm 2 & Ý kiến cá nhân: Tầm quan trọng của tài trợ công):\n1. Bảo tồn bản sắc văn hóa và nghệ thuật truyền thống: Những loại hình nghệ thuật dân gian, nhạc thính phòng kén khán giả sẽ biến mất nếu chỉ phó mặc cho thị trường đại chúng.\n2. Tự do sáng tạo và giá trị tinh thần: Trợ cấp nhà nước giúp các tài năng trẻ sáng tạo những kiệt tác mang tính di sản mà không bị áp lực câu khách tầm thường chi phối.\n\nConclusion: Kết luận rằng chính phủ nên trích một phần ngân sách hợp lý để bảo trợ các dự án nghệ thuật mang tính văn hóa cốt lõi, bên cạnh việc khuyến khích tài trợ từ các quỹ tư nhân."
+  },
+  {
+    "id": "T2_089",
+    "taskType": "Task 2",
+    "questionType": "Discuss Both Views",
+    "topicId": "health",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Simon IELTS Band 9 Model",
+    "yearDate": "2016",
+    "title": "Thử nghiệm trên động vật trong y học: Đạo đức sinh học vs Lợi ích nhân loại",
+    "promptText": "Nowadays animal experiments are widely used to develop new medicines and to test the safety of other products. Some people argue that these experiments should be banned because it is morally wrong to cause animals to suffer, while others think that these experiments are necessary for humanity's benefit. Discuss both views and give your own opinion.",
+    "difficulty": "Nâng cao (Band 7.5+)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase việc ứng dụng thí nghiệm động vật để phát triển dược phẩm và kiểm định độ an toàn sản phẩm. Nêu 2 luồng quan điểm: phe phản đối cho rằng hành vi này vô đạo đức, phe ủng hộ khẳng định đây là điều tất yếu vì sự sống con người; nêu ý kiến cá nhân ủng hộ việc giới hạn thử nghiệm y học thiết yếu và cấm triệt để trong ngành mỹ phẩm.\n\nBody 1 (Lập luận chống thử nghiệm động vật - Luận điểm nhân đạo):\n1. Quyền động vật và sự đau đớn: Động vật là sinh linh có tri giác; việc giam cầm và tiêm độc tố gây đau đớn cùng cực là hành vi tàn nhẫn.\n2. Sự tiến bộ của phương pháp thay thế: Công nghệ nuôi cấy tế bào nhân tạo và mô phỏng máy tính (computer modeling) ngày nay có thể thay thế hiệu quả nhiều thử nghiệm thực địa.\n\nBody 2 (Lập luận ủng hộ - Sự cần thiết đối với y học & Quan điểm cá nhân):\n1. Cứu sống mạng người: Nhiều loại vắc-xin, thuốc kháng sinh và phương pháp trị ung thư bắt buộc phải thử nghiệm trên sinh vật sống trước khi áp dụng trên cơ thể người.\n2. Cần phân định ranh giới: Thử nghiệm y tế vì mạng sống con người là bất khả kháng, nhưng thử nghiệm trên động vật đối với mỹ phẩm và sản phẩm làm đẹp cần bị cấm tuyệt đối.\n\nConclusion: Khẳng định lại rằng thử nghiệm y khoa trên động vật tạm thời vẫn là 'điều ác cần thiết' để bảo vệ sức khỏe nhân loại, song cần áp dụng quy chuẩn đạo đức ngặt nghèo và sớm tìm giải pháp thay thế sinh học hoàn toàn."
+  },
+  {
+    "id": "T2_090",
+    "taskType": "Task 2",
+    "questionType": "Agree or Disagree",
+    "topicId": "education",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Simon IELTS Band 9 Model",
+    "yearDate": "2017",
+    "title": "Áp dụng hạn ngạch cân bằng giới tính nam-nữ trong tuyển sinh đại học",
+    "promptText": "Universities should accept equal numbers of male and female students in every subject. To what extent do you agree or disagree?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase đề xuất trường đại học phải tuyển sinh số lượng sinh viên nam và nữ bằng nhau ở mọi ngành học. Nêu quan điểm: Hoàn toàn không đồng ý (Completely disagree), vì tuyển sinh phải dựa trên năng lực và sở thích tự nhiên chứ không phải phân bổ chỉ tiêu cơ học.\n\nBody 1 (Sự bất hợp lý của hạn ngạch giới tính cơ học):\n1. Đi ngược lại nguyên tắc xét tuyển theo thực lực (Meritocracy): Sinh viên giỏi điểm cao có thể bị từ chối chỉ vì ngành đó đã đủ chỉ tiêu giới tính, dẫn đến bất công sâu sắc.\n2. Xu hướng nghề nghiệp và năng khiếu tự nhiên khác nhau: Các ngành kỹ thuật cơ khí, xây dựng thường thu hút nhiều nam giới hơn; ngược lại các ngành điều dưỡng, giáo dục mầm non lại có số lượng nữ giới áp đảo tự nhiên.\n\nBody 2 (Hậu quả tiêu cực đối với chất lượng đào tạo và xã hội):\n1. Suy giảm chất lượng nhân lực: Ép buộc tuyển đủ 50/50 sẽ khiến nhà trường phải hạ điểm chuẩn cho giới tính ít ứng viên, làm giảm trình độ chung của sinh viên tốt nghiệp.\n2. Giải pháp đúng đắn hơn: Cung cấp cơ hội bình đẳng và khuyến khích nữ giới theo đuổi khối ngành STEM (qua học bổng, định hướng), thay vì áp đặt hạn ngạch cứng nhắc.\n\nConclusion: Tuyển sinh đại học nên công bằng dựa trên năng lực cá nhân; bình đẳng giới thực chất là tạo cơ hội bình đẳng chứ không phải chia đều chỉ tiêu số lượng."
+  },
+  {
+    "id": "T2_091",
+    "taskType": "Task 2",
+    "questionType": "Discuss Both Views",
+    "topicId": "education",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Simon IELTS Band 9 Model",
+    "yearDate": "2016",
+    "title": "Sứ mệnh của bảo tàng: Địa điểm giải trí đại chúng vs Cơ sở giáo dục học thuật",
+    "promptText": "Some people think that museums should be enjoyable places to entertain people, while others believe that the purpose of museums is to educate. Discuss both views and give your own opinion.",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase cuộc tranh luận về chức năng cốt lõi của bảo tàng: là nơi giải trí lôi cuốn công chúng hay là cơ sở giáo dục bảo tồn tri thức. Nêu quan điểm: Bảo tàng lý tưởng nhất là nơi kết hợp nhuần nhuyễn cả hai yếu tố (edutainment).\n\nBody 1 (Quan điểm 1: Bảo tàng cần chú trọng tính giải trí và trải nghiệm):\n1. Thu hút đông đảo công chúng: Các bảo tàng truyền thống với tủ kính và bảng chữ khô khan dễ gây nhàm chán, đặc biệt với trẻ em và du khách phổ thông.\n2. Tăng cường tương tác hiện đại: Ứng dụng thực tế ảo (VR), màn hình cảm ứng tương tác và các hoạt động thực hành giúp biến bảo tàng thành điểm đến văn hóa sôi động.\n\nBody 2 (Quan điểm 2 & Ý kiến cá nhân: Giáo dục vẫn là sứ mệnh nền tảng):\n1. Bảo tồn sự thật lịch sử và khoa học: Mục đích ban đầu và thiêng liêng nhất của bảo tàng là lưu giữ cổ vật quý giá và phổ biến kiến thức văn hóa nhân loại một cách chuẩn xác.\n2. Sự kết hợp hoàn hảo (Edutainment): Giải trí chính là phương tiện dẫn dắt để thông điệp giáo dục thấm sâu và dễ tiếp thu hơn đối với thế hệ trẻ.\n\nConclusion: Bảo tàng không nên lựa chọn một trong hai; thành công của một bảo tàng hiện đại nằm ở khả năng truyền tải kiến thức học thuật sâu sắc thông qua trải nghiệm giải trí lôi cuốn."
+  },
+  {
+    "id": "T2_092",
+    "taskType": "Task 2",
+    "questionType": "Discuss Both Views",
+    "topicId": "education",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Simon IELTS Band 9 Model",
+    "yearDate": "2016",
+    "title": "Con đường sự nghiệp: Học đại học vs Đi làm ngay sau khi tốt nghiệp phổ thông",
+    "promptText": "Some people believe that studying at university or college is the best route to a successful career, while others believe that it is better to get a job straight after school. Discuss both views and give your own opinion.",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase tranh cãi giữa việc tiếp tục học lên đại học vs lựa chọn đi làm tích lũy kinh nghiệm ngay sau khi rời ghế nhà trường phổ thông. Nêu quan điểm: Đi làm sớm có lợi thế thực tiễn, song bằng đại học vẫn mở ra nhiều cơ hội nghề nghiệp cao cấp hơn trong dài hạn.\n\nBody 1 (Lợi ích của việc đi làm ngay sau trung học phổ thông):\n1. Tự chủ tài chính sớm: Thanh niên kiếm được thu nhập ngay, tránh được gánh nặng nợ học phí và tích lũy kỹ năng thực tế trên thương trường sớm hơn bạn cùng trang lứa 4-5 năm.\n2. Phù hợp với các ngành nghề thực hành: Kinh doanh bán lẻ, dịch vụ, thợ kỹ thuật lành nghề chú trọng sự nhanh nhạy và thái độ làm việc hơn bằng cấp học thuật trừu tượng.\n\nBody 2 (Lợi thế vượt trội của tấm bằng đại học & Quan điểm cá nhân):\n1. Yêu cầu bắt buộc của các ngành chuyên môn cao: Bác sĩ, kỹ sư, luật sư, chuyên gia tài chính bắt buộc phải qua đào tạo chuyên sâu và có bằng cấp kiểm định.\n2. Triển vọng thăng tiến dài hạn: Bằng cử nhân vẫn là tiêu chuẩn sàng lọc ban đầu của các tập đoàn đa quốc gia, mở ra mức lương trần cao hơn nhiều trong sự nghiệp.\n\nConclusion: Lựa chọn tùy thuộc vào năng khiếu cá nhân; tuy nhiên giáo dục đại học nhìn chung vẫn là con đường an toàn và bền vững nhất dẫn đến sự thành công sự nghiệp."
+  },
+  {
+    "id": "T2_093",
+    "taskType": "Task 2",
+    "questionType": "Two-part Question",
+    "topicId": "technology",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Simon IELTS Band 9 Model",
+    "yearDate": "2017",
+    "title": "Tác động của công nghệ liên lạc đến bản chất các mối quan hệ xã hội",
+    "promptText": "Nowadays the way many people interact with each other has changed because of technology. In what ways has technology affected the types of relationships that people make? Has this become a positive or negative development?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase sự chuyển dịch mạnh mẽ trong phương thức giao tiếp giữa người với người do sự bùng nổ của mạng xã hội và smartphone. Khẳng định 2 luận điểm: công nghệ mở rộng mạng lưới quan hệ nhưng làm nông cạn hóa sự gắn kết; đây nhìn chung là xu hướng tiêu cực hơn là tích cực.\n\nBody 1 (Công nghệ thay đổi bản chất các mối quan hệ như thế nào?):\n1. Xóa nhòa khoảng cách địa lý: Dễ dàng kết nối với người lạ khắp năm châu và duy trì liên lạc với bạn bè xa xôi qua tin nhắn tức thời và cuộc gọi video.\n2. Tạo ra các mối quan hệ ảo hời hợt (Superficial ties): Thay vì tình bạn thân thiết ngoài đời, con người đo lường mối quan hệ bằng số lượng người theo dõi và lượt like trên mạng xã hội.\n\nBody 2 (Đánh giá tích cực hay tiêu cực? - Nhìn chung là tiêu cực):\n1. Xói mòn kỹ năng giao tiếp trực tiếp: Người trẻ trở nên e dè, ngại giao tiếp mặt đối mặt và thiếu thốn sự đồng cảm ngôn ngữ cơ thể chân thực.\n2. Cảm giác cô đơn và trầm cảm ảo: Dù có hàng trăm bạn bè trên mạng, nhiều người vẫn cảm thấy cô lập sâu sắc khi gặp khó khăn ngoài đời thực.\n\nConclusion: Công nghệ mang lại sự tiện lợi vượt bậc nhưng việc lạm dụng nó đang khiến các mối liên kết giữa con người trở nên mong manh và cô độc hơn."
+  },
+  {
+    "id": "T2_094",
+    "taskType": "Task 2",
+    "questionType": "Agree or Disagree",
+    "topicId": "society",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Simon IELTS Band 9 Model",
+    "yearDate": "2016",
+    "title": "Văn hóa người nổi tiếng: Hào nhoáng, giàu sang vs Tấm gương noi theo",
+    "promptText": "Nowadays celebrities are more famous for their glamour and wealth than for their achievements, and this sets a bad example to young people. To what extent do you agree or disagree with this statement?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase hiện tượng người nổi tiếng (celebrities) được tán dương nhờ vẻ ngoài hào nhoáng và khoe khoang của cải hơn là nhờ tài năng đích thực, gây ảnh hưởng tiêu cực đến giới trẻ. Nêu quan điểm: Hoàn toàn đồng ý với nhận định này.\n\nBody 1 (Sự thật về danh tiếng hào nhoáng rỗng tuếch):\n1. Hiện tượng ngôi sao truyền hình thực tế và mạng xã hội: Nhiều cá nhân trở nên nổi tiếng chỉ nhờ lối sống xa hoa, scandal và ngoại hình dao kéo mà không có đóng góp gì về khoa học, nghệ thuật hay xã hội.\n2. Tác động của truyền thông giật gân: Báo chí lá cải tập trung khai thác siêu xe, biệt thự và thời trang hiệu, định hình suy nghĩ lệch lạc rằng tiền bạc và ngoại hình là thước đo duy nhất của sự thành đạt.\n\nBody 2 (Hậu quả độc hại đối với nhận thức giới trẻ):\n1. Ảo tưởng về sự thành công nhanh chóng: Thanh thiếu niên dễ tin rằng không cần khổ luyện học tập hay lao động chăm chỉ vẫn có thể giàu có và nổi tiếng chỉ sau một đêm.\n2. Làm lu mờ các hình mẫu chân chính: Những nhà khoa học, bác sĩ, giáo viên và vận động viên kiên trì cống hiến bị ngó lơ trước làn sóng thần tượng rỗng tuếch.\n\nConclusion: Xã hội đương đại cần tôn vinh những giá trị thực chất và phẩm chất đạo đức để thế hệ trẻ có những hình mẫu lý tưởng đáng tin cậy để học tập."
+  },
+  {
+    "id": "T2_095",
+    "taskType": "Task 2",
+    "questionType": "Agree or Disagree",
+    "topicId": "work_career",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Simon IELTS Band 9 Model",
+    "yearDate": "2016",
+    "title": "Mức lương có phải là yếu tố quan trọng nhất khi lựa chọn nghề nghiệp?",
+    "promptText": "When choosing a job, the salary is the most important consideration. To what extent do you agree or disagree?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase quan điểm cho rằng tiền lương là tiêu chí quan trọng nhất khi quyết định lựa chọn công việc. Khẳng định: Hoàn toàn không đồng ý (I completely disagree), vì dù thu nhập là cần thiết, sự thỏa mãn nghề nghiệp và môi trường làm việc mới là yếu tố quyết định hạnh phúc lâu dài.\n\nBody 1 (Mặt quan trọng nhưng hữu hạn của tiền lương):\n1. Đáp ứng nhu cầu sinh hoạt căn bản: Lương bổng giúp trang trải chi phí ăn ở, gia đình và mang lại sự an toàn tài chính.\n2. Tiền bạc không đảm bảo hạnh phúc: Nhiều người có mức lương cực cao nhưng rơi vào kiệt sức (burnout), trầm cảm và từ bỏ công việc vì áp lực độc hại.\n\nBody 2 (Các yếu tố quan trọng hơn tiền lương):\n1. Đam mê và sự thỏa mãn trong công việc (Job satisfaction): Được làm việc đúng sở trường và thấy công việc của mình có ý nghĩa giúp con người tràn đầy năng lượng mỗi ngày.\n2. Môi trường làm việc lành mạnh và cơ hội thăng tiến: Đồng nghiệp tôn trọng, văn hóa cởi mở và cơ hội học hỏi kỹ năng mới có giá trị tinh thần vượt trội so với một mức lương cao trong môi trường chèn ép.\n\nConclusion: Tiền lương chỉ là điều kiện cần chứ không phải là yếu tố quan trọng nhất; một sự nghiệp viên mãn đòi hỏi sự cân bằng giữa thu nhập và sự say mê nghề nghiệp."
+  },
+  {
+    "id": "T2_096",
+    "taskType": "Task 2",
+    "questionType": "Discuss Both Views",
+    "topicId": "society",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Simon IELTS Band 9 Model",
+    "yearDate": "2017",
+    "title": "Tính phụ thuộc lẫn nhau vs Độc lập cá nhân trong thế giới hiện đại",
+    "promptText": "Some people think that in the modern world we are more dependent on each other, while others think that people have become more independent. Discuss both views and give your own opinion.",
+    "difficulty": "Nâng cao (Band 7.5+)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase hai góc nhìn đối lập về xã hội hiện đại: một bên cho rằng con người ngày càng phụ thuộc tương hỗ lẫn nhau, bên kia cho rằng con người ngày càng độc lập và tự chủ hơn. Nêu quan điểm: Cả hai xu hướng đều tồn tại song song ở các cấp độ khác nhau (độc lập trong đời sống cá nhân nhưng phụ thuộc ở quy mô hệ thống kinh tế xã hội).\n\nBody 1 (Quan điểm 1: Con người ngày càng độc lập hơn trong cuộc sống thường nhật):\n1. Tự chủ tài chính và lối sống: Người trẻ có xu hướng sống một mình sớm, tự kiếm sống và tự giải quyết các nhu cầu cá nhân qua công nghệ mà không cần nương tựa vào gia đình lớn.\n2. Nữ quyền và cơ hội bình đẳng: Phụ nữ hiện đại hoàn toàn tự lập về tài chính và không còn phải phụ thuộc vào người bạn đời như các thế hệ trước.\n\nBody 2 (Quan điểm 2 & Ý kiến cá nhân: Xã hội ngày càng phụ thuộc sâu sắc vào chuỗi cung ứng):\n1. Chuyên môn hóa lao động cao độ: Không ai có thể tự cung tự cấp; mỗi cá nhân phụ thuộc hoàn toàn vào nông dân để có thức ăn, bác sĩ để trị bệnh, kỹ sư để có điện và mạng Internet.\n2. Toàn cầu hóa và mạng lưới công nghệ: Một đứt gãy chuỗi cung ứng hay sự cố viễn thông ở một bán cầu có thể làm tê liệt đời sống của hàng triệu người ở phía bên kia trái đất.\n\nConclusion: Kết luận rằng con người hiện đại có thể tự do độc lập trong phong cách sống cá nhân, song trên thực tế chúng ta phụ thuộc vào cộng đồng và hệ thống xã hội sâu sắc hơn bao giờ hết."
+  },
+  {
+    "id": "T2_097",
+    "taskType": "Task 2",
+    "questionType": "Agree or Disagree",
+    "topicId": "environment",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Simon IELTS Band 9 Model",
+    "yearDate": "2016",
+    "title": "Bảo vệ động vật hoang dã trong thế kỷ 21: Sự cần thiết sinh thái vs Lãng phí nguồn lực",
+    "promptText": "Wild animals have no place in the 21st century, so protecting them is a waste of resources. To what extent do you agree or disagree?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase quan điểm cho rằng động vật hoang dã không còn chỗ đứng trong thế giới hiện đại và việc bảo tồn chúng là sự lãng phí tiền bạc. Nêu quan điểm: Hoàn toàn không đồng ý (I completely disagree), vì sự sinh tồn của động vật hoang dã gắn liền trực tiếp với cân bằng sinh thái và sự tồn vong của chính loài người.\n\nBody 1 (Tầm quan trọng sống còn của đa dạng sinh học đối với hệ sinh thái):\n1. Duy trì chuỗi thức ăn tự nhiên: Mỗi loài hoang dã đều là một mắt xích không thể thay thế; sự tuyệt chủng của một loài săn mồi đỉnh cao hay loài thụ phấn có thể dẫn đến sự sụp đổ dây chuyền của cả hệ sinh thái.\n2. Giá trị nghiên cứu y sinh: Hàng ngàn loại dược phẩm cứu mạng người được phát triển từ các hợp chất tự nhiên của các loài động thực vật hoang dã.\n\nBody 2 (Bảo vệ thiên nhiên là bảo vệ môi trường sống của con người):\n1. Rừng nguyên sinh và đại dương bảo vệ khí hậu: Bảo vệ môi trường sống cho động vật cũng chính là bảo vệ các bể chứa carbon khổng lồ giúp ngăn chặn thảm họa biến đổi khí hậu.\n2. Nghĩa vụ đạo đức của nhân loại: Con người không có quyền hủy diệt các loài sinh vật khác chỉ vì lòng tham mở rộng đô thị ngắn hạn.\n\nConclusion: Bảo tồn động vật hoang dã hoàn toàn không phải là sự lãng phí tài nguyên mà là khoản đầu tư sống còn cho tương lai bền vững của hành tinh."
+  },
+  {
+    "id": "T2_098",
+    "taskType": "Task 2",
+    "questionType": "Agree or Disagree",
+    "topicId": "crime_law",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Simon IELTS Band 9 Model",
+    "yearDate": "2016",
+    "title": "Cựu tù nhân hoàn lương: Những người tốt nhất để răn đe thanh thiếu niên về tội phạm",
+    "promptText": "Some people who have been in prison become good citizens later, and it is often argued that these are the best people to talk to teenagers about the dangers of committing a crime. To what extent do you agree or disagree?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase đề xuất mời những cựu phạm nhân đã cải tà quy chính và trở thành công dân tốt để nói chuyện với thanh thiếu niên về hậu quả của hành vi phạm tội. Nêu quan điểm: Hoàn toàn đồng ý (I completely agree), vì trải nghiệm thực tế đầy đau xót của họ có sức lay động và tính răn đe mạnh mẽ hơn nhiều so với những lời răn dạy lý thuyết của giáo viên hay cảnh sát.\n\nBody 1 (Sức mạnh thuyết phục từ trải nghiệm thực tế của cựu tù nhân):\n1. Tính chân thực và sự đồng cảm (Authenticity & Relatability): Giới trẻ tuổi mới lớn thường nổi loạn và coi thường lời khuyên của cha mẹ; nhưng câu chuyện sống động từ người từng trải qua sự giam cầm, bạo lực sau song sắt sẽ lập tức thức tỉnh họ.\n2. Vạch trần sự ảo tưởng về cuộc sống giang hồ: Các bộ phim thường lãng mạn hóa tội phạm; cựu tù nhân có thể vạch trần nỗi kinh hoàng thực sự, sự ân hận tột cùng và những vết nhơ lý lịch không thể xóa nhòa.\n\nBody 2 (Sự cần thiết kết hợp với các lực lượng giáo dục khác):\n1. Bổ sung chứ không thay thế: Bài nói chuyện của cựu tù nhân là lời cảnh tỉnh sốc, nhưng cần kết hợp với giáo dục pháp luật từ nhà trường và sự đồng hành của gia đình.\n2. Tác dụng kép: Việc tham gia giáo dục thanh thiếu niên cũng giúp chính các cựu tù nhân cảm thấy có ích cho cộng đồng, hỗ trợ quá trình tái hòa nhập xã hội của họ.\n\nConclusion: Khẳng định cựu phạm nhân hoàn lương là một nguồn lực giáo dục vô cùng giá trị để ngăn chặn tội phạm vị thành niên từ sớm."
+  },
+  {
+    "id": "T2_099",
+    "taskType": "Task 2",
+    "questionType": "Agree or Disagree",
+    "topicId": "business",
+    "sourceType": "Thi thật (Actual Test)",
+    "sourceDetail": "Simon IELTS Band 9 Model",
+    "yearDate": "2017",
+    "title": "Trách nhiệm xã hội của doanh nghiệp: Tối đa hóa lợi nhuận vs Đạo đức cộng đồng",
+    "promptText": "As well as making money, businesses also have social responsibilities. To what extent do you agree or disagree?",
+    "difficulty": "Trung bình (Band 6.5 - 7.0)",
+    "status": "Active",
+    "outlineHints": "Introduction: Paraphrase quan điểm về vai trò của doanh nghiệp trong xã hội: ngoài mục tiêu kinh tế kiếm tìm lợi nhuận, doanh nghiệp bắt buộc phải có trách nhiệm xã hội đối với cộng đồng. Khẳng định: Hoàn toàn đồng ý (I completely agree).\n\nBody 1 (Tại sao doanh nghiệp không thể chỉ chăm chăm vào lợi nhuận thuần túy):\n1. Trách nhiệm môi trường (Environmental stewardship): Hoạt động sản xuất công nghiệp tiêu thụ tài nguyên và xả thải; doanh nghiệp phải có nghĩa vụ xử lý chất thải sạch và áp dụng công nghệ xanh để không hủy hoại môi trường sống của người dân.\n2. Đạo đức với người lao động: Doanh nghiệp có trách nhiệm trả lương công bằng, bảo đảm an toàn lao động và không bóc lột sức lao động của công nhân.\n\nBody 2 (Lợi ích song hành giữa trách nhiệm xã hội và sự thịnh vượng kinh doanh):\n1. Nâng cao uy tín thương hiệu và lòng trung thành của khách hàng: Người tiêu dùng hiện đại có xu hướng ủng hộ các thương hiệu có đạo đức, có trách nhiệm cộng đồng và tẩy chay các công ty gây ô nhiễm.\n2. Xây dựng môi trường kinh doanh bền vững: Một cộng đồng địa phương thịnh vượng và có học thức sẽ cung cấp nguồn nhân lực chất lượng cao và thị trường tiêu thụ ổn định cho chính doanh nghiệp.\n\nConclusion: Khẳng định lợi nhuận và trách nhiệm xã hội không hề mâu thuẫn mà là hai trụ cột song hành cho sự phát triển trường tồn của bất kỳ doanh nghiệp nào."
   }
 ]

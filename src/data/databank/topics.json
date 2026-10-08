@@ -6,7 +6,13 @@
     "taskScope": "Both",
     "icon": "Leaf",
     "tag": "Phổ biến nhất",
-    "subTopics": ["global warming", "carbon footprint", "renewable energy", "plastic pollution", "biodiversity loss"]
+    "subTopics": [
+      "global warming",
+      "carbon footprint",
+      "renewable energy",
+      "plastic pollution",
+      "biodiversity loss"
+    ]
   },
   {
     "id": "education",
@@ -15,7 +21,13 @@
     "taskScope": "Both",
     "icon": "GraduationCap",
     "tag": "Trọng tâm",
-    "subTopics": ["higher education", "tuition fees", "online learning", "curriculum reform", "teachers vs AI"]
+    "subTopics": [
+      "higher education",
+      "tuition fees",
+      "online learning",
+      "curriculum reform",
+      "teachers vs AI"
+    ]
   },
   {
     "id": "technology",
@@ -24,7 +36,13 @@
     "taskScope": "Both",
     "icon": "Cpu",
     "tag": "Xu hướng 2024+",
-    "subTopics": ["artificial intelligence", "workplace automation", "social media addiction", "smartphones", "data privacy"]
+    "subTopics": [
+      "artificial intelligence",
+      "workplace automation",
+      "social media addiction",
+      "smartphones",
+      "data privacy"
+    ]
   },
   {
     "id": "society",
@@ -33,7 +51,13 @@
     "taskScope": "Task 2",
     "icon": "Users",
     "tag": "Kinh điển",
-    "subTopics": ["aging population", "consumerism", "work-life balance", "urbanization", "wealth gap"]
+    "subTopics": [
+      "aging population",
+      "consumerism",
+      "work-life balance",
+      "urbanization",
+      "wealth gap"
+    ]
   },
   {
     "id": "globalization",
@@ -42,7 +66,13 @@
     "taskScope": "Task 2",
     "icon": "Globe",
     "tag": "Nâng cao",
-    "subTopics": ["cultural preservation", "mass tourism", "language endangerment", "westernization", "traditional values"]
+    "subTopics": [
+      "cultural preservation",
+      "mass tourism",
+      "language endangerment",
+      "westernization",
+      "traditional values"
+    ]
   },
   {
     "id": "health",
@@ -51,7 +81,13 @@
     "taskScope": "Both",
     "icon": "HeartPulse",
     "tag": "Thực tế",
-    "subTopics": ["sedentary lifestyle", "fast food taxes", "universal healthcare", "mental health", "preventive medicine"]
+    "subTopics": [
+      "sedentary lifestyle",
+      "fast food taxes",
+      "universal healthcare",
+      "mental health",
+      "preventive medicine"
+    ]
   },
   {
     "id": "work_career",
@@ -60,7 +96,13 @@
     "taskScope": "Both",
     "icon": "Briefcase",
     "tag": "Thực tế",
-    "subTopics": ["remote working", "job automation", "retirement age", "job-hopping", "gig economy"]
+    "subTopics": [
+      "remote working",
+      "job automation",
+      "retirement age",
+      "job-hopping",
+      "gig economy"
+    ]
   },
   {
     "id": "crime_law",
@@ -69,7 +111,13 @@
     "taskScope": "Task 2",
     "icon": "Scale",
     "tag": "Nâng cao",
-    "subTopics": ["prison rehabilitation", "capital punishment", "juvenile crime", "surveillance cameras", "cybercrime"]
+    "subTopics": [
+      "prison rehabilitation",
+      "capital punishment",
+      "juvenile crime",
+      "surveillance cameras",
+      "cybercrime"
+    ]
   },
   {
     "id": "business",
@@ -78,7 +126,14 @@
     "taskScope": "Both",
     "icon": "TrendingUp",
     "tag": "Thực tế",
-    "subTopics": ["economic growth", "advertising & consumerism", "corporate responsibility", "local business vs multinationals", "cashless economy", "market regulation"]
+    "subTopics": [
+      "economic growth",
+      "advertising & consumerism",
+      "corporate responsibility",
+      "local business vs multinationals",
+      "cashless economy",
+      "market regulation"
+    ]
   },
   {
     "id": "task1_bar_chart",
@@ -87,7 +142,12 @@
     "taskScope": "Task 1",
     "icon": "BarChart3",
     "tag": "Task 1 Cốt lõi",
-    "subTopics": ["grouped bars", "stacked bars", "single-year comparison", "cross-country comparison"]
+    "subTopics": [
+      "grouped bars",
+      "stacked bars",
+      "single-year comparison",
+      "cross-country comparison"
+    ]
   },
   {
     "id": "task1_line_graph",
@@ -96,7 +156,13 @@
     "taskScope": "Task 1",
     "icon": "TrendingUp",
     "tag": "Task 1 Xu hướng",
-    "subTopics": ["trends over time", "fluctuations", "overtaking", "peak and plateau", "projections"]
+    "subTopics": [
+      "trends over time",
+      "fluctuations",
+      "overtaking",
+      "peak and plateau",
+      "projections"
+    ]
   },
   {
     "id": "task1_process",
@@ -105,6 +171,53 @@
     "taskScope": "Task 1",
     "icon": "Layers",
     "tag": "Task 1 Đặc biệt",
-    "subTopics": ["man-made manufacturing", "natural life cycles", "recycling phases", "linear vs cyclic"]
+    "subTopics": [
+      "man-made manufacturing",
+      "natural life cycles",
+      "recycling phases",
+      "linear vs cyclic"
+    ]
+  },
+  {
+    "id": "task1_pie_chart",
+    "name": "Task 1 - Pie Chart (Biểu đồ tròn)",
+    "vietnameseName": "Biểu đồ tròn tỉ lệ",
+    "taskScope": "Task 1",
+    "icon": "PieChart",
+    "tag": "Task 1 Tỉ lệ",
+    "subTopics": [
+      "single pie chart",
+      "multiple pie charts",
+      "percentage shares",
+      "proportions"
+    ]
+  },
+  {
+    "id": "task1_table",
+    "name": "Task 1 - Table (Bảng số liệu)",
+    "vietnameseName": "Bảng số liệu so sánh",
+    "taskScope": "Task 1",
+    "icon": "Table",
+    "tag": "Task 1 Dữ liệu",
+    "subTopics": [
+      "multi-variable table",
+      "changes over time",
+      "category ranking",
+      "static comparisons"
+    ]
+  },
+  {
+    "id": "task1_map",
+    "name": "Task 1 - Map & Plan (Bản đồ & Sơ đồ)",
+    "vietnameseName": "Bản đồ & Sơ đồ quy hoạch",
+    "taskScope": "Task 1",
+    "icon": "Compass",
+    "tag": "Task 1 Không gian",
+    "subTopics": [
+      "urban redevelopment",
+      "village expansion",
+      "building floor plans",
+      "site selection"
+    ]
   }
 ]

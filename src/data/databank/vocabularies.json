@@ -2671,5 +2671,617 @@
     ],
     "exampleSentence": "A toxic level of workplace jealousy can sabotage healthy collaboration and cause talented staff members to resign.",
     "wordFamily": "saboteur (n)"
+  },
+  {
+    "id": "V115",
+    "topicId": "environment",
+    "word": "estuary",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈes.tʃu.ə.ri/",
+    "meaning": "Cửa sông, vùng nước lợ nơi dòng sông gặp thủy triều của đại dương",
+    "definitionEn": "the wide part of a river at its mouth where fresh water meets the salt water of the sea",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "river mouth, coastal wetland",
+    "synonyms": [
+      "river mouth",
+      "firth",
+      "inlet"
+    ],
+    "collocations": [
+      "river estuary",
+      "lower estuary",
+      "estuary rearing period",
+      "estuarine ecosystem"
+    ],
+    "exampleSentence": "Young salmon spend several months in the lower river estuary to acclimatize to saline conditions before entering the open ocean.",
+    "wordFamily": "estuarine (adj)"
+  },
+  {
+    "id": "V116",
+    "topicId": "environment",
+    "word": "rearing period",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈrɪə.rɪŋ ˈpɪə.ri.əd/",
+    "meaning": "Giai đoạn nuôi dưỡng / ươm mầm sinh trưởng đầu đời của sinh vật",
+    "definitionEn": "the phase of development in an animal's life cycle during which it is cared for, nourished, and matures toward adulthood",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "nurturing phase, growth stage",
+    "synonyms": [
+      "nursery phase",
+      "growth period",
+      "developmental stage"
+    ],
+    "collocations": [
+      "estuary rearing period",
+      "juvenile rearing period",
+      "rearing facilities"
+    ],
+    "exampleSentence": "Following the river rearing period, the maturing smolts migrate to the ocean where they feed voraciously.",
+    "wordFamily": "rear (v)"
+  },
+  {
+    "id": "V117",
+    "topicId": "environment",
+    "word": "waste output",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/weɪst ˈaʊt.pʊt/",
+    "meaning": "Sản lượng / khối lượng rác thải xả ra trong quá trình sinh hoạt hoặc sản xuất",
+    "definitionEn": "the total quantity of discarded refuse, pollutants, or by-products produced by a facility or population over time",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "amount of rubbish, trash production",
+    "synonyms": [
+      "refuse yield",
+      "waste discharge",
+      "refuse production"
+    ],
+    "collocations": [
+      "curb waste output",
+      "industrial waste output",
+      "reduce waste output",
+      "annual waste output"
+    ],
+    "exampleSentence": "By adopting clean manufacturing technologies, Company B managed to slash its annual waste output from 8 to 3 tonnes.",
+    "wordFamily": "waste (v, n), wasteful (adj)"
+  },
+  {
+    "id": "V118",
+    "topicId": "business",
+    "word": "fairtrade",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈfeə.treɪd/",
+    "meaning": "Thương mại công bằng, cơ chế thương mại bảo đảm mức giá hợp lý và quyền lợi cho người nông dân nghèo",
+    "definitionEn": "a trading partnership that seeks greater equity in international trade by securing fair prices and decent working conditions for producers in developing countries",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "ethical trade, fair compensation",
+    "synonyms": [
+      "ethical commerce",
+      "equitable trading"
+    ],
+    "collocations": [
+      "Fairtrade-labelled products",
+      "Fairtrade coffee and bananas",
+      "promote Fairtrade",
+      "Fairtrade certified"
+    ],
+    "exampleSentence": "Consumer demand for Fairtrade-labelled coffee surged dramatically across Western Europe as ethical purchasing gained momentum.",
+    "wordFamily": "fairly (adv), fairness (n)"
+  },
+  {
+    "id": "V119",
+    "topicId": "environment",
+    "word": "evaporation",
+    "partOfSpeech": "noun",
+    "ipa": "/ɪˌvæp.əˈreɪ.ʃən/",
+    "meaning": "Sự bốc hơi nước, quá trình chất lỏng chuyển hóa thành thể khí dưới tác dụng của nhiệt",
+    "definitionEn": "the process of a liquid changing into a gas, especially water turning into vapour due to heat",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "drying up, vaporization",
+    "synonyms": [
+      "vaporization",
+      "steaming",
+      "volatilization"
+    ],
+    "collocations": [
+      "ocean evaporation",
+      "rate of evaporation",
+      "solar evaporation",
+      "evaporation stage"
+    ],
+    "exampleSentence": "Solar radiation drives the evaporation stage of the hydrological cycle, transforming vast volumes of seawater into atmospheric vapour.",
+    "wordFamily": "evaporate (v), evaporative (adj)"
+  },
+  {
+    "id": "V120",
+    "topicId": "environment",
+    "word": "precipitation",
+    "partOfSpeech": "noun",
+    "ipa": "/prɪˌsɪp.ɪˈteɪ.ʃən/",
+    "meaning": "Hiện tượng giáng thủy, lượng mưa tuyết rơi xuống từ khí quyển",
+    "definitionEn": "water that falls from clouds toward the ground, especially as rain, snow, or hail",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "rainfall, snow, falling moisture",
+    "synonyms": [
+      "rainfall",
+      "downpour",
+      "meteorological fall"
+    ],
+    "collocations": [
+      "annual precipitation",
+      "heavy precipitation",
+      "precipitation levels",
+      "precipitation patterns"
+    ],
+    "exampleSentence": "Mountainous barriers force rainclouds upward, resulting in heavy precipitation across coastal valleys.",
+    "wordFamily": "precipitate (v), precipitous (adj)"
+  },
+  {
+    "id": "V121",
+    "topicId": "environment",
+    "word": "condense",
+    "partOfSpeech": "verb",
+    "ipa": "/kənˈdens/",
+    "meaning": "Ngưng tụ, biến đổi từ trạng thái khí sang trạng thái lỏng khi gặp nhiệt độ lạnh",
+    "definitionEn": "to change from a gas into a liquid as temperature drops",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "turn from gas to liquid, liquefy",
+    "synonyms": [
+      "liquefy",
+      "compress",
+      "concentrate"
+    ],
+    "collocations": [
+      "vapour condenses to form clouds",
+      "condense into droplets",
+      "condensed moisture"
+    ],
+    "exampleSentence": "As warm water vapour ascends into cooler upper altitudes, it condenses into visible droplets that coalesce into rainclouds.",
+    "wordFamily": "condensation (n), condenser (n)"
+  },
+  {
+    "id": "V122",
+    "topicId": "society",
+    "word": "single-occupant household",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈsɪŋ.ɡəl ˈɒk.jʊ.pənt ˈhaʊs.həʊld/",
+    "meaning": "Hộ gia đình độc thân, nhà ở chỉ có duy nhất một người sinh sống",
+    "definitionEn": "a residential home or apartment occupied by only one individual living alone",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "one-person home, person living alone",
+    "synonyms": [
+      "one-person household",
+      "solo living arrangement",
+      "solitary residence"
+    ],
+    "collocations": [
+      "rise of single-occupant households",
+      "demographics of single-occupant households",
+      "single-occupant apartments"
+    ],
+    "exampleSentence": "Urbanization and increasing longevity have driven a pronounced rise in single-occupant households throughout developed nations.",
+    "wordFamily": "occupant (n), occupation (n), occupy (v)"
+  },
+  {
+    "id": "V123",
+    "topicId": "globalization",
+    "word": "foreign aid",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈfɒr.ən eɪd/",
+    "meaning": "Viện trợ quốc tế, nguồn tài chính và vật tư một chính phủ hỗ trợ các nước nghèo",
+    "definitionEn": "money, food, or other resources donated or lent by one country to help another country during emergencies or for economic development",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "international help, financial donation overseas",
+    "synonyms": [
+      "international aid",
+      "humanitarian assistance",
+      "development aid"
+    ],
+    "collocations": [
+      "allocate foreign aid",
+      "foreign aid budget",
+      "bilateral foreign aid",
+      "channel foreign aid"
+    ],
+    "exampleSentence": "Wealthy democracies should maintain their foreign aid commitments to alleviate famine and combat epidemics in impoverished nations.",
+    "wordFamily": "aid (v, n)"
+  },
+  {
+    "id": "V124",
+    "topicId": "globalization",
+    "word": "national interest",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈnæʃ.nəl ˈɪn.trəst/",
+    "meaning": "Lợi ích quốc gia, mục tiêu kinh tế chính trị an ninh tối thượng của một đất nước",
+    "definitionEn": "the economic, military, and cultural goals and advantages of a nation considered as a collective entity",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "country's benefit, domestic welfare",
+    "synonyms": [
+      "domestic interests",
+      "state welfare",
+      "strategic interest"
+    ],
+    "collocations": [
+      "in the national interest",
+      "serve the national interest",
+      "safeguard national interests"
+    ],
+    "exampleSentence": "Governments must strike a delicate equilibrium between safeguarding immediate national interests and honoring multilateral obligations.",
+    "wordFamily": "national (adj), nation (n)"
+  },
+  {
+    "id": "V125",
+    "topicId": "society",
+    "word": "sense of achievement",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/sens əv əˈtʃiːv.mənt/",
+    "meaning": "Cảm giác thành tựu, sự tự hào và thỏa mãn sâu sắc khi vượt qua thử thách khó khăn",
+    "definitionEn": "a proud and deeply satisfying feeling that comes from successfully completing a difficult task or reaching an ambitious goal",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "feeling of pride, accomplishment",
+    "synonyms": [
+      "feeling of accomplishment",
+      "sense of triumph",
+      "self-fulfillment"
+    ],
+    "collocations": [
+      "derive a profound sense of achievement",
+      "instil a sense of achievement",
+      "heightened sense of achievement"
+    ],
+    "exampleSentence": "Mastering a difficult classical instrument imparts an enduring sense of achievement that passive video entertainment can never replicate.",
+    "wordFamily": "achieve (v), achievable (adj)"
+  },
+  {
+    "id": "V126",
+    "topicId": "business",
+    "word": "differential pricing",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˌdɪf.əˈren.ʃəl ˈpraɪ.sɪŋ/",
+    "meaning": "Chính sách định giá khác biệt, áp dụng mức giá khác nhau cho các nhóm khách hàng khác nhau",
+    "definitionEn": "a pricing strategy that charges different prices to different buyers for the same service or commodity based on demographics or nationality",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "two-tier pricing, variable ticket prices",
+    "synonyms": [
+      "dual pricing",
+      "tiered pricing",
+      "price discrimination"
+    ],
+    "collocations": [
+      "adopt differential pricing",
+      "justify differential pricing",
+      "differential pricing system"
+    ],
+    "exampleSentence": "Historical heritage sites often employ differential pricing to ensure local citizens enjoy cheap admission while capitalizing on affluent tourist arrivals.",
+    "wordFamily": "differentiate (v), differentiate (v)"
+  },
+  {
+    "id": "V127",
+    "topicId": "society",
+    "word": "patronage",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈpæt.rə.nɪdʒ/",
+    "meaning": "Sự bảo trợ tài chính, sự hỗ trợ kinh phí của chính phủ hoặc giới quý tộc cho nghệ sĩ",
+    "definitionEn": "the financial support or practical encouragement given by a patron, government, or benefactor to an artist or institution",
+    "cefrBand": "C2 (Band 8.5+)",
+    "basicEquivalent": "financial backing, sponsorship",
+    "synonyms": [
+      "sponsorship",
+      "financial backing",
+      "subsidization",
+      "benefaction"
+    ],
+    "collocations": [
+      "state patronage",
+      "royal patronage",
+      "rely on wealthy patronage",
+      "artistic patronage"
+    ],
+    "exampleSentence": "Without state patronage, avant-garde painters and classical symphony orchestras would struggle to survive in a commercial marketplace.",
+    "wordFamily": "patron (n), patronize (v)"
+  },
+  {
+    "id": "V128",
+    "topicId": "health",
+    "word": "animal testing",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈæn.ɪ.məl ˈtes.tɪŋ/",
+    "meaning": "Thử nghiệm trên động vật, việc sử dụng động vật sống cho nghiên cứu khoa học và dược phẩm",
+    "definitionEn": "the use of non-human animals in controlled scientific experiments to test the toxicity and efficacy of medical drugs or cosmetics",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "animal experimentation, testing on animals",
+    "synonyms": [
+      "animal experimentation",
+      "in vivo testing",
+      "vivisection"
+    ],
+    "collocations": [
+      "ban animal testing",
+      "conduct animal testing",
+      "alternatives to animal testing",
+      "ethical guidelines on animal testing"
+    ],
+    "exampleSentence": "Medical authorities maintain that limited animal testing remains indispensable for verifying the safety of cancer treatments before human trials.",
+    "wordFamily": "test (v, n)"
+  },
+  {
+    "id": "V129",
+    "topicId": "education",
+    "word": "gender quota",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈdʒen.dər ˈkwəʊ.tə/",
+    "meaning": "Hạn ngạch giới tính, quy định ấn định tỷ lệ nam-nữ bắt buộc trong tuyển sinh hoặc bổ nhiệm",
+    "definitionEn": "an official rule requiring that a specific percentage or equal number of positions or educational seats be allocated to each gender",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "fixed male-female ratio, mandatory gender target",
+    "synonyms": [
+      "gender target",
+      "affirmative action quota",
+      "gender parity requirement"
+    ],
+    "collocations": [
+      "impose gender quotas",
+      "enforce strict gender quotas",
+      "debate over gender quotas"
+    ],
+    "exampleSentence": "Critics argue that imposing artificial gender quotas on STEM admissions undermines academic meritocracy and disincentivizes top candidates.",
+    "wordFamily": "quota (n)"
+  },
+  {
+    "id": "V130",
+    "topicId": "education",
+    "word": "vocational training",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/vəʊˈkeɪ.ʃən.əl ˈtreɪ.nɪŋ/",
+    "meaning": "Đào tạo nghề nghiệp thực hành, chương trình dạy kỹ năng thực tiễn thay vì lý thuyết học thuật",
+    "definitionEn": "education and practical instruction that prepares learners directly for careers in specialized trades, crafts, or technical occupations",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "job training, practical skills education",
+    "synonyms": [
+      "vocational education",
+      "apprenticeship training",
+      "trade schooling"
+    ],
+    "collocations": [
+      "pursue vocational training",
+      "vocational training institute",
+      "practical vocational training"
+    ],
+    "exampleSentence": "School leavers who undertake vocational training in plumbing or electrical engineering often attain stable employment faster than arts graduates.",
+    "wordFamily": "vocation (n), vocational (adj)"
+  },
+  {
+    "id": "V131",
+    "topicId": "society",
+    "word": "superficial",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˌsuː.pəˈfɪʃ.əl/",
+    "meaning": "Nông cạn, hời hợt, chỉ chú trọng vào bề nổi hoặc vẻ hào nhoáng bên ngoài",
+    "definitionEn": "not thorough or deep, focusing only on the obvious surface or appearance rather than genuine underlying worth",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "shallow, skin-deep, insubstantial",
+    "synonyms": [
+      "shallow",
+      "glib",
+      "insubstantial",
+      "cursory"
+    ],
+    "collocations": [
+      "superficial relationships",
+      "superficial glamour",
+      "superficial knowledge",
+      "purely superficial"
+    ],
+    "exampleSentence": "Social media cultivates superficial interactions where popularity is measured in ephemeral likes rather than enduring companionship.",
+    "wordFamily": "superficially (adv), superficiality (n)"
+  },
+  {
+    "id": "V132",
+    "topicId": "society",
+    "word": "role model",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈrəʊl ˌmɒd.əl/",
+    "meaning": "Hình mẫu lý tưởng, tấm gương chuẩn mực đạo đức và tài năng để người khác noi theo",
+    "definitionEn": "a person whose exemplary behavior, accomplishments, or virtues in a particular role serve as an inspiration for others to emulate",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "good example, inspiring figure",
+    "synonyms": [
+      "exemplar",
+      "moral beacon",
+      "inspirational figure",
+      "paragon"
+    ],
+    "collocations": [
+      "serve as a role model",
+      "positive role models for youth",
+      "flawed role model"
+    ],
+    "exampleSentence": "Parents fear that reality TV stars set dangerous precedents for adolescents when celebrated as role models solely for their opulence.",
+    "wordFamily": "model (v, n)"
+  },
+  {
+    "id": "V133",
+    "topicId": "work_career",
+    "word": "job satisfaction",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/dʒɒb ˌsæt.ɪsˈfæk.ʃən/",
+    "meaning": "Sự thỏa mãn trong công việc, mức độ hạnh phúc và cảm giác gắn bó với nghề nghiệp",
+    "definitionEn": "a feeling of fulfillment, content, and positive psychological gratification that an employee derives from their occupation",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "enjoyment of work, career happiness",
+    "synonyms": [
+      "vocational contentment",
+      "professional fulfillment",
+      "occupational satisfaction"
+    ],
+    "collocations": [
+      "derive high job satisfaction",
+      "compromise job satisfaction",
+      "boost employee job satisfaction"
+    ],
+    "exampleSentence": "Empirical studies confirm that meaningful work and autonomy contribute far more to employee retention than exorbitant salaries devoid of job satisfaction.",
+    "wordFamily": "satisfy (v), satisfactory (adj)"
+  },
+  {
+    "id": "V134",
+    "topicId": "society",
+    "word": "interdependence",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌɪn.tə.dɪˈpen.dəns/",
+    "meaning": "Sự phụ thuộc lẫn nhau, mối quan hệ tương hỗ và gắn kết chặt chẽ giữa các thành viên xã hội",
+    "definitionEn": "the state of mutually relying on or being influenced by each other within a community, economy, or ecosystem",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "mutual reliance, interconnectedness",
+    "synonyms": [
+      "mutual reliance",
+      "interconnectedness",
+      "interrelation",
+      "symbiosis"
+    ],
+    "collocations": [
+      "social interdependence",
+      "global economic interdependence",
+      "recognize our interdependence"
+    ],
+    "exampleSentence": "Despite notions of rugged individualism, modern urban civilization relies upon intricate networks of economic interdependence for food, power, and healthcare.",
+    "wordFamily": "interdependent (adj), interdependently (adv)"
+  },
+  {
+    "id": "V135",
+    "topicId": "environment",
+    "word": "biodiversity loss",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˌbaɪ.əʊ.daɪˈvɜː.sə.ti lɒs/",
+    "meaning": "Sự suy giảm đa dạng sinh học, tốc độ tuyệt chủng nhanh chóng của các loài động thực vật hoang dã",
+    "definitionEn": "the decline in the number, genetic variability, and ecological variety of living species in a specific biome or worldwide",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "extinction of species, loss of nature",
+    "synonyms": [
+      "species depletion",
+      "ecological degradation",
+      "faunal extinction"
+    ],
+    "collocations": [
+      "halt biodiversity loss",
+      "catastrophic biodiversity loss",
+      "accelerating biodiversity loss"
+    ],
+    "exampleSentence": "Rampant deforestation and habitat fragmentation have accelerated catastrophic biodiversity loss, threatening the equilibrium of global biomes.",
+    "wordFamily": "biodiverse (adj)"
+  },
+  {
+    "id": "V136",
+    "topicId": "crime_law",
+    "word": "reformed offender",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/rɪˈfɔːmd əˈfen.dər/",
+    "meaning": "Cựu phạm nhân hoàn lương, người từng phạm luật và chấp hành án tù nay đã cải tà quy chính",
+    "definitionEn": "a former criminal who has served their judicial penalty, genuinely altered their conduct, and integrated into society as a law-abiding citizen",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "ex-prisoner who changed, reformed criminal",
+    "synonyms": [
+      "reformed convict",
+      "ex-offender",
+      "rehabilitated prisoner"
+    ],
+    "collocations": [
+      "reformed offender mentorship",
+      "voices of reformed offenders",
+      "reintegrate reformed offenders"
+    ],
+    "exampleSentence": "Testimonies from reformed offenders carry authentic gravitas that effectively dismantles youthful romanticization of gang culture.",
+    "wordFamily": "reform (v, n), reformation (n)"
+  },
+  {
+    "id": "V137",
+    "topicId": "crime_law",
+    "word": "deterrent",
+    "partOfSpeech": "noun",
+    "ipa": "/dɪˈter.ənt/",
+    "meaning": "Biện pháp răn đe, tác nhân khiến người khác chùn bước không dám vi phạm pháp luật",
+    "definitionEn": "a measure, punishment, or circumstance that discourages or prevents people from taking an illegal or unwise course of action",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "discouragement, prevention measure, warning",
+    "synonyms": [
+      "disincentive",
+      "preventative measure",
+      "curb",
+      "deterrence"
+    ],
+    "collocations": [
+      "act as a powerful deterrent",
+      "effective deterrent against crime",
+      "serve as a deterrent"
+    ],
+    "exampleSentence": "Hearing first-hand accounts of prison hardships serves as an impactful deterrent against juvenile delinquency.",
+    "wordFamily": "deter (v), deterrence (n)"
+  },
+  {
+    "id": "V138",
+    "topicId": "business",
+    "word": "corporate social responsibility",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈkɔː.pər.ət ˈsəʊ.ʃəl rɪˌspɒn.sɪˈbɪl.ə.ti/",
+    "meaning": "Trách nhiệm xã hội của doanh nghiệp (CSR), cam kết của công ty đóng góp cho sự phát triển bền vững của xã hội",
+    "definitionEn": "a management concept whereby companies integrate social and environmental concerns in their business operations and interactions with stakeholders",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "ethical business duty, community responsibility",
+    "synonyms": [
+      "corporate citizenship",
+      "sustainable business practices",
+      "CSR policies"
+    ],
+    "collocations": [
+      "practice corporate social responsibility",
+      "embrace corporate social responsibility",
+      "CSR initiatives"
+    ],
+    "exampleSentence": "Forward-thinking conglomerates recognize that corporate social responsibility is not an optional charity, but an imperative for sustainable survival.",
+    "wordFamily": "responsible (adj), responsibly (adv)"
+  },
+  {
+    "id": "V139",
+    "topicId": "business",
+    "word": "ethical practice",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ˈeθ.ɪ.kəl ˈpræk.tɪs/",
+    "meaning": "Chuẩn mực thực hành đạo đức, phương thức kinh doanh tôn trọng pháp luật và sự công bằng",
+    "definitionEn": "business behavior and operational procedures that adhere to moral principles, fair labor laws, and transparent accountability",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "moral conduct in business, honest operations",
+    "synonyms": [
+      "moral conduct",
+      "fair trade practices",
+      "corporate integrity"
+    ],
+    "collocations": [
+      "adhere to ethical practice",
+      "standards of ethical practice",
+      "champion ethical practices"
+    ],
+    "exampleSentence": "Firms committed to ethical practice avoid toxic dumping and treat shopfloor laborers with dignity regardless of overseas profit margins.",
+    "wordFamily": "ethics (n), ethically (adv)"
+  },
+  {
+    "id": "V140",
+    "topicId": "health",
+    "word": "extreme sports",
+    "partOfSpeech": "noun phrase",
+    "ipa": "/ɪkˈstriːm spɔːts/",
+    "meaning": "Thể thao mạo hiểm, các bộ môn vận động có độ hiểm nguy cao như nhảy dù, lướt sóng lớn",
+    "definitionEn": "action sports involving high speed, height, danger, and specialized gear, often carrying acute risks of bodily injury or fatality",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "dangerous sports, high-risk physical activities",
+    "synonyms": [
+      "adventure sports",
+      "action sports",
+      "high-risk athletics"
+    ],
+    "collocations": [
+      "participate in extreme sports",
+      "ban extreme sports",
+      "surge in extreme sports",
+      "thrill of extreme sports"
+    ],
+    "exampleSentence": "While extreme sports such as wingsuit flying entail undeniable hazards, advocates maintain that adults possess the fundamental right to embrace personal risks.",
+    "wordFamily": "extremity (n), extreme (adj)"
   }
 ]
