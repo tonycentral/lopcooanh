@@ -4,13 +4,17 @@ import {
   BarChart3, 
   Columns3, 
   Columns2, 
-  Calendar,
   Layers,
   GraduationCap,
   Cpu,
   Leaf,
+  Car,
+  HeartPulse,
+  Briefcase,
+  TrendingUp,
   Users,
-  Scale
+  Scale,
+  Landmark
 } from 'lucide-react';
 import { MASTER_TOPIC_CATEGORIES, getMasterCategoryId } from '../data/topicCategories';
 
@@ -19,8 +23,13 @@ const CATEGORY_ICONS = {
   GraduationCap,
   Cpu,
   Leaf,
+  Car,
+  HeartPulse,
+  Briefcase,
+  TrendingUp,
   Users,
-  Scale
+  Scale,
+  Landmark
 };
 
 const CATEGORY_STYLES = {
@@ -44,14 +53,39 @@ const CATEGORY_STYLES = {
     badgeActive: "bg-emerald-500/40 text-emerald-100",
     badgeInactive: "bg-slate-800 text-slate-400"
   },
-  society: {
+  transport: {
+    active: "bg-teal-600 text-white shadow-md shadow-teal-600/30 ring-1 ring-teal-400",
+    badgeActive: "bg-teal-500/40 text-teal-100",
+    badgeInactive: "bg-slate-800 text-slate-400"
+  },
+  health: {
+    active: "bg-rose-600 text-white shadow-md shadow-rose-600/30 ring-1 ring-rose-400",
+    badgeActive: "bg-rose-500/40 text-rose-100",
+    badgeInactive: "bg-slate-800 text-slate-400"
+  },
+  work_career: {
+    active: "bg-indigo-600 text-white shadow-md shadow-indigo-600/30 ring-1 ring-indigo-400",
+    badgeActive: "bg-indigo-500/40 text-indigo-100",
+    badgeInactive: "bg-slate-800 text-slate-400"
+  },
+  business: {
+    active: "bg-violet-600 text-white shadow-md shadow-violet-600/30 ring-1 ring-violet-400",
+    badgeActive: "bg-violet-500/40 text-violet-100",
+    badgeInactive: "bg-slate-800 text-slate-400"
+  },
+  society_family: {
     active: "bg-purple-600 text-white shadow-md shadow-purple-600/30 ring-1 ring-purple-400",
     badgeActive: "bg-purple-500/40 text-purple-100",
     badgeInactive: "bg-slate-800 text-slate-400"
   },
-  economy_law: {
-    active: "bg-rose-600 text-white shadow-md shadow-rose-600/30 ring-1 ring-rose-400",
-    badgeActive: "bg-rose-500/40 text-rose-100",
+  crime_law: {
+    active: "bg-red-600 text-white shadow-md shadow-red-600/30 ring-1 ring-red-400",
+    badgeActive: "bg-red-500/40 text-red-100",
+    badgeInactive: "bg-slate-800 text-slate-400"
+  },
+  culture_arts: {
+    active: "bg-orange-600 text-white shadow-md shadow-orange-600/30 ring-1 ring-orange-400",
+    badgeActive: "bg-orange-500/40 text-orange-100",
     badgeInactive: "bg-slate-800 text-slate-400"
   }
 };
@@ -68,9 +102,8 @@ export default function TopicTabBar({
 }) {
   const list = topics && topics.length > 0 ? topics : [];
   const [selectedCategory, setSelectedCategory] = useState('ALL');
-  const [selectedYear, setSelectedYear] = useState('ALL');
 
-  // Compute topic counts for each of the 5 master categories
+  // Compute topic counts for each of the 10 master categories
   const categoryCounts = useMemo(() => {
     if (activeTask === 'task1') return {};
     const counts = { ALL: list.length };
@@ -82,33 +115,17 @@ export default function TopicTabBar({
       if (counts[catId] !== undefined) {
         counts[catId]++;
       } else {
-        counts['society'] = (counts['society'] || 0) + 1;
+        counts['society_family'] = (counts['society_family'] || 0) + 1;
       }
     });
     return counts;
   }, [list, activeTask]);
 
-  // Extract available years for Task 2
-  const availableYears = useMemo(() => {
-    if (activeTask === 'task1') return [];
-    const years = new Set();
-    list.forEach(t => {
-      if (t.yearDate) years.add(t.yearDate);
-    });
-    const sortedYears = Array.from(years).sort().reverse();
-    return ['ALL', ...sortedYears];
-  }, [list, activeTask]);
-
-  // Filter topics by selected master category and year
+  // Filter topics purely by selected master category
   const displayTopics = useMemo(() => {
-    if (activeTask === 'task1') return list;
-    return list.filter(t => {
-      const catId = t.topicCategory || getMasterCategoryId(t);
-      const matchCat = selectedCategory === 'ALL' || catId === selectedCategory;
-      const matchYear = selectedYear === 'ALL' || (t.yearDate || 'Kinh điển') === selectedYear;
-      return matchCat && matchYear;
-    });
-  }, [list, activeTask, selectedCategory, selectedYear]);
+    if (activeTask === 'task1' || selectedCategory === 'ALL') return list;
+    return list.filter(t => (t.topicCategory || getMasterCategoryId(t)) === selectedCategory);
+  }, [list, activeTask, selectedCategory]);
 
   // Handle master category tab click
   const handleCategoryClick = (catId) => {
@@ -118,19 +135,9 @@ export default function TopicTabBar({
     // If currently selected topic is not in the clicked category, auto-select the first topic in that category
     const currentCat = selectedTopic ? (selectedTopic.topicCategory || getMasterCategoryId(selectedTopic)) : null;
     if (currentCat !== catId) {
-      const candidates = list.filter(t => {
-        const c = t.topicCategory || getMasterCategoryId(t);
-        const matchYear = selectedYear === 'ALL' || (t.yearDate || 'Kinh điển') === selectedYear;
-        return c === catId && matchYear;
-      });
+      const candidates = list.filter(t => (t.topicCategory || getMasterCategoryId(t)) === catId);
       if (candidates.length > 0) {
         onSelectTopic(candidates[0]);
-      } else {
-        const fallback = list.filter(t => (t.topicCategory || getMasterCategoryId(t)) === catId);
-        if (fallback.length > 0) {
-          setSelectedYear('ALL');
-          onSelectTopic(fallback[0]);
-        }
       }
     }
   };
@@ -149,61 +156,37 @@ export default function TopicTabBar({
 
   return (
     <div className="space-y-2">
-      {/* 5 Master Categories Filter Bar for Task 2 */}
+      {/* 10 Master Thematic Groups Filter Bar for Task 2 */}
       {activeTask === 'task2' && (
-        <div className="flex items-center justify-between gap-2">
-          {/* Master Topic Category Tabs */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 scrollbar-thin flex-1">
-            {MASTER_TOPIC_CATEGORIES.map(cat => {
-              const isCatSelected = selectedCategory === cat.id;
-              const count = categoryCounts[cat.id] || 0;
-              const IconComp = CATEGORY_ICONS[cat.icon] || Layers;
-              const style = CATEGORY_STYLES[cat.id] || CATEGORY_STYLES.ALL;
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 scrollbar-thin">
+          {MASTER_TOPIC_CATEGORIES.map(cat => {
+            const isCatSelected = selectedCategory === cat.id;
+            const count = categoryCounts[cat.id] || 0;
+            const IconComp = CATEGORY_ICONS[cat.icon] || Layers;
+            const style = CATEGORY_STYLES[cat.id] || CATEGORY_STYLES.ALL;
 
-              return (
-                <button
-                  key={cat.id}
-                  type="button"
-                  onClick={() => handleCategoryClick(cat.id)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer select-none shrink-0 ${
-                    isCatSelected
-                      ? style.active
-                      : "bg-slate-900/90 hover:bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-800/80"
-                  }`}
-                  title={cat.description}
-                >
-                  <IconComp className="w-3.5 h-3.5 shrink-0" />
-                  <span>{cat.shortName}</span>
-                  <span className={`text-[10px] font-extrabold px-1.5 py-0.2 rounded-full ${
-                    isCatSelected ? style.badgeActive : style.badgeInactive
-                  }`}>
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Compact Year Filter Dropdown */}
-          {availableYears.length > 2 && (
-            <div className="flex items-center gap-1 shrink-0 bg-slate-900/90 border border-slate-800/90 rounded-xl px-2.5 py-1 text-xs shadow-sm">
-              <Calendar className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-              <label htmlFor="topic-year-filter" className="sr-only">Lọc theo năm thi</label>
-              <select
-                id="topic-year-filter"
-                value={selectedYear}
-                onChange={(e) => setSelectedYear(e.target.value)}
-                className="bg-transparent text-slate-300 hover:text-white text-xs font-bold outline-none cursor-pointer pr-0.5 py-0.5"
-                title="Lọc đề thi theo năm"
+            return (
+              <button
+                key={cat.id}
+                type="button"
+                onClick={() => handleCategoryClick(cat.id)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer select-none shrink-0 ${
+                  isCatSelected
+                    ? style.active
+                    : "bg-slate-900/90 hover:bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-800/80"
+                }`}
+                title={cat.description}
               >
-                {availableYears.map(year => (
-                  <option key={year} value={year} className="bg-slate-900 text-slate-200">
-                    {year === 'ALL' ? 'Tất cả năm' : `Năm ${year}`}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
+                <IconComp className="w-3.5 h-3.5 shrink-0" />
+                <span>{cat.shortName}</span>
+                <span className={`text-[10px] font-extrabold px-1.5 py-0.2 rounded-full ${
+                  isCatSelected ? style.badgeActive : style.badgeInactive
+                }`}>
+                  {count}
+                </span>
+              </button>
+            );
+          })}
         </div>
       )}
 
@@ -219,20 +202,13 @@ export default function TopicTabBar({
               key={topic.id}
               type="button"
               onClick={() => onSelectTopic(topic)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer select-none shrink-0 flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer select-none shrink-0 ${
                 isSelected
                   ? "bg-blue-600 text-white shadow-md shadow-blue-600/30 ring-1 ring-blue-400"
                   : "bg-slate-900/90 hover:bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-800"
               }`}
             >
               <span>{label}</span>
-              {topic.yearDate && topic.yearDate !== 'Kinh điển' && (
-                <span className={`text-[9px] font-bold px-1.5 py-0.2 rounded-md ${
-                  isSelected ? 'bg-white/20 text-white' : 'bg-slate-800 text-slate-400'
-                }`}>
-                  {topic.yearDate}
-                </span>
-              )}
             </button>
           );
         })}

@@ -95,6 +95,16 @@ export function saveHistoryEntry(entry) {
     const updated = [newEntry, ...history].slice(0, 50); // Keep last 50
     localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(updated));
     updateStats(newEntry);
+
+    // Đồng bộ lên Supabase nếu đã đăng nhập tài khoản
+    import('./authService').then(({ getCurrentUser, syncWritingToCloud }) => {
+      getCurrentUser().then(user => {
+        if (user) {
+          syncWritingToCloud(user.id, newEntry);
+        }
+      }).catch(() => {});
+    }).catch(() => {});
+
     return newEntry;
   } catch (e) {
     console.error("Failed to save history", e);

@@ -151,7 +151,7 @@ export default function FlashcardPage({
 
   const MODE_TITLES = {
     card: "🃏 Lật Thẻ Thông Minh",
-    quiz: "🎯 Trắc Nghiệm Duolingo",
+    quiz: "🎯 Trắc Nghiệm Phản Xạ",
     match: "⚡ Ghép Cặp Thần Tốc",
     fill: "✍️ Điền Từ Vào Câu"
   };
@@ -176,7 +176,7 @@ export default function FlashcardPage({
       {/* Mode Switcher Tabs & Filters */}
       <div className="w-full bg-slate-900/60 border-b border-slate-800 px-3 sm:px-6 py-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 shrink-0">
         
-        {/* 4 Duolingo Study Modes */}
+        {/* 4 Interactive Study Modes */}
         <div className="flex items-center p-1 rounded-2xl bg-slate-950/80 border border-slate-800 text-xs overflow-x-auto scrollbar-none">
           <button
             onClick={() => setActiveMode('card')}

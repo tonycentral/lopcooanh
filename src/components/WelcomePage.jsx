@@ -4,7 +4,9 @@ import {
   Check, 
   PhoneCall, 
   Mail,
-  Layers 
+  Layers,
+  User,
+  Cloud 
 } from 'lucide-react';
 import { BAND_OPTIONS } from '../data/bandDescriptors';
 
@@ -13,6 +15,8 @@ export default function WelcomePage({
   onStartFlashcard,
   onOpenContactModal,
   onChangeEmail,
+  onOpenAuth,
+  currentUser,
   studentEmail,
   targetBand = "7.0",
   selectedTask = "task2",
@@ -53,16 +57,29 @@ export default function WelcomePage({
           </div>
         </div>
 
-        {/* Student Email Display & Switcher */}
-        {studentEmail && (
+        {/* Student Email / Login Button */}
+        {currentUser || studentEmail ? (
           <button
-            onClick={onChangeEmail}
+            onClick={onOpenAuth || onChangeEmail}
             className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs text-slate-300 hover:text-white transition cursor-pointer max-w-[220px]"
-            title="Đổi địa chỉ email học viên"
+            title={currentUser ? "Tài khoản đám mây Supabase đã kết nối" : "Đổi địa chỉ email học viên"}
           >
-            <Mail className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-            <span className="truncate">{studentEmail}</span>
+            {currentUser ? (
+              <Cloud className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            ) : (
+              <Mail className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+            )}
+            <span className="truncate">{currentUser?.user_metadata?.full_name || currentUser?.email || studentEmail}</span>
             <span className="text-[10px] text-slate-500 shrink-0">• Đổi</span>
+          </button>
+        ) : (
+          <button
+            onClick={onOpenAuth}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-md shadow-blue-600/30 cursor-pointer active:scale-95"
+            title="Đăng nhập để đồng bộ tiến độ"
+          >
+            <User className="w-3.5 h-3.5" />
+            <span>Đăng Nhập</span>
           </button>
         )}
       </header>
@@ -180,7 +197,7 @@ export default function WelcomePage({
                 className="w-full py-3 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-bold text-xs sm:text-sm transition shadow-lg shadow-emerald-900/30 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
               >
                 <Layers className="w-4 h-4" />
-                <span>Học nhanh Flashcard từ vựng (Kiểu Duolingo)</span>
+                <span>Học nhanh Flashcard phản xạ từ vựng</span>
                 <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-white/20 text-white font-black">
                   Mới
                 </span>

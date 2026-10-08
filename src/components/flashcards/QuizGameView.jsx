@@ -99,7 +99,7 @@ export default function QuizGameView({
       {/* Top Question Header */}
       <div className="text-center space-y-3">
         <span className="text-xs font-bold text-blue-400 uppercase tracking-wider px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20">
-          Trắc nghiệm Duolingo • Chọn nghĩa đúng
+          Trắc nghiệm phản xạ • Chọn nghĩa đúng
         </span>
 
         {/* Word Display with Speaker */}
@@ -123,7 +123,7 @@ export default function QuizGameView({
         </div>
       </div>
 
-      {/* 4 Duolingo Options Grid */}
+      {/* 4 Options Grid */}
       <div className="grid grid-cols-1 gap-2.5 sm:gap-3 py-2">
         {options.map((opt, idx) => {
           let btnStyle = "bg-slate-900 hover:bg-slate-800/90 border-slate-700/80 text-slate-200 hover:border-blue-500/50 shadow-md";
@@ -165,7 +165,7 @@ export default function QuizGameView({
         })}
       </div>
 
-      {/* Bottom Result Banner: Signature Duolingo Bottom Drawer */}
+      {/* Bottom Result Banner */}
       {isAnswered ? (
         <div className={`p-4 sm:p-5 rounded-2xl border flex flex-col sm:flex-row items-center justify-between gap-4 animate-in fade-in-50 slide-in-from-bottom-2 duration-200 ${
           isCorrect

@@ -1,4 +1,4 @@
-// Flashcard state and gamification storage for Duolingo-style learning
+// Flashcard state and gamification storage for interactive learning
 
 const FLASHCARD_STORAGE_KEY = 'lopcooanh_flashcard_progress';
 
@@ -61,6 +61,28 @@ export function recordCardResult(wordId, isMastered) {
   }
 
   saveFlashcardProgress(progress);
+
+  // Đồng bộ lên Supabase Cloud nếu người dùng đã đăng nhập
+  import('./supabaseClient').then(({ supabase, isSupabaseConfigured }) => {
+    if (isSupabaseConfigured && supabase) {
+      import('./authService').then(({ getCurrentUser }) => {
+        getCurrentUser().then(user => {
+          if (user) {
+            supabase.from('flashcard_progress').upsert({
+              user_id: user.id,
+              mastered_word_ids: progress.masteredWordIds,
+              needs_review_word_ids: progress.needsReviewWordIds,
+              xp: progress.xp,
+              streak: progress.streak,
+              last_active_date: progress.lastActiveDate,
+              updated_at: new Date().toISOString()
+            }, { onConflict: 'user_id' }).then(() => {}).catch(() => {});
+          }
+        });
+      });
+    }
+  }).catch(() => {});
+
   return progress;
 }
 

@@ -241,7 +241,7 @@ export default function ClassicCardView({
         </div>
       </div>
 
-      {/* Action Buttons: Duolingo/Anki Style */}
+      {/* Action Buttons: Spaced Repetition Style */}
       <div className="w-full flex items-center justify-center gap-3 sm:gap-4 pt-1">
         
         {/* Needs Review (Chưa nhớ) */}

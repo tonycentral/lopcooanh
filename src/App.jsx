@@ -14,6 +14,7 @@ import Task1ChartModal from './components/Task1ChartModal';
 import AdminDashboard from './components/AdminDashboard';
 import FlashcardPage from './components/flashcards/FlashcardPage';
 import SourcesDatabankModal from './components/SourcesDatabankModal';
+import AuthModal from './components/AuthModal';
 
 
 import { 
@@ -38,6 +39,14 @@ import {
   recordUserVisit,
   shouldShowWelcomePage
 } from './services/userService';
+
+import { 
+  getCurrentUser, 
+  onAuthStateChange, 
+  signOut, 
+  upsertCloudProfile, 
+  fetchCloudProfile 
+} from './services/authService';
 
 export default function App() {
   // Current view: 'welcome' | 'practice' | 'admin' (ẩn bí mật)
@@ -105,9 +114,50 @@ export default function App() {
     setCurrentView('practice');
   };
 
-  // Student Email State: Pop-up automatically if not found
+  // Supabase Auth & Cloud User State
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+  // Student Email State
   const [studentEmail, setStudentEmail] = useState(() => getSavedEmail());
-  const [isEmailModalOpen, setIsEmailModalOpen] = useState(() => !getSavedEmail());
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+
+  // Lắng nghe thay đổi trạng thái đăng nhập từ Supabase & đồng bộ hồ sơ Cloud
+  useEffect(() => {
+    getCurrentUser().then(user => {
+      if (user) {
+        setCurrentUser(user);
+        if (user.email) setStudentEmail(user.email);
+        fetchCloudProfile(user.id).then(profile => {
+          if (profile) {
+            if (profile.target_band) setTargetBand(profile.target_band);
+            if (profile.selected_task) setActiveTask(profile.selected_task);
+          }
+        });
+      }
+    });
+
+    const sub = onAuthStateChange(async (event, user) => {
+      setCurrentUser(user);
+      if (user?.email) {
+        setStudentEmail(user.email);
+        const profile = await fetchCloudProfile(user.id);
+        if (profile) {
+          if (profile.target_band) setTargetBand(profile.target_band);
+          if (profile.selected_task) setActiveTask(profile.selected_task);
+        }
+      }
+    });
+
+    return () => {
+      if (sub?.unsubscribe) sub.unsubscribe();
+    };
+  }, []);
+
+  const handleSignOut = async () => {
+    await signOut();
+    setCurrentUser(null);
+  };
 
   // 7-Day Average Status Score
   const [current7DayScore, setCurrent7DayScore] = useState(() => getAverageScoreLast7Days(studentEmail));
@@ -206,6 +256,9 @@ export default function App() {
   const handleUpdateTargetBand = (newBand) => {
     setTargetBand(newBand);
     saveTargetBand(newBand);
+    if (currentUser) {
+      upsertCloudProfile(currentUser.id, { targetBand: newBand });
+    }
     if (studentEmail) {
       updateSettingsForEmail(studentEmail, { targetBand: newBand });
     }
@@ -215,6 +268,9 @@ export default function App() {
   // Update task 1 / task 2
   const handleToggleTask = (task) => {
     setActiveTask(task);
+    if (currentUser) {
+      upsertCloudProfile(currentUser.id, { selectedTask: task });
+    }
     if (studentEmail) {
       updateSettingsForEmail(studentEmail, { selectedTask: task });
     }
@@ -295,10 +351,12 @@ export default function App() {
       ) : currentView === 'welcome' ? (
         <WelcomePage
           studentEmail={studentEmail}
+          currentUser={currentUser}
           targetBand={targetBand}
           selectedTask={activeTask}
           onSettingsChange={handleSettingsChange}
-          onChangeEmail={() => setIsEmailModalOpen(true)}
+          onChangeEmail={() => setIsAuthModalOpen(true)}
+          onOpenAuth={() => setIsAuthModalOpen(true)}
           onStartPractice={() => {
             recordUserVisit();
             setCurrentView('practice');
@@ -318,10 +376,13 @@ export default function App() {
             onOpenHistory={() => setIsHistoryOpen(true)}
             onOpenContact={() => setIsContactModalOpen(true)}
             onOpenSources={() => setIsSourcesModalOpen(true)}
-            onChangeEmail={() => setIsEmailModalOpen(true)}
+            onChangeEmail={() => setIsAuthModalOpen(true)}
             onGoWelcome={() => setCurrentView('welcome')}
             onOpenFlashcard={() => setCurrentView('flashcard')}
             onGoPractice={() => setCurrentView('practice')}
+            currentUser={currentUser}
+            onOpenAuth={() => setIsAuthModalOpen(true)}
+            onSignOut={handleSignOut}
             studentEmail={studentEmail}
             activeTask={activeTask}
             onToggleTask={handleToggleTask}
@@ -524,6 +585,19 @@ export default function App() {
         onAddCustomTopic={handleAddCustomTopic}
         totalTopicsCount={currentTopics.length}
         totalVocabCount={currentTopics.reduce((acc, t) => acc + (t.vocabularies?.length || 0), 0)}
+      />
+
+      {/* Tài Khoản & Đồng Bộ Đám Mây Supabase Auth Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        onAuthSuccess={(user) => {
+          setCurrentUser(user);
+          if (user?.email) {
+            setStudentEmail(user.email);
+            saveCurrentEmail(user.email);
+          }
+        }}
       />
 
     </div>

@@ -117,7 +117,7 @@
   },
   {
     "id": "V006",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "demographic",
     "partOfSpeech": "adjective",
     "ipa": "/ˌdem.əˈɡræf.ɪk/",
@@ -185,7 +185,7 @@
   },
   {
     "id": "V009",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "self-medication",
     "partOfSpeech": "noun",
     "ipa": "/ˌself.med.ɪˈkeɪ.ʃən/",
@@ -207,7 +207,7 @@
   },
   {
     "id": "V010",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "preventative",
     "partOfSpeech": "adjective",
     "ipa": "/prɪˈven.tə.tɪv/",
@@ -229,7 +229,7 @@
   },
   {
     "id": "V011",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "burnout",
     "partOfSpeech": "noun",
     "ipa": "/ˈbɜːn.aʊt/",
@@ -251,7 +251,7 @@
   },
   {
     "id": "V012",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "telecommuting",
     "partOfSpeech": "noun",
     "ipa": "/ˈtel.ɪ.kəˌmjuː.tɪŋ/",
@@ -273,7 +273,7 @@
   },
   {
     "id": "V013",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "equilibrium",
     "partOfSpeech": "noun",
     "ipa": "/ˌiː.kwɪˈlɪb.ri.əm/",
@@ -296,7 +296,7 @@
   },
   {
     "id": "V014",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "incentivize",
     "partOfSpeech": "verb",
     "ipa": "/ɪnˈsen.tɪ.vaɪz/",
@@ -319,7 +319,7 @@
   },
   {
     "id": "V015",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "longevity",
     "partOfSpeech": "noun",
     "ipa": "/lɒnˈdʒev.ə.ti/",
@@ -341,7 +341,7 @@
   },
   {
     "id": "V016",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "alienation",
     "partOfSpeech": "noun",
     "ipa": "/ˌeɪ.li.əˈneɪ.ʃən/",
@@ -364,7 +364,7 @@
   },
   {
     "id": "V017",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "cohesion",
     "partOfSpeech": "noun",
     "ipa": "/kəʊˈhiː.ʒən/",
@@ -387,7 +387,7 @@
   },
   {
     "id": "V018",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "filial",
     "partOfSpeech": "adjective",
     "ipa": "/ˈfɪl.i.əl/",
@@ -410,7 +410,7 @@
   },
   {
     "id": "V019",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "conspicuous",
     "partOfSpeech": "adjective",
     "ipa": "/kənˈspɪk.ju.əs/",
@@ -433,7 +433,7 @@
   },
   {
     "id": "V020",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "materialism",
     "partOfSpeech": "noun",
     "ipa": "/məˈtɪə.ri.ə.lɪ.zəm/",
@@ -478,7 +478,7 @@
   },
   {
     "id": "V022",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "deterrent",
     "partOfSpeech": "noun",
     "ipa": "/dɪˈter.ənt/",
@@ -522,7 +522,7 @@
   },
   {
     "id": "V024",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "enforcement",
     "partOfSpeech": "noun",
     "ipa": "/ɪnˈfɔːs.mənt/",
@@ -591,7 +591,7 @@
   },
   {
     "id": "V027",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "diligence",
     "partOfSpeech": "noun",
     "ipa": "/ˈdɪl.ɪ.dʒəns/",
@@ -638,7 +638,7 @@
   },
   {
     "id": "V029",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "indigenous",
     "partOfSpeech": "adjective",
     "ipa": "/ɪnˈdɪdʒ.ɪ.nəs/",
@@ -661,7 +661,7 @@
   },
   {
     "id": "V030",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "artifact",
     "partOfSpeech": "noun",
     "ipa": "/ˈɑː.tɪ.fækt/",
@@ -684,7 +684,7 @@
   },
   {
     "id": "V031",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "repatriation",
     "partOfSpeech": "noun",
     "ipa": "/ˌriː.pæt.riˈeɪ.ʃən/",
@@ -707,7 +707,7 @@
   },
   {
     "id": "V032",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "curate",
     "partOfSpeech": "verb",
     "ipa": "/kjʊəˈreɪt/",
@@ -730,7 +730,7 @@
   },
   {
     "id": "V033",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "parochial",
     "partOfSpeech": "adjective",
     "ipa": "/pəˈrəʊ.ki.əl/",
@@ -753,7 +753,7 @@
   },
   {
     "id": "V034",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "provenance",
     "partOfSpeech": "noun",
     "ipa": "/ˈprɒv.ən.əns/",
@@ -799,7 +799,7 @@
   },
   {
     "id": "V036",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "altruism",
     "partOfSpeech": "noun",
     "ipa": "/ˈæl.tru.ɪ.zəm/",
@@ -822,7 +822,7 @@
   },
   {
     "id": "V037",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "depopulation",
     "partOfSpeech": "noun",
     "ipa": "/diːˌpɒp.jəˈleɪ.ʃən/",
@@ -867,7 +867,7 @@
   },
   {
     "id": "V039",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "subsidize",
     "partOfSpeech": "verb",
     "ipa": "/ˈsʌb.sɪ.daɪz/",
@@ -890,7 +890,7 @@
   },
   {
     "id": "V040",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "erosion",
     "partOfSpeech": "noun",
     "ipa": "/ɪˈrəʊ.ʒən/",
@@ -913,7 +913,7 @@
   },
   {
     "id": "V041",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "calculated",
     "partOfSpeech": "adjective",
     "ipa": "/ˈkæl.kjə.leɪ.tɪd/",
@@ -960,7 +960,7 @@
   },
   {
     "id": "V043",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "superfluous",
     "partOfSpeech": "adjective",
     "ipa": "/suːˈpɜː.flu.əs/",
@@ -984,7 +984,7 @@
   },
   {
     "id": "V044",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "aesthetic",
     "partOfSpeech": "adjective",
     "ipa": "/esˈθet.ɪk/",
@@ -1030,7 +1030,7 @@
   },
   {
     "id": "V046",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "communal",
     "partOfSpeech": "adjective",
     "ipa": "/kəˈmjuː.nəl/",
@@ -1054,7 +1054,7 @@
   },
   {
     "id": "V047",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "job-hopping",
     "partOfSpeech": "noun",
     "ipa": "/ˈdʒɒbˌhɒp.ɪŋ/",
@@ -1076,7 +1076,7 @@
   },
   {
     "id": "V048",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "affliction",
     "partOfSpeech": "noun",
     "ipa": "/əˈflɪk.ʃən/",
@@ -1100,7 +1100,7 @@
   },
   {
     "id": "V049",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "novelty",
     "partOfSpeech": "noun",
     "ipa": "/ˈnɒv.əl.ti/",
@@ -1193,7 +1193,7 @@
   },
   {
     "id": "V053",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "mortgage",
     "partOfSpeech": "noun",
     "ipa": "/ˈmɔː.ɡɪdʒ/",
@@ -1216,7 +1216,7 @@
   },
   {
     "id": "V054",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "desensitize",
     "partOfSpeech": "verb",
     "ipa": "/diːˈsen.sɪ.taɪz/",
@@ -1264,7 +1264,7 @@
   },
   {
     "id": "V056",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "autonomy",
     "partOfSpeech": "noun",
     "ipa": "/ɔːˈtɒn.ə.mi/",
@@ -1287,7 +1287,7 @@
   },
   {
     "id": "V057",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "exorbitant",
     "partOfSpeech": "adjective",
     "ipa": "/ɪɡˈzɔː.bɪ.tənt/",
@@ -1311,7 +1311,7 @@
   },
   {
     "id": "V058",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "dialogue",
     "partOfSpeech": "noun",
     "ipa": "/ˈdaɪ.ə.lɒɡ/",
@@ -1334,7 +1334,7 @@
   },
   {
     "id": "V059",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "fatalism",
     "partOfSpeech": "noun",
     "ipa": "/ˈfeɪ.təl.ɪ.zəm/",
@@ -1381,7 +1381,7 @@
   },
   {
     "id": "V061",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "universal",
     "partOfSpeech": "adjective",
     "ipa": "/ˌjuː.nɪˈvɜː.səl/",
@@ -1405,7 +1405,7 @@
   },
   {
     "id": "V062",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "precarious",
     "partOfSpeech": "adjective",
     "ipa": "/prɪˈkeə.ri.əs/",
@@ -1477,7 +1477,7 @@
   },
   {
     "id": "V065",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "assimilation",
     "partOfSpeech": "noun",
     "ipa": "/əˌsɪm.ɪˈleɪ.ʃən/",
@@ -1546,7 +1546,7 @@
   },
   {
     "id": "V068",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "camaraderie",
     "partOfSpeech": "noun",
     "ipa": "/ˌkæm.əˈrɑː.dər.i/",
@@ -1593,7 +1593,7 @@
   },
   {
     "id": "V070",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "utilitarian",
     "partOfSpeech": "adjective",
     "ipa": "/ˌjuː.tɪ.lɪˈteə.ri.ən/",
@@ -1617,7 +1617,7 @@
   },
   {
     "id": "V071",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "demographic",
     "partOfSpeech": "adjective",
     "ipa": "/ˌdem.əˈɡræf.ɪk/",
@@ -1640,7 +1640,7 @@
   },
   {
     "id": "V072",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "transit",
     "partOfSpeech": "noun",
     "ipa": "/ˈtræn.zɪt/",
@@ -1687,7 +1687,7 @@
   },
   {
     "id": "V074",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "commercialization",
     "partOfSpeech": "noun",
     "ipa": "/kəˌmɜː.ʃəl.aɪˈzeɪ.ʃən/",
@@ -1734,7 +1734,7 @@
   },
   {
     "id": "V076",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "solidarity",
     "partOfSpeech": "noun",
     "ipa": "/ˌsɒl.ɪˈdær.ə.ti/",
@@ -1758,7 +1758,7 @@
   },
   {
     "id": "V077",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "dilapidated",
     "partOfSpeech": "adjective",
     "ipa": "/dɪˈlæp.ɪ.deɪ.tɪd/",
@@ -1782,7 +1782,7 @@
   },
   {
     "id": "V078",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "reconcile",
     "partOfSpeech": "verb",
     "ipa": "/ˈrek.ən.saɪl/",
@@ -1946,7 +1946,7 @@
   },
   {
     "id": "V085",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "homogenization",
     "partOfSpeech": "noun",
     "ipa": "/həˌmɒdʒ.ɪ.naɪˈzeɪ.ʃən/",
@@ -1969,7 +1969,7 @@
   },
   {
     "id": "V086",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "accessibility",
     "partOfSpeech": "noun",
     "ipa": "/əkˌses.əˈbɪl.ə.ti/",
@@ -2040,7 +2040,7 @@
   },
   {
     "id": "V089",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "monopoly",
     "partOfSpeech": "noun",
     "ipa": "/məˈnɒp.əl.i/",
@@ -2065,7 +2065,7 @@
   },
   {
     "id": "V090",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "outsource",
     "partOfSpeech": "verb",
     "ipa": "/ˈaʊt.sɔːs/",
@@ -2090,7 +2090,7 @@
   },
   {
     "id": "V091",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "automated",
     "partOfSpeech": "adjective",
     "ipa": "/ˈɔː.tə.meɪ.tɪd/",
@@ -2162,7 +2162,7 @@
   },
   {
     "id": "V094",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "physically demanding",
     "partOfSpeech": "collocation",
     "ipa": "/ˈfɪz.ɪ.kli dɪˈmɑːn.dɪŋ/",
@@ -2186,7 +2186,7 @@
   },
   {
     "id": "V095",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "calorie expenditure",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˈkæl.ər.i ɪkˈspen.dɪ.tʃər/",
@@ -2209,7 +2209,7 @@
   },
   {
     "id": "V096",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "influx",
     "partOfSpeech": "noun",
     "ipa": "/ˈɪn.flʌks/",
@@ -2234,7 +2234,7 @@
   },
   {
     "id": "V097",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "facilitate",
     "partOfSpeech": "verb",
     "ipa": "/fəˈsɪl.ɪ.teɪt/",
@@ -2284,7 +2284,7 @@
   },
   {
     "id": "V099",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "dominance",
     "partOfSpeech": "noun",
     "ipa": "/ˈdɒm.ɪ.nəns/",
@@ -2309,7 +2309,7 @@
   },
   {
     "id": "V100",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "endorsement",
     "partOfSpeech": "noun",
     "ipa": "/ɪnˈdɔːs.mənt/",
@@ -2334,7 +2334,7 @@
   },
   {
     "id": "V101",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "entail",
     "partOfSpeech": "verb",
     "ipa": "/ɪnˈteɪl/",
@@ -2358,7 +2358,7 @@
   },
   {
     "id": "V102",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "emotional distress",
     "partOfSpeech": "noun phrase",
     "ipa": "/ɪˈməʊ.ʃən.əl dɪˈstres/",
@@ -2382,7 +2382,7 @@
   },
   {
     "id": "V103",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "antisocial",
     "partOfSpeech": "adjective",
     "ipa": "/ˌæn.tiˈsəʊ.ʃəl/",
@@ -2406,7 +2406,7 @@
   },
   {
     "id": "V104",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "paradigm shift",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˈpær.ə.daɪm ʃɪft/",
@@ -2430,7 +2430,7 @@
   },
   {
     "id": "V105",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "trajectory",
     "partOfSpeech": "noun",
     "ipa": "/trəˈdʒek.tər.i/",
@@ -2455,7 +2455,7 @@
   },
   {
     "id": "V106",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "livelihood",
     "partOfSpeech": "noun",
     "ipa": "/ˈlaɪv.li.hʊd/",
@@ -2480,7 +2480,7 @@
   },
   {
     "id": "V107",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "bombard",
     "partOfSpeech": "verb",
     "ipa": "/bɒmˈbɑːd/",
@@ -2504,7 +2504,7 @@
   },
   {
     "id": "V108",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "anarchy",
     "partOfSpeech": "noun",
     "ipa": "/ˈæn.ə.ki/",
@@ -2552,7 +2552,7 @@
   },
   {
     "id": "V110",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "career prospects",
     "partOfSpeech": "noun phrase",
     "ipa": "/kəˈrɪər ˈprɒs.pekts/",
@@ -2576,7 +2576,7 @@
   },
   {
     "id": "V111",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "self-absorbed",
     "partOfSpeech": "adjective",
     "ipa": "/ˌself.əbˈzɔːbd/",
@@ -2600,7 +2600,7 @@
   },
   {
     "id": "V112",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "conceited",
     "partOfSpeech": "adjective",
     "ipa": "/kənˈsiː.tɪd/",
@@ -2649,7 +2649,7 @@
   },
   {
     "id": "V114",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "sabotage",
     "partOfSpeech": "verb",
     "ipa": "/ˈsæb.ə.tɑːʒ/",
@@ -2745,7 +2745,7 @@
   },
   {
     "id": "V118",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "fairtrade",
     "partOfSpeech": "noun",
     "ipa": "/ˈfeə.treɪd/",
@@ -2839,7 +2839,7 @@
   },
   {
     "id": "V122",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "single-occupant household",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˈsɪŋ.ɡəl ˈɒk.jʊ.pənt ˈhaʊs.həʊld/",
@@ -2862,7 +2862,7 @@
   },
   {
     "id": "V123",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "foreign aid",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˈfɒr.ən eɪd/",
@@ -2886,7 +2886,7 @@
   },
   {
     "id": "V124",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "national interest",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˈnæʃ.nəl ˈɪn.trəst/",
@@ -2909,7 +2909,7 @@
   },
   {
     "id": "V125",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "sense of achievement",
     "partOfSpeech": "noun phrase",
     "ipa": "/sens əv əˈtʃiːv.mənt/",
@@ -2932,7 +2932,7 @@
   },
   {
     "id": "V126",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "differential pricing",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˌdɪf.əˈren.ʃəl ˈpraɪ.sɪŋ/",
@@ -2955,7 +2955,7 @@
   },
   {
     "id": "V127",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "patronage",
     "partOfSpeech": "noun",
     "ipa": "/ˈpæt.rə.nɪdʒ/",
@@ -2980,7 +2980,7 @@
   },
   {
     "id": "V128",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "animal testing",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˈæn.ɪ.məl ˈtes.tɪŋ/",
@@ -3050,7 +3050,7 @@
   },
   {
     "id": "V131",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "superficial",
     "partOfSpeech": "adjective",
     "ipa": "/ˌsuː.pəˈfɪʃ.əl/",
@@ -3075,7 +3075,7 @@
   },
   {
     "id": "V132",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "role model",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˈrəʊl ˌmɒd.əl/",
@@ -3099,7 +3099,7 @@
   },
   {
     "id": "V133",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "job satisfaction",
     "partOfSpeech": "noun phrase",
     "ipa": "/dʒɒb ˌsæt.ɪsˈfæk.ʃən/",
@@ -3122,7 +3122,7 @@
   },
   {
     "id": "V134",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "interdependence",
     "partOfSpeech": "noun",
     "ipa": "/ˌɪn.tə.dɪˈpen.dəns/",
@@ -3169,7 +3169,7 @@
   },
   {
     "id": "V136",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "reformed offender",
     "partOfSpeech": "noun phrase",
     "ipa": "/rɪˈfɔːmd əˈfen.dər/",
@@ -3192,7 +3192,7 @@
   },
   {
     "id": "V137",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "deterrent",
     "partOfSpeech": "noun",
     "ipa": "/dɪˈter.ənt/",
@@ -3216,7 +3216,7 @@
   },
   {
     "id": "V138",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "corporate social responsibility",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˈkɔː.pər.ət ˈsəʊ.ʃəl rɪˌspɒn.sɪˈbɪl.ə.ti/",
@@ -3239,7 +3239,7 @@
   },
   {
     "id": "V139",
-    "topicId": "economy_law",
+    "topicId": "society_family",
     "word": "ethical practice",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˈeθ.ɪ.kəl ˈpræk.tɪs/",
@@ -3262,7 +3262,7 @@
   },
   {
     "id": "V140",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "extreme sports",
     "partOfSpeech": "noun phrase",
     "ipa": "/ɪkˈstriːm spɔːts/",
@@ -5922,7 +5922,7 @@
   },
   {
     "id": "V257",
-    "topicId": "globalization",
+    "topicId": "culture_arts",
     "word": "emerging economy",
     "partOfSpeech": "noun phrase",
     "ipa": "/ɪˈmɜː.dʒɪŋ ɪˈkɒn.ə.mi/",
@@ -5945,7 +5945,7 @@
   },
   {
     "id": "V258",
-    "topicId": "globalization",
+    "topicId": "culture_arts",
     "word": "global village",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˌɡləʊ.bəl ˈvɪl.ɪdʒ/",
@@ -5968,7 +5968,7 @@
   },
   {
     "id": "V259",
-    "topicId": "globalization",
+    "topicId": "culture_arts",
     "word": "trade barrier",
     "partOfSpeech": "noun phrase",
     "ipa": "/treɪd ˈbær.i.ər/",
@@ -5992,7 +5992,7 @@
   },
   {
     "id": "V260",
-    "topicId": "globalization",
+    "topicId": "culture_arts",
     "word": "cultural homogenization",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˈkʌl.tʃər.əl həˌmɒdʒ.ə.naɪˈzeɪ.ʃən/",
@@ -6183,7 +6183,7 @@
   },
   {
     "id": "V268",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "space exploration",
     "partOfSpeech": "noun phrase",
     "ipa": "/speɪs ˌek.spləˈreɪ.ʃən/",
@@ -6206,7 +6206,7 @@
   },
   {
     "id": "V269",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "aesthetics",
     "partOfSpeech": "noun",
     "ipa": "/esˈθet.ɪks/",
@@ -6229,7 +6229,7 @@
   },
   {
     "id": "V270",
-    "topicId": "society",
+    "topicId": "society_family",
     "word": "cultural heritage",
     "partOfSpeech": "noun phrase",
     "ipa": "/ˈkʌl.tʃər.əl ˈher.ɪ.tɪdʒ/",
@@ -6249,5 +6249,2055 @@
     ],
     "exampleSentence": "Restoring centuries-old monuments is crucial for safeguarding a nation's unique cultural heritage amidst accelerating modernization.",
     "wordFamily": "heritage (n), inherit (v)"
+  },
+  {
+    "id": "V271",
+    "topicId": "task1-top-01-tourist-arrivals",
+    "word": "tourist arrivals",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈtʊərɪst əˈraɪvlz/",
+    "meaning": "Lượt khách du lịch quốc tế nhập cảnh",
+    "definitionEn": "Academic vocabulary for IELTS: Line Graph: International Tourist Arrivals in 5 Countries (1995-2010)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "number of visitors (Band 5)",
+    "synonyms": [
+      "inbound tourists",
+      "incoming travelers",
+      "visitor arrivals"
+    ],
+    "collocations": [
+      "international tourist arrivals",
+      "surge in tourist arrivals"
+    ],
+    "exampleSentence": "International tourist arrivals in France surged dramatically over the final five-year timeframe.",
+    "vietnameseSentence": "Lượt khách du lịch quốc tế đến Pháp đã tăng vọt một cách ấn tượng trong khung thời gian 5 năm cuối.",
+    "wordFamily": "tourist arrivals (IELTS Academic)"
+  },
+  {
+    "id": "V272",
+    "topicId": "task1-top-01-tourist-arrivals",
+    "word": "level off",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈlevl ɒf/",
+    "meaning": "Chững lại, duy trì ở mức cân bằng ổn định",
+    "definitionEn": "Academic vocabulary for IELTS: Line Graph: International Tourist Arrivals in 5 Countries (1995-2010)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "stop rising (Band 5)",
+    "synonyms": [
+      "plateau",
+      "flatten out",
+      "stabilize"
+    ],
+    "collocations": [
+      "level off at approximately",
+      "level off after rapid growth"
+    ],
+    "exampleSentence": "Visitor numbers leveled off at roughly 90 million by the end of the survey period.",
+    "vietnameseSentence": "Lượng du khách đã chững lại ở mức xấp xỉ 90 triệu lượt vào cuối giai đoạn khảo sát.",
+    "wordFamily": "level off (IELTS Academic)"
+  },
+  {
+    "id": "V273",
+    "topicId": "task1-top-01-tourist-arrivals",
+    "word": "inbound tourism",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈɪnbaʊnd ˈtʊərɪzəm/",
+    "meaning": "Du lịch quốc tế chiều vào (khách nước ngoài đến)",
+    "definitionEn": "Academic vocabulary for IELTS: Line Graph: International Tourist Arrivals in 5 Countries (1995-2010)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "foreign travel in (Band 5)",
+    "synonyms": [
+      "incoming tourism",
+      "foreign visitor traffic"
+    ],
+    "collocations": [
+      "inbound tourism volume",
+      "promote inbound tourism"
+    ],
+    "exampleSentence": "Malaysia witnessed uninterrupted expansion in inbound tourism throughout the entire period.",
+    "vietnameseSentence": "Malaysia chứng kiến sự tăng trưởng không ngừng về lượng khách du lịch quốc tế nhập cảnh trong suốt giai đoạn.",
+    "wordFamily": "inbound tourism (IELTS Academic)"
+  },
+  {
+    "id": "V274",
+    "topicId": "task1-top-01-tourist-arrivals",
+    "word": "plateau",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈplætəʊ/",
+    "meaning": "Dừng tăng và đi ngang ở mức nhất định",
+    "definitionEn": "Academic vocabulary for IELTS: Line Graph: International Tourist Arrivals in 5 Countries (1995-2010)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "stay at the same level (Band 5)",
+    "synonyms": [
+      "reach a plateau",
+      "stagnate",
+      "remain flat"
+    ],
+    "collocations": [
+      "plateau below 10 million",
+      "reach a plateau"
+    ],
+    "exampleSentence": "After modest gains, Brazilian arrivals plateaued at approximately seven million annually.",
+    "vietnameseSentence": "Sau những bước tăng khiêm tốn, lượng khách đến Brazil đã đi ngang ở mức khoảng 7 triệu lượt mỗi năm.",
+    "wordFamily": "plateau (IELTS Academic)"
+  },
+  {
+    "id": "V275",
+    "topicId": "task1-top-01-tourist-arrivals",
+    "word": "holidaymaker",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈhɒlədeɪmeɪkər/",
+    "meaning": "Khách du lịch đi nghỉ mát",
+    "definitionEn": "Academic vocabulary for IELTS: Line Graph: International Tourist Arrivals in 5 Countries (1995-2010)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "tourist (Band 5)",
+    "synonyms": [
+      "vacationer",
+      "sightseer",
+      "traveler"
+    ],
+    "collocations": [
+      "influx of holidaymakers",
+      "attract overseas holidaymakers"
+    ],
+    "exampleSentence": "European holidaymakers demonstrated a marked preference for Mediterranean coastal resorts.",
+    "vietnameseSentence": "Những người đi nghỉ mát Châu Âu thể hiện sự ưu tiên rõ rệt cho các khu nghỉ dưỡng ven biển Địa Trung Hải.",
+    "wordFamily": "holidaymaker (IELTS Academic)"
+  },
+  {
+    "id": "V276",
+    "topicId": "task1-top-01-tourist-arrivals",
+    "word": "sustained growth",
+    "partOfSpeech": "noun",
+    "ipa": "/səˈsteɪnd ɡrəʊθ/",
+    "meaning": "Sự tăng trưởng liên tục và bền vững",
+    "definitionEn": "Academic vocabulary for IELTS: Line Graph: International Tourist Arrivals in 5 Countries (1995-2010)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "continuous rise (Band 5)",
+    "synonyms": [
+      "steady expansion",
+      "unbroken ascent"
+    ],
+    "collocations": [
+      "register sustained growth",
+      "experience sustained growth"
+    ],
+    "exampleSentence": "France enjoyed sustained growth across all three five-year census intervals.",
+    "vietnameseSentence": "Nước Pháp đã có được mức tăng trưởng liên tục qua cả ba kỳ điều tra kéo dài 5 năm.",
+    "wordFamily": "sustained growth (IELTS Academic)"
+  },
+  {
+    "id": "V277",
+    "topicId": "task1-top-02-wave-power",
+    "word": "containment chamber",
+    "partOfSpeech": "noun",
+    "ipa": "/kənˈteɪnmənt ˈtʃeɪmbər/",
+    "meaning": "Buồng kín chứa sóng và khí nén",
+    "definitionEn": "Academic vocabulary for IELTS: Process: Electricity Generation via Wave Power Turbine",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "water box room (Band 5)",
+    "synonyms": [
+      "air column chamber",
+      "oscillating water chamber"
+    ],
+    "collocations": [
+      "enter the containment chamber",
+      "reinforced chamber"
+    ],
+    "exampleSentence": "The wave surges into the reinforced containment chamber anchored to the sea wall.",
+    "vietnameseSentence": "Sóng biển dâng tràn vào buồng kín gia cố được cố định vào bờ kè chắn sóng.",
+    "wordFamily": "containment chamber (IELTS Academic)"
+  },
+  {
+    "id": "V278",
+    "topicId": "task1-top-02-wave-power",
+    "word": "recede",
+    "partOfSpeech": "verb",
+    "ipa": "/rɪˈsiːd/",
+    "meaning": "Rút lui, hạ xuống, triều rút",
+    "definitionEn": "Academic vocabulary for IELTS: Process: Electricity Generation via Wave Power Turbine",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "go back (Band 5)",
+    "synonyms": [
+      "retreat",
+      "subside",
+      "withdraw"
+    ],
+    "collocations": [
+      "waves recede",
+      "receding water level"
+    ],
+    "exampleSentence": "As the oceanic wave recedes, water retreats toward the open sea, reversing the airflow.",
+    "vietnameseSentence": "Khi sóng đại dương rút đi, nước rút ngược ra biển khơi, làm đảo chiều luồng không khí.",
+    "wordFamily": "recede (IELTS Academic)"
+  },
+  {
+    "id": "V279",
+    "topicId": "task1-top-02-wave-power",
+    "word": "uninterrupted",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˌʌnˌɪntəˈrʌptɪd/",
+    "meaning": "Liên tục, không bị ngắt quãng",
+    "definitionEn": "Academic vocabulary for IELTS: Process: Electricity Generation via Wave Power Turbine",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "continuous / nonstop (Band 5)",
+    "synonyms": [
+      "continuous",
+      "seamless",
+      "perpetual"
+    ],
+    "collocations": [
+      "uninterrupted power generation",
+      "uninterrupted rotation"
+    ],
+    "exampleSentence": "The innovative turbine configuration guarantees an uninterrupted supply of green energy.",
+    "vietnameseSentence": "Cấu hình tuabin đổi mới đảm bảo nguồn cung năng lượng xanh không bị gián đoạn.",
+    "wordFamily": "uninterrupted (IELTS Academic)"
+  },
+  {
+    "id": "V280",
+    "topicId": "task1-top-02-wave-power",
+    "word": "equalize pressure",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈiːkwəlaɪz ˈpreʃər/",
+    "meaning": "Cân bằng áp suất",
+    "definitionEn": "Academic vocabulary for IELTS: Process: Electricity Generation via Wave Power Turbine",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "make air pressure balance (Band 5)",
+    "synonyms": [
+      "equilibrate air pressure",
+      "balance pressure gradients"
+    ],
+    "collocations": [
+      "drawn down to equalize pressure",
+      "pressure equalization"
+    ],
+    "exampleSentence": "Outside air rushes into the duct to equalize pressure within the subterranean void.",
+    "vietnameseSentence": "Không khí bên ngoài tràn vào đường ống để cân bằng áp suất bên trong khoảng trống dưới đất.",
+    "wordFamily": "equalize pressure (IELTS Academic)"
+  },
+  {
+    "id": "V281",
+    "topicId": "task1-top-02-wave-power",
+    "word": "bidirectional airflow",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌbaɪdaɪˈrekʃənl ˈeəfləʊ/",
+    "meaning": "Luồng không khí hai chiều (vào và ra)",
+    "definitionEn": "Academic vocabulary for IELTS: Process: Electricity Generation via Wave Power Turbine",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "two-way air movement (Band 5)",
+    "synonyms": [
+      "two-way airflow",
+      "reversing air currents"
+    ],
+    "collocations": [
+      "harness bidirectional airflow",
+      "drive by bidirectional airflow"
+    ],
+    "exampleSentence": "The specialized Wells turbine harnesses bidirectional airflow without reversing its spin.",
+    "vietnameseSentence": "Tuabin Wells chuyên dụng tận dụng luồng không khí hai chiều mà không làm đảo chiều quay của nó.",
+    "wordFamily": "bidirectional airflow (IELTS Academic)"
+  },
+  {
+    "id": "V282",
+    "topicId": "task1-top-02-wave-power",
+    "word": "act like a piston",
+    "partOfSpeech": "verb",
+    "ipa": "/ækt laɪk ə ˈpɪstən/",
+    "meaning": "Hoạt động như một pít-tông nén khí",
+    "definitionEn": "Academic vocabulary for IELTS: Process: Electricity Generation via Wave Power Turbine",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "push air like a pump (Band 5)",
+    "synonyms": [
+      "function as a hydraulic ram",
+      "compress air mechanically"
+    ],
+    "collocations": [
+      "water column acts like a piston",
+      "piston effect"
+    ],
+    "exampleSentence": "Rising ocean water acts like a piston, driving air through the upper aperture at high speed.",
+    "vietnameseSentence": "Mực nước đại dương dâng lên hoạt động như một pít-tông, đẩy không khí qua khe hở phía trên với tốc độ cao.",
+    "wordFamily": "act like a piston (IELTS Academic)"
+  },
+  {
+    "id": "V283",
+    "topicId": "task1-top-02-wave-power",
+    "word": "renewable harness",
+    "partOfSpeech": "noun",
+    "ipa": "/rɪˈnjuːəbl ˈhɑːnɪs/",
+    "meaning": "Sự khai thác năng lượng tái tạo",
+    "definitionEn": "Academic vocabulary for IELTS: Process: Electricity Generation via Wave Power Turbine",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "getting clean power (Band 5)",
+    "synonyms": [
+      "clean energy extraction",
+      "marine power harvesting"
+    ],
+    "collocations": [
+      "harness ocean power",
+      "coastal kinetic energy"
+    ],
+    "exampleSentence": "The facility illustrates efficient kinetic harnessing along turbulent coastal headlands.",
+    "vietnameseSentence": "Công trình minh họa cho việc khai thác động năng hiệu quả dọc theo các mũi đất ven biển nhiều sóng gió.",
+    "wordFamily": "renewable harness (IELTS Academic)"
+  },
+  {
+    "id": "V284",
+    "topicId": "task1-top-02-wave-power",
+    "word": "narrow duct",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈnærəʊ dʌkt/",
+    "meaning": "Đường ống dẫn khí hẹp tăng tốc áp suất",
+    "definitionEn": "Academic vocabulary for IELTS: Process: Electricity Generation via Wave Power Turbine",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "small air pipe (Band 5)",
+    "synonyms": [
+      "ventilation conduit",
+      "constricted airway"
+    ],
+    "collocations": [
+      "funneled through a narrow duct",
+      "exhaust duct"
+    ],
+    "exampleSentence": "Air is accelerated through a narrow duct to achieve optimal turbine rotational speed.",
+    "vietnameseSentence": "Không khí được tăng tốc qua một đường ống hẹp để đạt được vận tốc quay tối ưu của tuabin.",
+    "wordFamily": "narrow duct (IELTS Academic)"
+  },
+  {
+    "id": "V285",
+    "topicId": "task1-top-03-canterbury-map",
+    "word": "northeastern outskirts",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌnɔːθˈiːstən ˈaʊtskɜːts/",
+    "meaning": "Vùng ven ngoại ô phía đông bắc",
+    "definitionEn": "Academic vocabulary for IELTS: Maps: Town of Canterbury Proposed Sites for a New School",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "far corner of the town (Band 5)",
+    "synonyms": [
+      "northeastern periphery",
+      "outer fringes"
+    ],
+    "collocations": [
+      "located on the northeastern outskirts",
+      "rural outskirts"
+    ],
+    "exampleSentence": "Site 1 occupies open countryside situated on the northeastern outskirts of the municipal boundary.",
+    "vietnameseSentence": "Khu đất 1 nằm trên vùng đồng quê thoáng đãng tại vùng ven ngoại ô phía đông bắc của ranh giới đô thị.",
+    "wordFamily": "northeastern outskirts (IELTS Academic)"
+  },
+  {
+    "id": "V286",
+    "topicId": "task1-top-03-canterbury-map",
+    "word": "residential neighborhood",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌrezɪˈdenʃl ˈneɪbəhʊd/",
+    "meaning": "Khu phố dân cư sinh sống",
+    "definitionEn": "Academic vocabulary for IELTS: Maps: Town of Canterbury Proposed Sites for a New School",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "housing area (Band 5)",
+    "synonyms": [
+      "housing district",
+      "residential quarter"
+    ],
+    "collocations": [
+      "established residential neighborhood",
+      "densely populated neighborhood"
+    ],
+    "exampleSentence": "Site 2 is embedded within an established residential neighborhood with thousands of family homes.",
+    "vietnameseSentence": "Khu đất 2 nằm trọn bên trong một khu phố dân cư lâu đời với hàng ngàn ngôi nhà của các gia đình.",
+    "wordFamily": "residential neighborhood (IELTS Academic)"
+  },
+  {
+    "id": "V287",
+    "topicId": "task1-top-03-canterbury-map",
+    "word": "outlying settlement",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈaʊtlaɪɪŋ ˈsetlmənt/",
+    "meaning": "Khu dân cư / thị trấn vệ tinh nằm xa bên ngoài",
+    "definitionEn": "Academic vocabulary for IELTS: Maps: Town of Canterbury Proposed Sites for a New School",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "village far away (Band 5)",
+    "synonyms": [
+      "peripheral community",
+      "neighboring satellite town"
+    ],
+    "collocations": [
+      "serve outlying settlements",
+      "commute from outlying settlements"
+    ],
+    "exampleSentence": "Choosing S1 would conveniently cater to pupils commuting from the outlying settlement of Sturry.",
+    "vietnameseSentence": "Lựa chọn S1 sẽ phục vụ thuận tiện cho học sinh đi lại từ khu dân cư ngoại vi Sturry.",
+    "wordFamily": "outlying settlement (IELTS Academic)"
+  },
+  {
+    "id": "V288",
+    "topicId": "task1-top-03-canterbury-map",
+    "word": "close proximity",
+    "partOfSpeech": "noun",
+    "ipa": "/kləʊs prɒkˈsɪməti/",
+    "meaning": "Cự ly gần kề sát bên",
+    "definitionEn": "Academic vocabulary for IELTS: Maps: Town of Canterbury Proposed Sites for a New School",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "near to (Band 5)",
+    "synonyms": [
+      "immediate vicinity",
+      "close neighborhood"
+    ],
+    "collocations": [
+      "in close proximity to the railway station",
+      "located in close proximity"
+    ],
+    "exampleSentence": "The southern location enjoys close proximity to both arterial bypasses and the rail terminus.",
+    "vietnameseSentence": "Vị trí phía nam có lợi thế nằm gần kề cả tuyến đường tránh huyết mạch và ga đầu mối đường sắt.",
+    "wordFamily": "close proximity (IELTS Academic)"
+  },
+  {
+    "id": "V289",
+    "topicId": "task1-top-03-canterbury-map",
+    "word": "public transit",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈpʌblɪk ˈtrænzɪt/",
+    "meaning": "Hệ thống phương tiện giao thông công cộng",
+    "definitionEn": "Academic vocabulary for IELTS: Maps: Town of Canterbury Proposed Sites for a New School",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "bus and train (Band 5)",
+    "synonyms": [
+      "mass transit",
+      "public transportation"
+    ],
+    "collocations": [
+      "public transit connectivity",
+      "access to public transit"
+    ],
+    "exampleSentence": "S2 offers seamless public transit access via the adjacent mainline railway interchange.",
+    "vietnameseSentence": "S2 mang lại khả năng kết nối giao thông công cộng liền mạch thông qua điểm giao cắt đường sắt chính bên cạnh.",
+    "wordFamily": "public transit (IELTS Academic)"
+  },
+  {
+    "id": "V290",
+    "topicId": "task1-top-03-canterbury-map",
+    "word": "rural setting",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈrʊərəl ˈsetɪŋ/",
+    "meaning": "Bối cảnh cảnh quan nông thôn, đồng quê",
+    "definitionEn": "Academic vocabulary for IELTS: Maps: Town of Canterbury Proposed Sites for a New School",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "country place (Band 5)",
+    "synonyms": [
+      "countryside backdrop",
+      "pastoral environment"
+    ],
+    "collocations": [
+      "situated in a rural setting",
+      "tranquil rural setting"
+    ],
+    "exampleSentence": "A campus located in a rural setting affords ample playing fields and tranquil surroundings.",
+    "vietnameseSentence": "Một khuôn viên trường nằm trong bối cảnh nông thôn mang lại sân chơi rộng rãi và môi trường yên tĩnh.",
+    "wordFamily": "rural setting (IELTS Academic)"
+  },
+  {
+    "id": "V291",
+    "topicId": "task1-top-03-canterbury-map",
+    "word": "arterial bypass",
+    "partOfSpeech": "noun",
+    "ipa": "/ɑːˈtɪəriəl ˈbaɪpɑːs/",
+    "meaning": "Đường tránh huyết mạch bao quanh đô thị",
+    "definitionEn": "Academic vocabulary for IELTS: Maps: Town of Canterbury Proposed Sites for a New School",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "ring road (Band 5)",
+    "synonyms": [
+      "ring road",
+      "circumferential thoroughfare"
+    ],
+    "collocations": [
+      "flanked by an arterial bypass",
+      "direct bypass access"
+    ],
+    "exampleSentence": "School buses could easily navigate the arterial bypass without entering clogged downtown streets.",
+    "vietnameseSentence": "Xe buýt trường học có thể dễ dàng lưu thông trên đường tránh huyết mạch mà không phải đi vào các phố trung tâm ùn tắc.",
+    "wordFamily": "arterial bypass (IELTS Academic)"
+  },
+  {
+    "id": "V292",
+    "topicId": "task1-top-03-canterbury-map",
+    "word": "accessible on foot",
+    "partOfSpeech": "adjective",
+    "ipa": "/əkˈsesəbl ɒn fʊt/",
+    "meaning": "Có thể tiếp cận dễ dàng bằng cách đi bộ",
+    "definitionEn": "Academic vocabulary for IELTS: Maps: Town of Canterbury Proposed Sites for a New School",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "easy to walk to (Band 5)",
+    "synonyms": [
+      "pedestrian-friendly",
+      "within walking distance"
+    ],
+    "collocations": [
+      "highly accessible on foot",
+      "accessible via footpaths"
+    ],
+    "exampleSentence": "The compact layout makes the southern campus fully accessible on foot for hundreds of local children.",
+    "vietnameseSentence": "Cách bố trí quy hoạch gọn gàng giúp khuôn viên phía nam hoàn toàn có thể đi bộ tới đối với hàng trăm trẻ em địa phương.",
+    "wordFamily": "accessible on foot (IELTS Academic)"
+  },
+  {
+    "id": "V293",
+    "topicId": "task1-top-04-further-education",
+    "word": "further education",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈfɜːðər ˌedʒuˈkeɪʃn/",
+    "meaning": "Giáo dục thường xuyên, học sau phổ thông",
+    "definitionEn": "Academic vocabulary for IELTS: Bar Chart: British Further Education Enrolment by Gender (1970-1990)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "college study after school (Band 5)",
+    "synonyms": [
+      "vocational education",
+      "post-secondary training"
+    ],
+    "collocations": [
+      "enrolled in further education",
+      "further education college"
+    ],
+    "exampleSentence": "The expansion of further education provided working adults with critical upskilling opportunities.",
+    "vietnameseSentence": "Sự mở rộng của giáo dục thường xuyên đã mang lại cho người lớn đi làm những cơ hội nâng cao kỹ năng quan trọng.",
+    "wordFamily": "further education (IELTS Academic)"
+  },
+  {
+    "id": "V294",
+    "topicId": "task1-top-04-further-education",
+    "word": "part-time enrolment",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌpɑːt ˈtaɪm ɪnˈrəʊlmənt/",
+    "meaning": "Số lượng đăng ký học bán thời gian",
+    "definitionEn": "Academic vocabulary for IELTS: Bar Chart: British Further Education Enrolment by Gender (1970-1990)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "part-time students (Band 5)",
+    "synonyms": [
+      "part-time registration",
+      "flexible attendance"
+    ],
+    "collocations": [
+      "surge in part-time enrolment",
+      "part-time enrolment figures"
+    ],
+    "exampleSentence": "Female part-time enrolment climbed past the one-million milestone in the final decade.",
+    "vietnameseSentence": "Lượng nữ sinh viên đăng ký học bán thời gian đã vượt qua cột mốc một triệu học viên trong thập kỷ cuối.",
+    "wordFamily": "part-time enrolment (IELTS Academic)"
+  },
+  {
+    "id": "V295",
+    "topicId": "task1-top-04-further-education",
+    "word": "upward trajectory",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈʌpwəd trəˈdʒektəri/",
+    "meaning": "Quỹ đạo tăng trưởng đi lên đều đặn",
+    "definitionEn": "Academic vocabulary for IELTS: Bar Chart: British Further Education Enrolment by Gender (1970-1990)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "rise / going up (Band 5)",
+    "synonyms": [
+      "upward trend",
+      "ascending course"
+    ],
+    "collocations": [
+      "follow an upward trajectory",
+      "steady upward trajectory"
+    ],
+    "exampleSentence": "Full-time student numbers maintained a steady upward trajectory across the entire timeframe.",
+    "vietnameseSentence": "Số lượng sinh viên học toàn thời gian đã duy trì quỹ đạo đi lên vững chắc trong toàn bộ khung thời gian.",
+    "wordFamily": "upward trajectory (IELTS Academic)"
+  },
+  {
+    "id": "V296",
+    "topicId": "task1-top-04-further-education",
+    "word": "stark contrast",
+    "partOfSpeech": "noun",
+    "ipa": "/stɑːk ˈkɒntrɑːst/",
+    "meaning": "Sự tương phản, đối nghịch hoàn toàn rõ nét",
+    "definitionEn": "Academic vocabulary for IELTS: Bar Chart: British Further Education Enrolment by Gender (1970-1990)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "big difference (Band 5)",
+    "synonyms": [
+      "sharp divergence",
+      "striking disparity"
+    ],
+    "collocations": [
+      "stand in stark contrast to",
+      "a stark contrast emerges"
+    ],
+    "exampleSentence": "The massive volume of part-time learners stood in stark contrast to modest full-time cohorts.",
+    "vietnameseSentence": "Khối lượng khổng lồ học viên bán thời gian hoàn toàn tương phản với các nhóm học toàn thời gian khiêm tốn.",
+    "wordFamily": "stark contrast (IELTS Academic)"
+  },
+  {
+    "id": "V297",
+    "topicId": "task1-top-04-further-education",
+    "word": "rebound",
+    "partOfSpeech": "verb",
+    "ipa": "/rɪˈbaʊnd/",
+    "meaning": "Phục hồi trở lại sau khi suy giảm",
+    "definitionEn": "Academic vocabulary for IELTS: Bar Chart: British Further Education Enrolment by Gender (1970-1990)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "go up again (Band 5)",
+    "synonyms": [
+      "recover",
+      "rally",
+      "bounce back"
+    ],
+    "collocations": [
+      "rebound to just under",
+      "rebound after a dip"
+    ],
+    "exampleSentence": "Male registrations dropped in 1980 before rebounding slightly in the subsequent census.",
+    "vietnameseSentence": "Số lượng nam giới đăng ký giảm năm 1980 trước khi phục hồi nhẹ trong kỳ thống kê tiếp theo.",
+    "wordFamily": "rebound (IELTS Academic)"
+  },
+  {
+    "id": "V298",
+    "topicId": "task1-top-04-further-education",
+    "word": "surpass",
+    "partOfSpeech": "verb",
+    "ipa": "/səˈpɑːs/",
+    "meaning": "Vượt qua, soán ngôi dẫn đầu",
+    "definitionEn": "Academic vocabulary for IELTS: Bar Chart: British Further Education Enrolment by Gender (1970-1990)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "be more than (Band 5)",
+    "synonyms": [
+      "overtake",
+      "outstrip",
+      "exceed"
+    ],
+    "collocations": [
+      "surpass male figures",
+      "surpass expectations"
+    ],
+    "exampleSentence": "Women ultimately surpassed their male peers in further education participation by 1990.",
+    "vietnameseSentence": "Phụ nữ cuối cùng đã vượt qua các đồng nghiệp nam về mức độ tham gia giáo dục thường xuyên vào năm 1990.",
+    "wordFamily": "surpass (IELTS Academic)"
+  },
+  {
+    "id": "V299",
+    "topicId": "task1-top-04-further-education",
+    "word": "flexible study mode",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈfleksəbl ˈstʌdi məʊd/",
+    "meaning": "Phương thức học tập linh hoạt (học tối, học buổi)",
+    "definitionEn": "Academic vocabulary for IELTS: Bar Chart: British Further Education Enrolment by Gender (1970-1990)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "easy time study (Band 5)",
+    "synonyms": [
+      "modular study format",
+      "part-time schedule"
+    ],
+    "collocations": [
+      "adopt flexible study modes",
+      "preference for flexible study modes"
+    ],
+    "exampleSentence": "Working mothers heavily favored flexible study modes to reconcile career and household duties.",
+    "vietnameseSentence": "Các bà mẹ đi làm rất ưa chuộng các phương thức học tập linh hoạt để cân bằng sự nghiệp và công việc gia đình.",
+    "wordFamily": "flexible study mode (IELTS Academic)"
+  },
+  {
+    "id": "V300",
+    "topicId": "task1-top-04-further-education",
+    "word": "academic cohort",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌækəˈdemɪk ˈkəʊhɔːt/",
+    "meaning": "Nhóm khóa học sinh sinh viên cùng niên khóa",
+    "definitionEn": "Academic vocabulary for IELTS: Bar Chart: British Further Education Enrolment by Gender (1970-1990)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "student group (Band 5)",
+    "synonyms": [
+      "student body",
+      "enrolment group"
+    ],
+    "collocations": [
+      "full-time academic cohort",
+      "expand the cohort"
+    ],
+    "exampleSentence": "Each successive academic cohort contained a progressively higher proportion of mature female entrants.",
+    "vietnameseSentence": "Mỗi nhóm học sinh qua các niên khóa kế tiếp đều chứa tỷ lệ ngày càng cao những phụ nữ trưởng thành theo học.",
+    "wordFamily": "academic cohort (IELTS Academic)"
+  },
+  {
+    "id": "V301",
+    "topicId": "task1-top-05-radio-tv-audiences",
+    "word": "audience share",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈɔːdiəns ʃeər/",
+    "meaning": "Thị phần / tỷ lệ khán thính giả theo dõi",
+    "definitionEn": "Academic vocabulary for IELTS: Line Graph: UK Radio and TV Audience Patterns throughout the Day (1992)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "number of watchers (Band 5)",
+    "synonyms": [
+      "viewership proportion",
+      "listenership percentage"
+    ],
+    "collocations": [
+      "command a high audience share",
+      "peak audience share"
+    ],
+    "exampleSentence": "Television commanded an extraordinary 45% audience share during evening prime time.",
+    "vietnameseSentence": "Truyền hình đã nắm giữ thị phần khán giả phi thường 45% trong khung giờ vàng buổi tối.",
+    "wordFamily": "audience share (IELTS Academic)"
+  },
+  {
+    "id": "V302",
+    "topicId": "task1-top-05-radio-tv-audiences",
+    "word": "zenith",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈzenɪθ/",
+    "meaning": "Điểm cao nhất, đỉnh cao tuyệt đối",
+    "definitionEn": "Academic vocabulary for IELTS: Line Graph: UK Radio and TV Audience Patterns throughout the Day (1992)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "highest point (Band 5)",
+    "synonyms": [
+      "peak",
+      "apex",
+      "culmination",
+      "summit"
+    ],
+    "collocations": [
+      "reach its daily zenith",
+      "at its zenith"
+    ],
+    "exampleSentence": "Radio listenership attained its daily zenith of 27% during the morning rush hour.",
+    "vietnameseSentence": "Lượng thính giả nghe radio đã đạt điểm cao nhất trong ngày là 27% vào khung giờ cao điểm buổi sáng.",
+    "wordFamily": "zenith (IELTS Academic)"
+  },
+  {
+    "id": "V303",
+    "topicId": "task1-top-05-radio-tv-audiences",
+    "word": "precipitously",
+    "partOfSpeech": "adverb",
+    "ipa": "/prɪˈsɪpɪtəsli/",
+    "meaning": "Một cách nhanh chóng và dốc đứng",
+    "definitionEn": "Academic vocabulary for IELTS: Line Graph: UK Radio and TV Audience Patterns throughout the Day (1992)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "very fast up (Band 5)",
+    "synonyms": [
+      "steeply",
+      "sharply",
+      "rapidly"
+    ],
+    "collocations": [
+      "climb precipitously",
+      "drop precipitously"
+    ],
+    "exampleSentence": "Morning radio ratings climbed precipitously between dawn and eight-thirty in the morning.",
+    "vietnameseSentence": "Xếp hạng radio buổi sáng đã leo dốc nhanh chóng từ rạng đông cho đến 8 giờ 30 sáng.",
+    "wordFamily": "precipitously (IELTS Academic)"
+  },
+  {
+    "id": "V304",
+    "topicId": "task1-top-05-radio-tv-audiences",
+    "word": "prime time",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈpraɪm taɪm/",
+    "meaning": "Khung giờ vàng phát sóng (thu hút nhiều người xem nhất)",
+    "definitionEn": "Academic vocabulary for IELTS: Line Graph: UK Radio and TV Audience Patterns throughout the Day (1992)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "popular evening hours (Band 5)",
+    "synonyms": [
+      "peak viewing hours",
+      "prime viewing slot"
+    ],
+    "collocations": [
+      "evening prime time",
+      "prime-time broadcasting"
+    ],
+    "exampleSentence": "Families congregated around the television screen during traditional prime-time hours.",
+    "vietnameseSentence": "Các gia đình tụ họp quây quần bên màn hình tivi trong các khung giờ vàng truyền thống.",
+    "wordFamily": "prime time (IELTS Academic)"
+  },
+  {
+    "id": "V305",
+    "topicId": "task1-top-05-radio-tv-audiences",
+    "word": "taper off",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈteɪpər ɒf/",
+    "meaning": "Giảm dần đều và nhỏ lại về cuối",
+    "definitionEn": "Academic vocabulary for IELTS: Line Graph: UK Radio and TV Audience Patterns throughout the Day (1992)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "decrease slowly (Band 5)",
+    "synonyms": [
+      "dwindle",
+      "peter out",
+      "subside gradually"
+    ],
+    "collocations": [
+      "taper off to under 3%",
+      "taper off past midnight"
+    ],
+    "exampleSentence": "Broadcast viewership tapered off sharply once midnight programming drew to a close.",
+    "vietnameseSentence": "Lượng khán giả xem đài giảm dần đều rõ rệt một khi các chương trình nửa đêm kết thúc.",
+    "wordFamily": "taper off (IELTS Academic)"
+  },
+  {
+    "id": "V306",
+    "topicId": "task1-top-05-radio-tv-audiences",
+    "word": "chronological trend",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌkrɒnəˈlɒdʒɪkl trend/",
+    "meaning": "Xu hướng biến thiên theo trình tự thời gian trong ngày",
+    "definitionEn": "Academic vocabulary for IELTS: Line Graph: UK Radio and TV Audience Patterns throughout the Day (1992)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "change by time (Band 5)",
+    "synonyms": [
+      "temporal pattern",
+      "diurnal distribution"
+    ],
+    "collocations": [
+      "follow chronological trends",
+      "contrasting chronological trends"
+    ],
+    "exampleSentence": "The two media forms displayed sharply conflicting chronological trends across the 24-hour cycle.",
+    "vietnameseSentence": "Hai loại hình truyền thông thể hiện những xu hướng theo trình tự thời gian xung đột rõ rệt trong chu kỳ 24 giờ.",
+    "wordFamily": "chronological trend (IELTS Academic)"
+  },
+  {
+    "id": "V307",
+    "topicId": "task1-top-05-radio-tv-audiences",
+    "word": "negligible",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˈneɡlɪdʒəbl/",
+    "meaning": "Không đáng kể, cực kỳ nhỏ bé",
+    "definitionEn": "Academic vocabulary for IELTS: Line Graph: UK Radio and TV Audience Patterns throughout the Day (1992)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "very small (Band 5)",
+    "synonyms": [
+      "minimal",
+      "insignificant",
+      "marginal"
+    ],
+    "collocations": [
+      "remain negligible",
+      "negligible audience share"
+    ],
+    "exampleSentence": "Television ratings remained practically negligible during early working hours.",
+    "vietnameseSentence": "Tỷ suất người xem truyền hình hầu như không đáng kể trong những giờ làm việc đầu buổi sáng.",
+    "wordFamily": "negligible (IELTS Academic)"
+  },
+  {
+    "id": "V308",
+    "topicId": "task1-top-05-radio-tv-audiences",
+    "word": "crossover point",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈkrɒsəʊvər pɔɪnt/",
+    "meaning": "Điểm giao cắt giữa hai đường số liệu",
+    "definitionEn": "Academic vocabulary for IELTS: Line Graph: UK Radio and TV Audience Patterns throughout the Day (1992)",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "meeting point of lines (Band 5)",
+    "synonyms": [
+      "intersection threshold",
+      "junction point"
+    ],
+    "collocations": [
+      "reach a crossover point",
+      "crossover point at 4 PM"
+    ],
+    "exampleSentence": "Around 4:00 PM, a critical crossover point occurred where television surpassed radio for good.",
+    "vietnameseSentence": "Vào khoảng 4 giờ chiều, một điểm giao cắt then chốt đã xuất hiện nơi truyền hình chính thức vượt qua radio.",
+    "wordFamily": "crossover point (IELTS Academic)"
+  },
+  {
+    "id": "V309",
+    "topicId": "task1-top-06-worldwide-water-use",
+    "word": "freshwater extraction",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈfreʃwɔːtər ɪkˈstrækʃn/",
+    "meaning": "Việc khai thác và sử dụng nguồn nước ngọt",
+    "definitionEn": "Academic vocabulary for IELTS: Mixed: Worldwide Water Use by Sector and Country Disparity",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "taking water from rivers (Band 5)",
+    "synonyms": [
+      "water withdrawal",
+      "hydrological abstraction"
+    ],
+    "collocations": [
+      "rates of freshwater extraction",
+      "sustainable freshwater extraction"
+    ],
+    "exampleSentence": "Global freshwater extraction accelerated exponentially following the mid-century agricultural boom.",
+    "vietnameseSentence": "Việc khai thác nước ngọt toàn cầu đã tăng tốc theo cấp số nhân sau sự bùng nổ nông nghiệp giữa thế kỷ.",
+    "wordFamily": "freshwater extraction (IELTS Academic)"
+  },
+  {
+    "id": "V310",
+    "topicId": "task1-top-06-worldwide-water-use",
+    "word": "irrigated farmland",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈɪrɪɡeɪtɪd ˈfɑːmlænd/",
+    "meaning": "Đất canh tác nông nghiệp có hệ thống tưới tiêu nhân tạo",
+    "definitionEn": "Academic vocabulary for IELTS: Mixed: Worldwide Water Use by Sector and Country Disparity",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "watered farm area (Band 5)",
+    "synonyms": [
+      "irrigated agriculture",
+      "water-fed cropland"
+    ],
+    "collocations": [
+      "hectares of irrigated farmland",
+      "expand irrigated farmland"
+    ],
+    "exampleSentence": "Brazil maintains vast tracts of irrigated farmland to sustain industrial crop exports.",
+    "vietnameseSentence": "Brazil duy trì những dải đất canh tác có tưới tiêu rộng lớn để phục vụ xuất khẩu cây trồng công nghiệp.",
+    "wordFamily": "irrigated farmland (IELTS Academic)"
+  },
+  {
+    "id": "V311",
+    "topicId": "task1-top-06-worldwide-water-use",
+    "word": "per capita consumption",
+    "partOfSpeech": "noun",
+    "ipa": "/pə ˈkæpɪtə kənˈsʌmpʃn/",
+    "meaning": "Mức tiêu thụ bình quân tính trên đầu người",
+    "definitionEn": "Academic vocabulary for IELTS: Mixed: Worldwide Water Use by Sector and Country Disparity",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "use per person (Band 5)",
+    "synonyms": [
+      "per person usage",
+      "individual consumption rate"
+    ],
+    "collocations": [
+      "annual per capita consumption",
+      "disparity in per capita consumption"
+    ],
+    "exampleSentence": "The annual per capita consumption in Brazil eclipsed that of Congo by more than forty-fold.",
+    "vietnameseSentence": "Mức tiêu thụ bình quân đầu người hàng năm ở Brazil đã vượt xa Congo hơn bốn mươi lần.",
+    "wordFamily": "per capita consumption (IELTS Academic)"
+  },
+  {
+    "id": "V312",
+    "topicId": "task1-top-06-worldwide-water-use",
+    "word": "domestic water use",
+    "partOfSpeech": "noun",
+    "ipa": "/dəˈmestɪk ˈwɔːtər juːs/",
+    "meaning": "Nhu cầu dùng nước trong sinh hoạt gia đình",
+    "definitionEn": "Academic vocabulary for IELTS: Mixed: Worldwide Water Use by Sector and Country Disparity",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "household water (Band 5)",
+    "synonyms": [
+      "residential consumption",
+      "household water demand"
+    ],
+    "collocations": [
+      "allocated to domestic water use",
+      "curb domestic water use"
+    ],
+    "exampleSentence": "Domestic water use accounted for the smallest slice of total global abstractions.",
+    "vietnameseSentence": "Nước dùng cho sinh hoạt gia đình chiếm tỷ trọng nhỏ nhất trong tổng lượng nước khai thác toàn cầu.",
+    "wordFamily": "domestic water use (IELTS Academic)"
+  },
+  {
+    "id": "V313",
+    "topicId": "task1-top-06-worldwide-water-use",
+    "word": "exponential increase",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌekspəˈnenʃl ˈɪŋkriːs/",
+    "meaning": "Sự gia tăng theo cấp số nhân phi mã",
+    "definitionEn": "Academic vocabulary for IELTS: Mixed: Worldwide Water Use by Sector and Country Disparity",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "very big fast increase (Band 5)",
+    "synonyms": [
+      "skyrocketing surge",
+      "dramatic escalation"
+    ],
+    "collocations": [
+      "witness an exponential increase",
+      "experience exponential growth"
+    ],
+    "exampleSentence": "Irrigation experienced an exponential increase as populations grew and food demands escalated.",
+    "vietnameseSentence": "Hoạt động tưới tiêu chứng kiến sự gia tăng phi mã khi dân số tăng nhanh và nhu cầu lương thực leo thang.",
+    "wordFamily": "exponential increase (IELTS Academic)"
+  },
+  {
+    "id": "V314",
+    "topicId": "task1-top-06-worldwide-water-use",
+    "word": "minuscule",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˈmɪnəskjuːl/",
+    "meaning": "Vô cùng nhỏ bé, không đáng kể",
+    "definitionEn": "Academic vocabulary for IELTS: Mixed: Worldwide Water Use by Sector and Country Disparity",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "tiny / very small (Band 5)",
+    "synonyms": [
+      "negligible",
+      "infinitesimal",
+      "minute"
+    ],
+    "collocations": [
+      "minuscule portion",
+      "minuscule land area"
+    ],
+    "exampleSentence": "Congo possesses only a minuscule area of developed irrigation infrastructure.",
+    "vietnameseSentence": "Congo chỉ sở hữu một diện tích hạ tầng tưới tiêu phát triển vô cùng nhỏ bé.",
+    "wordFamily": "minuscule (IELTS Academic)"
+  },
+  {
+    "id": "V315",
+    "topicId": "task1-top-06-worldwide-water-use",
+    "word": "overwhelming majority",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌəʊvəˈwelmɪŋ məˈdʒɒrəti/",
+    "meaning": "Đại đa số áp đảo hoàn toàn",
+    "definitionEn": "Academic vocabulary for IELTS: Mixed: Worldwide Water Use by Sector and Country Disparity",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "most of all (Band 5)",
+    "synonyms": [
+      "lion's share",
+      "vast preponderance"
+    ],
+    "collocations": [
+      "command the overwhelming majority",
+      "absorb the overwhelming majority"
+    ],
+    "exampleSentence": "Farming practices absorbed the overwhelming majority of diverted fresh water worldwide.",
+    "vietnameseSentence": "Các hoạt động canh tác nông nghiệp đã hấp thụ đại đa số áp đảo lượng nước ngọt được chuyển hướng trên toàn cầu.",
+    "wordFamily": "overwhelming majority (IELTS Academic)"
+  },
+  {
+    "id": "V316",
+    "topicId": "task1-top-06-worldwide-water-use",
+    "word": "hydrological reserves",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌhaɪdrəˈlɒdʒɪkl rɪˈzɜːvz/",
+    "meaning": "Trữ lượng thủy văn, nguồn tài nguyên nước",
+    "definitionEn": "Academic vocabulary for IELTS: Mixed: Worldwide Water Use by Sector and Country Disparity",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "water supplies (Band 5)",
+    "synonyms": [
+      "aquatic resources",
+      "freshwater reserves"
+    ],
+    "collocations": [
+      "abundant hydrological reserves",
+      "protect hydrological reserves"
+    ],
+    "exampleSentence": "Despite abundant natural hydrological reserves, lack of reticulation keeps usage low.",
+    "vietnameseSentence": "Dù có nguồn trữ lượng thủy văn tự nhiên dồi dào, sự thiếu thốn mạng lưới đường ống khiến mức sử dụng rất thấp.",
+    "wordFamily": "hydrological reserves (IELTS Academic)"
+  },
+  {
+    "id": "V317",
+    "topicId": "t2-elderly-care-funding",
+    "word": "residential nursing home",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌrezɪˈdenʃl ˈnɜːsɪŋ həʊm/",
+    "meaning": "Viện dưỡng lão có y tá chăm sóc toàn diện",
+    "definitionEn": "Academic vocabulary for IELTS: Elderly Care: State Pension & Nursing Homes vs Family Duty",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "home for old people (Band 5)",
+    "synonyms": [
+      "assisted living facility",
+      "eldercare home",
+      "geriatric institution"
+    ],
+    "collocations": [
+      "admit into a residential nursing home",
+      "nursing home fees"
+    ],
+    "exampleSentence": "Placing aging relatives into a residential nursing home ensures round-the-clock medical oversight.",
+    "vietnameseSentence": "Đưa người thân lớn tuổi vào viện dưỡng lão đảm bảo sự theo dõi y tế suốt ngày đêm.",
+    "wordFamily": "residential nursing home (IELTS Academic)"
+  },
+  {
+    "id": "V318",
+    "topicId": "t2-elderly-care-funding",
+    "word": "filial duty",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈfɪliəl ˈdjuːti/",
+    "meaning": "Bổn phận hiếu thảo của con cái đối với cha mẹ",
+    "definitionEn": "Academic vocabulary for IELTS: Elderly Care: State Pension & Nursing Homes vs Family Duty",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "duty to parents (Band 5)",
+    "synonyms": [
+      "filial piety",
+      "familial obligation",
+      "moral duty"
+    ],
+    "collocations": [
+      "honor filial duty",
+      "uphold filial duty"
+    ],
+    "exampleSentence": "In traditional Asian societies, filial duty requires offspring to support parents financially in retirement.",
+    "vietnameseSentence": "Trong các xã hội Châu Á truyền thống, bổn phận hiếu thảo đòi hỏi con cái phải phụng dưỡng cha mẹ về tài chính khi về hưu.",
+    "wordFamily": "filial duty (IELTS Academic)"
+  },
+  {
+    "id": "V319",
+    "topicId": "t2-elderly-care-funding",
+    "word": "social entitlement",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈsəʊʃl ɪnˈtaɪtlmənt/",
+    "meaning": "Quyền lợi an sinh xã hội chính đáng được hưởng",
+    "definitionEn": "Academic vocabulary for IELTS: Elderly Care: State Pension & Nursing Homes vs Family Duty",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "right to get help (Band 5)",
+    "synonyms": [
+      "welfare right",
+      "public benefit entitlement"
+    ],
+    "collocations": [
+      "earned social entitlement",
+      "guarantee social entitlements"
+    ],
+    "exampleSentence": "State healthcare for the elderly should be respected as an earned social entitlement rather than state charity.",
+    "vietnameseSentence": "Dịch vụ y tế nhà nước cho người già nên được tôn trọng như một quyền lợi an sinh xứng đáng hơn là sự bố thí từ thiện.",
+    "wordFamily": "social entitlement (IELTS Academic)"
+  },
+  {
+    "id": "V320",
+    "topicId": "t2-elderly-care-funding",
+    "word": "demographic aging",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌdeməˈɡræfɪk ˈeɪdʒɪŋ/",
+    "meaning": "Sự già hóa dân số nhân khẩu học",
+    "definitionEn": "Academic vocabulary for IELTS: Elderly Care: State Pension & Nursing Homes vs Family Duty",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "more old people (Band 5)",
+    "synonyms": [
+      "graying population",
+      "population aging"
+    ],
+    "collocations": [
+      "accelerating demographic aging",
+      "tackle demographic aging"
+    ],
+    "exampleSentence": "Rapid demographic aging places unprecedented fiscal pressure on public pension systems.",
+    "vietnameseSentence": "Sự già hóa dân số diễn ra nhanh chóng tạo nên áp lực tài chính chưa từng có lên các hệ thống hưu trí công.",
+    "wordFamily": "demographic aging (IELTS Academic)"
+  },
+  {
+    "id": "V321",
+    "topicId": "t2-elderly-care-funding",
+    "word": "co-payment model",
+    "partOfSpeech": "noun",
+    "ipa": "/kəʊ ˈpeɪmənt ˈmɒdl/",
+    "meaning": "Mô hình đồng chi trả (giữa nhà nước và gia đình)",
+    "definitionEn": "Academic vocabulary for IELTS: Elderly Care: State Pension & Nursing Homes vs Family Duty",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "paying together (Band 5)",
+    "synonyms": [
+      "cost-sharing framework",
+      "shared funding system"
+    ],
+    "collocations": [
+      "implement a co-payment model",
+      "equitable co-payment model"
+    ],
+    "exampleSentence": "An equitable co-payment model relieves pressure on taxpayers while protecting impoverished pensioners.",
+    "vietnameseSentence": "Mô hình đồng chi trả công bằng giải tỏa áp lực cho người nộp thuế đồng thời bảo vệ những người hưu trí nghèo khó.",
+    "wordFamily": "co-payment model (IELTS Academic)"
+  },
+  {
+    "id": "V322",
+    "topicId": "t2-elderly-care-funding",
+    "word": "frail",
+    "partOfSpeech": "adjective",
+    "ipa": "/freɪl/",
+    "meaning": "Yếu ớt, già yếu suy giảm thể lực",
+    "definitionEn": "Academic vocabulary for IELTS: Elderly Care: State Pension & Nursing Homes vs Family Duty",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "weak (Band 5)",
+    "synonyms": [
+      "debilitated",
+      "infirm",
+      "vulnerable"
+    ],
+    "collocations": [
+      "frail elderly",
+      "in frail health"
+    ],
+    "exampleSentence": "Frail seniors suffering from dementia require intensive nursing care that families cannot provide at home.",
+    "vietnameseSentence": "Những người cao tuổi già yếu mắc chứng mất trí nhớ đòi hỏi sự chăm sóc y tế chuyên sâu mà gia đình không thể đáp ứng tại nhà.",
+    "wordFamily": "frail (IELTS Academic)"
+  },
+  {
+    "id": "V323",
+    "topicId": "t2-elderly-care-funding",
+    "word": "public coffers",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈpʌblɪk ˈkɒfəz/",
+    "meaning": "Ngân khố quốc gia / công quỹ nhà nước",
+    "definitionEn": "Academic vocabulary for IELTS: Elderly Care: State Pension & Nursing Homes vs Family Duty",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "state money (Band 5)",
+    "synonyms": [
+      "state treasury",
+      "national treasury",
+      "public exchequer"
+    ],
+    "collocations": [
+      "drain public coffers",
+      "strain on public coffers"
+    ],
+    "exampleSentence": "Funding lifelong residential care solely through public coffers would exhaust treasury reserves.",
+    "vietnameseSentence": "Chi trả toàn bộ viện dưỡng lão suốt đời chỉ từ công quỹ nhà nước sẽ làm cạn kiệt dự trữ ngân khố.",
+    "wordFamily": "public coffers (IELTS Academic)"
+  },
+  {
+    "id": "V324",
+    "topicId": "t2-elderly-care-funding",
+    "word": "dignified old age",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈdɪɡnɪfaɪd əʊld eɪdʒ/",
+    "meaning": "Tuổi già sống trong danh dự và được tôn trọng",
+    "definitionEn": "Academic vocabulary for IELTS: Elderly Care: State Pension & Nursing Homes vs Family Duty",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "good old life (Band 5)",
+    "synonyms": [
+      "graceful retirement",
+      "dignity in old age"
+    ],
+    "collocations": [
+      "guarantee a dignified old age",
+      "enjoy a dignified old age"
+    ],
+    "exampleSentence": "Every senior citizen deserves to live a comfortable and dignified old age after a lifetime of labor.",
+    "vietnameseSentence": "Mỗi người cao tuổi đều xứng đáng được hưởng một tuổi già an nhàn và được tôn trọng sau cả cuộc đời lao động.",
+    "wordFamily": "dignified old age (IELTS Academic)"
+  },
+  {
+    "id": "V325",
+    "topicId": "t2-brain-drain-migration",
+    "word": "financial remittances",
+    "partOfSpeech": "noun",
+    "ipa": "/faɪˈnænʃl rɪˈmɪtnsɪz/",
+    "meaning": "Kiều hối (tiền người lao động ở nước ngoài gửi về quê nhà)",
+    "definitionEn": "Academic vocabulary for IELTS: Brain Drain: Skilled Medical & Professional Emigration from Developing Countries",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "money sent home (Band 5)",
+    "synonyms": [
+      "migrant remittances",
+      "inward remittances"
+    ],
+    "collocations": [
+      "send back remittances",
+      "depend on foreign remittances"
+    ],
+    "exampleSentence": "Financial remittances sent home by overseas doctors often exceed official developmental aid.",
+    "vietnameseSentence": "Nguồn kiều hối tài chính do các bác sĩ ở nước ngoài gửi về thường vượt qua cả viện trợ phát triển chính thức.",
+    "wordFamily": "financial remittances (IELTS Academic)"
+  },
+  {
+    "id": "V326",
+    "topicId": "t2-brain-drain-migration",
+    "word": "human capital flight",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈhjuːmən ˈkæpɪtl flaɪt/",
+    "meaning": "Sự thất thoát nguồn vốn con người / nhân lực chất lượng cao",
+    "definitionEn": "Academic vocabulary for IELTS: Brain Drain: Skilled Medical & Professional Emigration from Developing Countries",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "loss of educated workers (Band 5)",
+    "synonyms": [
+      "brain drain",
+      "talent depletion"
+    ],
+    "collocations": [
+      "reverse human capital flight",
+      "curb human capital flight"
+    ],
+    "exampleSentence": "Governments must offer competitive research grants to counteract human capital flight.",
+    "vietnameseSentence": "Các chính phủ phải đưa ra các khoản tài trợ nghiên cứu cạnh tranh để ngăn chặn sự thất thoát nguồn vốn con người.",
+    "wordFamily": "human capital flight (IELTS Academic)"
+  },
+  {
+    "id": "V327",
+    "topicId": "t2-brain-drain-migration",
+    "word": "return on investment",
+    "partOfSpeech": "noun",
+    "ipa": "/rɪˈtɜːn ɒn ɪnˈvestmənt/",
+    "meaning": "Tỷ suất hoàn vốn đầu tư (vào đào tạo nhân lực)",
+    "definitionEn": "Academic vocabulary for IELTS: Brain Drain: Skilled Medical & Professional Emigration from Developing Countries",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "money gained back (Band 5)",
+    "synonyms": [
+      "yield on educational expenditure",
+      "social return"
+    ],
+    "collocations": [
+      "forfeit return on investment",
+      "maximize return on investment"
+    ],
+    "exampleSentence": "When certified engineers emigrate immediately after graduation, public universities lose their return on investment.",
+    "vietnameseSentence": "Khi các kỹ sư tốt nghiệp di cư ngay sau khi ra trường, các trường đại học công lập mất đi khoản hoàn vốn đầu tư xã hội.",
+    "wordFamily": "return on investment (IELTS Academic)"
+  },
+  {
+    "id": "V328",
+    "topicId": "t2-brain-drain-migration",
+    "word": "chronically understaffed",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˈkrɒnɪkli ˌʌndəˈstɑːft/",
+    "meaning": "Thiếu hụt nhân sự kinh niên kéo dài",
+    "definitionEn": "Academic vocabulary for IELTS: Brain Drain: Skilled Medical & Professional Emigration from Developing Countries",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "always not enough workers (Band 5)",
+    "synonyms": [
+      "perpetually short-staffed",
+      "critically depleted"
+    ],
+    "collocations": [
+      "hospitals remain understaffed",
+      "chronically understaffed wards"
+    ],
+    "exampleSentence": "Provincial healthcare facilities remain chronically understaffed because graduates seek overseas contracts.",
+    "vietnameseSentence": "Các cơ sở y tế tuyến tỉnh vẫn thiếu hụt nhân sự triền miên do sinh viên ra trường tìm kiếm hợp đồng ở nước ngoài.",
+    "wordFamily": "chronically understaffed (IELTS Academic)"
+  },
+  {
+    "id": "V329",
+    "topicId": "t2-brain-drain-migration",
+    "word": "reciprocal investment",
+    "partOfSpeech": "noun",
+    "ipa": "/rɪˈsɪprəkl ɪnˈvestmənt/",
+    "meaning": "Sự đầu tư có đi có lại, tương hỗ song phương",
+    "definitionEn": "Academic vocabulary for IELTS: Brain Drain: Skilled Medical & Professional Emigration from Developing Countries",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "giving back help (Band 5)",
+    "synonyms": [
+      "mutual reinvestment",
+      "bilateral aid"
+    ],
+    "collocations": [
+      "commit to reciprocal investment",
+      "reciprocal cooperation"
+    ],
+    "exampleSentence": "Wealthy nations hiring foreign doctors should commit to reciprocal investment in overseas teaching hospitals.",
+    "vietnameseSentence": "Các quốc gia giàu có thuê bác sĩ nước ngoài nên cam kết đầu tư tương hỗ vào các bệnh viện thực hành ở nước sở tại.",
+    "wordFamily": "reciprocal investment (IELTS Academic)"
+  },
+  {
+    "id": "V330",
+    "topicId": "t2-brain-drain-migration",
+    "word": "exodus",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈeksədəs/",
+    "meaning": "Làn sóng rời đi hàng loạt của một nhóm người",
+    "definitionEn": "Academic vocabulary for IELTS: Brain Drain: Skilled Medical & Professional Emigration from Developing Countries",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "many people leaving (Band 5)",
+    "synonyms": [
+      "mass departure",
+      "outpouring",
+      "migration wave"
+    ],
+    "collocations": [
+      "mass exodus of talent",
+      "stem the exodus"
+    ],
+    "exampleSentence": "Without tax incentives, developing countries will be powerless to stem the mass exodus of technicians.",
+    "vietnameseSentence": "Nếu thiếu các ưu đãi thuế, các nước đang phát triển sẽ bất lực trong việc ngăn chặn làn sóng kỹ thuật viên rời đi hàng loạt.",
+    "wordFamily": "exodus (IELTS Academic)"
+  },
+  {
+    "id": "V331",
+    "topicId": "t2-brain-drain-migration",
+    "word": "personal autonomy",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈpɜːsənl ɔːˈtɒnəmi/",
+    "meaning": "Quyền tự quyết định con đường của bản thân",
+    "definitionEn": "Academic vocabulary for IELTS: Brain Drain: Skilled Medical & Professional Emigration from Developing Countries",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "freedom of choice (Band 5)",
+    "synonyms": [
+      "individual liberty",
+      "self-determination"
+    ],
+    "collocations": [
+      "exercise personal autonomy",
+      "infringe on personal autonomy"
+    ],
+    "exampleSentence": "Denying skilled workers passports would gravely violate fundamental rights to personal autonomy.",
+    "vietnameseSentence": "Việc cấm cấp hộ chiếu cho người lao động có tay nghề sẽ vi phạm nghiêm trọng quyền tự quyết cá nhân cơ bản.",
+    "wordFamily": "personal autonomy (IELTS Academic)"
+  },
+  {
+    "id": "V332",
+    "topicId": "t2-sports-income-disparity",
+    "word": "astronomical income",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌæstrəˈnɒmɪkl ˈɪnkʌm/",
+    "meaning": "Thu nhập khổng lồ, cao ngất ngưởng",
+    "definitionEn": "Academic vocabulary for IELTS: Income Disparity: Astronomical Sports Star Earnings vs Essential Public Workers",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "very huge money (Band 5)",
+    "synonyms": [
+      "exorbitant salary",
+      "staggering remuneration",
+      "colossal earnings"
+    ],
+    "collocations": [
+      "earn an astronomical income",
+      "command astronomical incomes"
+    ],
+    "exampleSentence": "Elite footballers command astronomical incomes exceeding several hundred thousand dollars per week.",
+    "vietnameseSentence": "Các cầu thủ bóng đá hàng đầu nhận mức thu nhập khổng lồ vượt quá hàng trăm nghìn đô la mỗi tuần.",
+    "wordFamily": "astronomical income (IELTS Academic)"
+  },
+  {
+    "id": "V333",
+    "topicId": "t2-sports-income-disparity",
+    "word": "societal utility",
+    "partOfSpeech": "noun",
+    "ipa": "/səˈsaɪətl juːˈtɪləti/",
+    "meaning": "Giá trị công năng / mức độ hữu ích thực sự cho xã hội",
+    "definitionEn": "Academic vocabulary for IELTS: Income Disparity: Astronomical Sports Star Earnings vs Essential Public Workers",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "usefulness for people (Band 5)",
+    "synonyms": [
+      "public value",
+      "social necessity",
+      "humanitarian worth"
+    ],
+    "collocations": [
+      "evaluate societal utility",
+      "rank by societal utility"
+    ],
+    "exampleSentence": "Remuneration structures should ideally reflect the true societal utility of each profession.",
+    "vietnameseSentence": "Cơ cấu thù lao lý tưởng nhất nên phản ánh giá trị hữu ích thực sự cho xã hội của từng nghề nghiệp.",
+    "wordFamily": "societal utility (IELTS Academic)"
+  },
+  {
+    "id": "V334",
+    "topicId": "t2-sports-income-disparity",
+    "word": "commercial sponsorship",
+    "partOfSpeech": "noun",
+    "ipa": "/kəˈmɜːʃl ˈspɒnsəʃɪp/",
+    "meaning": "Hợp đồng tài trợ thương mại",
+    "definitionEn": "Academic vocabulary for IELTS: Income Disparity: Astronomical Sports Star Earnings vs Essential Public Workers",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "company support money (Band 5)",
+    "synonyms": [
+      "corporate endorsement",
+      "marketing contract"
+    ],
+    "collocations": [
+      "secure commercial sponsorships",
+      "lucrative sponsorships"
+    ],
+    "exampleSentence": "Athletic franchises generate colossal cash reserves through television rights and commercial sponsorships.",
+    "vietnameseSentence": "Các câu lạc bộ thể thao tạo ra nguồn dự trữ tiền mặt khổng lồ qua bản quyền truyền hình và tài trợ thương mại.",
+    "wordFamily": "commercial sponsorship (IELTS Academic)"
+  },
+  {
+    "id": "V335",
+    "topicId": "t2-sports-income-disparity",
+    "word": "career-ending injury",
+    "partOfSpeech": "noun",
+    "ipa": "/kəˈrɪər ˈendɪŋ ˈɪndʒəri/",
+    "meaning": "Chấn thương chấm dứt sự nghiệp thi đấu",
+    "definitionEn": "Academic vocabulary for IELTS: Income Disparity: Astronomical Sports Star Earnings vs Essential Public Workers",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "hurt that stops playing forever (Band 5)",
+    "synonyms": [
+      "debilitating sports injury",
+      "permanent trauma"
+    ],
+    "collocations": [
+      "suffer a career-ending injury",
+      "risk of career-ending injury"
+    ],
+    "exampleSentence": "A solitary career-ending injury can extinguish an athlete's earning potential overnight.",
+    "vietnameseSentence": "Chỉ một chấn thương chấm dứt sự nghiệp duy nhất có thể dập tắt tiềm năng kiếm tiền của một vận động viên chỉ sau một đêm.",
+    "wordFamily": "career-ending injury (IELTS Academic)"
+  },
+  {
+    "id": "V336",
+    "topicId": "t2-sports-income-disparity",
+    "word": "bedrock of civilization",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈbedrɒk əv ˌsɪvəlaɪˈzeɪʃn/",
+    "meaning": "Nền tảng vững chắc của nền văn minh nhân loại",
+    "definitionEn": "Academic vocabulary for IELTS: Income Disparity: Astronomical Sports Star Earnings vs Essential Public Workers",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "foundation of world (Band 5)",
+    "synonyms": [
+      "cornerstone of society",
+      "vital pillars"
+    ],
+    "collocations": [
+      "form the bedrock of civilization",
+      "undermine the bedrock"
+    ],
+    "exampleSentence": "Educators and medical personnel constitute the bedrock of modern civilized civilization.",
+    "vietnameseSentence": "Các nhà giáo và nhân viên y tế cấu thành nên nền tảng vững chắc của nền văn minh hiện đại.",
+    "wordFamily": "bedrock of civilization (IELTS Academic)"
+  },
+  {
+    "id": "V337",
+    "topicId": "t2-sports-income-disparity",
+    "word": "distort the moral compass",
+    "partOfSpeech": "verb",
+    "ipa": "/dɪˈstɔːt ðə ˈmɒrəl ˈkʌmpəs/",
+    "meaning": "Làm lệch lạc thước đo chuẩn mực đạo đức xã hội",
+    "definitionEn": "Academic vocabulary for IELTS: Income Disparity: Astronomical Sports Star Earnings vs Essential Public Workers",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "make values wrong (Band 5)",
+    "synonyms": [
+      "warp societal values",
+      "pervert moral standards"
+    ],
+    "collocations": [
+      "risks distorting the moral compass",
+      "distort social values"
+    ],
+    "exampleSentence": "Paying performers thousands of times more than doctors risks distorting the moral compass of younger generations.",
+    "vietnameseSentence": "Trả lương cho người biểu diễn cao gấp hàng nghìn lần bác sĩ có nguy cơ làm lệch lạc chuẩn mực đạo đức của thế hệ trẻ.",
+    "wordFamily": "distort the moral compass (IELTS Academic)"
+  },
+  {
+    "id": "V338",
+    "topicId": "t2-sports-income-disparity",
+    "word": "windfall tax",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈwɪndfɔːl tæks/",
+    "meaning": "Thuế đánh vào thu nhập siêu lợi nhuận / lợi tức bất thường",
+    "definitionEn": "Academic vocabulary for IELTS: Income Disparity: Astronomical Sports Star Earnings vs Essential Public Workers",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "tax on rich money (Band 5)",
+    "synonyms": [
+      "super-profit levy",
+      "progressive surtax"
+    ],
+    "collocations": [
+      "levy a windfall tax",
+      "redistribute via windfall taxes"
+    ],
+    "exampleSentence": "Governments could levy a modest windfall tax on mega sports contracts to subsidize nursing wages.",
+    "vietnameseSentence": "Chính phủ có thể đánh thuế siêu lợi tức khiêm tốn vào các hợp đồng thể thao khổng lồ để trợ cấp tiền lương cho y tá.",
+    "wordFamily": "windfall tax (IELTS Academic)"
+  },
+  {
+    "id": "V339",
+    "topicId": "t2-gap-year-benefits",
+    "word": "academic momentum",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌækəˈdemɪk məˈmentəm/",
+    "meaning": "Quán tính / đà học tập liên tục",
+    "definitionEn": "Academic vocabulary for IELTS: Gap Year: Career Exploration & Independence vs Academic Disruption",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "study habit (Band 5)",
+    "synonyms": [
+      "scholastic drive",
+      "learning continuity"
+    ],
+    "collocations": [
+      "lose academic momentum",
+      "maintain academic momentum"
+    ],
+    "exampleSentence": "Taking twelve months off can cause school leavers to lose crucial academic momentum.",
+    "vietnameseSentence": "Nghỉ ngơi mười hai tháng có thể khiến học sinh mới tốt nghiệp đánh mất đà học tập quan trọng.",
+    "wordFamily": "academic momentum (IELTS Academic)"
+  },
+  {
+    "id": "V340",
+    "topicId": "t2-gap-year-benefits",
+    "word": "worldly perspective",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈwɜːldli pəˈspektɪv/",
+    "meaning": "Vốn sống và góc nhìn hiểu biết thực tế về cuộc đời",
+    "definitionEn": "Academic vocabulary for IELTS: Gap Year: Career Exploration & Independence vs Academic Disruption",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "life experience (Band 5)",
+    "synonyms": [
+      "broad horizons",
+      "worldly wisdom",
+      "cosmopolitan outlook"
+    ],
+    "collocations": [
+      "acquire a worldly perspective",
+      "broaden worldly perspective"
+    ],
+    "exampleSentence": "Traveling independently across foreign cultures equips young adults with an invaluable worldly perspective.",
+    "vietnameseSentence": "Đi du lịch độc lập qua các nền văn hóa nước ngoài trang bị cho thanh niên một vốn sống thực tế vô giá.",
+    "wordFamily": "worldly perspective (IELTS Academic)"
+  },
+  {
+    "id": "V341",
+    "topicId": "t2-gap-year-benefits",
+    "word": "scholastic discipline",
+    "partOfSpeech": "noun",
+    "ipa": "/skəˈlæstɪk ˈdɪsəplɪn/",
+    "meaning": "Tính kỷ luật và nề nếp trong học tập học thuật",
+    "definitionEn": "Academic vocabulary for IELTS: Gap Year: Career Exploration & Independence vs Academic Disruption",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "school rules (Band 5)",
+    "synonyms": [
+      "academic rigor",
+      "study discipline"
+    ],
+    "collocations": [
+      "readapt to scholastic discipline",
+      "instill scholastic discipline"
+    ],
+    "exampleSentence": "Returning undergraduates often find it tough to submit to rigorous scholastic discipline once more.",
+    "vietnameseSentence": "Sinh viên quay lại trường thường thấy khó khăn khi phải khép mình vào nề nếp kỷ luật học tập nghiêm ngặt một lần nữa.",
+    "wordFamily": "scholastic discipline (IELTS Academic)"
+  },
+  {
+    "id": "V342",
+    "topicId": "t2-gap-year-benefits",
+    "word": "vocational exploration",
+    "partOfSpeech": "noun",
+    "ipa": "/vəʊˈkeɪʃənl ˌekspləˈreɪʃn/",
+    "meaning": "Sự trải nghiệm khám phá các ngành nghề thực tế",
+    "definitionEn": "Academic vocabulary for IELTS: Gap Year: Career Exploration & Independence vs Academic Disruption",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "trying jobs (Band 5)",
+    "synonyms": [
+      "career discovery",
+      "occupational trial"
+    ],
+    "collocations": [
+      "engage in vocational exploration",
+      "period of vocational exploration"
+    ],
+    "exampleSentence": "A period of vocational exploration enables students to select majors aligned with their genuine talents.",
+    "vietnameseSentence": "Một giai đoạn trải nghiệm nghề nghiệp cho phép sinh viên chọn các chuyên ngành phù hợp với năng khiếu thực sự của họ.",
+    "wordFamily": "vocational exploration (IELTS Academic)"
+  },
+  {
+    "id": "V343",
+    "topicId": "t2-gap-year-benefits",
+    "word": "dead-end job",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌded ˈend dʒɒb/",
+    "meaning": "Công việc không có tương lai thăng tiến",
+    "definitionEn": "Academic vocabulary for IELTS: Gap Year: Career Exploration & Independence vs Academic Disruption",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "bad job without future (Band 5)",
+    "synonyms": [
+      "stagnant employment",
+      "unskilled job"
+    ],
+    "collocations": [
+      "trapped in dead-end jobs",
+      "settle for dead-end jobs"
+    ],
+    "exampleSentence": "Without higher qualifications, young workers often become trapped in low-paid, dead-end jobs.",
+    "vietnameseSentence": "Nếu thiếu bằng cấp cao hơn, những lao động trẻ thường bị mắc kẹt trong những công việc lương thấp không có tương lai.",
+    "wordFamily": "dead-end job (IELTS Academic)"
+  },
+  {
+    "id": "V344",
+    "topicId": "t2-gap-year-benefits",
+    "word": "defer enrollment",
+    "partOfSpeech": "verb",
+    "ipa": "/dɪˈfɜːr ɪnˈrəʊlmənt/",
+    "meaning": "Bảo lưu kết quả trúng tuyển, hoãn nhập học",
+    "definitionEn": "Academic vocabulary for IELTS: Gap Year: Career Exploration & Independence vs Academic Disruption",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "delay going to university (Band 5)",
+    "synonyms": [
+      "postpone matriculation",
+      "delay admission"
+    ],
+    "collocations": [
+      "defer university enrollment",
+      "granted permission to defer"
+    ],
+    "exampleSentence": "Prestigious universities now encourage accepted candidates to defer enrollment for one academic year.",
+    "vietnameseSentence": "Các trường đại học danh tiếng hiện nay khuyến khích thí sinh trúng tuyển bảo lưu hoãn nhập học trong một năm.",
+    "wordFamily": "defer enrollment (IELTS Academic)"
+  },
+  {
+    "id": "V345",
+    "topicId": "t2-gap-year-benefits",
+    "word": "self-discovery",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌself dɪˈskʌvəri/",
+    "meaning": "Hành trình thấu hiểu và khám phá bản thân",
+    "definitionEn": "Academic vocabulary for IELTS: Gap Year: Career Exploration & Independence vs Academic Disruption",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "learning about oneself (Band 5)",
+    "synonyms": [
+      "personal introspection",
+      "identity formation"
+    ],
+    "collocations": [
+      "journey of self-discovery",
+      "foster self-discovery"
+    ],
+    "exampleSentence": "Volunteering abroad serves as a transformative catalyst for emotional maturation and self-discovery.",
+    "vietnameseSentence": "Hoạt động tình nguyện ở nước ngoài đóng vai trò như một chất xúc tác chuyển hóa cho sự trưởng thành cảm xúc và khám phá bản thân.",
+    "wordFamily": "self-discovery (IELTS Academic)"
+  },
+  {
+    "id": "V346",
+    "topicId": "t2-gap-year-benefits",
+    "word": "hiatus",
+    "partOfSpeech": "noun",
+    "ipa": "/haɪˈeɪtəs/",
+    "meaning": "Khoảng thời gian tạm nghỉ, gián đoạn ngắn",
+    "definitionEn": "Academic vocabulary for IELTS: Gap Year: Career Exploration & Independence vs Academic Disruption",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "break time (Band 5)",
+    "synonyms": [
+      "intermission",
+      "pause",
+      "interlude"
+    ],
+    "collocations": [
+      "take a brief hiatus",
+      "year-long hiatus"
+    ],
+    "exampleSentence": "A year-long hiatus from homework provides exhausted teenagers with essential psychological rejuvenation.",
+    "vietnameseSentence": "Khoảng thời gian tạm nghỉ một năm khỏi bài tập về nhà mang lại cho thanh thiếu niên kiệt sức sự hồi phục tâm lý thiết yếu.",
+    "wordFamily": "hiatus (IELTS Academic)"
+  },
+  {
+    "id": "V347",
+    "topicId": "t2-routine-vs-change",
+    "word": "decision fatigue",
+    "partOfSpeech": "noun",
+    "ipa": "/dɪˈsɪʒn fəˈtiːɡ/",
+    "meaning": "Sự kiệt sức tâm lý vì phải đưa ra quá nhiều lựa chọn",
+    "definitionEn": "Academic vocabulary for IELTS: Psychology: Comfort of Familiar Routine vs Embracing Constant Change",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "tiredness from choosing (Band 5)",
+    "synonyms": [
+      "cognitive overload",
+      "mental exhaustion"
+    ],
+    "collocations": [
+      "alleviate decision fatigue",
+      "suffer from decision fatigue"
+    ],
+    "exampleSentence": "Adopting uniform daily routines significantly alleviates mental anxiety and decision fatigue.",
+    "vietnameseSentence": "Áp dụng các nề nếp thói quen hàng ngày đồng nhất giúp giảm bớt đáng kể sự lo âu tâm lý và tình trạng kiệt sức vì lựa chọn.",
+    "wordFamily": "decision fatigue (IELTS Academic)"
+  },
+  {
+    "id": "V348",
+    "topicId": "t2-routine-vs-change",
+    "word": "complacency",
+    "partOfSpeech": "noun",
+    "ipa": "/kəmˈpleɪsnsi/",
+    "meaning": "Sự tự mãn, thỏa mãn quá sớm dẫn đến trì trệ",
+    "definitionEn": "Academic vocabulary for IELTS: Psychology: Comfort of Familiar Routine vs Embracing Constant Change",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "being too satisfied (Band 5)",
+    "synonyms": [
+      "smugness",
+      "unwarranted contentment",
+      "stagnation"
+    ],
+    "collocations": [
+      "breed complacency",
+      "fall into complacency"
+    ],
+    "exampleSentence": "Excessive reliance on past triumphs breeds complacency and leaves organizations vulnerable to disruption.",
+    "vietnameseSentence": "Sự phụ thuộc quá mức vào các thành công trong quá khứ sẽ sinh ra thói tự mãn và khiến các tổ chức dễ bị đổ vỡ.",
+    "wordFamily": "complacency (IELTS Academic)"
+  },
+  {
+    "id": "V349",
+    "topicId": "t2-routine-vs-change",
+    "word": "comfort zone",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈkʌmfət zəʊn/",
+    "meaning": "Vùng an toàn quen thuộc của bản thân",
+    "definitionEn": "Academic vocabulary for IELTS: Psychology: Comfort of Familiar Routine vs Embracing Constant Change",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "safe place (Band 5)",
+    "synonyms": [
+      "familiar territory",
+      "sphere of comfort"
+    ],
+    "collocations": [
+      "step outside one's comfort zone",
+      "venture beyond the comfort zone"
+    ],
+    "exampleSentence": "Venturing beyond one's comfort zone catalyzes cognitive resilience and creative problem-solving.",
+    "vietnameseSentence": "Dấn thân vượt ra ngoài vùng an toàn của bản thân giúp kích hoạt sự kiên cường nhận thức và tư duy giải quyết vấn đề sáng tạo.",
+    "wordFamily": "comfort zone (IELTS Academic)"
+  },
+  {
+    "id": "V350",
+    "topicId": "t2-routine-vs-change",
+    "word": "intellectual calcification",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌɪntəˈlektʃuəl ˌkælsɪfɪˈkeɪʃn/",
+    "meaning": "Sự xơ cứng về tư duy, bảo thủ không chịu đổi mới",
+    "definitionEn": "Academic vocabulary for IELTS: Psychology: Comfort of Familiar Routine vs Embracing Constant Change",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "mind becoming hard and old (Band 5)",
+    "synonyms": [
+      "mental rigidity",
+      "dogmatic obstinacy"
+    ],
+    "collocations": [
+      "prevent intellectual calcification",
+      "risk of calcification"
+    ],
+    "exampleSentence": "Lifelong curiosity shields professionals from the perils of intellectual calcification in old age.",
+    "vietnameseSentence": "Sự tò mò học hỏi suốt đời bảo vệ các chuyên gia khỏi những hiểm họa xơ cứng tư duy khi về già.",
+    "wordFamily": "intellectual calcification (IELTS Academic)"
+  },
+  {
+    "id": "V351",
+    "topicId": "t2-routine-vs-change",
+    "word": "psychological security",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌsaɪkəˈlɒdʒɪkl sɪˈkjʊərəti/",
+    "meaning": "Cảm giác an toàn và vững tâm về mặt tâm lý",
+    "definitionEn": "Academic vocabulary for IELTS: Psychology: Comfort of Familiar Routine vs Embracing Constant Change",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "feeling safe inside (Band 5)",
+    "synonyms": [
+      "emotional peace",
+      "mental serenity"
+    ],
+    "collocations": [
+      "foster psychological security",
+      "provide psychological security"
+    ],
+    "exampleSentence": "Predictable workplace expectations cultivate psychological security and enhance team retention.",
+    "vietnameseSentence": "Những kỳ vọng rõ ràng tại nơi làm việc nuôi dưỡng sự an tâm về tâm lý và nâng cao tỷ lệ gắn bó của đội ngũ.",
+    "wordFamily": "psychological security (IELTS Academic)"
+  },
+  {
+    "id": "V352",
+    "topicId": "t2-routine-vs-change",
+    "word": "unmitigated virtue",
+    "partOfSpeech": "noun",
+    "ipa": "/ʌnˈmɪtɪɡeɪtɪd ˈvɜːtʃuː/",
+    "meaning": "Một điều tốt đẹp tuyệt đối không chút nhược điểm",
+    "definitionEn": "Academic vocabulary for IELTS: Psychology: Comfort of Familiar Routine vs Embracing Constant Change",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "completely good thing (Band 5)",
+    "synonyms": [
+      "flawless benefit",
+      "unqualified good"
+    ],
+    "collocations": [
+      "view as an unmitigated virtue",
+      "not an unmitigated virtue"
+    ],
+    "exampleSentence": "Constant organizational restructuring should not be romanticized as an unmitigated virtue.",
+    "vietnameseSentence": "Việc liên tục tái cấu trúc tổ chức không nên được lý tưởng hóa như một điều tốt đẹp hoàn hảo tuyệt đối.",
+    "wordFamily": "unmitigated virtue (IELTS Academic)"
+  },
+  {
+    "id": "V353",
+    "topicId": "t2-routine-vs-change",
+    "word": "emotional burnout",
+    "partOfSpeech": "noun",
+    "ipa": "/ɪˈməʊʃənl ˈbɜːnaʊt/",
+    "meaning": "Sự kiệt quệ cảm xúc do căng thẳng kéo dài",
+    "definitionEn": "Academic vocabulary for IELTS: Psychology: Comfort of Familiar Routine vs Embracing Constant Change",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "too tired feeling (Band 5)",
+    "synonyms": [
+      "nervous exhaustion",
+      "chronic mental fatigue"
+    ],
+    "collocations": [
+      "induce emotional burnout",
+      "recover from burnout"
+    ],
+    "exampleSentence": "Coping with perpetual workplace volatility frequently induces severe emotional burnout.",
+    "vietnameseSentence": "Đối phó với sự biến động không ngừng tại nơi làm việc thường xuyên gây ra tình trạng kiệt quệ cảm xúc nghiêm trọng.",
+    "wordFamily": "emotional burnout (IELTS Academic)"
+  },
+  {
+    "id": "V354",
+    "topicId": "t2-routine-vs-change",
+    "word": "steadfast anchor",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈstedfɑːst ˈæŋkər/",
+    "meaning": "Mỏ neo vững chắc giữ cho tâm trí không bị chao đảo",
+    "definitionEn": "Academic vocabulary for IELTS: Psychology: Comfort of Familiar Routine vs Embracing Constant Change",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "strong hold (Band 5)",
+    "synonyms": [
+      "unshakable pillar",
+      "grounding foundation"
+    ],
+    "collocations": [
+      "serve as a steadfast anchor",
+      "maintain a steadfast anchor"
+    ],
+    "exampleSentence": "Cherished family traditions serve as a steadfast anchor amidst tumultuous sociopolitical upheavals.",
+    "vietnameseSentence": "Những truyền thống gia đình quý báu đóng vai trò như một mỏ neo vững chắc giữa những biến động chính trị xã hội đầy bão táp.",
+    "wordFamily": "steadfast anchor (IELTS Academic)"
+  },
+  {
+    "id": "V355",
+    "topicId": "t2-celebrity-media-privacy",
+    "word": "tabloid journalism",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈtæblɔɪd ˈdʒɜːnəlɪzəm/",
+    "meaning": "Báo chí lá cải, chuyên giật gân soi mói đời tư",
+    "definitionEn": "Academic vocabulary for IELTS: Mass Media: Celebrity Voyeurism & Commercial Profit vs Inherent Privacy Rights",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "gossip newspaper (Band 5)",
+    "synonyms": [
+      "yellow journalism",
+      "sensationalist press",
+      "gossip rags"
+    ],
+    "collocations": [
+      "hallmark of tabloid journalism",
+      "victims of tabloid journalism"
+    ],
+    "exampleSentence": "Tabloid journalism relentlessly trades intimate celebrity suffering for advertising clicks.",
+    "vietnameseSentence": "Báo chí lá cải không ngừng đánh đổi nỗi đau đớn riêng tư của người nổi tiếng lấy lượt bấm quảng cáo.",
+    "wordFamily": "tabloid journalism (IELTS Academic)"
+  },
+  {
+    "id": "V356",
+    "topicId": "t2-celebrity-media-privacy",
+    "word": "intrusive scrutiny",
+    "partOfSpeech": "noun",
+    "ipa": "/ɪnˈtruːsɪv ˈskruːtəni/",
+    "meaning": "Sự soi mói xâm phạm đời tư quá mức",
+    "definitionEn": "Academic vocabulary for IELTS: Mass Media: Celebrity Voyeurism & Commercial Profit vs Inherent Privacy Rights",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "too much looking into life (Band 5)",
+    "synonyms": [
+      "invasive surveillance",
+      "unwarranted snooping"
+    ],
+    "collocations": [
+      "subjected to intrusive scrutiny",
+      "escape intrusive scrutiny"
+    ],
+    "exampleSentence": "Constant intrusive scrutiny prevents high-profile artists from enjoying peaceful family outings.",
+    "vietnameseSentence": "Sự soi mói xâm phạm đời tư liên miên ngăn cản các nghệ sĩ tên tuổi tận hưởng những buổi đi chơi gia đình yên bình.",
+    "wordFamily": "intrusive scrutiny (IELTS Academic)"
+  },
+  {
+    "id": "V357",
+    "topicId": "t2-celebrity-media-privacy",
+    "word": "paparazzi",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌpæpəˈrætsi/",
+    "meaning": "Tay săn ảnh người nổi tiếng",
+    "definitionEn": "Academic vocabulary for IELTS: Mass Media: Celebrity Voyeurism & Commercial Profit vs Inherent Privacy Rights",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "photo hunters (Band 5)",
+    "synonyms": [
+      "freelance celebrity photographers",
+      "press hounds"
+    ],
+    "collocations": [
+      "hounded by paparazzi",
+      "paparazzi harassment"
+    ],
+    "exampleSentence": "Reckless motorcycle pursuits by aggressive paparazzi present grave hazards to road users.",
+    "vietnameseSentence": "Những cuộc rượt đuổi bằng xe máy liều lĩnh của các tay săn ảnh hung hãn gây ra những mối nguy hiểm nghiêm trọng cho người tham gia giao thông.",
+    "wordFamily": "paparazzi (IELTS Academic)"
+  },
+  {
+    "id": "V358",
+    "topicId": "t2-celebrity-media-privacy",
+    "word": "domestic sanctuary",
+    "partOfSpeech": "noun",
+    "ipa": "/dəˈmestɪk ˈsæŋktʃuəri/",
+    "meaning": "Chốn bình yên riêng tư bất khả xâm phạm tại gia đình",
+    "definitionEn": "Academic vocabulary for IELTS: Mass Media: Celebrity Voyeurism & Commercial Profit vs Inherent Privacy Rights",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "safe private home (Band 5)",
+    "synonyms": [
+      "private refuge",
+      "intimate haven"
+    ],
+    "collocations": [
+      "inviolable domestic sanctuary",
+      "breach a domestic sanctuary"
+    ],
+    "exampleSentence": "Every human being requires an inviolable domestic sanctuary where cameras cannot penetrate.",
+    "vietnameseSentence": "Mỗi con người đều cần một chốn bình yên tại gia bất khả xâm phạm, nơi mà máy ảnh không thể thâm nhập.",
+    "wordFamily": "domestic sanctuary (IELTS Academic)"
+  },
+  {
+    "id": "V359",
+    "topicId": "t2-celebrity-media-privacy",
+    "word": "sensationalist",
+    "partOfSpeech": "adjective",
+    "ipa": "/senˈseɪʃənəlɪst/",
+    "meaning": "Giật gân, câu khách rẻ tiền",
+    "definitionEn": "Academic vocabulary for IELTS: Mass Media: Celebrity Voyeurism & Commercial Profit vs Inherent Privacy Rights",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "shocking on purpose (Band 5)",
+    "synonyms": [
+      "lurid",
+      "scandal-mongering",
+      "yellow"
+    ],
+    "collocations": [
+      "sensationalist headlines",
+      "sensationalist reporting"
+    ],
+    "exampleSentence": "Sensationalist websites fabricate scandalous break-ups simply to manipulate engagement algorithms.",
+    "vietnameseSentence": "Các trang web giật gân bịa đặt những vụ chia tay bê bối chỉ đơn giản để thao túng thuật toán tương tác.",
+    "wordFamily": "sensationalist (IELTS Academic)"
+  },
+  {
+    "id": "V360",
+    "topicId": "t2-celebrity-media-privacy",
+    "word": "unspoken bargain",
+    "partOfSpeech": "noun",
+    "ipa": "/ʌnˈspəʊkən ˈbɑːɡən/",
+    "meaning": "Thỏa thuận ngầm định không nói ra",
+    "definitionEn": "Academic vocabulary for IELTS: Mass Media: Celebrity Voyeurism & Commercial Profit vs Inherent Privacy Rights",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "secret deal (Band 5)",
+    "synonyms": [
+      "implicit pact",
+      "tacit contract"
+    ],
+    "collocations": [
+      "part of the unspoken bargain",
+      "unspoken bargain of fame"
+    ],
+    "exampleSentence": "Some claim that surrendering personal privacy is part of the unspoken bargain of high celebrity compensation.",
+    "vietnameseSentence": "Một số người cho rằng việc từ bỏ sự riêng tư cá nhân là một phần của thỏa thuận ngầm định đổi lấy thù lao ngôi sao kếch xù.",
+    "wordFamily": "unspoken bargain (IELTS Academic)"
+  },
+  {
+    "id": "V361",
+    "topicId": "t2-celebrity-media-privacy",
+    "word": "whistleblowing",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈwɪslbləʊɪŋ/",
+    "meaning": "Sự tố giác, vạch trần cái sai vì lợi ích công chúng",
+    "definitionEn": "Academic vocabulary for IELTS: Mass Media: Celebrity Voyeurism & Commercial Profit vs Inherent Privacy Rights",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "telling the truth about crimes (Band 5)",
+    "synonyms": [
+      "investigative exposure",
+      "public interest reporting"
+    ],
+    "collocations": [
+      "legitimate whistleblowing",
+      "whistleblowing function"
+    ],
+    "exampleSentence": "Investigative journalists perform crucial whistleblowing when exposing corrupt donations among civic leaders.",
+    "vietnameseSentence": "Các nhà báo điều tra thực hiện chức năng tố giác trọng yếu khi vạch trần các khoản quyên góp tham nhũng trong giới lãnh đạo dân sự.",
+    "wordFamily": "whistleblowing (IELTS Academic)"
+  },
+  {
+    "id": "V362",
+    "topicId": "t2-celebrity-media-privacy",
+    "word": "public voyeurism",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈpʌblɪk vɔɪˈjɜːrɪzəm/",
+    "meaning": "Thói tò mò thích nhìn trộm đời tư người khác của công chúng",
+    "definitionEn": "Academic vocabulary for IELTS: Mass Media: Celebrity Voyeurism & Commercial Profit vs Inherent Privacy Rights",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "watching others' private life (Band 5)",
+    "synonyms": [
+      "mass snooping",
+      "morbid curiosity"
+    ],
+    "collocations": [
+      "feed public voyeurism",
+      "toxic public voyeurism"
+    ],
+    "exampleSentence": "Broadcasting unvetted footage of celebrities' grief merely serves toxic public voyeurism.",
+    "vietnameseSentence": "Phát sóng các thước phim chưa được kiểm chứng về nỗi đau buồn của người nổi tiếng chỉ nhằm phục vụ thói tò mò nhìn trộm độc hại của đám đông.",
+    "wordFamily": "public voyeurism (IELTS Academic)"
   }
 ]

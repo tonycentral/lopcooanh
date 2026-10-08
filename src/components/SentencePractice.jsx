@@ -20,7 +20,8 @@ import {
   Plus,
   FileEdit,
   FileText,
-  Award
+  Award,
+  Tag
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { 
@@ -697,30 +698,58 @@ In conclusion, while..., I believe that...`;
         </div>
       ) : (
         selectedVocab && (
-          <div className="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-            <div className="flex items-baseline gap-2 flex-wrap">
-              <span className="text-[10px] uppercase font-black text-blue-400 tracking-wider bg-blue-500/10 px-2 py-0.5 rounded-md border border-blue-500/20">
-                Từ Đang Luyện
-              </span>
-              <span className="text-lg font-black text-white">{selectedVocab.word}</span>
-              {selectedVocab.ipa && (
-                <span className="text-xs font-mono text-blue-300 italic font-bold">
-                  {selectedVocab.ipa}
+          <div className="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 shadow-md flex flex-col gap-2.5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+              <div className="flex items-baseline gap-2 flex-wrap">
+                <span className="text-[10px] uppercase font-black text-blue-400 tracking-wider bg-blue-500/10 px-2 py-0.5 rounded-md border border-blue-500/20">
+                  Từ Đang Luyện
                 </span>
+                <span className="text-lg font-black text-white">{selectedVocab.word}</span>
+                {selectedVocab.ipa && (
+                  <span className="text-xs font-mono text-blue-300 italic font-bold">
+                    {selectedVocab.ipa}
+                  </span>
+                )}
+                <span className="text-xs text-slate-400">({selectedVocab.partOfSpeech})</span>
+                {selectedVocab.meaning && (
+                  <span className="text-xs text-slate-200 font-medium ml-1">
+                    • <strong className="text-emerald-400 font-bold">Nghĩa:</strong> {selectedVocab.meaning}
+                  </span>
+                )}
+              </div>
+
+              {activeTask === 'task1' && onOpenChartModal && (
+                <button
+                  type="button"
+                  onClick={onOpenChartModal}
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 hover:text-white border border-blue-500/30 text-xs font-bold transition cursor-pointer self-start sm:self-auto"
+                  title="Xem bảng số liệu biểu đồ Task 1"
+                >
+                  <BarChart3 className="w-3.5 h-3.5" />
+                  <span>Xem Bar Chart</span>
+                </button>
               )}
-              <span className="text-xs text-slate-400">({selectedVocab.partOfSpeech})</span>
             </div>
 
-            {activeTask === 'task1' && onOpenChartModal && (
-              <button
-                type="button"
-                onClick={onOpenChartModal}
-                className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 hover:text-white border border-blue-500/30 text-xs font-bold transition cursor-pointer self-start sm:self-auto"
-                title="Xem bảng số liệu biểu đồ Task 1"
-              >
-                <BarChart3 className="w-3.5 h-3.5" />
-                <span>Xem Bar Chart</span>
-              </button>
+            {/* Từ đồng nghĩa (Synonyms) - Đồng bộ với Flashcard */}
+            {selectedVocab.synonyms && selectedVocab.synonyms.length > 0 && (
+              <div className="pt-2 border-t border-slate-800/80 flex items-center gap-2 flex-wrap">
+                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-pink-400 flex items-center gap-1 shrink-0">
+                  <Tag className="w-3.5 h-3.5" />
+                  <span>Từ đồng nghĩa (Synonyms):</span>
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  {selectedVocab.synonyms.map((syn, idx) => (
+                    <span
+                      key={idx}
+                      className="text-xs px-2 py-0.5 rounded-md bg-pink-500/10 border border-pink-500/20 text-pink-300 font-mono font-medium hover:bg-pink-500/20 transition select-text"
+                      title={`Từ đồng nghĩa Band 7.5+ của "${selectedVocab.word}": ${syn}`}
+                    >
+                      {syn}
+                    </span>
+                  ))}
+                </div>
+              </div>
             )}
           </div>
         )

@@ -10,7 +10,10 @@ import {
   Layers,
   Sparkles,
   PenTool,
-  Database
+  Database,
+  User,
+  Cloud,
+  LogOut
 } from 'lucide-react';
 
 export default function Header({ 
@@ -24,6 +27,9 @@ export default function Header({
   onGoWelcome,
   onOpenFlashcard,
   onGoPractice,
+  currentUser,
+  onOpenAuth,
+  onSignOut,
   studentEmail,
   activeTask,
   onToggleTask,
@@ -76,7 +82,7 @@ export default function Header({
             </button>
           )}
 
-          {/* Mode Switcher: Luyện Viết vs Flashcard Duolingo */}
+          {/* Mode Switcher: Luyện Viết vs Flashcard */}
           <div className="flex items-center p-0.5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs shadow-inner">
             <button
               onClick={onGoPractice}
@@ -97,12 +103,12 @@ export default function Header({
                   ? "bg-gradient-to-r from-emerald-600 to-green-600 text-white shadow-md shadow-emerald-600/30"
                   : "text-emerald-400 hover:text-emerald-300"
               }`}
-              title="Học Nhanh Từ Vựng (Phong cách Duolingo)"
+              title="Học Nhanh Từ Vựng (Flashcard Tương Tác)"
             >
               <Layers className="w-3 h-3" />
               <span>Flashcard</span>
               <span className="text-[9px] px-1 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 font-black border border-emerald-500/30 animate-pulse hidden xs:inline">
-                Duo
+                Smart
               </span>
             </button>
           </div>
@@ -185,17 +191,45 @@ export default function Header({
             </span>
           </button>
 
-          {/* Student Email / Switcher */}
-          {studentEmail && (
+          {/* User Account / Login Button */}
+          {currentUser || studentEmail ? (
+            <div className="flex items-center gap-1">
+              <button
+                onClick={onOpenAuth || onChangeEmail}
+                className="flex items-center gap-1.5 p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-xs text-slate-200 transition cursor-pointer"
+                title={currentUser ? "Tài khoản Supabase đã đồng bộ" : "Bấm để liên kết tài khoản Supabase"}
+              >
+                {currentUser ? (
+                  <Cloud className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                ) : (
+                  <Mail className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+                )}
+                <span className="font-medium hidden md:inline max-w-[130px] truncate">
+                  {currentUser?.user_metadata?.full_name || currentUser?.email || studentEmail}
+                </span>
+                {currentUser && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse hidden lg:inline" title="Đã đồng bộ đám mây" />
+                )}
+              </button>
+
+              {currentUser && onSignOut && (
+                <button
+                  onClick={onSignOut}
+                  className="p-1.5 sm:p-2 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition cursor-pointer"
+                  title="Đăng xuất tài khoản"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+          ) : (
             <button
-              onClick={onChangeEmail}
-              className="flex items-center gap-1.5 p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-xs text-slate-200 transition cursor-pointer"
-              title="Đổi địa chỉ email học viên"
+              onClick={onOpenAuth}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-md shadow-blue-600/30 cursor-pointer active:scale-95"
+              title="Đăng nhập để đồng bộ tiến độ đám mây"
             >
-              <Mail className="w-3.5 h-3.5 text-indigo-400" />
-              <span className="font-medium hidden md:inline max-w-[130px] truncate">
-                {studentEmail}
-              </span>
+              <User className="w-3.5 h-3.5" />
+              <span>Đăng Nhập</span>
             </button>
           )}
 

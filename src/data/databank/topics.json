@@ -2,7 +2,7 @@
   {
     "id": "education",
     "name": "Education & Schooling",
-    "vietnameseName": "Giáo dục & Học đường",
+    "vietnameseName": "Giáo dục & Đào tạo",
     "taskScope": "Task 2",
     "icon": "GraduationCap",
     "tag": "Trọng tâm",
@@ -18,7 +18,7 @@
   {
     "id": "technology",
     "name": "Technology & Artificial Intelligence",
-    "vietnameseName": "Công nghệ & Trí tuệ nhân tạo",
+    "vietnameseName": "Công nghệ & AI",
     "taskScope": "Task 2",
     "icon": "Cpu",
     "tag": "Xu hướng 2024+",
@@ -27,14 +27,14 @@
       "workplace automation",
       "social media addiction",
       "smartphones",
-      "data privacy",
-      "digital communication"
+      "digital communication",
+      "data privacy"
     ]
   },
   {
     "id": "environment",
-    "name": "Environment & Transportation",
-    "vietnameseName": "Môi trường & Giao thông",
+    "name": "Environment & Nature",
+    "vietnameseName": "Môi trường & Khí hậu",
     "taskScope": "Task 2",
     "icon": "Leaf",
     "tag": "Phổ biến nhất",
@@ -44,38 +44,115 @@
       "renewable energy",
       "plastic pollution",
       "biodiversity loss",
-      "green transport & aviation"
+      "environmental legislation"
     ]
   },
   {
-    "id": "society",
-    "name": "Society, Health & Modern Lifestyle",
-    "vietnameseName": "Xã hội, Y tế & Lối sống",
+    "id": "transport",
+    "name": "Transportation & Urbanization",
+    "vietnameseName": "Giao thông & Đô thị",
+    "taskScope": "Task 2",
+    "icon": "Car",
+    "tag": "Thực tế",
+    "subTopics": [
+      "public transit vs private cars",
+      "high-speed railways",
+      "long-distance aviation",
+      "urban planning & green spaces",
+      "rural-to-urban migration",
+      "housing ownership vs renting"
+    ]
+  },
+  {
+    "id": "health",
+    "name": "Public Health & Wellbeing",
+    "vietnameseName": "Y tế & Sức khỏe",
+    "taskScope": "Task 2",
+    "icon": "HeartPulse",
+    "tag": "Thiết thực",
+    "subTopics": [
+      "self-medication vs medical consultation",
+      "fast food taxation",
+      "urban mental health",
+      "sports & physical exercise",
+      "bioethics & medical testing"
+    ]
+  },
+  {
+    "id": "work_career",
+    "name": "Work & Employment",
+    "vietnameseName": "Việc làm & Nghề nghiệp",
+    "taskScope": "Task 2",
+    "icon": "Briefcase",
+    "tag": "Thực tế",
+    "subTopics": [
+      "four-day workweek",
+      "remote working & freelancing",
+      "lifelong employment vs job-hopping",
+      "degrees vs practical experience",
+      "career risk-taking",
+      "salary vs job satisfaction"
+    ]
+  },
+  {
+    "id": "business",
+    "name": "Economy & Consumerism",
+    "vietnameseName": "Kinh tế & Tiêu dùng",
+    "taskScope": "Task 2",
+    "icon": "TrendingUp",
+    "tag": "Kinh điển",
+    "subTopics": [
+      "economic growth & success metrics",
+      "brand loyalty & consumerism",
+      "advertising power & marketing novelty",
+      "shopping mall leisure",
+      "corporate social responsibility"
+    ]
+  },
+  {
+    "id": "society_family",
+    "name": "Society & Family Dynamics",
+    "vietnameseName": "Xã hội & Gia đình",
     "taskScope": "Task 2",
     "icon": "Users",
     "tag": "Kinh điển",
     "subTopics": [
-      "aging population",
-      "public health & mental wellbeing",
-      "family & parenting",
-      "urbanization & housing",
-      "culture & heritage preservation"
+      "aging population & elderly care",
+      "parenting & intra-familial dialogue",
+      "youth independence",
+      "celebrity influencers & youth icons",
+      "social cohesion & competitive mindset"
     ]
   },
   {
-    "id": "economy_law",
-    "name": "Economy, Career & Law",
-    "vietnameseName": "Kinh tế, Việc làm & Pháp luật",
+    "id": "crime_law",
+    "name": "Crime & Legal System",
+    "vietnameseName": "Tội phạm & Pháp luật",
     "taskScope": "Task 2",
     "icon": "Scale",
-    "tag": "Thực tế & Nâng cao",
+    "tag": "Nâng cao",
     "subTopics": [
-      "four-day workweek",
-      "job automation & freelancing",
-      "economic growth & social metrics",
-      "advertising & consumerism",
-      "labor market dynamics",
-      "crime & legal system"
+      "traffic violations & law enforcement",
+      "prison rehabilitation & former inmates",
+      "juvenile delinquency",
+      "surveillance & crime deterrence",
+      "capital punishment & legal frameworks"
+    ]
+  },
+  {
+    "id": "culture_arts",
+    "name": "Culture, Arts & Heritage",
+    "vietnameseName": "Văn hóa & Di sản",
+    "taskScope": "Task 2",
+    "icon": "Landmark",
+    "tag": "Nâng cao",
+    "subTopics": [
+      "museum admission fees & cultural access",
+      "preserving heritage architecture",
+      "state subsidies for creative arts",
+      "language barriers & social integration",
+      "international tourism in developing nations",
+      "music as a unifying force"
     ]
   },
   {

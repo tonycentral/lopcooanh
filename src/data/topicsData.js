@@ -2789,19 +2789,662 @@ const RAW_IELTS_TOPICS = [
       }
     ]
   }
+,
+  {
+    id: "t2-elderly-care-funding",
+    name: "Elderly Care: State Pension & Nursing Homes vs Family Duty",
+    vietnameseName: "Chăm sóc người cao tuổi: Trách nhiệm chu cấp của Nhà nước vs Bổn phận gia đình",
+    tag: "Xã hội & Dân số già",
+    icon: "HeartHandshake",
+    ieltsPrompt: "In Britain, when someone gets old they often go to live in a home with other old people where there are nurses to look after them. Sometimes the government has to pay for this care. Who do you think should pay for this care - the government or the family?",
+    modelEssay: "In many developed nations, the aging population has led to a growing reliance on specialized residential nursing homes. Whether the state or the family should shoulder the financial burden of eldercare is a subject of ongoing debate. In my view, while families bear a moral obligation to contribute, the government must guarantee foundational financial support to ensure dignified care for all senior citizens.\n\nOn the one hand, proponents of family responsibility argue that filial duty is a cornerstone of society. Children have been nurtured and supported by their parents throughout their youth; therefore, providing for parents in their frailest years is a fundamental ethical duty. Moreover, relying entirely on public coffers would place an unsustainable strain on state budgets, especially as demographic aging accelerates and the workforce shrinks. If affluent households are required to fund nursing care privately, public funds can be safeguarded for underprivileged families who genuinely lack the means.\n\nOn the other hand, there is a compelling case for government provision. Senior citizens have paid taxes and contributed productive labor to the national economy over decades of employment. Access to compassionate healthcare in old age should be viewed as an earned social entitlement rather than an act of charity. Furthermore, modern economic pressures—such as escalating living costs and high mortgages—mean that many working adults simply cannot afford exorbitant monthly nursing home fees without jeopardizing their own children's future.\n\nIn conclusion, rather than placing the entire obligation on either party, I believe an equitable co-payment model is the most sustainable approach. The state should finance medical treatments and subsidize low-income seniors, while families who possess the means should contribute toward accommodation and daily living expenses.",
+    vocabularies: [
+      {
+        id: "t2-eld-1",
+        word: "residential nursing home",
+        ipa: "/ˌrezɪˈdenʃl ˈnɜːsɪŋ həʊm/",
+        partOfSpeech: "noun",
+        meaning: "Viện dưỡng lão có y tá chăm sóc toàn diện",
+        basicEquivalent: "home for old people (Band 5)",
+        synonyms: ["assisted living facility", "eldercare home", "geriatric institution"],
+        collocations: ["admit into a residential nursing home", "nursing home fees"],
+        modelSentence: "Placing aging relatives into a residential nursing home ensures round-the-clock medical oversight.",
+        vietnameseSentence: "Đưa người thân lớn tuổi vào viện dưỡng lão đảm bảo sự theo dõi y tế suốt ngày đêm."
+      },
+      {
+        id: "t2-eld-2",
+        word: "filial duty",
+        ipa: "/ˈfɪliəl ˈdjuːti/",
+        partOfSpeech: "noun",
+        meaning: "Bổn phận hiếu thảo của con cái đối với cha mẹ",
+        basicEquivalent: "duty to parents (Band 5)",
+        synonyms: ["filial piety", "familial obligation", "moral duty"],
+        collocations: ["honor filial duty", "uphold filial duty"],
+        modelSentence: "In traditional Asian societies, filial duty requires offspring to support parents financially in retirement.",
+        vietnameseSentence: "Trong các xã hội Châu Á truyền thống, bổn phận hiếu thảo đòi hỏi con cái phải phụng dưỡng cha mẹ về tài chính khi về hưu."
+      },
+      {
+        id: "t2-eld-3",
+        word: "social entitlement",
+        ipa: "/ˈsəʊʃl ɪnˈtaɪtlmənt/",
+        partOfSpeech: "noun",
+        meaning: "Quyền lợi an sinh xã hội chính đáng được hưởng",
+        basicEquivalent: "right to get help (Band 5)",
+        synonyms: ["welfare right", "public benefit entitlement"],
+        collocations: ["earned social entitlement", "guarantee social entitlements"],
+        modelSentence: "State healthcare for the elderly should be respected as an earned social entitlement rather than state charity.",
+        vietnameseSentence: "Dịch vụ y tế nhà nước cho người già nên được tôn trọng như một quyền lợi an sinh xứng đáng hơn là sự bố thí từ thiện."
+      },
+      {
+        id: "t2-eld-4",
+        word: "demographic aging",
+        ipa: "/ˌdeməˈɡræfɪk ˈeɪdʒɪŋ/",
+        partOfSpeech: "noun",
+        meaning: "Sự già hóa dân số nhân khẩu học",
+        basicEquivalent: "more old people (Band 5)",
+        synonyms: ["graying population", "population aging"],
+        collocations: ["accelerating demographic aging", "tackle demographic aging"],
+        modelSentence: "Rapid demographic aging places unprecedented fiscal pressure on public pension systems.",
+        vietnameseSentence: "Sự già hóa dân số diễn ra nhanh chóng tạo nên áp lực tài chính chưa từng có lên các hệ thống hưu trí công."
+      },
+      {
+        id: "t2-eld-5",
+        word: "co-payment model",
+        ipa: "/kəʊ ˈpeɪmənt ˈmɒdl/",
+        partOfSpeech: "noun",
+        meaning: "Mô hình đồng chi trả (giữa nhà nước và gia đình)",
+        basicEquivalent: "paying together (Band 5)",
+        synonyms: ["cost-sharing framework", "shared funding system"],
+        collocations: ["implement a co-payment model", "equitable co-payment model"],
+        modelSentence: "An equitable co-payment model relieves pressure on taxpayers while protecting impoverished pensioners.",
+        vietnameseSentence: "Mô hình đồng chi trả công bằng giải tỏa áp lực cho người nộp thuế đồng thời bảo vệ những người hưu trí nghèo khó."
+      },
+      {
+        id: "t2-eld-6",
+        word: "frail",
+        ipa: "/freɪl/",
+        partOfSpeech: "adjective",
+        meaning: "Yếu ớt, già yếu suy giảm thể lực",
+        basicEquivalent: "weak (Band 5)",
+        synonyms: ["debilitated", "infirm", "vulnerable"],
+        collocations: ["frail elderly", "in frail health"],
+        modelSentence: "Frail seniors suffering from dementia require intensive nursing care that families cannot provide at home.",
+        vietnameseSentence: "Những người cao tuổi già yếu mắc chứng mất trí nhớ đòi hỏi sự chăm sóc y tế chuyên sâu mà gia đình không thể đáp ứng tại nhà."
+      },
+      {
+        id: "t2-eld-7",
+        word: "public coffers",
+        ipa: "/ˈpʌblɪk ˈkɒfəz/",
+        partOfSpeech: "noun",
+        meaning: "Ngân khố quốc gia / công quỹ nhà nước",
+        basicEquivalent: "state money (Band 5)",
+        synonyms: ["state treasury", "national treasury", "public exchequer"],
+        collocations: ["drain public coffers", "strain on public coffers"],
+        modelSentence: "Funding lifelong residential care solely through public coffers would exhaust treasury reserves.",
+        vietnameseSentence: "Chi trả toàn bộ viện dưỡng lão suốt đời chỉ từ công quỹ nhà nước sẽ làm cạn kiệt dự trữ ngân khố."
+      },
+      {
+        id: "t2-eld-8",
+        word: "dignified old age",
+        ipa: "/ˈdɪɡnɪfaɪd əʊld eɪdʒ/",
+        partOfSpeech: "noun",
+        meaning: "Tuổi già sống trong danh dự và được tôn trọng",
+        basicEquivalent: "good old life (Band 5)",
+        synonyms: ["graceful retirement", "dignity in old age"],
+        collocations: ["guarantee a dignified old age", "enjoy a dignified old age"],
+        modelSentence: "Every senior citizen deserves to live a comfortable and dignified old age after a lifetime of labor.",
+        vietnameseSentence: "Mỗi người cao tuổi đều xứng đáng được hưởng một tuổi già an nhàn và được tôn trọng sau cả cuộc đời lao động."
+      }
+    ]
+  },
+  {
+    id: "t2-brain-drain-migration",
+    name: "Brain Drain: Skilled Medical & Professional Emigration from Developing Countries",
+    vietnameseName: "Chảy máu chất xám: Làn sóng di cư của y bác sĩ và chuyên gia từ các nước đang phát triển",
+    tag: "Toàn cầu hóa & Di cư",
+    icon: "Globe",
+    ieltsPrompt: "Many qualified doctors, nurses, and academics emigrate from developing countries to work in developed nations. Some consider this as stealing talent from poor countries, while others feel that this is only part of the natural movement of workers around the world. Discuss both views and give your opinion.",
+    modelEssay: "The migration of skilled professionals, particularly doctors, nurses, and researchers, from developing territories to industrialized economies is an intensifying global phenomenon. While critics argue that this brain drain constitutes an exploitative deprivation of vital talent from developing countries, others maintain that it represents the legitimate, voluntary movement of global labor. In my view, while individuals possess the fundamental right to seek optimal career prospects, rich recipient nations should compensate source nations through structured development assistance.\n\nOn the one hand, detractors view the recruitment of qualified specialists as detrimental to developing countries. Poorer nations invest substantial public resources into subsidizing medical faculties and universities. When newly minted physicians emigrate en masse to affluent nations like the UK or Australia, the source country forfeits its return on investment. More critically, this exodus cripples domestic infrastructure, leaving local hospitals chronically understaffed and compounding humanitarian crises in vulnerable communities.\n\nOn the other hand, defenders of skilled migration view this trend as a natural corollary of globalisation and personal autonomy. Every professional possesses an intrinsic human right to pursue superior living standards, fair compensation, and professional advancement that may be unavailable in their homeland. Furthermore, skilled emigrants frequently send back substantial financial remittances, which directly bolster local households and stimulate foreign exchange reserves. Many also eventually return with international expertise, fostering technological innovation in their native countries.\n\nIn conclusion, while freedom of movement must be safeguarded for individual professionals, developed countries should not passively strip poorer nations of indispensable human capital. Ethical recruitment policies and reciprocal investment in source nations' training infrastructure are essential to achieve equitable global balance.",
+    vocabularies: [
+      {
+        id: "t2-brain-1",
+        word: "brain drain",
+        ipa: "/ˈbreɪn dreɪn/",
+        partOfSpeech: "noun",
+        meaning: "Hiện tượng chảy máu chất xám (nhân tài di cư ra nước ngoài)",
+        basicEquivalent: "smart people leaving (Band 5)",
+        synonyms: ["human capital flight", "skilled emigration", "talent exodus"],
+        collocations: ["suffer from brain drain", "mitigate brain drain"],
+        modelSentence: "Developing economies continue to suffer from chronic brain drain in critical medical specialties.",
+        vietnameseSentence: "Các nền kinh tế đang phát triển tiếp tục phải hứng chịu tình trạng chảy máu chất xám kéo dài ở các chuyên khoa y tế trọng yếu."
+      },
+      {
+        id: "t2-brain-2",
+        word: "financial remittances",
+        ipa: "/faɪˈnænʃl rɪˈmɪtnsɪz/",
+        partOfSpeech: "noun",
+        meaning: "Kiều hối (tiền người lao động ở nước ngoài gửi về quê nhà)",
+        basicEquivalent: "money sent home (Band 5)",
+        synonyms: ["migrant remittances", "inward remittances"],
+        collocations: ["send back remittances", "depend on foreign remittances"],
+        modelSentence: "Financial remittances sent home by overseas doctors often exceed official developmental aid.",
+        vietnameseSentence: "Nguồn kiều hối tài chính do các bác sĩ ở nước ngoài gửi về thường vượt qua cả viện trợ phát triển chính thức."
+      },
+      {
+        id: "t2-brain-3",
+        word: "human capital flight",
+        ipa: "/ˈhjuːmən ˈkæpɪtl flaɪt/",
+        partOfSpeech: "noun",
+        meaning: "Sự thất thoát nguồn vốn con người / nhân lực chất lượng cao",
+        basicEquivalent: "loss of educated workers (Band 5)",
+        synonyms: ["brain drain", "talent depletion"],
+        collocations: ["reverse human capital flight", "curb human capital flight"],
+        modelSentence: "Governments must offer competitive research grants to counteract human capital flight.",
+        vietnameseSentence: "Các chính phủ phải đưa ra các khoản tài trợ nghiên cứu cạnh tranh để ngăn chặn sự thất thoát nguồn vốn con người."
+      },
+      {
+        id: "t2-brain-4",
+        word: "return on investment",
+        ipa: "/rɪˈtɜːn ɒn ɪnˈvestmənt/",
+        partOfSpeech: "noun",
+        meaning: "Tỷ suất hoàn vốn đầu tư (vào đào tạo nhân lực)",
+        basicEquivalent: "money gained back (Band 5)",
+        synonyms: ["yield on educational expenditure", "social return"],
+        collocations: ["forfeit return on investment", "maximize return on investment"],
+        modelSentence: "When certified engineers emigrate immediately after graduation, public universities lose their return on investment.",
+        vietnameseSentence: "Khi các kỹ sư tốt nghiệp di cư ngay sau khi ra trường, các trường đại học công lập mất đi khoản hoàn vốn đầu tư xã hội."
+      },
+      {
+        id: "t2-brain-5",
+        word: "chronically understaffed",
+        ipa: "/ˈkrɒnɪkli ˌʌndəˈstɑːft/",
+        partOfSpeech: "adjective",
+        meaning: "Thiếu hụt nhân sự kinh niên kéo dài",
+        basicEquivalent: "always not enough workers (Band 5)",
+        synonyms: ["perpetually short-staffed", "critically depleted"],
+        collocations: ["hospitals remain understaffed", "chronically understaffed wards"],
+        modelSentence: "Provincial healthcare facilities remain chronically understaffed because graduates seek overseas contracts.",
+        vietnameseSentence: "Các cơ sở y tế tuyến tỉnh vẫn thiếu hụt nhân sự triền miên do sinh viên ra trường tìm kiếm hợp đồng ở nước ngoài."
+      },
+      {
+        id: "t2-brain-6",
+        word: "reciprocal investment",
+        ipa: "/rɪˈsɪprəkl ɪnˈvestmənt/",
+        partOfSpeech: "noun",
+        meaning: "Sự đầu tư có đi có lại, tương hỗ song phương",
+        basicEquivalent: "giving back help (Band 5)",
+        synonyms: ["mutual reinvestment", "bilateral aid"],
+        collocations: ["commit to reciprocal investment", "reciprocal cooperation"],
+        modelSentence: "Wealthy nations hiring foreign doctors should commit to reciprocal investment in overseas teaching hospitals.",
+        vietnameseSentence: "Các quốc gia giàu có thuê bác sĩ nước ngoài nên cam kết đầu tư tương hỗ vào các bệnh viện thực hành ở nước sở tại."
+      },
+      {
+        id: "t2-brain-7",
+        word: "exodus",
+        ipa: "/ˈeksədəs/",
+        partOfSpeech: "noun",
+        meaning: "Làn sóng rời đi hàng loạt của một nhóm người",
+        basicEquivalent: "many people leaving (Band 5)",
+        synonyms: ["mass departure", "outpouring", "migration wave"],
+        collocations: ["mass exodus of talent", "stem the exodus"],
+        modelSentence: "Without tax incentives, developing countries will be powerless to stem the mass exodus of technicians.",
+        vietnameseSentence: "Nếu thiếu các ưu đãi thuế, các nước đang phát triển sẽ bất lực trong việc ngăn chặn làn sóng kỹ thuật viên rời đi hàng loạt."
+      },
+      {
+        id: "t2-brain-8",
+        word: "personal autonomy",
+        ipa: "/ˈpɜːsənl ɔːˈtɒnəmi/",
+        partOfSpeech: "noun",
+        meaning: "Quyền tự quyết định con đường của bản thân",
+        basicEquivalent: "freedom of choice (Band 5)",
+        synonyms: ["individual liberty", "self-determination"],
+        collocations: ["exercise personal autonomy", "infringe on personal autonomy"],
+        modelSentence: "Denying skilled workers passports would gravely violate fundamental rights to personal autonomy.",
+        vietnameseSentence: "Việc cấm cấp hộ chiếu cho người lao động có tay nghề sẽ vi phạm nghiêm trọng quyền tự quyết cá nhân cơ bản."
+      }
+    ]
+  },
+  {
+    id: "t2-sports-income-disparity",
+    name: "Income Disparity: Astronomical Sports Star Earnings vs Essential Public Workers",
+    vietnameseName: "Chênh lệch thu nhập: Mức lương khổng lồ của ngôi sao thể thao vs Nghề thiết yếu",
+    tag: "Việc làm & Đạo đức xã hội",
+    icon: "Coins",
+    ieltsPrompt: "Successful sports professionals can earn a great deal more money than people in other important professions such as doctors, nurses, and teachers. Some people think this is fully justified while others think it is unfair. Discuss both these views and give your own opinion.",
+    modelEssay: "The staggering compensation awarded to elite athletic figures in modern sports frequently dwarfs the wages of professionals in vital public services such as healthcare and education. While many argue that these astronomical incomes are legitimately earned through market forces and rare talent, others condemn this gap as deeply unjust. In my opinion, whilst high sports earnings are commercially understandable, government tax mechanisms must redistribute excess wealth to adequately reward critical public servants.\n\nOn the one hand, those who defend sports remuneration point to free-market economics. Professional athletics generates billions of dollars globally through commercial sponsorships, broadcasting rights, and merchandise sales. Since top athletes are the primary entertainers driving this multi-billion-dollar industry, they are entitled to a proportionate share of the profits. Furthermore, athletic careers are notoriously precarious and brief, usually terminating before the age of thirty-five, with constant risk of career-ending injuries. Athletes also possess unique physiological abilities that only a fraction of the world population can replicate, commanding scarcity-driven wages.\n\nOn the other hand, the argument for unfairness centers on societal utility and moral justice. Doctors save human lives, nurses care for the vulnerable, and teachers cultivate the minds of future generations. These occupations form the bedrock of civilization, yet their salaries often fail to reflect the immense emotional and practical value they deliver. By contrast, athletic entertainment is superfluous to human survival. When a football striker earns more in a solitary week than an experienced cardiac surgeon earns in a lifetime, society risks distorting its moral compass by glorifying celebrity entertainment above humanitarian commitment.\n\nIn conclusion, although exorbitant sports wages reflect the realities of global commercial entertainment, the profound contribution of public service workers cannot be overlooked. Governments should levy progressive windfall taxes on elite entertainment contracts to augment the salaries of teachers and healthcare professionals.",
+    vocabularies: [
+      {
+        id: "t2-sport-1",
+        word: "astronomical income",
+        ipa: "/ˌæstrəˈnɒmɪkl ˈɪnkʌm/",
+        partOfSpeech: "noun",
+        meaning: "Thu nhập khổng lồ, cao ngất ngưởng",
+        basicEquivalent: "very huge money (Band 5)",
+        synonyms: ["exorbitant salary", "staggering remuneration", "colossal earnings"],
+        collocations: ["earn an astronomical income", "command astronomical incomes"],
+        modelSentence: "Elite footballers command astronomical incomes exceeding several hundred thousand dollars per week.",
+        vietnameseSentence: "Các cầu thủ bóng đá hàng đầu nhận mức thu nhập khổng lồ vượt quá hàng trăm nghìn đô la mỗi tuần."
+      },
+      {
+        id: "t2-sport-2",
+        word: "societal utility",
+        ipa: "/səˈsaɪətl juːˈtɪləti/",
+        partOfSpeech: "noun",
+        meaning: "Giá trị công năng / mức độ hữu ích thực sự cho xã hội",
+        basicEquivalent: "usefulness for people (Band 5)",
+        synonyms: ["public value", "social necessity", "humanitarian worth"],
+        collocations: ["evaluate societal utility", "rank by societal utility"],
+        modelSentence: "Remuneration structures should ideally reflect the true societal utility of each profession.",
+        vietnameseSentence: "Cơ cấu thù lao lý tưởng nhất nên phản ánh giá trị hữu ích thực sự cho xã hội của từng nghề nghiệp."
+      },
+      {
+        id: "t2-sport-3",
+        word: "commercial sponsorship",
+        ipa: "/kəˈmɜːʃl ˈspɒnsəʃɪp/",
+        partOfSpeech: "noun",
+        meaning: "Hợp đồng tài trợ thương mại",
+        basicEquivalent: "company support money (Band 5)",
+        synonyms: ["corporate endorsement", "marketing contract"],
+        collocations: ["secure commercial sponsorships", "lucrative sponsorships"],
+        modelSentence: "Athletic franchises generate colossal cash reserves through television rights and commercial sponsorships.",
+        vietnameseSentence: "Các câu lạc bộ thể thao tạo ra nguồn dự trữ tiền mặt khổng lồ qua bản quyền truyền hình và tài trợ thương mại."
+      },
+      {
+        id: "t2-sport-4",
+        word: "career-ending injury",
+        ipa: "/kəˈrɪər ˈendɪŋ ˈɪndʒəri/",
+        partOfSpeech: "noun",
+        meaning: "Chấn thương chấm dứt sự nghiệp thi đấu",
+        basicEquivalent: "hurt that stops playing forever (Band 5)",
+        synonyms: ["debilitating sports injury", "permanent trauma"],
+        collocations: ["suffer a career-ending injury", "risk of career-ending injury"],
+        modelSentence: "A solitary career-ending injury can extinguish an athlete's earning potential overnight.",
+        vietnameseSentence: "Chỉ một chấn thương chấm dứt sự nghiệp duy nhất có thể dập tắt tiềm năng kiếm tiền của một vận động viên chỉ sau một đêm."
+      },
+      {
+        id: "t2-sport-5",
+        word: "bedrock of civilization",
+        ipa: "/ˈbedrɒk əv ˌsɪvəlaɪˈzeɪʃn/",
+        partOfSpeech: "noun",
+        meaning: "Nền tảng vững chắc của nền văn minh nhân loại",
+        basicEquivalent: "foundation of world (Band 5)",
+        synonyms: ["cornerstone of society", "vital pillars"],
+        collocations: ["form the bedrock of civilization", "undermine the bedrock"],
+        modelSentence: "Educators and medical personnel constitute the bedrock of modern civilized civilization.",
+        vietnameseSentence: "Các nhà giáo và nhân viên y tế cấu thành nên nền tảng vững chắc của nền văn minh hiện đại."
+      },
+      {
+        id: "t2-sport-6",
+        word: "distort the moral compass",
+        ipa: "/dɪˈstɔːt ðə ˈmɒrəl ˈkʌmpəs/",
+        partOfSpeech: "verb",
+        meaning: "Làm lệch lạc thước đo chuẩn mực đạo đức xã hội",
+        basicEquivalent: "make values wrong (Band 5)",
+        synonyms: ["warp societal values", "pervert moral standards"],
+        collocations: ["risks distorting the moral compass", "distort social values"],
+        modelSentence: "Paying performers thousands of times more than doctors risks distorting the moral compass of younger generations.",
+        vietnameseSentence: "Trả lương cho người biểu diễn cao gấp hàng nghìn lần bác sĩ có nguy cơ làm lệch lạc chuẩn mực đạo đức của thế hệ trẻ."
+      },
+      {
+        id: "t2-sport-7",
+        word: "windfall tax",
+        ipa: "/ˈwɪndfɔːl tæks/",
+        partOfSpeech: "noun",
+        meaning: "Thuế đánh vào thu nhập siêu lợi nhuận / lợi tức bất thường",
+        basicEquivalent: "tax on rich money (Band 5)",
+        synonyms: ["super-profit levy", "progressive surtax"],
+        collocations: ["levy a windfall tax", "redistribute via windfall taxes"],
+        modelSentence: "Governments could levy a modest windfall tax on mega sports contracts to subsidize nursing wages.",
+        vietnameseSentence: "Chính phủ có thể đánh thuế siêu lợi tức khiêm tốn vào các hợp đồng thể thao khổng lồ để trợ cấp tiền lương cho y tá."
+      },
+      {
+        id: "t2-sport-8",
+        word: "superfluous",
+        ipa: "/suːˈpɜːfluəs/",
+        partOfSpeech: "adjective",
+        meaning: "Không thiết yếu, xa xỉ thừa thãi so với sinh tồn cơ bản",
+        basicEquivalent: "not really needed (Band 5)",
+        synonyms: ["non-essential", "redundant", "dispensable"],
+        collocations: ["superfluous entertainment", "superfluous to survival"],
+        modelSentence: "While athletic spectacles enrich culture, they remain strictly superfluous to biological survival.",
+        vietnameseSentence: "Dù các màn trình diễn thể thao làm phong phú văn hóa, chúng hoàn toàn không mang tính thiết yếu đối với sự sinh tồn sinh học."
+      }
+    ]
+  },
+  {
+    id: "t2-gap-year-benefits",
+    name: "Gap Year: Career Exploration & Independence vs Academic Disruption",
+    vietnameseName: "Năm nghỉ ngắt quãng (Gap Year): Rèn luyện tự lập & trải nghiệm vs Gián đoạn học tập",
+    tag: "Giáo dục & Thanh thiếu niên",
+    icon: "Compass",
+    ieltsPrompt: "In some countries young people are encouraged to work or travel for a year between finishing high school and starting university studies. Discuss the advantages and disadvantages for young people who decide to do this.",
+    modelEssay: "In recent decades, taking a gap year between secondary schooling and tertiary education has become a prevalent trend worldwide. While this hiatus from formal study presents distinct hazards regarding academic continuity, I believe the advantages in maturity, practical competence, and self-discovery far outweigh the downsides.\n\nOn the one hand, deferring university enrollment carries real drawbacks. The most immediate challenge is the loss of academic momentum. Students who spend twelve months disconnected from scholastic discipline often struggle to readapt to rigorous study schedules, complex assignments, and examination pressure. Furthermore, young people who secure entry-level employment during their gap year may become seduced by immediate financial independence, leading them to abandon higher education altogether in favor of dead-end jobs that offer limited long-term career progression.\n\nOn the other hand, the merits of a productive gap year are invaluable. Firstly, high school graduates who immediately transition into university often lack practical life skills and worldly perspective. By working or travelling, young adults learn budgeting, cross-cultural communication, and emotional resilience under real-world pressures. Secondly, a year of vocational exploration clarifies academic purpose. Many school-leavers choose unsuitable majors simply because they have never experienced actual workplace environments. Exposure to diverse industries prevents costly course changes later on and yields highly motivated undergraduates who comprehend exactly why they are studying.\n\nIn conclusion, although taking time off can disrupt educational routines and tempt students away from academia, a structured gap year enriches personal maturity and clarifies life goals. So long as it is intentionally planned, a gap year constitutes an immensely empowering investment in young people's future.",
+    vocabularies: [
+      {
+        id: "t2-gap-1",
+        word: "academic momentum",
+        ipa: "/ˌækəˈdemɪk məˈmentəm/",
+        partOfSpeech: "noun",
+        meaning: "Quán tính / đà học tập liên tục",
+        basicEquivalent: "study habit (Band 5)",
+        synonyms: ["scholastic drive", "learning continuity"],
+        collocations: ["lose academic momentum", "maintain academic momentum"],
+        modelSentence: "Taking twelve months off can cause school leavers to lose crucial academic momentum.",
+        vietnameseSentence: "Nghỉ ngơi mười hai tháng có thể khiến học sinh mới tốt nghiệp đánh mất đà học tập quan trọng."
+      },
+      {
+        id: "t2-gap-2",
+        word: "worldly perspective",
+        ipa: "/ˈwɜːldli pəˈspektɪv/",
+        partOfSpeech: "noun",
+        meaning: "Vốn sống và góc nhìn hiểu biết thực tế về cuộc đời",
+        basicEquivalent: "life experience (Band 5)",
+        synonyms: ["broad horizons", "worldly wisdom", "cosmopolitan outlook"],
+        collocations: ["acquire a worldly perspective", "broaden worldly perspective"],
+        modelSentence: "Traveling independently across foreign cultures equips young adults with an invaluable worldly perspective.",
+        vietnameseSentence: "Đi du lịch độc lập qua các nền văn hóa nước ngoài trang bị cho thanh niên một vốn sống thực tế vô giá."
+      },
+      {
+        id: "t2-gap-3",
+        word: "scholastic discipline",
+        ipa: "/skəˈlæstɪk ˈdɪsəplɪn/",
+        partOfSpeech: "noun",
+        meaning: "Tính kỷ luật và nề nếp trong học tập học thuật",
+        basicEquivalent: "school rules (Band 5)",
+        synonyms: ["academic rigor", "study discipline"],
+        collocations: ["readapt to scholastic discipline", "instill scholastic discipline"],
+        modelSentence: "Returning undergraduates often find it tough to submit to rigorous scholastic discipline once more.",
+        vietnameseSentence: "Sinh viên quay lại trường thường thấy khó khăn khi phải khép mình vào nề nếp kỷ luật học tập nghiêm ngặt một lần nữa."
+      },
+      {
+        id: "t2-gap-4",
+        word: "vocational exploration",
+        ipa: "/vəʊˈkeɪʃənl ˌekspləˈreɪʃn/",
+        partOfSpeech: "noun",
+        meaning: "Sự trải nghiệm khám phá các ngành nghề thực tế",
+        basicEquivalent: "trying jobs (Band 5)",
+        synonyms: ["career discovery", "occupational trial"],
+        collocations: ["engage in vocational exploration", "period of vocational exploration"],
+        modelSentence: "A period of vocational exploration enables students to select majors aligned with their genuine talents.",
+        vietnameseSentence: "Một giai đoạn trải nghiệm nghề nghiệp cho phép sinh viên chọn các chuyên ngành phù hợp với năng khiếu thực sự của họ."
+      },
+      {
+        id: "t2-gap-5",
+        word: "dead-end job",
+        ipa: "/ˌded ˈend dʒɒb/",
+        partOfSpeech: "noun",
+        meaning: "Công việc không có tương lai thăng tiến",
+        basicEquivalent: "bad job without future (Band 5)",
+        synonyms: ["stagnant employment", "unskilled job"],
+        collocations: ["trapped in dead-end jobs", "settle for dead-end jobs"],
+        modelSentence: "Without higher qualifications, young workers often become trapped in low-paid, dead-end jobs.",
+        vietnameseSentence: "Nếu thiếu bằng cấp cao hơn, những lao động trẻ thường bị mắc kẹt trong những công việc lương thấp không có tương lai."
+      },
+      {
+        id: "t2-gap-6",
+        word: "defer enrollment",
+        ipa: "/dɪˈfɜːr ɪnˈrəʊlmənt/",
+        partOfSpeech: "verb",
+        meaning: "Bảo lưu kết quả trúng tuyển, hoãn nhập học",
+        basicEquivalent: "delay going to university (Band 5)",
+        synonyms: ["postpone matriculation", "delay admission"],
+        collocations: ["defer university enrollment", "granted permission to defer"],
+        modelSentence: "Prestigious universities now encourage accepted candidates to defer enrollment for one academic year.",
+        vietnameseSentence: "Các trường đại học danh tiếng hiện nay khuyến khích thí sinh trúng tuyển bảo lưu hoãn nhập học trong một năm."
+      },
+      {
+        id: "t2-gap-7",
+        word: "self-discovery",
+        ipa: "/ˌself dɪˈskʌvəri/",
+        partOfSpeech: "noun",
+        meaning: "Hành trình thấu hiểu và khám phá bản thân",
+        basicEquivalent: "learning about oneself (Band 5)",
+        synonyms: ["personal introspection", "identity formation"],
+        collocations: ["journey of self-discovery", "foster self-discovery"],
+        modelSentence: "Volunteering abroad serves as a transformative catalyst for emotional maturation and self-discovery.",
+        vietnameseSentence: "Hoạt động tình nguyện ở nước ngoài đóng vai trò như một chất xúc tác chuyển hóa cho sự trưởng thành cảm xúc và khám phá bản thân."
+      },
+      {
+        id: "t2-gap-8",
+        word: "hiatus",
+        ipa: "/haɪˈeɪtəs/",
+        partOfSpeech: "noun",
+        meaning: "Khoảng thời gian tạm nghỉ, gián đoạn ngắn",
+        basicEquivalent: "break time (Band 5)",
+        synonyms: ["intermission", "pause", "interlude"],
+        collocations: ["take a brief hiatus", "year-long hiatus"],
+        modelSentence: "A year-long hiatus from homework provides exhausted teenagers with essential psychological rejuvenation.",
+        vietnameseSentence: "Khoảng thời gian tạm nghỉ một năm khỏi bài tập về nhà mang lại cho thanh thiếu niên kiệt sức sự hồi phục tâm lý thiết yếu."
+      }
+    ]
+  },
+  {
+    id: "t2-routine-vs-change",
+    name: "Psychology: Comfort of Familiar Routine vs Embracing Constant Change",
+    vietnameseName: "Tâm lý học: Sự an toàn của nếp sống quen thuộc vs Sẵn sàng đón nhận thay đổi",
+    tag: "Tâm lý & Lối sống",
+    icon: "RefreshCw",
+    ieltsPrompt: "Some people prefer to spend their lives doing the same things and avoiding change. Others, however, think that change is always a good thing. Discuss both these views and give your own opinion.",
+    modelEssay: "Human attitudes toward personal lifestyle and career paths vary greatly: some individuals seek solace in consistency and routine, while others champion perpetual change as inherently beneficial. While a stable routine provides psychological security and mastery, embracing prudent transformation prevents stagnation. In my opinion, a fulfilling life requires a harmonious balance between fundamental stability and deliberate adaptation.\n\nOn the one hand, the preference for routine is rooted in profound human psychological needs. Sticking to familiar occupations and living environments dramatically minimizes chronic anxiety and decision fatigue. Consistency allows individuals to refine specific proficiencies over decades, attaining true mastery in their trade or craft. Furthermore, predictable daily patterns foster strong community cohesion and provide dependable domestic environments for rearing children, who thrive on emotional and economic stability.\n\nOn the other hand, the belief that change is unconditionally positive reflects an appreciation for human dynamism. Reluctance to adapt inevitably breeds complacency and intellectual calcification. In an era dominated by technological disruption and economic flux, individuals who resist change risk becoming obsolete in the labor market. Moreover, stepping outside one's comfort zone stimulates neural plasticity and exposes individuals to fresh ideas, diverse cultures, and unforeseen opportunities for personal enrichment.\n\nNonetheless, treating change as an unmitigated virtue can be dangerous. Excessive disruption often manifests as restlessness, eroding long-term commitments and inducing emotional burnout. The most resilient individuals maintain a steadfast anchor of core personal values while remaining agile enough to embrace constructive transformation when circumstances demand it.\n\nIn conclusion, neither static aversion to change nor reckless pursuit of novelty offers an optimal life strategy. The secret to long-term fulfillment lies in cultivating reliable routines while remaining courageous enough to navigate new horizons.",
+    vocabularies: [
+      {
+        id: "t2-rout-1",
+        word: "decision fatigue",
+        ipa: "/dɪˈsɪʒn fəˈtiːɡ/",
+        partOfSpeech: "noun",
+        meaning: "Sự kiệt sức tâm lý vì phải đưa ra quá nhiều lựa chọn",
+        basicEquivalent: "tiredness from choosing (Band 5)",
+        synonyms: ["cognitive overload", "mental exhaustion"],
+        collocations: ["alleviate decision fatigue", "suffer from decision fatigue"],
+        modelSentence: "Adopting uniform daily routines significantly alleviates mental anxiety and decision fatigue.",
+        vietnameseSentence: "Áp dụng các nề nếp thói quen hàng ngày đồng nhất giúp giảm bớt đáng kể sự lo âu tâm lý và tình trạng kiệt sức vì lựa chọn."
+      },
+      {
+        id: "t2-rout-2",
+        word: "complacency",
+        ipa: "/kəmˈpleɪsnsi/",
+        partOfSpeech: "noun",
+        meaning: "Sự tự mãn, thỏa mãn quá sớm dẫn đến trì trệ",
+        basicEquivalent: "being too satisfied (Band 5)",
+        synonyms: ["smugness", "unwarranted contentment", "stagnation"],
+        collocations: ["breed complacency", "fall into complacency"],
+        modelSentence: "Excessive reliance on past triumphs breeds complacency and leaves organizations vulnerable to disruption.",
+        vietnameseSentence: "Sự phụ thuộc quá mức vào các thành công trong quá khứ sẽ sinh ra thói tự mãn và khiến các tổ chức dễ bị đổ vỡ."
+      },
+      {
+        id: "t2-rout-3",
+        word: "comfort zone",
+        ipa: "/ˈkʌmfət zəʊn/",
+        partOfSpeech: "noun",
+        meaning: "Vùng an toàn quen thuộc của bản thân",
+        basicEquivalent: "safe place (Band 5)",
+        synonyms: ["familiar territory", "sphere of comfort"],
+        collocations: ["step outside one's comfort zone", "venture beyond the comfort zone"],
+        modelSentence: "Venturing beyond one's comfort zone catalyzes cognitive resilience and creative problem-solving.",
+        vietnameseSentence: "Dấn thân vượt ra ngoài vùng an toàn của bản thân giúp kích hoạt sự kiên cường nhận thức và tư duy giải quyết vấn đề sáng tạo."
+      },
+      {
+        id: "t2-rout-4",
+        word: "intellectual calcification",
+        ipa: "/ˌɪntəˈlektʃuəl ˌkælsɪfɪˈkeɪʃn/",
+        partOfSpeech: "noun",
+        meaning: "Sự xơ cứng về tư duy, bảo thủ không chịu đổi mới",
+        basicEquivalent: "mind becoming hard and old (Band 5)",
+        synonyms: ["mental rigidity", "dogmatic obstinacy"],
+        collocations: ["prevent intellectual calcification", "risk of calcification"],
+        modelSentence: "Lifelong curiosity shields professionals from the perils of intellectual calcification in old age.",
+        vietnameseSentence: "Sự tò mò học hỏi suốt đời bảo vệ các chuyên gia khỏi những hiểm họa xơ cứng tư duy khi về già."
+      },
+      {
+        id: "t2-rout-5",
+        word: "psychological security",
+        ipa: "/ˌsaɪkəˈlɒdʒɪkl sɪˈkjʊərəti/",
+        partOfSpeech: "noun",
+        meaning: "Cảm giác an toàn và vững tâm về mặt tâm lý",
+        basicEquivalent: "feeling safe inside (Band 5)",
+        synonyms: ["emotional peace", "mental serenity"],
+        collocations: ["foster psychological security", "provide psychological security"],
+        modelSentence: "Predictable workplace expectations cultivate psychological security and enhance team retention.",
+        vietnameseSentence: "Những kỳ vọng rõ ràng tại nơi làm việc nuôi dưỡng sự an tâm về tâm lý và nâng cao tỷ lệ gắn bó của đội ngũ."
+      },
+      {
+        id: "t2-rout-6",
+        word: "unmitigated virtue",
+        ipa: "/ʌnˈmɪtɪɡeɪtɪd ˈvɜːtʃuː/",
+        partOfSpeech: "noun",
+        meaning: "Một điều tốt đẹp tuyệt đối không chút nhược điểm",
+        basicEquivalent: "completely good thing (Band 5)",
+        synonyms: ["flawless benefit", "unqualified good"],
+        collocations: ["view as an unmitigated virtue", "not an unmitigated virtue"],
+        modelSentence: "Constant organizational restructuring should not be romanticized as an unmitigated virtue.",
+        vietnameseSentence: "Việc liên tục tái cấu trúc tổ chức không nên được lý tưởng hóa như một điều tốt đẹp hoàn hảo tuyệt đối."
+      },
+      {
+        id: "t2-rout-7",
+        word: "emotional burnout",
+        ipa: "/ɪˈməʊʃənl ˈbɜːnaʊt/",
+        partOfSpeech: "noun",
+        meaning: "Sự kiệt quệ cảm xúc do căng thẳng kéo dài",
+        basicEquivalent: "too tired feeling (Band 5)",
+        synonyms: ["nervous exhaustion", "chronic mental fatigue"],
+        collocations: ["induce emotional burnout", "recover from burnout"],
+        modelSentence: "Coping with perpetual workplace volatility frequently induces severe emotional burnout.",
+        vietnameseSentence: "Đối phó với sự biến động không ngừng tại nơi làm việc thường xuyên gây ra tình trạng kiệt quệ cảm xúc nghiêm trọng."
+      },
+      {
+        id: "t2-rout-8",
+        word: "steadfast anchor",
+        ipa: "/ˈstedfɑːst ˈæŋkər/",
+        partOfSpeech: "noun",
+        meaning: "Mỏ neo vững chắc giữ cho tâm trí không bị chao đảo",
+        basicEquivalent: "strong hold (Band 5)",
+        synonyms: ["unshakable pillar", "grounding foundation"],
+        collocations: ["serve as a steadfast anchor", "maintain a steadfast anchor"],
+        modelSentence: "Cherished family traditions serve as a steadfast anchor amidst tumultuous sociopolitical upheavals.",
+        vietnameseSentence: "Những truyền thống gia đình quý báu đóng vai trò như một mỏ neo vững chắc giữa những biến động chính trị xã hội đầy bão táp."
+      }
+    ]
+  },
+  {
+    id: "t2-celebrity-media-privacy",
+    name: "Mass Media: Celebrity Voyeurism & Commercial Profit vs Inherent Privacy Rights",
+    vietnameseName: "Truyền thông đại chúng: Sự tò mò đời tư người nổi tiếng vs Quyền riêng tư cơ bản",
+    tag: "Truyền thông & Đạo đức báo chí",
+    icon: "Eye",
+    ieltsPrompt: "Many newspapers, magazines, and social media channels feature intrusive stories about the private lives of famous people. We are shown what they eat, who they date, and their private family moments. To what extent should the media respect the privacy of public figures?",
+    modelEssay: "The relentless media obsession with the private affairs of celebrities—ranging from romantic relationships to family disputes—has become a hallmark of contemporary tabloid journalism. While proponents claim that public visibility is the natural price of fame, I firmly believe that the press must respect reasonable boundaries of privacy, and that the exploitation of intimate personal lives causes profound psychological harm.\n\nOn the one hand, sensationalist publications argue that scrutiny is part of the unspoken bargain of stardom. High-profile actors, musicians, and athletes deliberately court publicity to elevate their commercial brand, secure corporate endorsements, and boost album or ticket sales. Having willingly leveraged public curiosity to attain immense wealth and influence, critics argue they cannot suddenly demand complete opacity when media coverage turns inconvenient. Furthermore, in cases involving public morality, lawbreaking, or hypocritical behavior, investigative reporting serves a legitimate whistleblowing function.\n\nOn the other hand, the entitlement to basic human dignity and psychological safety does not vanish upon achieving fame. The relentless pursuit by paparazzi and paparazzi drones crosses ethical lines into stalking and harassment. Relentless intrusion into intimate domestic realms strips individuals of their fundamental sanctuary, frequently provoking severe depression, substance abuse, and even physical endangerment. More deplorably, media intrusion routinely targets celebrities' innocent children, who never chose public life and deserve uncompromised shielding from toxic public voyeurism.\n\nIn conclusion, a clear distinction must be established between public professional activities and inviolable domestic sanctuaries. While journalists have every right to critique an artist's professional output or expose genuine malfeasance, stalking their private homes and harassing their families represents an unacceptable abuse of press freedom that warrants stringent regulatory penalties.",
+    vocabularies: [
+      {
+        id: "t2-celeb-1",
+        word: "tabloid journalism",
+        ipa: "/ˈtæblɔɪd ˈdʒɜːnəlɪzəm/",
+        partOfSpeech: "noun",
+        meaning: "Báo chí lá cải, chuyên giật gân soi mói đời tư",
+        basicEquivalent: "gossip newspaper (Band 5)",
+        synonyms: ["yellow journalism", "sensationalist press", "gossip rags"],
+        collocations: ["hallmark of tabloid journalism", "victims of tabloid journalism"],
+        modelSentence: "Tabloid journalism relentlessly trades intimate celebrity suffering for advertising clicks.",
+        vietnameseSentence: "Báo chí lá cải không ngừng đánh đổi nỗi đau đớn riêng tư của người nổi tiếng lấy lượt bấm quảng cáo."
+      },
+      {
+        id: "t2-celeb-2",
+        word: "intrusive scrutiny",
+        ipa: "/ɪnˈtruːsɪv ˈskruːtəni/",
+        partOfSpeech: "noun",
+        meaning: "Sự soi mói xâm phạm đời tư quá mức",
+        basicEquivalent: "too much looking into life (Band 5)",
+        synonyms: ["invasive surveillance", "unwarranted snooping"],
+        collocations: ["subjected to intrusive scrutiny", "escape intrusive scrutiny"],
+        modelSentence: "Constant intrusive scrutiny prevents high-profile artists from enjoying peaceful family outings.",
+        vietnameseSentence: "Sự soi mói xâm phạm đời tư liên miên ngăn cản các nghệ sĩ tên tuổi tận hưởng những buổi đi chơi gia đình yên bình."
+      },
+      {
+        id: "t2-celeb-3",
+        word: "paparazzi",
+        ipa: "/ˌpæpəˈrætsi/",
+        partOfSpeech: "noun",
+        meaning: "Tay săn ảnh người nổi tiếng",
+        basicEquivalent: "photo hunters (Band 5)",
+        synonyms: ["freelance celebrity photographers", "press hounds"],
+        collocations: ["hounded by paparazzi", "paparazzi harassment"],
+        modelSentence: "Reckless motorcycle pursuits by aggressive paparazzi present grave hazards to road users.",
+        vietnameseSentence: "Những cuộc rượt đuổi bằng xe máy liều lĩnh của các tay săn ảnh hung hãn gây ra những mối nguy hiểm nghiêm trọng cho người tham gia giao thông."
+      },
+      {
+        id: "t2-celeb-4",
+        word: "domestic sanctuary",
+        ipa: "/dəˈmestɪk ˈsæŋktʃuəri/",
+        partOfSpeech: "noun",
+        meaning: "Chốn bình yên riêng tư bất khả xâm phạm tại gia đình",
+        basicEquivalent: "safe private home (Band 5)",
+        synonyms: ["private refuge", "intimate haven"],
+        collocations: ["inviolable domestic sanctuary", "breach a domestic sanctuary"],
+        modelSentence: "Every human being requires an inviolable domestic sanctuary where cameras cannot penetrate.",
+        vietnameseSentence: "Mỗi con người đều cần một chốn bình yên tại gia bất khả xâm phạm, nơi mà máy ảnh không thể thâm nhập."
+      },
+      {
+        id: "t2-celeb-5",
+        word: "sensationalist",
+        ipa: "/senˈseɪʃənəlɪst/",
+        partOfSpeech: "adjective",
+        meaning: "Giật gân, câu khách rẻ tiền",
+        basicEquivalent: "shocking on purpose (Band 5)",
+        synonyms: ["lurid", "scandal-mongering", "yellow"],
+        collocations: ["sensationalist headlines", "sensationalist reporting"],
+        modelSentence: "Sensationalist websites fabricate scandalous break-ups simply to manipulate engagement algorithms.",
+        vietnameseSentence: "Các trang web giật gân bịa đặt những vụ chia tay bê bối chỉ đơn giản để thao túng thuật toán tương tác."
+      },
+      {
+        id: "t2-celeb-6",
+        word: "unspoken bargain",
+        ipa: "/ʌnˈspəʊkən ˈbɑːɡən/",
+        partOfSpeech: "noun",
+        meaning: "Thỏa thuận ngầm định không nói ra",
+        basicEquivalent: "secret deal (Band 5)",
+        synonyms: ["implicit pact", "tacit contract"],
+        collocations: ["part of the unspoken bargain", "unspoken bargain of fame"],
+        modelSentence: "Some claim that surrendering personal privacy is part of the unspoken bargain of high celebrity compensation.",
+        vietnameseSentence: "Một số người cho rằng việc từ bỏ sự riêng tư cá nhân là một phần của thỏa thuận ngầm định đổi lấy thù lao ngôi sao kếch xù."
+      },
+      {
+        id: "t2-celeb-7",
+        word: "whistleblowing",
+        ipa: "/ˈwɪslbləʊɪŋ/",
+        partOfSpeech: "noun",
+        meaning: "Sự tố giác, vạch trần cái sai vì lợi ích công chúng",
+        basicEquivalent: "telling the truth about crimes (Band 5)",
+        synonyms: ["investigative exposure", "public interest reporting"],
+        collocations: ["legitimate whistleblowing", "whistleblowing function"],
+        modelSentence: "Investigative journalists perform crucial whistleblowing when exposing corrupt donations among civic leaders.",
+        vietnameseSentence: "Các nhà báo điều tra thực hiện chức năng tố giác trọng yếu khi vạch trần các khoản quyên góp tham nhũng trong giới lãnh đạo dân sự."
+      },
+      {
+        id: "t2-celeb-8",
+        word: "public voyeurism",
+        ipa: "/ˈpʌblɪk vɔɪˈjɜːrɪzəm/",
+        partOfSpeech: "noun",
+        meaning: "Thói tò mò thích nhìn trộm đời tư người khác của công chúng",
+        basicEquivalent: "watching others' private life (Band 5)",
+        synonyms: ["mass snooping", "morbid curiosity"],
+        collocations: ["feed public voyeurism", "toxic public voyeurism"],
+        modelSentence: "Broadcasting unvetted footage of celebrities' grief merely serves toxic public voyeurism.",
+        vietnameseSentence: "Phát sóng các thước phim chưa được kiểm chứng về nỗi đau buồn của người nổi tiếng chỉ nhằm phục vụ thói tò mò nhìn trộm độc hại của đám đông."
+      }
+    ]
+  }
 ];
 
 const TOPIC_ICONS = {
   education: 'GraduationCap',
   technology: 'Cpu',
   environment: 'Leaf',
-  society: 'Users',
-  economy_law: 'Scale',
+  transport: 'Car',
+  health: 'HeartPulse',
   work_career: 'Briefcase',
   business: 'TrendingUp',
+  society_family: 'Users',
   crime_law: 'Scale',
-  globalization: 'Globe',
-  health: 'HeartPulse'
+  culture_arts: 'Landmark'
 };
 
 // Map vocabularies by master category for rich, diverse vocabulary pools
@@ -2851,7 +3494,7 @@ const allTask2TopicsRaw = task2Prompts.map(p => {
   const matchingVocabs = (vocabsByTopic[masterCatId] || []).slice(0, 8);
   let vocabs = [...matchingVocabs];
   if (vocabs.length < 5) {
-    const backup = (vocabsByTopic['society'] || []).slice(0, 5 - vocabs.length);
+    const backup = (vocabsByTopic['society_family'] || vocabsByTopic['society'] || []).slice(0, 5 - vocabs.length);
     vocabs = [...vocabs, ...backup];
   }
 
@@ -5086,6 +5729,745 @@ const RAW_IELTS_TASK1_TOPICS = [
         collocations: ["master knapping techniques", "sophisticated knapping technique"],
         modelSentence: "Sophisticated knapping techniques allowed artisans to shave off wafer-thin stone flakes.",
         vietnameseSentence: "Kỹ thuật ghè đẽo đá tinh vi cho phép những người thợ bóc tách những mảnh đá mỏng như cánh hoa."
+      }
+    ]
+  }
+,
+  {
+    id: "task1-top-01-tourist-arrivals",
+    name: "Line Graph: International Tourist Arrivals in 5 Countries (1995-2010)",
+    vietnameseName: "Biểu đồ đường: Lượng khách du lịch quốc tế tại 5 quốc gia (1995-2010)",
+    tag: "Task 1: Biểu đồ đường (Line Graph)",
+    icon: "TrendingUp",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_top-01-tourist-arrivals.png",
+    chartData: {
+      title: "Line Graph: International Tourist Arrivals in 5 Countries (1995-2010)",
+      imageUrl: "/charts/task1/task1_top-01-tourist-arrivals.png",
+      keyNotes: [
+        "Hai điểm đến hàng đầu: Hoa Kỳ và Pháp thu hút lượng khách vượt trội so với các quốc gia còn lại, cùng tiến gần mốc 90 triệu lượt vào năm 2010.",
+        "Tăng trưởng bứt phá của Pháp: Pháp tăng mạnh từ hơn 30 triệu (1995) lên gần 90 triệu (2010), trong khi Mỹ giảm nhẹ trong giai đoạn 2005-2010.",
+        "Malaysia, Brazil & Ai Cập: Malaysia tăng đều đặn nhưng luôn dưới 50 triệu lượt; Brazil và Ai Cập có lượng khách thấp nhất (dưới 20 triệu lượt)."
+]
+    },
+    ieltsPrompt: "The graph below gives information about international tourist arrivals in five countries. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    keyNotes: [
+        "Hai điểm đến hàng đầu: Hoa Kỳ và Pháp thu hút lượng khách vượt trội so với các quốc gia còn lại, cùng tiến gần mốc 90 triệu lượt vào năm 2010.",
+        "Tăng trưởng bứt phá của Pháp: Pháp tăng mạnh từ hơn 30 triệu (1995) lên gần 90 triệu (2010), trong khi Mỹ giảm nhẹ trong giai đoạn 2005-2010.",
+        "Malaysia, Brazil & Ai Cập: Malaysia tăng đều đặn nhưng luôn dưới 50 triệu lượt; Brazil và Ai Cập có lượng khách thấp nhất (dưới 20 triệu lượt)."
+],
+    modelEssay: "The graph shows the overall numbers of tourist arrivals in five countries between 1995 and 2010.\n\nOverall, the United States and France were by far the two most popular tourist destinations throughout the 15-year period. While France experienced dramatic and sustained growth, the remaining countries recorded lower figures, with Brazil and Egypt attracting the smallest numbers of international visitors.\n\nIn 1995, over 70 million tourists visited the United States, which was more than twice the total recorded for France (around 30 million). Over the next decade, tourist numbers in the US fluctuated slightly before peaking at around 90 million in 2005, followed by a slight dip between 2005 and 2010. Conversely, arrivals in France surged steadily, culminating in a steep increase of nearly 20 million visitors between 2005 and 2010, so that by 2010 the arrivals in both countries leveled off at approximately 90 million each.\n\nTurning to the other three nations, inbound tourism in Malaysia rose consistently from around 10 million in 1995 to reach nearly 45 million in 2010. Meanwhile, Brazil and Egypt registered the fewest arrivals, tracking each other closely at roughly 5 million until 2000, after which Egypt saw faster growth to finish near 15 million, while Brazil plateaued below 10 million.",
+    vocabularies: [
+      {
+        id: "t1-top01-1",
+        word: "tourist arrivals",
+        ipa: "/ˈtʊərɪst əˈraɪvlz/",
+        partOfSpeech: "noun",
+        meaning: "Lượt khách du lịch quốc tế nhập cảnh",
+        basicEquivalent: "number of visitors (Band 5)",
+        synonyms: ["inbound tourists", "incoming travelers", "visitor arrivals"],
+        collocations: ["international tourist arrivals", "surge in tourist arrivals"],
+        modelSentence: "International tourist arrivals in France surged dramatically over the final five-year timeframe.",
+        vietnameseSentence: "Lượt khách du lịch quốc tế đến Pháp đã tăng vọt một cách ấn tượng trong khung thời gian 5 năm cuối."
+      },
+      {
+        id: "t1-top01-2",
+        word: "level off",
+        ipa: "/ˈlevl ɒf/",
+        partOfSpeech: "verb",
+        meaning: "Chững lại, duy trì ở mức cân bằng ổn định",
+        basicEquivalent: "stop rising (Band 5)",
+        synonyms: ["plateau", "flatten out", "stabilize"],
+        collocations: ["level off at approximately", "level off after rapid growth"],
+        modelSentence: "Visitor numbers leveled off at roughly 90 million by the end of the survey period.",
+        vietnameseSentence: "Lượng du khách đã chững lại ở mức xấp xỉ 90 triệu lượt vào cuối giai đoạn khảo sát."
+      },
+      {
+        id: "t1-top01-3",
+        word: "inbound tourism",
+        ipa: "/ˈɪnbaʊnd ˈtʊərɪzəm/",
+        partOfSpeech: "noun",
+        meaning: "Du lịch quốc tế chiều vào (khách nước ngoài đến)",
+        basicEquivalent: "foreign travel in (Band 5)",
+        synonyms: ["incoming tourism", "foreign visitor traffic"],
+        collocations: ["inbound tourism volume", "promote inbound tourism"],
+        modelSentence: "Malaysia witnessed uninterrupted expansion in inbound tourism throughout the entire period.",
+        vietnameseSentence: "Malaysia chứng kiến sự tăng trưởng không ngừng về lượng khách du lịch quốc tế nhập cảnh trong suốt giai đoạn."
+      },
+      {
+        id: "t1-top01-4",
+        word: "outstrip",
+        ipa: "/aʊtˈstrɪp/",
+        partOfSpeech: "verb",
+        meaning: "Vượt xa, bỏ cách đối thủ phía sau",
+        basicEquivalent: "be higher than (Band 5)",
+        synonyms: ["eclipse", "exceed", "outpace"],
+        collocations: ["outstrip competitors", "outstrip the next popular destination"],
+        modelSentence: "In 1995, US tourist figures heavily outstripped those of all other competitor nations.",
+        vietnameseSentence: "Vào năm 1995, các số liệu du khách của Mỹ đã bỏ xa số liệu của tất cả các quốc gia cạnh tranh khác."
+      },
+      {
+        id: "t1-top01-5",
+        word: "plateau",
+        ipa: "/ˈplætəʊ/",
+        partOfSpeech: "verb",
+        meaning: "Dừng tăng và đi ngang ở mức nhất định",
+        basicEquivalent: "stay at the same level (Band 5)",
+        synonyms: ["reach a plateau", "stagnate", "remain flat"],
+        collocations: ["plateau below 10 million", "reach a plateau"],
+        modelSentence: "After modest gains, Brazilian arrivals plateaued at approximately seven million annually.",
+        vietnameseSentence: "Sau những bước tăng khiêm tốn, lượng khách đến Brazil đã đi ngang ở mức khoảng 7 triệu lượt mỗi năm."
+      },
+      {
+        id: "t1-top01-6",
+        word: "culminate in",
+        ipa: "/ˈkʌlmɪneɪt ɪn/",
+        partOfSpeech: "verb",
+        meaning: "Đạt tới đỉnh điểm hoặc kết thúc ở mức",
+        basicEquivalent: "end with (Band 5)",
+        synonyms: ["climax in", "conclude with", "reach an apex of"],
+        collocations: ["culminate in a steep increase", "culminate at 90 million"],
+        modelSentence: "The sustained advertising campaign culminated in a record influx of holidaymakers.",
+        vietnameseSentence: "Chiến dịch quảng bá bền bỉ đã đạt đỉnh điểm với lượng khách nghỉ dưỡng đổ về cao kỷ lục."
+      },
+      {
+        id: "t1-top01-7",
+        word: "holidaymaker",
+        ipa: "/ˈhɒlədeɪmeɪkər/",
+        partOfSpeech: "noun",
+        meaning: "Khách du lịch đi nghỉ mát",
+        basicEquivalent: "tourist (Band 5)",
+        synonyms: ["vacationer", "sightseer", "traveler"],
+        collocations: ["influx of holidaymakers", "attract overseas holidaymakers"],
+        modelSentence: "European holidaymakers demonstrated a marked preference for Mediterranean coastal resorts.",
+        vietnameseSentence: "Những người đi nghỉ mát Châu Âu thể hiện sự ưu tiên rõ rệt cho các khu nghỉ dưỡng ven biển Địa Trung Hải."
+      },
+      {
+        id: "t1-top01-8",
+        word: "sustained growth",
+        ipa: "/səˈsteɪnd ɡrəʊθ/",
+        partOfSpeech: "noun",
+        meaning: "Sự tăng trưởng liên tục và bền vững",
+        basicEquivalent: "continuous rise (Band 5)",
+        synonyms: ["steady expansion", "unbroken ascent"],
+        collocations: ["register sustained growth", "experience sustained growth"],
+        modelSentence: "France enjoyed sustained growth across all three five-year census intervals.",
+        vietnameseSentence: "Nước Pháp đã có được mức tăng trưởng liên tục qua cả ba kỳ điều tra kéo dài 5 năm."
+      }
+    ]
+  },
+  {
+    id: "task1-top-02-wave-power",
+    name: "Process: Electricity Generation via Wave Power Turbine",
+    vietnameseName: "Quy trình: Cơ chế phát điện bằng năng lượng sóng biển qua tuabin hai chiều",
+    tag: "Task 1: Sơ đồ quy trình (Process)",
+    icon: "Layers",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_top-02-wave-power.png",
+    chartData: {
+      title: "Process: Electricity Generation via Wave Power Turbine",
+      imageUrl: "/charts/task1/task1_top-02-wave-power.png",
+      keyNotes: [
+        "Hệ thống hai chu kỳ: Chu kỳ sóng vào (dâng lên) và chu kỳ sóng rút (hạ xuống).",
+        "Nguyên lý khí nén: Khi sóng tràn vào buồng kín, nước dâng lên đẩy khí qua tuabin; khi sóng rút, áp suất âm hút khí quay ngược lại.",
+        "Cơ chế tuabin thông minh: Nhờ thiết kế cánh đặc biệt, tuabin luôn quay theo cùng một chiều (same direction) trong cả hai pha đẩy và hút để phát điện liên tục."
+]
+    },
+    ieltsPrompt: "The diagram below shows how electricity is generated by wave power. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    keyNotes: [
+        "Hệ thống hai chu kỳ: Chu kỳ sóng vào (dâng lên) và chu kỳ sóng rút (hạ xuống).",
+        "Nguyên lý khí nén: Khi sóng tràn vào buồng kín, nước dâng lên đẩy khí qua tuabin; khi sóng rút, áp suất âm hút khí quay ngược lại.",
+        "Cơ chế tuabin thông minh: Nhờ thiết kế cánh đặc biệt, tuabin luôn quay theo cùng một chiều (same direction) trong cả hai pha đẩy và hút để phát điện liên tục."
+],
+    modelEssay: "The diagram illustrates the process of generating electrical energy utilizing the force of ocean waves.\n\nOverall, the electricity generation cycle consists of two distinct stages: the rising wave phase and the receding wave phase. The most remarkable feature of the system is that the turbine rotates continuously in the same direction regardless of whether airflow is being pushed upward or drawn downward.\n\nIn the first stage, incoming ocean waves surge into a reinforced containment chamber built into a coastal cliff or seawall. As sea level rises inside the chamber, the water acts like a piston, forcing the trapped air column upward at high velocity. This compressed air streams through a narrow duct, spinning an air turbine connected to an electrical generator, thereby generating electric power.\n\nIn the second stage, as the ocean wave retreats and the water level falls, a vacuum is created within the chamber. Consequently, atmospheric air is drawn back downward from the top of the column to equalize pressure. Crucially, the specialized turbine blades continue rotating in the exact same direction under this reverse airflow, ensuring an uninterrupted supply of electricity to the local power grid.",
+    vocabularies: [
+      {
+        id: "t1-top02-1",
+        word: "containment chamber",
+        ipa: "/kənˈteɪnmənt ˈtʃeɪmbər/",
+        partOfSpeech: "noun",
+        meaning: "Buồng kín chứa sóng và khí nén",
+        basicEquivalent: "water box room (Band 5)",
+        synonyms: ["air column chamber", "oscillating water chamber"],
+        collocations: ["enter the containment chamber", "reinforced chamber"],
+        modelSentence: "The wave surges into the reinforced containment chamber anchored to the sea wall.",
+        vietnameseSentence: "Sóng biển dâng tràn vào buồng kín gia cố được cố định vào bờ kè chắn sóng."
+      },
+      {
+        id: "t1-top02-2",
+        word: "recede",
+        ipa: "/rɪˈsiːd/",
+        partOfSpeech: "verb",
+        meaning: "Rút lui, hạ xuống, triều rút",
+        basicEquivalent: "go back (Band 5)",
+        synonyms: ["retreat", "subside", "withdraw"],
+        collocations: ["waves recede", "receding water level"],
+        modelSentence: "As the oceanic wave recedes, water retreats toward the open sea, reversing the airflow.",
+        vietnameseSentence: "Khi sóng đại dương rút đi, nước rút ngược ra biển khơi, làm đảo chiều luồng không khí."
+      },
+      {
+        id: "t1-top02-3",
+        word: "uninterrupted",
+        ipa: "/ˌʌnˌɪntəˈrʌptɪd/",
+        partOfSpeech: "adjective",
+        meaning: "Liên tục, không bị ngắt quãng",
+        basicEquivalent: "continuous / nonstop (Band 5)",
+        synonyms: ["continuous", "seamless", "perpetual"],
+        collocations: ["uninterrupted power generation", "uninterrupted rotation"],
+        modelSentence: "The innovative turbine configuration guarantees an uninterrupted supply of green energy.",
+        vietnameseSentence: "Cấu hình tuabin đổi mới đảm bảo nguồn cung năng lượng xanh không bị gián đoạn."
+      },
+      {
+        id: "t1-top02-4",
+        word: "equalize pressure",
+        ipa: "/ˈiːkwəlaɪz ˈpreʃər/",
+        partOfSpeech: "verb",
+        meaning: "Cân bằng áp suất",
+        basicEquivalent: "make air pressure balance (Band 5)",
+        synonyms: ["equilibrate air pressure", "balance pressure gradients"],
+        collocations: ["drawn down to equalize pressure", "pressure equalization"],
+        modelSentence: "Outside air rushes into the duct to equalize pressure within the subterranean void.",
+        vietnameseSentence: "Không khí bên ngoài tràn vào đường ống để cân bằng áp suất bên trong khoảng trống dưới đất."
+      },
+      {
+        id: "t1-top02-5",
+        word: "bidirectional airflow",
+        ipa: "/ˌbaɪdaɪˈrekʃənl ˈeəfləʊ/",
+        partOfSpeech: "noun",
+        meaning: "Luồng không khí hai chiều (vào và ra)",
+        basicEquivalent: "two-way air movement (Band 5)",
+        synonyms: ["two-way airflow", "reversing air currents"],
+        collocations: ["harness bidirectional airflow", "drive by bidirectional airflow"],
+        modelSentence: "The specialized Wells turbine harnesses bidirectional airflow without reversing its spin.",
+        vietnameseSentence: "Tuabin Wells chuyên dụng tận dụng luồng không khí hai chiều mà không làm đảo chiều quay của nó."
+      },
+      {
+        id: "t1-top02-6",
+        word: "act like a piston",
+        ipa: "/ækt laɪk ə ˈpɪstən/",
+        partOfSpeech: "verb",
+        meaning: "Hoạt động như một pít-tông nén khí",
+        basicEquivalent: "push air like a pump (Band 5)",
+        synonyms: ["function as a hydraulic ram", "compress air mechanically"],
+        collocations: ["water column acts like a piston", "piston effect"],
+        modelSentence: "Rising ocean water acts like a piston, driving air through the upper aperture at high speed.",
+        vietnameseSentence: "Mực nước đại dương dâng lên hoạt động như một pít-tông, đẩy không khí qua khe hở phía trên với tốc độ cao."
+      },
+      {
+        id: "t1-top02-7",
+        word: "renewable harness",
+        ipa: "/rɪˈnjuːəbl ˈhɑːnɪs/",
+        partOfSpeech: "noun",
+        meaning: "Sự khai thác năng lượng tái tạo",
+        basicEquivalent: "getting clean power (Band 5)",
+        synonyms: ["clean energy extraction", "marine power harvesting"],
+        collocations: ["harness ocean power", "coastal kinetic energy"],
+        modelSentence: "The facility illustrates efficient kinetic harnessing along turbulent coastal headlands.",
+        vietnameseSentence: "Công trình minh họa cho việc khai thác động năng hiệu quả dọc theo các mũi đất ven biển nhiều sóng gió."
+      },
+      {
+        id: "t1-top02-8",
+        word: "narrow duct",
+        ipa: "/ˈnærəʊ dʌkt/",
+        partOfSpeech: "noun",
+        meaning: "Đường ống dẫn khí hẹp tăng tốc áp suất",
+        basicEquivalent: "small air pipe (Band 5)",
+        synonyms: ["ventilation conduit", "constricted airway"],
+        collocations: ["funneled through a narrow duct", "exhaust duct"],
+        modelSentence: "Air is accelerated through a narrow duct to achieve optimal turbine rotational speed.",
+        vietnameseSentence: "Không khí được tăng tốc qua một đường ống hẹp để đạt được vận tốc quay tối ưu của tuabin."
+      }
+    ]
+  },
+  {
+    id: "task1-top-03-canterbury-map",
+    name: "Maps: Town of Canterbury Proposed Sites for a New School",
+    vietnameseName: "Bản đồ quy hoạch: Hai phương án vị trí xây trường học mới tại thị trấn Canterbury",
+    tag: "Task 1: Bản đồ quy hoạch (Maps)",
+    icon: "MapPin",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_top-03-canterbury-map.png",
+    chartData: {
+      title: "Maps: Town of Canterbury Proposed Sites for a New School",
+      imageUrl: "/charts/task1/task1_top-03-canterbury-map.png",
+      keyNotes: [
+        "Vị trí S1 (Site 1): Nằm ở phía Đông Bắc thị trấn thuộc vùng đồng quê (countryside), giáp khu dân cư và tuyến đường chính đi thị trấn lân cận Sturry.",
+        "Vị trí S2 (Site 2): Nằm ở phía Tây Nam gần lõi trung tâm thị trấn (town centre), bao quanh hoàn toàn bởi các khu nhà ở và tiếp giáp ga đường sắt Canterbury.",
+        "Hạ tầng giao thông & Dân cư: S1 thuận lợi phục vụ học sinh từ các vùng nông thôn ngoại ô, trong khi S2 nằm giữa khu dân cư đông đúc nội thành nhưng có thể gây áp lực giao thông."
+]
+    },
+    ieltsPrompt: "The map below is of the town of Canterbury. A new school (S) is planned for the area. The map shows two possible sites for the school. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    keyNotes: [
+        "Vị trí S1 (Site 1): Nằm ở phía Đông Bắc thị trấn thuộc vùng đồng quê (countryside), giáp khu dân cư và tuyến đường chính đi thị trấn lân cận Sturry.",
+        "Vị trí S2 (Site 2): Nằm ở phía Tây Nam gần lõi trung tâm thị trấn (town centre), bao quanh hoàn toàn bởi các khu nhà ở và tiếp giáp ga đường sắt Canterbury.",
+        "Hạ tầng giao thông & Dân cư: S1 thuận lợi phục vụ học sinh từ các vùng nông thôn ngoại ô, trong khi S2 nằm giữa khu dân cư đông đúc nội thành nhưng có thể gây áp lực giao thông."
+],
+    modelEssay: "The map shows two proposed sites for a new school for the town of Canterbury and the surrounding area.\n\nOverall, the main difference between the two proposed locations is that Site 1 (S1) is located in a rural setting on the northeastern outskirts of the town, whereas Site 2 (S2) is positioned within an established urban residential neighborhood in the southwest.\n\nThe first site, S1, is situated in the countryside to the north-east of the town centre, immediately adjacent to a housing estate. It lies conveniently between the central town district and the outlying settlement of Sturry, which has a population of 7,000 residents. A major main road runs directly past S1, providing straightforward access for vehicles traveling from both Canterbury and Sturry. Additionally, the railway line passes nearby to the south, although there is no local railway station situated at this site.\n\nIn contrast, Site 2 (S2) is located in the southwestern portion of Canterbury, positioned much closer to the town centre. It is bordered almost entirely by residential housing, making it highly accessible on foot for local urban families. Transport links for S2 are equally strong: a main highway runs along its eastern edge, and it is located in close proximity to the central railway station, facilitating easy public transit connections.",
+    vocabularies: [
+      {
+        id: "t1-top03-1",
+        word: "northeastern outskirts",
+        ipa: "/ˌnɔːθˈiːstən ˈaʊtskɜːts/",
+        partOfSpeech: "noun",
+        meaning: "Vùng ven ngoại ô phía đông bắc",
+        basicEquivalent: "far corner of the town (Band 5)",
+        synonyms: ["northeastern periphery", "outer fringes"],
+        collocations: ["located on the northeastern outskirts", "rural outskirts"],
+        modelSentence: "Site 1 occupies open countryside situated on the northeastern outskirts of the municipal boundary.",
+        vietnameseSentence: "Khu đất 1 nằm trên vùng đồng quê thoáng đãng tại vùng ven ngoại ô phía đông bắc của ranh giới đô thị."
+      },
+      {
+        id: "t1-top03-2",
+        word: "residential neighborhood",
+        ipa: "/ˌrezɪˈdenʃl ˈneɪbəhʊd/",
+        partOfSpeech: "noun",
+        meaning: "Khu phố dân cư sinh sống",
+        basicEquivalent: "housing area (Band 5)",
+        synonyms: ["housing district", "residential quarter"],
+        collocations: ["established residential neighborhood", "densely populated neighborhood"],
+        modelSentence: "Site 2 is embedded within an established residential neighborhood with thousands of family homes.",
+        vietnameseSentence: "Khu đất 2 nằm trọn bên trong một khu phố dân cư lâu đời với hàng ngàn ngôi nhà của các gia đình."
+      },
+      {
+        id: "t1-top03-3",
+        word: "outlying settlement",
+        ipa: "/ˈaʊtlaɪɪŋ ˈsetlmənt/",
+        partOfSpeech: "noun",
+        meaning: "Khu dân cư / thị trấn vệ tinh nằm xa bên ngoài",
+        basicEquivalent: "village far away (Band 5)",
+        synonyms: ["peripheral community", "neighboring satellite town"],
+        collocations: ["serve outlying settlements", "commute from outlying settlements"],
+        modelSentence: "Choosing S1 would conveniently cater to pupils commuting from the outlying settlement of Sturry.",
+        vietnameseSentence: "Lựa chọn S1 sẽ phục vụ thuận tiện cho học sinh đi lại từ khu dân cư ngoại vi Sturry."
+      },
+      {
+        id: "t1-top03-4",
+        word: "close proximity",
+        ipa: "/kləʊs prɒkˈsɪməti/",
+        partOfSpeech: "noun",
+        meaning: "Cự ly gần kề sát bên",
+        basicEquivalent: "near to (Band 5)",
+        synonyms: ["immediate vicinity", "close neighborhood"],
+        collocations: ["in close proximity to the railway station", "located in close proximity"],
+        modelSentence: "The southern location enjoys close proximity to both arterial bypasses and the rail terminus.",
+        vietnameseSentence: "Vị trí phía nam có lợi thế nằm gần kề cả tuyến đường tránh huyết mạch và ga đầu mối đường sắt."
+      },
+      {
+        id: "t1-top03-5",
+        word: "public transit",
+        ipa: "/ˈpʌblɪk ˈtrænzɪt/",
+        partOfSpeech: "noun",
+        meaning: "Hệ thống phương tiện giao thông công cộng",
+        basicEquivalent: "bus and train (Band 5)",
+        synonyms: ["mass transit", "public transportation"],
+        collocations: ["public transit connectivity", "access to public transit"],
+        modelSentence: "S2 offers seamless public transit access via the adjacent mainline railway interchange.",
+        vietnameseSentence: "S2 mang lại khả năng kết nối giao thông công cộng liền mạch thông qua điểm giao cắt đường sắt chính bên cạnh."
+      },
+      {
+        id: "t1-top03-6",
+        word: "rural setting",
+        ipa: "/ˈrʊərəl ˈsetɪŋ/",
+        partOfSpeech: "noun",
+        meaning: "Bối cảnh cảnh quan nông thôn, đồng quê",
+        basicEquivalent: "country place (Band 5)",
+        synonyms: ["countryside backdrop", "pastoral environment"],
+        collocations: ["situated in a rural setting", "tranquil rural setting"],
+        modelSentence: "A campus located in a rural setting affords ample playing fields and tranquil surroundings.",
+        vietnameseSentence: "Một khuôn viên trường nằm trong bối cảnh nông thôn mang lại sân chơi rộng rãi và môi trường yên tĩnh."
+      },
+      {
+        id: "t1-top03-7",
+        word: "arterial bypass",
+        ipa: "/ɑːˈtɪəriəl ˈbaɪpɑːs/",
+        partOfSpeech: "noun",
+        meaning: "Đường tránh huyết mạch bao quanh đô thị",
+        basicEquivalent: "ring road (Band 5)",
+        synonyms: ["ring road", "circumferential thoroughfare"],
+        collocations: ["flanked by an arterial bypass", "direct bypass access"],
+        modelSentence: "School buses could easily navigate the arterial bypass without entering clogged downtown streets.",
+        vietnameseSentence: "Xe buýt trường học có thể dễ dàng lưu thông trên đường tránh huyết mạch mà không phải đi vào các phố trung tâm ùn tắc."
+      },
+      {
+        id: "t1-top03-8",
+        word: "accessible on foot",
+        ipa: "/əkˈsesəbl ɒn fʊt/",
+        partOfSpeech: "adjective",
+        meaning: "Có thể tiếp cận dễ dàng bằng cách đi bộ",
+        basicEquivalent: "easy to walk to (Band 5)",
+        synonyms: ["pedestrian-friendly", "within walking distance"],
+        collocations: ["highly accessible on foot", "accessible via footpaths"],
+        modelSentence: "The compact layout makes the southern campus fully accessible on foot for hundreds of local children.",
+        vietnameseSentence: "Cách bố trí quy hoạch gọn gàng giúp khuôn viên phía nam hoàn toàn có thể đi bộ tới đối với hàng trăm trẻ em địa phương."
+      }
+    ]
+  },
+  {
+    id: "task1-top-04-further-education",
+    name: "Bar Chart: British Further Education Enrolment by Gender (1970-1990)",
+    vietnameseName: "Biểu đồ cột: Tỷ lệ nam và nữ theo học giáo dục thường xuyên tại Anh (1970-1990)",
+    tag: "Task 1: Biểu đồ cột (Bar Chart)",
+    icon: "BarChart3",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_top-04-further-education.png",
+    chartData: {
+      title: "Bar Chart: British Further Education Enrolment by Gender (1970-1990)",
+      imageUrl: "/charts/task1/task1_top-04-further-education.png",
+      keyNotes: [
+        "Học bán thời gian áp đảo: Hình thức học bán thời gian (part-time) luôn chiếm ưu thế tuyệt đối so với học toàn thời gian (full-time) ở cả nam và nữ qua cả 3 thời kỳ.",
+        "Tăng trưởng vượt bậc của nữ giới: Số lượng phụ nữ học part-time tăng mạnh mẽ từ hơn 700.000 lên hơn 1.1 triệu học viên, vượt qua số lượng nam giới (khoảng 900.000) vào năm 1990/91.",
+        "Xu hướng học toàn thời gian: Cả nam và nữ học full-time đều tăng dần nhưng luôn giữ ở mức khiêm tốn, chỉ dao động từ 100.000 đến gần 300.000 người."
+]
+    },
+    ieltsPrompt: "The chart below shows the number of men and women in further education in Britain in three periods and whether they were studying full-time or part-time. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    keyNotes: [
+        "Học bán thời gian áp đảo: Hình thức học bán thời gian (part-time) luôn chiếm ưu thế tuyệt đối so với học toàn thời gian (full-time) ở cả nam và nữ qua cả 3 thời kỳ.",
+        "Tăng trưởng vượt bậc của nữ giới: Số lượng phụ nữ học part-time tăng mạnh mẽ từ hơn 700.000 lên hơn 1.1 triệu học viên, vượt qua số lượng nam giới (khoảng 900.000) vào năm 1990/91.",
+        "Xu hướng học toàn thời gian: Cả nam và nữ học full-time đều tăng dần nhưng luôn giữ ở mức khiêm tốn, chỉ dao động từ 100.000 đến gần 300.000 người."
+],
+    modelEssay: "The bar charts illustrate the numbers of male and female students enrolled in further education in the United Kingdom across three academic periods (1970/71, 1980/81, and 1990/91), categorised by full-time and part-time study modes.\n\nOverall, part-time education was consistently far more popular than full-time education for both genders throughout the period. Furthermore, while the number of men studying part-time fluctuated, female part-time participation experienced sustained growth, ultimately surpassing male enrolment by 1990/91.\n\nIn terms of part-time education, approximately 1,000,000 men were enrolled in 1970/71, compared to roughly 750,000 women. Over the subsequent two decades, male part-time numbers dipped to around 850,000 in 1980/81 before rebounding to just under 900,000. In stark contrast, female enrolment expanded dramatically, reaching roughly 900,000 in 1980/81 and peaking at over 1,100,000 in 1990/91, making women the majority in part-time studies.\n\nRegarding full-time education, student participation was significantly lower, with totals never exceeding 300,000 for either gender. Both male and female full-time enrolments followed steady upward trajectories, rising from roughly 100,000 in 1970/71 to approximately 220,000 for men and 280,000 for women by the end of the timeframe.",
+    vocabularies: [
+      {
+        id: "t1-top04-1",
+        word: "further education",
+        ipa: "/ˈfɜːðər ˌedʒuˈkeɪʃn/",
+        partOfSpeech: "noun",
+        meaning: "Giáo dục thường xuyên, học sau phổ thông",
+        basicEquivalent: "college study after school (Band 5)",
+        synonyms: ["vocational education", "post-secondary training"],
+        collocations: ["enrolled in further education", "further education college"],
+        modelSentence: "The expansion of further education provided working adults with critical upskilling opportunities.",
+        vietnameseSentence: "Sự mở rộng của giáo dục thường xuyên đã mang lại cho người lớn đi làm những cơ hội nâng cao kỹ năng quan trọng."
+      },
+      {
+        id: "t1-top04-2",
+        word: "part-time enrolment",
+        ipa: "/ˌpɑːt ˈtaɪm ɪnˈrəʊlmənt/",
+        partOfSpeech: "noun",
+        meaning: "Số lượng đăng ký học bán thời gian",
+        basicEquivalent: "part-time students (Band 5)",
+        synonyms: ["part-time registration", "flexible attendance"],
+        collocations: ["surge in part-time enrolment", "part-time enrolment figures"],
+        modelSentence: "Female part-time enrolment climbed past the one-million milestone in the final decade.",
+        vietnameseSentence: "Lượng nữ sinh viên đăng ký học bán thời gian đã vượt qua cột mốc một triệu học viên trong thập kỷ cuối."
+      },
+      {
+        id: "t1-top04-3",
+        word: "upward trajectory",
+        ipa: "/ˈʌpwəd trəˈdʒektəri/",
+        partOfSpeech: "noun",
+        meaning: "Quỹ đạo tăng trưởng đi lên đều đặn",
+        basicEquivalent: "rise / going up (Band 5)",
+        synonyms: ["upward trend", "ascending course"],
+        collocations: ["follow an upward trajectory", "steady upward trajectory"],
+        modelSentence: "Full-time student numbers maintained a steady upward trajectory across the entire timeframe.",
+        vietnameseSentence: "Số lượng sinh viên học toàn thời gian đã duy trì quỹ đạo đi lên vững chắc trong toàn bộ khung thời gian."
+      },
+      {
+        id: "t1-top04-4",
+        word: "stark contrast",
+        ipa: "/stɑːk ˈkɒntrɑːst/",
+        partOfSpeech: "noun",
+        meaning: "Sự tương phản, đối nghịch hoàn toàn rõ nét",
+        basicEquivalent: "big difference (Band 5)",
+        synonyms: ["sharp divergence", "striking disparity"],
+        collocations: ["stand in stark contrast to", "a stark contrast emerges"],
+        modelSentence: "The massive volume of part-time learners stood in stark contrast to modest full-time cohorts.",
+        vietnameseSentence: "Khối lượng khổng lồ học viên bán thời gian hoàn toàn tương phản với các nhóm học toàn thời gian khiêm tốn."
+      },
+      {
+        id: "t1-top04-5",
+        word: "rebound",
+        ipa: "/rɪˈbaʊnd/",
+        partOfSpeech: "verb",
+        meaning: "Phục hồi trở lại sau khi suy giảm",
+        basicEquivalent: "go up again (Band 5)",
+        synonyms: ["recover", "rally", "bounce back"],
+        collocations: ["rebound to just under", "rebound after a dip"],
+        modelSentence: "Male registrations dropped in 1980 before rebounding slightly in the subsequent census.",
+        vietnameseSentence: "Số lượng nam giới đăng ký giảm năm 1980 trước khi phục hồi nhẹ trong kỳ thống kê tiếp theo."
+      },
+      {
+        id: "t1-top04-6",
+        word: "surpass",
+        ipa: "/səˈpɑːs/",
+        partOfSpeech: "verb",
+        meaning: "Vượt qua, soán ngôi dẫn đầu",
+        basicEquivalent: "be more than (Band 5)",
+        synonyms: ["overtake", "outstrip", "exceed"],
+        collocations: ["surpass male figures", "surpass expectations"],
+        modelSentence: "Women ultimately surpassed their male peers in further education participation by 1990.",
+        vietnameseSentence: "Phụ nữ cuối cùng đã vượt qua các đồng nghiệp nam về mức độ tham gia giáo dục thường xuyên vào năm 1990."
+      },
+      {
+        id: "t1-top04-7",
+        word: "flexible study mode",
+        ipa: "/ˈfleksəbl ˈstʌdi məʊd/",
+        partOfSpeech: "noun",
+        meaning: "Phương thức học tập linh hoạt (học tối, học buổi)",
+        basicEquivalent: "easy time study (Band 5)",
+        synonyms: ["modular study format", "part-time schedule"],
+        collocations: ["adopt flexible study modes", "preference for flexible study modes"],
+        modelSentence: "Working mothers heavily favored flexible study modes to reconcile career and household duties.",
+        vietnameseSentence: "Các bà mẹ đi làm rất ưa chuộng các phương thức học tập linh hoạt để cân bằng sự nghiệp và công việc gia đình."
+      },
+      {
+        id: "t1-top04-8",
+        word: "academic cohort",
+        ipa: "/ˌækəˈdemɪk ˈkəʊhɔːt/",
+        partOfSpeech: "noun",
+        meaning: "Nhóm khóa học sinh sinh viên cùng niên khóa",
+        basicEquivalent: "student group (Band 5)",
+        synonyms: ["student body", "enrolment group"],
+        collocations: ["full-time academic cohort", "expand the cohort"],
+        modelSentence: "Each successive academic cohort contained a progressively higher proportion of mature female entrants.",
+        vietnameseSentence: "Mỗi nhóm học sinh qua các niên khóa kế tiếp đều chứa tỷ lệ ngày càng cao những phụ nữ trưởng thành theo học."
+      }
+    ]
+  },
+  {
+    id: "task1-top-05-radio-tv-audiences",
+    name: "Line Graph: UK Radio and TV Audience Patterns throughout the Day (1992)",
+    vietnameseName: "Biểu đồ đường: Xu hướng khán thính giả nghe Radio và xem TV trong ngày tại Anh (1992)",
+    tag: "Task 1: Biểu đồ đường (Line Graph)",
+    icon: "TrendingUp",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_top-05-radio-tv-audiences.png",
+    chartData: {
+      title: "Line Graph: UK Radio and TV Audience Patterns throughout the Day (1992)",
+      imageUrl: "/charts/task1/task1_top-05-radio-tv-audiences.png",
+      keyNotes: [
+        "Quy luật ngày và đêm: Radio thống trị buổi sáng từ 6:00 đến 13:00 (đỉnh điểm gần 30% lúc 8:30 sáng). Ngược lại, TV bùng nổ mạnh mẽ vào buổi tối từ 18:00 đến 23:00 (đỉnh điểm tới 45% lúc 20:00 - 22:00).",
+        "Điểm giao nhau (Crossover Points): Khoảng 13:00 trưa và 16:00 chiều, tỷ lệ khán thính giả của hai phương tiện gần như ngang bằng nhau ở mức 15%.",
+        "Đêm muộn và rạng sáng: Cả radio và TV đều chạm đáy dưới 5% từ 2:00 sáng đến 6:00 sáng khi người dân nghỉ ngơi."
+]
+    },
+    ieltsPrompt: "The graph below shows radio and television audiences throughout the day in 1992. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    keyNotes: [
+        "Quy luật ngày và đêm: Radio thống trị buổi sáng từ 6:00 đến 13:00 (đỉnh điểm gần 30% lúc 8:30 sáng). Ngược lại, TV bùng nổ mạnh mẽ vào buổi tối từ 18:00 đến 23:00 (đỉnh điểm tới 45% lúc 20:00 - 22:00).",
+        "Điểm giao nhau (Crossover Points): Khoảng 13:00 trưa và 16:00 chiều, tỷ lệ khán thính giả của hai phương tiện gần như ngang bằng nhau ở mức 15%.",
+        "Đêm muộn và rạng sáng: Cả radio và TV đều chạm đáy dưới 5% từ 2:00 sáng đến 6:00 sáng khi người dân nghỉ ngơi."
+],
+    modelEssay: "The line graph compares audience shares for radio and television over a 24-hour cycle in the United Kingdom between October and December 1992.\n\nOverall, radio and television viewership followed sharply contrasting chronological trends. Radio captured the vast majority of media consumers during morning hours, whereas television commanded a massive surge in the evening, achieving the highest audience percentage across the entire day.\n\nBeginning in the early morning, radio listening rose precipitously from under 5% at 6:00 AM to reach its daily zenith of approximately 27% at around 8:30 AM, coinciding with breakfast and the morning commute. After this morning peak, radio audiences experienced a steady downward slide, dropping to roughly 15% by 1:00 PM and hovering below 10% for the remainder of the evening.\n\nIn stark contrast, television audiences remained negligible throughout the morning, lingering beneath 5% until midday. However, television viewership began accelerating after 1:00 PM, surpassing radio at around 4:00 PM (15%). Viewership climbed steeply throughout prime-time evening hours, culminating in an impressive summit of 45% between 8:00 PM and 10:00 PM. Following 11:00 PM, both media channels suffered steep contractions, tapering off to under 3% by 3:00 AM.",
+    vocabularies: [
+      {
+        id: "t1-top05-1",
+        word: "audience share",
+        ipa: "/ˈɔːdiəns ʃeər/",
+        partOfSpeech: "noun",
+        meaning: "Thị phần / tỷ lệ khán thính giả theo dõi",
+        basicEquivalent: "number of watchers (Band 5)",
+        synonyms: ["viewership proportion", "listenership percentage"],
+        collocations: ["command a high audience share", "peak audience share"],
+        modelSentence: "Television commanded an extraordinary 45% audience share during evening prime time.",
+        vietnameseSentence: "Truyền hình đã nắm giữ thị phần khán giả phi thường 45% trong khung giờ vàng buổi tối."
+      },
+      {
+        id: "t1-top05-2",
+        word: "zenith",
+        ipa: "/ˈzenɪθ/",
+        partOfSpeech: "noun",
+        meaning: "Điểm cao nhất, đỉnh cao tuyệt đối",
+        basicEquivalent: "highest point (Band 5)",
+        synonyms: ["peak", "apex", "culmination", "summit"],
+        collocations: ["reach its daily zenith", "at its zenith"],
+        modelSentence: "Radio listenership attained its daily zenith of 27% during the morning rush hour.",
+        vietnameseSentence: "Lượng thính giả nghe radio đã đạt điểm cao nhất trong ngày là 27% vào khung giờ cao điểm buổi sáng."
+      },
+      {
+        id: "t1-top05-3",
+        word: "precipitously",
+        ipa: "/prɪˈsɪpɪtəsli/",
+        partOfSpeech: "adverb",
+        meaning: "Một cách nhanh chóng và dốc đứng",
+        basicEquivalent: "very fast up (Band 5)",
+        synonyms: ["steeply", "sharply", "rapidly"],
+        collocations: ["climb precipitously", "drop precipitously"],
+        modelSentence: "Morning radio ratings climbed precipitously between dawn and eight-thirty in the morning.",
+        vietnameseSentence: "Xếp hạng radio buổi sáng đã leo dốc nhanh chóng từ rạng đông cho đến 8 giờ 30 sáng."
+      },
+      {
+        id: "t1-top05-4",
+        word: "prime time",
+        ipa: "/ˈpraɪm taɪm/",
+        partOfSpeech: "noun",
+        meaning: "Khung giờ vàng phát sóng (thu hút nhiều người xem nhất)",
+        basicEquivalent: "popular evening hours (Band 5)",
+        synonyms: ["peak viewing hours", "prime viewing slot"],
+        collocations: ["evening prime time", "prime-time broadcasting"],
+        modelSentence: "Families congregated around the television screen during traditional prime-time hours.",
+        vietnameseSentence: "Các gia đình tụ họp quây quần bên màn hình tivi trong các khung giờ vàng truyền thống."
+      },
+      {
+        id: "t1-top05-5",
+        word: "taper off",
+        ipa: "/ˈteɪpər ɒf/",
+        partOfSpeech: "verb",
+        meaning: "Giảm dần đều và nhỏ lại về cuối",
+        basicEquivalent: "decrease slowly (Band 5)",
+        synonyms: ["dwindle", "peter out", "subside gradually"],
+        collocations: ["taper off to under 3%", "taper off past midnight"],
+        modelSentence: "Broadcast viewership tapered off sharply once midnight programming drew to a close.",
+        vietnameseSentence: "Lượng khán giả xem đài giảm dần đều rõ rệt một khi các chương trình nửa đêm kết thúc."
+      },
+      {
+        id: "t1-top05-6",
+        word: "chronological trend",
+        ipa: "/ˌkrɒnəˈlɒdʒɪkl trend/",
+        partOfSpeech: "noun",
+        meaning: "Xu hướng biến thiên theo trình tự thời gian trong ngày",
+        basicEquivalent: "change by time (Band 5)",
+        synonyms: ["temporal pattern", "diurnal distribution"],
+        collocations: ["follow chronological trends", "contrasting chronological trends"],
+        modelSentence: "The two media forms displayed sharply conflicting chronological trends across the 24-hour cycle.",
+        vietnameseSentence: "Hai loại hình truyền thông thể hiện những xu hướng theo trình tự thời gian xung đột rõ rệt trong chu kỳ 24 giờ."
+      },
+      {
+        id: "t1-top05-7",
+        word: "negligible",
+        ipa: "/ˈneɡlɪdʒəbl/",
+        partOfSpeech: "adjective",
+        meaning: "Không đáng kể, cực kỳ nhỏ bé",
+        basicEquivalent: "very small (Band 5)",
+        synonyms: ["minimal", "insignificant", "marginal"],
+        collocations: ["remain negligible", "negligible audience share"],
+        modelSentence: "Television ratings remained practically negligible during early working hours.",
+        vietnameseSentence: "Tỷ suất người xem truyền hình hầu như không đáng kể trong những giờ làm việc đầu buổi sáng."
+      },
+      {
+        id: "t1-top05-8",
+        word: "crossover point",
+        ipa: "/ˈkrɒsəʊvər pɔɪnt/",
+        partOfSpeech: "noun",
+        meaning: "Điểm giao cắt giữa hai đường số liệu",
+        basicEquivalent: "meeting point of lines (Band 5)",
+        synonyms: ["intersection threshold", "junction point"],
+        collocations: ["reach a crossover point", "crossover point at 4 PM"],
+        modelSentence: "Around 4:00 PM, a critical crossover point occurred where television surpassed radio for good.",
+        vietnameseSentence: "Vào khoảng 4 giờ chiều, một điểm giao cắt then chốt đã xuất hiện nơi truyền hình chính thức vượt qua radio."
+      }
+    ]
+  },
+  {
+    id: "task1-top-06-worldwide-water-use",
+    name: "Mixed: Worldwide Water Use by Sector and Country Disparity",
+    vietnameseName: "Biểu đồ kết hợp: Nhu cầu sử dụng nước toàn cầu theo ngành và so sánh giữa các quốc gia",
+    tag: "Task 1: Biểu đồ kết hợp (Line Graph & Table)",
+    icon: "BarChart3",
+    chartType: "image",
+    imageUrl: "/charts/task1/task1_top-06-worldwide-water-use.png",
+    chartData: {
+      title: "Mixed: Worldwide Water Use by Sector and Country Disparity",
+      imageUrl: "/charts/task1/task1_top-06-worldwide-water-use.png",
+      keyNotes: [
+        "Xu hướng toàn cầu theo ngành: Lượng nước sử dụng toàn cầu tăng vọt từ năm 1900 đến 2000. Nông nghiệp (Agriculture) luôn ngốn lượng nước áp đảo (vượt 3.000 km³ vào năm 2000), gấp gần ba lần công nghiệp và sinh hoạt cộng lại.",
+        "Nước dùng cho công nghiệp và sinh hoạt: Bắt đầu tăng tốc sau năm 1950; công nghiệp đạt khoảng 1.000 km³, trong khi sinh hoạt gia đình thấp nhất (dưới 400 km³).",
+        "So sánh hai quốc gia: Brazil (176 triệu dân, 26.500 km² đất tưới tiêu) tiêu thụ 359 m³ nước/người/năm, cao gấp gần 45 lần mức tiêu thụ của CHDC Congo (8 m³/người/năm) do sự chênh lệch hạ tầng tưới tiêu nông nghiệp."
+]
+    },
+    ieltsPrompt: "The graph and table below give information about water use worldwide and water consumption in two different countries. Summarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+    keyNotes: [
+        "Xu hướng toàn cầu theo ngành: Lượng nước sử dụng toàn cầu tăng vọt từ năm 1900 đến 2000. Nông nghiệp (Agriculture) luôn ngốn lượng nước áp đảo (vượt 3.000 km³ vào năm 2000), gấp gần ba lần công nghiệp và sinh hoạt cộng lại.",
+        "Nước dùng cho công nghiệp và sinh hoạt: Bắt đầu tăng tốc sau năm 1950; công nghiệp đạt khoảng 1.000 km³, trong khi sinh hoạt gia đình thấp nhất (dưới 400 km³).",
+        "So sánh hai quốc gia: Brazil (176 triệu dân, 26.500 km² đất tưới tiêu) tiêu thụ 359 m³ nước/người/năm, cao gấp gần 45 lần mức tiêu thụ của CHDC Congo (8 m³/người/năm) do sự chênh lệch hạ tầng tưới tiêu nông nghiệp."
+],
+    modelEssay: "The charts provide a comprehensive analysis of global freshwater extraction across three sectors from 1900 to 2000, along with a comparative breakdown of water consumption between Brazil and the Democratic Republic of Congo in the year 2000.\n\nOverall, global water consumption escalated dramatically over the twentieth century, with agriculture consistently demanding the overwhelming majority of water supplies. Furthermore, the table reveals a massive disparity in per capita water usage, with Brazil consuming vastly more water than Congo due to its extensive irrigated agricultural base.\n\nLooking at the line graph, total water consumption expanded more than threefold between 1900 and 2000. The agricultural sector was the primary driver of this growth, climbing steadily from approximately 500 km³ in 1900 to surpass 3,000 km³ by 2000. Industrial water use emerged as the second largest category after 1950, escalating to nearly 1,000 km³. In contrast, domestic consumption remained the lowest sector throughout, only rising modestly after 1950 to reach around 350 km³.\n\nThe accompanying table highlights sharp contrasts between Brazil and the Democratic Republic of Congo. Despite both nations having significant freshwater reserves, Brazil's population of 176 million utilised 26,500 km² of irrigated farmland, generating an annual consumption rate of 359 m³ per person. Conversely, Congo, with 5.2 million inhabitants and a minuscule 100 km² of irrigated agricultural land, registered an annual consumption of merely 8 m³ per person.",
+    vocabularies: [
+      {
+        id: "t1-top06-1",
+        word: "freshwater extraction",
+        ipa: "/ˈfreʃwɔːtər ɪkˈstrækʃn/",
+        partOfSpeech: "noun",
+        meaning: "Việc khai thác và sử dụng nguồn nước ngọt",
+        basicEquivalent: "taking water from rivers (Band 5)",
+        synonyms: ["water withdrawal", "hydrological abstraction"],
+        collocations: ["rates of freshwater extraction", "sustainable freshwater extraction"],
+        modelSentence: "Global freshwater extraction accelerated exponentially following the mid-century agricultural boom.",
+        vietnameseSentence: "Việc khai thác nước ngọt toàn cầu đã tăng tốc theo cấp số nhân sau sự bùng nổ nông nghiệp giữa thế kỷ."
+      },
+      {
+        id: "t1-top06-2",
+        word: "irrigated farmland",
+        ipa: "/ˈɪrɪɡeɪtɪd ˈfɑːmlænd/",
+        partOfSpeech: "noun",
+        meaning: "Đất canh tác nông nghiệp có hệ thống tưới tiêu nhân tạo",
+        basicEquivalent: "watered farm area (Band 5)",
+        synonyms: ["irrigated agriculture", "water-fed cropland"],
+        collocations: ["hectares of irrigated farmland", "expand irrigated farmland"],
+        modelSentence: "Brazil maintains vast tracts of irrigated farmland to sustain industrial crop exports.",
+        vietnameseSentence: "Brazil duy trì những dải đất canh tác có tưới tiêu rộng lớn để phục vụ xuất khẩu cây trồng công nghiệp."
+      },
+      {
+        id: "t1-top06-3",
+        word: "per capita consumption",
+        ipa: "/pə ˈkæpɪtə kənˈsʌmpʃn/",
+        partOfSpeech: "noun",
+        meaning: "Mức tiêu thụ bình quân tính trên đầu người",
+        basicEquivalent: "use per person (Band 5)",
+        synonyms: ["per person usage", "individual consumption rate"],
+        collocations: ["annual per capita consumption", "disparity in per capita consumption"],
+        modelSentence: "The annual per capita consumption in Brazil eclipsed that of Congo by more than forty-fold.",
+        vietnameseSentence: "Mức tiêu thụ bình quân đầu người hàng năm ở Brazil đã vượt xa Congo hơn bốn mươi lần."
+      },
+      {
+        id: "t1-top06-4",
+        word: "domestic water use",
+        ipa: "/dəˈmestɪk ˈwɔːtər juːs/",
+        partOfSpeech: "noun",
+        meaning: "Nhu cầu dùng nước trong sinh hoạt gia đình",
+        basicEquivalent: "household water (Band 5)",
+        synonyms: ["residential consumption", "household water demand"],
+        collocations: ["allocated to domestic water use", "curb domestic water use"],
+        modelSentence: "Domestic water use accounted for the smallest slice of total global abstractions.",
+        vietnameseSentence: "Nước dùng cho sinh hoạt gia đình chiếm tỷ trọng nhỏ nhất trong tổng lượng nước khai thác toàn cầu."
+      },
+      {
+        id: "t1-top06-5",
+        word: "exponential increase",
+        ipa: "/ˌekspəˈnenʃl ˈɪŋkriːs/",
+        partOfSpeech: "noun",
+        meaning: "Sự gia tăng theo cấp số nhân phi mã",
+        basicEquivalent: "very big fast increase (Band 5)",
+        synonyms: ["skyrocketing surge", "dramatic escalation"],
+        collocations: ["witness an exponential increase", "experience exponential growth"],
+        modelSentence: "Irrigation experienced an exponential increase as populations grew and food demands escalated.",
+        vietnameseSentence: "Hoạt động tưới tiêu chứng kiến sự gia tăng phi mã khi dân số tăng nhanh và nhu cầu lương thực leo thang."
+      },
+      {
+        id: "t1-top06-6",
+        word: "minuscule",
+        ipa: "/ˈmɪnəskjuːl/",
+        partOfSpeech: "adjective",
+        meaning: "Vô cùng nhỏ bé, không đáng kể",
+        basicEquivalent: "tiny / very small (Band 5)",
+        synonyms: ["negligible", "infinitesimal", "minute"],
+        collocations: ["minuscule portion", "minuscule land area"],
+        modelSentence: "Congo possesses only a minuscule area of developed irrigation infrastructure.",
+        vietnameseSentence: "Congo chỉ sở hữu một diện tích hạ tầng tưới tiêu phát triển vô cùng nhỏ bé."
+      },
+      {
+        id: "t1-top06-7",
+        word: "overwhelming majority",
+        ipa: "/ˌəʊvəˈwelmɪŋ məˈdʒɒrəti/",
+        partOfSpeech: "noun",
+        meaning: "Đại đa số áp đảo hoàn toàn",
+        basicEquivalent: "most of all (Band 5)",
+        synonyms: ["lion's share", "vast preponderance"],
+        collocations: ["command the overwhelming majority", "absorb the overwhelming majority"],
+        modelSentence: "Farming practices absorbed the overwhelming majority of diverted fresh water worldwide.",
+        vietnameseSentence: "Các hoạt động canh tác nông nghiệp đã hấp thụ đại đa số áp đảo lượng nước ngọt được chuyển hướng trên toàn cầu."
+      },
+      {
+        id: "t1-top06-8",
+        word: "hydrological reserves",
+        ipa: "/ˌhaɪdrəˈlɒdʒɪkl rɪˈzɜːvz/",
+        partOfSpeech: "noun",
+        meaning: "Trữ lượng thủy văn, nguồn tài nguyên nước",
+        basicEquivalent: "water supplies (Band 5)",
+        synonyms: ["aquatic resources", "freshwater reserves"],
+        collocations: ["abundant hydrological reserves", "protect hydrological reserves"],
+        modelSentence: "Despite abundant natural hydrological reserves, lack of reticulation keeps usage low.",
+        vietnameseSentence: "Dù có nguồn trữ lượng thủy văn tự nhiên dồi dào, sự thiếu thốn mạng lưới đường ống khiến mức sử dụng rất thấp."
       }
     ]
   }

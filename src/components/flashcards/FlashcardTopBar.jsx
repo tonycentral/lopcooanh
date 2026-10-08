@@ -37,7 +37,7 @@ export default function FlashcardTopBar({
           <X className="w-5 h-5" />
         </button>
 
-        {/* Center: Duolingo-style Animated Progress Bar */}
+        {/* Center: Animated Progress Bar */}
         <div className="flex-1 max-w-xl mx-2">
           <div className="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-1">
             <span className="flex items-center gap-1.5 text-blue-400">

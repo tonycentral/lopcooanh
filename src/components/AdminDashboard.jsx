@@ -480,6 +480,7 @@ export default function AdminDashboard({ onExitAdmin }) {
                     <th className="p-3 w-28">Trình độ</th>
                     <th className="p-3">Nghĩa tiếng Việt</th>
                     <th className="p-3 w-40">Thay thế Band 6</th>
+                    <th className="p-3 w-48">Từ đồng nghĩa (Synonyms)</th>
                     <th className="p-3">Collocations</th>
                   </tr>
                 </thead>
@@ -499,6 +500,17 @@ export default function AdminDashboard({ onExitAdmin }) {
                       </td>
                       <td className="p-3 text-slate-200 font-medium">{v.meaning}</td>
                       <td className="p-3 text-amber-400/90 font-mono text-[11px]">{v.basicEquivalent || "--"}</td>
+                      <td className="p-3">
+                        {v.synonyms && v.synonyms.length > 0 ? (
+                          <div className="flex flex-wrap gap-1">
+                            {v.synonyms.map((s, idx) => (
+                              <span key={idx} className="text-[10px] px-1.5 py-0.2 rounded bg-pink-500/10 text-pink-300 border border-pink-500/20 font-mono">
+                                {s}
+                              </span>
+                            ))}
+                          </div>
+                        ) : "--"}
+                      </td>
                       <td className="p-3 text-slate-300 text-[11px] leading-relaxed">
                         {v.collocations ? v.collocations.join('; ') : '--'}
                       </td>

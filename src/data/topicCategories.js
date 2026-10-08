@@ -1,3 +1,4 @@
+// 1. Definition of MASTER_TOPIC_CATEGORIES
 export const MASTER_TOPIC_CATEGORIES = [
   {
     id: 'ALL',
@@ -6,64 +7,124 @@ export const MASTER_TOPIC_CATEGORIES = [
     shortName: 'Tất cả',
     icon: 'Layers',
     color: 'blue',
-    description: 'Toàn bộ ngân hàng đề thi IELTS Writing'
+    description: 'Toàn bộ ngân hàng đề thi IELTS Writing Task 2'
   },
   {
     id: 'education',
     name: 'Education & Schooling',
-    vietnameseName: 'Giáo dục & Học đường',
+    vietnameseName: 'Giáo dục & Đào tạo',
     shortName: 'Giáo dục',
     icon: 'GraduationCap',
     color: 'amber',
-    description: 'Trường học, đại học, giáo viên vs AI, học phí, phương pháp học, kỹ năng sống'
+    description: 'Trường học, đại học, giáo viên vs AI, học phí, kỹ năng sống vs lý thuyết'
   },
   {
     id: 'technology',
-    name: 'Technology & Artificial Intelligence',
+    name: 'Technology & AI',
     vietnameseName: 'Công nghệ & AI',
-    shortName: 'Công nghệ & AI',
+    shortName: 'Công nghệ',
     icon: 'Cpu',
     color: 'cyan',
-    description: 'Trí tuệ nhân tạo, tự động hóa, mạng xã hội, thiết bị thông minh, công nghệ số'
+    description: 'Trí tuệ nhân tạo, tự động hóa, robot, mạng xã hội, thiết bị số'
   },
   {
     id: 'environment',
-    name: 'Environment & Transportation',
-    vietnameseName: 'Môi trường & Giao thông',
+    name: 'Environment & Climate',
+    vietnameseName: 'Môi trường & Khí hậu',
     shortName: 'Môi trường',
     icon: 'Leaf',
     color: 'emerald',
-    description: 'Biến đổi khí hậu, năng lượng sạch, ô nhiễm, hàng không, xe cộ, sinh thái'
+    description: 'Biến đổi khí hậu, năng lượng sạch, ô nhiễm, rác thải & sinh thái'
   },
   {
-    id: 'society',
-    name: 'Society, Health & Modern Lifestyle',
-    vietnameseName: 'Xã hội, Y tế & Lối sống',
-    shortName: 'Xã hội & Y tế',
+    id: 'transport',
+    name: 'Transport & Urbanization',
+    vietnameseName: 'Giao thông & Đô thị',
+    shortName: 'Giao thông',
+    icon: 'Car',
+    color: 'teal',
+    description: 'Hàng không, đường sắt, xe cộ, quy hoạch đô thị, nhà ở & dãn dân'
+  },
+  {
+    id: 'health',
+    name: 'Health & Wellbeing',
+    vietnameseName: 'Y tế & Sức khỏe',
+    shortName: 'Y tế',
+    icon: 'HeartPulse',
+    color: 'red',
+    description: 'Y tế công cộng, sức khỏe tinh thần, tự dùng thuốc, thể dục thể thao'
+  },
+  {
+    id: 'work_career',
+    name: 'Work & Employment',
+    vietnameseName: 'Việc làm & Nghề nghiệp',
+    shortName: 'Việc làm',
+    icon: 'Briefcase',
+    color: 'indigo',
+    description: 'Thị trường lao động, tuần làm 4 ngày, làm từ xa, lương bổng, tuyển dụng'
+  },
+  {
+    id: 'business',
+    name: 'Economy & Consumerism',
+    vietnameseName: 'Kinh tế & Tiêu dùng',
+    shortName: 'Kinh tế',
+    icon: 'TrendingUp',
+    color: 'violet',
+    description: 'Tăng trưởng kinh tế, hàng hiệu, quảng cáo, mua sắm & doanh nghiệp'
+  },
+  {
+    id: 'society_family',
+    name: 'Society & Family',
+    vietnameseName: 'Xã hội & Gia đình',
+    shortName: 'Xã hội',
     icon: 'Users',
     color: 'purple',
-    description: 'Già hóa dân số, y tế cộng đồng, sức khỏe tinh thần, gia đình, đô thị hóa, văn hóa'
+    description: 'Già hóa dân số, nuôi dạy con, sống tự lập, người nổi tiếng'
   },
   {
-    id: 'economy_law',
-    name: 'Economy, Career & Law',
-    vietnameseName: 'Kinh tế, Việc làm & Pháp luật',
-    shortName: 'Kinh tế & Luật',
+    id: 'crime_law',
+    name: 'Crime & Legal System',
+    vietnameseName: 'Tội phạm & Pháp luật',
+    shortName: 'Pháp luật',
     icon: 'Scale',
     color: 'rose',
-    description: 'Thị trường lao động, tuần làm 4 ngày, kinh doanh, tiêu dùng, tội phạm & luật pháp'
+    description: 'Hệ thống luật pháp, xử phạt, trật tự xã hội, cải tạo tù nhân'
+  },
+  {
+    id: 'culture_arts',
+    name: 'Culture, Arts & Heritage',
+    vietnameseName: 'Văn hóa & Di sản',
+    shortName: 'Văn hóa',
+    icon: 'Landmark',
+    color: 'orange',
+    description: 'Bảo tàng, di tích lịch sử, kiến trúc cổ, nghệ thuật, du lịch'
   }
 ];
 
-// Specific prompt & topic ID overrides for optimal categorization
+// Explicit ID overrides for all prompts and topics
 const ID_OVERRIDES = {
-  // Transport & Green Infrastructure -> environment
-  'T2_010': 'environment',
-  'T2_059': 'environment',
-  'T2_067': 'environment',
-  'transport-2025': 'environment',
+  // 1. Education
+  'T2_008': 'education',
+  'T2_012': 'education',
+  'T2_015': 'education',
+  'T2_023': 'education',
+  'T2_029': 'education',
+  'T2_037': 'education',
+  'T2_042': 'education',
+  'T2_050': 'education',
+  'T2_053': 'education',
+  'T2_056': 'education',
+  'T2_060': 'education',
+  'T2_068': 'education',
+  'T2_070': 'education',
+  'T2_071': 'education',
+  'T2_074': 'education',
+  'T2_091': 'education',
+  'T2_092': 'education',
+  'higher-education-utility-2015': 'education',
+  'education': 'education',
 
-  // Tech & Digital -> technology
+  // 2. Technology & AI
   'T2_002': 'technology',
   'T2_021': 'technology',
   'T2_022': 'technology',
@@ -72,65 +133,141 @@ const ID_OVERRIDES = {
   'T2_077': 'technology',
   'T2_093': 'technology',
   'ai-workforce-cam19': 'technology',
+  'technology': 'technology',
 
-  // Economy, Career & Law -> economy_law
-  'T2_005': 'economy_law',
-  'T2_009': 'economy_law',
-  'T2_011': 'economy_law',
-  'T2_013': 'economy_law',
-  'T2_014': 'economy_law',
-  'T2_027': 'economy_law',
-  'T2_028': 'economy_law',
-  'T2_034': 'economy_law',
-  'T2_036': 'economy_law',
-  'T2_041': 'economy_law',
-  'T2_049': 'economy_law',
-  'T2_057': 'economy_law',
-  'T2_058': 'economy_law',
-  'T2_061': 'economy_law',
-  'T2_065': 'economy_law',
-  'T2_072': 'economy_law',
-  'T2_076': 'economy_law',
-  'T2_083': 'economy_law',
-  'work-2026': 'economy_law',
-  'career-mobility-2021': 'economy_law',
-  'law-safety-2025': 'economy_law',
-  'risk-taking-2022': 'economy_law',
-  'youth-demographics-2017': 'economy_law',
+  // 3. Environment & Climate
+  'T2_001': 'environment',
+  'T2_007': 'environment',
+  'T2_019': 'environment',
+  'T2_025': 'environment',
+  'T2_038': 'environment',
+  'T2_039': 'environment',
+  'T2_047': 'environment',
+  'T2_054': 'environment',
+  'T2_062': 'environment',
+  'T2_066': 'environment',
+  'T2_069': 'environment',
+  'T2_075': 'environment',
+  'environment': 'environment',
 
-  // Education -> education
-  'higher-education-utility-2015': 'education',
+  // 4. Transport & Urbanization
+  'T2_010': 'transport',
+  'T2_020': 'transport',
+  'T2_024': 'transport',
+  'T2_031': 'transport',
+  'T2_033': 'transport',
+  'T2_040': 'transport',
+  'T2_059': 'transport',
+  'T2_067': 'transport',
+  'T2_082': 'transport',
+  'transport-2025': 'transport',
+  'housing-ownership-2020': 'transport',
+  'transport': 'transport',
 
-  // Society, Health & Culture -> society
-  'health-2026': 'society',
-  'family-2026': 'society',
-  'museum-culture-2024': 'society',
-  'science-welfare-2023': 'society',
-  'housing-ownership-2020': 'society',
-  'adversity-betterment-2019': 'society',
-  'language-barrier-2018': 'society',
-  'heritage-restoration-2016': 'society'
+  // 5. Health & Wellbeing
+  'T2_004': 'health',
+  'T2_017': 'health',
+  'T2_035': 'health',
+  'T2_055': 'health',
+  'T2_089': 'health',
+  'health-2026': 'health',
+  'health': 'health',
+
+  // 6. Work & Careers
+  'T2_005': 'work_career',
+  'T2_014': 'work_career',
+  'T2_028': 'work_career',
+  'T2_034': 'work_career',
+  'T2_049': 'work_career',
+  'T2_076': 'work_career',
+  'T2_083': 'work_career',
+  'T2_095': 'work_career',
+  'work-2026': 'work_career',
+  'career-mobility-2021': 'work_career',
+  'risk-taking-2022': 'work_career',
+  'work_career': 'work_career',
+
+  // 7. Business & Consumerism
+  'T2_009': 'business',
+  'T2_013': 'business',
+  'T2_027': 'business',
+  'T2_036': 'business',
+  'T2_041': 'business',
+  'T2_057': 'business',
+  'T2_058': 'business',
+  'T2_061': 'business',
+  'T2_065': 'business',
+  'T2_072': 'business',
+  'T2_099': 'business',
+  'youth-demographics-2017': 'business',
+  'business': 'business',
+
+  // 8. Society & Family
+  'T2_003': 'society_family',
+  'T2_006': 'society_family',
+  'T2_018': 'society_family',
+  'T2_030': 'society_family',
+  'T2_043': 'society_family',
+  'T2_044': 'society_family',
+  'T2_045': 'society_family',
+  'T2_046': 'society_family',
+  'T2_080': 'society_family',
+  'T2_081': 'society_family',
+  'T2_084': 'society_family',
+  'T2_086': 'society_family',
+  'T2_094': 'society_family',
+  'T2_096': 'society_family',
+  'family-2026': 'society_family',
+  'science-welfare-2023': 'society_family',
+  'adversity-betterment-2019': 'society_family',
+  'society_family': 'society_family',
+  'society': 'society_family',
+
+  // 9. Crime & Law
+  'T2_011': 'crime_law',
+  'T2_098': 'crime_law',
+  'law-safety-2025': 'crime_law',
+  'crime_law': 'crime_law',
+
+  // 10. Culture, Arts & Heritage
+  'T2_016': 'culture_arts',
+  'T2_026': 'culture_arts',
+  'T2_048': 'culture_arts',
+  'T2_052': 'culture_arts',
+  'T2_063': 'culture_arts',
+  'T2_064': 'culture_arts',
+  'T2_073': 'culture_arts',
+  'T2_078': 'culture_arts',
+  'T2_085': 'culture_arts',
+  'T2_087': 'culture_arts',
+  'T2_088': 'culture_arts',
+  'museum-culture-2024': 'culture_arts',
+  'language-barrier-2018': 'culture_arts',
+  'heritage-restoration-2016': 'culture_arts',
+  'culture_arts': 'culture_arts',
+  'globalization': 'culture_arts'
 };
 
 const BASE_CATEGORY_MAP = {
   education: 'education',
   technology: 'technology',
   environment: 'environment',
-  society: 'society',
-  health: 'society',
-  globalization: 'society',
-  work_career: 'economy_law',
-  business: 'economy_law',
-  crime_law: 'economy_law',
-  economy_law: 'economy_law'
+  transport: 'transport',
+  health: 'health',
+  work_career: 'work_career',
+  business: 'business',
+  society_family: 'society_family',
+  society: 'society_family',
+  crime_law: 'crime_law',
+  culture_arts: 'culture_arts',
+  globalization: 'culture_arts'
 };
 
 /**
- * Normalizes any topic object or category key into one of the 5 Master Categories
- * ('education' | 'technology' | 'environment' | 'society' | 'economy_law')
+ * Normalizes any topic object or category key into one of the 10 Master Categories
  */
 export function getMasterCategoryId(item) {
-  if (!item) return 'society';
+  if (!item) return 'society_family';
   if (typeof item === 'string') {
     if (ID_OVERRIDES[item]) return ID_OVERRIDES[item];
     if (BASE_CATEGORY_MAP[item]) return BASE_CATEGORY_MAP[item];
@@ -143,21 +280,18 @@ export function getMasterCategoryId(item) {
   if (ID_OVERRIDES[cat]) return ID_OVERRIDES[cat];
   if (BASE_CATEGORY_MAP[cat]) return BASE_CATEGORY_MAP[cat];
 
-  // Smart heuristic for custom topics
+  // Smart keyword heuristic for user custom topics
   const text = `${item.name || ''} ${item.title || ''} ${item.ieltsPrompt || ''} ${item.promptText || ''}`.toLowerCase();
-  if (text.includes('học') || text.includes('giáo dục') || text.includes('education') || text.includes('school') || text.includes('student') || text.includes('teacher') || text.includes('curriculum')) {
-    return 'education';
-  }
-  if (text.includes('công nghệ') || text.includes('ai') || text.includes('trí tuệ nhân tạo') || text.includes('robot') || text.includes('internet') || text.includes('technology') || text.includes('digital') || text.includes('smartphone')) {
-    return 'technology';
-  }
-  if (text.includes('môi trường') || text.includes('climate') || text.includes('environment') || text.includes('pollution') || text.includes('energy') || text.includes('khí hậu') || text.includes('rác') || text.includes('transport') || text.includes('giao thông') || text.includes('aviation') || text.includes('hàng không')) {
-    return 'environment';
-  }
-  if (text.includes('kinh tế') || text.includes('việc làm') || text.includes('tiêu dùng') || text.includes('tội phạm') || text.includes('pháp luật') || text.includes('economy') || text.includes('job') || text.includes('work') || text.includes('business') || text.includes('crime') || text.includes('law')) {
-    return 'economy_law';
-  }
-  return 'society';
+  if (text.includes('học') || text.includes('giáo dục') || text.includes('education') || text.includes('school') || text.includes('student') || text.includes('teacher')) return 'education';
+  if (text.includes('công nghệ') || text.includes('ai') || text.includes('robot') || text.includes('internet') || text.includes('technology') || text.includes('digital')) return 'technology';
+  if (text.includes('môi trường') || text.includes('climate') || text.includes('environment') || text.includes('pollution') || text.includes('energy') || text.includes('khí hậu')) return 'environment';
+  if (text.includes('giao thông') || text.includes('transport') || text.includes('traffic') || text.includes('rail') || text.includes('aviation') || text.includes('đô thị') || text.includes('urban') || text.includes('housing') || text.includes('nhà ở')) return 'transport';
+  if (text.includes('y tế') || text.includes('sức khỏe') || text.includes('health') || text.includes('medical') || text.includes('hospital') || text.includes('disease')) return 'health';
+  if (text.includes('việc làm') || text.includes('job') || text.includes('work') || text.includes('career') || text.includes('salary') || text.includes('lương') || text.includes('tuyển dụng')) return 'work_career';
+  if (text.includes('kinh tế') || text.includes('tiêu dùng') || text.includes('economy') || text.includes('business') || text.includes('quảng cáo') || text.includes('advertis') || text.includes('consumer')) return 'business';
+  if (text.includes('tội phạm') || text.includes('pháp luật') || text.includes('crime') || text.includes('law') || text.includes('prison') || text.includes('police')) return 'crime_law';
+  if (text.includes('văn hóa') || text.includes('di sản') || text.includes('bảo tàng') || text.includes('museum') || text.includes('art') || text.includes('heritage') || text.includes('touris') || text.includes('du lịch')) return 'culture_arts';
+  return 'society_family';
 }
 
 /**
@@ -165,5 +299,5 @@ export function getMasterCategoryId(item) {
  */
 export function getMasterCategoryMeta(item) {
   const catId = getMasterCategoryId(item);
-  return MASTER_TOPIC_CATEGORIES.find(c => c.id === catId) || MASTER_TOPIC_CATEGORIES[4];
+  return MASTER_TOPIC_CATEGORIES.find(c => c.id === catId) || MASTER_TOPIC_CATEGORIES[8]; // society_family fallback
 }

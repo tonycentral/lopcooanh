@@ -132,7 +132,7 @@ export default function FillBlankView({
 
       </div>
 
-      {/* Word Chips Bank: Duolingo Style */}
+      {/* Word Chips Bank: Interactive Chips */}
       <div className="space-y-2">
         <div className="text-[11px] font-semibold text-slate-400 text-center">
           Ngân hàng từ vựng:

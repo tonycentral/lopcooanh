@@ -1,4 +1,4 @@
-// Web Audio API Sound Generator & Web Speech Synthesis for Duolingo-style Audio
+// Web Audio API Sound Generator & Web Speech Synthesis for Interactive Audio
 // 100% self-contained, no external assets or mp3 files needed!
 
 let audioCtx = null;
@@ -17,7 +17,7 @@ function getAudioContext() {
   return audioCtx;
 }
 
-// Duolingo-style cheerful correct chime (Major chord arpeggio)
+// Cheerful correct chime (Major chord arpeggio)
 export function playCorrectSound() {
   try {
     const ctx = getAudioContext();
@@ -46,7 +46,7 @@ export function playCorrectSound() {
   }
 }
 
-// Gentle low error tone (Duolingo style)
+// Gentle low error tone
 export function playIncorrectSound() {
   try {
     const ctx = getAudioContext();

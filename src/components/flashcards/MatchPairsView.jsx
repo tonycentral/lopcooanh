@@ -114,7 +114,7 @@ export default function MatchPairsView({
       <div className="flex items-center justify-between">
         <div>
           <span className="text-xs font-bold text-pink-400 uppercase tracking-wider px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20">
-            Mini-Game Duolingo • Nối Cặp Thần Tốc
+            Mini-Game Phản Xạ • Nối Cặp Thần Tốc
           </span>
           <p className="text-xs text-slate-400 mt-1">
             Chạm vào 1 từ tiếng Anh và 1 nghĩa tiếng Việt tương ứng

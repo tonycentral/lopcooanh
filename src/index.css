@@ -38,7 +38,7 @@
   transform: rotateY(180deg);
 }
 
-/* Duolingo-style Animations */
+/* Interactive Flashcard Animations */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   20%, 60% { transform: translateX(-6px); }
