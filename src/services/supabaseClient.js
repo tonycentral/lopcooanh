@@ -1,6 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Get Supabase credentials from Vite environment variables or localStorage
+// Default Supabase project credentials for Lop Co Oanh IELTS app
+const DEFAULT_SUPABASE_URL = 'https://ammqjvbdjmqggpzwusir.supabase.co';
+const DEFAULT_SUPABASE_ANON_KEY = 'sb_publishable_L-i8E4_2AK7_OrRTTjks9g_EtI6cihM';
+
+// Get Supabase credentials from Vite environment variables or localStorage or defaults
 export function getSupabaseConfig() {
   const envUrl = import.meta.env?.VITE_SUPABASE_URL || '';
   const envKey = import.meta.env?.VITE_SUPABASE_ANON_KEY || '';
@@ -14,8 +18,8 @@ export function getSupabaseConfig() {
     console.debug(e);
   }
 
-  const url = (envUrl || localUrl).trim();
-  const anonKey = (envKey || localKey).trim();
+  const url = (envUrl || localUrl || DEFAULT_SUPABASE_URL).trim();
+  const anonKey = (envKey || localKey || DEFAULT_SUPABASE_ANON_KEY).trim();
 
   return {
     url,
@@ -37,7 +41,7 @@ const config = getSupabaseConfig();
 
 export const isSupabaseConfigured = config.isConfigured;
 
-// Initialize Supabase client if configured, otherwise create a safe placeholder
+// Initialize Supabase client
 export const supabase = config.isConfigured
   ? createClient(config.url, config.anonKey, {
       auth: {
