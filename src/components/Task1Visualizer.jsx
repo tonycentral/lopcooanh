@@ -38,28 +38,38 @@ export default function Task1Visualizer({ topic, onExpandChart, isCompact = fals
           {onExpandChart && (
             <button
               onClick={onExpandChart}
-              className="p-1.5 rounded-lg bg-[#F4EFEA] hover:bg-[#E6E2D8] text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8] transition cursor-pointer"
-              title="Phóng to ảnh"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-[#FAF5EE] hover:bg-[#E6E2D8] text-[#A67C52] border border-[#E6E2D8] text-xs font-semibold transition cursor-pointer"
+              title="Phóng to bản đồ & Zoom chi tiết"
             >
               <Maximize2 className="w-3.5 h-3.5" />
+              <span>Phóng to</span>
             </button>
           )}
         </div>
 
-        {/* Image Container */}
+        {/* Image Container with larger height & interactive zoom hover */}
         <div 
           onClick={onExpandChart}
-          className="relative rounded-xl overflow-hidden bg-[#FAF8F5] border border-[#E6E2D8] group cursor-pointer shrink-0 flex items-center justify-center p-2"
+          className="relative rounded-xl overflow-hidden bg-[#FAF8F5] border border-[#E6E2D8] group cursor-pointer shrink-0 flex items-center justify-center p-2.5 min-h-[220px]"
+          title="Nhấn để mở bản đồ chi tiết với tính năng Zoom & Kéo rê"
         >
+          {onExpandChart && (
+            <div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white/95 backdrop-blur-xs border border-[#E6E2D8] text-[11px] font-semibold text-[#3E4F42] shadow-xs group-hover:bg-[#EDF3EE] transition">
+              <Maximize2 className="w-3.5 h-3.5" />
+              <span>Zoom & Soi chi tiết</span>
+            </div>
+          )}
+
           <img
             src={topic.imageUrl}
             alt={title}
-            className="w-full max-h-72 object-contain mx-auto rounded-lg group-hover:scale-[1.02] transition-transform duration-300"
+            className="w-full max-h-[360px] sm:max-h-[420px] object-contain mx-auto rounded-lg group-hover:scale-[1.02] transition-transform duration-300"
           />
+
           {onExpandChart && (
-            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white text-xs font-semibold backdrop-blur-[2px]">
+            <div className="absolute inset-0 bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white text-xs font-semibold backdrop-blur-[2px]">
               <Maximize2 className="w-4 h-4" />
-              <span>Nhấn để phóng to toàn màn hình</span>
+              <span>Nhấn để mở bản đồ toàn màn hình (Zoom 350% & Kéo rê)</span>
             </div>
           )}
         </div>
