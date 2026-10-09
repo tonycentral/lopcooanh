@@ -11,7 +11,8 @@ import {
   User, 
   Cloud, 
   LogOut,
-  Check
+  Check,
+  Settings
 } from 'lucide-react';
 
 export default function Header({ 
@@ -25,6 +26,7 @@ export default function Header({
   onGoPractice,
   currentUser,
   onOpenAuth,
+  onOpenSettings,
   onSignOut,
   studentEmail,
   activeTask,
@@ -33,9 +35,11 @@ export default function Header({
 }) {
   const [isFunctionDropdownOpen, setIsFunctionDropdownOpen] = useState(false);
   const [isTaskDropdownOpen, setIsTaskDropdownOpen] = useState(false);
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
 
   const functionDropdownRef = useRef(null);
   const taskDropdownRef = useRef(null);
+  const accountMenuRef = useRef(null);
 
   // Close dropdowns on click outside
   useEffect(() => {
@@ -45,6 +49,9 @@ export default function Header({
       }
       if (taskDropdownRef.current && !taskDropdownRef.current.contains(e.target)) {
         setIsTaskDropdownOpen(false);
+      }
+      if (accountMenuRef.current && !accountMenuRef.current.contains(e.target)) {
+        setIsAccountMenuOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -302,26 +309,94 @@ export default function Header({
         {/* Right Area: User Account Only */}
         <div className="flex items-center gap-2">
           {currentUser ? (
-            <div className="flex items-center gap-1">
+            <div className="relative" ref={accountMenuRef}>
               <button
-                onClick={onOpenAuth}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-xs text-[#24211E] transition cursor-pointer shadow-2xs"
-                title="Tài khoản học viên"
+                type="button"
+                onClick={() => setIsAccountMenuOpen(prev => !prev)}
+                className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#3E4F42]/30 text-xs text-[#24211E] transition cursor-pointer shadow-2xs select-none"
+                title="Tài khoản & Cài đặt"
               >
-                <Cloud className="w-3.5 h-3.5 text-[#3E4F42] shrink-0" />
-                <span className="font-medium text-[#24211E] max-w-[120px] sm:max-w-[160px] truncate">
+                <div className="w-5 h-5 rounded-lg bg-[#3E4F42] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+                  {(currentUser?.user_metadata?.full_name || studentEmail || "H").charAt(0).toUpperCase()}
+                </div>
+                <span className="font-semibold text-[#24211E] max-w-[110px] sm:max-w-[150px] truncate">
                   {currentUser?.user_metadata?.full_name || currentUser?.email}
                 </span>
+                <ChevronDown className={`w-3 h-3 text-[#7A7369] transition-transform duration-200 ${isAccountMenuOpen ? "rotate-180" : ""}`} />
               </button>
 
-              {onSignOut && (
-                <button
-                  onClick={onSignOut}
-                  className="p-1.5 sm:p-2 rounded-xl text-[#7A7369] hover:text-[#A67C52] hover:bg-[#FAF8F5] transition cursor-pointer"
-                  title="Đăng xuất"
-                >
-                  <LogOut className="w-3.5 h-3.5" />
-                </button>
+              {/* Account Dropdown Menu */}
+              {isAccountMenuOpen && (
+                <div className="absolute top-full right-0 mt-1.5 w-64 bg-white border border-[#E6E2D8] rounded-2xl shadow-xl p-2 z-50 animate-in fade-in-50 duration-150">
+                  {/* Account Header */}
+                  <div className="px-3 py-2.5 bg-[#FAF8F5] rounded-xl border border-[#E6E2D8] mb-1.5">
+                    <div className="font-bold text-xs text-[#24211E] truncate">
+                      {currentUser?.user_metadata?.full_name || "Học viên"}
+                    </div>
+                    <div className="text-[11px] text-[#7A7369] truncate">
+                      {currentUser?.email || studentEmail}
+                    </div>
+                    <div className="flex items-center gap-1.5 text-[10px] font-semibold text-[#3E4F42] mt-1.5">
+                      <Cloud className="w-3 h-3" />
+                      <span>Đã kết nối đám mây Supabase</span>
+                    </div>
+                  </div>
+
+                  {/* Menu Items */}
+                  <div className="space-y-0.5">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsAccountMenuOpen(false);
+                        if (onOpenSettings) onOpenSettings();
+                      }}
+                      className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-left text-xs text-[#24211E] hover:bg-[#FAF8F5] hover:text-[#3E4F42] transition cursor-pointer font-medium"
+                    >
+                      <div className="w-6 h-6 rounded-lg bg-[#EDF3EE] text-[#3E4F42] flex items-center justify-center shrink-0">
+                        <Settings className="w-3.5 h-3.5" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-semibold text-[#24211E]">Cài đặt tài khoản &amp; AI</div>
+                        <div className="text-[10px] text-[#7A7369]">Hồ sơ, Gemini Key, Dữ liệu</div>
+                      </div>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsAccountMenuOpen(false);
+                        if (onOpenBandModal) onOpenBandModal();
+                      }}
+                      className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-left text-xs text-[#24211E] hover:bg-[#FAF8F5] transition cursor-pointer font-medium"
+                    >
+                      <div className="w-6 h-6 rounded-lg bg-[#FAF5EE] text-[#A67C52] flex items-center justify-center shrink-0">
+                        <Target className="w-3.5 h-3.5" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div>Mục tiêu: <strong className="text-[#3E4F42]">Band {targetBand}</strong></div>
+                        <div className="text-[10px] text-[#7A7369]">Chỉnh sửa mục tiêu điểm số</div>
+                      </div>
+                    </button>
+
+                    <div className="h-px bg-[#E6E2D8] my-1" />
+
+                    {onSignOut && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsAccountMenuOpen(false);
+                          onSignOut();
+                        }}
+                        className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-left text-xs text-[#A67C52] hover:bg-[#FAF5EE] transition cursor-pointer font-semibold"
+                      >
+                        <div className="w-6 h-6 rounded-lg bg-[#FAF5EE] text-[#A67C52] flex items-center justify-center shrink-0">
+                          <LogOut className="w-3.5 h-3.5" />
+                        </div>
+                        <span>Đăng xuất tài khoản</span>
+                      </button>
+                    )}
+                  </div>
+                </div>
               )}
             </div>
           ) : (
