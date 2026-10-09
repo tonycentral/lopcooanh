@@ -7527,7 +7527,14 @@ const RAW_IELTS_TASK1_TOPICS = [
     ]
   }
 ];
-export const IELTS_TASK1_TOPICS = RAW_IELTS_TASK1_TOPICS.map(topic => ({
-  ...topic,
-  vocabularies: topic.vocabularies.map(v => enrichVocabulary(v, topic.name))
-}));
+export const IELTS_TASK1_TOPICS = RAW_IELTS_TASK1_TOPICS.map(topic => {
+  const masterCatId = getMasterCategoryId(topic);
+  const masterMeta = getMasterCategoryMeta(masterCatId);
+  return {
+    ...topic,
+    topicCategory: masterCatId,
+    categoryName: masterMeta.name,
+    categoryVietnameseName: masterMeta.vietnameseName,
+    vocabularies: topic.vocabularies.map(v => enrichVocabulary(v, topic.name))
+  };
+});

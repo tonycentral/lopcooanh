@@ -32,7 +32,7 @@ const CATEGORY_ICONS = {
   Landmark
 };
 
-// 10 Classified Master Topics ONLY (excluding 'ALL')
+// 10 Classified Master Topics ONLY (excluding 'ALL') - Unified for Task 1, Task 2 & Vocab
 const CLASSIFIED_10_TOPICS = MASTER_TOPIC_CATEGORIES.filter(cat => cat.id !== 'ALL');
 
 export default function TopicTabBar({ 
@@ -58,15 +58,14 @@ export default function TopicTabBar({
     return getMasterCategoryId(selectedTopic) || 'education';
   }, [selectedTopic]);
 
-  // Matching prompts for the currently active category in Task 2
+  // Matching prompts/charts for the currently active category
   const currentCategoryPrompts = useMemo(() => {
-    if (activeTask === 'task1') return list;
     return list.filter(t => 
       t.id === activeCatId || 
       t.topicCategory === activeCatId || 
       getMasterCategoryId(t) === activeCatId
     );
-  }, [list, activeCatId, activeTask]);
+  }, [list, activeCatId]);
 
   // Current prompt index within the category
   const currentPromptIndex = useMemo(() => {
@@ -84,97 +83,62 @@ export default function TopicTabBar({
     );
     if (matching.length === 0) return;
 
-    // If clicking the category that is already active, cycle through prompts in this category
+    // If clicking the category that is already active, cycle through prompts/charts in this category
     if (activeCatId === catId && matching.length > 1) {
       const currentIdx = matching.findIndex(t => t.id === selectedTopic?.id);
       const nextIdx = (currentIdx + 1) % matching.length;
       onSelectTopic(matching[nextIdx]);
     } else {
-      // Select the primary or first prompt of this category
+      // Select the primary or first prompt/chart of this category
       const primary = matching.find(t => t.id === catId) || matching[0];
       onSelectTopic(primary);
     }
   };
 
-  // Next prompt in the same category
+  // Next prompt/chart in the same category
   const handleNextPromptInCategory = () => {
     if (currentCategoryPrompts.length <= 1) return;
     const nextIdx = (currentPromptIndex + 1) % currentCategoryPrompts.length;
     onSelectTopic(currentCategoryPrompts[nextIdx]);
   };
 
-  // Smart random topic selector
+  // Smart random topic selector across the 10 classified master topics
   const handleRandomClick = () => {
-    if (activeTask === 'task1') {
-      if (list.length > 0) {
-        const candidates = list.filter(t => t.id !== selectedTopic?.id);
-        const pool = candidates.length > 0 ? candidates : list;
-        onSelectTopic(pool[Math.floor(Math.random() * pool.length)]);
-      } else if (onRandomTopic) {
-        onRandomTopic();
-      }
-    } else {
-      // Pick another category among the 10 classified master topics
-      const candidates = CLASSIFIED_10_TOPICS.filter(c => c.id !== activeCatId);
-      const pool = candidates.length > 0 ? candidates : CLASSIFIED_10_TOPICS;
-      const randomCat = pool[Math.floor(Math.random() * pool.length)];
-      if (randomCat) {
-        handleCategoryClick(randomCat.id);
-      } else if (onRandomTopic) {
-        onRandomTopic();
-      }
+    const candidates = CLASSIFIED_10_TOPICS.filter(c => c.id !== activeCatId);
+    const pool = candidates.length > 0 ? candidates : CLASSIFIED_10_TOPICS;
+    const randomCat = pool[Math.floor(Math.random() * pool.length)];
+    if (randomCat) {
+      handleCategoryClick(randomCat.id);
+    } else if (onRandomTopic) {
+      onRandomTopic();
     }
   };
 
   return (
     <div className="space-y-2">
-      {/* Single clean row of Classified Topic Tabs */}
+      {/* Single clean row of 10 Classified Topic Tabs - Unified across Task 1, Task 2 & Vocab */}
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-thin">
-        {activeTask === 'task1' ? (
-          // TASK 1: Chart topics
-          list.map((topic) => {
-            const isSelected = selectedTopic?.id === topic.id;
-            const label = topic.vietnameseName ? topic.vietnameseName.split('&')[0].trim() : topic.name;
+        {CLASSIFIED_10_TOPICS.map((cat) => {
+          const isSelected = activeCatId === cat.id;
+          const IconComp = CATEGORY_ICONS[cat.icon] || Layers;
 
-            return (
-              <button
-                key={topic.id}
-                type="button"
-                onClick={() => onSelectTopic(topic)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition cursor-pointer select-none shrink-0 ${
-                  isSelected
-                    ? "bg-[#3E4F42] text-white shadow-xs font-semibold"
-                    : "bg-white hover:bg-[#FAF8F5] text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
-                }`}
-              >
-                <span>{label}</span>
-              </button>
-            );
-          })
-        ) : (
-          // TASK 2 & VOCAB: 10 Classified Master Topics ONLY
-          CLASSIFIED_10_TOPICS.map((cat) => {
-            const isSelected = activeCatId === cat.id;
-            const IconComp = CATEGORY_ICONS[cat.icon] || Layers;
-
-            return (
-              <button
-                key={cat.id}
-                type="button"
-                onClick={() => handleCategoryClick(cat.id)}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition cursor-pointer select-none shrink-0 ${
-                  isSelected
-                    ? "bg-[#3E4F42] text-white shadow-xs font-semibold"
-                    : "bg-white hover:bg-[#FAF8F5] text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
-                }`}
-                title={cat.description}
-              >
-                <IconComp className="w-3.5 h-3.5 shrink-0" />
-                <span>{cat.shortName}</span>
-              </button>
-            );
-          })
-        )}
+          return (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => handleCategoryClick(cat.id)}
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition cursor-pointer select-none shrink-0 ${
+                isSelected
+                  ? "bg-[#3E4F42] text-white shadow-xs font-semibold"
+                  : "bg-white hover:bg-[#FAF8F5] text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
+              }`}
+              title={cat.description}
+            >
+              <IconComp className="w-3.5 h-3.5 shrink-0" />
+              <span>{cat.shortName}</span>
+            </button>
+          );
+        })}
 
         {/* Dedicated Random Topic Tab */}
         <button
@@ -200,8 +164,8 @@ export default function TopicTabBar({
                 {selectedTopic.vietnameseName || selectedTopic.name}
               </span>
 
-              {/* Cycle through other prompts in the same topic for Task 2 */}
-              {activeTask === 'task2' && currentCategoryPrompts.length > 1 && (
+              {/* Cycle through other prompts / charts in the same category */}
+              {currentCategoryPrompts.length > 1 && (
                 <button
                   type="button"
                   onClick={handleNextPromptInCategory}

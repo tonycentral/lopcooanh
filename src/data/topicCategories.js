@@ -245,7 +245,58 @@ const ID_OVERRIDES = {
   'language-barrier-2018': 'culture_arts',
   'heritage-restoration-2016': 'culture_arts',
   'culture_arts': 'culture_arts',
-  'globalization': 'culture_arts'
+  'globalization': 'culture_arts',
+
+  // Task 1 Overrides to 10 Master Categories
+  // 1. Education
+  'task1-top-04-further-education': 'education',
+  'task1-top-03-canterbury-map': 'education',
+  'task1-zim-12-student-rooms': 'education',
+
+  // 2. Technology & AI
+  'task1-top-02-wave-power': 'technology',
+  'task1-top-05-radio-tv-audiences': 'technology',
+  'task1-zim-13-stone-tools': 'technology',
+
+  // 3. Environment & Climate
+  'task1-line-graph': 'environment',
+  'task1-process': 'environment',
+  'task1-pie-chart': 'environment',
+  'task1-zim-09-rainwater': 'environment',
+  'task1-zim-10-stormwater': 'environment',
+  'task1-zim-11-water-supply': 'environment',
+  'task1-top-06-worldwide-water-use': 'environment',
+  'task1-roche-06-water-cycle': 'environment',
+
+  // 4. Transport & Urbanization
+  'task1-zim-01-tunnels': 'transport',
+  'task1-zim-07-city-evolution': 'transport',
+  'task1-zim-08-road-safety': 'transport',
+
+  // 5. Health & Wellbeing
+  'task1-roche-03-uk-alcohol': 'health',
+
+  // 6. Work & Careers
+  'task1-zim-05-teacher-salaries': 'work_career',
+
+  // 7. Business & Consumerism
+  'task1-bar-chart': 'business',
+  'task1-zim-02-fruits': 'business',
+  'task1-zim-06-water-costs': 'business',
+  'task1-roche-01-kpb-shares': 'business',
+  'task1-roche-04-uk-spending': 'business',
+  'task1-roche-05-consumer-spending': 'business',
+
+  // 8. Society & Family
+  'task1-roche-02-gulf-fertility': 'society_family',
+
+  // 9. Crime & Law
+  'task1-zim-04-driving-license': 'crime_law',
+
+  // 10. Culture, Arts & Heritage
+  'task1-zim-03-igloo': 'culture_arts',
+  'task1-top-01-tourist-arrivals': 'culture_arts',
+  'task1-roche-07-island-tourism': 'culture_arts'
 };
 
 const BASE_CATEGORY_MAP = {
