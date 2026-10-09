@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { 
   Shuffle, 
   BarChart3, 
@@ -32,11 +32,8 @@ const CATEGORY_ICONS = {
   Landmark
 };
 
-const UNIFIED_CATEGORY_STYLE = {
-  active: "bg-[#3E4F42] text-white shadow-xs",
-  badgeActive: "bg-white/20 text-white",
-  badgeInactive: "bg-[#F4EFEA] text-[#7A7369]"
-};
+// 10 Classified Master Topics ONLY (excluding 'ALL')
+const CLASSIFIED_10_TOPICS = MASTER_TOPIC_CATEGORIES.filter(cat => cat.id !== 'ALL');
 
 export default function TopicTabBar({ 
   topics, 
@@ -50,67 +47,114 @@ export default function TopicTabBar({
   hidePromptCard = false
 }) {
   const list = topics && topics.length > 0 ? topics : [];
-  const [selectedCategory, setSelectedCategory] = useState('ALL');
 
-  // Compute topic counts for each of the 10 master categories
-  const categoryCounts = useMemo(() => {
-    if (activeTask === 'task1') return {};
-    const counts = { ALL: list.length };
-    MASTER_TOPIC_CATEGORIES.forEach(cat => {
-      if (cat.id !== 'ALL') counts[cat.id] = 0;
-    });
-    list.forEach(t => {
-      const catId = t.topicCategory || getMasterCategoryId(t);
-      if (counts[catId] !== undefined) {
-        counts[catId]++;
-      } else {
-        counts['society_family'] = (counts['society_family'] || 0) + 1;
-      }
-    });
-    return counts;
-  }, [list, activeTask]);
+  // Determine current active category ID matching the 10 master categories
+  const activeCatId = useMemo(() => {
+    if (!selectedTopic) return 'education';
+    if (selectedTopic.topicCategory) return selectedTopic.topicCategory;
+    if (selectedTopic.id && CLASSIFIED_10_TOPICS.some(c => c.id === selectedTopic.id)) {
+      return selectedTopic.id;
+    }
+    return getMasterCategoryId(selectedTopic) || 'education';
+  }, [selectedTopic]);
 
-  // Filter topics purely by selected master category
-  const displayTopics = useMemo(() => {
-    if (activeTask === 'task1' || selectedCategory === 'ALL') return list;
-    return list.filter(t => (t.topicCategory || getMasterCategoryId(t)) === selectedCategory);
-  }, [list, activeTask, selectedCategory]);
+  // Matching prompts for the currently active category in Task 2
+  const currentCategoryPrompts = useMemo(() => {
+    if (activeTask === 'task1') return list;
+    return list.filter(t => 
+      t.id === activeCatId || 
+      t.topicCategory === activeCatId || 
+      getMasterCategoryId(t) === activeCatId
+    );
+  }, [list, activeCatId, activeTask]);
 
-  // Handle master category tab click
+  // Current prompt index within the category
+  const currentPromptIndex = useMemo(() => {
+    if (!selectedTopic || currentCategoryPrompts.length === 0) return 0;
+    const idx = currentCategoryPrompts.findIndex(t => t.id === selectedTopic.id);
+    return idx >= 0 ? idx : 0;
+  }, [selectedTopic, currentCategoryPrompts]);
+
+  // Handle click on one of the 10 classified master topics
   const handleCategoryClick = (catId) => {
-    setSelectedCategory(catId);
-    if (catId === 'ALL') return;
+    const matching = list.filter(t => 
+      t.id === catId || 
+      t.topicCategory === catId || 
+      getMasterCategoryId(t) === catId
+    );
+    if (matching.length === 0) return;
 
-    // If currently selected topic is not in the clicked category, auto-select the first topic in that category
-    const currentCat = selectedTopic ? (selectedTopic.topicCategory || getMasterCategoryId(selectedTopic)) : null;
-    if (currentCat !== catId) {
-      const candidates = list.filter(t => (t.topicCategory || getMasterCategoryId(t)) === catId);
-      if (candidates.length > 0) {
-        onSelectTopic(candidates[0]);
-      }
+    // If clicking the category that is already active, cycle through prompts in this category
+    if (activeCatId === catId && matching.length > 1) {
+      const currentIdx = matching.findIndex(t => t.id === selectedTopic?.id);
+      const nextIdx = (currentIdx + 1) % matching.length;
+      onSelectTopic(matching[nextIdx]);
+    } else {
+      // Select the primary or first prompt of this category
+      const primary = matching.find(t => t.id === catId) || matching[0];
+      onSelectTopic(primary);
     }
   };
 
-  // Smart random within current filtered view
+  // Next prompt in the same category
+  const handleNextPromptInCategory = () => {
+    if (currentCategoryPrompts.length <= 1) return;
+    const nextIdx = (currentPromptIndex + 1) % currentCategoryPrompts.length;
+    onSelectTopic(currentCategoryPrompts[nextIdx]);
+  };
+
+  // Smart random topic selector
   const handleRandomClick = () => {
-    if (displayTopics.length > 0) {
-      const candidates = displayTopics.filter(t => t.id !== selectedTopic?.id);
-      const pool = candidates.length > 0 ? candidates : displayTopics;
-      const random = pool[Math.floor(Math.random() * pool.length)];
-      onSelectTopic(random);
-    } else if (onRandomTopic) {
-      onRandomTopic();
+    if (activeTask === 'task1') {
+      if (list.length > 0) {
+        const candidates = list.filter(t => t.id !== selectedTopic?.id);
+        const pool = candidates.length > 0 ? candidates : list;
+        onSelectTopic(pool[Math.floor(Math.random() * pool.length)]);
+      } else if (onRandomTopic) {
+        onRandomTopic();
+      }
+    } else {
+      // Pick another category among the 10 classified master topics
+      const candidates = CLASSIFIED_10_TOPICS.filter(c => c.id !== activeCatId);
+      const pool = candidates.length > 0 ? candidates : CLASSIFIED_10_TOPICS;
+      const randomCat = pool[Math.floor(Math.random() * pool.length)];
+      if (randomCat) {
+        handleCategoryClick(randomCat.id);
+      } else if (onRandomTopic) {
+        onRandomTopic();
+      }
     }
   };
 
   return (
     <div className="space-y-2">
-      {/* 10 Master Thematic Groups Filter Bar for Task 2 */}
-      {activeTask === 'task2' && (
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 scrollbar-thin">
-          {MASTER_TOPIC_CATEGORIES.map(cat => {
-            const isCatSelected = selectedCategory === cat.id;
-            const count = categoryCounts[cat.id] || 0;
+      {/* Single clean row of Classified Topic Tabs */}
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-thin">
+        {activeTask === 'task1' ? (
+          // TASK 1: Chart topics
+          list.map((topic) => {
+            const isSelected = selectedTopic?.id === topic.id;
+            const label = topic.vietnameseName ? topic.vietnameseName.split('&')[0].trim() : topic.name;
+
+            return (
+              <button
+                key={topic.id}
+                type="button"
+                onClick={() => onSelectTopic(topic)}
+                className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition cursor-pointer select-none shrink-0 ${
+                  isSelected
+                    ? "bg-[#3E4F42] text-white shadow-xs font-semibold"
+                    : "bg-white hover:bg-[#FAF8F5] text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
+                }`}
+              >
+                <span>{label}</span>
+              </button>
+            );
+          })
+        ) : (
+          // TASK 2 & VOCAB: 10 Classified Master Topics ONLY
+          CLASSIFIED_10_TOPICS.map((cat) => {
+            const isSelected = activeCatId === cat.id;
             const IconComp = CATEGORY_ICONS[cat.icon] || Layers;
 
             return (
@@ -118,47 +162,19 @@ export default function TopicTabBar({
                 key={cat.id}
                 type="button"
                 onClick={() => handleCategoryClick(cat.id)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition cursor-pointer select-none shrink-0 ${
-                  isCatSelected
-                    ? UNIFIED_CATEGORY_STYLE.active
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition cursor-pointer select-none shrink-0 ${
+                  isSelected
+                    ? "bg-[#3E4F42] text-white shadow-xs font-semibold"
                     : "bg-white hover:bg-[#FAF8F5] text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
                 }`}
                 title={cat.description}
               >
                 <IconComp className="w-3.5 h-3.5 shrink-0" />
                 <span>{cat.shortName}</span>
-                <span className={`text-[10px] font-bold px-1.5 py-0.2 rounded-full ${
-                  isCatSelected ? UNIFIED_CATEGORY_STYLE.badgeActive : UNIFIED_CATEGORY_STYLE.badgeInactive
-                }`}>
-                  {count}
-                </span>
               </button>
             );
-          })}
-        </div>
-      )}
-
-      {/* Horizontal Topic Tabs + Random Tab */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-thin">
-        {displayTopics.map((topic) => {
-          const isSelected = selectedTopic?.id === topic.id;
-          const label = topic.vietnameseName ? topic.vietnameseName.split('&')[0].trim() : topic.name;
-
-          return (
-            <button
-              key={topic.id}
-              type="button"
-              onClick={() => onSelectTopic(topic)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition cursor-pointer select-none shrink-0 ${
-                isSelected
-                  ? "bg-[#3E4F42] text-white shadow-xs"
-                  : "bg-white hover:bg-[#FAF8F5] text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
-              }`}
-            >
-              <span>{label}</span>
-            </button>
-          );
-        })}
+          })
+        )}
 
         {/* Dedicated Random Topic Tab */}
         <button
@@ -172,7 +188,7 @@ export default function TopicTabBar({
         </button>
       </div>
 
-      {/* Prominent, Legible IELTS Prompt Card - Clean & Minimalist (Hidden in pure vocab mode) */}
+      {/* Prominent, Legible IELTS Prompt Card - Clean & Minimalist */}
       {!hidePromptCard && selectedTopic && (
         <div className="px-4 py-3 rounded-2xl bg-white border border-[#E6E2D8] shadow-xs space-y-1.5">
           <div className="flex items-center justify-between gap-2">
@@ -183,6 +199,19 @@ export default function TopicTabBar({
               <span className="text-xs font-medium text-[#24211E]">
                 {selectedTopic.vietnameseName || selectedTopic.name}
               </span>
+
+              {/* Cycle through other prompts in the same topic for Task 2 */}
+              {activeTask === 'task2' && currentCategoryPrompts.length > 1 && (
+                <button
+                  type="button"
+                  onClick={handleNextPromptInCategory}
+                  className="flex items-center gap-1 text-[11px] font-medium text-[#7A7369] hover:text-[#3E4F42] bg-[#FAF8F5] hover:bg-[#EDF3EE] px-2 py-0.5 rounded-lg border border-[#E6E2D8] transition cursor-pointer"
+                  title="Đổi đề khác trong cùng chủ đề này"
+                >
+                  <Shuffle className="w-3 h-3" />
+                  <span>Đổi đề ({currentPromptIndex + 1}/{currentCategoryPrompts.length})</span>
+                </button>
+              )}
             </div>
 
             <div className="flex items-center gap-2 shrink-0">
