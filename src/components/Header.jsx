@@ -36,7 +36,7 @@ export default function Header({
   currentView
 }) {
   return (
-    <header className="sticky top-0 z-40 bg-[#F8F6F1]/95 backdrop-blur-md border-b border-[#E7E2D9] shadow-[0_1px_3px_rgba(0,0,0,0.03)] shrink-0">
+    <header className="sticky top-0 z-40 bg-[#F8F6F1]/95 backdrop-blur-md border-b border-[#E6E2D8] shadow-[0_1px_3px_rgba(0,0,0,0.03)] shrink-0">
       <div className="w-full px-3 sm:px-5 h-14 flex items-center justify-between gap-2.5">
         
         {/* Logo & App title - Clickable to return to Welcome Page */}
@@ -56,7 +56,7 @@ export default function Header({
             <span className="font-serif font-bold text-base sm:text-lg text-[#24211E] group-hover:text-[#3E4F42] transition leading-none">
               Lớp cô Oanh
             </span>
-            <span className="text-[10px] uppercase font-medium px-2 py-0.5 rounded-full bg-[#EDF3EE] text-[#3E4F42] border border-[#D3DFD5]">
+            <span className="text-[10px] uppercase font-medium px-2 py-0.5 rounded-full bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3]">
               {activeTask === "task1" ? "Task 1" : "Task 2"}
             </span>
           </div>
@@ -69,7 +69,7 @@ export default function Header({
           {(currentView === 'practice' || currentView === 'flashcard') && (
             <button
               onClick={onGoWelcome}
-              className="hidden xl:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-xs font-medium text-[#6B6358] hover:text-[#24211E] transition cursor-pointer"
+              className="hidden xl:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-xs font-medium text-[#7A7369] hover:text-[#24211E] transition cursor-pointer"
               title="Quay lại Trang Chào Mừng"
             >
               <Home className="w-3.5 h-3.5 text-[#3E4F42]" />
@@ -84,7 +84,7 @@ export default function Header({
               className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-medium transition cursor-pointer ${
                 currentView === 'practice'
                   ? "bg-[#3E4F42] text-white shadow-xs"
-                  : "text-[#6B6358] hover:text-[#24211E]"
+                  : "text-[#7A7369] hover:text-[#24211E]"
               }`}
               title="Khu vực Luyện Viết"
             >
@@ -96,7 +96,7 @@ export default function Header({
               className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-medium transition cursor-pointer ${
                 currentView === 'flashcard'
                   ? "bg-[#3E4F42] text-white shadow-xs"
-                  : "text-[#6B6358] hover:text-[#24211E]"
+                  : "text-[#7A7369] hover:text-[#24211E]"
               }`}
               title="Flashcard Từ Vựng"
             >
@@ -113,7 +113,7 @@ export default function Header({
                 className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-medium transition cursor-pointer ${
                   activeTask === "task1"
                     ? "bg-[#3E4F42] text-white shadow-xs"
-                    : "text-[#6B6358] hover:text-[#24211E]"
+                    : "text-[#7A7369] hover:text-[#24211E]"
                 }`}
               >
                 <BarChart3 className="w-3 h-3" />
@@ -124,7 +124,7 @@ export default function Header({
                 className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-medium transition cursor-pointer ${
                   activeTask === "task2"
                     ? "bg-[#3E4F42] text-white shadow-xs"
-                    : "text-[#6B6358] hover:text-[#24211E]"
+                    : "text-[#7A7369] hover:text-[#24211E]"
                 }`}
               >
                 <FileText className="w-3 h-3" />
@@ -136,7 +136,7 @@ export default function Header({
           {/* 1-Line Target Band Button */}
           <button
             onClick={onOpenBandModal}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#D3DFD5] transition cursor-pointer select-none text-xs"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#D1DDD3] transition cursor-pointer select-none text-xs"
             title="Đổi Band mục tiêu"
           >
             <Target className="w-3.5 h-3.5 text-[#3E4F42] shrink-0" />
@@ -166,7 +166,7 @@ export default function Header({
           {/* Contact cô Oanh button */}
           <button
             onClick={onOpenContact}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] text-[#3E4F42] border border-[#D3DFD5] text-xs font-medium transition cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] text-[#3E4F42] border border-[#D1DDD3] text-xs font-medium transition cursor-pointer"
             title="Liên hệ cô Oanh"
           >
             <PhoneCall className="w-3.5 h-3.5 text-[#3E4F42]" />
@@ -190,7 +190,7 @@ export default function Header({
               {onSignOut && (
                 <button
                   onClick={onSignOut}
-                  className="p-1.5 sm:p-2 rounded-xl text-[#7A7369] hover:text-[#C25442] hover:bg-[#FAF8F5] transition cursor-pointer"
+                  className="p-1.5 sm:p-2 rounded-xl text-[#7A7369] hover:text-[#A67C52] hover:bg-[#FAF8F5] transition cursor-pointer"
                   title="Đăng xuất"
                 >
                   <LogOut className="w-3.5 h-3.5" />
@@ -200,7 +200,7 @@ export default function Header({
           ) : (
             <button
               onClick={onOpenAuth}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#3E4F42] hover:bg-[#324036] text-white font-medium text-xs transition cursor-pointer shadow-xs shrink-0"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-xs transition cursor-pointer shadow-xs shrink-0"
               title="Đăng nhập"
             >
               <User className="w-3.5 h-3.5" />
@@ -212,7 +212,7 @@ export default function Header({
           {onOpenSources && (
             <button
               onClick={onOpenSources}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-xs text-[#6B6358] hover:text-[#24211E] transition cursor-pointer"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-xs text-[#7A7369] hover:text-[#24211E] transition cursor-pointer"
               title="Tài liệu tham khảo"
             >
               <Database className="w-3.5 h-3.5 text-[#3E4F42]" />
@@ -223,7 +223,7 @@ export default function Header({
           {/* History Drawer */}
           <button
             onClick={onOpenHistory}
-            className="p-2 sm:p-2.5 rounded-xl text-[#6B6358] hover:text-[#24211E] hover:bg-white border border-transparent hover:border-[#E6E2D8] transition cursor-pointer"
+            className="p-2 sm:p-2.5 rounded-xl text-[#7A7369] hover:text-[#24211E] hover:bg-white border border-transparent hover:border-[#E6E2D8] transition cursor-pointer"
             title="Lịch sử bài viết"
           >
             <History className="w-4 h-4 sm:w-5 sm:h-5" />

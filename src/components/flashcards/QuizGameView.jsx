@@ -3,10 +3,7 @@ import {
   Volume2, 
   CheckCircle2, 
   XCircle, 
-  ArrowRight, 
-  Sparkles, 
-  HelpCircle,
-  Lightbulb
+  ArrowRight
 } from 'lucide-react';
 import { speakWord, playCorrectSound, playIncorrectSound } from '../../services/soundEffects';
 
@@ -23,23 +20,17 @@ export default function QuizGameView({
   const options = useMemo(() => {
     if (!card) return [];
 
-    // Correct meaning
     const correctMeaning = card.meaning;
     
-    // Pick 3 distractors from allCards
     const otherMeanings = allCards
       .filter(c => c.id !== card.id && c.meaning !== correctMeaning)
       .map(c => c.meaning);
 
-    // Shuffle and pick 3
     const shuffledOthers = [...otherMeanings].sort(() => 0.5 - Math.random()).slice(0, 3);
-    
-    // Combine and shuffle
     const combined = [correctMeaning, ...shuffledOthers].sort(() => 0.5 - Math.random());
     return combined;
   }, [card?.id, allCards]);
 
-  // Reset state on card change
   useEffect(() => {
     setSelectedOption(null);
     setIsAnswered(false);
@@ -48,7 +39,6 @@ export default function QuizGameView({
     }
   }, [card?.id, soundEnabled]);
 
-  // Keyboard shortcut listener (1, 2, 3, 4 for options, Enter for Continue)
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!isAnswered) {
@@ -97,26 +87,26 @@ export default function QuizGameView({
     <div className="w-full max-w-2xl mx-auto flex flex-col justify-between py-2 space-y-5">
       
       {/* Top Question Header */}
-      <div className="text-center space-y-3">
-        <span className="text-xs font-bold text-blue-400 uppercase tracking-wider px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20">
+      <div className="text-center space-y-2">
+        <span className="text-xs font-medium uppercase px-3 py-1 rounded-full bg-[#EDF3EE] text-[#3E4F42] border border-[#3E4F42]/20">
           Trắc nghiệm phản xạ • Chọn nghĩa đúng
         </span>
 
         {/* Word Display with Speaker */}
         <div className="flex items-center justify-center gap-3 pt-1">
-          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-wide">
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#24211E] tracking-wide">
             {card.word}
           </h2>
           <button
             onClick={() => speakWord(card.word)}
-            className="p-2 rounded-2xl bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white border border-blue-500/30 transition transform hover:scale-105 cursor-pointer"
+            className="p-2 rounded-2xl bg-[#EDF3EE] hover:bg-[#3E4F42] text-[#3E4F42] hover:text-white border border-[#3E4F42]/20 transition transform hover:scale-105 cursor-pointer shadow-xs"
             title="Nghe phát âm"
           >
             <Volume2 className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="flex items-center justify-center gap-2 text-xs text-slate-400 font-mono">
+        <div className="flex items-center justify-center gap-2 text-xs text-[#7A7369] font-mono">
           <span>{card.ipa}</span>
           <span>•</span>
           <span className="italic">({card.partOfSpeech})</span>
@@ -126,17 +116,15 @@ export default function QuizGameView({
       {/* 4 Options Grid */}
       <div className="grid grid-cols-1 gap-2.5 sm:gap-3 py-2">
         {options.map((opt, idx) => {
-          let btnStyle = "bg-slate-900 hover:bg-slate-800/90 border-slate-700/80 text-slate-200 hover:border-blue-500/50 shadow-md";
+          let btnStyle = "bg-white hover:bg-[#F4EFEA] border-[#E6E2D8] text-[#24211E] shadow-xs";
           
           if (isAnswered) {
             if (opt === card.meaning) {
-              // Correct option is always green
-              btnStyle = "bg-emerald-950/80 border-emerald-500 text-emerald-200 ring-2 ring-emerald-500/40 shadow-emerald-950/40";
+              btnStyle = "bg-[#EDF3EE] border-[#3E4F42] text-[#3E4F42] font-semibold";
             } else if (opt === selectedOption) {
-              // Selected wrong option is red
-              btnStyle = "bg-rose-950/80 border-rose-500 text-rose-200 ring-2 ring-rose-500/40 shadow-rose-950/40 animate-shake";
+              btnStyle = "bg-[#FAF5EE] border-[#A67C52] text-[#A67C52] font-semibold";
             } else {
-              btnStyle = "bg-slate-900/40 border-slate-800 text-slate-500 opacity-60";
+              btnStyle = "bg-[#FAF8F5] border-[#E6E2D8] text-[#7A7369] opacity-60";
             }
           }
 
@@ -145,20 +133,20 @@ export default function QuizGameView({
               key={idx}
               onClick={() => handleSelect(opt)}
               disabled={isAnswered}
-              className={`w-full p-4 rounded-2xl border text-left font-medium text-xs sm:text-sm transition flex items-center justify-between gap-3 cursor-pointer select-none ${btnStyle}`}
+              className={`w-full p-3.5 sm:p-4 rounded-2xl border text-left font-medium text-xs sm:text-sm transition flex items-center justify-between gap-3 cursor-pointer select-none ${btnStyle}`}
             >
               <div className="flex items-center gap-3">
-                <span className="w-6 h-6 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-mono font-bold text-slate-400 shrink-0">
+                <span className="w-6 h-6 rounded-lg bg-[#F4EFEA] border border-[#E6E2D8] flex items-center justify-center text-xs font-mono font-medium text-[#7A7369] shrink-0">
                   {idx + 1}
                 </span>
                 <span className="leading-snug">{opt}</span>
               </div>
 
               {isAnswered && opt === card.meaning && (
-                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                <CheckCircle2 className="w-5 h-5 text-[#3E4F42] shrink-0" />
               )}
               {isAnswered && opt === selectedOption && opt !== card.meaning && (
-                <XCircle className="w-5 h-5 text-rose-400 shrink-0" />
+                <XCircle className="w-5 h-5 text-[#A67C52] shrink-0" />
               )}
             </button>
           );
@@ -167,26 +155,26 @@ export default function QuizGameView({
 
       {/* Bottom Result Banner */}
       {isAnswered ? (
-        <div className={`p-4 sm:p-5 rounded-2xl border flex flex-col sm:flex-row items-center justify-between gap-4 animate-in fade-in-50 slide-in-from-bottom-2 duration-200 ${
+        <div className={`p-4 rounded-2xl border flex flex-col sm:flex-row items-center justify-between gap-4 animate-in fade-in-50 duration-200 ${
           isCorrect
-            ? "bg-emerald-950/60 border-emerald-500/50 shadow-lg shadow-emerald-950/30"
-            : "bg-rose-950/60 border-rose-500/50 shadow-lg shadow-rose-950/30"
+            ? "bg-[#EDF3EE] border-[#3E4F42]/30"
+            : "bg-[#FAF5EE] border-[#A67C52]/30"
         }`}>
           <div className="flex items-center gap-3 text-left w-full sm:w-auto">
-            <div className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 ${
-              isCorrect ? "bg-emerald-500 text-white" : "bg-rose-500 text-white"
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
+              isCorrect ? "bg-[#3E4F42] text-white" : "bg-[#A67C52] text-white"
             }`}>
-              {isCorrect ? <CheckCircle2 className="w-6 h-6" /> : <XCircle className="w-6 h-6" />}
+              {isCorrect ? <CheckCircle2 className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
             </div>
             <div>
-              <h4 className={`font-black text-sm sm:text-base ${
-                isCorrect ? "text-emerald-300" : "text-rose-300"
+              <h4 className={`font-semibold text-sm ${
+                isCorrect ? "text-[#3E4F42]" : "text-[#A67C52]"
               }`}>
-                {isCorrect ? "Tuyệt vời! Chính xác (+10 XP)" : "Chưa chính xác (-1 tim)"}
+                {isCorrect ? "Chính xác (+10 XP)" : "Chưa chính xác"}
               </h4>
               {!isCorrect && (
-                <p className="text-xs text-slate-300 leading-snug">
-                  Nghĩa chuẩn: <strong className="text-white">{card.meaning}</strong>
+                <p className="text-xs text-[#7A7369] leading-snug">
+                  Nghĩa đúng: <strong className="text-[#24211E]">{card.meaning}</strong>
                 </p>
               )}
             </div>
@@ -194,10 +182,10 @@ export default function QuizGameView({
 
           <button
             onClick={handleNext}
-            className={`w-full sm:w-auto px-6 py-3 rounded-2xl font-bold text-xs sm:text-sm text-white shadow-lg transition flex items-center justify-center gap-2 cursor-pointer active:scale-95 ${
+            className={`w-full sm:w-auto px-5 py-2.5 rounded-xl font-medium text-xs sm:text-sm text-white shadow-xs transition flex items-center justify-center gap-2 cursor-pointer active:scale-95 ${
               isCorrect
-                ? "bg-emerald-600 hover:bg-emerald-500 shadow-emerald-900/30"
-                : "bg-rose-600 hover:bg-rose-500 shadow-rose-900/30"
+                ? "bg-[#3E4F42] hover:bg-[#334237]"
+                : "bg-[#A67C52] hover:bg-[#A67C52]"
             }`}
           >
             <span>Tiếp Tục</span>
@@ -205,7 +193,7 @@ export default function QuizGameView({
           </button>
         </div>
       ) : (
-        <div className="text-center text-[11px] text-slate-500">
+        <div className="text-center text-[11px] text-[#7A7369]">
           Nhấn phím <strong>1, 2, 3, 4</strong> để chọn nhanh đáp án
         </div>
       )}

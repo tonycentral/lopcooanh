@@ -258,53 +258,131 @@ function generateUpgradedVersions(userSentence, targetWord) {
  * PHẦN 1: Chấm điểm hiểu từ vựng (Comprehension Test)
  * Kiểm tra nghĩa tiếng Việt (trắc nghiệm) HOẶC từ đồng nghĩa tiếng Anh
  */
-export function evaluateComprehensionTest(vocab, { selectedOptionIndex = null, synonymInput = "" }) {
+/**
+ * PHẦN 1: Đánh giá nghĩa tiếng Việt do học viên tự ghi (Thay vì trắc nghiệm)
+ * Phân tích độ chính xác ngữ nghĩa và phản hồi sắc thái học thuật chuẩn Band cao.
+ */
+export function evaluateComprehensionMeaning(vocab, userMeaningInput = "") {
   if (!vocab) {
-    return { isValid: false, error: "Không tìm thấy từ vựng." };
+    return { isValid: false, error: "Không tìm thấy thông tin từ vựng." };
   }
 
-  const cleanSynonym = (synonymInput || "").trim().toLowerCase();
-  const synonyms = (vocab.synonyms || []).map(s => s.toLowerCase().trim());
-  const correctQuizIndex = vocab.vietnameseQuiz?.correctIndex ?? 0;
-
-  let isCorrect = false;
-  let testType = "quiz";
-  let feedbackMessage = "";
-
-  if (cleanSynonym) {
-    testType = "synonym";
-    // Check if input matches any of the synonyms or contains the root
-    const matched = synonyms.some(s => s === cleanSynonym || cleanSynonym.includes(s) || s.includes(cleanSynonym));
-    if (matched) {
-      isCorrect = true;
-      feedbackMessage = `Xuất sắc! "${synonymInput}" là từ đồng nghĩa học thuật rất chuẩn của "${vocab.word}".`;
-    } else {
-      isCorrect = false;
-      feedbackMessage = `Từ "${synonymInput}" chưa phải là từ đồng nghĩa tiêu biểu. Các từ đồng nghĩa Band 7.5+ gồm: ${vocab.synonyms?.join(", ")}.`;
-    }
-  } else if (selectedOptionIndex !== null) {
-    testType = "quiz";
-    if (selectedOptionIndex === correctQuizIndex) {
-      isCorrect = true;
-      feedbackMessage = `Chính xác! Bạn đã hiểu đúng 100% nghĩa của từ "${vocab.word}" (${vocab.partOfSpeech}): "${vocab.meaning}".`;
-    } else {
-      isCorrect = false;
-      const correctOption = vocab.vietnameseQuiz?.options?.[correctQuizIndex] || vocab.meaning;
-      feedbackMessage = `Chưa chính xác! Nghĩa chuẩn của "${vocab.word}" là: "${correctOption}".`;
-    }
-  } else {
+  const rawInput = (userMeaningInput || "").trim();
+  if (!rawInput) {
     return {
       isValid: false,
-      error: "Vui lòng chọn 1 đáp án nghĩa tiếng Việt HOẶC nhập từ đồng nghĩa tiếng Anh."
+      error: "Vui lòng nhập nghĩa tiếng Việt của từ để hệ thống đánh giá!"
     };
+  }
+
+  const targetMeaning = (vocab.meaning || "").toLowerCase();
+  const inputLower = rawInput.toLowerCase();
+
+  // Keyword extraction & semantic matching
+  const cleanStr = (s) => s.replace(/[,;:.!?()\/\\-]/g, " ").replace(/\s+/g, " ").trim();
+  const cleanInput = cleanStr(inputLower);
+  const cleanTarget = cleanStr(targetMeaning);
+
+  const inputWords = cleanInput.split(" ").filter(w => w.length > 1);
+  const targetWords = cleanTarget.split(" ").filter(w => w.length > 1);
+
+  // Stop words in Vietnamese meaning definitions
+  const stopWords = new Set(["một", "các", "những", "của", "và", "cho", "hoặc", "trong", "để", "sự", "việc", "tính", "làm", "bị", "được", "ra", "vào"]);
+  const coreTargetWords = targetWords.filter(w => !stopWords.has(w));
+
+  // Count overlap
+  let matchCount = 0;
+  inputWords.forEach(w => {
+    if (coreTargetWords.some(tw => tw === w || tw.includes(w) || w.includes(tw))) {
+      matchCount++;
+    }
+  });
+
+  // Check direct containment
+  const isDirectContainment = cleanTarget.includes(cleanInput) || cleanInput.includes(cleanTarget);
+  
+  // Also check if basic equivalent or synonyms match
+  const basicEq = (vocab.basicEquivalent || "").toLowerCase();
+  const basicMatches = basicEq && inputLower.includes(basicEq);
+
+  let status = "needs_review";
+  let score = 40;
+  let isCorrect = false;
+  let feedbackMessage = "";
+
+  const overlapRatio = coreTargetWords.length > 0 ? matchCount / coreTargetWords.length : 0;
+
+  if (isDirectContainment || overlapRatio >= 0.45 || (matchCount >= 2 && inputWords.length <= 6)) {
+    status = "excellent";
+    score = 100;
+    isCorrect = true;
+    feedbackMessage = `Xuất sắc! Bạn đã hiểu rất chuẩn xác và sát nghĩa từ "${vocab.word}": "${rawInput}".`;
+  } else if (matchCount >= 1 || overlapRatio >= 0.2 || basicMatches) {
+    status = "good";
+    score = 80;
+    isCorrect = true;
+    feedbackMessage = `Khá tốt! Bạn đã nắm được nét nghĩa cơ bản của từ "${vocab.word}". Hãy lưu ý thêm sắc thái học thuật chi tiết bên dưới để vận dụng chuẩn xác nhất.`;
+  } else {
+    status = "needs_review";
+    score = 40;
+    isCorrect = false;
+    feedbackMessage = `Nghĩa bạn ghi ("${rawInput}") chưa thực sự sát với định nghĩa chuẩn của "${vocab.word}". Hãy tham khảo ngữ nghĩa và ví dụ chuẩn bên dưới.`;
   }
 
   return {
     isValid: true,
     isCorrect,
-    testType,
+    status,
+    score,
+    userMeaning: rawInput,
+    feedbackMessage,
+    standardMeaning: vocab.meaning,
+    word: vocab.word,
+    ipa: vocab.ipa,
+    partOfSpeech: vocab.partOfSpeech,
+    basicEquivalent: vocab.basicEquivalent,
+    collocations: vocab.collocations || [],
+    synonyms: vocab.synonyms || []
+  };
+}
+
+export function evaluateComprehensionTest(vocab, params) {
+  if (typeof params === 'string') {
+    return evaluateComprehensionMeaning(vocab, params);
+  }
+  if (params?.userMeaningInput || params?.meaningInput) {
+    return evaluateComprehensionMeaning(vocab, params.userMeaningInput || params.meaningInput);
+  }
+  // Fallback if older options format is called
+  const { selectedOptionIndex = null, synonymInput = "" } = params || {};
+  if (synonymInput) {
+    return evaluateComprehensionMeaning(vocab, synonymInput);
+  }
+  const cleanSynonym = (synonymInput || "").trim().toLowerCase();
+  const synonyms = (vocab.synonyms || []).map(s => s.toLowerCase().trim());
+  const correctQuizIndex = vocab.vietnameseQuiz?.correctIndex ?? 0;
+
+  let isCorrect = false;
+  let feedbackMessage = "";
+
+  if (selectedOptionIndex !== null) {
+    if (selectedOptionIndex === correctQuizIndex) {
+      isCorrect = true;
+      feedbackMessage = `Chính xác! Bạn đã hiểu đúng nghĩa của từ "${vocab.word}" (${vocab.partOfSpeech}): "${vocab.meaning}".`;
+    } else {
+      isCorrect = false;
+      const correctOption = vocab.vietnameseQuiz?.options?.[correctQuizIndex] || vocab.meaning;
+      feedbackMessage = `Chưa chính xác! Nghĩa chuẩn của "${vocab.word}" là: "${correctOption}".`;
+    }
+  }
+
+  return {
+    isValid: true,
+    isCorrect,
+    status: isCorrect ? 'excellent' : 'needs_review',
     score: isCorrect ? 100 : 40,
     feedbackMessage,
+    standardMeaning: vocab.meaning,
     word: vocab.word,
     ipa: vocab.ipa,
     meaning: vocab.meaning,

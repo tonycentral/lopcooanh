@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
 import { 
   Trophy, 
-  Sparkles, 
-  Zap, 
   CheckCircle2, 
   RotateCcw, 
   PenTool, 
-  Flame, 
-  ArrowRight 
+  Zap
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { playVictorySound } from '../../services/soundEffects';
@@ -23,8 +20,8 @@ export default function SessionCompletionModal({
     if (isOpen) {
       if (soundEnabled) playVictorySound();
       confetti({
-        particleCount: 100,
-        spread: 80,
+        particleCount: 80,
+        spread: 70,
         origin: { y: 0.5 }
       });
     }
@@ -36,25 +33,22 @@ export default function SessionCompletionModal({
   const accuracy = totalCards > 0 ? Math.round((masteredCount / totalCards) * 100) : 100;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-300">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#24211E]/40 backdrop-blur-xs animate-in fade-in duration-200">
       <div 
-        className="bg-slate-900 border border-slate-700/80 rounded-3xl w-full max-w-lg overflow-hidden flex flex-col shadow-2xl text-center p-6 sm:p-8 space-y-6"
+        className="bg-[#FAF8F5] border border-[#E6E2D8] rounded-3xl w-full max-w-lg overflow-hidden flex flex-col shadow-2xl text-center p-6 sm:p-8 space-y-6 text-[#24211E]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Trophy Header */}
-        <div className="relative mx-auto w-24 h-24 rounded-3xl bg-gradient-to-tr from-amber-500 to-yellow-300 flex items-center justify-center shadow-2xl shadow-amber-500/30">
-          <Trophy className="w-12 h-12 text-slate-950" />
-          <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-black text-xs shadow-md">
-            ✓
-          </div>
+        <div className="mx-auto w-20 h-20 rounded-2xl bg-[#EDF3EE] border border-[#3E4F42]/20 flex items-center justify-center text-[#3E4F42]">
+          <Trophy className="w-10 h-10" />
         </div>
 
         <div>
-          <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-            Hoàn Thành Bài Học!
+          <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#24211E] tracking-tight">
+            Hoàn Thành Bài Học
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            Bạn đã nạp thêm vốn từ vựng học thuật xuất sắc cho bài thi IELTS
+          <p className="text-xs sm:text-sm text-[#7A7369] mt-1">
+            Bạn đã nạp thêm vốn từ vựng học thuật cho bài thi IELTS
           </p>
         </div>
 
@@ -62,49 +56,40 @@ export default function SessionCompletionModal({
         <div className="grid grid-cols-3 gap-2.5 sm:gap-3 py-1">
           
           {/* XP Earned */}
-          <div className="p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700 text-center">
-            <div className="flex items-center justify-center gap-1 text-amber-400 text-xs font-bold mb-1">
-              <Zap className="w-4 h-4 fill-amber-400" />
+          <div className="p-3.5 rounded-2xl bg-white border border-[#E6E2D8] text-center shadow-xs">
+            <div className="flex items-center justify-center gap-1 text-[#A67C52] text-xs font-semibold mb-1">
+              <Zap className="w-4 h-4 fill-[#A67C52]" />
               <span>EXP</span>
             </div>
-            <div className="text-xl sm:text-2xl font-black text-white font-mono">
+            <div className="text-xl sm:text-2xl font-bold text-[#24211E] font-mono">
               +{xpEarned}
             </div>
-            <div className="text-[10px] text-slate-400">Điểm kinh nghiệm</div>
+            <div className="text-[10px] text-[#7A7369]">Điểm kinh nghiệm</div>
           </div>
 
           {/* Accuracy */}
-          <div className="p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700 text-center">
-            <div className="flex items-center justify-center gap-1 text-emerald-400 text-xs font-bold mb-1">
+          <div className="p-3.5 rounded-2xl bg-white border border-[#E6E2D8] text-center shadow-xs">
+            <div className="flex items-center justify-center gap-1 text-[#3E4F42] text-xs font-semibold mb-1">
               <CheckCircle2 className="w-4 h-4" />
               <span>Chính xác</span>
             </div>
-            <div className="text-xl sm:text-2xl font-black text-emerald-400 font-mono">
+            <div className="text-xl sm:text-2xl font-bold text-[#3E4F42] font-mono">
               {accuracy}%
             </div>
-            <div className="text-[10px] text-slate-400">{masteredCount}/{totalCards} từ thuộc</div>
+            <div className="text-[10px] text-[#7A7369]">{masteredCount}/{totalCards} từ thuộc</div>
           </div>
 
           {/* Streak */}
-          <div className="p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700 text-center">
-            <div className="flex items-center justify-center gap-1 text-rose-400 text-xs font-bold mb-1">
-              <Flame className="w-4 h-4 fill-rose-400" />
-              <span>Streak</span>
+          <div className="p-3.5 rounded-2xl bg-white border border-[#E6E2D8] text-center shadow-xs">
+            <div className="flex items-center justify-center gap-1 text-[#A67C52] text-xs font-semibold mb-1">
+              <span>Chuỗi ngày</span>
             </div>
-            <div className="text-xl sm:text-2xl font-black text-rose-400 font-mono">
+            <div className="text-xl sm:text-2xl font-bold text-[#24211E] font-mono">
               {streak}
             </div>
-            <div className="text-[10px] text-slate-400">Ngày liên tiếp</div>
+            <div className="text-[10px] text-[#7A7369]">Ngày liên tiếp</div>
           </div>
 
-        </div>
-
-        {/* Motivational Tip */}
-        <div className="p-3.5 rounded-2xl bg-indigo-950/40 border border-indigo-800/50 text-xs text-indigo-300 text-left flex items-start gap-2.5">
-          <Sparkles className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
-          <span>
-            <strong>Bí quyết nhớ lâu:</strong> Sau khi nạp từ qua Flashcard, hãy chuyển ngay sang phần <strong>Luyện Viết Câu</strong> để áp dụng từ vựng vào ngữ cảnh thật!
-          </span>
         </div>
 
         {/* Action Buttons */}
@@ -112,18 +97,18 @@ export default function SessionCompletionModal({
           
           <button
             onClick={onRestart}
-            className="w-full sm:flex-1 py-3 px-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs sm:text-sm border border-slate-700 transition flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full sm:flex-1 py-2.5 px-4 rounded-xl bg-white hover:bg-[#F4EFEA] text-[#24211E] font-medium text-xs sm:text-sm border border-[#E6E2D8] transition flex items-center justify-center gap-2 cursor-pointer shadow-xs"
           >
-            <RotateCcw className="w-4 h-4" />
+            <RotateCcw className="w-4 h-4 text-[#7A7369]" />
             <span>Ôn Lại Vòng Này</span>
           </button>
 
           <button
             onClick={onGoWritingPractice}
-            className="w-full sm:flex-1 py-3 px-4 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-indigo-950/50 transition flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full sm:flex-1 py-2.5 px-4 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer shadow-xs"
           >
             <PenTool className="w-4 h-4" />
-            <span>Sang Luyện Viết Ngay</span>
+            <span>Luyện Viết Câu</span>
           </button>
 
         </div>

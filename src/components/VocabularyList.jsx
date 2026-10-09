@@ -133,20 +133,20 @@ export default function VocabularyList({
   const endWordIdx = Math.min((pageIndex + 1) * PAGE_SIZE, filteredVocabs.length);
 
   return (
-    <div className="h-full flex flex-col overflow-hidden text-[#2B2826]">
+    <div className="h-full flex flex-col overflow-hidden text-[#24211E]">
       
       {/* Top Header: Title & Pagination Action */}
-      <div className="flex items-center justify-between pb-2 mb-1.5 border-b border-[#E7E2D9] shrink-0">
+      <div className="flex items-center justify-between pb-2 mb-1.5 border-b border-[#E6E2D8] shrink-0">
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-[#EDF3EE] text-[#4A5D4E] flex items-center justify-center">
+          <div className="w-7 h-7 rounded-lg bg-[#EDF3EE] text-[#3E4F42] flex items-center justify-center">
             <BookOpen className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="text-xs sm:text-sm font-bold text-[#2B2826] leading-tight">
+            <h3 className="text-xs sm:text-sm font-bold text-[#24211E] leading-tight">
               Từ vựng trọng tâm ({filteredVocabs.length})
             </h3>
             <span className="text-[10px] text-[#7A7369]">
-              Hiện từ {startWordIdx}-{endWordIdx} • Đã biết: <strong className={isAllKnown ? "text-[#3D5240] font-bold" : "text-[#4A5D4E]"}>{topicKnownCount}/{vocabularies.length}</strong>
+              Hiện từ {startWordIdx}-{endWordIdx} • Đã biết: <strong className={isAllKnown ? "text-[#3E4F42] font-bold" : "text-[#3E4F42]"}>{topicKnownCount}/{vocabularies.length}</strong>
             </span>
           </div>
         </div>
@@ -157,7 +157,7 @@ export default function VocabularyList({
             <button
               type="button"
               onClick={onOpenFlashcard}
-              className="flex items-center gap-1 px-2 py-1 rounded-xl bg-[#EDF3EE] hover:bg-[#E2ECE3] text-[#344837] border border-[#CAD8C8] text-xs font-bold transition cursor-pointer shadow-sm"
+              className="flex items-center gap-1 px-2 py-1 rounded-xl bg-[#EDF3EE] hover:bg-[#EDF3EE] text-[#334237] border border-[#D1DDD3] text-xs font-bold transition cursor-pointer shadow-sm"
               title="Học bộ từ này theo dạng Flashcard tương tác"
             >
               <Layers className="w-3 h-3" />
@@ -169,7 +169,7 @@ export default function VocabularyList({
             <button
               type="button"
               onClick={handlePrevPage}
-              className="p-1 rounded-lg bg-[#F2EFE9] hover:bg-[#EAE5DC] text-[#6E675E] hover:text-[#2B2826] border border-[#DDD6CB] transition cursor-pointer"
+              className="p-1 rounded-lg bg-[#F4EFEA] hover:bg-[#E6E2D8] text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8] transition cursor-pointer"
               title="5 từ trước"
             >
               <ChevronLeft className="w-3.5 h-3.5" />
@@ -179,7 +179,7 @@ export default function VocabularyList({
           <button
             type="button"
             onClick={handleNextPage}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-[#4A5D4E] hover:bg-[#3D4E41] text-white border border-[#3D4E41] text-xs font-bold transition cursor-pointer shadow-sm"
+            className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white border border-[#334237] text-xs font-bold transition cursor-pointer shadow-sm"
             title="Xem 5 từ vựng tiếp theo"
           >
             <span>5 từ tiếp theo</span>
@@ -190,7 +190,7 @@ export default function VocabularyList({
 
       {/* Quick Search for Words & Synonyms */}
       <div className="relative mb-2 shrink-0">
-        <Search className="w-3.5 h-3.5 text-[#968E84] absolute left-2.5 top-2.5" />
+        <Search className="w-3.5 h-3.5 text-[#7A7369] absolute left-2.5 top-2.5" />
         <input
           type="text"
           value={searchQuery}
@@ -199,7 +199,7 @@ export default function VocabularyList({
             setPageIndex(0);
           }}
           placeholder="Tìm từ vựng hoặc từ đồng nghĩa (synonyms)..."
-          className="w-full bg-[#FAF8F5] border border-[#DDD6CB] rounded-xl pl-8 pr-7 py-1.5 text-xs text-[#2B2826] placeholder-[#968E84] outline-none focus:border-[#4A5D4E] transition"
+          className="w-full bg-[#FAF8F5] border border-[#E6E2D8] rounded-xl pl-8 pr-7 py-1.5 text-xs text-[#24211E] placeholder-[#7A7369] outline-none focus:border-[#3E4F42] transition"
         />
         {searchQuery && (
           <button
@@ -208,7 +208,7 @@ export default function VocabularyList({
               setSearchQuery('');
               setPageIndex(0);
             }}
-            className="absolute right-2.5 top-1 text-sm text-[#7A7369] hover:text-[#2B2826] font-bold"
+            className="absolute right-2.5 top-1 text-sm text-[#7A7369] hover:text-[#24211E] font-bold"
             title="Xóa tìm kiếm"
           >
             ×
@@ -218,13 +218,13 @@ export default function VocabularyList({
 
       {/* Celebratory Banner when 100% of vocabularies in this topic are learned */}
       {isAllKnown && (
-        <div className="p-3 mb-2 rounded-2xl bg-[#FAF8F5] border border-[#CAD8C8] shadow-sm space-y-2 shrink-0 animate-fadeIn">
+        <div className="p-3 mb-2 rounded-2xl bg-[#FAF8F5] border border-[#D1DDD3] shadow-sm space-y-2 shrink-0 animate-fadeIn">
           <div className="flex items-center gap-2">
             <span className="text-xl">🏆</span>
             <div>
-              <h4 className="text-xs font-black text-[#2B2826] flex items-center gap-1.5">
+              <h4 className="text-xs font-black text-[#24211E] flex items-center gap-1.5">
                 <span>Xuất sắc! Bạn đã học hết {vocabularies.length}/{vocabularies.length} từ vựng</span>
-                <span className="px-1.5 py-0.2 rounded bg-[#EDF3EE] text-[#3D5240] text-[10px] font-mono border border-[#CAD8C8]">100%</span>
+                <span className="px-1.5 py-0.2 rounded bg-[#EDF3EE] text-[#3E4F42] text-[10px] font-mono border border-[#D1DDD3]">100%</span>
               </h4>
               <p className="text-[11px] text-[#7A7369] leading-snug">
                 Bạn đã nắm vững toàn bộ từ vựng chủ đề này. Hãy chọn hành động tiếp theo:
@@ -232,14 +232,14 @@ export default function VocabularyList({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-1.5 pt-1.5 border-t border-[#E7E2D9]">
+          <div className="grid grid-cols-2 gap-1.5 pt-1.5 border-t border-[#E6E2D8]">
             {onGoFullEssay && (
               <button
                 type="button"
                 onClick={onGoFullEssay}
-                className="col-span-2 py-1.5 px-3 rounded-xl bg-[#4A5D4E] hover:bg-[#3D4E41] text-white font-bold text-xs flex items-center justify-center gap-1.5 transition shadow-sm cursor-pointer"
+                className="col-span-2 py-1.5 px-3 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-bold text-xs flex items-center justify-center gap-1.5 transition shadow-sm cursor-pointer"
               >
-                <FileEdit className="w-3.5 h-3.5 text-[#E0EAE1]" />
+                <FileEdit className="w-3.5 h-3.5 text-[#EDF3EE]" />
                 <span>Viết Full Bài Essay ngay (Tab 4)</span>
               </button>
             )}
@@ -248,20 +248,20 @@ export default function VocabularyList({
               <button
                 type="button"
                 onClick={onNextTopic}
-                className="py-1 px-2.5 rounded-xl bg-[#F2EFE9] hover:bg-[#EAE5DC] text-[#2B2826] font-bold text-xs flex items-center justify-center gap-1 transition border border-[#DDD6CB] cursor-pointer"
+                className="py-1 px-2.5 rounded-xl bg-[#F4EFEA] hover:bg-[#E6E2D8] text-[#24211E] font-bold text-xs flex items-center justify-center gap-1 transition border border-[#E6E2D8] cursor-pointer"
               >
                 <span>Chủ đề tiếp theo</span>
-                <ChevronRight className="w-3.5 h-3.5 text-[#4A5D4E]" />
+                <ChevronRight className="w-3.5 h-3.5 text-[#3E4F42]" />
               </button>
             )}
 
             <button
               type="button"
               onClick={handleResetTopicWords}
-              className="py-1 px-2.5 rounded-xl bg-[#F2EFE9] hover:bg-[#EAE5DC] text-[#5A524A] font-medium text-xs flex items-center justify-center gap-1 transition border border-[#DDD6CB] cursor-pointer"
+              className="py-1 px-2.5 rounded-xl bg-[#F4EFEA] hover:bg-[#E6E2D8] text-[#7A7369] font-medium text-xs flex items-center justify-center gap-1 transition border border-[#E6E2D8] cursor-pointer"
               title="Bỏ đánh dấu đã biết các từ này để ôn tập lại từ đầu"
             >
-              <RotateCcw className="w-3.5 h-3.5 text-[#B88728]" />
+              <RotateCcw className="w-3.5 h-3.5 text-[#A67C52]" />
               <span>Ôn tập lại từ</span>
             </button>
 
@@ -269,7 +269,7 @@ export default function VocabularyList({
               <button
                 type="button"
                 onClick={onOpenSourcesModal}
-                className="col-span-2 py-1 px-2.5 rounded-xl bg-[#FAF8F5] hover:bg-[#F2EFE9] text-[#4A5D4E] border border-[#CAD8C8] font-semibold text-[11px] flex items-center justify-center gap-1 transition cursor-pointer"
+                className="col-span-2 py-1 px-2.5 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFEA] text-[#3E4F42] border border-[#D1DDD3] font-semibold text-[11px] flex items-center justify-center gap-1 transition cursor-pointer"
               >
                 <PlusCircle className="w-3.5 h-3.5" />
                 <span>Nguồn bổ sung chủ đề &amp; từ vựng mới</span>
@@ -323,7 +323,7 @@ export default function VocabularyList({
                   </div>
 
                   {isKnown && (
-                    <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[#EDF3EE] text-[#3E4F42] border border-[#D3DFD5] font-medium flex items-center gap-0.5 shrink-0">
+                    <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3] font-medium flex items-center gap-0.5 shrink-0">
                       <Check className="w-2.5 h-2.5" /> Đã biết
                     </span>
                   )}
@@ -339,7 +339,7 @@ export default function VocabularyList({
 
                 {/* TỪ ĐỒNG NGHĨA */}
                 {vocab.synonyms && vocab.synonyms.length > 0 && (
-                  <div className="pt-1.5 border-t border-[#F0EDE6] space-y-1">
+                  <div className="pt-1.5 border-t border-[#F4EFEA] space-y-1">
                     <div className="text-[10px] font-medium text-[#7A7369] flex items-center gap-1">
                       <Tag className="w-3 h-3 text-[#A67C52]" />
                       <span>Đồng nghĩa:</span>
@@ -363,7 +363,7 @@ export default function VocabularyList({
                     {vocab.collocations.slice(0, 2).map((col, cIdx) => (
                       <span
                         key={cIdx}
-                        className="text-[10px] px-1.5 py-0.5 rounded bg-[#EDF3EE] text-[#3E4F42] border border-[#D3DFD5]"
+                        className="text-[10px] px-1.5 py-0.5 rounded bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3]"
                       >
                         {col}
                       </span>
@@ -378,8 +378,8 @@ export default function VocabularyList({
                     onClick={(e) => handleToggleKnown(e, vocab.id)}
                     className={`flex-1 py-1 px-2 rounded-lg text-xs font-medium transition flex items-center justify-center gap-1 cursor-pointer border ${
                       isKnown
-                        ? "bg-[#EDF3EE] text-[#3E4F42] border-[#D3DFD5]"
-                        : "bg-white hover:bg-[#FAF8F5] text-[#6B6358] border-[#E6E2D8]"
+                        ? "bg-[#EDF3EE] text-[#3E4F42] border-[#D1DDD3]"
+                        : "bg-white hover:bg-[#FAF8F5] text-[#7A7369] border-[#E6E2D8]"
                     }`}
                   >
                     {isKnown ? (
@@ -401,7 +401,7 @@ export default function VocabularyList({
                     className={`flex-1 py-1 px-2.5 rounded-lg text-xs font-medium transition flex items-center justify-center gap-1.5 cursor-pointer shadow-xs ${
                       isSelected
                         ? "bg-[#3E4F42] text-white"
-                        : "bg-[#3E4F42] hover:bg-[#324036] text-white"
+                        : "bg-[#3E4F42] hover:bg-[#334237] text-white"
                     }`}
                   >
                     <PenTool className="w-3 h-3" />
@@ -416,12 +416,12 @@ export default function VocabularyList({
 
       {/* Bottom pagination status */}
       {totalPages > 1 && (
-        <div className="pt-2 border-t border-[#E7E2D9] flex items-center justify-between text-[11px] text-[#7A7369] shrink-0">
+        <div className="pt-2 border-t border-[#E6E2D8] flex items-center justify-between text-[11px] text-[#7A7369] shrink-0">
           <span>Trang {pageIndex + 1} / {totalPages}</span>
           <button
             type="button"
             onClick={handleNextPage}
-            className="text-[#4A5D4E] hover:text-[#3D4E41] font-semibold cursor-pointer flex items-center gap-1"
+            className="text-[#3E4F42] hover:text-[#334237] font-semibold cursor-pointer flex items-center gap-1"
           >
             <span>Sang 5 từ tiếp theo</span>
             <ChevronRight className="w-3 h-3" />

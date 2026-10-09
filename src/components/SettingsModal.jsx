@@ -50,7 +50,7 @@ export default function SettingsModal({
         {/* Header */}
         <div className="px-6 py-5 border-b border-[#E6E2D8] bg-white flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#EDF3EE] text-[#3E4F42] flex items-center justify-center border border-[#D3DFD5]">
+            <div className="w-10 h-10 rounded-xl bg-[#EDF3EE] text-[#3E4F42] flex items-center justify-center border border-[#D1DDD3]">
               <Settings className="w-5 h-5" />
             </div>
             <div>
@@ -102,7 +102,7 @@ export default function SettingsModal({
                 <Bot className="w-4 h-4 text-[#3E4F42]" />
                 Google Gemini API Key (Tuỳ chọn)
               </label>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#EDF3EE] text-[#3E4F42] font-medium border border-[#D3DFD5]">
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#EDF3EE] text-[#3E4F42] font-medium border border-[#D1DDD3]">
                 Miễn phí
               </span>
             </div>
@@ -116,11 +116,11 @@ export default function SettingsModal({
                 placeholder="AIzaSy..."
                 value={inputKey}
                 onChange={(e) => setInputKey(e.target.value)}
-                className="flex-1 px-3 py-2 rounded-xl bg-white border border-[#E6E2D8] text-xs text-[#24211E] placeholder-[#B0A89F] focus:outline-none focus:border-[#3E4F42] font-mono"
+                className="flex-1 px-3 py-2 rounded-xl bg-white border border-[#E6E2D8] text-xs text-[#24211E] placeholder-[#7A7369] focus:outline-none focus:border-[#3E4F42] font-mono"
               />
               <button
                 onClick={handleSave}
-                className="px-4 py-2 rounded-xl bg-[#3E4F42] hover:bg-[#324036] text-white font-medium text-xs transition cursor-pointer flex items-center gap-1 shrink-0"
+                className="px-4 py-2 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-xs transition cursor-pointer flex items-center gap-1 shrink-0"
               >
                 {savedSuccess ? <Check className="w-3.5 h-3.5 text-white" /> : "Lưu Key"}
               </button>
@@ -150,7 +150,7 @@ export default function SettingsModal({
             <span className="text-[#7A7369] text-xs">Khôi phục mặc định:</span>
             <button
               onClick={handleClearAll}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-[#C25442] hover:bg-[#FDF4F2] border border-[#F3CCC6] transition cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-[#A67C52] hover:bg-[#FAF5EE] border border-[#E6E2D8] transition cursor-pointer"
             >
               <Trash2 className="w-3.5 h-3.5" />
               Đặt lại dữ liệu
@@ -163,7 +163,7 @@ export default function SettingsModal({
         <div className="px-6 py-4 border-t border-[#E6E2D8] bg-white flex justify-end">
           <button
             onClick={onClose}
-            className="px-5 py-2 rounded-xl bg-[#F4EFEA] hover:bg-[#EAE4DB] text-[#24211E] border border-[#E6E2D8] font-medium text-xs transition cursor-pointer"
+            className="px-5 py-2 rounded-xl bg-[#F4EFEA] hover:bg-[#E6E2D8] text-[#24211E] border border-[#E6E2D8] font-medium text-xs transition cursor-pointer"
           >
             Đóng
           </button>

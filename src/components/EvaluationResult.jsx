@@ -1,15 +1,12 @@
 import React from 'react';
 import { 
-  Award, 
   CheckCircle2, 
   AlertTriangle, 
   Sparkles, 
-  TrendingUp, 
   ArrowRight, 
   Copy, 
   Check, 
   Bot, 
-  BookOpen,
   Layers
 } from 'lucide-react';
 
@@ -33,66 +30,66 @@ export default function EvaluationResult({
   };
 
   return (
-    <div className="space-y-4 animate-in fade-in-50 slide-in-from-bottom-2 duration-300 text-[#2B2826]">
+    <div className="space-y-4 animate-in fade-in-50 duration-200 text-[#24211E]">
       
       {/* Top Banner: Overall Score & Target Status */}
       <div className={`p-4 sm:p-5 rounded-2xl border flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs ${
         isTargetMet
-          ? "bg-[#EDF3EE] border-[#CAD8C8]"
-          : "bg-[#FAF4EE] border-[#EADBCC]"
+          ? "bg-[#EDF3EE] border-[#3E4F42]/30"
+          : "bg-[#FAF5EE] border-[#A67C52]/30"
       }`}>
         <div className="flex items-center gap-3.5">
-          <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex flex-col items-center justify-center font-black shadow-xs shrink-0 ${
+          <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex flex-col items-center justify-center font-bold shadow-xs shrink-0 ${
             isTargetMet
-              ? "bg-[#4A5D4E] text-white"
-              : "bg-[#B88758] text-white"
+              ? "bg-[#3E4F42] text-white"
+              : "bg-[#A67C52] text-white"
           }`}>
-            <span className="text-[10px] uppercase font-bold tracking-wider -mb-0.5 opacity-90">BAND</span>
-            <span className="text-2xl sm:text-3xl leading-none">{scores?.overallBand || "6.5"}</span>
+            <span className="text-[10px] uppercase font-medium tracking-wider -mb-0.5 opacity-90">BAND</span>
+            <span className="text-2xl sm:text-3xl leading-none font-serif">{scores?.overallBand || "6.5"}</span>
           </div>
 
           <div>
             <div className="flex items-center gap-2 mb-1 flex-wrap">
-              <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full border ${
+              <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full border ${
                 isTargetMet
-                  ? "bg-white text-[#3D5240] border-[#CAD8C8]"
-                  : "bg-white text-[#8C5D33] border-[#EADBCC]"
+                  ? "bg-white text-[#3E4F42] border-[#3E4F42]/20"
+                  : "bg-white text-[#A67C52] border-[#A67C52]/20"
               }`}>
-                {isTargetMet ? "Đạt Mục Tiêu Band " + result.targetBand : "Chưa Đạt Mục Tiêu Band " + result.targetBand}
+                {isTargetMet ? "Đạt mục tiêu Band " + result.targetBand : "Chưa đạt mục tiêu Band " + result.targetBand}
               </span>
 
               {isAiGraded && (
-                <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-white text-[#5A524A] border border-[#DDD6CB] flex items-center gap-1">
-                  <Bot className="w-3 h-3 text-[#4A5D4E]" /> Chấm bởi Gemini AI
+                <span className="text-xs font-normal px-2 py-0.5 rounded-full bg-white text-[#7A7369] border border-[#E6E2D8] flex items-center gap-1">
+                  <Bot className="w-3 h-3 text-[#3E4F42]" /> Chấm bởi AI
                 </span>
               )}
             </div>
-            <h4 className="text-sm sm:text-base font-bold text-[#2B2826]">
+            <h4 className="text-sm sm:text-base font-semibold text-[#24211E]">
               {isTargetMet 
-                ? "Xuất sắc! Câu văn của bạn đạt tiêu chuẩn học thuật rất tốt." 
-                : "Câu viết tương đối ổn, xem chi tiết gợi ý để nâng band!"}
+                ? "Câu văn đạt tiêu chuẩn học thuật rất tốt." 
+                : "Xem chi tiết gợi ý để nâng band!"}
             </h4>
           </div>
         </div>
 
         {/* Sub-scores breakdown */}
-        <div className="flex items-center gap-2 sm:gap-4 bg-white p-2.5 rounded-xl border border-[#E7E2D9] shadow-xs">
+        <div className="flex items-center gap-2 sm:gap-4 bg-white p-2.5 rounded-xl border border-[#E6E2D8] shadow-xs">
           {scores?.lexicalResource !== undefined && (
             <div className="text-center px-2">
-              <div className="text-[10px] text-[#7A7369] font-semibold uppercase">Lexical</div>
-              <div className="text-base sm:text-lg font-black text-[#4A5D4E]">{scores.lexicalResource}</div>
+              <div className="text-[10px] text-[#7A7369] font-medium uppercase">Lexical</div>
+              <div className="text-base sm:text-lg font-bold text-[#3E4F42]">{scores.lexicalResource}</div>
             </div>
           )}
           {scores?.grammarRange !== undefined && (
-            <div className="text-center px-2 border-l border-[#E7E2D9]">
-              <div className="text-[10px] text-[#7A7369] font-semibold uppercase">Grammar</div>
-              <div className="text-base sm:text-lg font-black text-[#B88758]">{scores.grammarRange}</div>
+            <div className="text-center px-2 border-l border-[#E6E2D8]">
+              <div className="text-[10px] text-[#7A7369] font-medium uppercase">Grammar</div>
+              <div className="text-base sm:text-lg font-bold text-[#A67C52]">{scores.grammarRange}</div>
             </div>
           )}
           {scores?.coherenceCohesion !== undefined && (
-            <div className="text-center px-2 border-l border-[#E7E2D9]">
-              <div className="text-[10px] text-[#7A7369] font-semibold uppercase">Coherence</div>
-              <div className="text-base sm:text-lg font-black text-[#B95C48]">{scores.coherenceCohesion}</div>
+            <div className="text-center px-2 border-l border-[#E6E2D8]">
+              <div className="text-[10px] text-[#7A7369] font-medium uppercase">Coherence</div>
+              <div className="text-base sm:text-lg font-bold text-[#A67C52]">{scores.coherenceCohesion}</div>
             </div>
           )}
         </div>
@@ -102,16 +99,16 @@ export default function EvaluationResult({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
         
         {/* Strengths */}
-        <div className="p-4 rounded-xl bg-white border border-[#CAD8C8] space-y-2.5 shadow-xs">
-          <div className="flex items-center gap-2 text-[#3D5240] font-bold text-sm">
-            <CheckCircle2 className="w-4 h-4 text-[#4A5D4E]" />
-            <span>Điểm sáng trong câu (Strengths)</span>
+        <div className="p-4 rounded-xl bg-white border border-[#3E4F42]/20 space-y-2.5 shadow-xs">
+          <div className="flex items-center gap-2 text-[#3E4F42] font-semibold text-sm">
+            <CheckCircle2 className="w-4 h-4 text-[#3E4F42]" />
+            <span>Điểm sáng trong câu</span>
           </div>
-          <ul className="space-y-1.5 text-xs text-[#2B2826]">
+          <ul className="space-y-1.5 text-xs text-[#24211E]">
             {strengths && strengths.length > 0 ? (
               strengths.map((str, idx) => (
                 <li key={idx} className="flex items-start gap-2 leading-relaxed">
-                  <span className="text-[#4A5D4E] font-bold mt-0.5">•</span>
+                  <span className="text-[#3E4F42] font-bold mt-0.5">•</span>
                   <span>{str}</span>
                 </li>
               ))
@@ -122,75 +119,75 @@ export default function EvaluationResult({
         </div>
 
         {/* Improvements */}
-        <div className="p-4 rounded-xl bg-white border border-[#EADBCC] space-y-2.5 shadow-xs">
-          <div className="flex items-center gap-2 text-[#8C5D33] font-bold text-sm">
-            <AlertTriangle className="w-4 h-4 text-[#B88758]" />
-            <span>Điểm cần hoàn thiện (To Improve)</span>
+        <div className="p-4 rounded-xl bg-white border border-[#A67C52]/20 space-y-2.5 shadow-xs">
+          <div className="flex items-center gap-2 text-[#A67C52] font-semibold text-sm">
+            <AlertTriangle className="w-4 h-4 text-[#A67C52]" />
+            <span>Điểm cần hoàn thiện</span>
           </div>
-          <ul className="space-y-1.5 text-xs text-[#2B2826]">
+          <ul className="space-y-1.5 text-xs text-[#24211E]">
             {improvements && improvements.length > 0 ? (
               improvements.map((imp, idx) => (
                 <li key={idx} className="flex items-start gap-2 leading-relaxed">
-                  <span className="text-[#B88758] font-bold mt-0.5">•</span>
+                  <span className="text-[#A67C52] font-bold mt-0.5">•</span>
                   <span>{imp}</span>
                 </li>
               ))
             ) : (
-              <li className="text-[#7A7369] italic">Câu đã chuẩn xác, không có lỗi cần sửa.</li>
+              <li className="text-[#7A7369] italic">Câu chuẩn xác, không có lỗi cần sửa.</li>
             )}
           </ul>
         </div>
 
       </div>
 
-      {/* Upgraded Sentences for Step 1 */}
+      {/* Upgraded Sentences */}
       {upgradeSuggestion && (
-        <div className="p-4 rounded-xl bg-white border border-[#E7E2D9] space-y-3 shadow-xs">
+        <div className="p-4 rounded-xl bg-white border border-[#E6E2D8] space-y-3 shadow-xs">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-[#4A5D4E] font-bold text-sm">
-              <Sparkles className="w-4 h-4 text-[#4A5D4E]" />
-              <span>Gợi ý nâng cấp câu chuẩn Band cao (Sentence Upgrade)</span>
+            <div className="flex items-center gap-2 text-[#3E4F42] font-semibold text-sm">
+              <Sparkles className="w-4 h-4 text-[#3E4F42]" />
+              <span>Gợi ý nâng cấp câu</span>
             </div>
-            <span className="text-xs text-[#7A7369]">Cách viết học thuật bản xứ</span>
+            <span className="text-xs text-[#7A7369]">Chuẩn Band cao</span>
           </div>
 
           <div className="space-y-2.5">
             {upgradeSuggestion.version1 && (
-              <div className="p-3 rounded-lg bg-[#FAF8F5] border border-[#E7E2D9] flex items-start justify-between gap-3">
+              <div className="p-3 rounded-lg bg-[#FAF8F5] border border-[#E6E2D8] flex items-start justify-between gap-3">
                 <div className="space-y-1">
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#EDF3EE] text-[#3D5240] border border-[#CAD8C8]">
-                    Mức Band {upgradeSuggestion.band1 || "7.5"}
+                  <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-[#EDF3EE] text-[#3E4F42] border border-[#3E4F42]/20">
+                    Band {upgradeSuggestion.band1 || "7.5"}
                   </span>
-                  <p className="text-xs text-[#2B2826] font-mono italic leading-relaxed pt-1">
+                  <p className="text-xs text-[#24211E] font-serif italic leading-relaxed pt-1">
                     "{upgradeSuggestion.version1}"
                   </p>
                 </div>
                 <button
                   onClick={() => handleCopy(upgradeSuggestion.version1, "v1")}
-                  className="p-1.5 rounded-lg text-[#7A7369] hover:text-[#2B2826] hover:bg-white shrink-0 transition"
+                  className="p-1.5 rounded-lg text-[#7A7369] hover:text-[#24211E] hover:bg-white shrink-0 transition"
                   title="Copy câu mẫu"
                 >
-                  {copiedKey === "v1" ? <Check className="w-3.5 h-3.5 text-[#4A5D4E]" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copiedKey === "v1" ? <Check className="w-3.5 h-3.5 text-[#3E4F42]" /> : <Copy className="w-3.5 h-3.5" />}
                 </button>
               </div>
             )}
 
             {upgradeSuggestion.version2 && (
-              <div className="p-3 rounded-lg bg-[#FAF8F5] border border-[#E7E2D9] flex items-start justify-between gap-3">
+              <div className="p-3 rounded-lg bg-[#FAF8F5] border border-[#E6E2D8] flex items-start justify-between gap-3">
                 <div className="space-y-1">
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#FAF4EE] text-[#8C5D33] border border-[#EADBCC]">
-                    Mức Band {upgradeSuggestion.band2 || "8.5"}
+                  <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-[#FAF5EE] text-[#A67C52] border border-[#A67C52]/20">
+                    Band {upgradeSuggestion.band2 || "8.5"}
                   </span>
-                  <p className="text-xs text-[#2B2826] font-mono italic leading-relaxed pt-1">
+                  <p className="text-xs text-[#24211E] font-serif italic leading-relaxed pt-1">
                     "{upgradeSuggestion.version2}"
                   </p>
                 </div>
                 <button
                   onClick={() => handleCopy(upgradeSuggestion.version2, "v2")}
-                  className="p-1.5 rounded-lg text-[#7A7369] hover:text-[#2B2826] hover:bg-white shrink-0 transition"
+                  className="p-1.5 rounded-lg text-[#7A7369] hover:text-[#24211E] hover:bg-white shrink-0 transition"
                   title="Copy câu mẫu"
                 >
-                  {copiedKey === "v2" ? <Check className="w-3.5 h-3.5 text-[#4A5D4E]" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copiedKey === "v2" ? <Check className="w-3.5 h-3.5 text-[#3E4F42]" /> : <Copy className="w-3.5 h-3.5" />}
                 </button>
               </div>
             )}
@@ -206,31 +203,31 @@ export default function EvaluationResult({
 
       {/* Model Follow-up & Coherence for Step 2 */}
       {modelFollowUp && (
-        <div className="p-4 rounded-xl bg-white border border-[#E7E2D9] space-y-3 shadow-xs">
+        <div className="p-4 rounded-xl bg-white border border-[#E6E2D8] space-y-3 shadow-xs">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-[#B88758] font-bold text-sm">
-              <Layers className="w-4 h-4 text-[#B88758]" />
-              <span>Câu mẫu tiếp theo chuẩn Band 8.5 (Model Follow-up)</span>
+            <div className="flex items-center gap-2 text-[#3E4F42] font-semibold text-sm">
+              <Layers className="w-4 h-4 text-[#3E4F42]" />
+              <span>Câu mẫu tiếp theo (Model Follow-up)</span>
             </div>
             <span className="text-xs text-[#7A7369]">Coherence &amp; Cohesion</span>
           </div>
 
-          <div className="p-3 rounded-lg bg-[#FAF8F5] border border-[#E7E2D9] flex items-start justify-between gap-3">
-            <p className="text-xs text-[#2B2826] font-mono italic leading-relaxed">
+          <div className="p-3 rounded-lg bg-[#FAF8F5] border border-[#E6E2D8] flex items-start justify-between gap-3">
+            <p className="text-xs text-[#24211E] font-serif italic leading-relaxed">
               "{modelFollowUp}"
             </p>
             <button
               onClick={() => handleCopy(modelFollowUp, "modelB")}
-              className="p-1.5 rounded-lg text-[#7A7369] hover:text-[#2B2826] hover:bg-white shrink-0 transition"
+              className="p-1.5 rounded-lg text-[#7A7369] hover:text-[#24211E] hover:bg-white shrink-0 transition"
               title="Copy câu mẫu"
             >
-              {copiedKey === "modelB" ? <Check className="w-3.5 h-3.5 text-[#4A5D4E]" /> : <Copy className="w-3.5 h-3.5" />}
+              {copiedKey === "modelB" ? <Check className="w-3.5 h-3.5 text-[#3E4F42]" /> : <Copy className="w-3.5 h-3.5" />}
             </button>
           </div>
 
           {explanation && (
-            <p className="text-xs text-[#7A7369] leading-relaxed bg-[#FAF4EE] p-2.5 rounded-lg border border-[#EADBCC]">
-              <span className="font-semibold text-[#8C5D33]">Phân tích liên kết: </span>
+            <p className="text-xs text-[#7A7369] leading-relaxed bg-[#FAF8F5] p-2.5 rounded-lg border border-[#E6E2D8]">
+              <span className="font-semibold text-[#24211E]">Phân tích liên kết: </span>
               {explanation}
             </p>
           )}
@@ -241,17 +238,17 @@ export default function EvaluationResult({
       <div className="flex items-center justify-between pt-2">
         <button
           onClick={onRetry}
-          className="px-4 py-2 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E7E2D9] text-[#5A524A] hover:text-[#2B2826] text-xs font-semibold transition cursor-pointer shadow-xs"
+          className="px-4 py-2 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-[#7A7369] hover:text-[#24211E] text-xs font-medium transition cursor-pointer shadow-xs"
         >
-          Viết Lại / Thử Câu Khác
+          Viết Lại
         </button>
 
         {onNextStep && (
           <button
             onClick={onNextStep}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#4A5D4E] hover:bg-[#3D4E41] text-white text-xs font-bold shadow-xs transition cursor-pointer"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white text-xs font-medium shadow-xs transition cursor-pointer"
           >
-            <span>{type === "vocabulary" ? "Tiếp Tục: Luyện Coherence với Câu Mới" : "Luyện Thêm Thử Thách Mới"}</span>
+            <span>{type === "vocabulary" ? "Tiếp Tục: Luyện Liên Kết Câu" : "Luyện Câu Tiếp Theo"}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         )}

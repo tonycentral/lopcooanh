@@ -132,33 +132,33 @@ export default function AuthModal({
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#2B2826]/45 backdrop-blur-xs animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#24211E]/45 backdrop-blur-xs animate-in fade-in duration-200"
       onClick={() => {
         if (!isRequired) onClose();
       }}
     >
       <div 
-        className="bg-[#FAF8F5] border border-[#E7E2D9] rounded-3xl w-full max-w-md max-h-[92vh] overflow-hidden flex flex-col shadow-2xl"
+        className="bg-[#FAF8F5] border border-[#E6E2D8] rounded-3xl w-full max-w-md max-h-[92vh] overflow-hidden flex flex-col shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="px-5 sm:px-6 py-4 border-b border-[#E7E2D9] flex items-center justify-between bg-white">
+        <div className="px-5 sm:px-6 py-4 border-b border-[#E6E2D8] flex items-center justify-between bg-white">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-[#4A5D4E]/10 text-[#4A5D4E] border border-[#4A5D4E]/20 flex items-center justify-center font-bold">
-              <Cloud className="w-5 h-5 text-[#4A5D4E]" />
+            <div className="w-9 h-9 rounded-xl bg-[#3E4F42]/10 text-[#3E4F42] border border-[#3E4F42]/20 flex items-center justify-center font-bold">
+              <Cloud className="w-5 h-5 text-[#3E4F42]" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-serif font-semibold text-base text-[#2B2826]">
+                <h3 className="font-serif font-semibold text-base text-[#24211E]">
                   Tài Khoản Lớp Cô Oanh
                 </h3>
                 {isRequired && (
-                  <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#4A5D4E]/10 text-[#4A5D4E] border border-[#4A5D4E]/20 font-sans">
+                  <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#3E4F42]/10 text-[#3E4F42] border border-[#3E4F42]/20 font-sans">
                     Bắt buộc
                   </span>
                 )}
               </div>
-              <p className="text-[11px] text-[#7A7267]">
+              <p className="text-[11px] text-[#7A7369]">
                 {isRequired 
                   ? "Vui lòng đăng nhập hoặc tạo tài khoản để vào học" 
                   : "Đồng bộ đám mây Supabase • Học mọi lúc mọi nơi"}
@@ -169,7 +169,7 @@ export default function AuthModal({
           {!isRequired && (
             <button
               onClick={onClose}
-              className="p-1.5 rounded-xl text-[#7A7267] hover:text-[#2B2826] hover:bg-[#F4EFEA] transition cursor-pointer"
+              className="p-1.5 rounded-xl text-[#7A7369] hover:text-[#24211E] hover:bg-[#F4EFEA] transition cursor-pointer"
               title="Đóng"
             >
               <X className="w-5 h-5" />
@@ -179,13 +179,13 @@ export default function AuthModal({
 
         {/* Tab Switcher: Đăng Nhập / Đăng Ký / Cấu Hình */}
         <div className="px-5 sm:px-6 pt-4 shrink-0">
-          <div className="flex p-1 rounded-2xl bg-[#F4EFEA] border border-[#E7E2D9] text-xs">
+          <div className="flex p-1 rounded-2xl bg-[#F4EFEA] border border-[#E6E2D8] text-xs">
             <button
               onClick={() => { setTab('login'); setErrorMessage(''); }}
               className={`flex-1 py-2 rounded-xl font-medium transition cursor-pointer ${
                 tab === 'login'
-                  ? "bg-[#4A5D4E] text-white shadow-xs"
-                  : "text-[#7A7267] hover:text-[#2B2826]"
+                  ? "bg-[#3E4F42] text-white shadow-xs"
+                  : "text-[#7A7369] hover:text-[#24211E]"
               }`}
             >
               Đăng Nhập
@@ -194,8 +194,8 @@ export default function AuthModal({
               onClick={() => { setTab('signup'); setErrorMessage(''); }}
               className={`flex-1 py-2 rounded-xl font-medium transition cursor-pointer ${
                 tab === 'signup'
-                  ? "bg-[#4A5D4E] text-white shadow-xs"
-                  : "text-[#7A7267] hover:text-[#2B2826]"
+                  ? "bg-[#3E4F42] text-white shadow-xs"
+                  : "text-[#7A7369] hover:text-[#24211E]"
               }`}
             >
               Tạo Tài Khoản
@@ -205,8 +205,8 @@ export default function AuthModal({
                 onClick={() => { setTab('config'); setErrorMessage(''); }}
                 className={`px-3 py-2 rounded-xl font-medium transition flex items-center gap-1 cursor-pointer ${
                   tab === 'config'
-                    ? "bg-[#B88758] text-white shadow-xs"
-                    : "text-[#B88758] hover:text-[#9A6D42]"
+                    ? "bg-[#A67C52] text-white shadow-xs"
+                    : "text-[#A67C52] hover:text-[#A67C52]"
                 }`}
                 title="Cài đặt kết nối Supabase"
               >
@@ -238,43 +238,43 @@ export default function AuthModal({
           {/* TAB: CẤU HÌNH SUPABASE (Nếu chưa kết nối) */}
           {tab === 'config' ? (
             <form onSubmit={handleSaveConfig} className="space-y-3.5">
-              <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#B88758]/30 text-[#2B2826] space-y-1">
-                <div className="font-semibold flex items-center gap-1.5 text-[#B88758]">
-                  <Database className="w-4 h-4 text-[#B88758]" />
+              <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#A67C52]/30 text-[#24211E] space-y-1">
+                <div className="font-semibold flex items-center gap-1.5 text-[#A67C52]">
+                  <Database className="w-4 h-4 text-[#A67C52]" />
                   Kết nối tài khoản Supabase miễn phí:
                 </div>
-                <p className="text-[11px] leading-relaxed text-[#7A7267]">
+                <p className="text-[11px] leading-relaxed text-[#7A7369]">
                   Lấy URL và Anon Key từ trang quản trị <strong>Supabase &gt; Project Settings &gt; API</strong> rồi dán vào đây:
                 </p>
               </div>
 
               <div className="space-y-1">
-                <label className="text-[11px] font-medium text-[#2B2826]">Project URL (Supabase URL):</label>
+                <label className="text-[11px] font-medium text-[#24211E]">Project URL (Supabase URL):</label>
                 <input
                   type="url"
                   placeholder="https://xyzcompany.supabase.co"
                   value={supabaseUrl}
                   onChange={(e) => setSupabaseUrl(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E7E2D9] text-xs text-[#2B2826] placeholder-[#B0A89F] focus:outline-none focus:border-[#4A5D4E] font-mono shadow-2xs"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E6E2D8] text-xs text-[#24211E] placeholder-[#7A7369] focus:outline-none focus:border-[#3E4F42] font-mono shadow-2xs"
                   required
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-[11px] font-medium text-[#2B2826]">Anon Public Key:</label>
+                <label className="text-[11px] font-medium text-[#24211E]">Anon Public Key:</label>
                 <textarea
                   rows={3}
                   placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
                   value={supabaseAnonKey}
                   onChange={(e) => setSupabaseAnonKey(e.target.value)}
-                  className="w-full p-2.5 rounded-xl bg-white border border-[#E7E2D9] text-[11px] text-[#2B2826] placeholder-[#B0A89F] focus:outline-none focus:border-[#4A5D4E] font-mono resize-none shadow-2xs"
+                  className="w-full p-2.5 rounded-xl bg-white border border-[#E6E2D8] text-[11px] text-[#24211E] placeholder-[#7A7369] focus:outline-none focus:border-[#3E4F42] font-mono resize-none shadow-2xs"
                   required
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 rounded-2xl bg-[#4A5D4E] hover:bg-[#3D4D40] text-white font-medium text-xs transition shadow-xs flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-3 rounded-2xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-xs transition shadow-xs flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Save className="w-4 h-4" />
                 <span>Lưu Cấu Hình &amp; Khởi Động Supabase</span>
@@ -288,15 +288,15 @@ export default function AuthModal({
               <form onSubmit={handleSubmit} className="space-y-3">
                 {tab === 'signup' && (
                   <div className="space-y-1">
-                    <label className="text-[11px] font-medium text-[#2B2826]">Họ và tên học viên:</label>
+                    <label className="text-[11px] font-medium text-[#24211E]">Họ và tên học viên:</label>
                     <div className="relative">
-                      <User className="w-4 h-4 text-[#7A7267] absolute left-3 top-1/2 -translate-y-1/2" />
+                      <User className="w-4 h-4 text-[#7A7369] absolute left-3 top-1/2 -translate-y-1/2" />
                       <input
                         type="text"
                         placeholder="Nguyễn Văn A"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-white border border-[#E7E2D9] text-xs text-[#2B2826] placeholder-[#B0A89F] focus:outline-none focus:border-[#4A5D4E] shadow-2xs"
+                        className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-white border border-[#E6E2D8] text-xs text-[#24211E] placeholder-[#7A7369] focus:outline-none focus:border-[#3E4F42] shadow-2xs"
                         required
                       />
                     </div>
@@ -304,37 +304,37 @@ export default function AuthModal({
                 )}
 
                 <div className="space-y-1">
-                  <label className="text-[11px] font-medium text-[#2B2826]">Email học viên:</label>
+                  <label className="text-[11px] font-medium text-[#24211E]">Email học viên:</label>
                   <div className="relative">
-                    <Mail className="w-4 h-4 text-[#7A7267] absolute left-3 top-1/2 -translate-y-1/2" />
+                    <Mail className="w-4 h-4 text-[#7A7369] absolute left-3 top-1/2 -translate-y-1/2" />
                     <input
                       type="email"
                       placeholder="hocvien@gmail.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-white border border-[#E7E2D9] text-xs text-[#2B2826] placeholder-[#B0A89F] focus:outline-none focus:border-[#4A5D4E] shadow-2xs"
+                      className="w-full pl-9 pr-3.5 py-2.5 rounded-xl bg-white border border-[#E6E2D8] text-xs text-[#24211E] placeholder-[#7A7369] focus:outline-none focus:border-[#3E4F42] shadow-2xs"
                       required
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[11px] font-medium text-[#2B2826]">Mật khẩu:</label>
+                  <label className="text-[11px] font-medium text-[#24211E]">Mật khẩu:</label>
                   <div className="relative">
-                    <Lock className="w-4 h-4 text-[#7A7267] absolute left-3 top-1/2 -translate-y-1/2" />
+                    <Lock className="w-4 h-4 text-[#7A7369] absolute left-3 top-1/2 -translate-y-1/2" />
                     <input
                       type={showPassword ? 'text' : 'password'}
                       placeholder="Tối thiểu 6 ký tự"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full pl-9 pr-10 py-2.5 rounded-xl bg-white border border-[#E7E2D9] text-xs text-[#2B2826] placeholder-[#B0A89F] focus:outline-none focus:border-[#4A5D4E] font-mono shadow-2xs"
+                      className="w-full pl-9 pr-10 py-2.5 rounded-xl bg-white border border-[#E6E2D8] text-xs text-[#24211E] placeholder-[#7A7369] focus:outline-none focus:border-[#3E4F42] font-mono shadow-2xs"
                       minLength={6}
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(prev => !prev)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7A7267] hover:text-[#2B2826]"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7A7369] hover:text-[#24211E]"
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -344,7 +344,7 @@ export default function AuthModal({
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3 rounded-2xl bg-[#4A5D4E] hover:bg-[#3D4D40] text-white font-medium text-xs transition shadow-xs flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 mt-1"
+                  className="w-full py-3 rounded-2xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-xs transition shadow-xs flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 mt-1"
                 >
                   <span>{loading ? "Đang xử lý..." : tab === 'signup' ? "Tạo Tài Khoản Mới" : "Đăng Nhập Ngay"}</span>
                   <ArrowRight className="w-4 h-4" />
@@ -354,16 +354,16 @@ export default function AuthModal({
               {/* Hoặc bằng Google */}
               <div className="space-y-2 pt-1">
                 <div className="flex items-center gap-3">
-                  <div className="flex-1 h-px bg-[#E7E2D9]"></div>
-                  <span className="text-[10px] text-[#7A7267] uppercase font-medium">Hoặc Google</span>
-                  <div className="flex-1 h-px bg-[#E7E2D9]"></div>
+                  <div className="flex-1 h-px bg-[#E6E2D8]"></div>
+                  <span className="text-[10px] text-[#7A7369] uppercase font-medium">Hoặc Google</span>
+                  <div className="flex-1 h-px bg-[#E6E2D8]"></div>
                 </div>
 
                 <button
                   type="button"
                   onClick={handleGoogleLogin}
                   disabled={loading}
-                  className="w-full py-2.5 px-4 rounded-2xl bg-white hover:bg-[#F4EFEA] border border-[#E7E2D9] text-[#2B2826] font-medium text-xs transition flex items-center justify-center gap-2.5 shadow-2xs cursor-pointer"
+                  className="w-full py-2.5 px-4 rounded-2xl bg-white hover:bg-[#F4EFEA] border border-[#E6E2D8] text-[#24211E] font-medium text-xs transition flex items-center justify-center gap-2.5 shadow-2xs cursor-pointer"
                   title="Yêu cầu bật Google Provider trong Supabase Dashboard"
                 >
                   <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -377,22 +377,22 @@ export default function AuthModal({
               </div>
 
               {/* Cloud Benefits Visualizer */}
-              <div className="p-3.5 rounded-2xl bg-white border border-[#E7E2D9] space-y-2 shadow-xs">
-                <div className="text-[11px] font-semibold text-[#4A5D4E] flex items-center gap-1.5">
+              <div className="p-3.5 rounded-2xl bg-white border border-[#E6E2D8] space-y-2 shadow-xs">
+                <div className="text-[11px] font-semibold text-[#3E4F42] flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" />
                   Lợi ích khi có tài khoản đám mây:
                 </div>
-                <div className="grid grid-cols-2 gap-2 text-[10px] text-[#2B2826]">
+                <div className="grid grid-cols-2 gap-2 text-[10px] text-[#24211E]">
                   <div className="flex items-center gap-1.5">
-                    <Smartphone className="w-3.5 h-3.5 text-[#4A5D4E]" />
+                    <Smartphone className="w-3.5 h-3.5 text-[#3E4F42]" />
                     <span>Học trên điện thoại</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <Laptop className="w-3.5 h-3.5 text-[#4A5D4E]" />
+                    <Laptop className="w-3.5 h-3.5 text-[#3E4F42]" />
                     <span>Viết bài trên laptop</span>
                   </div>
                 </div>
-                <p className="text-[10px] text-[#7A7267] pt-0.5">
+                <p className="text-[10px] text-[#7A7369] pt-0.5">
                   ✓ Toàn bộ từ vựng Flashcard, điểm số và bài viết sẽ tự động đồng bộ xuyên suốt.
                 </p>
               </div>
@@ -403,9 +403,9 @@ export default function AuthModal({
         </div>
 
         {/* Modal Footer: Enforced Student Policy */}
-        <div className="px-5 sm:px-6 py-3.5 border-t border-[#E7E2D9] bg-white flex items-center justify-between text-xs">
-          <div className="flex items-center gap-1.5 text-[#7A7267] text-[11px]">
-            <Lock className="w-3.5 h-3.5 text-[#4A5D4E] shrink-0" />
+        <div className="px-5 sm:px-6 py-3.5 border-t border-[#E6E2D8] bg-white flex items-center justify-between text-xs">
+          <div className="flex items-center gap-1.5 text-[#7A7369] text-[11px]">
+            <Lock className="w-3.5 h-3.5 text-[#3E4F42] shrink-0" />
             <span>Chỉ dành cho học viên có tài khoản Lớp Cô Oanh</span>
           </div>
 
@@ -413,7 +413,7 @@ export default function AuthModal({
             <button
               type="button"
               onClick={() => setTab('config')}
-              className="text-[#B88758] hover:text-[#9A6D42] font-medium cursor-pointer"
+              className="text-[#A67C52] hover:text-[#A67C52] font-medium cursor-pointer"
             >
               Cấu hình Supabase &rarr;
             </button>

@@ -276,31 +276,31 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
   };
 
   return (
-    <div className="h-full flex flex-col gap-3 overflow-hidden text-[#2B2826]">
+    <div className="h-full flex flex-col gap-3 overflow-hidden text-[#24211E]">
       
       {/* ================= HEADER RIBBON: PROMPT SELECTOR & TIMER ================= */}
-      <div className="p-3.5 rounded-2xl bg-white border border-[#E7E2D9] shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3 shrink-0">
+      <div className="p-3.5 rounded-2xl bg-white border border-[#E6E2D8] shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3 shrink-0">
         
         {/* Left: Task Indicator & Prompt Title */}
         <div className="flex items-center gap-3 min-w-0">
-          <div className="w-10 h-10 rounded-xl bg-[#EDF3EE] text-[#4A5D4E] border border-[#CAD8C8] flex items-center justify-center shrink-0 shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3] flex items-center justify-center shrink-0 shadow-xs">
             {isTask1 ? <BarChart3 className="w-5 h-5" /> : <FileText className="w-5 h-5" />}
           </div>
 
           <div className="min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs uppercase font-black px-2 py-0.5 rounded-full bg-[#4A5D4E] text-white tracking-wider">
+              <span className="text-xs uppercase font-black px-2 py-0.5 rounded-full bg-[#3E4F42] text-white tracking-wider">
                 {isTask1 ? "IELTS Task 1 Report" : "IELTS Task 2 Full Essay"}
               </span>
               <span className="text-[11px] font-bold text-[#7A7369]">
-                Mục tiêu: <strong className="text-[#3D5240]">Band {targetBand}</strong>
+                Mục tiêu: <strong className="text-[#3E4F42]">Band {targetBand}</strong>
               </span>
-              <span className="text-[11px] px-2 py-0.5 rounded-md bg-[#FAF8F5] border border-[#E7E2D9] text-[#5A524A] font-mono">
+              <span className="text-[11px] px-2 py-0.5 rounded-md bg-[#FAF8F5] border border-[#E6E2D8] text-[#7A7369] font-mono">
                 {selectedTopic?.questionType || selectedTopic?.tag || "Academic Writing"}
               </span>
             </div>
 
-            <h2 className="text-sm font-extrabold text-[#2B2826] truncate mt-0.5">
+            <h2 className="text-sm font-extrabold text-[#24211E] truncate mt-0.5">
               {selectedTopic?.name || selectedTopic?.title || "Chủ đề luyện viết IELTS"}
             </h2>
           </div>
@@ -310,15 +310,15 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
         <div className="flex items-center gap-2.5 shrink-0 self-end md:self-auto">
           
           {/* Timer Widget */}
-          <div className="flex items-center gap-1.5 bg-[#FAF8F5] px-3 py-1.5 rounded-xl border border-[#DDD6CB] shadow-xs">
-            <Clock className="w-4 h-4 text-[#B88758] shrink-0" />
-            <span className={`font-mono text-sm font-bold ${timeLeft < 300 ? "text-[#B95C48] animate-pulse" : "text-[#785334]"}`}>
+          <div className="flex items-center gap-1.5 bg-[#FAF8F5] px-3 py-1.5 rounded-xl border border-[#E6E2D8] shadow-xs">
+            <Clock className="w-4 h-4 text-[#A67C52] shrink-0" />
+            <span className={`font-mono text-sm font-bold ${timeLeft < 300 ? "text-[#A67C52] animate-pulse" : "text-[#A67C52]"}`}>
               {formatTimer(timeLeft)}
             </span>
             <button
               type="button"
               onClick={() => setIsTimerRunning(prev => !prev)}
-              className="p-1 rounded-lg bg-white hover:bg-[#F2EFE9] text-[#2B2826] border border-[#E7E2D9] transition cursor-pointer"
+              className="p-1 rounded-lg bg-white hover:bg-[#F4EFEA] text-[#24211E] border border-[#E6E2D8] transition cursor-pointer"
               title={isTimerRunning ? "Tạm dừng đồng hồ" : "Bắt đầu tính giờ thi thật"}
             >
               {isTimerRunning ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -329,7 +329,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                 setIsTimerRunning(false);
                 setTimeLeft(isTask1 ? 20 * 60 : 40 * 60);
               }}
-              className="p-1 rounded-lg bg-white hover:bg-[#F2EFE9] text-[#7A7369] border border-[#E7E2D9] transition cursor-pointer"
+              className="p-1 rounded-lg bg-white hover:bg-[#F4EFEA] text-[#7A7369] border border-[#E6E2D8] transition cursor-pointer"
               title="Đặt lại đồng hồ"
             >
               <RotateCcw className="w-3.5 h-3.5" />
@@ -338,12 +338,12 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
 
           {/* Quick Task 1 / Task 2 toggle */}
           {onToggleTask && (
-            <div className="flex items-center p-0.5 rounded-xl bg-[#F0EDE6] border border-[#DDD6CB] text-xs shadow-xs">
+            <div className="flex items-center p-0.5 rounded-xl bg-[#F4EFEA] border border-[#E6E2D8] text-xs shadow-xs">
               <button
                 type="button"
                 onClick={() => onToggleTask('task1')}
                 className={`px-2.5 py-1 rounded-lg font-bold transition cursor-pointer ${
-                  isTask1 ? "bg-[#4A5D4E] text-white shadow-xs" : "text-[#6E675E] hover:text-[#2B2826]"
+                  isTask1 ? "bg-[#3E4F42] text-white shadow-xs" : "text-[#7A7369] hover:text-[#24211E]"
                 }`}
               >
                 Task 1
@@ -352,7 +352,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                 type="button"
                 onClick={() => onToggleTask('task2')}
                 className={`px-2.5 py-1 rounded-lg font-bold transition cursor-pointer ${
-                  !isTask1 ? "bg-[#4A5D4E] text-white shadow-xs" : "text-[#6E675E] hover:text-[#2B2826]"
+                  !isTask1 ? "bg-[#3E4F42] text-white shadow-xs" : "text-[#7A7369] hover:text-[#24211E]"
                 }`}
               >
                 Task 2
@@ -364,30 +364,30 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
       </div>
 
       {/* ================= PROMPT & TASK 1 VISUALIZER BANNER ================= */}
-      <div className="p-3.5 rounded-2xl bg-[#FAF8F5] border border-[#E7E2D9] shadow-xs flex flex-col gap-2 shrink-0">
+      <div className="p-3.5 rounded-2xl bg-[#FAF8F5] border border-[#E6E2D8] shadow-xs flex flex-col gap-2 shrink-0">
         <div className="flex items-center justify-between text-[11px] text-[#7A7369]">
-          <span className="font-bold uppercase tracking-wider text-[#4A5D4E] flex items-center gap-1.5">
+          <span className="font-bold uppercase tracking-wider text-[#3E4F42] flex items-center gap-1.5">
             <span>📌</span> Đề thi chính thức ({isTask1 ? "Yêu cầu: >= 150 từ • 20 phút" : "Yêu cầu: >= 250 từ • 40 phút"}):
           </span>
           {isTask1 && onOpenChartModal && (
             <button
               type="button"
               onClick={onOpenChartModal}
-              className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#FAF8F5] border border-[#CAD8C8] text-[#3D5240] text-xs font-bold transition cursor-pointer flex items-center gap-1 shadow-xs"
+              className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#FAF8F5] border border-[#D1DDD3] text-[#3E4F42] text-xs font-bold transition cursor-pointer flex items-center gap-1 shadow-xs"
             >
-              <Eye className="w-3.5 h-3.5 text-[#4A5D4E]" />
+              <Eye className="w-3.5 h-3.5 text-[#3E4F42]" />
               <span>Phóng to Biểu đồ</span>
             </button>
           )}
         </div>
 
-        <p className="text-xs sm:text-sm text-[#2B2826] font-medium italic leading-relaxed pl-3 border-l-2 border-[#4A5D4E]">
+        <p className="text-xs sm:text-sm text-[#24211E] font-medium italic leading-relaxed pl-3 border-l-2 border-[#3E4F42]">
           "{selectedTopic?.ieltsPrompt || 'Đề bài chưa được cập nhật'}"
         </p>
 
         {/* Task 1 Compact Visualizer if activeTask === 'task1' */}
         {isTask1 && selectedTopic && (
-          <div className="mt-1 pt-2 border-t border-[#E7E2D9]/60 max-h-44 overflow-hidden rounded-xl">
+          <div className="mt-1 pt-2 border-t border-[#E6E2D8]/60 max-h-44 overflow-hidden rounded-xl">
             <Task1Visualizer 
               topic={selectedTopic} 
               onExpandChart={onOpenChartModal} 
@@ -398,7 +398,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
       </div>
 
       {/* ================= 3 PRACTICE SUB-MODES TABS ================= */}
-      <div className="p-1 rounded-2xl bg-[#F0EDE6] border border-[#DDD6CB] shadow-xs grid grid-cols-3 gap-1 shrink-0 text-xs">
+      <div className="p-1 rounded-2xl bg-[#F4EFEA] border border-[#E6E2D8] shadow-xs grid grid-cols-3 gap-1 shrink-0 text-xs">
         
         {/* Sub-mode 1 */}
         <button
@@ -406,8 +406,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
           onClick={() => setEssaySubMode('freestyle')}
           className={`py-2 px-2 rounded-xl font-bold transition flex items-center justify-center gap-1.5 cursor-pointer text-center ${
             essaySubMode === 'freestyle'
-              ? "bg-[#4A5D4E] text-white shadow-xs"
-              : "text-[#6E675E] hover:text-[#2B2826]"
+              ? "bg-[#3E4F42] text-white shadow-xs"
+              : "text-[#7A7369] hover:text-[#24211E]"
           }`}
         >
           <FileEdit className="w-3.5 h-3.5 shrink-0" />
@@ -420,8 +420,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
           onClick={() => setEssaySubMode('guided')}
           className={`py-2 px-2 rounded-xl font-bold transition flex items-center justify-center gap-1.5 cursor-pointer text-center ${
             essaySubMode === 'guided'
-              ? "bg-[#4A5D4E] text-white shadow-xs"
-              : "text-[#6E675E] hover:text-[#2B2826]"
+              ? "bg-[#3E4F42] text-white shadow-xs"
+              : "text-[#7A7369] hover:text-[#24211E]"
           }`}
         >
           <Compass className="w-3.5 h-3.5 shrink-0" />
@@ -434,8 +434,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
           onClick={() => setEssaySubMode('proposal_translation')}
           className={`py-2 px-2 rounded-xl font-bold transition flex items-center justify-center gap-1.5 cursor-pointer text-center ${
             essaySubMode === 'proposal_translation'
-              ? "bg-[#655243] text-white shadow-xs"
-              : "text-[#6E675E] hover:text-[#2B2826]"
+              ? "bg-[#3E4F42] text-white shadow-xs"
+              : "text-[#7A7369] hover:text-[#24211E]"
           }`}
         >
           <Sparkles className="w-3.5 h-3.5 shrink-0" />
@@ -452,14 +452,14 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
         {/* ========================================================================= */}
         {essaySubMode === 'freestyle' && (
           <div className="space-y-3 animate-fadeIn">
-            <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E7E2D9] space-y-3.5 shadow-xs">
+            <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E6E2D8] space-y-3.5 shadow-xs">
               
               {/* Quick Vocabularies Toolbar */}
               {topicVocabs.length > 0 && (
-                <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-1.5">
+                <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] space-y-1.5">
                   <div className="flex items-center justify-between text-[11px] text-[#7A7369]">
-                    <span className="font-bold text-[#4A5D4E] uppercase flex items-center gap-1">
-                      <Sparkles className="w-3 h-3 text-[#B88758]" />
+                    <span className="font-bold text-[#3E4F42] uppercase flex items-center gap-1">
+                      <Sparkles className="w-3 h-3 text-[#A67C52]" />
                       Từ vựng Band 8.0 của chủ đề (Bấm để chèn nhanh vào bài):
                     </span>
                     <span className="italic">(Collocation & Academic Lexicon)</span>
@@ -470,7 +470,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                         key={v.id || v.word}
                         type="button"
                         onClick={() => insertWordIntoFreestyle(v.word)}
-                        className="px-2 py-0.5 rounded-lg bg-white hover:bg-[#EDF3EE] border border-[#DDD6CB] hover:border-[#CAD8C8] text-[#5A524A] hover:text-[#2B2826] text-xs font-mono transition cursor-pointer flex items-center gap-1"
+                        className="px-2 py-0.5 rounded-lg bg-white hover:bg-[#EDF3EE] border border-[#E6E2D8] hover:border-[#D1DDD3] text-[#7A7369] hover:text-[#24211E] text-xs font-mono transition cursor-pointer flex items-center gap-1"
                         title={`Nghĩa: ${v.meaning}`}
                       >
                         <Plus className="w-3 h-3 text-[#7A7369]" />
@@ -486,9 +486,9 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                 <button
                   type="button"
                   onClick={insertFreestyleScaffold}
-                  className="px-3 py-1.5 rounded-xl bg-[#EDF3EE] hover:bg-[#E3EDE5] text-[#3D5240] border border-[#CAD8C8] text-xs font-bold transition cursor-pointer flex items-center gap-1 shadow-xs"
+                  className="px-3 py-1.5 rounded-xl bg-[#EDF3EE] hover:bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3] text-xs font-bold transition cursor-pointer flex items-center gap-1 shadow-xs"
                 >
-                  <Plus className="w-3.5 h-3.5 text-[#4A5D4E]" />
+                  <Plus className="w-3.5 h-3.5 text-[#3E4F42]" />
                   <span>Chèn Khung Dàn Ý {isTask1 ? "Report Task 1" : "Essay 4 Đoạn Tiêu Chuẩn"}</span>
                 </button>
               </div>
@@ -504,7 +504,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                       : "Soạn thảo toàn văn bài luận Task 2 tại đây (tối thiểu 250 từ)... Chia thành 4 đoạn văn mạch lạc: Mở bài (Bối cảnh & Luận điểm), Thân bài 1, Thân bài 2 và Kết bài."
                   }
                   rows={14}
-                  className="w-full p-4 rounded-xl bg-[#FAF8F5] border border-[#DDD6CB] focus:border-[#4A5D4E] focus:ring-1 focus:ring-[#4A5D4E] text-[#2B2826] placeholder-[#968E84] font-sans text-xs sm:text-sm leading-relaxed outline-none transition resize-y shadow-inner"
+                  className="w-full p-4 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] focus:border-[#3E4F42] focus:ring-1 focus:ring-[#3E4F42] text-[#24211E] placeholder-[#7A7369] font-sans text-xs sm:text-sm leading-relaxed outline-none transition resize-y shadow-inner"
                 />
 
                 {/* Bottom Bar: Word Counter & Submit */}
@@ -512,24 +512,24 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                   <div className="flex items-center gap-2 flex-wrap text-xs">
                     <span className={`px-2.5 py-1 rounded-lg font-mono font-bold border flex items-center gap-1.5 ${
                       freestyleWords.length >= minWordsRequired
-                        ? "bg-[#EDF3EE] border-[#CAD8C8] text-[#3D5240]"
-                        : "bg-[#FAF4EE] border-[#EADBCC] text-[#8C5D33]"
+                        ? "bg-[#EDF3EE] border-[#D1DDD3] text-[#3E4F42]"
+                        : "bg-[#FAF5EE] border-[#E6E2D8] text-[#A67C52]"
                     }`}>
                       {freestyleWords.length >= minWordsRequired ? (
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#3D5240]" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#3E4F42]" />
                       ) : (
-                        <AlertTriangle className="w-3.5 h-3.5 text-[#B88758]" />
+                        <AlertTriangle className="w-3.5 h-3.5 text-[#A67C52]" />
                       )}
                       <span>{freestyleWords.length} / {minWordsRequired} từ</span>
                       {freestyleWords.length < minWordsRequired && (
-                        <span className="text-[10px] text-[#8C5D33]">
+                        <span className="text-[10px] text-[#A67C52]">
                           (cần thêm {minWordsRequired - freestyleWords.length} từ)
                         </span>
                       )}
                     </span>
 
                     <span className="text-[11px] text-[#7A7369]">
-                      Đoạn văn: <strong className="text-[#2B2826]">{freestyleParagraphs}</strong> đoạn
+                      Đoạn văn: <strong className="text-[#24211E]">{freestyleParagraphs}</strong> đoạn
                     </span>
 
                     {freestyleInput.length > 0 && (
@@ -541,7 +541,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                             setEvaluationResult(null);
                           }
                         }}
-                        className="text-[11px] text-[#7A7369] hover:text-[#B95C48] transition underline cursor-pointer ml-1"
+                        className="text-[11px] text-[#7A7369] hover:text-[#A67C52] transition underline cursor-pointer ml-1"
                       >
                         Xóa làm lại
                       </button>
@@ -554,8 +554,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                     disabled={isEvaluating || freestyleWords.length < 25}
                     className={`px-5 py-2.5 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-xs cursor-pointer ${
                       freestyleWords.length < 25
-                        ? "bg-[#F2EFE9] text-[#A8A196] cursor-not-allowed border border-[#DDD6CB]"
-                        : "bg-[#4A5D4E] hover:bg-[#3D4E41] text-white active:scale-95"
+                        ? "bg-[#F4EFEA] text-[#7A7369] cursor-not-allowed border border-[#E6E2D8]"
+                        : "bg-[#3E4F42] hover:bg-[#334237] text-white active:scale-95"
                     }`}
                   >
                     {isEvaluating ? (
@@ -565,7 +565,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                       </>
                     ) : (
                       <>
-                        <Sparkles className="w-4 h-4 text-[#E0EAE1]" />
+                        <Sparkles className="w-4 h-4 text-[#EDF3EE]" />
                         <span>Nộp bài &amp; Chấm điểm chuẩn IELTS</span>
                       </>
                     )}
@@ -576,10 +576,10 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
 
             {/* Evaluation Results Rendered Below Textarea */}
             {evaluationResult && (
-              <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#CAD8C8] space-y-4 shadow-xs animate-fadeIn">
-                <div className="p-4 rounded-xl bg-[#EDF3EE] border border-[#CAD8C8] flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+              <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#D1DDD3] space-y-4 shadow-xs animate-fadeIn">
+                <div className="p-4 rounded-xl bg-[#EDF3EE] border border-[#D1DDD3] flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-2xl bg-[#4A5D4E] text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <div className="w-12 h-12 rounded-2xl bg-[#3E4F42] text-white flex items-center justify-center shrink-0 shadow-xs">
                       <Award className="w-7 h-7" />
                     </div>
                     <div>
@@ -587,7 +587,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                         Kết quả đánh giá 4 tiêu chí {isTask1 ? 'Task 1' : 'Task 2'}
                       </span>
                       <div className="flex items-baseline gap-2">
-                        <span className="text-2xl font-black text-[#2B2826] font-mono">
+                        <span className="text-2xl font-black text-[#24211E] font-mono">
                           Band {evaluationResult.scores?.overallBand || "6.5"}
                         </span>
                         <span className="text-xs text-[#7A7369]">
@@ -599,8 +599,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
 
                   <span className={`px-3 py-1 rounded-full text-xs font-bold border ${
                     (evaluationResult.scores?.overallBand || 0) >= parseFloat(targetBand)
-                      ? "bg-white text-[#3D5240] border-[#CAD8C8]"
-                      : "bg-white text-[#8C5D33] border-[#EADBCC]"
+                      ? "bg-white text-[#3E4F42] border-[#D1DDD3]"
+                      : "bg-white text-[#A67C52] border-[#E6E2D8]"
                   }`}>
                     {(evaluationResult.scores?.overallBand || 0) >= parseFloat(targetBand)
                       ? "✓ Đạt mục tiêu đề ra"
@@ -610,11 +610,11 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
 
                 {/* 4 IELTS Criteria */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-1">
+                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] space-y-1">
                     <span className="text-[10px] font-bold text-[#7A7369] uppercase tracking-wider block">
                       {isTask1 ? "Task Achievement (TA)" : "Task Response (TR)"}
                     </span>
-                    <div className="text-lg font-black text-[#4A5D4E] font-mono">
+                    <div className="text-lg font-black text-[#3E4F42] font-mono">
                       {evaluationResult.scores?.taskResponse?.toFixed(1) || "6.5"}
                     </div>
                     <span className="text-[10px] text-[#7A7369] block">
@@ -622,11 +622,11 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                     </span>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-1">
+                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] space-y-1">
                     <span className="text-[10px] font-bold text-[#7A7369] uppercase tracking-wider block">
                       Coherence &amp; Cohesion (CC)
                     </span>
-                    <div className="text-lg font-black text-[#3D5240] font-mono">
+                    <div className="text-lg font-black text-[#3E4F42] font-mono">
                       {evaluationResult.scores?.coherenceCohesion?.toFixed(1) || "6.5"}
                     </div>
                     <span className="text-[10px] text-[#7A7369] block">
@@ -634,11 +634,11 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                     </span>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-1">
+                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] space-y-1">
                     <span className="text-[10px] font-bold text-[#7A7369] uppercase tracking-wider block">
                       Lexical Resource (LR)
                     </span>
-                    <div className="text-lg font-black text-[#B88758] font-mono">
+                    <div className="text-lg font-black text-[#A67C52] font-mono">
                       {evaluationResult.scores?.lexicalResource?.toFixed(1) || "6.5"}
                     </div>
                     <span className="text-[10px] text-[#7A7369] block">
@@ -646,11 +646,11 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                     </span>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-1">
+                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] space-y-1">
                     <span className="text-[10px] font-bold text-[#7A7369] uppercase tracking-wider block">
                       Grammar Accuracy (GRA)
                     </span>
-                    <div className="text-lg font-black text-[#785334] font-mono">
+                    <div className="text-lg font-black text-[#A67C52] font-mono">
                       {evaluationResult.scores?.grammarRange?.toFixed(1) || "6.5"}
                     </div>
                     <span className="text-[10px] text-[#7A7369] block">
@@ -661,22 +661,22 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
 
                 {/* Feedback */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                  <div className="p-3.5 rounded-xl bg-[#EDF3EE]/60 border border-[#CAD8C8] space-y-1.5">
-                    <span className="font-bold text-[#3D5240] uppercase text-[11px] flex items-center gap-1.5">
+                  <div className="p-3.5 rounded-xl bg-[#EDF3EE]/60 border border-[#D1DDD3] space-y-1.5">
+                    <span className="font-bold text-[#3E4F42] uppercase text-[11px] flex items-center gap-1.5">
                       <CheckCircle2 className="w-3.5 h-3.5" /> Điểm mạnh của bài viết:
                     </span>
-                    <ul className="space-y-1 text-[#2B2826] list-disc pl-4">
+                    <ul className="space-y-1 text-[#24211E] list-disc pl-4">
                       {evaluationResult.strengths?.map((s, idx) => (
                         <li key={idx}>{s}</li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-[#FAF4EE] border border-[#EADBCC] space-y-1.5">
-                    <span className="font-bold text-[#8C5D33] uppercase text-[11px] flex items-center gap-1.5">
+                  <div className="p-3.5 rounded-xl bg-[#FAF5EE] border border-[#E6E2D8] space-y-1.5">
+                    <span className="font-bold text-[#A67C52] uppercase text-[11px] flex items-center gap-1.5">
                       <AlertTriangle className="w-3.5 h-3.5" /> Góp ý cải thiện chuẩn Band {targetBand}:
                     </span>
-                    <ul className="space-y-1 text-[#2B2826] list-disc pl-4">
+                    <ul className="space-y-1 text-[#24211E] list-disc pl-4">
                       {evaluationResult.improvements?.map((imp, idx) => (
                         <li key={idx}>{imp}</li>
                       ))}
@@ -695,15 +695,15 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
           <div className="space-y-3.5 animate-fadeIn">
             
             {/* Stage Selector Tabs */}
-            <div className="p-2 rounded-2xl bg-white border border-[#E7E2D9] shadow-xs flex items-center justify-between gap-2 flex-wrap">
+            <div className="p-2 rounded-2xl bg-white border border-[#E6E2D8] shadow-xs flex items-center justify-between gap-2 flex-wrap">
               <div className="flex items-center gap-1.5 flex-wrap">
                 <button
                   type="button"
                   onClick={() => setActiveStageTab('intro')}
                   className={`px-3 py-1.5 rounded-xl font-bold text-xs transition cursor-pointer flex items-center gap-1.5 ${
                     activeStageTab === 'intro'
-                      ? "bg-[#4A5D4E] text-white shadow-xs"
-                      : "bg-[#FAF8F5] text-[#5A524A] hover:bg-[#F2EFE9]"
+                      ? "bg-[#3E4F42] text-white shadow-xs"
+                      : "bg-[#FAF8F5] text-[#7A7369] hover:bg-[#F4EFEA]"
                   }`}
                 >
                   <span>1. Mở bài &amp; {isTask1 ? "Overview" : "Thesis"}</span>
@@ -715,8 +715,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                   onClick={() => setActiveStageTab('body1')}
                   className={`px-3 py-1.5 rounded-xl font-bold text-xs transition cursor-pointer flex items-center gap-1.5 ${
                     activeStageTab === 'body1'
-                      ? "bg-[#4A5D4E] text-white shadow-xs"
-                      : "bg-[#FAF8F5] text-[#5A524A] hover:bg-[#F2EFE9]"
+                      ? "bg-[#3E4F42] text-white shadow-xs"
+                      : "bg-[#FAF8F5] text-[#7A7369] hover:bg-[#F4EFEA]"
                   }`}
                 >
                   <span>2. Thân bài 1 (Body 1)</span>
@@ -728,8 +728,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                   onClick={() => setActiveStageTab('body2')}
                   className={`px-3 py-1.5 rounded-xl font-bold text-xs transition cursor-pointer flex items-center gap-1.5 ${
                     activeStageTab === 'body2'
-                      ? "bg-[#4A5D4E] text-white shadow-xs"
-                      : "bg-[#FAF8F5] text-[#5A524A] hover:bg-[#F2EFE9]"
+                      ? "bg-[#3E4F42] text-white shadow-xs"
+                      : "bg-[#FAF8F5] text-[#7A7369] hover:bg-[#F4EFEA]"
                   }`}
                 >
                   <span>3. Thân bài 2 (Body 2)</span>
@@ -742,8 +742,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                     onClick={() => setActiveStageTab('conclusion')}
                     className={`px-3 py-1.5 rounded-xl font-bold text-xs transition cursor-pointer flex items-center gap-1.5 ${
                       activeStageTab === 'conclusion'
-                        ? "bg-[#4A5D4E] text-white shadow-xs"
-                        : "bg-[#FAF8F5] text-[#5A524A] hover:bg-[#F2EFE9]"
+                        ? "bg-[#3E4F42] text-white shadow-xs"
+                        : "bg-[#FAF8F5] text-[#7A7369] hover:bg-[#F4EFEA]"
                     }`}
                   >
                     <span>4. Kết bài (Conclusion)</span>
@@ -756,21 +756,21 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
               <button
                 type="button"
                 onClick={handleAssembleGuidedEssay}
-                className="py-1.5 px-3.5 rounded-xl bg-[#655243] hover:bg-[#544436] text-white font-extrabold text-xs transition cursor-pointer flex items-center gap-1.5 shadow-xs"
+                className="py-1.5 px-3.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-extrabold text-xs transition cursor-pointer flex items-center gap-1.5 shadow-xs"
                 title="Ghép các phần đã viết thành một bài essay hoàn chỉnh"
               >
-                <Zap className="w-3.5 h-3.5 text-[#F3EFE9]" />
+                <Zap className="w-3.5 h-3.5 text-[#F4EFEA]" />
                 <span>⚡ Ghép toàn bài ({totalGuidedWords} từ) &rarr;</span>
               </button>
             </div>
 
             {/* Active Stage Panel */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E7E2D9] space-y-4 shadow-xs">
+            <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E6E2D8] space-y-4 shadow-xs">
               
               {activeStageTab === 'intro' && (
                 <div className="space-y-3">
                   <div className="space-y-1">
-                    <h3 className="text-sm font-extrabold text-[#4A5D4E] flex items-center gap-1.5">
+                    <h3 className="text-sm font-extrabold text-[#3E4F42] flex items-center gap-1.5">
                       <BookOpen className="w-4 h-4" />
                       Giai đoạn 1: Mở bài &amp; {isTask1 ? "Tổng quan (Overview)" : "Luận điểm (Thesis Statement)"}
                     </h3>
@@ -782,8 +782,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                   </div>
 
                   {/* Sentence Starters */}
-                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-1.5">
-                    <span className="text-[11px] font-bold text-[#5A524A] uppercase block">
+                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] space-y-1.5">
+                    <span className="text-[11px] font-bold text-[#7A7369] uppercase block">
                       💡 Mẫu câu gợi ý (Sentence Starters - Bấm để chèn):
                     </span>
                     <div className="flex flex-wrap gap-1.5">
@@ -799,7 +799,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                             ...prev,
                             intro: prev.intro ? `${prev.intro} ${starter}` : starter
                           }))}
-                          className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#EDF3EE] border border-[#DDD6CB] text-xs text-[#2B2826] transition cursor-pointer"
+                          className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#EDF3EE] border border-[#E6E2D8] text-xs text-[#24211E] transition cursor-pointer"
                         >
                           + {starter}
                         </button>
@@ -812,7 +812,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                     onChange={(e) => setStageDrafts(prev => ({ ...prev, intro: e.target.value }))}
                     placeholder="Viết đoạn Mở bài tại đây (khoảng 35 - 55 từ)..."
                     rows={6}
-                    className="w-full p-3.5 rounded-xl bg-[#FAF8F5] border border-[#DDD6CB] focus:border-[#4A5D4E] text-xs sm:text-sm leading-relaxed outline-none"
+                    className="w-full p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] focus:border-[#3E4F42] text-xs sm:text-sm leading-relaxed outline-none"
                   />
                 </div>
               )}
@@ -820,7 +820,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
               {activeStageTab === 'body1' && (
                 <div className="space-y-3">
                   <div className="space-y-1">
-                    <h3 className="text-sm font-extrabold text-[#4A5D4E] flex items-center gap-1.5">
+                    <h3 className="text-sm font-extrabold text-[#3E4F42] flex items-center gap-1.5">
                       <BookOpen className="w-4 h-4" />
                       Giai đoạn 2: Thân bài 1 (Body Paragraph 1)
                     </h3>
@@ -832,8 +832,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                   </div>
 
                   {/* Sentence Starters */}
-                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-1.5">
-                    <span className="text-[11px] font-bold text-[#5A524A] uppercase block">
+                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] space-y-1.5">
+                    <span className="text-[11px] font-bold text-[#7A7369] uppercase block">
                       💡 Mẫu câu &amp; Liên từ Thân bài 1:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
@@ -850,7 +850,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                             ...prev,
                             body1: prev.body1 ? `${prev.body1} ${starter}` : starter
                           }))}
-                          className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#EDF3EE] border border-[#DDD6CB] text-xs text-[#2B2826] transition cursor-pointer"
+                          className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#EDF3EE] border border-[#E6E2D8] text-xs text-[#24211E] transition cursor-pointer"
                         >
                           + {starter}
                         </button>
@@ -863,7 +863,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                     onChange={(e) => setStageDrafts(prev => ({ ...prev, body1: e.target.value }))}
                     placeholder="Viết đoạn Thân bài 1 tại đây (khoảng 80 - 110 từ)..."
                     rows={7}
-                    className="w-full p-3.5 rounded-xl bg-[#FAF8F5] border border-[#DDD6CB] focus:border-[#4A5D4E] text-xs sm:text-sm leading-relaxed outline-none"
+                    className="w-full p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] focus:border-[#3E4F42] text-xs sm:text-sm leading-relaxed outline-none"
                   />
                 </div>
               )}
@@ -871,7 +871,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
               {activeStageTab === 'body2' && (
                 <div className="space-y-3">
                   <div className="space-y-1">
-                    <h3 className="text-sm font-extrabold text-[#4A5D4E] flex items-center gap-1.5">
+                    <h3 className="text-sm font-extrabold text-[#3E4F42] flex items-center gap-1.5">
                       <BookOpen className="w-4 h-4" />
                       Giai đoạn 3: Thân bài 2 (Body Paragraph 2)
                     </h3>
@@ -883,8 +883,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                   </div>
 
                   {/* Sentence Starters */}
-                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-1.5">
-                    <span className="text-[11px] font-bold text-[#5A524A] uppercase block">
+                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] space-y-1.5">
+                    <span className="text-[11px] font-bold text-[#7A7369] uppercase block">
                       💡 Mẫu câu &amp; Liên từ Thân bài 2:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
@@ -901,7 +901,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                             ...prev,
                             body2: prev.body2 ? `${prev.body2} ${starter}` : starter
                           }))}
-                          className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#EDF3EE] border border-[#DDD6CB] text-xs text-[#2B2826] transition cursor-pointer"
+                          className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#EDF3EE] border border-[#E6E2D8] text-xs text-[#24211E] transition cursor-pointer"
                         >
                           + {starter}
                         </button>
@@ -914,7 +914,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                     onChange={(e) => setStageDrafts(prev => ({ ...prev, body2: e.target.value }))}
                     placeholder="Viết đoạn Thân bài 2 tại đây (khoảng 80 - 110 từ)..."
                     rows={7}
-                    className="w-full p-3.5 rounded-xl bg-[#FAF8F5] border border-[#DDD6CB] focus:border-[#4A5D4E] text-xs sm:text-sm leading-relaxed outline-none"
+                    className="w-full p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] focus:border-[#3E4F42] text-xs sm:text-sm leading-relaxed outline-none"
                   />
                 </div>
               )}
@@ -922,7 +922,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
               {activeStageTab === 'conclusion' && (
                 <div className="space-y-3">
                   <div className="space-y-1">
-                    <h3 className="text-sm font-extrabold text-[#4A5D4E] flex items-center gap-1.5">
+                    <h3 className="text-sm font-extrabold text-[#3E4F42] flex items-center gap-1.5">
                       <BookOpen className="w-4 h-4" />
                       Giai đoạn 4: Kết bài (Conclusion)
                     </h3>
@@ -932,8 +932,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                   </div>
 
                   {/* Sentence Starters */}
-                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-1.5">
-                    <span className="text-[11px] font-bold text-[#5A524A] uppercase block">
+                  <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] space-y-1.5">
+                    <span className="text-[11px] font-bold text-[#7A7369] uppercase block">
                       💡 Mẫu câu Kết bài:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
@@ -949,7 +949,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                             ...prev,
                             conclusion: prev.conclusion ? `${prev.conclusion} ${starter}` : starter
                           }))}
-                          className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#EDF3EE] border border-[#DDD6CB] text-xs text-[#2B2826] transition cursor-pointer"
+                          className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#EDF3EE] border border-[#E6E2D8] text-xs text-[#24211E] transition cursor-pointer"
                         >
                           + {starter}
                         </button>
@@ -962,7 +962,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                     onChange={(e) => setStageDrafts(prev => ({ ...prev, conclusion: e.target.value }))}
                     placeholder="Viết đoạn Kết bài tại đây (khoảng 30 - 45 từ)..."
                     rows={5}
-                    className="w-full p-3.5 rounded-xl bg-[#FAF8F5] border border-[#DDD6CB] focus:border-[#4A5D4E] text-xs sm:text-sm leading-relaxed outline-none"
+                    className="w-full p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] focus:border-[#3E4F42] text-xs sm:text-sm leading-relaxed outline-none"
                   />
                 </div>
               )}
@@ -978,17 +978,17 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
           <div className="space-y-3.5 animate-fadeIn">
             
             {/* Unit Switcher: Từng Đoạn vs Từng Câu */}
-            <div className="p-3 rounded-2xl bg-white border border-[#E7E2D9] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+            <div className="p-3 rounded-2xl bg-white border border-[#E6E2D8] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-bold text-[#5A524A]">Hình thức dịch đề xuất:</span>
-                <div className="flex items-center p-0.5 rounded-xl bg-[#F0EDE6] border border-[#DDD6CB] text-xs shadow-xs">
+                <span className="text-xs font-bold text-[#7A7369]">Hình thức dịch đề xuất:</span>
+                <div className="flex items-center p-0.5 rounded-xl bg-[#F4EFEA] border border-[#E6E2D8] text-xs shadow-xs">
                   <button
                     type="button"
                     onClick={() => setTranslationUnitMode('paragraphs')}
                     className={`px-3 py-1 rounded-lg font-bold transition cursor-pointer ${
                       translationUnitMode === 'paragraphs'
-                        ? "bg-[#4A5D4E] text-white shadow-xs"
-                        : "text-[#6E675E] hover:text-[#2B2826]"
+                        ? "bg-[#3E4F42] text-white shadow-xs"
+                        : "text-[#7A7369] hover:text-[#24211E]"
                     }`}
                   >
                     Dịch theo từng đoạn ({proposalData.totalParagraphs} đoạn)
@@ -998,8 +998,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                     onClick={() => setTranslationUnitMode('sentences')}
                     className={`px-3 py-1 rounded-lg font-bold transition cursor-pointer ${
                       translationUnitMode === 'sentences'
-                        ? "bg-[#4A5D4E] text-white shadow-xs"
-                        : "text-[#6E675E] hover:text-[#2B2826]"
+                        ? "bg-[#3E4F42] text-white shadow-xs"
+                        : "text-[#7A7369] hover:text-[#24211E]"
                     }`}
                   >
                     Dịch theo từng câu ({proposalData.totalSentences} câu)
@@ -1011,10 +1011,10 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
               <button
                 type="button"
                 onClick={handleAssembleTranslationEssay}
-                className="py-1.5 px-3.5 rounded-xl bg-[#655243] hover:bg-[#544436] text-white font-extrabold text-xs transition cursor-pointer flex items-center justify-center gap-1.5 shadow-xs"
+                className="py-1.5 px-3.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-extrabold text-xs transition cursor-pointer flex items-center justify-center gap-1.5 shadow-xs"
                 title="Tập hợp toàn bộ bản dịch thành một bài văn hoàn chỉnh"
               >
-                <Zap className="w-3.5 h-3.5 text-[#F3EFE9]" />
+                <Zap className="w-3.5 h-3.5 text-[#F4EFEA]" />
                 <span>⚡ Ghép toàn bài hoàn chỉnh &rarr;</span>
               </button>
             </div>
@@ -1027,12 +1027,12 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                   const currentUpgradeText = p.bandUpgrades?.[activeBand] || p.englishModel;
 
                   return (
-                    <div key={pIdx} className="p-4 rounded-2xl bg-white border border-[#E7E2D9] space-y-3 shadow-xs">
+                    <div key={pIdx} className="p-4 rounded-2xl bg-white border border-[#E6E2D8] space-y-3 shadow-xs">
                       
                       {/* Header of paragraph */}
-                      <div className="flex items-center justify-between pb-2 border-b border-[#E7E2D9]">
-                        <span className="text-xs font-black text-[#4A5D4E] uppercase tracking-wide flex items-center gap-1.5">
-                          <Layers className="w-4 h-4 text-[#B88758]" />
+                      <div className="flex items-center justify-between pb-2 border-b border-[#E6E2D8]">
+                        <span className="text-xs font-black text-[#3E4F42] uppercase tracking-wide flex items-center gap-1.5">
+                          <Layers className="w-4 h-4 text-[#A67C52]" />
                           {p.roleTitle}
                         </span>
                         <span className="text-[10px] text-[#7A7369] font-mono">
@@ -1041,11 +1041,11 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                       </div>
 
                       {/* Vietnamese Proposal by Website */}
-                      <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-1">
-                        <span className="text-[11px] font-bold text-[#8C5D33] uppercase flex items-center gap-1">
+                      <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] space-y-1">
+                        <span className="text-[11px] font-bold text-[#A67C52] uppercase flex items-center gap-1">
                           <span>🇻🇳</span> Đề xuất ý tưởng tiếng Việt của website:
                         </span>
-                        <p className="text-xs sm:text-sm text-[#2B2826] leading-relaxed">
+                        <p className="text-xs sm:text-sm text-[#24211E] leading-relaxed">
                           {p.vietnameseProposal}
                         </p>
                       </div>
@@ -1053,7 +1053,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                       {/* Band Upgrades Selector Buttons */}
                       <div className="space-y-1.5">
                         <div className="flex items-center justify-between text-[11px] text-[#7A7369]">
-                          <span className="font-semibold text-[#5A524A] flex items-center gap-1">
+                          <span className="font-semibold text-[#7A7369] flex items-center gap-1">
                             <span>✨</span> Xem câu/đoạn nâng cấp theo Band điểm mục tiêu:
                           </span>
                           <span className="text-[10px] italic">Bấm chọn để xem cách diễn đạt từng Band</span>
@@ -1069,8 +1069,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                               }))}
                               className={`px-2.5 py-1 rounded-xl text-xs font-bold transition cursor-pointer flex items-center gap-1 ${
                                 activeBand === band
-                                  ? "bg-[#4A5D4E] text-white shadow-xs"
-                                  : "bg-[#FAF8F5] hover:bg-[#F2EFE9] text-[#5A524A] border border-[#DDD6CB]"
+                                  ? "bg-[#3E4F42] text-white shadow-xs"
+                                  : "bg-[#FAF8F5] hover:bg-[#F4EFEA] text-[#7A7369] border border-[#E6E2D8]"
                               }`}
                             >
                               <span>Band {band}</span>
@@ -1080,8 +1080,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                         </div>
 
                         {/* Display of upgraded model for this band */}
-                        <div className="p-2.5 rounded-xl bg-[#EDF3EE]/50 border border-[#CAD8C8] text-xs space-y-1">
-                          <div className="flex items-center justify-between text-[10px] text-[#4A5D4E] font-bold">
+                        <div className="p-2.5 rounded-xl bg-[#EDF3EE]/50 border border-[#D1DDD3] text-xs space-y-1">
+                          <div className="flex items-center justify-between text-[10px] text-[#3E4F42] font-bold">
                             <span>Bản mẫu tiếng Anh chuẩn Band {activeBand}:</span>
                             <button
                               type="button"
@@ -1091,13 +1091,13 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                                   [pIdx]: currentUpgradeText
                                 }));
                               }}
-                              className="text-[#3D5240] hover:underline cursor-pointer flex items-center gap-1"
+                              className="text-[#3E4F42] hover:underline cursor-pointer flex items-center gap-1"
                             >
                               <Copy className="w-3 h-3" />
                               <span>Áp dụng vào bản dịch</span>
                             </button>
                           </div>
-                          <p className="text-[#2B2826] font-sans leading-relaxed italic">
+                          <p className="text-[#24211E] font-sans leading-relaxed italic">
                             "{currentUpgradeText}"
                           </p>
                         </div>
@@ -1105,7 +1105,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
 
                       {/* Student Translation Input */}
                       <div className="space-y-1">
-                        <span className="text-[11px] font-bold text-[#5A524A]">
+                        <span className="text-[11px] font-bold text-[#7A7369]">
                           Bản dịch tiếng Anh của bạn cho đoạn này:
                         </span>
                         <textarea
@@ -1116,7 +1116,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                           }))}
                           placeholder="Nhập bản dịch tiếng Anh của bạn tại đây..."
                           rows={4}
-                          className="w-full p-3 rounded-xl bg-[#FAF8F5] border border-[#DDD6CB] focus:border-[#4A5D4E] text-xs sm:text-sm leading-relaxed outline-none"
+                          className="w-full p-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] focus:border-[#3E4F42] text-xs sm:text-sm leading-relaxed outline-none"
                         />
                       </div>
 
@@ -1134,12 +1134,12 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                   const currentUpgradeText = s.bandUpgrades?.[activeBand] || s.englishModel;
 
                   return (
-                    <div key={sIdx} className="p-4 rounded-2xl bg-white border border-[#E7E2D9] space-y-2.5 shadow-xs">
+                    <div key={sIdx} className="p-4 rounded-2xl bg-white border border-[#E6E2D8] space-y-2.5 shadow-xs">
                       
                       {/* Header */}
-                      <div className="flex items-center justify-between pb-1.5 border-b border-[#E7E2D9]">
-                        <span className="text-xs font-black text-[#4A5D4E] uppercase tracking-wide flex items-center gap-1.5">
-                          <FileText className="w-3.5 h-3.5 text-[#B88758]" />
+                      <div className="flex items-center justify-between pb-1.5 border-b border-[#E6E2D8]">
+                        <span className="text-xs font-black text-[#3E4F42] uppercase tracking-wide flex items-center gap-1.5">
+                          <FileText className="w-3.5 h-3.5 text-[#A67C52]" />
                           {s.role} • {s.paragraphRole}
                         </span>
                         <span className="text-[10px] text-[#7A7369] font-mono">
@@ -1148,11 +1148,11 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                       </div>
 
                       {/* Vietnamese proposal */}
-                      <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] text-xs">
-                        <span className="text-[10px] font-bold text-[#8C5D33] uppercase block mb-0.5">
+                      <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] text-xs">
+                        <span className="text-[10px] font-bold text-[#A67C52] uppercase block mb-0.5">
                           🇻🇳 Câu tiếng Việt cần dịch:
                         </span>
-                        <p className="text-[#2B2826] font-medium leading-relaxed">
+                        <p className="text-[#24211E] font-medium leading-relaxed">
                           {s.vietnameseProposal}
                         </p>
                       </div>
@@ -1171,8 +1171,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                               }))}
                               className={`px-2 py-0.5 rounded-lg text-[11px] font-bold transition cursor-pointer ${
                                 activeBand === band
-                                  ? "bg-[#4A5D4E] text-white shadow-xs"
-                                  : "bg-[#FAF8F5] text-[#5A524A] border border-[#DDD6CB]"
+                                  ? "bg-[#3E4F42] text-white shadow-xs"
+                                  : "bg-[#FAF8F5] text-[#7A7369] border border-[#E6E2D8]"
                               }`}
                             >
                               Band {band}
@@ -1180,8 +1180,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                           ))}
                         </div>
 
-                        <div className="p-2 rounded-xl bg-[#EDF3EE]/50 border border-[#CAD8C8] text-xs flex items-start justify-between gap-2">
-                          <p className="text-[#2B2826] italic text-xs leading-relaxed">
+                        <div className="p-2 rounded-xl bg-[#EDF3EE]/50 border border-[#D1DDD3] text-xs flex items-start justify-between gap-2">
+                          <p className="text-[#24211E] italic text-xs leading-relaxed">
                             "{currentUpgradeText}"
                           </p>
                           <button
@@ -1190,7 +1190,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                               ...prev,
                               [sIdx]: currentUpgradeText
                             }))}
-                            className="text-[10px] text-[#3D5240] hover:underline cursor-pointer shrink-0 font-bold"
+                            className="text-[10px] text-[#3E4F42] hover:underline cursor-pointer shrink-0 font-bold"
                           >
                             Áp dụng &rarr;
                           </button>
@@ -1206,7 +1206,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                         }))}
                         placeholder="Nhập bản dịch tiếng Anh của bạn..."
                         rows={2}
-                        className="w-full p-2.5 rounded-xl bg-[#FAF8F5] border border-[#DDD6CB] focus:border-[#4A5D4E] text-xs sm:text-sm leading-relaxed outline-none"
+                        className="w-full p-2.5 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] focus:border-[#3E4F42] text-xs sm:text-sm leading-relaxed outline-none"
                       />
 
                     </div>

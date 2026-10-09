@@ -61,7 +61,7 @@ export default function FlashcardTopBar({
           
           {/* Streak Flame */}
           <div 
-            className="flex items-center gap-1 px-2 py-1 rounded-xl bg-[#FAF5EF] border border-[#ECDDCF] text-[#A67C52] text-xs font-medium"
+            className="flex items-center gap-1 px-2 py-1 rounded-xl bg-[#FAF5EE] border border-[#F4EFEA] text-[#A67C52] text-xs font-medium"
             title={`Chuỗi học tập liên tiếp: ${streak} ngày`}
           >
             <Flame className="w-3.5 h-3.5 fill-[#A67C52]" />
@@ -70,16 +70,16 @@ export default function FlashcardTopBar({
 
           {/* Hearts / Lives */}
           <div 
-            className="flex items-center gap-1 px-2 py-1 rounded-xl bg-[#FDF4F2] border border-[#F3CCC6] text-[#C25442] text-xs font-medium"
+            className="flex items-center gap-1 px-2 py-1 rounded-xl bg-[#FAF5EE] border border-[#E6E2D8] text-[#A67C52] text-xs font-medium"
             title={`Số tim còn lại: ${hearts}/5`}
           >
-            <Heart className="w-3.5 h-3.5 fill-[#C25442]" />
+            <Heart className="w-3.5 h-3.5 fill-[#A67C52]" />
             <span>{hearts}</span>
           </div>
 
           {/* XP Points */}
           <div 
-            className="hidden sm:flex items-center gap-1 px-2.5 py-1 rounded-xl bg-[#EDF3EE] border border-[#D3DFD5] text-[#3E4F42] text-xs font-medium"
+            className="hidden sm:flex items-center gap-1 px-2.5 py-1 rounded-xl bg-[#EDF3EE] border border-[#D1DDD3] text-[#3E4F42] text-xs font-medium"
             title={`Tổng điểm kinh nghiệm XP: ${xp}`}
           >
             <Zap className="w-3.5 h-3.5 text-[#3E4F42]" />
@@ -91,7 +91,7 @@ export default function FlashcardTopBar({
             onClick={onToggleSound}
             className={`p-1.5 sm:p-2 rounded-xl border transition cursor-pointer ${
               soundEnabled
-                ? "bg-[#EDF3EE] border-[#D3DFD5] text-[#3E4F42]"
+                ? "bg-[#EDF3EE] border-[#D1DDD3] text-[#3E4F42]"
                 : "bg-white border-[#E6E2D8] text-[#7A7369]"
             }`}
             title={soundEnabled ? "Tắt âm thanh" : "Bật âm thanh"}

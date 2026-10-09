@@ -69,7 +69,7 @@ export default function EmailModal({ isOpen, onSaveEmail }) {
                   if (error) setError("");
                 }}
                 placeholder="VD: hocvien@gmail.com"
-                className={`w-full pl-10 pr-4 py-3 bg-white border rounded-xl text-sm text-[#24211E] placeholder-[#B0A89F] focus:outline-none transition ${
+                className={`w-full pl-10 pr-4 py-3 bg-white border rounded-xl text-sm text-[#24211E] placeholder-[#7A7369] focus:outline-none transition ${
                   error 
                     ? "border-red-400 focus:border-red-500" 
                     : "border-[#E6E2D8] focus:border-[#3E4F42]"
@@ -87,7 +87,7 @@ export default function EmailModal({ isOpen, onSaveEmail }) {
 
           <button
             type="submit"
-            className="w-full py-3 px-4 rounded-xl bg-[#3E4F42] hover:bg-[#324036] text-white font-medium text-sm transition shadow-xs flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full py-3 px-4 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-sm transition shadow-xs flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>Tiếp tục</span>
             <ArrowRight className="w-4 h-4" />

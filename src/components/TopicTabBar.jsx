@@ -35,7 +35,7 @@ const CATEGORY_ICONS = {
 const UNIFIED_CATEGORY_STYLE = {
   active: "bg-[#3E4F42] text-white shadow-xs",
   badgeActive: "bg-white/20 text-white",
-  badgeInactive: "bg-[#F0EDE6] text-[#7A7369]"
+  badgeInactive: "bg-[#F4EFEA] text-[#7A7369]"
 };
 
 export default function TopicTabBar({ 
@@ -120,7 +120,7 @@ export default function TopicTabBar({
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition cursor-pointer select-none shrink-0 ${
                   isCatSelected
                     ? UNIFIED_CATEGORY_STYLE.active
-                    : "bg-white hover:bg-[#FAF8F5] text-[#6B6358] hover:text-[#24211E] border border-[#E6E2D8]"
+                    : "bg-white hover:bg-[#FAF8F5] text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
                 }`}
                 title={cat.description}
               >
@@ -151,7 +151,7 @@ export default function TopicTabBar({
               className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition cursor-pointer select-none shrink-0 ${
                 isSelected
                   ? "bg-[#3E4F42] text-white shadow-xs"
-                  : "bg-white hover:bg-[#FAF8F5] text-[#6B6358] hover:text-[#24211E] border border-[#E6E2D8]"
+                  : "bg-white hover:bg-[#FAF8F5] text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
               }`}
             >
               <span>{label}</span>
@@ -163,7 +163,7 @@ export default function TopicTabBar({
         <button
           type="button"
           onClick={handleRandomClick}
-          className="px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap bg-white hover:bg-[#FAF8F5] text-[#3E4F42] border border-[#D3DFD5] transition cursor-pointer select-none shrink-0 flex items-center gap-1.5"
+          className="px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap bg-white hover:bg-[#FAF8F5] text-[#3E4F42] border border-[#D1DDD3] transition cursor-pointer select-none shrink-0 flex items-center gap-1.5"
           title="Chọn chủ đề ngẫu nhiên"
         >
           <Shuffle className="w-3.5 h-3.5" />
@@ -176,7 +176,7 @@ export default function TopicTabBar({
         <div className="px-4 py-3 rounded-2xl bg-white border border-[#E6E2D8] shadow-xs space-y-1.5">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
-              <span className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#EDF3EE] text-[#3E4F42] border border-[#D3DFD5]">
+              <span className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3]">
                 {activeTask === 'task1' ? 'Task 1' : 'Task 2'}
               </span>
               <span className="text-xs font-medium text-[#24211E]">
@@ -194,7 +194,7 @@ export default function TopicTabBar({
                     className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition cursor-pointer ${
                       task1Layout === 'three-col'
                         ? 'bg-[#3E4F42] text-white shadow-xs'
-                        : 'text-[#6B6358] hover:text-[#24211E]'
+                        : 'text-[#7A7369] hover:text-[#24211E]'
                     }`}
                     title="3 Cột song song"
                   >
@@ -207,7 +207,7 @@ export default function TopicTabBar({
                     className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition cursor-pointer ${
                       task1Layout === 'stacked'
                         ? 'bg-[#3E4F42] text-white shadow-xs'
-                        : 'text-[#6B6358] hover:text-[#24211E]'
+                        : 'text-[#7A7369] hover:text-[#24211E]'
                     }`}
                     title="2 Cột gộp"
                   >
@@ -222,7 +222,7 @@ export default function TopicTabBar({
                 <button
                   type="button"
                   onClick={onOpenChartModal}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white hover:bg-[#FAF8F5] text-[#3E4F42] border border-[#D3DFD5] text-xs font-medium transition cursor-pointer shrink-0"
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white hover:bg-[#FAF8F5] text-[#3E4F42] border border-[#D1DDD3] text-xs font-medium transition cursor-pointer shrink-0"
                   title="Phóng to biểu đồ"
                 >
                   <BarChart3 className="w-3.5 h-3.5" />
