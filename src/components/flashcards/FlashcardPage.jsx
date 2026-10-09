@@ -157,7 +157,7 @@ export default function FlashcardPage({
   };
 
   return (
-    <div className="h-screen w-full flex flex-col bg-slate-950 text-slate-100 overflow-hidden select-none">
+    <div className="h-screen w-full flex flex-col bg-[#F8F6F1] text-[#24211E] overflow-hidden select-none">
       
       {/* Top Gamification Bar */}
       <FlashcardTopBar
@@ -174,16 +174,16 @@ export default function FlashcardPage({
       />
 
       {/* Mode Switcher Tabs & Filters */}
-      <div className="w-full bg-slate-900/60 border-b border-slate-800 px-3 sm:px-6 py-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 shrink-0">
+      <div className="w-full bg-white border-b border-[#E6E2D8] px-3 sm:px-6 py-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 shrink-0">
         
         {/* 4 Interactive Study Modes */}
-        <div className="flex items-center p-1 rounded-2xl bg-slate-950/80 border border-slate-800 text-xs overflow-x-auto scrollbar-none">
+        <div className="flex items-center p-0.5 rounded-2xl bg-[#F4EFEA] border border-[#E6E2D8] text-xs overflow-x-auto scrollbar-none">
           <button
             onClick={() => setActiveMode('card')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap cursor-pointer ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-medium transition whitespace-nowrap cursor-pointer ${
               activeMode === 'card'
-                ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
-                : "text-slate-400 hover:text-white"
+                ? "bg-[#3E4F42] text-white shadow-xs"
+                : "text-[#6B6358] hover:text-[#24211E]"
             }`}
           >
             <span>🃏 Lật Thẻ</span>
@@ -191,10 +191,10 @@ export default function FlashcardPage({
 
           <button
             onClick={() => setActiveMode('quiz')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap cursor-pointer ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-medium transition whitespace-nowrap cursor-pointer ${
               activeMode === 'quiz'
-                ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/30"
-                : "text-slate-400 hover:text-white"
+                ? "bg-[#3E4F42] text-white shadow-xs"
+                : "text-[#6B6358] hover:text-[#24211E]"
             }`}
           >
             <span>🎯 Trắc Nghiệm</span>
@@ -202,10 +202,10 @@ export default function FlashcardPage({
 
           <button
             onClick={() => setActiveMode('match')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap cursor-pointer ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-medium transition whitespace-nowrap cursor-pointer ${
               activeMode === 'match'
-                ? "bg-pink-600 text-white shadow-md shadow-pink-600/30"
-                : "text-slate-400 hover:text-white"
+                ? "bg-[#3E4F42] text-white shadow-xs"
+                : "text-[#6B6358] hover:text-[#24211E]"
             }`}
           >
             <span>⚡ Ghép Cặp</span>
@@ -213,10 +213,10 @@ export default function FlashcardPage({
 
           <button
             onClick={() => setActiveMode('fill')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap cursor-pointer ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-medium transition whitespace-nowrap cursor-pointer ${
               activeMode === 'fill'
-                ? "bg-amber-600 text-white shadow-md shadow-amber-600/30"
-                : "text-slate-400 hover:text-white"
+                ? "bg-[#3E4F42] text-white shadow-xs"
+                : "text-[#6B6358] hover:text-[#24211E]"
             }`}
           >
             <span>✍️ Điền Từ</span>
@@ -225,16 +225,16 @@ export default function FlashcardPage({
 
         {/* Filter Pills */}
         <div className="flex items-center gap-1.5 text-xs overflow-x-auto scrollbar-none">
-          <span className="text-slate-500 font-semibold hidden md:inline flex items-center gap-1">
+          <span className="text-[#7A7369] font-medium hidden md:inline flex items-center gap-1">
             <Filter className="w-3 h-3" /> Lọc:
           </span>
 
           <button
             onClick={() => setFilterMode('current')}
-            className={`px-2.5 py-1 rounded-xl font-semibold transition cursor-pointer whitespace-nowrap ${
+            className={`px-2.5 py-1 rounded-xl font-medium transition cursor-pointer whitespace-nowrap ${
               filterMode === 'current'
-                ? "bg-blue-500/20 text-blue-300 border border-blue-500/40"
-                : "bg-slate-800/80 text-slate-400 hover:text-slate-200 border border-slate-700/60"
+                ? "bg-[#EDF3EE] text-[#3E4F42] border border-[#D3DFD5]"
+                : "bg-white text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
             }`}
           >
             Chủ đề đang học ({currentTopic?.vietnameseName || currentTopic?.name || "Hiện tại"})
@@ -242,10 +242,10 @@ export default function FlashcardPage({
 
           <button
             onClick={() => setFilterMode('all')}
-            className={`px-2.5 py-1 rounded-xl font-semibold transition cursor-pointer whitespace-nowrap ${
+            className={`px-2.5 py-1 rounded-xl font-medium transition cursor-pointer whitespace-nowrap ${
               filterMode === 'all'
-                ? "bg-blue-500/20 text-blue-300 border border-blue-500/40"
-                : "bg-slate-800/80 text-slate-400 hover:text-slate-200 border border-slate-700/60"
+                ? "bg-[#EDF3EE] text-[#3E4F42] border border-[#D3DFD5]"
+                : "bg-white text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
             }`}
           >
             Tất cả ({allVocabularies.length} từ)
@@ -253,10 +253,10 @@ export default function FlashcardPage({
 
           <button
             onClick={() => setFilterMode('daily10')}
-            className={`px-2.5 py-1 rounded-xl font-semibold transition cursor-pointer whitespace-nowrap ${
+            className={`px-2.5 py-1 rounded-xl font-medium transition cursor-pointer whitespace-nowrap ${
               filterMode === 'daily10'
-                ? "bg-amber-500/20 text-amber-300 border border-amber-500/40"
-                : "bg-slate-800/80 text-slate-400 hover:text-slate-200 border border-slate-700/60"
+                ? "bg-[#EDF3EE] text-[#3E4F42] border border-[#D3DFD5]"
+                : "bg-white text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
             }`}
           >
             Ngẫu nhiên 10 từ
@@ -264,10 +264,10 @@ export default function FlashcardPage({
 
           <button
             onClick={() => setFilterMode('weak')}
-            className={`px-2.5 py-1 rounded-xl font-semibold transition cursor-pointer whitespace-nowrap ${
+            className={`px-2.5 py-1 rounded-xl font-medium transition cursor-pointer whitespace-nowrap ${
               filterMode === 'weak'
-                ? "bg-rose-500/20 text-rose-300 border border-rose-500/40"
-                : "bg-slate-800/80 text-slate-400 hover:text-slate-200 border border-slate-700/60"
+                ? "bg-[#FAF5EF] text-[#A67C52] border border-[#ECDDCF]"
+                : "bg-white text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
             }`}
           >
             Từ cần ôn ({progress.needsReviewWordIds?.length || 0})

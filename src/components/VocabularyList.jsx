@@ -282,7 +282,7 @@ export default function VocabularyList({
       {/* Vocabulary List with Synonyms and Meanings */}
       <div className="flex-1 min-h-0 overflow-y-auto space-y-2 pr-1 scrollbar-thin py-1">
         {currentBatch.length === 0 ? (
-          <div className="p-4 text-center text-xs text-[#968E84]">
+          <div className="p-4 text-center text-xs text-[#7A7369]">
             Không tìm thấy từ vựng nào khớp với từ khóa "{searchQuery}".
           </div>
         ) : (
@@ -294,36 +294,36 @@ export default function VocabularyList({
               <div
                 key={vocab.id}
                 onClick={() => handlePracticeWord(vocab)}
-                className={`p-2.5 rounded-xl border transition-all cursor-pointer text-left select-none flex flex-col gap-2 ${
+                className={`p-3 rounded-xl border transition-all cursor-pointer text-left select-none flex flex-col gap-2 ${
                   isSelected
-                    ? "bg-[#F5F8F5] border-[#4A5D4E] shadow-sm ring-1 ring-[#4A5D4E]"
+                    ? "bg-[#FAF8F5] border-[#3E4F42] shadow-xs ring-1 ring-[#3E4F42]"
                     : isKnown
-                      ? "bg-[#FAF8F5]/80 hover:bg-[#FAF8F5] border-[#E7E2D9] opacity-80"
-                      : "bg-white hover:bg-[#FAF8F5] border-[#E7E2D9] hover:border-[#CAD8C8] shadow-sm"
+                      ? "bg-white/60 hover:bg-[#FAF8F5] border-[#E6E2D8] opacity-75"
+                      : "bg-white hover:bg-[#FAF8F5] border-[#E6E2D8] shadow-2xs"
                 }`}
               >
                 {/* TỪ VỰNG VÀ PHIÊN ÂM (IPA) */}
                 <div className="flex items-baseline justify-between gap-1.5 flex-wrap">
-                  <div className="flex items-baseline gap-1.5 flex-wrap">
-                    <span className={`text-sm sm:text-base font-extrabold tracking-tight ${
-                      isSelected ? "text-[#2B2826]" : isKnown ? "text-[#5A524A]" : "text-[#2B2826]"
-                    }`}>
+                  <div className="flex items-baseline gap-2 flex-wrap">
+                    <span className="text-sm sm:text-base font-serif font-bold text-[#24211E]">
                       {vocab.word}
                     </span>
 
                     {vocab.ipa && (
-                      <span className="text-xs font-mono text-[#4A5D4E] italic font-semibold">
+                      <span className="text-xs font-mono text-[#3E4F42] font-medium">
                         {vocab.ipa}
                       </span>
                     )}
 
-                    <span className="text-[10px] text-[#8E867B] font-sans">
-                      ({vocab.partOfSpeech || "từ vựng"})
-                    </span>
+                    {vocab.partOfSpeech && (
+                      <span className="text-[10px] text-[#7A7369]">
+                        {vocab.partOfSpeech}
+                      </span>
+                    )}
                   </div>
 
                   {isKnown && (
-                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-[#EDF3EE] text-[#3D5240] border border-[#CAD8C8] font-medium flex items-center gap-0.5 shrink-0">
+                    <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[#EDF3EE] text-[#3E4F42] border border-[#D3DFD5] font-medium flex items-center gap-0.5 shrink-0">
                       <Check className="w-2.5 h-2.5" /> Đã biết
                     </span>
                   )}
@@ -331,25 +331,24 @@ export default function VocabularyList({
 
                 {/* NGHĨA TIẾNG VIỆT */}
                 {vocab.meaning && (
-                  <div className="text-xs text-[#3A3633] font-medium leading-snug">
-                    <span className="text-[#B88758] font-bold mr-1">Nghĩa:</span>
+                  <div className="text-xs text-[#24211E] leading-relaxed">
+                    <span className="text-[#A67C52] font-medium mr-1.5">Nghĩa:</span>
                     <span>{vocab.meaning}</span>
                   </div>
                 )}
 
-                {/* TỪ ĐỒNG NGHĨA (SYNONYMS) - ĐỒNG BỘ VỚI FLASHCARDS */}
+                {/* TỪ ĐỒNG NGHĨA */}
                 {vocab.synonyms && vocab.synonyms.length > 0 && (
-                  <div className="pt-1.5 border-t border-[#EFECE5] space-y-1">
-                    <div className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#B88758] flex items-center gap-1">
-                      <Tag className="w-3.5 h-3.5" />
-                      <span>Từ đồng nghĩa (Synonyms):</span>
+                  <div className="pt-1.5 border-t border-[#F0EDE6] space-y-1">
+                    <div className="text-[10px] font-medium text-[#7A7369] flex items-center gap-1">
+                      <Tag className="w-3 h-3 text-[#A67C52]" />
+                      <span>Đồng nghĩa:</span>
                     </div>
                     <div className="flex flex-wrap gap-1">
                       {vocab.synonyms.map((syn, sIdx) => (
                         <span
                           key={sIdx}
-                          className="text-xs px-2 py-0.5 rounded-md bg-[#FAF4EE] border border-[#EADBCC] text-[#785334] font-mono font-medium hover:bg-[#F4ECE3] transition cursor-default select-text"
-                          title={`Từ đồng nghĩa Band 7.5+ của "${vocab.word}": ${syn}`}
+                          className="text-xs px-2 py-0.5 rounded-md bg-[#FAF8F5] border border-[#E6E2D8] text-[#24211E] font-mono hover:bg-[#F4EFEA] transition select-text"
                         >
                           {syn}
                         </span>
@@ -358,14 +357,13 @@ export default function VocabularyList({
                   </div>
                 )}
 
-                {/* COLLOCATIONS ĂN ĐIỂM (NẾU CÓ) */}
+                {/* COLLOCATIONS */}
                 {vocab.collocations && vocab.collocations.length > 0 && (
                   <div className="flex flex-wrap gap-1 pt-0.5">
                     {vocab.collocations.slice(0, 2).map((col, cIdx) => (
                       <span
                         key={cIdx}
-                        className="text-[10px] px-1.5 py-0.5 rounded bg-[#EDF3EE] text-[#3D5240] border border-[#CAD8C8] font-medium"
-                        title={`Collocation: ${col}`}
+                        className="text-[10px] px-1.5 py-0.5 rounded bg-[#EDF3EE] text-[#3E4F42] border border-[#D3DFD5]"
                       >
                         {col}
                       </span>
@@ -373,22 +371,20 @@ export default function VocabularyList({
                   </div>
                 )}
 
-                {/* 2 NÚT LỰA CHỌN: "Tôi đã biết" & "Luyện tập" */}
-                <div className="flex items-center gap-1.5 shrink-0 pt-0.5">
-                  {/* Nút 1: Tôi đã biết */}
+                {/* 2 NÚT HÀNH ĐỘNG */}
+                <div className="flex items-center gap-2 shrink-0 pt-0.5">
                   <button
                     type="button"
                     onClick={(e) => handleToggleKnown(e, vocab.id)}
-                    className={`flex-1 py-1 px-2 rounded-lg text-xs font-semibold transition flex items-center justify-center gap-1 cursor-pointer ${
+                    className={`flex-1 py-1 px-2 rounded-lg text-xs font-medium transition flex items-center justify-center gap-1 cursor-pointer border ${
                       isKnown
-                        ? "bg-[#EDF3EE] text-[#3D5240] hover:bg-[#E2ECE3] border border-[#CAD8C8]"
-                        : "bg-[#F2EFE9] hover:bg-[#EAE5DC] text-[#6E675E] hover:text-[#2B2826] border border-[#DDD6CB]"
+                        ? "bg-[#EDF3EE] text-[#3E4F42] border-[#D3DFD5]"
+                        : "bg-white hover:bg-[#FAF8F5] text-[#6B6358] border-[#E6E2D8]"
                     }`}
-                    title={isKnown ? "Nhấn để bỏ đánh dấu đã biết" : "Đánh dấu đã biết để không ưu tiên hiển thị lần sau"}
                   >
                     {isKnown ? (
                       <>
-                        <CheckCircle2 className="w-3 h-3 text-[#3D5240]" />
+                        <CheckCircle2 className="w-3 h-3 text-[#3E4F42]" />
                         <span>Đã biết</span>
                       </>
                     ) : (
@@ -396,19 +392,17 @@ export default function VocabularyList({
                     )}
                   </button>
 
-                  {/* Nút 2: Luyện tập */}
                   <button
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
                       handlePracticeWord(vocab);
                     }}
-                    className={`flex-1 py-1 px-2.5 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer shadow-sm ${
+                    className={`flex-1 py-1 px-2.5 rounded-lg text-xs font-medium transition flex items-center justify-center gap-1.5 cursor-pointer shadow-xs ${
                       isSelected
-                        ? "bg-[#4A5D4E] text-white ring-1 ring-[#3D4E41]"
-                        : "bg-[#4A5D4E] hover:bg-[#3D4E41] text-white"
+                        ? "bg-[#3E4F42] text-white"
+                        : "bg-[#3E4F42] hover:bg-[#324036] text-white"
                     }`}
-                    title="Bắt đầu 3 phần luyện tập từ này"
                   >
                     <PenTool className="w-3 h-3" />
                     <span>Luyện tập</span>

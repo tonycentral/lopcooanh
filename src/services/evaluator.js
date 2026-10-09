@@ -432,10 +432,10 @@ export function evaluatePart3Translation(userTranslation, vocab, targetBand = "7
   const words = text.split(/\s+/).filter(Boolean);
   const wordCount = words.length;
 
-  if (wordCount < 12) {
+  if (wordCount < 10) {
     return {
       isValid: false,
-      error: "Bản dịch 2 câu quá ngắn! Hãy viết đầy đủ cả 2 câu có liên kết mạch lạc (tối thiểu 12 từ)."
+      error: "Đoạn văn luyện viết quá ngắn! Hãy viết đầy đủ một đoạn văn học thuật (tối thiểu 10 từ, khuyến nghị 30 - 60 từ) có sử dụng từ vựng mục tiêu và các liên từ mạch lạc."
     };
   }
 
@@ -449,7 +449,7 @@ export function evaluatePart3Translation(userTranslation, vocab, targetBand = "7
     if (lowerText.includes(marker)) detectedCohesiveDevices.push(marker);
   });
 
-  // Check 2 sentences presence
+  // Check sentences presence
   const sentenceCount = text.split(/[.!?]+/).filter(s => s.trim().length > 3).length;
 
   // Check complex structures
@@ -467,7 +467,8 @@ export function evaluatePart3Translation(userTranslation, vocab, targetBand = "7
   else if (detectedCohesiveDevices.length === 1) ccScore += 1.0;
   else ccScore -= 0.5;
 
-  if (sentenceCount >= 2) ccScore += 0.5;
+  if (sentenceCount >= 3) ccScore += 0.8;
+  else if (sentenceCount >= 2) ccScore += 0.5;
 
   if (hasTargetWord) lrScore += 1.2;
   else lrScore -= 0.5;
@@ -482,10 +483,10 @@ export function evaluatePart3Translation(userTranslation, vocab, targetBand = "7
   const overallBand = Math.round(((ccScore * 1.5 + lrScore + graScore) / 3.5) * 2) / 2;
   const targetBandNum = parseFloat(targetBand) || 7.0;
 
-  // Retrieve upgraded 2 sentences tailored to target band
-  const practiceData = vocab.twoSentencePractice || {};
+  // Retrieve upgraded paragraph/sentences tailored to target band
+  const practiceData = vocab.paragraphPractice || vocab.twoSentencePractice || {};
   const bandKey = parseFloat(targetBand) >= 8.5 ? "8.5" : parseFloat(targetBand) >= 8.0 ? "8.0" : parseFloat(targetBand) >= 7.5 ? "7.5" : parseFloat(targetBand) >= 7.0 ? "7.0" : "6.5";
-  const upgradedPair = practiceData.bandUpgrades?.[bandKey] || practiceData.bandUpgrades?.["7.5"] || practiceData.modelTranslation || "";
+  const upgradedPair = practiceData.bandUpgrades?.[bandKey] || practiceData.bandUpgrades?.["7.5"] || practiceData.modelParagraph || practiceData.modelTranslation || "";
 
   // Generate deep breakdown of vocabulary (IPA + Vietnamese meaning), grammar & cohesion
   const detailedAnalysis = analyzeUpgradeDetails({
@@ -498,11 +499,11 @@ export function evaluatePart3Translation(userTranslation, vocab, targetBand = "7
   const upgradeDetails = practiceData.upgradeDetails || [
     `Từ vựng mục tiêu: "${vocab.word}" ${vocab.ipa || ''} (${vocab.partOfSpeech || 'từ vựng'}) - Nghĩa: ${vocab.meaning || ''}.`,
     detailedAnalysis.cohesionPoints?.[0]
-      ? `Cách chuyển câu (Cohesion): Liên từ "${detailedAnalysis.cohesionPoints[0].marker}" ${detailedAnalysis.cohesionPoints[0].ipa} - ${detailedAnalysis.cohesionPoints[0].detail}`
-      : `Cách chuyển câu (Cohesion): Sử dụng liên từ chuyển tiếp chỉ hệ quả/tương phản học thuật giúp hai câu gắn kết hữu cơ.`,
+      ? `Kỹ thuật liên kết (Cohesion): Liên từ "${detailedAnalysis.cohesionPoints[0].marker}" ${detailedAnalysis.cohesionPoints[0].ipa} - ${detailedAnalysis.cohesionPoints[0].detail}`
+      : `Kỹ thuật liên kết (Cohesion): Phối hợp các liên từ học thuật nối câu mạch lạc, tạo dòng chảy lập luận tự nhiên.`,
     detailedAnalysis.vocabularyList.find(v => !v.isTarget)
       ? `Từ vựng nâng cấp đi kèm: "${detailedAnalysis.vocabularyList.find(v => !v.isTarget).word}" ${detailedAnalysis.vocabularyList.find(v => !v.isTarget).ipa} (${detailedAnalysis.vocabularyList.find(v => !v.isTarget).pos}) - Nghĩa: ${detailedAnalysis.vocabularyList.find(v => !v.isTarget).meaning}.`
-      : `Mạch lập luận logic: Câu 1 làm tiền đề nguyên nhân, Câu 2 đóng vai trò giải pháp/kết quả tương xứng.`
+      : `Cấu trúc đoạn văn (PEEL): Câu chủ đề (Topic Sentence) &rarr; Phân tích (Explanation) &rarr; Dẫn chứng (Evidence) &rarr; Đúc kết (Conclusion).`
   ];
 
   const strengths = [];
@@ -511,25 +512,26 @@ export function evaluatePart3Translation(userTranslation, vocab, targetBand = "7
   if (detectedCohesiveDevices.length > 0) {
     strengths.push(`Sử dụng liên từ chuyển tiếp học thuật: "${detectedCohesiveDevices.join(", ")}".`);
   } else {
-    improvements.push("Chưa phát hiện liên từ chuyển câu rõ ràng (ví dụ: Consequently, Therefore, In contrast...).");
+    improvements.push("Chưa phát hiện liên từ chuyển câu rõ ràng (ví dụ: Consequently, Therefore, In contrast, For instance...).");
   }
 
   if (hasTargetWord) {
     strengths.push(`Sử dụng chính xác từ mục tiêu: "${vocab.word}".`);
   } else {
-    improvements.push(`Bản dịch chưa xuất hiện từ vựng mục tiêu "${vocab.word}".`);
+    improvements.push(`Bản viết chưa xuất hiện từ vựng mục tiêu "${vocab.word}".`);
   }
 
   if (sentenceCount >= 2) {
-    strengths.push("Phân tách cấu trúc 2 câu rõ ràng, đáp ứng yêu cầu chuyển câu.");
+    strengths.push(`Cấu trúc đoạn văn phát triển ý tốt (${sentenceCount} câu), có sự liên kết chặt chẽ.`);
   } else {
-    improvements.push("Hãy viết đủ 2 câu tách biệt bằng dấu chấm để thể hiện kỹ thuật liên kết câu.");
+    improvements.push("Nên mở rộng thành đoạn văn 2 - 4 câu để phát triển luận điểm đầy đủ (Câu mở đầu, giải thích, dẫn chứng).");
   }
 
   return {
     isValid: true,
     userSentence: text,
     wordCount,
+    sentenceCount,
     scores: {
       overallBand,
       coherenceCohesion: ccScore,
@@ -548,6 +550,9 @@ export function evaluatePart3Translation(userTranslation, vocab, targetBand = "7
     bandUpgrades: practiceData.bandUpgrades || {}
   };
 }
+
+export const evaluateParagraphTranslation = evaluatePart3Translation;
+
 
 /**
  * Chấm điểm bài viết Full Essay (Task 2) hoặc Full Report (Task 1)

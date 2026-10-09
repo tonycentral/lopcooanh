@@ -14,25 +14,25 @@ export default function CohesiveGuideModal({ isOpen, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#24211E]/40 backdrop-blur-xs animate-in fade-in duration-200">
       <div 
-        className="bg-slate-900 border border-slate-700/80 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl"
+        className="bg-[#FAF8F5] border border-[#E6E2D8] rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl text-[#24211E]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-6 py-5 border-b border-slate-800 flex items-center justify-between">
+        <div className="px-6 py-5 border-b border-[#E6E2D8] bg-white flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-pink-600/20 text-pink-400 flex items-center justify-center border border-pink-500/20">
+            <div className="w-10 h-10 rounded-xl bg-[#EDF3EE] text-[#3E4F42] flex items-center justify-center border border-[#D3DFD5]">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-white">Sổ Tay Cohesive Devices Band 7.5 - 8.5</h2>
-              <p className="text-xs text-slate-400">Từ nối học thuật &amp; Kỹ thuật quy chiếu tạo mạch lạc</p>
+              <h2 className="text-base font-serif font-bold text-[#24211E]">Sổ Tay Cohesive Devices</h2>
+              <p className="text-xs text-[#7A7369]">Từ nối học thuật &amp; Kỹ thuật quy chiếu mạch lạc</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer"
+            className="p-2 rounded-xl text-[#7A7369] hover:text-[#24211E] hover:bg-[#F4EFEA] transition cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -41,11 +41,11 @@ export default function CohesiveGuideModal({ isOpen, onClose }) {
         {/* Content */}
         <div className="p-6 overflow-y-auto space-y-4">
           {COHESIVE_CATEGORIES.map((cat, idx) => (
-            <div key={idx} className="p-4 rounded-xl bg-slate-800/60 border border-slate-700/70 space-y-3">
+            <div key={idx} className="p-4 rounded-xl bg-white border border-[#E6E2D8] space-y-3 shadow-2xs">
               <div>
-                <h3 className="font-bold text-white text-sm flex items-center justify-between">
+                <h3 className="font-semibold text-[#24211E] text-sm flex items-center justify-between">
                   <span>{cat.category}</span>
-                  <span className="text-xs font-normal text-slate-400 italic">{cat.purpose}</span>
+                  <span className="text-xs font-normal text-[#7A7369] italic">{cat.purpose}</span>
                 </h3>
               </div>
 
@@ -53,26 +53,26 @@ export default function CohesiveGuideModal({ isOpen, onClose }) {
                 {cat.devices.map((item, dIdx) => (
                   <div 
                     key={dIdx} 
-                    className="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 flex items-start justify-between gap-3 text-xs"
+                    className="p-2.5 rounded-lg bg-[#FAF8F5] border border-[#E6E2D8] flex items-start justify-between gap-3 text-xs"
                   >
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-indigo-300 font-mono text-sm">{item.word}</span>
-                        <span className="text-[10px] px-1.5 py-0.2 rounded bg-pink-500/20 text-pink-300 font-bold">
+                        <span className="font-bold text-[#3E4F42] font-mono text-sm">{item.word}</span>
+                        <span className="text-[10px] px-1.5 py-0.2 rounded bg-[#EDF3EE] text-[#3E4F42] font-medium border border-[#D3DFD5]">
                           Band {item.band}
                         </span>
                       </div>
-                      <p className="text-slate-300 italic text-[11px] font-mono leading-relaxed">
+                      <p className="text-[#24211E] italic text-[11px] font-serif leading-relaxed">
                         "{item.example}"
                       </p>
                     </div>
 
                     <button
                       onClick={() => handleCopy(item.word)}
-                      className="p-1 rounded text-slate-400 hover:text-white transition shrink-0"
+                      className="p-1 rounded text-[#7A7369] hover:text-[#24211E] transition shrink-0"
                       title="Copy từ nối"
                     >
-                      {copiedWord === item.word ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                      {copiedWord === item.word ? <Check className="w-3.5 h-3.5 text-[#3E4F42]" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
                   </div>
                 ))}
@@ -82,12 +82,12 @@ export default function CohesiveGuideModal({ isOpen, onClose }) {
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-slate-800 bg-slate-900/90 flex justify-end">
+        <div className="px-6 py-4 border-t border-[#E6E2D8] bg-white flex justify-end">
           <button
             onClick={onClose}
-            className="px-5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs transition cursor-pointer"
+            className="px-5 py-2 rounded-xl bg-[#F4EFEA] hover:bg-[#EAE4DB] text-[#24211E] border border-[#E6E2D8] font-medium text-xs transition cursor-pointer"
           >
-            Đóng Sổ Tay
+            Đóng lại
           </button>
         </div>
       </div>

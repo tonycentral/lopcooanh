@@ -103,67 +103,149 @@ export function generateBandUpgrades(modelSentence, vocab = {}) {
 }
 
 /**
- * Generates topic-appropriate 2-sentence context for Part 3 practice.
+ * Generates full academic paragraph (3-4 sentences PEEL/TEEL) for Paragraph Practice.
+ * Replaces the previous 2-sentence practice with a complete IELTS body/analytical paragraph.
  */
-function generatePart3Practice(vocab, topicName = "IELTS Writing") {
+export function generateParagraphPractice(vocab, topicName = "IELTS Writing") {
   const word = vocab.word || "";
+  const ipa = vocab.ipa || "";
+  const pos = vocab.partOfSpeech || "từ vựng";
   const meaning = vocab.meaning || "";
   const collocation = vocab.collocations?.[0] || word;
+  const topicLower = (topicName || "").toLowerCase();
 
-  const topicLower = topicName.toLowerCase();
+  let tsVN = "Sự chuyển biến nhanh chóng trong bối cảnh phát triển hiện đại đang đặt ra nhiều yêu cầu mới cho các lĩnh vực xã hội.";
+  let exVN = `Để thích ứng hiệu quả, các cơ quan hữu quan cần chủ động phối hợp hành động nhằm ${meaning.toLowerCase()}.`;
+  let evVN = "Các dữ liệu thực nghiệm đã chứng minh rằng những tổ chức đi đầu trong cải cách luôn duy trì được tính bền vững và sức cạnh tranh vượt trội.";
+  let csVN = "Tóm lại, đây là chiến lược then chốt giúp cộng đồng vượt qua thách thức và đạt được sự thịnh vượng lâu dài.";
 
-  let s1VN = "Sự chuyển biến nhanh chóng trong bối cảnh phát triển hiện đại đang đặt ra nhiều yêu cầu mới cho các lĩnh vực xã hội.";
-  let s2VN = `Do đó, các bên liên quan cần chủ động phối hợp hành động nhằm ${meaning.toLowerCase()}.`;
-  let s1EN = "Rapid transformations across contemporary societal paradigms present substantial challenges for institutional development.";
-  let s2EN = `Consequently, relevant stakeholders must coordinate collaborative initiatives to ${word} ${collocation !== word ? collocation.replace(new RegExp(`^${word}\\s*`, 'i'), '') : 'essential capabilities'} effectively.`;
+  let tsEN = "Rapid transformations across contemporary societal paradigms present substantial challenges for institutional development.";
+  let exEN = `To adapt effectively, relevant authorities must coordinate strategic initiatives to ${word} ${collocation !== word ? collocation.replace(new RegExp(`^${word}\\s*`, 'i'), '') : 'systemic challenges'} efficiently.`;
+  let evEN = "Empirical data consistently demonstrates that institutions pioneering institutional reforms maintain superior resilience and long-term viability.";
+  let csEN = "In summary, proactive structural adaptation represents an indispensable cornerstone for enduring societal progress.";
 
-  if (topicLower.includes("education") || topicLower.includes("learning")) {
-    s1VN = "Các phương pháp giáo dục truyền thống thường đối mặt với thách thức trong việc duy trì sự hứng thú và tính chủ động của người học.";
-    s2VN = `Do đó, các nhà giáo dục cần đổi mới mô hình lớp học nhằm ${meaning.toLowerCase()}.`;
-    s1EN = "Traditional educational methodologies frequently face challenges in maintaining active learner engagement.";
-    s2EN = `Consequently, educators must innovate pedagogical models to ${word} ${collocation !== word ? collocation.replace(new RegExp(`^${word}\\s*`, 'i'), '') : 'academic proficiencies'} effectively.`;
-  } else if (topicLower.includes("environment") || topicLower.includes("climate")) {
-    s1VN = "Sự suy thoái môi trường và biến đổi khí hậu đang đe dọa trực tiếp đến sự cân bằng sinh thái trên quy mô toàn cầu.";
-    s2VN = `Do đó, các cơ quan chức năng phải ban hành những chính sách kiên quyết nhằm ${meaning.toLowerCase()}.`;
-    s1EN = "Environmental degradation and climate disruptions pose immediate threats to ecological stability on a global scale.";
-    s2EN = `Consequently, regulatory authorities must enact decisive environmental policies to ${word} ${collocation !== word ? collocation.replace(new RegExp(`^${word}\\s*`, 'i'), '') : 'ecological risks'} effectively.`;
-  } else if (topicLower.includes("tech") || topicLower.includes("intelligence") || topicLower.includes("ai")) {
-    s1VN = "Sự bùng nổ của chuyển đổi số đang đặt ra những yêu cầu mới đối với phương thức làm việc và học tập.";
-    s2VN = `Do đó, các tổ chức hiện đại cần nhanh chóng điều chỉnh quy trình nhằm ${meaning.toLowerCase()}.`;
-    s1EN = "The rapid expansion of digital transformation presents novel demands for modern professional and academic paradigms.";
-    s2EN = `Consequently, modern organizations must proactively adapt operational workflows to ${word} ${collocation !== word ? collocation.replace(new RegExp(`^${word}\\s*`, 'i'), '') : 'digital capabilities'} efficiently.`;
-  } else if (topicLower.includes("health") || topicLower.includes("wellbeing")) {
-    s1VN = "Áp lực cuộc sống hiện đại và cường độ làm việc cao khiến tình trạng sức khỏe của nhiều người bị suy giảm nghiêm trọng.";
-    s2VN = `Do đó, mỗi cá nhân và cộng đồng cần xây dựng thói quen tích cực nhằm ${meaning.toLowerCase()}.`;
-    s1EN = "Modern societal pressures and intensive work commitments have exacerbated long-term physical and psychological exhaustion.";
-    s2EN = `Consequently, individuals and communities must adopt balanced lifestyle practices to ${word} ${collocation !== word ? collocation.replace(new RegExp(`^${word}\\s*`, 'i'), '') : 'holistic wellbeing'} sustainably.`;
-  } else if (topicLower.includes("work") || topicLower.includes("career")) {
-    s1VN = "Thị trường lao động cạnh tranh đòi hỏi các doanh nghiệp phải không ngừng cải thiện môi trường làm việc.";
-    s2VN = `Do đó, ban lãnh đạo cần thực hiện các cải cách thiết thực nhằm ${meaning.toLowerCase()}.`;
-    s1EN = "A highly competitive labor market compels corporate enterprises to continuously enhance workplace culture.";
-    s2EN = `Consequently, organizational leaders must implement tangible reforms to ${word} ${collocation !== word ? collocation.replace(new RegExp(`^${word}\\s*`, 'i'), '') : 'workplace cohesion'} effectively.`;
+  if (topicLower.includes("education") || topicLower.includes("giáo dục") || topicLower.includes("learning")) {
+    tsVN = "Các phương pháp giáo dục hiện đại cần chuyển trọng tâm từ việc truyền thụ lý thuyết thụ động sang phát triển năng lực tư duy độc lập.";
+    exVN = `Khi các nhà sư phạm đổi mới mô hình lớp học, học sinh sẽ có cơ hội thuận lợi để ${meaning.toLowerCase()}.`;
+    evVN = "Một ví dụ điển hình là các buổi thảo luận đa chiều giúp người học rèn luyện phản xạ phản biện và tự tin bảo vệ quan điểm cá nhân.";
+    csVN = "Tóm lại, việc đổi mới giáo dục toàn diện chính là nền tảng cốt lõi để đào tạo nguồn nhân lực chất lượng cao.";
+
+    tsEN = "Modern educational methodologies must shift focus from passive theoretical instruction to the active cultivation of independent critical thinking.";
+    exEN = `By innovating pedagogical frameworks, educators empower learners to ${word} ${collocation !== word ? collocation.replace(new RegExp(`^${word}\\s*`, 'i'), '') : 'academic proficiencies'} with greater autonomy.`;
+    evEN = "A prime example is the implementation of structured debates, which markedly enhances students' analytical reasoning and argumentative clarity.";
+    csEN = "In conclusion, comprehensive pedagogical reform constitutes an indispensable prerequisite for preparing a competitive future workforce.";
+  } else if (topicLower.includes("environment") || topicLower.includes("môi trường") || topicLower.includes("climate")) {
+    tsVN = "Sự suy thoái môi trường và biến đổi khí hậu đang đe dọa trực tiếp đến sự cân bằng sinh thái trên quy mô toàn cầu.";
+    exVN = `Do đó, các cơ quan chức năng phải khẩn trương ban hành các chính sách kiểm soát nghiêm ngặt nhằm ${meaning.toLowerCase()}.`;
+    evVN = "Nhiều quốc gia áp dụng thuế carbon và năng lượng tái tạo đã giảm thiểu đáng kể lượng khí thải độc hại mà không làm gián đoạn tăng trưởng kinh tế.";
+    csVN = "Nhìn chung, việc dung hòa giữa phát triển kinh tế và bảo vệ thiên nhiên là mục tiêu sống còn của nhân loại.";
+
+    tsEN = "Environmental degradation and climate disruptions pose immediate threats to ecological stability on an unprecedented global scale.";
+    exEN = `Consequently, regulatory authorities must enact stringent statutory frameworks to ${word} ${collocation !== word ? collocation.replace(new RegExp(`^${word}\\s*`, 'i'), '') : 'ecological risks'} effectively.`;
+    evEN = "For instance, jurisdictions that instituted carbon pricing mechanisms have substantially reduced industrial emissions without sacrificing economic growth.";
+    csEN = "Ultimately, harmonizing industrial progress with environmental preservation represents a paramount imperative for humanity.";
+  } else if (topicLower.includes("tech") || topicLower.includes("công nghệ") || topicLower.includes("ai") || topicLower.includes("intelligence")) {
+    tsVN = "Sự bùng nổ của trí tuệ nhân tạo và tự động hóa đang tái định hình căn bản phương thức làm việc và tương tác xã hội.";
+    exVN = `Để duy trì lợi thế cạnh tranh, các tổ chức hiện đại buộc phải nâng cấp cơ sở hạ tầng nhằm ${meaning.toLowerCase()}.`;
+    evVN = "Thực tế cho thấy những doanh nghiệp sớm ứng dụng quy trình số hóa đã tối ưu hóa hiệu suất làm việc lên gấp nhiều lần.";
+    csVN = "Có thể khẳng định rằng việc làm chủ công nghệ mới chính là chìa khóa mở ra tiềm năng phát triển đột phá.";
+
+    tsEN = "The rapid proliferation of artificial intelligence and automation is fundamentally reshaping conventional professional and social paradigms.";
+    exEN = `To retain a competitive edge, contemporary enterprises are compelled to upgrade digital infrastructure to ${word} ${collocation !== word ? collocation.replace(new RegExp(`^${word}\\s*`, 'i'), '') : 'operational workflows'} efficiently.`;
+    evEN = "Evidence shows that organizations pioneering algorithmic integration have realized twofold productivity gains while eliminating operational redundancies.";
+    csEN = "Undeniably, mastering technological breakthroughs serves as a definitive catalyst for transformative socioeconomic development.";
+  } else if (topicLower.includes("health") || topicLower.includes("sức khỏe") || topicLower.includes("y tế")) {
+    tsVN = "Lối sống ít vận động và áp lực công việc gia tăng đang đẩy sức khỏe thể chất lẫn tinh thần của người dân vào tình trạng báo động.";
+    exVN = `Mỗi cá nhân và hệ thống y tế công cộng cần thiết lập những thói quen chủ động nhằm ${meaning.toLowerCase()}.`;
+    evVN = "Các chương trình thể thao cộng đồng và tư vấn dinh dưỡng tại chỗ đã giúp giảm thiểu rõ rệt tỷ lệ mắc các bệnh mãn tính.";
+    csVN = "Tóm lại, đầu tư cho y tế dự phòng mang lại lợi ích sức khỏe lâu dài và giảm tải áp lực tài chính cho xã hội.";
+
+    tsEN = "Sedentary lifestyles combined with escalating occupational stress have precipitated severe physical and psychological health crises.";
+    exEN = `Consequently, individuals and public health agencies must adopt preventive protocols to ${word} ${collocation !== word ? collocation.replace(new RegExp(`^${word}\\s*`, 'i'), '') : 'holistic wellbeing'} sustainably.`;
+    evEN = "Community-based wellness initiatives and nutritional counseling have proven highly instrumental in curtailing the incidence of chronic lifestyle diseases.";
+    csEN = "In summary, prioritizing preventative healthcare yields enduring well-being dividends while mitigating acute strain on healthcare infrastructure.";
+  } else if (topicLower.includes("work") || topicLower.includes("công việc") || topicLower.includes("career")) {
+    tsVN = "Thị trường lao động cạnh tranh khốc liệt đòi hỏi người lao động phải liên tục nâng cao kỹ năng chuyên môn.";
+    exVN = `Đồng thời, ban lãnh đạo doanh nghiệp cần xây dựng văn hóa làm việc minh bạch nhằm ${meaning.toLowerCase()}.`;
+    evVN = "Một môi trường làm việc khuyến khích sáng tạo và đãi ngộ xứng đáng luôn ghi nhận mức độ gắn kết nhân viên cao hơn hẳn.";
+    csVN = "Như vậy, sự gắn kết giữa quyền lợi của người lao động và mục tiêu của doanh nghiệp là yếu tố then chốt tạo nên thành công.";
+
+    tsEN = "An intensely competitive global labor market necessitates continuous professional upskilling and career adaptability.";
+    exEN = `Simultaneously, corporate leaders must cultivate transparent organizational cultures to ${word} ${collocation !== word ? collocation.replace(new RegExp(`^${word}\\s*`, 'i'), '') : 'employee retention'} effectively.`;
+    evEN = "Workplaces that champion meritocracy and ongoing talent development consistently exhibit higher employee satisfaction and lower attrition rates.";
+    csEN = "Thus, aligning workforce development with strategic corporate objectives is vital for sustainable commercial prosperity.";
+  } else if (topicLower.includes("society") || topicLower.includes("xã hội") || topicLower.includes("crime") || topicLower.includes("tội phạm")) {
+    tsVN = "Sự phân hóa giàu nghèo và bất bình đẳng xã hội là một trong những nguyên nhân gốc rễ làm gia tăng các vấn đề bất ổn xã hội.";
+    exVN = `Các nhà hoạch định chính sách cần phân bổ ngân sách công một cách công bằng nhằm ${meaning.toLowerCase()}.`;
+    evVN = "Việc cải thiện phúc lợi xã hội và tạo cơ hội việc làm bình đẳng đã giúp giảm thiểu đáng kể tỷ lệ tội phạm ở nhiều đô thị lớn.";
+    csVN = "Tóm lại, xây dựng một xã hội công bằng và nhân văn là nền tảng vững chắc nhất cho sự an bình xã hội.";
+
+    tsEN = "Socioeconomic inequality and wealth disparity constitute fundamental root causes of urban instability and antisocial behaviors.";
+    exEN = `Policy architects must allocate public resources equitably to ${word} ${collocation !== word ? collocation.replace(new RegExp(`^${word}\\s*`, 'i'), '') : 'societal disparities'} comprehensively.`;
+    evEN = "Empirical evidence reveals that expanding civic welfare and vocational training programs significantly reduces recidivism rates in major metropolitan areas.";
+    csEN = "In essence, fostering inclusive social equity remains the most enduring safeguard for long-term communal stability.";
   }
 
-  const modelTranslation = `${s1EN} ${s2EN}`;
+  const vietnamesePrompt = `${tsVN} ${exVN} ${evVN} ${csVN}`;
+  const modelParagraph = `${tsEN} ${exEN} ${evEN} ${csEN}`;
+
+  const band65 = `Firstly, ${tsEN.replace(/^The\s+/i, 'the ')} Furthermore, it is important for stakeholders to ${word} these concerns. For example, some organizations have tried this and seen positive results. In short, this practice brings many benefits.`;
+  const band70 = `${tsEN} Consequently, relevant authorities should implement decisive measures to ${word} these emerging challenges. A notable example is that systematic interventions have improved long-term outcomes significantly. Overall, this approach is vital for sustainable development.`;
+  const band75 = modelParagraph;
+  const band80 = `${tsEN} As a direct consequence, designated authorities are compelled to coordinate strategic interventions to ${word} ${collocation !== word ? collocation.replace(new RegExp(`^${word}\\s*`, 'i'), '') : 'structural priorities'}, thereby preventing systemic disruption. Empirical investigations confirm that institutional reforms yield substantial returns, which reinforces the necessity of proactive long-term planning.`;
+  const band85 = `It is widely acknowledged that ${tsEN.charAt(0).toLowerCase() + tsEN.slice(1).replace(/\.$/, '')}, an exigency that necessitates decisive institutional action. By systematically ${word.endsWith('e') && !word.endsWith('ee') ? word.slice(0, -1) + 'ing' : word + 'ing'} ${collocation !== word ? collocation.replace(new RegExp(`^${word}\\s*`, 'i'), '') : 'underlying bottlenecks'}, governing bodies can optimize resource distribution with formidable precision. In light of these empirical realities, such structural adaptations serve as an indispensable cornerstone for enduring institutional excellence.`;
 
   return {
-    sentence1Vietnamese: s1VN,
-    sentence2Vietnamese: s2VN,
-    linkingSuggestions: DEFAULT_LINKING_SUGGESTIONS,
-    modelTranslation,
+    vietnamesePrompt,
+    topicSentenceVN: tsVN,
+    explanationVN: exVN,
+    evidenceVN: evVN,
+    conclusionVN: csVN,
+    modelParagraph,
+    targetWord: word,
+    structure: {
+      ts: tsEN,
+      ex: exEN,
+      ev: evEN,
+      cs: csEN
+    },
+    linkingSuggestions: [
+      "Consequently,", 
+      "As a direct consequence,", 
+      "Empirical evidence demonstrates that", 
+      "For instance,", 
+      "In light of these developments,"
+    ],
     bandUpgrades: {
-      "6.5": `${s1EN} Therefore, it is important to ${word} these concerns.`,
-      "7.0": `${s1EN} Consequently, stakeholders should implement suitable measures to ${word} these priorities.`,
-      "7.5": modelTranslation,
-      "8.0": `${s1EN} As a direct consequence, designated authorities are compelled to coordinate strategic interventions to ${word} emerging priorities.`,
-      "8.5": `${s1EN} In light of these critical developments, governing institutions are obligated to enact rigorous measures to systematically ${word} structural priorities before adverse tipping points are reached.`
+      "6.5": band65,
+      "7.0": band70,
+      "7.5": band75,
+      "8.0": band80,
+      "8.5": band85
     },
     upgradeDetails: [
-      `Từ vựng mục tiêu: "${vocab.word}" ${vocab.ipa || ''} (${vocab.partOfSpeech || 'từ vựng'}) - Nghĩa: ${vocab.meaning || ''}.`,
-      `Cách chuyển câu (Cohesion): Liên từ C1 "Consequently," (Do đó, như một hệ quả tất yếu) chỉ quan hệ nhân quả mạnh mẽ thay cho 'so/therefore'.`,
-      `Đại từ quy chiếu (Referencing): Móc xích nguyên nhân ở Câu 1 với giải pháp ở Câu 2 mà không bị lặp từ.`,
-      `Mạch lập luận logic: Câu 1 nêu thực trạng/tiền đề, Câu 2 đóng vai trò giải pháp trực tiếp liên quan đến "${vocab.word}".`
+      `Từ vựng mục tiêu: "${word}" ${ipa} (${pos}) - Nghĩa: ${meaning}.`,
+      collocation !== word 
+        ? `Collocation học thuật C1/C2: "${collocation}" kết hợp tự nhiên trong văn cảnh bài viết.`
+        : `Sắc thái học thuật: Sử dụng từ ngữ chính xác, trang trọng, tương thích hoàn toàn với văn phong IELTS Writing.`,
+      `Cấu trúc đoạn văn (PEEL Architecture): Topic Sentence (Luận điểm) &rarr; Explanation (Phân tích có từ vựng) &rarr; Evidence (Dẫn chứng/Hệ quả) &rarr; Conclusion (Đúc kết giải pháp).`,
+      `Liên từ & Mạch lạc (Cohesive Devices): Sự phối hợp linh hoạt của 'Consequently', 'For instance', 'In summary' tạo dòng chảy lập luận chặt chẽ.`
     ]
+  };
+}
+
+/**
+ * Generates topic-appropriate 2-sentence context for Part 3 practice (backwards compatibility).
+ */
+function generatePart3Practice(vocab, topicName = "IELTS Writing") {
+  const paragraph = generateParagraphPractice(vocab, topicName);
+  return {
+    sentence1Vietnamese: paragraph.topicSentenceVN,
+    sentence2Vietnamese: paragraph.explanationVN,
+    linkingSuggestions: paragraph.linkingSuggestions,
+    modelTranslation: `${paragraph.structure.ts} ${paragraph.structure.ex}`,
+    bandUpgrades: paragraph.bandUpgrades,
+    upgradeDetails: paragraph.upgradeDetails
   };
 }
 
@@ -210,13 +292,16 @@ export function enrichVocabulary(vocab, topicName = "IELTS Writing") {
     ]
   };
 
-  // 3. Two-Sentence Translation with Cohesive Device Data (Part 3)
-  const twoSentencePractice = vocab.twoSentencePractice || generatePart3Practice(vocab, topicName);
+  // 3. Paragraph Practice (PEEL Academic Paragraph - replacing 2-sentence practice)
+  const paragraphPractice = vocab.paragraphPractice || generateParagraphPractice(vocab, topicName);
+  const twoSentencePractice = vocab.twoSentencePractice || paragraphPractice;
 
   return {
     ...vocab,
     vietnameseQuiz: quiz,
     sentencePractice,
+    paragraphPractice,
     twoSentencePractice
   };
 }
+
