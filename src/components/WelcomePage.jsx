@@ -12,6 +12,7 @@ import { BAND_OPTIONS } from '../data/bandDescriptors';
 
 export default function WelcomePage({ 
   onStartPractice, 
+  onStartFullEssay,
   onStartFlashcard,
   onOpenContactModal,
   onChangeEmail,
@@ -244,9 +245,26 @@ export default function WelcomePage({
               }}
               className="w-full py-3 px-4 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-sm transition shadow-xs flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
             >
-              <span>Vào học ({selectedTask === "task1" ? "Task 1" : selectedTask === "vocab" ? "Từ vựng" : "Task 2"} • Band {targetBand})</span>
+              <span>📚 Học từ vựng (Luyện câu &amp; đoạn • Band {targetBand})</span>
               <ArrowRight className="w-4 h-4" />
             </button>
+
+            {onStartFullEssay && (
+              <button
+                type="button"
+                onClick={() => {
+                  if (!currentUser) {
+                    onOpenAuth();
+                    return;
+                  }
+                  onStartFullEssay();
+                }}
+                className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-[#FAF8F5] text-[#24211E] border border-[#D1DDD3] font-medium text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] shadow-2xs"
+              >
+                <span>✍️ Luyện viết toàn bộ ({selectedTask === "task1" ? "Task 1 Report" : "Task 2 Essay"})</span>
+                <ArrowRight className="w-4 h-4 text-[#3E4F42]" />
+              </button>
+            )}
 
             {onStartFlashcard && (
               <button
@@ -258,10 +276,10 @@ export default function WelcomePage({
                   }
                   onStartFlashcard();
                 }}
-                className="w-full py-2.5 px-4 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFEA] text-[#24211E] border border-[#E6E2D8] font-medium text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
+                className="w-full py-2 px-4 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFEA] text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8] font-medium text-xs transition flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
               >
-                <Layers className="w-4 h-4 text-[#3E4F42]" />
-                <span>Ôn tập từ vựng qua Flashcard</span>
+                <Layers className="w-3.5 h-3.5 text-[#3E4F42]" />
+                <span>🗂️ Ôn tập từ vựng qua Flashcard</span>
               </button>
             )}
           </div>

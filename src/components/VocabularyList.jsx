@@ -240,7 +240,7 @@ export default function VocabularyList({
                 className="col-span-2 py-1.5 px-3 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-bold text-xs flex items-center justify-center gap-1.5 transition shadow-sm cursor-pointer"
               >
                 <FileEdit className="w-3.5 h-3.5 text-[#EDF3EE]" />
-                <span>Viết Full Bài Essay ngay (Tab 4)</span>
+                <span>✍️ Luyện Viết Toàn Bộ Task (Full Essay)</span>
               </button>
             )}
 

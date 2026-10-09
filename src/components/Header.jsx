@@ -20,6 +20,8 @@ export default function Header({
   onOpenBandModal, 
   onGoWelcome,
   onOpenFlashcard,
+  onGoVocabPractice,
+  onGoFullEssay,
   onGoPractice,
   currentUser,
   onOpenAuth,
@@ -54,21 +56,32 @@ export default function Header({
   const currentNum = current7DayScore !== null ? current7DayScore : 0;
   const progressPercent = Math.min(100, Math.round((currentNum / targetNum) * 100));
 
-  // Definition of learning features (easily extensible for future features)
+  // Definition of learning features (Học từ vựng vs Viết full task vs Flashcard)
   const LEARNING_FEATURES = [
     {
-      id: 'practice',
-      title: 'Luyện Viết',
-      subtitle: 'Writing Practice (Câu & Full Essay)',
+      id: 'vocab_practice',
+      title: 'Học Từ Vựng (Câu & Đoạn)',
+      subtitle: 'Luyện nhóm từ vựng, viết câu & đoạn văn',
+      icon: BookOpen,
+      action: () => {
+        setIsFunctionDropdownOpen(false);
+        if (onGoVocabPractice) onGoVocabPractice();
+        else if (onGoPractice) onGoPractice();
+      }
+    },
+    {
+      id: 'full_essay',
+      title: 'Viết Full Task (Full Essay)',
+      subtitle: 'Tự viết, viết theo hướng dẫn & dịch theo đề xuất',
       icon: PenTool,
       action: () => {
         setIsFunctionDropdownOpen(false);
-        if (onGoPractice) onGoPractice();
+        if (onGoFullEssay) onGoFullEssay();
       }
     },
     {
       id: 'flashcard',
-      title: 'Flashcard',
+      title: 'Flashcard Từ Vựng',
       subtitle: 'Phản xạ từ vựng học thuật',
       icon: Layers,
       action: () => {
@@ -91,18 +104,15 @@ export default function Header({
       title: 'Task 2',
       subtitle: 'Bài luận Essay học thuật',
       icon: FileText
-    },
-    {
-      id: 'vocab',
-      title: 'Từ vựng (Vocabulary)',
-      subtitle: 'Kho từ vựng & Collocations theo chủ đề',
-      icon: BookOpen
     }
   ];
 
-  const currentFeature = currentView === 'flashcard' 
-    ? LEARNING_FEATURES.find(f => f.id === 'flashcard')
-    : LEARNING_FEATURES.find(f => f.id === 'practice');
+  const currentFeature = LEARNING_FEATURES.find(f => {
+    if (currentView === 'vocab_practice' || currentView === 'practice') return f.id === 'vocab_practice';
+    if (currentView === 'full_essay') return f.id === 'full_essay';
+    if (currentView === 'flashcard') return f.id === 'flashcard';
+    return f.id === 'vocab_practice';
+  }) || LEARNING_FEATURES[0];
 
   const currentSection = PRACTICE_SECTIONS.find(s => s.id === activeTask) || PRACTICE_SECTIONS[1];
 
@@ -132,7 +142,7 @@ export default function Header({
         <div className="flex items-center gap-2">
           
           {/* Home button */}
-          {(currentView === 'practice' || currentView === 'flashcard') && (
+          {(currentView === 'practice' || currentView === 'vocab_practice' || currentView === 'full_essay' || currentView === 'flashcard') && (
             <button
               onClick={onGoWelcome}
               className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-xs font-medium text-[#7A7369] hover:text-[#24211E] transition cursor-pointer"
@@ -165,7 +175,7 @@ export default function Header({
                 </div>
                 <div className="space-y-0.5">
                   {LEARNING_FEATURES.map((feature) => {
-                    const isActive = currentView === feature.id;
+                    const isActive = currentView === feature.id || (feature.id === 'vocab_practice' && currentView === 'practice');
                     const Icon = feature.icon;
                     return (
                       <button
