@@ -46,7 +46,8 @@ export default function TopicTabBar({
   activeTask,
   onOpenChartModal,
   task1Layout = 'three-col',
-  onToggleTask1Layout
+  onToggleTask1Layout,
+  hidePromptCard = false
 }) {
   const list = topics && topics.length > 0 ? topics : [];
   const [selectedCategory, setSelectedCategory] = useState('ALL');
@@ -171,13 +172,13 @@ export default function TopicTabBar({
         </button>
       </div>
 
-      {/* Prominent, Legible IELTS Prompt Card - Clean & Minimalist */}
-      {selectedTopic && (
+      {/* Prominent, Legible IELTS Prompt Card - Clean & Minimalist (Hidden in pure vocab mode) */}
+      {!hidePromptCard && selectedTopic && (
         <div className="px-4 py-3 rounded-2xl bg-white border border-[#E6E2D8] shadow-xs space-y-1.5">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <span className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3]">
-                {activeTask === 'task1' ? 'Task 1' : 'Task 2'}
+                {activeTask === 'task1' ? 'Task 1' : activeTask === 'vocab' ? 'Từ vựng' : 'Task 2'}
               </span>
               <span className="text-xs font-medium text-[#24211E]">
                 {selectedTopic.vietnameseName || selectedTopic.name}
@@ -234,7 +235,7 @@ export default function TopicTabBar({
 
           {/* Prompt text */}
           <p className="text-sm sm:text-[15px] text-[#24211E] leading-relaxed select-text font-serif">
-            "{selectedTopic.ieltsPrompt}"
+            "{activeTask === 'vocab' ? `Bộ từ vựng học thuật C1-C2 và collocations đắt giá theo chủ đề ${selectedTopic.vietnameseName || selectedTopic.name}` : selectedTopic.ieltsPrompt}"
           </p>
         </div>
       )}

@@ -185,15 +185,15 @@ export default function WelcomePage({
           {/* Nút Chọn Task 1 hoặc Task 2 */}
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs">
-              <span className="font-medium text-[#7A7369]">Dạng bài:</span>
-              <span className="font-semibold text-[#3E4F42]">{selectedTask === "task1" ? "Task 1" : "Task 2"}</span>
+              <span className="font-medium text-[#7A7369]">Phần luyện tập:</span>
+              <span className="font-semibold text-[#3E4F42]">{selectedTask === "task1" ? "Task 1" : selectedTask === "vocab" ? "Từ vựng" : "Task 2"}</span>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 p-1 bg-[#FAF8F5] rounded-xl border border-[#E6E2D8]">
+            <div className="grid grid-cols-3 gap-1.5 p-1 bg-[#FAF8F5] rounded-xl border border-[#E6E2D8]">
               <button
                 type="button"
                 onClick={() => handleSelectTask("task1")}
-                className={`py-2.5 px-4 rounded-lg text-xs font-medium transition flex items-center justify-center gap-1.5 cursor-pointer ${
+                className={`py-2 px-2 rounded-lg text-xs font-medium transition flex items-center justify-center gap-1 cursor-pointer ${
                   selectedTask === "task1"
                     ? "bg-[#3E4F42] text-white shadow-xs"
                     : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
@@ -206,7 +206,7 @@ export default function WelcomePage({
               <button
                 type="button"
                 onClick={() => handleSelectTask("task2")}
-                className={`py-2.5 px-4 rounded-lg text-xs font-medium transition flex items-center justify-center gap-1.5 cursor-pointer ${
+                className={`py-2 px-2 rounded-lg text-xs font-medium transition flex items-center justify-center gap-1 cursor-pointer ${
                   selectedTask === "task2"
                     ? "bg-[#3E4F42] text-white shadow-xs"
                     : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
@@ -214,6 +214,19 @@ export default function WelcomePage({
               >
                 {selectedTask === "task2" && <Check className="w-3.5 h-3.5" />}
                 <span>Task 2</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleSelectTask("vocab")}
+                className={`py-2 px-2 rounded-lg text-xs font-medium transition flex items-center justify-center gap-1 cursor-pointer ${
+                  selectedTask === "vocab"
+                    ? "bg-[#3E4F42] text-white shadow-xs"
+                    : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
+                }`}
+              >
+                {selectedTask === "vocab" && <Check className="w-3.5 h-3.5" />}
+                <span>Từ vựng</span>
               </button>
             </div>
           </div>
@@ -231,7 +244,7 @@ export default function WelcomePage({
               }}
               className="w-full py-3 px-4 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-sm transition shadow-xs flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
             >
-              <span>Luyện viết câu (Band {targetBand} • {selectedTask === "task1" ? "Task 1" : "Task 2"})</span>
+              <span>Vào học ({selectedTask === "task1" ? "Task 1" : selectedTask === "vocab" ? "Từ vựng" : "Task 2"} • Band {targetBand})</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 

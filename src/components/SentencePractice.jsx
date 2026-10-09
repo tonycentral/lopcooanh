@@ -13,27 +13,17 @@ import {
   Lightbulb,
   Copy,
   Check,
-  Clock,
-  Play,
-  Pause,
-  RotateCcw,
-  Plus,
-  FileEdit,
-  FileText,
-  Award,
   Tag
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { 
-  evaluateComprehensionTest, 
+  evaluateComprehensionMeaning, 
   evaluatePart2Translation, 
-  evaluatePart3Translation,
-  evaluateFullEssay
+  evaluatePart3Translation
 } from '../services/evaluator';
 import { evaluateWithGemini } from '../services/geminiService';
 import { analyzeUpgradeDetails } from '../services/upgradeDetailHelper';
 import { saveHistoryEntry } from '../services/storage';
-import WritingProcessModal from './WritingProcessModal';
 
 const AVAILABLE_BANDS = ["6.5", "7.0", "7.5", "8.0", "8.5"];
 
@@ -185,7 +175,7 @@ export default function SentencePractice({
   activePart: controlledActivePart,
   onPartChange
 }) {
-  // 4-Part State: 1 = Hiểu từ, 2 = Dịch 1 câu, 3 = Dịch 2 câu & Chuyển câu, 4 = Full Essay / Report
+  // 3-Part State: 1 = Hiểu từ, 2 = Dịch 1 câu, 3 = Luyện viết đoạn văn
   const [internalActivePart, setInternalActivePart] = useState(1);
   const activePart = controlledActivePart !== undefined ? controlledActivePart : internalActivePart;
   const setActivePart = (newPart) => {
@@ -193,9 +183,10 @@ export default function SentencePractice({
     if (onPartChange) onPartChange(newPart);
   };
 
-  // ================= STATE CHO PHẦN 1: CHẤM ĐIỂM HIỂU TỪ =================
-  const [quizSelectedIndex, setQuizSelectedIndex] = useState(null);
+  // ================= STATE CHO PHẦN 1: ĐÁNH GIÁ NGHĨA TIẾNG VIỆT & TỪ ĐỒNG NGHĨA =================
+  const [vietnameseMeaningInput, setVietnameseMeaningInput] = useState("");
   const [synonymInput, setSynonymInput] = useState("");
+  const [isEvaluatingPart1, setIsEvaluatingPart1] = useState(false);
   const [part1Result, setPart1Result] = useState(null);
 
   // ================= STATE CHO PHẦN 2: DỊCH 1 CÂU =================
@@ -204,62 +195,20 @@ export default function SentencePractice({
   const [part2Result, setPart2Result] = useState(null);
   const [part2ViewBand, setPart2ViewBand] = useState(null);
 
-  // ================= STATE CHO PHẦN 3: DỊCH 2 CÂU & CHUYỂN CÂU =================
+  // ================= STATE CHO PHẦN 3: LUYỆN VIẾT ĐOẠN VĂN =================
   const [part3Input, setPart3Input] = useState("");
   const [isEvaluatingPart3, setIsEvaluatingPart3] = useState(false);
   const [part3Result, setPart3Result] = useState(null);
   const [part3ViewBand, setPart3ViewBand] = useState(null);
-
-  // ================= STATE CHO PHẦN 4: FULL ESSAY / FULL REPORT =================
-  const isTask1 = activeTask === 'task1';
-  const minWordsRequired = isTask1 ? 150 : 250;
-  const [essayInput, setEssayInput] = useState("");
-  const [isEvaluatingEssay, setIsEvaluatingEssay] = useState(false);
-  const [essayResult, setEssayResult] = useState(null);
-  const [essayTimeLeft, setEssayTimeLeft] = useState(isTask1 ? 20 * 60 : 40 * 60);
-  const [isTimerRunning, setIsTimerRunning] = useState(false);
-  const [showModelEssay, setShowModelEssay] = useState(false);
-  const [isProcessModalOpen, setIsProcessModalOpen] = useState(false);
-  const hasAutoOpenedModalRef = useRef(false);
-
-  // Tự động hiện pop-up quy trình viết bài khi học viên vào mục số 4 (Tab 4)
-  useEffect(() => {
-    if (activePart === 4 && !hasAutoOpenedModalRef.current) {
-      setIsProcessModalOpen(true);
-      hasAutoOpenedModalRef.current = true;
-    }
-  }, [activePart]);
-
-  // Timer countdown for essay
-  useEffect(() => {
-    let timer;
-    if (isTimerRunning && essayTimeLeft > 0) {
-      timer = setInterval(() => {
-        setEssayTimeLeft(prev => Math.max(0, prev - 1));
-      }, 1000);
-    } else if (essayTimeLeft === 0 && isTimerRunning) {
-      setIsTimerRunning(false);
-    }
-    return () => clearInterval(timer);
-  }, [isTimerRunning, essayTimeLeft]);
-
-  // Reset essay state when topic changes
-  useEffect(() => {
-    setEssayInput("");
-    setIsEvaluatingEssay(false);
-    setEssayResult(null);
-    setEssayTimeLeft(isTask1 ? 20 * 60 : 40 * 60);
-    setIsTimerRunning(false);
-    setShowModelEssay(false);
-  }, [topic?.id, activeTask]);
 
   // Copy status
   const [copiedKey, setCopiedKey] = useState(null);
 
   // Reset when selected vocabulary changes
   useEffect(() => {
-    setQuizSelectedIndex(null);
+    setVietnameseMeaningInput("");
     setSynonymInput("");
+    setIsEvaluatingPart1(false);
     setPart1Result(null);
 
     setPart2Input("");
@@ -272,9 +221,7 @@ export default function SentencePractice({
     setPart3Result(null);
     setPart3ViewBand(null);
 
-    if (activePart !== 4) {
-      setActivePart(1);
-    }
+    setActivePart(1);
   }, [selectedVocab]);
 
   const handleCopy = (text, key) => {
@@ -283,17 +230,42 @@ export default function SentencePractice({
     setTimeout(() => setCopiedKey(null), 1500);
   };
 
-  // ---------------- HANDLER PHẦN 1: CHẤM ĐIỂM HIỂU TỪ ----------------
+  // ---------------- HANDLER PHẦN 1: ĐÁNH GIÁ NGHĨA TIẾNG VIỆT & TỪ ĐỒNG NGHĨA ----------------
   const handleGradePart1 = () => {
-    if (!selectedVocab) return;
-    const res = evaluateComprehensionTest(selectedVocab, {
-      selectedOptionIndex: quizSelectedIndex,
-      synonymInput: synonymInput
-    });
-    setPart1Result(res);
+    if (!selectedVocab || (!vietnameseMeaningInput.trim() && !synonymInput.trim())) return;
+    setIsEvaluatingPart1(true);
+    try {
+      const res = evaluateComprehensionMeaning(
+        selectedVocab, 
+        vietnameseMeaningInput.trim() || synonymInput.trim()
+      );
 
-    if (res.isCorrect) {
-      confetti({ particleCount: 30, spread: 60, origin: { y: 0.8 } });
+      // Nếu có nhập thêm từ đồng nghĩa tiếng Anh, kiểm tra thêm độ chính xác
+      if (synonymInput.trim() && selectedVocab.synonyms && selectedVocab.synonyms.length > 0) {
+        const cleanSyn = synonymInput.trim().toLowerCase();
+        const matchesSyn = selectedVocab.synonyms.some(s => s.toLowerCase() === cleanSyn || cleanSyn.includes(s.toLowerCase()));
+        if (matchesSyn) {
+          res.isSynonymCorrect = true;
+          if (res.status === 'needs_review' && !vietnameseMeaningInput.trim()) {
+            res.status = 'good';
+            res.score = 80;
+            res.isCorrect = true;
+            res.feedbackMessage = `Chính xác! "${synonymInput.trim()}" là từ đồng nghĩa chuẩn của "${selectedVocab.word}".`;
+          } else if (res.isCorrect) {
+            res.feedbackMessage += ` Ngoài ra, từ đồng nghĩa "${synonymInput.trim()}" bạn điền rất chính xác!`;
+          }
+        } else {
+          res.isSynonymCorrect = false;
+        }
+      }
+
+      setPart1Result(res);
+
+      if (res.isCorrect) {
+        confetti({ particleCount: 35, spread: 65, origin: { y: 0.8 } });
+      }
+    } finally {
+      setIsEvaluatingPart1(false);
     }
   };
 
@@ -394,164 +366,10 @@ export default function SentencePractice({
       setPart2Input(prev => prev ? `${prev} ${text}` : text);
     } else if (partNum === 3) {
       setPart3Input(prev => prev ? `${prev} ${text}` : text);
-    } else if (partNum === 4) {
-      insertIntoEssay(text);
     }
   };
 
-  // Helper for Part 4 essay
-  const topicVocabs = useMemo(() => topic?.vocabularies || [], [topic]);
 
-  const isWordUsed = (word, synonyms = []) => {
-    if (!essayInput.trim() || !word) return false;
-    const cleanWord = word.trim().toLowerCase();
-    const regex = new RegExp(`\\b${cleanWord.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}`, 'i');
-    if (regex.test(essayInput)) return true;
-    const lowerInput = essayInput.toLowerCase();
-    return (synonyms || []).some(s => s && lowerInput.includes(s.toLowerCase()));
-  };
-
-  const usedWordsCount = useMemo(() => {
-    return topicVocabs.filter(v => isWordUsed(v.word, v.synonyms)).length;
-  }, [topicVocabs, essayInput]);
-
-  const essayWords = useMemo(() => {
-    return essayInput.trim().split(/\s+/).filter(Boolean);
-  }, [essayInput]);
-
-  const currentWordCount = essayWords.length;
-
-  const essayParagraphCount = useMemo(() => {
-    if (!essayInput.trim()) return 0;
-    const paras = essayInput.split(/\n\s*\n|\r\n\s*\r\n/).map(p => p.trim()).filter(Boolean);
-    return paras.length > 0 ? paras.length : 1;
-  }, [essayInput]);
-
-  const formatTimer = (seconds) => {
-    const m = Math.floor(seconds / 60);
-    const s = seconds % 60;
-    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-  };
-
-  const insertIntoEssay = (text) => {
-    setEssayInput(prev => {
-      if (!prev) return text;
-      if (prev.endsWith(" ") || prev.endsWith("\n")) return `${prev}${text}`;
-      return `${prev} ${text}`;
-    });
-  };
-
-  const insertOutlineScaffold = () => {
-    if (isTask1) {
-      const scaffold = `Introduction & Overview:
-The chart illustrates the changes in... Overall, it is evident that...
-
-Body Paragraph 1:
-Looking first at..., the figure for... was... Furthermore,...
-
-Body Paragraph 2:
-Turning to the remaining categories,..., whereas...`;
-      insertIntoEssay(scaffold);
-    } else {
-      const scaffold = `Introduction:
-It is often argued that... However, I firmly maintain that...
-
-Body Paragraph 1:
-On the one hand, it is undeniable that... Specifically,... For example,... Consequently,...
-
-Body Paragraph 2:
-On the other hand, there are compelling reasons to argue that... Furthermore,... For instance,... Therefore,...
-
-Conclusion:
-In conclusion, while..., I believe that...`;
-      insertIntoEssay(scaffold);
-    }
-  };
-
-  const quickConnectors = isTask1 ? [
-    { text: "The chart illustrates", tip: "Mở bài Task 1" },
-    { text: "Overall, it is evident that", tip: "Mở đầu câu Overview" },
-    { text: "In terms of", tip: "Mở đoạn thân bài" },
-    { text: "Compared to", tip: "So sánh số liệu" },
-    { text: "Stood at approximately", tip: "Nêu số liệu cụ thể" },
-    { text: "In stark contrast,", tip: "Đối lập số liệu" }
-  ] : [
-    { text: "On the one hand,", tip: "Mở đoạn Thân bài 1" },
-    { text: "On the other hand,", tip: "Mở đoạn Thân bài 2" },
-    { text: "Furthermore,", tip: "Bổ sung luận điểm" },
-    { text: "Consequently,", tip: "Chỉ ra hệ quả tất yếu" },
-    { text: "In light of this,", tip: "Liên hệ mạch lạc" },
-    { text: "In conclusion,", tip: "Mở đoạn Kết bài" }
-  ];
-
-  const handleGradeEssay = async () => {
-    if (!essayInput.trim()) return;
-    setIsEvaluatingEssay(true);
-
-    try {
-      let res = evaluateFullEssay(essayInput, topic, targetBand, activeTask);
-      if (!res.isValid) {
-        alert(res.error);
-        return;
-      }
-
-      if (apiKey) {
-        try {
-          const aiRes = await evaluateWithGemini("full_essay", {
-            targetBand,
-            activeTask,
-            topicName: topic?.name,
-            ieltsPrompt: topic?.ieltsPrompt,
-            targetWords: topicVocabs.map(v => v.word),
-            essayText: essayInput
-          }, apiKey);
-
-          if (aiRes && aiRes.scores) {
-            res = {
-              ...res,
-              scores: aiRes.scores,
-              strengths: aiRes.strengths?.length ? aiRes.strengths : res.strengths,
-              improvements: aiRes.improvements?.length ? aiRes.improvements : res.improvements,
-              paragraphFeedbacks: aiRes.paragraphFeedbacks?.length ? aiRes.paragraphFeedbacks : res.paragraphFeedbacks,
-              isAiGraded: true
-            };
-          }
-        } catch (aiErr) {
-          console.warn("Lỗi gọi Gemini AI examiner, sử dụng bộ chấm IELTS ngoại tuyến:", aiErr);
-        }
-      }
-
-      setEssayResult(res);
-
-      if (res.scores && res.scores.overallBand >= parseFloat(targetBand)) {
-        confetti({ particleCount: 80, spread: 90, origin: { y: 0.6 } });
-      }
-
-      saveHistoryEntry({
-        studentEmail,
-        type: "full_essay",
-        topicName: topic?.name,
-        targetWord: `${usedWordsCount}/${topicVocabs.length} từ chủ đề`,
-        userSentence: essayInput,
-        scores: res.scores,
-        targetBand,
-        isTargetMet: (res.scores?.overallBand || 0) >= parseFloat(targetBand)
-      });
-
-      if (onSentenceGraded) onSentenceGraded();
-    } finally {
-      setIsEvaluatingEssay(false);
-    }
-  };
-
-  const getModelEssayText = () => {
-    if (topic?.modelEssay) return topic.modelEssay;
-    if (isTask1) {
-      return `The presented illustration provides an overview of the data concerning ${topic?.name || 'the given subject'}. Overall, what stands out from the visual representation is that significant differences are observable between the surveyed metrics throughout the designated timeframe.\n\nIn terms of the prominent indicators, the figures registered substantial activity, where key categories commanded a notable proportion of the total. Furthermore, steady progression was maintained across several parameters.\n\nTurning to the secondary details, comparative analysis highlights distinct variations between the remaining sectors, with certain values stabilizing towards the conclusion of the survey period.`;
-    }
-
-    return `It is widely asserted that the issue surrounding ${topic?.name || 'the given phenomenon'} represents a matter of considerable debate in contemporary society. While some individuals argue that certain factors contribute fundamentally to this trend, I firmly believe that a balanced and multidimensional approach is essential.\n\nOn the one hand, proponents of the first perspective contend that tangible benefits can be attained through targeted interventions. In particular, when relevant stakeholders implement systematic measures, they can effectively mitigate underlying challenges and stimulate sustainable progress. For instance, empirical evidence suggests that structured reforms often yield enduring societal gains.\n\nOn the other hand, compelling arguments can also be advanced regarding alternative considerations. Crucially, addressing root causes rather than superficial symptoms fosters long-term stability and resilience. Consequently, modern communities must adopt prudent policies to avoid exacerbating systemic vulnerabilities.\n\nIn conclusion, having analyzed both viewpoints, it is apparent that although individual aspects merit serious attention, holistic and cohesive strategies remain the most viable roadmap forward.`;
-  };
 
   const sentencePracticeData = selectedVocab?.sentencePractice;
   const paragraphPracticeData = selectedVocab?.paragraphPractice || selectedVocab?.twoSentencePractice;
@@ -605,39 +423,32 @@ In conclusion, while..., I believe that...`;
     });
   }, [part3Result, currentPart3Pair, selectedVocab, currentPart3Band]);
 
-  // Relaxed empty state: if no vocab is selected and user is not in Part 4
-  if (!selectedVocab && activePart !== 4) {
+  // Relaxed empty state: if no vocab is selected
+  if (!selectedVocab) {
     return (
       <div className="space-y-4 text-[#24211E]">
-        {/* Navigation Switcher to still allow switching to Tab 4 */}
-        <div className="grid grid-cols-4 gap-1 p-1 rounded-2xl bg-[#F4EFEA] border border-[#E6E2D8] shadow-xs">
+        {/* Navigation Switcher */}
+        <div className="grid grid-cols-3 gap-1 p-1 rounded-2xl bg-[#F4EFEA] border border-[#E6E2D8] shadow-xs">
           <button
             onClick={() => setActivePart(1)}
             className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold text-[#7A7369] hover:text-[#24211E] transition flex items-center justify-center gap-1 cursor-pointer"
           >
             <span className="w-4 h-4 rounded-full bg-black/10 text-[10px] flex items-center justify-center font-black">1</span>
-            <span className="truncate">Hiểu từ</span>
+            <span className="truncate">Hiểu từ vựng</span>
           </button>
           <button
             onClick={() => setActivePart(2)}
             className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold text-[#7A7369] hover:text-[#24211E] transition flex items-center justify-center gap-1 cursor-pointer"
           >
             <span className="w-4 h-4 rounded-full bg-black/10 text-[10px] flex items-center justify-center font-black">2</span>
-            <span className="truncate">Dịch 1 câu</span>
+            <span className="truncate">Luyện viết câu</span>
           </button>
           <button
             onClick={() => setActivePart(3)}
             className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold text-[#7A7369] hover:text-[#24211E] transition flex items-center justify-center gap-1 cursor-pointer"
           >
             <span className="w-4 h-4 rounded-full bg-black/10 text-[10px] flex items-center justify-center font-black">3</span>
-            <span className="truncate">Dịch 2 câu</span>
-          </button>
-          <button
-            onClick={() => setActivePart(4)}
-            className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold bg-[#3E4F42] text-white shadow-xs transition flex items-center justify-center gap-1 cursor-pointer"
-          >
-            <span className="w-4 h-4 rounded-full bg-white/20 text-[10px] flex items-center justify-center font-black">4</span>
-            <span className="truncate">{activeTask === 'task1' ? "Full Report" : "Full Essay"}</span>
+            <span className="truncate">Luyện viết đoạn văn</span>
           </button>
         </div>
 
@@ -648,114 +459,73 @@ In conclusion, while..., I believe that...`;
           <div>
             <h4 className="text-sm font-bold text-[#24211E]">Chưa chọn từ vựng luyện tập</h4>
             <p className="text-xs text-[#7A7369] mt-1 max-w-sm">
-              Hãy chọn một từ vựng ở danh sách bên cạnh và nhấn nút "Luyện tập" để học 3 bước (Hiểu từ &rarr; Dịch 1 câu &rarr; Dịch 2 câu), hoặc chuyển sang Tab 4 để viết Full {activeTask === 'task1' ? 'Report' : 'Essay'} theo toàn bộ chủ đề!
+              Hãy chọn một từ vựng ở danh sách bên cạnh và nhấn nút "Luyện tập" để học 3 bước (Hiểu từ &rarr; Luyện viết câu &rarr; Luyện viết đoạn văn)!
             </p>
           </div>
-          <button
-            type="button"
-            onClick={() => setActivePart(4)}
-            className="mt-2 px-4 py-2 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-bold text-xs flex items-center gap-2 shadow-xs cursor-pointer"
-          >
-            <FileEdit className="w-4 h-4" />
-            <span>Viết Full {activeTask === 'task1' ? 'Report' : 'Essay'} ngay (Tab 4)</span>
-          </button>
         </div>
       </div>
     );
   }
 
-  // Pre-extracted data from enriched vocabulary
-  const quiz = selectedVocab?.vietnameseQuiz || {
-    question: `Nghĩa tiếng Việt chuẩn xác nhất của "${selectedVocab?.word || ''}" là gì?`,
-    options: [selectedVocab?.meaning || '', "Làm gia tăng rủi ro", "Giữ nguyên trạng thái", "Bỏ qua vấn đề"],
-    correctIndex: 0
-  };
-
   return (
     <div className="space-y-4 text-[#24211E]">
       
-      {/* Target Word Overview Ribbon OR Full Essay Topic Ribbon */}
-      {activePart === 4 ? (
-        <div className="p-3.5 rounded-2xl bg-white border border-[#E6E2D8] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-          <div className="flex items-center gap-2.5 flex-wrap">
-            <span className="text-[10px] uppercase font-black text-[#A67C52] tracking-wider bg-[#FAF5EE] px-2.5 py-0.5 rounded-md border border-[#E6E2D8]">
-              {activeTask === 'task1' ? "Task 1 Report Practice" : "Task 2 Full Essay"}
-            </span>
-            <span className="text-sm sm:text-base font-black text-[#24211E]">{topic?.name || "Chủ đề học thuật"}</span>
-            <span className="text-xs text-[#7A7369] font-medium">
-              (Mục tiêu: Band {targetBand} • Tối thiểu {activeTask === 'task1' ? '150' : '250'} từ)
-            </span>
-          </div>
-
-          {activeTask === 'task1' && onOpenChartModal && (
-            <button
-              type="button"
-              onClick={onOpenChartModal}
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-[#EDF3EE] hover:bg-[#EDF3EE] text-[#334237] border border-[#D1DDD3] text-xs font-bold transition cursor-pointer self-start sm:self-auto shadow-xs"
-              title="Xem bảng số liệu biểu đồ Task 1"
-            >
-              <BarChart3 className="w-3.5 h-3.5 text-[#3E4F42]" />
-              <span>Xem Biểu Đồ Số Liệu</span>
-            </button>
-          )}
-        </div>
-      ) : (
-        selectedVocab && (
-          <div className="p-3.5 rounded-2xl bg-white border border-[#E6E2D8] shadow-xs flex flex-col gap-2.5">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-              <div className="flex items-baseline gap-2 flex-wrap">
-                <span className="text-[10px] uppercase font-black text-[#3E4F42] tracking-wider bg-[#EDF3EE] px-2 py-0.5 rounded-md border border-[#D1DDD3]">
-                  Từ Đang Luyện
+      {/* Target Word Overview Ribbon */}
+      {selectedVocab && (
+        <div className="p-3.5 rounded-2xl bg-white border border-[#E6E2D8] shadow-xs flex flex-col gap-2.5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+            <div className="flex items-baseline gap-2 flex-wrap">
+              <span className="text-[10px] uppercase font-black text-[#3E4F42] tracking-wider bg-[#EDF3EE] px-2 py-0.5 rounded-md border border-[#D1DDD3]">
+                Từ Đang Luyện
+              </span>
+              <span className="text-lg font-black text-[#24211E]">{selectedVocab.word}</span>
+              {selectedVocab.ipa && (
+                <span className="text-xs font-mono text-[#3E4F42] italic font-bold">
+                  {selectedVocab.ipa}
                 </span>
-                <span className="text-lg font-black text-[#24211E]">{selectedVocab.word}</span>
-                {selectedVocab.ipa && (
-                  <span className="text-xs font-mono text-[#3E4F42] italic font-bold">
-                    {selectedVocab.ipa}
-                  </span>
-                )}
-                <span className="text-xs text-[#7A7369]">({selectedVocab.partOfSpeech})</span>
-                {selectedVocab.meaning && (
-                  <span className="text-xs text-[#24211E] font-medium ml-1">
-                    • <strong className="text-[#3E4F42] font-bold">Nghĩa:</strong> {selectedVocab.meaning}
-                  </span>
-                )}
-              </div>
-
-              {activeTask === 'task1' && onOpenChartModal && (
-                <button
-                  type="button"
-                  onClick={onOpenChartModal}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-[#EDF3EE] hover:bg-[#EDF3EE] text-[#334237] border border-[#D1DDD3] text-xs font-bold transition cursor-pointer self-start sm:self-auto shadow-xs"
-                  title="Xem bảng số liệu biểu đồ Task 1"
-                >
-                  <BarChart3 className="w-3.5 h-3.5 text-[#3E4F42]" />
-                  <span>Xem Bar Chart</span>
-                </button>
+              )}
+              <span className="text-xs text-[#7A7369]">({selectedVocab.partOfSpeech})</span>
+              {selectedVocab.meaning && (
+                <span className="text-xs text-[#24211E] font-medium ml-1">
+                  • <strong className="text-[#3E4F42] font-bold">Nghĩa:</strong> {selectedVocab.meaning}
+                </span>
               )}
             </div>
 
-            {/* Từ đồng nghĩa (Synonyms) - Đồng bộ với Flashcard */}
-            {selectedVocab.synonyms && selectedVocab.synonyms.length > 0 && (
-              <div className="pt-2 border-t border-[#E6E2D8] flex items-center gap-2 flex-wrap">
-                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#A67C52] flex items-center gap-1 shrink-0">
-                  <Tag className="w-3.5 h-3.5" />
-                  <span>Từ đồng nghĩa (Synonyms):</span>
-                </span>
-                <div className="flex flex-wrap gap-1.5">
-                  {selectedVocab.synonyms.map((syn, idx) => (
-                    <span
-                      key={idx}
-                      className="text-xs px-2 py-0.5 rounded-md bg-[#FAF5EE] border border-[#E6E2D8] text-[#A67C52] font-mono font-medium hover:bg-[#FAF5EE] transition select-text"
-                      title={`Từ đồng nghĩa Band 7.5+ của "${selectedVocab.word}": ${syn}`}
-                    >
-                      {syn}
-                    </span>
-                  ))}
-                </div>
-              </div>
+            {activeTask === 'task1' && onOpenChartModal && (
+              <button
+                type="button"
+                onClick={onOpenChartModal}
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-[#EDF3EE] hover:bg-[#EDF3EE] text-[#334237] border border-[#D1DDD3] text-xs font-bold transition cursor-pointer self-start sm:self-auto shadow-xs"
+                title="Xem bảng số liệu biểu đồ Task 1"
+              >
+                <BarChart3 className="w-3.5 h-3.5 text-[#3E4F42]" />
+                <span>Xem Bar Chart</span>
+              </button>
             )}
           </div>
-        )
+
+          {/* Từ đồng nghĩa (Synonyms) - Hiển thị sau khi học viên kiểm tra hiểu từ hoặc khi ở Phần 2, 3 */}
+          {(activePart > 1 || part1Result) && selectedVocab.synonyms && selectedVocab.synonyms.length > 0 && (
+            <div className="pt-2 border-t border-[#E6E2D8] flex items-center gap-2 flex-wrap animate-fadeIn">
+              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#A67C52] flex items-center gap-1 shrink-0">
+                <Tag className="w-3.5 h-3.5" />
+                <span>Từ đồng nghĩa (Synonyms):</span>
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {selectedVocab.synonyms.map((syn, idx) => (
+                  <span
+                    key={idx}
+                    className="text-xs px-2 py-0.5 rounded-md bg-[#FAF5EE] border border-[#E6E2D8] text-[#A67C52] font-mono font-medium hover:bg-[#FAF5EE] transition select-text"
+                    title={`Từ đồng nghĩa Band 7.5+ của "${selectedVocab.word}": ${syn}`}
+                  >
+                    {syn}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       )}
 
       {/* 3-Part Navigation Switcher: Hiểu từ -> Luyện câu -> Luyện đoạn */}
@@ -823,51 +593,42 @@ In conclusion, while..., I believe that...`;
               </div>
             </div>
 
-            {/* Trắc nghiệm nghĩa tiếng Việt */}
+            {/* 1. Ghi nghĩa tiếng Việt của từ để hệ thống đánh giá */}
             <div className="space-y-2">
-              <label className="text-xs font-medium text-[#24211E] block">
-                Nghĩa tiếng Việt của từ:
-              </label>
-
-              <div className="grid grid-cols-1 gap-2">
-                {quiz.options.map((option, idx) => {
-                  const isChecked = quizSelectedIndex === idx;
-                  return (
-                    <button
-                      key={idx}
-                      type="button"
-                      onClick={() => {
-                        setQuizSelectedIndex(idx);
-                        setSynonymInput("");
-                      }}
-                      className={`p-3 rounded-xl text-xs text-left transition border cursor-pointer flex items-center justify-between gap-2 ${
-                        isChecked
-                          ? "bg-[#EDF3EE] border-[#D1DDD3] text-[#24211E] font-medium"
-                          : "bg-white hover:bg-[#FAF8F5] border-[#E6E2D8] text-[#24211E]"
-                      }`}
-                    >
-                      <span className="flex-1">{String.fromCharCode(65 + idx)}. {option}</span>
-                      {isChecked && <CheckCircle2 className="w-4 h-4 text-[#3E4F42] shrink-0" />}
-                    </button>
-                  );
-                })}
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-semibold text-[#24211E] block">
+                  1. Ghi nghĩa tiếng Việt của từ:
+                </label>
+                <span className="text-[11px] text-[#7A7369] italic">
+                  (Hệ thống AI sẽ đối chiếu và đánh giá độ chính xác học thuật)
+                </span>
               </div>
+
+              <textarea
+                value={vietnameseMeaningInput}
+                onChange={(e) => setVietnameseMeaningInput(e.target.value)}
+                placeholder="Ghi nghĩa tiếng Việt của từ theo cách hiểu của bạn..."
+                rows={2}
+                className="w-full p-3 rounded-xl bg-white border border-[#E6E2D8] text-[#24211E] text-xs sm:text-sm focus:outline-none focus:border-[#3E4F42] transition placeholder-[#7A7369] resize-none font-sans"
+              />
             </div>
 
-            {/* Hoặc điền từ đồng nghĩa tiếng Anh */}
+            {/* 2. Điền từ đồng nghĩa tiếng Anh (Synonym - Tùy chọn) - KHÔNG ĐỂ VÍ DỤ TRONG Ô */}
             <div className="pt-2 border-t border-[#E6E2D8] space-y-2">
-              <label className="text-xs font-medium text-[#24211E] block">
-                Hoặc điền từ đồng nghĩa (synonym):
-              </label>
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-semibold text-[#24211E] block">
+                  2. Hoặc điền thêm từ đồng nghĩa (synonym) tiếng Anh:
+                </label>
+                <span className="text-[11px] text-[#7A7369] italic">
+                  (Không bắt buộc)
+                </span>
+              </div>
               
               <input
                 type="text"
                 value={synonymInput}
-                onChange={(e) => {
-                  setSynonymInput(e.target.value);
-                  setQuizSelectedIndex(null);
-                }}
-                placeholder={`Ví dụ: ${selectedVocab.synonyms?.[0] || "alleviate"}...`}
+                onChange={(e) => setSynonymInput(e.target.value)}
+                placeholder="Nhập từ đồng nghĩa tiếng Anh..."
                 className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E6E2D8] text-[#24211E] text-xs font-mono focus:outline-none focus:border-[#3E4F42] transition placeholder-[#7A7369]"
               />
             </div>
@@ -877,7 +638,7 @@ In conclusion, while..., I believe that...`;
               <button
                 type="button"
                 onClick={() => {
-                  setQuizSelectedIndex(null);
+                  setVietnameseMeaningInput("");
                   setSynonymInput("");
                   setPart1Result(null);
                 }}
@@ -889,10 +650,10 @@ In conclusion, while..., I believe that...`;
               <button
                 type="button"
                 onClick={handleGradePart1}
-                disabled={quizSelectedIndex === null && !synonymInput.trim()}
+                disabled={!vietnameseMeaningInput.trim() && !synonymInput.trim()}
                 className="px-5 py-2.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-xs shadow-xs transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
               >
-                <span>Kiểm tra</span>
+                <span>Kiểm tra &amp; Đánh giá</span>
               </button>
             </div>
           </div>
@@ -900,26 +661,43 @@ In conclusion, while..., I believe that...`;
           {/* KẾT QUẢ CHẤM ĐIỂM HIỂU TỪ */}
           {part1Result && (
             <div className={`p-4 rounded-2xl border space-y-3 animate-fadeIn shadow-xs ${
-              part1Result.isCorrect
+              part1Result.status === 'excellent'
                 ? "bg-[#EDF3EE] border-[#D1DDD3]"
-                : "bg-[#FAF5EE] border-[#E6E2D8]"
+                : part1Result.status === 'good'
+                  ? "bg-[#F4F7F4] border-[#D1DDD3]"
+                  : "bg-[#FAF5EE] border-[#E6E2D8]"
             }`}>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-start gap-2.5">
                   {part1Result.isCorrect ? (
-                    <div className="w-8 h-8 rounded-xl bg-white text-[#3E4F42] border border-[#D1DDD3] flex items-center justify-center shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-white text-[#3E4F42] border border-[#D1DDD3] flex items-center justify-center shadow-xs shrink-0 mt-0.5">
                       <CheckCircle2 className="w-5 h-5" />
                     </div>
                   ) : (
-                    <div className="w-8 h-8 rounded-xl bg-white text-[#A67C52] border border-[#E6E2D8] flex items-center justify-center shadow-xs">
+                    <div className="w-8 h-8 rounded-xl bg-white text-[#A67C52] border border-[#E6E2D8] flex items-center justify-center shadow-xs shrink-0 mt-0.5">
                       <AlertTriangle className="w-5 h-5" />
                     </div>
                   )}
                   <div>
-                    <h4 className="text-xs sm:text-sm font-bold text-[#24211E]">
-                      {part1Result.isCorrect ? "Đạt chuẩn hiểu từ: 100% (Band 8.0+)" : "Cần lưu ý lại nghĩa của từ (40%)"}
-                    </h4>
-                    <p className="text-xs text-[#7A7369] mt-0.5">{part1Result.feedbackMessage}</p>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h4 className="text-xs sm:text-sm font-bold text-[#24211E]">
+                        {part1Result.status === 'excellent'
+                          ? "Đạt chuẩn hiểu từ: 100% (Band 8.0+)"
+                          : part1Result.status === 'good'
+                            ? "Khá tốt: 80% (Nắm được nét nghĩa cơ bản)"
+                            : "Cần lưu ý lại nghĩa của từ (40%)"}
+                      </h4>
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
+                        part1Result.status === 'excellent'
+                          ? "bg-[#3E4F42] text-white"
+                          : part1Result.status === 'good'
+                            ? "bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3]"
+                            : "bg-[#FAF5EE] text-[#A67C52] border border-[#E6E2D8]"
+                      }`}>
+                        Điểm: {part1Result.score}/100
+                      </span>
+                    </div>
+                    <p className="text-xs text-[#7A7369] mt-1 leading-relaxed">{part1Result.feedbackMessage}</p>
                   </div>
                 </div>
 
@@ -928,9 +706,22 @@ In conclusion, while..., I believe that...`;
                   onClick={() => setActivePart(2)}
                   className="px-3.5 py-1.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-bold text-xs transition cursor-pointer flex items-center gap-1 shrink-0 shadow-xs"
                 >
-                  <span>Sang Phần 2</span>
+                  <span>Sang Phần 2 (Luyện câu)</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
+              </div>
+
+              {/* Định nghĩa chuẩn học thuật */}
+              <div className="p-3 rounded-xl bg-white border border-[#E6E2D8] text-xs space-y-1">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="font-bold text-[#3E4F42]">📖 Định nghĩa chuẩn học thuật:</span>
+                  <span className="font-black text-[#24211E]">{selectedVocab.word}</span>
+                  {selectedVocab.ipa && <span className="text-[#7A7369] font-mono italic">[{selectedVocab.ipa}]</span>}
+                  <span className="text-[#7A7369]">({selectedVocab.partOfSpeech})</span>
+                </div>
+                <p className="text-[#24211E] font-medium pl-2 border-l-2 border-[#3E4F42] leading-relaxed">
+                  {selectedVocab.meaning}
+                </p>
               </div>
 
               {/* Collocations & Synonyms gợi ý nâng cao */}

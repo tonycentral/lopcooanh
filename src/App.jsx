@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Header from './components/Header';
 import WelcomePage from './components/WelcomePage';
 import ContactModal from './components/ContactModal';
 import BandSelectorModal from './components/BandSelectorModal';
 import TopicTabBar from './components/TopicTabBar';
 import VocabularyList from './components/VocabularyList';
+import VocabularyStudio from './components/VocabularyStudio';
 import SentencePractice from './components/SentencePractice';
 import HistoryDrawer from './components/HistoryDrawer';
 import CohesiveGuideModal from './components/CohesiveGuideModal';
@@ -199,9 +200,15 @@ export default function App() {
   // Available topics based on selected task + custom added topics
   const [customTask1Topics, setCustomTask1Topics] = useState([]);
   const [customTask2Topics, setCustomTask2Topics] = useState([]);
-  const currentTopics = activeTask === 'task1' 
-    ? [...IELTS_TASK1_TOPICS, ...customTask1Topics] 
-    : [...IELTS_TASK2_TOPICS, ...customTask2Topics];
+  const currentTopics = useMemo(() => {
+    if (activeTask === 'task1') {
+      return [...IELTS_TASK1_TOPICS, ...customTask1Topics];
+    } else if (activeTask === 'vocab') {
+      return [...IELTS_TASK2_TOPICS, ...IELTS_TASK1_TOPICS];
+    } else {
+      return [...IELTS_TASK2_TOPICS, ...customTask2Topics];
+    }
+  }, [activeTask, customTask1Topics, customTask2Topics]);
 
   // Topic, Vocab & Practice Tab State
   const [selectedTopic, setSelectedTopic] = useState(() => currentTopics[0] || IELTS_TOPICS[0]);
@@ -225,7 +232,14 @@ export default function App() {
     }
     if (newTask && newTask !== activeTask) {
       setActiveTask(newTask);
-      const topics = newTask === 'task1' ? IELTS_TASK1_TOPICS : IELTS_TASK2_TOPICS;
+      let topics;
+      if (newTask === 'task1') {
+        topics = [...IELTS_TASK1_TOPICS, ...customTask1Topics];
+      } else if (newTask === 'vocab') {
+        topics = [...IELTS_TASK2_TOPICS, ...IELTS_TASK1_TOPICS];
+      } else {
+        topics = [...IELTS_TASK2_TOPICS, ...customTask2Topics];
+      }
       if (topics && topics.length > 0) {
         setSelectedTopic(topics[0]);
         setSelectedVocab(topics[0].vocabularies[0] || null);
@@ -249,7 +263,7 @@ export default function App() {
     setIsBandModalOpen(false);
   };
 
-  // Update task 1 / task 2
+  // Update task 1 / task 2 / vocab
   const handleToggleTask = (task) => {
     setActiveTask(task);
     if (currentUser) {
@@ -258,7 +272,14 @@ export default function App() {
     if (studentEmail) {
       updateSettingsForEmail(studentEmail, { selectedTask: task });
     }
-    const topics = task === 'task1' ? IELTS_TASK1_TOPICS : IELTS_TASK2_TOPICS;
+    let topics;
+    if (task === 'task1') {
+      topics = [...IELTS_TASK1_TOPICS, ...customTask1Topics];
+    } else if (task === 'vocab') {
+      topics = [...IELTS_TASK2_TOPICS, ...IELTS_TASK1_TOPICS];
+    } else {
+      topics = [...IELTS_TASK2_TOPICS, ...customTask2Topics];
+    }
     if (topics && topics.length > 0) {
       setSelectedTopic(topics[0]);
       setSelectedVocab(topics[0].vocabularies[0] || null);
@@ -368,10 +389,6 @@ export default function App() {
             targetBand={targetBand}
             current7DayScore={current7DayScore}
             onOpenBandModal={() => setIsBandModalOpen(true)}
-            onOpenHistory={() => setIsHistoryOpen(true)}
-            onOpenContact={() => setIsContactModalOpen(true)}
-            onOpenSources={() => setIsSourcesModalOpen(true)}
-            onChangeEmail={() => setIsAuthModalOpen(true)}
             onGoWelcome={() => setCurrentView('welcome')}
             onOpenFlashcard={() => {
               if (!currentUser) {
@@ -410,9 +427,45 @@ export default function App() {
             />
           </section>
 
-          {/* Section 2: Main Workspace */}
+          {/* Section 2: Main Workspace - 3 Distinct Practice Sections */}
           <main className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-12 gap-3 p-3 sm:p-4 overflow-hidden">
-            {activeTask === 'task1' ? (
+            {activeTask === 'vocab' ? (
+              /* PHÂN MỤC 3: TỪ VỰNG CHUYÊN SÂU (VOCABULARY MASTERY) */
+              <>
+                {/* Cột 1: Danh sách từ vựng theo chủ đề (4 cols) */}
+                <div className="md:col-span-4 h-full bg-white border border-[#E6E2D8] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
+                  <VocabularyList
+                    vocabularies={selectedTopic?.vocabularies || []}
+                    selectedVocab={selectedVocab}
+                    onSelectVocab={setSelectedVocab}
+                    studentEmail={studentEmail}
+                    onStartPractice={(vocab) => setSelectedVocab(vocab)}
+                    onOpenFlashcard={() => setCurrentView('flashcard')}
+                    onGoFullEssay={() => {
+                      setActiveTask('task2');
+                      setPracticeActivePart(4);
+                    }}
+                    onNextTopic={handleNextTopic}
+                    onOpenSourcesModal={() => setIsSourcesModalOpen(true)}
+                  />
+                </div>
+
+                {/* Cột 2: Studio Tra Cứu, Phiên Âm, Collocations & Ví Dụ (8 cols) */}
+                <div className="md:col-span-8 h-full bg-white border border-[#E6E2D8] rounded-2xl p-4 flex flex-col overflow-hidden shadow-xs">
+                  <VocabularyStudio
+                    selectedVocab={selectedVocab}
+                    topic={selectedTopic}
+                    studentEmail={studentEmail}
+                    onGoWritingPractice={(vocab) => {
+                      setSelectedVocab(vocab);
+                      setActiveTask('task2');
+                      setPracticeActivePart(1);
+                    }}
+                    onOpenFlashcard={() => setCurrentView('flashcard')}
+                  />
+                </div>
+              </>
+            ) : activeTask === 'task1' ? (
               task1Layout === 'three-col' ? (
                 /* Task 1 Chế độ 3 Cột: Luôn thấy Đề/Biểu đồ (4 cols) | Từ vựng (3 cols) | Luyện tập (5 cols) */
                 <>
