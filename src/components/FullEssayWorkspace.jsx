@@ -27,12 +27,16 @@ import {
   Compass,
   FileEdit,
   Send,
-  Zap
+  Zap,
+  Target,
+  TrendingUp,
+  Info
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { evaluateFullEssay } from '../services/evaluator';
 import { saveHistoryEntry } from '../services/storage';
 import { deconstructModelEssay } from '../services/essayProposalHelper';
+import { getBandModelEssay, BAND_LEVELS, normalizeBand } from '../services/bandModelEssayService';
 import Task1Visualizer from './Task1Visualizer';
 
 const AVAILABLE_BANDS = ["6.5", "7.0", "7.5", "8.0", "8.5"];
@@ -51,11 +55,24 @@ export default function FullEssayWorkspace({
   const isTask1 = activeTask === 'task1';
   const minWordsRequired = isTask1 ? 150 : 250;
 
-  // 3 Sub-Modes of Full Essay Practice:
+  // 4 Sub-Modes of Full Essay Practice:
   // 'freestyle' (Tự viết không cần hướng dẫn)
   // 'guided' (Viết theo hướng dẫn bóc tách từng giai đoạn)
   // 'proposal_translation' (Viết theo từng câu/từng đoạn dịch theo đề xuất)
+  // 'band_models' (Bài mẫu chuẩn theo Band kèm chấm điểm & phân tích)
   const [essaySubMode, setEssaySubMode] = useState('freestyle');
+
+  // Selected Band for Sub-mode 4 (Bài mẫu theo Band: 6.5, 7.5, 8.5)
+  const [selectedModelBand, setSelectedModelBand] = useState(() => normalizeBand(targetBand));
+
+  // Sync selectedModelBand when targetBand prop changes
+  useEffect(() => {
+    setSelectedModelBand(normalizeBand(targetBand));
+  }, [targetBand]);
+
+  const currentBandModel = useMemo(() => {
+    return getBandModelEssay(selectedTopic, activeTask, selectedModelBand);
+  }, [selectedTopic, activeTask, selectedModelBand]);
 
   // Timer countdown
   const [timeLeft, setTimeLeft] = useState(isTask1 ? 20 * 60 : 40 * 60);
@@ -397,8 +414,8 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
         )}
       </div>
 
-      {/* ================= 3 PRACTICE SUB-MODES TABS ================= */}
-      <div className="p-1 rounded-2xl bg-[#F4EFEA] border border-[#E6E2D8] shadow-xs grid grid-cols-3 gap-1 shrink-0 text-xs">
+      {/* ================= 4 PRACTICE SUB-MODES TABS ================= */}
+      <div className="p-1 rounded-2xl bg-[#F4EFEA] border border-[#E6E2D8] shadow-xs grid grid-cols-2 lg:grid-cols-4 gap-1 shrink-0 text-xs">
         
         {/* Sub-mode 1 */}
         <button
@@ -425,7 +442,7 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
           }`}
         >
           <Compass className="w-3.5 h-3.5 shrink-0" />
-          <span className="truncate">2. Viết theo hướng dẫn (Bóc tách)</span>
+          <span className="truncate">2. Viết theo hướng dẫn</span>
         </button>
 
         {/* Sub-mode 3 */}
@@ -439,7 +456,21 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
           }`}
         >
           <Sparkles className="w-3.5 h-3.5 shrink-0" />
-          <span className="truncate">3. Dịch từng câu/đoạn đề xuất</span>
+          <span className="truncate">3. Dịch câu/đoạn đề xuất</span>
+        </button>
+
+        {/* Sub-mode 4: Bài mẫu chuẩn theo Band kèm chấm điểm */}
+        <button
+          type="button"
+          onClick={() => setEssaySubMode('band_models')}
+          className={`py-2 px-2 rounded-xl font-bold transition flex items-center justify-center gap-1.5 cursor-pointer text-center ${
+            essaySubMode === 'band_models'
+              ? "bg-[#3E4F42] text-white shadow-xs"
+              : "text-[#7A7369] hover:text-[#24211E]"
+          }`}
+        >
+          <Award className="w-3.5 h-3.5 shrink-0" />
+          <span className="truncate">4. Bài mẫu Band & Chấm điểm</span>
         </button>
 
       </div>
@@ -1214,6 +1245,438 @@ In conclusion, although valid points underpin both perspectives, I reaffirm my c
                 })}
               </div>
             )}
+
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* 4. BÀI MẪU THEO BAND KÈM PHÂN TÍCH CHẤM ĐIỂM (BAND MODEL ESSAYS) ======= */}
+        {/* ========================================================================= */}
+        {essaySubMode === 'band_models' && (
+          <div className="space-y-4 animate-fadeIn pb-8">
+            
+            {/* Top Control Banner: Band Selector & Word Count Adherence */}
+            <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E6E2D8] shadow-xs space-y-4">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-[#E6E2D8]">
+                <div>
+                  <h3 className="text-base sm:text-lg font-bold text-[#24211E] flex items-center gap-2">
+                    <Award className="w-5 h-5 text-[#3E4F42]" />
+                    <span>Bài mẫu chuẩn theo Band & Phân tích điểm IELTS Examiner</span>
+                  </h3>
+                  <p className="text-xs text-[#7A7369] mt-0.5">
+                    Viết đúng & đủ số từ cần thiết (không viết lan man) • Giải thích chi tiết theo 4 tiêu chí chấm thi chính thức
+                  </p>
+                </div>
+
+                {/* Quick Action Buttons */}
+                <div className="flex items-center gap-2 shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => handleCopy(currentBandModel.fullEssayText, 'full_model_essay')}
+                    className="px-3 py-1.5 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFEA] border border-[#E6E2D8] text-[#24211E] text-xs font-bold transition cursor-pointer flex items-center gap-1.5 shadow-xs"
+                    title="Sao chép bài viết hoàn chỉnh"
+                  >
+                    {copiedKey === 'full_model_essay' ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-600" />
+                        <span className="text-emerald-700">Đã chép</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5 text-[#7A7369]" />
+                        <span>Sao chép bài mẫu</span>
+                      </>
+                    )}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFreestyleInput(currentBandModel.fullEssayText);
+                      setEssaySubMode('freestyle');
+                    }}
+                    className="px-3 py-1.5 rounded-xl bg-[#3E4F42] hover:bg-[#2F3C32] text-white text-xs font-bold transition cursor-pointer flex items-center gap-1.5 shadow-xs"
+                    title="Đưa bài mẫu này vào khung tự viết để sửa và làm bài thi"
+                  >
+                    <ArrowRight className="w-3.5 h-3.5" />
+                    <span>Đưa vào phòng thi luyện tập</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Band Pills & Word Count Bar */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                {/* 3 Band Pills */}
+                <div className="flex items-center gap-1.5 p-1 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] text-xs">
+                  {BAND_LEVELS.map((lvl) => {
+                    const isSelected = selectedModelBand === lvl.id;
+                    return (
+                      <button
+                        key={lvl.id}
+                        type="button"
+                        onClick={() => setSelectedModelBand(lvl.id)}
+                        className={`px-3 py-1.5 rounded-lg font-bold transition cursor-pointer flex items-center gap-1.5 ${
+                          isSelected
+                            ? "bg-[#3E4F42] text-white shadow-xs"
+                            : "text-[#7A7369] hover:text-[#24211E] hover:bg-white/80"
+                        }`}
+                      >
+                        <span>{lvl.id === '6.5' ? '🎯' : lvl.id === '7.5' ? '⭐' : '💎'}</span>
+                        <span>{lvl.label}</span>
+                        <span className="hidden md:inline text-[10px] opacity-80 font-normal">({lvl.title})</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Word Count Adherence Badge */}
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#EDF3EE] border border-[#D1DDD3] text-xs text-[#24211E]">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <div>
+                    <span className="font-bold text-[#3E4F42]">{currentBandModel.actualWordCount} từ</span>
+                    <span className="text-[#7A7369] ml-1.5 font-medium">• Chuẩn {isTask1 ? 'Task 1' : 'Task 2'} ({currentBandModel.idealRange})</span>
+                  </div>
+                  <span className="hidden lg:inline text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold ml-1">
+                    Đủ từ - Không thừa
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Official Examiner Scorecard Banner */}
+            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#FAF8F5] to-[#F4EFEA] border border-[#E6E2D8] shadow-xs space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#E6E2D8]">
+                <div className="flex items-center gap-3">
+                  <div className="w-14 h-14 rounded-2xl bg-[#3E4F42] text-white flex flex-col items-center justify-center shadow-sm shrink-0">
+                    <span className="text-[10px] font-bold uppercase tracking-wider opacity-80">Band</span>
+                    <span className="text-xl font-extrabold leading-tight">{currentBandModel.scorecard?.overall || selectedModelBand}</span>
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h4 className="font-bold text-sm sm:text-base text-[#24211E]">
+                        {currentBandModel.title}
+                      </h4>
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#3E4F42]/10 text-[#3E4F42]">
+                        IELTS Official Scale
+                      </span>
+                    </div>
+                    <p className="text-xs text-[#7A7369] mt-0.5">
+                      Đối tượng: <strong className="text-[#24211E]">{currentBandModel.targetAudience}</strong>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="text-xs text-[#7A7369] bg-white/80 px-3 py-2 rounded-xl border border-[#E6E2D8] shrink-0">
+                  <div className="font-bold text-[#3E4F42] flex items-center gap-1">
+                    <Info className="w-3.5 h-3.5" />
+                    <span>Lưu ý về độ dài từ:</span>
+                  </div>
+                  <p className="text-[11px] text-[#24211E] mt-0.5">
+                    {isTask1 
+                      ? "165-185 từ: Đủ 4 đoạn báo cáo sâu sắc, tránh viết >220 từ gây thiếu giờ Task 2."
+                      : "260-285 từ: Độ dài vàng đủ phát triển 2 luận điểm đa chiều, tránh dài dòng >350 từ."}
+                  </p>
+                </div>
+              </div>
+
+              {/* 4 Criteria Scores Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+                {/* Criterion 1 */}
+                <div className="p-3 rounded-xl bg-white border border-[#E6E2D8] shadow-2xs space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-[#7A7369]">
+                      {isTask1 ? 'Task Achievement' : 'Task Response'}
+                    </span>
+                    <span className="text-xs font-extrabold text-[#3E4F42] px-1.5 py-0.5 rounded bg-[#FAF8F5]">
+                      {currentBandModel.scorecard?.criterion1Score}
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-[#7A7369] line-clamp-2">
+                    {isTask1 ? 'Mô tả số liệu & Overview' : 'Phát triển luận điểm & Lập trường'}
+                  </p>
+                </div>
+
+                {/* Criterion 2 */}
+                <div className="p-3 rounded-xl bg-white border border-[#E6E2D8] shadow-2xs space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-[#7A7369]">Coherence & Cohesion</span>
+                    <span className="text-xs font-extrabold text-[#3E4F42] px-1.5 py-0.5 rounded bg-[#FAF8F5]">
+                      {currentBandModel.scorecard?.criterion2Score}
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-[#7A7369] line-clamp-2">
+                    Bố cục đoạn & Mạch liên kết ý
+                  </p>
+                </div>
+
+                {/* Criterion 3 */}
+                <div className="p-3 rounded-xl bg-white border border-[#E6E2D8] shadow-2xs space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-[#7A7369]">Lexical Resource</span>
+                    <span className="text-xs font-extrabold text-[#3E4F42] px-1.5 py-0.5 rounded bg-[#FAF8F5]">
+                      {currentBandModel.scorecard?.criterion3Score}
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-[#7A7369] line-clamp-2">
+                    Vốn từ học thuật & Collocations
+                  </p>
+                </div>
+
+                {/* Criterion 4 */}
+                <div className="p-3 rounded-xl bg-white border border-[#E6E2D8] shadow-2xs space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-[#7A7369]">Grammatical Range</span>
+                    <span className="text-xs font-extrabold text-[#3E4F42] px-1.5 py-0.5 rounded bg-[#FAF8F5]">
+                      {currentBandModel.scorecard?.criterion4Score}
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-[#7A7369] line-clamp-2">
+                    Cấu trúc câu phức & Độ chính xác
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Model Essay & Examiner Rationale Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+              
+              {/* Left Column: 4-Paragraph Model Essay (7 Cols on desktop) */}
+              <div className="lg:col-span-7 space-y-3.5">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#3E4F42] flex items-center gap-1.5">
+                    <BookOpen className="w-3.5 h-3.5" />
+                    <span>Nội dung bài viết mẫu ({currentBandModel.paragraphs.length} đoạn chuẩn mực)</span>
+                  </h4>
+                  <span className="text-[11px] text-[#7A7369]">
+                    Tổng cộng: <strong>{currentBandModel.actualWordCount} từ</strong>
+                  </span>
+                </div>
+
+                {/* Paragraphs List */}
+                <div className="space-y-3">
+                  {currentBandModel.paragraphs.map((p, pIdx) => {
+                    const pWords = p.text.trim().split(/\s+/).filter(Boolean).length;
+                    const pKey = `model_para_${selectedModelBand}_${pIdx}`;
+                    return (
+                      <div 
+                        key={pIdx}
+                        className="p-3.5 sm:p-4 rounded-2xl bg-white border border-[#E6E2D8] hover:border-[#3E4F42]/40 transition shadow-xs space-y-2"
+                      >
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="px-2 py-0.5 rounded-lg bg-[#FAF8F5] border border-[#E6E2D8] font-bold text-[#3E4F42] text-[11px]">
+                            {p.role}
+                          </span>
+                          <div className="flex items-center gap-2">
+                            <span className="text-[10px] text-[#7A7369] font-medium">
+                              {pWords} từ
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => handleCopy(p.text, pKey)}
+                              className="p-1 rounded-md text-[#7A7369] hover:text-[#24211E] hover:bg-[#FAF8F5] transition cursor-pointer"
+                              title="Sao chép đoạn này"
+                            >
+                              {copiedKey === pKey ? (
+                                <Check className="w-3.5 h-3.5 text-emerald-600" />
+                              ) : (
+                                <Copy className="w-3.5 h-3.5" />
+                              )}
+                            </button>
+                          </div>
+                        </div>
+
+                        <p className="text-xs sm:text-sm text-[#24211E] leading-relaxed font-normal select-text">
+                          {p.text}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Key Academic Vocabularies Table */}
+                {currentBandModel.keyVocabularies && currentBandModel.keyVocabularies.length > 0 && (
+                  <div className="p-4 rounded-2xl bg-white border border-[#E6E2D8] shadow-xs space-y-3">
+                    <div className="flex items-center justify-between">
+                      <h5 className="text-xs font-bold uppercase tracking-wider text-[#3E4F42] flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                        <span>Từ vựng & Collocations đắt giá giúp ghi điểm Band {currentBandModel.band}</span>
+                      </h5>
+                    </div>
+
+                    <div className="space-y-2">
+                      {currentBandModel.keyVocabularies.map((vocab, vIdx) => (
+                        <div 
+                          key={vIdx}
+                          className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+                        >
+                          <div className="space-y-0.5">
+                            <div className="flex items-center gap-2">
+                              <span className="font-bold text-[#24211E] text-xs sm:text-sm">
+                                {vocab.word}
+                              </span>
+                              {vocab.ipa && (
+                                <span className="text-[11px] text-[#7A7369] italic font-mono">
+                                  {vocab.ipa}
+                                </span>
+                              )}
+                              {vocab.pos && (
+                                <span className="text-[10px] px-1.5 py-0.2 rounded bg-[#E6E2D8]/60 text-[#7A7369] font-medium">
+                                  {vocab.pos}
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-xs text-[#3E4F42] font-medium">
+                              Nghĩa: {vocab.meaning}
+                            </p>
+                          </div>
+
+                          {vocab.note && (
+                            <span className="text-[10px] sm:max-w-xs text-right text-[#7A7369] bg-white px-2 py-1 rounded-lg border border-[#E6E2D8]/80 shrink-0">
+                              💡 {vocab.note}
+                            </span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Right Column: In-Depth Examiner Scoring Justification (5 Cols on desktop) */}
+              <div className="lg:col-span-5 space-y-3.5">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#3E4F42] flex items-center gap-1.5">
+                    <Target className="w-3.5 h-3.5" />
+                    <span>Giải thích chi tiết theo cách chấm điểm IELTS</span>
+                  </h4>
+                </div>
+
+                {/* Examiner Rationale Cards */}
+                <div className="space-y-3">
+                  
+                  {/* Why this Band */}
+                  <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-[#E6E2D8] shadow-xs space-y-2">
+                    <div className="flex items-center gap-2 text-xs font-bold text-emerald-700">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <span>Tại sao bài này thuộc Band {currentBandModel.band}?</span>
+                    </div>
+                    <p className="text-xs text-[#24211E] leading-relaxed">
+                      {currentBandModel.examinerRationale?.whyThisBand}
+                    </p>
+                  </div>
+
+                  {/* Why not higher */}
+                  <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-[#E6E2D8] shadow-xs space-y-2">
+                    <div className="flex items-center gap-2 text-xs font-bold text-amber-700">
+                      <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+                      <span>Tại sao bài này chưa đạt Band cao hơn?</span>
+                    </div>
+                    <p className="text-xs text-[#24211E] leading-relaxed">
+                      {currentBandModel.examinerRationale?.whyNotHigher}
+                    </p>
+                  </div>
+
+                  {/* Upgrade Advice */}
+                  <div className="p-3.5 sm:p-4 rounded-2xl bg-[#EDF3EE] border border-[#D1DDD3] shadow-xs space-y-2">
+                    <div className="flex items-center gap-2 text-xs font-bold text-[#3E4F42]">
+                      <TrendingUp className="w-4 h-4 text-[#3E4F42] shrink-0" />
+                      <span>Lời khuyên thăng hạng Band (Upgrade Takeaways)</span>
+                    </div>
+                    <p className="text-xs text-[#24211E] leading-relaxed font-medium">
+                      {currentBandModel.examinerRationale?.upgradeAdvice}
+                    </p>
+                  </div>
+
+                  {/* 4 Criteria Breakdown Accordion/Cards */}
+                  <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-[#E6E2D8] shadow-xs space-y-3">
+                    <h5 className="text-xs font-bold text-[#24211E] flex items-center gap-1.5 pb-2 border-b border-[#E6E2D8]">
+                      <span>📊</span>
+                      <span>Đánh giá cụ thể theo từng tiêu chí chấm</span>
+                    </h5>
+
+                    {/* TA/TR Breakdown */}
+                    {(currentBandModel.criteriaBreakdown?.ta || currentBandModel.criteriaBreakdown?.tr) && (
+                      <div className="space-y-1 text-xs">
+                        <div className="flex items-center justify-between font-bold text-[#3E4F42]">
+                          <span>1. {isTask1 ? 'Task Achievement' : 'Task Response'}</span>
+                          <span className="px-1.5 py-0.2 rounded bg-[#FAF8F5] text-[11px]">
+                            {currentBandModel.criteriaBreakdown?.ta?.score || currentBandModel.criteriaBreakdown?.tr?.score}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-[#24211E] bg-[#FAF8F5] p-2 rounded-lg border border-[#E6E2D8]/60">
+                          <strong className="text-emerald-700">✓ Điểm mạnh: </strong>
+                          {currentBandModel.criteriaBreakdown?.ta?.strengths || currentBandModel.criteriaBreakdown?.tr?.strengths}
+                          <br />
+                          <strong className="text-amber-700">⚠ Hạn chế: </strong>
+                          {currentBandModel.criteriaBreakdown?.ta?.weaknesses || currentBandModel.criteriaBreakdown?.tr?.weaknesses}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* CC Breakdown */}
+                    {currentBandModel.criteriaBreakdown?.cc && (
+                      <div className="space-y-1 text-xs pt-1">
+                        <div className="flex items-center justify-between font-bold text-[#3E4F42]">
+                          <span>2. Coherence & Cohesion</span>
+                          <span className="px-1.5 py-0.2 rounded bg-[#FAF8F5] text-[11px]">
+                            {currentBandModel.criteriaBreakdown?.cc?.score}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-[#24211E] bg-[#FAF8F5] p-2 rounded-lg border border-[#E6E2D8]/60">
+                          <strong className="text-emerald-700">✓ Điểm mạnh: </strong>
+                          {currentBandModel.criteriaBreakdown?.cc?.strengths}
+                          <br />
+                          <strong className="text-amber-700">⚠ Hạn chế: </strong>
+                          {currentBandModel.criteriaBreakdown?.cc?.weaknesses}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* LR Breakdown */}
+                    {currentBandModel.criteriaBreakdown?.lr && (
+                      <div className="space-y-1 text-xs pt-1">
+                        <div className="flex items-center justify-between font-bold text-[#3E4F42]">
+                          <span>3. Lexical Resource</span>
+                          <span className="px-1.5 py-0.2 rounded bg-[#FAF8F5] text-[11px]">
+                            {currentBandModel.criteriaBreakdown?.lr?.score}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-[#24211E] bg-[#FAF8F5] p-2 rounded-lg border border-[#E6E2D8]/60">
+                          <strong className="text-emerald-700">✓ Điểm mạnh: </strong>
+                          {currentBandModel.criteriaBreakdown?.lr?.strengths}
+                          <br />
+                          <strong className="text-amber-700">⚠ Hạn chế: </strong>
+                          {currentBandModel.criteriaBreakdown?.lr?.weaknesses}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* GRA Breakdown */}
+                    {currentBandModel.criteriaBreakdown?.gra && (
+                      <div className="space-y-1 text-xs pt-1">
+                        <div className="flex items-center justify-between font-bold text-[#3E4F42]">
+                          <span>4. Grammatical Range & Accuracy</span>
+                          <span className="px-1.5 py-0.2 rounded bg-[#FAF8F5] text-[11px]">
+                            {currentBandModel.criteriaBreakdown?.gra?.score}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-[#24211E] bg-[#FAF8F5] p-2 rounded-lg border border-[#E6E2D8]/60">
+                          <strong className="text-emerald-700">✓ Điểm mạnh: </strong>
+                          {currentBandModel.criteriaBreakdown?.gra?.strengths}
+                          <br />
+                          <strong className="text-amber-700">⚠ Hạn chế: </strong>
+                          {currentBandModel.criteriaBreakdown?.gra?.weaknesses}
+                        </p>
+                      </div>
+                    )}
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
 
           </div>
         )}
