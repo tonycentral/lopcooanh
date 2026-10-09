@@ -361,7 +361,7 @@ export default function App() {
         />
       ) : (
         /* Single-Screen Practice Workspace View (No Page Scroll) */
-        <div className="h-screen flex flex-col overflow-hidden bg-slate-950">
+        <div className="h-screen flex flex-col overflow-hidden bg-[#F8F6F1] text-[#2B2826]">
           
           {/* Compact Top Navigation Bar */}
           <Header
@@ -426,7 +426,7 @@ export default function App() {
                   </div>
 
                   {/* Cột 2: Danh sách từ vựng Band 8.0 */}
-                  <div className="md:col-span-3 h-full bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col overflow-hidden shadow-lg">
+                  <div className="md:col-span-3 h-full bg-white border border-[#E7E2D9] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
                     <VocabularyList
                       vocabularies={selectedTopic?.vocabularies || []}
                       selectedVocab={selectedVocab}
@@ -441,7 +441,7 @@ export default function App() {
                   </div>
 
                   {/* Cột 3: Khu vực luyện tập 3 phần */}
-                  <div className="md:col-span-5 h-full bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col overflow-hidden shadow-lg">
+                  <div className="md:col-span-5 h-full bg-white border border-[#E7E2D9] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
                     <div className="flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-thin">
                       <SentencePractice
                         topic={selectedTopic}
@@ -473,7 +473,7 @@ export default function App() {
                     </div>
 
                     {/* Tầng dưới: Danh sách từ vựng Band 8.0 */}
-                    <div className="flex-1 min-h-0 bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col overflow-hidden shadow-lg">
+                    <div className="flex-1 min-h-0 bg-white border border-[#E7E2D9] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
                       <VocabularyList
                         vocabularies={selectedTopic?.vocabularies || []}
                         selectedVocab={selectedVocab}
@@ -489,7 +489,7 @@ export default function App() {
                   </div>
 
                   {/* Cột Phải: Khu vực luyện tập 3 phần (7 cols) */}
-                  <div className="md:col-span-7 h-full bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col overflow-hidden shadow-lg">
+                  <div className="md:col-span-7 h-full bg-white border border-[#E7E2D9] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
                     <div className="flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-thin">
                       <SentencePractice
                         topic={selectedTopic}
@@ -511,7 +511,7 @@ export default function App() {
             ) : (
               /* Task 2: Cột 1 là Từ vựng (5 cols), Cột 2 là Luyện tập (7 cols) */
               <>
-                <div className="md:col-span-5 h-full bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col overflow-hidden shadow-lg">
+                <div className="md:col-span-5 h-full bg-white border border-[#E7E2D9] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
                   <VocabularyList
                     vocabularies={selectedTopic?.vocabularies || []}
                     selectedVocab={selectedVocab}
@@ -525,7 +525,7 @@ export default function App() {
                   />
                 </div>
 
-                <div className="md:col-span-7 h-full bg-slate-900/80 border border-slate-800 rounded-2xl p-3 flex flex-col overflow-hidden shadow-lg">
+                <div className="md:col-span-7 h-full bg-white border border-[#E7E2D9] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
                   <div className="flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-thin">
                     <SentencePractice
                       topic={selectedTopic}

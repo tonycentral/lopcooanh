@@ -27,19 +27,15 @@ export default function ContactModal({ isOpen, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#2B2826]/45 backdrop-blur-xs animate-in fade-in duration-200">
       <div 
-        className="relative w-full max-w-lg bg-slate-900 border border-slate-700/80 rounded-3xl p-6 sm:p-8 shadow-2xl text-slate-100 overflow-hidden"
+        className="relative w-full max-w-lg bg-[#FAF8F5] border border-[#E7E2D9] rounded-3xl p-6 sm:p-8 shadow-2xl text-[#2B2826] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Subtle decorative glow */}
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-52 h-52 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-52 h-52 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer"
+          className="absolute top-5 right-5 p-2 rounded-xl text-[#7A7267] hover:text-[#2B2826] hover:bg-[#F4EFEA] transition cursor-pointer"
           aria-label="Đóng"
         >
           <X className="w-5 h-5" />
@@ -47,60 +43,60 @@ export default function ContactModal({ isOpen, onClose }) {
 
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-14 h-14 rounded-2xl bg-blue-600/10 p-1 border border-blue-500/30 flex items-center justify-center shadow-lg shadow-blue-600/20 shrink-0">
+          <div className="w-14 h-14 rounded-2xl bg-white p-1.5 border border-[#E7E2D9] flex items-center justify-center shadow-xs shrink-0">
             <img 
               src="./logo.png" 
               alt="Lớp cô Oanh" 
-              className="w-full h-full object-contain drop-shadow" 
+              className="w-full h-full object-contain" 
             />
           </div>
           <div>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[11px] font-semibold mb-1">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#4A5D4E]/10 border border-[#4A5D4E]/20 text-[#4A5D4E] text-[11px] font-medium mb-1">
               <Sparkles className="w-3 h-3" />
               <span>Học Trực Tiếp 1-kèm-1 &amp; Nhóm Nhỏ</span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#2B2826] tracking-tight">
               Liên Hệ Cô Oanh Writing
             </h2>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-[#7A7267]">
               Chữa bài chi tiết từng câu • Tối ưu theo band mục tiêu của bạn
             </p>
           </div>
         </div>
 
         {/* Highlights */}
-        <div className="space-y-2.5 mb-6 bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4">
-          <div className="flex items-start gap-2.5 text-xs text-slate-300">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+        <div className="space-y-2.5 mb-6 bg-white border border-[#E7E2D9] rounded-2xl p-4 shadow-xs">
+          <div className="flex items-start gap-2.5 text-xs text-[#2B2826]">
+            <CheckCircle2 className="w-4 h-4 text-[#4A5D4E] shrink-0 mt-0.5" />
             <span>Sửa lỗi ngữ pháp, từ vựng và cấu trúc mạch lạc (Coherence) trực tiếp.</span>
           </div>
-          <div className="flex items-start gap-2.5 text-xs text-slate-300">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+          <div className="flex items-start gap-2.5 text-xs text-[#2B2826]">
+            <CheckCircle2 className="w-4 h-4 text-[#4A5D4E] shrink-0 mt-0.5" />
             <span>Lộ trình may đo theo mục tiêu riêng (từ 5.0 lên 6.5 - 7.5+).</span>
           </div>
-          <div className="flex items-start gap-2.5 text-xs text-slate-300">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+          <div className="flex items-start gap-2.5 text-xs text-[#2B2826]">
+            <CheckCircle2 className="w-4 h-4 text-[#4A5D4E] shrink-0 mt-0.5" />
             <span>Phản hồi chi tiết sau mỗi bài viết trong vòng 24 - 48h.</span>
           </div>
         </div>
 
         {/* Main Phone / Zalo Box */}
-        <div className="p-4 rounded-2xl bg-gradient-to-r from-slate-800/80 to-slate-800/50 border border-slate-700/80 mb-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="p-4 rounded-2xl bg-[#F4EFEA] border border-[#E7E2D9] mb-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="text-center sm:text-left">
-            <span className="text-[11px] text-slate-400 uppercase tracking-wider font-semibold block">
+            <span className="text-[11px] text-[#7A7267] uppercase tracking-wider font-medium block">
               Hotline &amp; Zalo Trực Tiếp
             </span>
-            <span className="text-2xl font-black text-white tracking-wider font-mono">
+            <span className="text-2xl font-serif font-bold text-[#2B2826] tracking-wider">
               {formattedPhone}
             </span>
           </div>
 
           <button
             onClick={handleCopy}
-            className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition cursor-pointer shrink-0 ${
+            className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-medium transition cursor-pointer shrink-0 border ${
               copied
-                ? "bg-emerald-600 text-white"
-                : "bg-slate-700 hover:bg-slate-600 text-slate-200"
+                ? "bg-[#4A5D4E] text-white border-[#4A5D4E]"
+                : "bg-white hover:bg-[#FAF8F5] text-[#2B2826] border-[#E7E2D9]"
             }`}
           >
             {copied ? (
@@ -110,7 +106,7 @@ export default function ContactModal({ isOpen, onClose }) {
               </>
             ) : (
               <>
-                <Copy className="w-4 h-4" />
+                <Copy className="w-4 h-4 text-[#7A7267]" />
                 <span>Sao chép số</span>
               </>
             )}
@@ -124,7 +120,7 @@ export default function ContactModal({ isOpen, onClose }) {
             href={zaloUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold shadow-lg shadow-blue-600/30 transition transform hover:-translate-y-0.5"
+            className="flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-[#4A5D4E] hover:bg-[#3D4D40] text-white text-sm font-medium shadow-xs transition"
           >
             <MessageSquare className="w-4 h-4" />
             <span>Nhắn Zalo Ngay</span>
@@ -134,14 +130,14 @@ export default function ContactModal({ isOpen, onClose }) {
           {/* Call Direct Button */}
           <a
             href={`tel:${phoneNumber}`}
-            className="flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/30 text-sm font-bold transition hover:text-emerald-300"
+            className="flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-white hover:bg-[#F4EFEA] text-[#2B2826] border border-[#E7E2D9] text-sm font-medium transition shadow-2xs"
           >
-            <Phone className="w-4 h-4" />
+            <Phone className="w-4 h-4 text-[#4A5D4E]" />
             <span>Gọi Trực Tiếp</span>
           </a>
         </div>
 
-        <p className="text-center text-[11px] text-slate-500 mt-5">
+        <p className="text-center text-[11px] text-[#7A7267] mt-5">
           Cô Oanh phản hồi Zalo nhanh chóng trong khung giờ 08:00 - 22:00 hàng ngày.
         </p>
       </div>

@@ -106,46 +106,46 @@ export default function SourcesDatabankModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#2B2826]/45 backdrop-blur-xs animate-in fade-in duration-200">
       <div 
-        className="bg-slate-900 border border-slate-700/80 rounded-3xl w-full max-w-3xl max-h-[92vh] overflow-hidden flex flex-col shadow-2xl shadow-blue-950/60"
+        className="bg-[#FAF8F5] border border-[#E7E2D9] rounded-3xl w-full max-w-3xl max-h-[92vh] overflow-hidden flex flex-col shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-5 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/95 shrink-0">
+        <div className="px-5 py-4 border-b border-[#E7E2D9] flex items-center justify-between bg-white shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-blue-600/20 text-blue-400 flex items-center justify-center border border-blue-500/30 shrink-0">
+            <div className="w-10 h-10 rounded-2xl bg-[#4A5D4E]/10 text-[#4A5D4E] flex items-center justify-center border border-[#4A5D4E]/20 shrink-0">
               <Library className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-base sm:text-lg font-black text-white flex items-center gap-2">
+              <h2 className="text-base sm:text-lg font-serif font-semibold text-[#2B2826] flex items-center gap-2">
                 <span>Nguồn Tài Liệu &amp; Bổ Sung Chủ Đề</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-300 border border-blue-500/30 font-mono font-bold">
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#4A5D4E]/10 text-[#4A5D4E] border border-[#4A5D4E]/20 font-mono font-medium">
                   Cambridge • Simon • Liz
                 </span>
               </h2>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-[#7A7267]">
                 Khám phá nguồn gốc đề thi chuẩn quốc tế và chủ động mở rộng ngân hàng từ vựng học thuật.
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer shrink-0"
+            className="p-2 rounded-xl text-[#7A7267] hover:text-[#2B2826] hover:bg-[#F4EFEA] transition cursor-pointer shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Tab switcher */}
-        <div className="px-5 pt-3 pb-1 border-b border-slate-800 flex items-center gap-2 shrink-0 bg-slate-950/40">
+        <div className="px-5 pt-3 pb-1 border-b border-[#E7E2D9] flex items-center gap-2 shrink-0 bg-[#F4EFEA]">
           <button
             type="button"
             onClick={() => setActiveTab('sources')}
-            className={`py-2 px-3.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+            className={`py-2 px-3.5 rounded-xl text-xs font-medium transition flex items-center gap-1.5 cursor-pointer ${
               activeTab === 'sources'
-                ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
-                : "text-slate-400 hover:text-white hover:bg-slate-800/60"
+                ? "bg-[#4A5D4E] text-white shadow-xs"
+                : "text-[#7A7267] hover:text-[#2B2826] hover:bg-white"
             }`}
           >
             <Database className="w-3.5 h-3.5" />
@@ -154,10 +154,10 @@ export default function SourcesDatabankModal({
           <button
             type="button"
             onClick={() => setActiveTab('add_custom')}
-            className={`py-2 px-3.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+            className={`py-2 px-3.5 rounded-xl text-xs font-medium transition flex items-center gap-1.5 cursor-pointer ${
               activeTab === 'add_custom'
-                ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
-                : "text-slate-400 hover:text-white hover:bg-slate-800/60"
+                ? "bg-[#4A5D4E] text-white shadow-xs"
+                : "text-[#7A7267] hover:text-[#2B2826] hover:bg-white"
             }`}
           >
             <PlusCircle className="w-3.5 h-3.5" />
@@ -166,35 +166,35 @@ export default function SourcesDatabankModal({
         </div>
 
         {/* Modal Body */}
-        <div className="p-5 overflow-y-auto space-y-4 scrollbar-thin">
+        <div className="p-5 overflow-y-auto space-y-4">
           
           {activeTab === 'sources' ? (
             <div className="space-y-4">
               
               {/* Quick stats overview */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3 rounded-2xl bg-slate-950/60 border border-slate-800">
-                <div className="text-center p-2 rounded-xl bg-slate-900/80 border border-slate-800/80">
-                  <span className="text-[10px] text-slate-400 uppercase font-bold block">Tổng Chủ Đề</span>
-                  <span className="text-lg font-black text-white">{totalTopicsCount || "25+"}</span>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3 rounded-2xl bg-white border border-[#E7E2D9]">
+                <div className="text-center p-2 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9]">
+                  <span className="text-[10px] text-[#7A7267] uppercase font-medium block">Tổng Chủ Đề</span>
+                  <span className="text-lg font-serif font-bold text-[#2B2826]">{totalTopicsCount || "25+"}</span>
                 </div>
-                <div className="text-center p-2 rounded-xl bg-slate-900/80 border border-slate-800/80">
-                  <span className="text-[10px] text-slate-400 uppercase font-bold block">Từ Vựng Band 8.0</span>
-                  <span className="text-lg font-black text-blue-400">{totalVocabCount || "200+"}</span>
+                <div className="text-center p-2 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9]">
+                  <span className="text-[10px] text-[#7A7267] uppercase font-medium block">Từ Vựng Band 8.0</span>
+                  <span className="text-lg font-serif font-bold text-[#4A5D4E]">{totalVocabCount || "200+"}</span>
                 </div>
-                <div className="text-center p-2 rounded-xl bg-slate-900/80 border border-slate-800/80">
-                  <span className="text-[10px] text-slate-400 uppercase font-bold block">Bộ Đề Cambridge</span>
-                  <span className="text-lg font-black text-emerald-400">Cam 10-19</span>
+                <div className="text-center p-2 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9]">
+                  <span className="text-[10px] text-[#7A7267] uppercase font-medium block">Bộ Đề Cambridge</span>
+                  <span className="text-lg font-serif font-bold text-[#2B2826]">Cam 10-19</span>
                 </div>
-                <div className="text-center p-2 rounded-xl bg-slate-900/80 border border-slate-800/80">
-                  <span className="text-[10px] text-slate-400 uppercase font-bold block">Chuẩn Chấm Điểm</span>
-                  <span className="text-lg font-black text-amber-400">4 Tiêu Chí</span>
+                <div className="text-center p-2 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9]">
+                  <span className="text-[10px] text-[#7A7267] uppercase font-medium block">Chuẩn Chấm Điểm</span>
+                  <span className="text-lg font-serif font-bold text-[#B88758]">4 Tiêu Chí</span>
                 </div>
               </div>
 
               {/* List of Official Sources */}
               <div className="space-y-3">
-                <h3 className="text-xs font-black uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-                  <BookOpen className="w-3.5 h-3.5 text-blue-400" />
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-[#7A7267] flex items-center gap-1.5">
+                  <BookOpen className="w-3.5 h-3.5 text-[#4A5D4E]" />
                   <span>Các Nguồn Dữ Liệu Được Trích Xuất &amp; Chuẩn Hóa:</span>
                 </h3>
 
@@ -202,34 +202,34 @@ export default function SourcesDatabankModal({
                   {OFFICIAL_SOURCES.map((source) => (
                     <div 
                       key={source.id}
-                      className="p-3.5 rounded-2xl bg-slate-950/70 border border-slate-800 hover:border-slate-700 transition flex flex-col justify-between space-y-2.5 shadow-md"
+                      className="p-3.5 rounded-2xl bg-white border border-[#E7E2D9] hover:border-[#D1C9BE] transition flex flex-col justify-between space-y-2.5 shadow-xs"
                     >
                       <div>
                         <div className="flex items-start justify-between gap-2">
-                          <h4 className="text-xs sm:text-sm font-bold text-white leading-snug">
+                          <h4 className="text-xs sm:text-sm font-semibold text-[#2B2826] leading-snug">
                             {source.title}
                           </h4>
-                          <span className="text-[9px] px-2 py-0.5 rounded-md bg-blue-500/15 text-blue-300 font-bold border border-blue-500/30 shrink-0">
+                          <span className="text-[9px] px-2 py-0.5 rounded-md bg-[#4A5D4E]/10 text-[#4A5D4E] font-medium border border-[#4A5D4E]/20 shrink-0">
                             {source.badge}
                           </span>
                         </div>
-                        <p className="text-[11px] text-slate-400 font-medium mt-0.5">
+                        <p className="text-[11px] text-[#7A7267] mt-0.5">
                           Tác giả: {source.author}
                         </p>
-                        <p className="text-xs text-slate-300 leading-relaxed mt-2 font-sans">
+                        <p className="text-xs text-[#2B2826] leading-relaxed mt-2 font-sans">
                           {source.description}
                         </p>
                       </div>
 
-                      <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px]">
-                        <span className="text-slate-400 italic text-[10px] truncate max-w-[220px]">
+                      <div className="pt-2 border-t border-[#E7E2D9] flex items-center justify-between text-[11px]">
+                        <span className="text-[#7A7267] italic text-[10px] truncate max-w-[220px]">
                           {source.coverage}
                         </span>
                         <a
                           href={source.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1 text-blue-400 hover:text-blue-300 font-bold transition shrink-0"
+                          className="flex items-center gap-1 text-[#4A5D4E] hover:text-[#3D4D40] font-medium transition shrink-0"
                         >
                           <span>Xem nguồn</span>
                           <ExternalLink className="w-3 h-3" />
@@ -241,12 +241,12 @@ export default function SourcesDatabankModal({
               </div>
 
               {/* Note on how to practice after mastering */}
-              <div className="p-3.5 rounded-2xl bg-gradient-to-r from-blue-950/50 via-indigo-950/40 to-slate-900 border border-blue-500/30 space-y-1.5">
-                <span className="text-xs font-black text-blue-300 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+              <div className="p-3.5 rounded-2xl bg-[#FAF8F5] border border-[#B88758]/30 space-y-1.5">
+                <span className="text-xs font-semibold text-[#B88758] flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#B88758]" />
                   <span>Lời khuyên của chuyên gia IELTS khi đã học hết từ vựng:</span>
                 </span>
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <p className="text-xs text-[#2B2826] leading-relaxed">
                   Học thuộc từ vựng chỉ là bước 1. Để thực sự biến từ vựng thành điểm số Band 7.5 - 8.5, bạn cần <strong>áp dụng ngay vào việc viết bài luận hoàn chỉnh (Tab 4: Viết Full Essay)</strong>. Khi viết bài thật dưới áp lực thời gian, não bộ sẽ kích hoạt phản xạ sử dụng từ vựng tự nhiên nhất.
                 </p>
               </div>
@@ -256,24 +256,24 @@ export default function SourcesDatabankModal({
             /* Tab: Tự Bổ Sung Đề Mới & Từ Vựng */
             <form onSubmit={handleCreateTopic} className="space-y-4">
               {successMsg && (
-                <div className="p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold flex items-center gap-2 animate-fadeIn">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-medium flex items-center gap-2 animate-fadeIn">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                   <span>{successMsg}</span>
                 </div>
               )}
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-300 block">
+                <label className="text-xs font-semibold text-[#2B2826] block">
                   1. Chọn Phần Thi IELTS:
                 </label>
                 <div className="flex gap-2">
                   <button
                     type="button"
                     onClick={() => setCustomTask('task2')}
-                    className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition cursor-pointer border ${
+                    className={`flex-1 py-2 px-3 rounded-xl text-xs font-medium transition cursor-pointer border ${
                       customTask === 'task2'
-                        ? "bg-blue-600 text-white border-blue-400 shadow-md shadow-blue-600/30"
-                        : "bg-slate-950 text-slate-400 border-slate-800 hover:text-white"
+                        ? "bg-[#4A5D4E] text-white border-[#4A5D4E] shadow-xs"
+                        : "bg-white text-[#7A7267] border-[#E7E2D9] hover:text-[#2B2826]"
                     }`}
                   >
                     Task 2 (Essay - Luận học thuật)
@@ -281,10 +281,10 @@ export default function SourcesDatabankModal({
                   <button
                     type="button"
                     onClick={() => setCustomTask('task1')}
-                    className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition cursor-pointer border ${
+                    className={`flex-1 py-2 px-3 rounded-xl text-xs font-medium transition cursor-pointer border ${
                       customTask === 'task1'
-                        ? "bg-blue-600 text-white border-blue-400 shadow-md shadow-blue-600/30"
-                        : "bg-slate-950 text-slate-400 border-slate-800 hover:text-white"
+                        ? "bg-[#4A5D4E] text-white border-[#4A5D4E] shadow-xs"
+                        : "bg-white text-[#7A7267] border-[#E7E2D9] hover:text-[#2B2826]"
                     }`}
                   >
                     Task 1 (Report - Phân tích số liệu)
@@ -293,7 +293,7 @@ export default function SourcesDatabankModal({
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-300 block">
+                <label className="text-xs font-semibold text-[#2B2826] block">
                   2. Tên Chủ Đề / Tiêu Đề Bài Viết:
                 </label>
                 <input
@@ -302,12 +302,12 @@ export default function SourcesDatabankModal({
                   onChange={(e) => setCustomTitle(e.target.value)}
                   placeholder="Ví dụ: AI in Modern Workplaces hoặc Cambridge 19 Test 1"
                   required
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:border-blue-500 transition"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E7E2D9] text-[#2B2826] placeholder-[#B0A89F] text-xs focus:outline-none focus:border-[#4A5D4E] transition shadow-2xs"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-300 block">
+                <label className="text-xs font-semibold text-[#2B2826] block">
                   3. Câu Hỏi Đề Bài IELTS (Prompt):
                 </label>
                 <textarea
@@ -316,12 +316,12 @@ export default function SourcesDatabankModal({
                   placeholder="Nhập toàn văn đề bài IELTS của bạn (ví dụ: Some people believe that... Discuss both views and give your opinion.)"
                   rows={3}
                   required
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:border-blue-500 transition resize-none leading-relaxed"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E7E2D9] text-[#2B2826] placeholder-[#B0A89F] text-xs focus:outline-none focus:border-[#4A5D4E] transition resize-none leading-relaxed shadow-2xs"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-300 block">
+                <label className="text-xs font-semibold text-[#2B2826] block">
                   4. Danh Sách Từ Vựng Trọng Tâm Band 8.0 Muốn Học (Phân cách bằng dấu phẩy hoặc xuống dòng):
                 </label>
                 <textarea
@@ -329,16 +329,16 @@ export default function SourcesDatabankModal({
                   onChange={(e) => setCustomVocabWords(e.target.value)}
                   placeholder="Ví dụ: pervasive, paradigm, unprecedented, alleviate, indispensable"
                   rows={3}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-xs focus:outline-none focus:border-blue-500 transition resize-none leading-relaxed"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E7E2D9] text-[#2B2826] placeholder-[#B0A89F] text-xs focus:outline-none focus:border-[#4A5D4E] transition resize-none leading-relaxed shadow-2xs"
                 />
-                <p className="text-[10px] text-slate-400">
+                <p className="text-[10px] text-[#7A7267]">
                   Hệ thống sẽ tự động đối chiếu các từ này vào bài viết Full Essay ở Tab 4.
                 </p>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-black text-xs transition shadow-lg shadow-blue-900/40 cursor-pointer flex items-center justify-center gap-2"
+                className="w-full py-2.5 px-4 rounded-xl bg-[#4A5D4E] hover:bg-[#3D4D40] text-white font-medium text-xs transition shadow-xs cursor-pointer flex items-center justify-center gap-2"
               >
                 <PlusCircle className="w-4 h-4" />
                 <span>Thêm Chủ Đề Này Vào Danh Sách Luyện Tập</span>
@@ -349,11 +349,11 @@ export default function SourcesDatabankModal({
         </div>
 
         {/* Footer */}
-        <div className="px-5 py-3 border-t border-slate-800 bg-slate-950/60 flex items-center justify-between text-xs text-slate-400 shrink-0">
+        <div className="px-5 py-3 border-t border-[#E7E2D9] bg-white flex items-center justify-between text-xs text-[#7A7267] shrink-0">
           <span>Lớp cô Oanh • IELTS Writing Practice Databank</span>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold transition cursor-pointer"
+            className="px-4 py-1.5 rounded-xl bg-[#F4EFEA] hover:bg-[#EAE4DB] text-[#2B2826] border border-[#E7E2D9] font-medium transition cursor-pointer"
           >
             Đóng
           </button>

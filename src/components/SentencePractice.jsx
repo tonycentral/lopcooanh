@@ -48,15 +48,15 @@ function UpgradeDetailsBreakdown({ result, targetBand, isPart3 = false }) {
   const upgradeDetails = result.upgradeDetails || [];
 
   return (
-    <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-3.5 animate-fadeIn">
+    <div className="p-3.5 sm:p-4 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-3.5 animate-fadeIn text-[#2B2826]">
       
       {/* Title Ribbon */}
-      <div className="flex items-center justify-between pb-2 border-b border-slate-800/80">
-        <span className="text-xs font-black text-slate-200 flex items-center gap-1.5 uppercase tracking-wide">
-          <Lightbulb className="w-4 h-4 text-amber-400" />
+      <div className="flex items-center justify-between pb-2 border-b border-[#E7E2D9]">
+        <span className="text-xs font-black text-[#2B2826] flex items-center gap-1.5 uppercase tracking-wide">
+          <Lightbulb className="w-4 h-4 text-[#B88758]" />
           Chi tiết các phần nâng cấp chuẩn Band {targetBand}:
         </span>
-        <span className="text-[10px] text-blue-300 bg-blue-500/10 px-2.5 py-0.5 rounded-full font-mono border border-blue-500/20 font-bold">
+        <span className="text-[10px] text-[#3D5240] bg-[#EDF3EE] px-2.5 py-0.5 rounded-full font-mono border border-[#CAD8C8] font-bold">
           {isPart3 ? "Cohesion & Lexical Breakdown" : "Lexical & Grammar Breakdown"}
         </span>
       </div>
@@ -65,10 +65,10 @@ function UpgradeDetailsBreakdown({ result, targetBand, isPart3 = false }) {
       {analysis?.vocabularyList && analysis.vocabularyList.length > 0 ? (
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1.5">
+            <span className="text-[11px] font-bold text-[#4A5D4E] uppercase tracking-wider flex items-center gap-1.5">
               <span>📖</span> Từ vựng &amp; Cụm từ học thuật trong câu:
             </span>
-            <span className="text-[10px] text-slate-400 italic">
+            <span className="text-[10px] text-[#7A7369] italic">
               (Bao gồm phiên âm IPA &amp; giải nghĩa chi tiết)
             </span>
           </div>
@@ -79,36 +79,36 @@ function UpgradeDetailsBreakdown({ result, targetBand, isPart3 = false }) {
                 key={idx} 
                 className={`p-2.5 rounded-xl border text-xs flex flex-col justify-between gap-1.5 transition ${
                   item.isTarget 
-                    ? "bg-blue-950/50 border-blue-500/50 ring-1 ring-blue-500/30" 
-                    : "bg-slate-900/80 border-slate-800/90 hover:border-slate-700"
+                    ? "bg-[#EDF3EE]/60 border-[#CAD8C8] ring-1 ring-[#CAD8C8]" 
+                    : "bg-white border-[#E7E2D9] hover:border-[#CAD8C8]"
                 }`}
               >
                 <div>
                   <div className="flex items-baseline justify-between gap-1 flex-wrap">
-                    <span className="font-black text-white text-sm tracking-tight">{item.word}</span>
-                    <span className="text-[11px] font-mono text-blue-300 font-bold italic">{item.ipa}</span>
+                    <span className="font-black text-[#2B2826] text-sm tracking-tight">{item.word}</span>
+                    <span className="text-[11px] font-mono text-[#4A5D4E] font-bold italic">{item.ipa}</span>
                   </div>
                   
                   <div className="flex items-center gap-1.5 mt-0.5">
-                    <span className="text-[9px] uppercase font-bold text-slate-400 px-1.5 py-0.2 rounded bg-slate-800 border border-slate-700/60 font-mono">
+                    <span className="text-[9px] uppercase font-bold text-[#6E675E] px-1.5 py-0.2 rounded bg-[#F2EFE9] border border-[#DDD6CB] font-mono">
                       {item.pos}
                     </span>
                     {item.isTarget && (
-                      <span className="text-[9px] uppercase font-black text-blue-300 bg-blue-500/20 px-1.5 py-0.2 rounded border border-blue-500/40">
+                      <span className="text-[9px] uppercase font-black text-[#3D5240] bg-[#EDF3EE] px-1.5 py-0.2 rounded border border-[#CAD8C8]">
                         Từ đang luyện
                       </span>
                     )}
                   </div>
                 </div>
 
-                <div className="text-[11px] text-slate-200 leading-relaxed font-sans">
-                  <strong className="text-slate-300 font-bold">Nghĩa:</strong> {item.meaning}
+                <div className="text-[11px] text-[#2B2826] leading-relaxed font-sans">
+                  <strong className="text-[#5A524A] font-bold">Nghĩa:</strong> {item.meaning}
                 </div>
 
                 {item.replaces && (
-                  <div className="text-[10px] text-slate-400 border-t border-slate-800/80 pt-1 flex items-start gap-1">
-                    <span className="text-emerald-400 font-bold shrink-0">🔄 Nâng cấp từ:</span>
-                    <span className="italic text-slate-300">{item.replaces}</span>
+                  <div className="text-[10px] text-[#7A7369] border-t border-[#E7E2D9] pt-1 flex items-start gap-1">
+                    <span className="text-[#3D5240] font-bold shrink-0">🔄 Nâng cấp từ:</span>
+                    <span className="italic text-[#5A524A]">{item.replaces}</span>
                   </div>
                 )}
               </div>
@@ -119,19 +119,19 @@ function UpgradeDetailsBreakdown({ result, targetBand, isPart3 = false }) {
 
       {/* 2. ĐIỂM SÁNG NGỮ PHÁP (Grammar Highlights) */}
       {analysis?.grammarPoints && analysis.grammarPoints.length > 0 && (
-        <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-800/80 space-y-1.5 text-xs">
-          <span className="font-bold text-blue-300 flex items-center gap-1.5 text-[11px] uppercase tracking-wider">
+        <div className="p-3 rounded-xl bg-white border border-[#E7E2D9] space-y-1.5 text-xs shadow-xs">
+          <span className="font-bold text-[#4A5D4E] flex items-center gap-1.5 text-[11px] uppercase tracking-wider">
             <span>⚙️</span> Điểm sáng ngữ pháp (Grammar Architecture):
           </span>
           {analysis.grammarPoints.map((g, idx) => (
             <div key={idx} className="space-y-0.5">
-              <div className="font-semibold text-slate-200">
-                • <strong className="text-white">{g.title}:</strong>{" "}
-                <code className="text-[10px] text-blue-300 bg-slate-950 px-1.5 py-0.5 rounded border border-blue-900/40 font-mono font-bold">
+              <div className="font-semibold text-[#2B2826]">
+                • <strong className="text-[#2B2826]">{g.title}:</strong>{" "}
+                <code className="text-[10px] text-[#3D5240] bg-[#EDF3EE] px-1.5 py-0.5 rounded border border-[#CAD8C8] font-mono font-bold">
                   {g.formula}
                 </code>
               </div>
-              <p className="text-[11px] text-slate-400 pl-3 leading-relaxed">{g.detail}</p>
+              <p className="text-[11px] text-[#7A7369] pl-3 leading-relaxed">{g.detail}</p>
             </div>
           ))}
         </div>
@@ -139,19 +139,19 @@ function UpgradeDetailsBreakdown({ result, targetBand, isPart3 = false }) {
 
       {/* 3. KỸ THUẬT CHUYỂN CÂU & MẠCH LẠC (Cohesion - Part 3) */}
       {analysis?.cohesionPoints && analysis.cohesionPoints.length > 0 && (
-        <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-800/80 space-y-1.5 text-xs">
-          <span className="font-bold text-sky-300 flex items-center gap-1.5 text-[11px] uppercase tracking-wider">
+        <div className="p-3 rounded-xl bg-white border border-[#E7E2D9] space-y-1.5 text-xs shadow-xs">
+          <span className="font-bold text-[#B88758] flex items-center gap-1.5 text-[11px] uppercase tracking-wider">
             <span>🔗</span> Kỹ thuật chuyển câu &amp; Mạch lạc (Cohesion &amp; Logic Transition):
           </span>
           {analysis.cohesionPoints.map((c, idx) => (
             <div key={idx} className="space-y-0.5">
-              <div className="font-semibold text-slate-200 flex items-baseline gap-1.5 flex-wrap">
+              <div className="font-semibold text-[#2B2826] flex items-baseline gap-1.5 flex-wrap">
                 <span>•</span>
-                <strong className="text-white">{c.marker}</strong>
-                <span className="text-[10px] font-mono text-sky-300 italic font-bold">{c.ipa}</span>
-                <span className="text-[10px] text-slate-400">({c.type})</span>
+                <strong className="text-[#2B2826]">{c.marker}</strong>
+                <span className="text-[10px] font-mono text-[#4A5D4E] italic font-bold">{c.ipa}</span>
+                <span className="text-[10px] text-[#7A7369]">({c.type})</span>
               </div>
-              <p className="text-[11px] text-slate-400 pl-3 leading-relaxed">{c.detail}</p>
+              <p className="text-[11px] text-[#7A7369] pl-3 leading-relaxed">{c.detail}</p>
             </div>
           ))}
         </div>
@@ -159,10 +159,10 @@ function UpgradeDetailsBreakdown({ result, targetBand, isPart3 = false }) {
 
       {/* Fallback to text list if no detailedAnalysis */}
       {(!analysis || !analysis.vocabularyList) && upgradeDetails && upgradeDetails.length > 0 && (
-        <ul className="space-y-1.5 text-xs text-slate-300">
+        <ul className="space-y-1.5 text-xs text-[#5A524A]">
           {upgradeDetails.map((detail, idx) => (
             <li key={idx} className="flex items-start gap-1.5">
-              <span className="text-blue-400 font-bold">•</span>
+              <span className="text-[#4A5D4E] font-bold">•</span>
               <span>{detail}</span>
             </li>
           ))}
@@ -605,53 +605,53 @@ In conclusion, while..., I believe that...`;
   // Relaxed empty state: if no vocab is selected and user is not in Part 4
   if (!selectedVocab && activePart !== 4) {
     return (
-      <div className="space-y-4">
+      <div className="space-y-4 text-[#2B2826]">
         {/* Navigation Switcher to still allow switching to Tab 4 */}
-        <div className="grid grid-cols-4 gap-1 p-1 rounded-2xl bg-slate-900 border border-slate-800 shadow-inner">
+        <div className="grid grid-cols-4 gap-1 p-1 rounded-2xl bg-[#F0EDE6] border border-[#DDD6CB] shadow-xs">
           <button
             onClick={() => setActivePart(1)}
-            className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold text-slate-400 hover:text-white transition flex items-center justify-center gap-1 cursor-pointer"
+            className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold text-[#6E675E] hover:text-[#2B2826] transition flex items-center justify-center gap-1 cursor-pointer"
           >
-            <span className="w-4 h-4 rounded-full bg-white/20 text-[10px] flex items-center justify-center font-black">1</span>
+            <span className="w-4 h-4 rounded-full bg-black/10 text-[10px] flex items-center justify-center font-black">1</span>
             <span className="truncate">Hiểu từ</span>
           </button>
           <button
             onClick={() => setActivePart(2)}
-            className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold text-slate-400 hover:text-white transition flex items-center justify-center gap-1 cursor-pointer"
+            className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold text-[#6E675E] hover:text-[#2B2826] transition flex items-center justify-center gap-1 cursor-pointer"
           >
-            <span className="w-4 h-4 rounded-full bg-white/20 text-[10px] flex items-center justify-center font-black">2</span>
+            <span className="w-4 h-4 rounded-full bg-black/10 text-[10px] flex items-center justify-center font-black">2</span>
             <span className="truncate">Dịch 1 câu</span>
           </button>
           <button
             onClick={() => setActivePart(3)}
-            className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold text-slate-400 hover:text-white transition flex items-center justify-center gap-1 cursor-pointer"
+            className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold text-[#6E675E] hover:text-[#2B2826] transition flex items-center justify-center gap-1 cursor-pointer"
           >
-            <span className="w-4 h-4 rounded-full bg-white/20 text-[10px] flex items-center justify-center font-black">3</span>
+            <span className="w-4 h-4 rounded-full bg-black/10 text-[10px] flex items-center justify-center font-black">3</span>
             <span className="truncate">Dịch 2 câu</span>
           </button>
           <button
             onClick={() => setActivePart(4)}
-            className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-indigo-600/30 transition flex items-center justify-center gap-1 cursor-pointer"
+            className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold bg-[#655243] text-white shadow-xs transition flex items-center justify-center gap-1 cursor-pointer"
           >
             <span className="w-4 h-4 rounded-full bg-white/20 text-[10px] flex items-center justify-center font-black">4</span>
             <span className="truncate">{activeTask === 'task1' ? "Full Report" : "Full Essay"}</span>
           </button>
         </div>
 
-        <div className="h-full flex flex-col items-center justify-center p-8 text-center space-y-3.5 bg-slate-900/60 rounded-2xl border border-slate-800">
-          <div className="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
+        <div className="h-full flex flex-col items-center justify-center p-8 text-center space-y-3.5 bg-white rounded-2xl border border-[#E7E2D9] shadow-xs">
+          <div className="w-12 h-12 rounded-2xl bg-[#EDF3EE] text-[#4A5D4E] flex items-center justify-center">
             <BookOpen className="w-6 h-6" />
           </div>
           <div>
-            <h4 className="text-sm font-bold text-white">Chưa chọn từ vựng luyện tập</h4>
-            <p className="text-xs text-slate-400 mt-1 max-w-sm">
+            <h4 className="text-sm font-bold text-[#2B2826]">Chưa chọn từ vựng luyện tập</h4>
+            <p className="text-xs text-[#7A7369] mt-1 max-w-sm">
               Hãy chọn một từ vựng ở danh sách bên cạnh và nhấn nút "Luyện tập" để học 3 bước (Hiểu từ &rarr; Dịch 1 câu &rarr; Dịch 2 câu), hoặc chuyển sang Tab 4 để viết Full {activeTask === 'task1' ? 'Report' : 'Essay'} theo toàn bộ chủ đề!
             </p>
           </div>
           <button
             type="button"
             onClick={() => setActivePart(4)}
-            className="mt-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs flex items-center gap-2 shadow-md cursor-pointer"
+            className="mt-2 px-4 py-2 rounded-xl bg-[#4A5D4E] hover:bg-[#3D4E41] text-white font-bold text-xs flex items-center gap-2 shadow-xs cursor-pointer"
           >
             <FileEdit className="w-4 h-4" />
             <span>Viết Full {activeTask === 'task1' ? 'Report' : 'Essay'} ngay (Tab 4)</span>
@@ -669,17 +669,17 @@ In conclusion, while..., I believe that...`;
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 text-[#2B2826]">
       
       {/* Target Word Overview Ribbon OR Full Essay Topic Ribbon */}
       {activePart === 4 ? (
-        <div className="p-3.5 rounded-2xl bg-gradient-to-r from-blue-950/70 via-indigo-950/60 to-slate-900 border border-indigo-500/30 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+        <div className="p-3.5 rounded-2xl bg-white border border-[#E7E2D9] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
           <div className="flex items-center gap-2.5 flex-wrap">
-            <span className="text-[10px] uppercase font-black text-indigo-300 tracking-wider bg-indigo-500/20 px-2.5 py-0.5 rounded-md border border-indigo-500/30">
+            <span className="text-[10px] uppercase font-black text-[#8C5D33] tracking-wider bg-[#FAF4EE] px-2.5 py-0.5 rounded-md border border-[#EADBCC]">
               {activeTask === 'task1' ? "Task 1 Report Practice" : "Task 2 Full Essay"}
             </span>
-            <span className="text-sm sm:text-base font-black text-white">{topic?.name || "Chủ đề học thuật"}</span>
-            <span className="text-xs text-indigo-200/80 font-medium">
+            <span className="text-sm sm:text-base font-black text-[#2B2826]">{topic?.name || "Chủ đề học thuật"}</span>
+            <span className="text-xs text-[#7A7369] font-medium">
               (Mục tiêu: Band {targetBand} • Tối thiểu {activeTask === 'task1' ? '150' : '250'} từ)
             </span>
           </div>
@@ -688,32 +688,32 @@ In conclusion, while..., I believe that...`;
             <button
               type="button"
               onClick={onOpenChartModal}
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 hover:text-white border border-blue-500/30 text-xs font-bold transition cursor-pointer self-start sm:self-auto"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-[#EDF3EE] hover:bg-[#E2ECE3] text-[#344837] border border-[#CAD8C8] text-xs font-bold transition cursor-pointer self-start sm:self-auto shadow-xs"
               title="Xem bảng số liệu biểu đồ Task 1"
             >
-              <BarChart3 className="w-3.5 h-3.5" />
+              <BarChart3 className="w-3.5 h-3.5 text-[#4A5D4E]" />
               <span>Xem Biểu Đồ Số Liệu</span>
             </button>
           )}
         </div>
       ) : (
         selectedVocab && (
-          <div className="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 shadow-md flex flex-col gap-2.5">
+          <div className="p-3.5 rounded-2xl bg-white border border-[#E7E2D9] shadow-xs flex flex-col gap-2.5">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
               <div className="flex items-baseline gap-2 flex-wrap">
-                <span className="text-[10px] uppercase font-black text-blue-400 tracking-wider bg-blue-500/10 px-2 py-0.5 rounded-md border border-blue-500/20">
+                <span className="text-[10px] uppercase font-black text-[#3D5240] tracking-wider bg-[#EDF3EE] px-2 py-0.5 rounded-md border border-[#CAD8C8]">
                   Từ Đang Luyện
                 </span>
-                <span className="text-lg font-black text-white">{selectedVocab.word}</span>
+                <span className="text-lg font-black text-[#2B2826]">{selectedVocab.word}</span>
                 {selectedVocab.ipa && (
-                  <span className="text-xs font-mono text-blue-300 italic font-bold">
+                  <span className="text-xs font-mono text-[#4A5D4E] italic font-bold">
                     {selectedVocab.ipa}
                   </span>
                 )}
-                <span className="text-xs text-slate-400">({selectedVocab.partOfSpeech})</span>
+                <span className="text-xs text-[#7A7369]">({selectedVocab.partOfSpeech})</span>
                 {selectedVocab.meaning && (
-                  <span className="text-xs text-slate-200 font-medium ml-1">
-                    • <strong className="text-emerald-400 font-bold">Nghĩa:</strong> {selectedVocab.meaning}
+                  <span className="text-xs text-[#2B2826] font-medium ml-1">
+                    • <strong className="text-[#3D5240] font-bold">Nghĩa:</strong> {selectedVocab.meaning}
                   </span>
                 )}
               </div>
@@ -722,10 +722,10 @@ In conclusion, while..., I believe that...`;
                 <button
                   type="button"
                   onClick={onOpenChartModal}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 hover:text-white border border-blue-500/30 text-xs font-bold transition cursor-pointer self-start sm:self-auto"
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-[#EDF3EE] hover:bg-[#E2ECE3] text-[#344837] border border-[#CAD8C8] text-xs font-bold transition cursor-pointer self-start sm:self-auto shadow-xs"
                   title="Xem bảng số liệu biểu đồ Task 1"
                 >
-                  <BarChart3 className="w-3.5 h-3.5" />
+                  <BarChart3 className="w-3.5 h-3.5 text-[#4A5D4E]" />
                   <span>Xem Bar Chart</span>
                 </button>
               )}
@@ -733,8 +733,8 @@ In conclusion, while..., I believe that...`;
 
             {/* Từ đồng nghĩa (Synonyms) - Đồng bộ với Flashcard */}
             {selectedVocab.synonyms && selectedVocab.synonyms.length > 0 && (
-              <div className="pt-2 border-t border-slate-800/80 flex items-center gap-2 flex-wrap">
-                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-pink-400 flex items-center gap-1 shrink-0">
+              <div className="pt-2 border-t border-[#E7E2D9] flex items-center gap-2 flex-wrap">
+                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#B88758] flex items-center gap-1 shrink-0">
                   <Tag className="w-3.5 h-3.5" />
                   <span>Từ đồng nghĩa (Synonyms):</span>
                 </span>
@@ -742,7 +742,7 @@ In conclusion, while..., I believe that...`;
                   {selectedVocab.synonyms.map((syn, idx) => (
                     <span
                       key={idx}
-                      className="text-xs px-2 py-0.5 rounded-md bg-pink-500/10 border border-pink-500/20 text-pink-300 font-mono font-medium hover:bg-pink-500/20 transition select-text"
+                      className="text-xs px-2 py-0.5 rounded-md bg-[#FAF4EE] border border-[#EADBCC] text-[#785334] font-mono font-medium hover:bg-[#F4ECE3] transition select-text"
                       title={`Từ đồng nghĩa Band 7.5+ của "${selectedVocab.word}": ${syn}`}
                     >
                       {syn}
@@ -756,20 +756,20 @@ In conclusion, while..., I believe that...`;
       )}
 
       {/* 4-Part Navigation Switcher */}
-      <div className="grid grid-cols-4 gap-1 p-1 rounded-2xl bg-slate-900 border border-slate-800 shadow-inner">
+      <div className="grid grid-cols-4 gap-1 p-1 rounded-2xl bg-[#F0EDE6] border border-[#DDD6CB] shadow-xs">
         {/* Tab Phần 1 */}
         <button
           onClick={() => setActivePart(1)}
           className={`py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold transition flex items-center justify-center gap-1 sm:gap-1.5 cursor-pointer text-center ${
             activePart === 1
-              ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
-              : "text-slate-400 hover:text-white"
+              ? "bg-[#4A5D4E] text-white shadow-xs"
+              : "text-[#6E675E] hover:text-[#2B2826]"
           }`}
         >
           <span className="w-4 h-4 rounded-full bg-white/20 text-[10px] flex items-center justify-center font-black shrink-0">1</span>
           <span className="truncate">Hiểu từ</span>
           {part1Result && part1Result.isCorrect && (
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#3D5240] shrink-0" />
           )}
         </button>
 
@@ -778,14 +778,14 @@ In conclusion, while..., I believe that...`;
           onClick={() => setActivePart(2)}
           className={`py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold transition flex items-center justify-center gap-1 sm:gap-1.5 cursor-pointer text-center ${
             activePart === 2
-              ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
-              : "text-slate-400 hover:text-white"
+              ? "bg-[#4A5D4E] text-white shadow-xs"
+              : "text-[#6E675E] hover:text-[#2B2826]"
           }`}
         >
           <span className="w-4 h-4 rounded-full bg-white/20 text-[10px] flex items-center justify-center font-black shrink-0">2</span>
           <span className="truncate">Dịch 1 câu</span>
           {part2Result && (
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#3D5240] shrink-0" />
           )}
         </button>
 
@@ -794,14 +794,14 @@ In conclusion, while..., I believe that...`;
           onClick={() => setActivePart(3)}
           className={`py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold transition flex items-center justify-center gap-1 sm:gap-1.5 cursor-pointer text-center ${
             activePart === 3
-              ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
-              : "text-slate-400 hover:text-white"
+              ? "bg-[#4A5D4E] text-white shadow-xs"
+              : "text-[#6E675E] hover:text-[#2B2826]"
           }`}
         >
           <span className="w-4 h-4 rounded-full bg-white/20 text-[10px] flex items-center justify-center font-black shrink-0">3</span>
           <span className="truncate">Dịch 2 câu</span>
           {part3Result && (
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#3D5240] shrink-0" />
           )}
         </button>
 
@@ -810,14 +810,14 @@ In conclusion, while..., I believe that...`;
           onClick={() => setActivePart(4)}
           className={`py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold transition flex items-center justify-center gap-1 sm:gap-1.5 cursor-pointer text-center ${
             activePart === 4
-              ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-indigo-600/30"
-              : "text-slate-400 hover:text-white"
+              ? "bg-[#655243] text-white shadow-xs"
+              : "text-[#6E675E] hover:text-[#2B2826]"
           }`}
         >
           <span className="w-4 h-4 rounded-full bg-white/20 text-[10px] flex items-center justify-center font-black shrink-0">4</span>
           <span className="truncate">{activeTask === 'task1' ? "Full Report" : "Full Essay"}</span>
           {essayResult && (
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#3D5240] shrink-0" />
           )}
         </button>
       </div>
@@ -828,22 +828,22 @@ In conclusion, while..., I believe that...`;
       {activePart === 1 && (
         <div className="space-y-4 animate-fadeIn">
           
-          <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 shadow-lg">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-              <div className="flex items-center gap-2 text-blue-400 font-extrabold text-xs sm:text-sm">
+          <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E7E2D9] space-y-4 shadow-xs">
+            <div className="flex items-center justify-between pb-2 border-b border-[#E7E2D9]">
+              <div className="flex items-center gap-2 text-[#4A5D4E] font-extrabold text-xs sm:text-sm">
                 <HelpCircle className="w-4 h-4" />
                 <span>Phần 1: Chấm điểm hiểu từ "{selectedVocab.word}"</span>
               </div>
-              <span className="text-[10px] text-slate-400 bg-slate-800 px-2 py-0.5 rounded-full">
+              <span className="text-[10px] text-[#6E675E] bg-[#F2EFE9] px-2 py-0.5 rounded-full border border-[#DDD6CB]">
                 Trắc nghiệm nghĩa HOẶC điền từ đồng nghĩa
               </span>
             </div>
 
             {/* Lựa chọn A: Trắc nghiệm nghĩa tiếng Việt */}
             <div className="space-y-2.5">
-              <label className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+              <label className="text-xs font-bold text-[#2B2826] flex items-center gap-1.5">
                 <span>Cách 1: Chọn nghĩa tiếng Việt chính xác của</span>
-                <span className="text-blue-400 font-extrabold underline">{selectedVocab.word}</span>:
+                <span className="text-[#4A5D4E] font-extrabold underline">{selectedVocab.word}</span>:
               </label>
 
               <div className="grid grid-cols-1 gap-2">
@@ -859,12 +859,12 @@ In conclusion, while..., I believe that...`;
                       }}
                       className={`p-3 rounded-xl text-xs text-left transition border cursor-pointer flex items-center justify-between gap-2 ${
                         isChecked
-                          ? "bg-blue-600/20 border-blue-500 text-white font-bold ring-1 ring-blue-400"
-                          : "bg-slate-950/60 hover:bg-slate-800/80 border-slate-800 text-slate-300"
+                          ? "bg-[#EDF3EE] border-[#CAD8C8] text-[#2B2826] font-bold ring-1 ring-[#CAD8C8]"
+                          : "bg-[#FAF8F5] hover:bg-[#F2EFE9] border-[#E7E2D9] text-[#2B2826]"
                       }`}
                     >
                       <span className="flex-1">{String.fromCharCode(65 + idx)}. {option}</span>
-                      {isChecked && <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0" />}
+                      {isChecked && <CheckCircle2 className="w-4 h-4 text-[#4A5D4E] shrink-0" />}
                     </button>
                   );
                 })}
@@ -872,10 +872,10 @@ In conclusion, while..., I believe that...`;
             </div>
 
             {/* Lựa chọn B: Điền từ đồng nghĩa tiếng Anh */}
-            <div className="pt-2 border-t border-slate-800/80 space-y-2">
-              <label className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+            <div className="pt-2 border-t border-[#E7E2D9] space-y-2">
+              <label className="text-xs font-bold text-[#2B2826] flex items-center gap-1.5">
                 <span>Cách 2: HOẶC điền 1 từ đồng nghĩa (synonym) tiếng Anh của</span>
-                <span className="text-blue-400 font-extrabold">{selectedVocab.word}</span>:
+                <span className="text-[#4A5D4E] font-extrabold">{selectedVocab.word}</span>:
               </label>
               
               <input
@@ -886,7 +886,7 @@ In conclusion, while..., I believe that...`;
                   setQuizSelectedIndex(null); // clear quiz if typing synonym
                 }}
                 placeholder={`Ví dụ: ${selectedVocab.synonyms?.[0] || "alleviate"}, ${selectedVocab.synonyms?.[1] || "lessen"}...`}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs font-mono focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#DDD6CB] text-[#2B2826] text-xs font-mono focus:outline-none focus:border-[#4A5D4E] focus:ring-1 focus:ring-[#4A5D4E] transition placeholder-[#968E84]"
               />
             </div>
 
@@ -899,7 +899,7 @@ In conclusion, while..., I believe that...`;
                   setSynonymInput("");
                   setPart1Result(null);
                 }}
-                className="text-xs text-slate-400 hover:text-white transition cursor-pointer"
+                className="text-xs text-[#7A7369] hover:text-[#2B2826] transition cursor-pointer"
               >
                 Làm lại
               </button>
@@ -908,7 +908,7 @@ In conclusion, while..., I believe that...`;
                 type="button"
                 onClick={handleGradePart1}
                 disabled={quizSelectedIndex === null && !synonymInput.trim()}
-                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md shadow-blue-600/30 transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
+                className="px-5 py-2.5 rounded-xl bg-[#4A5D4E] hover:bg-[#3D4E41] text-white font-bold text-xs shadow-xs transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
               >
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Chấm điểm hiểu từ</span>
@@ -918,34 +918,34 @@ In conclusion, while..., I believe that...`;
 
           {/* KẾT QUẢ CHẤM ĐIỂM HIỂU TỪ */}
           {part1Result && (
-            <div className={`p-4 rounded-2xl border space-y-3 animate-fadeIn ${
+            <div className={`p-4 rounded-2xl border space-y-3 animate-fadeIn shadow-xs ${
               part1Result.isCorrect
-                ? "bg-emerald-950/30 border-emerald-500/40"
-                : "bg-amber-950/30 border-amber-500/40"
+                ? "bg-[#EDF3EE] border-[#CAD8C8]"
+                : "bg-[#FAF4EE] border-[#EADBCC]"
             }`}>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   {part1Result.isCorrect ? (
-                    <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-xl bg-white text-[#4A5D4E] border border-[#CAD8C8] flex items-center justify-center shadow-xs">
                       <CheckCircle2 className="w-5 h-5" />
                     </div>
                   ) : (
-                    <div className="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-xl bg-white text-[#B88758] border border-[#EADBCC] flex items-center justify-center shadow-xs">
                       <AlertTriangle className="w-5 h-5" />
                     </div>
                   )}
                   <div>
-                    <h4 className="text-xs sm:text-sm font-bold text-white">
+                    <h4 className="text-xs sm:text-sm font-bold text-[#2B2826]">
                       {part1Result.isCorrect ? "Đạt chuẩn hiểu từ: 100% (Band 8.0+)" : "Cần lưu ý lại nghĩa của từ (40%)"}
                     </h4>
-                    <p className="text-xs text-slate-300 mt-0.5">{part1Result.feedbackMessage}</p>
+                    <p className="text-xs text-[#5A524A] mt-0.5">{part1Result.feedbackMessage}</p>
                   </div>
                 </div>
 
                 <button
                   type="button"
                   onClick={() => setActivePart(2)}
-                  className="px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition cursor-pointer flex items-center gap-1 shrink-0"
+                  className="px-3.5 py-1.5 rounded-xl bg-[#4A5D4E] hover:bg-[#3D4E41] text-white font-bold text-xs transition cursor-pointer flex items-center gap-1 shrink-0 shadow-xs"
                 >
                   <span>Sang Phần 2</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -954,11 +954,11 @@ In conclusion, while..., I believe that...`;
 
               {/* Collocations & Synonyms gợi ý nâng cao */}
               {selectedVocab.collocations && selectedVocab.collocations.length > 0 && (
-                <div className="pt-2 border-t border-slate-800 text-xs space-y-1">
-                  <span className="text-slate-400 font-semibold">Cụm từ học thuật đi kèm (Collocations):</span>
+                <div className="pt-2 border-t border-[#E7E2D9] text-xs space-y-1">
+                  <span className="text-[#6E675E] font-semibold">Cụm từ học thuật đi kèm (Collocations):</span>
                   <div className="flex flex-wrap gap-1.5 pt-1">
                     {selectedVocab.collocations.map((col, i) => (
-                      <span key={i} className="px-2 py-0.5 rounded-md bg-slate-800/80 text-blue-300 text-[11px] font-mono">
+                      <span key={i} className="px-2 py-0.5 rounded-md bg-white border border-[#DDD6CB] text-[#3D5240] text-[11px] font-mono">
                         {col}
                       </span>
                     ))}
@@ -977,33 +977,33 @@ In conclusion, while..., I believe that...`;
       {activePart === 2 && (
         <div className="space-y-4 animate-fadeIn">
           
-          <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-3.5 shadow-lg">
+          <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E7E2D9] space-y-3.5 shadow-xs">
             
             {/* Header Phần 2 */}
-            <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-              <div className="flex items-center gap-2 text-blue-400 font-extrabold text-xs sm:text-sm">
+            <div className="flex items-center justify-between pb-2 border-b border-[#E7E2D9]">
+              <div className="flex items-center gap-2 text-[#4A5D4E] font-extrabold text-xs sm:text-sm">
                 <BookOpen className="w-4 h-4" />
                 <span>Phần 2: Dịch câu mẫu sang tiếng Anh</span>
               </div>
-              <span className="text-[10px] text-slate-400 bg-slate-800 px-2 py-0.5 rounded-full">
+              <span className="text-[10px] text-[#6E675E] bg-[#F2EFE9] px-2 py-0.5 rounded-full border border-[#DDD6CB]">
                 Mục tiêu: Band {targetBand}
               </span>
             </div>
 
             {/* Câu tiếng Việt mẫu do Web đưa ra */}
-            <div className="p-3.5 rounded-xl bg-slate-950 border border-blue-500/30 space-y-1.5">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-blue-400">
+            <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#CAD8C8] space-y-1.5">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-[#4A5D4E]">
                 🇻🇳 Câu Tiếng Việt Cần Dịch:
               </span>
-              <p className="text-xs sm:text-sm font-semibold text-white leading-relaxed select-text">
+              <p className="text-xs sm:text-sm font-semibold text-[#2B2826] leading-relaxed select-text">
                 "{sentencePracticeData.vietnamesePrompt}"
               </p>
               <div className="flex items-center gap-2 pt-1">
-                <span className="text-[11px] text-slate-400">Bắt buộc dùng từ:</span>
+                <span className="text-[11px] text-[#7A7369]">Bắt buộc dùng từ:</span>
                 <button
                   type="button"
                   onClick={() => insertText(selectedVocab.word, 2)}
-                  className="px-2 py-0.5 rounded-md bg-blue-500/20 text-blue-300 text-xs font-mono font-bold hover:bg-blue-500/30 transition cursor-pointer"
+                  className="px-2 py-0.5 rounded-md bg-[#EDF3EE] text-[#3D5240] border border-[#CAD8C8] text-xs font-mono font-bold hover:bg-[#E2ECE3] transition cursor-pointer"
                   title="Nhấn để chèn từ này vào ô dịch"
                 >
                   + {selectedVocab.word}
@@ -1018,9 +1018,9 @@ In conclusion, while..., I believe that...`;
                 value={part2Input}
                 onChange={(e) => setPart2Input(e.target.value)}
                 placeholder={`Dịch câu trên sang tiếng Anh có sử dụng từ "${selectedVocab.word}"...`}
-                className="w-full p-3.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs sm:text-sm font-mono focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition resize-y leading-relaxed"
+                className="w-full p-3.5 rounded-xl bg-[#FAF8F5] border border-[#DDD6CB] text-[#2B2826] text-xs sm:text-sm font-mono focus:outline-none focus:border-[#4A5D4E] focus:ring-1 focus:ring-[#4A5D4E] transition resize-y leading-relaxed placeholder-[#968E84]"
               />
-              <div className="absolute right-2.5 bottom-2.5 text-[10px] text-slate-400 bg-slate-900/90 px-2 py-0.5 rounded">
+              <div className="absolute right-2.5 bottom-2.5 text-[10px] text-[#7A7369] bg-white px-2 py-0.5 rounded border border-[#E7E2D9]">
                 {part2Input.split(/\s+/).filter(Boolean).length} từ
               </div>
             </div>
@@ -1028,13 +1028,13 @@ In conclusion, while..., I believe that...`;
             {/* Gợi ý từ đồng nghĩa chèn nhanh */}
             {selectedVocab.synonyms && (
               <div className="flex flex-wrap items-center gap-1.5 text-xs">
-                <span className="text-slate-400 text-[11px]">Từ đồng nghĩa có thể dùng:</span>
+                <span className="text-[#7A7369] text-[11px]">Từ đồng nghĩa có thể dùng:</span>
                 {selectedVocab.synonyms.map((syn, i) => (
                   <button
                     key={i}
                     type="button"
                     onClick={() => insertText(syn, 2)}
-                    className="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-blue-300 text-[11px] font-mono transition cursor-pointer"
+                    className="px-2 py-0.5 rounded bg-white hover:bg-[#FAF8F5] border border-[#DDD6CB] text-[#4A5D4E] text-[11px] font-mono transition cursor-pointer shadow-xs"
                   >
                     + {syn}
                   </button>
@@ -1047,7 +1047,7 @@ In conclusion, while..., I believe that...`;
               <button
                 type="button"
                 onClick={() => setPart2Input("")}
-                className="text-xs text-slate-400 hover:text-white transition cursor-pointer"
+                className="text-xs text-[#7A7369] hover:text-[#2B2826] transition cursor-pointer"
               >
                 Xóa làm lại
               </button>
@@ -1056,7 +1056,7 @@ In conclusion, while..., I believe that...`;
                 type="button"
                 onClick={handleGradePart2}
                 disabled={isEvaluatingPart2 || !part2Input.trim()}
-                className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md shadow-blue-600/30 transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
+                className="px-5 py-2 rounded-xl bg-[#4A5D4E] hover:bg-[#3D4E41] text-white font-bold text-xs shadow-xs transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
               >
                 {isEvaluatingPart2 ? (
                   <>
@@ -1076,25 +1076,25 @@ In conclusion, while..., I believe that...`;
 
           {/* KẾT QUẢ CHẤM ĐIỂM & CÂU NÂNG CẤP ĐÚNG SỐ BAND (PHẦN 2) */}
           {part2Result && (
-            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-blue-500/40 shadow-xl space-y-4 animate-fadeIn">
+            <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#CAD8C8] shadow-xs space-y-4 animate-fadeIn">
               
               {/* Header Điểm */}
-              <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+              <div className="flex items-center justify-between pb-3 border-b border-[#E7E2D9]">
                 <div className="flex items-center gap-3">
                   <div className={`w-12 h-12 rounded-xl flex flex-col items-center justify-center font-black ${
                     part2Result.isTargetMet
-                      ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/30"
-                      : "bg-amber-600 text-white shadow-md shadow-amber-600/30"
+                      ? "bg-[#4A5D4E] text-white shadow-xs"
+                      : "bg-[#B88758] text-white shadow-xs"
                   }`}>
-                    <span className="text-[9px] uppercase tracking-wider opacity-80">BAND</span>
+                    <span className="text-[9px] uppercase tracking-wider opacity-90">BAND</span>
                     <span className="text-xl leading-none">{part2Result.scores?.overallBand}</span>
                   </div>
 
                   <div>
-                    <h4 className="text-xs sm:text-sm font-bold text-white">
+                    <h4 className="text-xs sm:text-sm font-bold text-[#2B2826]">
                       {part2Result.isTargetMet ? "Đạt chuẩn mục tiêu!" : "Cần hoàn thiện thêm để chạm Band mục tiêu"}
                     </h4>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-[#7A7369]">
                       Lexical: {part2Result.scores?.lexicalResource} • Grammar: {part2Result.scores?.grammarRange}
                     </p>
                   </div>
@@ -1103,7 +1103,7 @@ In conclusion, while..., I believe that...`;
                 <button
                   type="button"
                   onClick={() => setActivePart(3)}
-                  className="px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition cursor-pointer flex items-center gap-1.5 shadow-md shadow-blue-600/25"
+                  className="px-3.5 py-1.5 rounded-xl bg-[#4A5D4E] hover:bg-[#3D4E41] text-white font-bold text-xs transition cursor-pointer flex items-center gap-1.5 shadow-xs"
                 >
                   <span>Tiếp tục Phần 3</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -1111,21 +1111,21 @@ In conclusion, while..., I believe that...`;
               </div>
 
               {/* CÂU NÂNG CẤP ĐÚNG THEO BAND MỤC TIÊU & CHỌN BAND CAO HƠN */}
-              <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950 border border-blue-500/30 space-y-3">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-[#FAF8F5] border border-[#CAD8C8] space-y-3">
                 {/* Header thanh công cụ câu nâng cấp */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2.5 border-b border-slate-800/80">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2.5 border-b border-[#E7E2D9]">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-blue-400">
-                      <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-[#4A5D4E]">
+                      <Sparkles className="w-3.5 h-3.5 text-[#4A5D4E]" />
                       <span>CÂU NÂNG CẤP CHUẨN BAND {currentPart2Band}:</span>
                     </div>
 
                     {parseFloat(currentPart2Band) > parseFloat(targetBand) ? (
-                      <span className="text-[10px] px-2 py-0.5 rounded-md bg-purple-500/20 text-purple-300 border border-purple-500/30 font-bold flex items-center gap-1">
+                      <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#FAF4EE] text-[#8C5D33] border border-[#EADBCC] font-bold flex items-center gap-1">
                         <span>🚀</span> Nâng cấp cao hơn (+{(parseFloat(currentPart2Band) - parseFloat(targetBand)).toFixed(1)})
                       </span>
                     ) : currentPart2Band === targetBand ? (
-                      <span className="text-[10px] px-2 py-0.5 rounded-md bg-blue-500/20 text-blue-300 border border-blue-500/30 font-bold">
+                      <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#EDF3EE] text-[#3D5240] border border-[#CAD8C8] font-bold">
                         🎯 Band mục tiêu
                       </span>
                     ) : null}
@@ -1134,16 +1134,16 @@ In conclusion, while..., I believe that...`;
                   <button
                     type="button"
                     onClick={() => handleCopy(currentPart2Sentence, `part2_upgraded_${currentPart2Band}`)}
-                    className="flex items-center gap-1 px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[10px] transition cursor-pointer self-start sm:self-auto shrink-0"
+                    className="flex items-center gap-1 px-2.5 py-1 rounded bg-white hover:bg-[#FAF8F5] border border-[#DDD6CB] text-[#5A524A] text-[10px] transition cursor-pointer self-start sm:self-auto shrink-0 shadow-xs"
                   >
-                    {copiedKey === `part2_upgraded_${currentPart2Band}` ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                    {copiedKey === `part2_upgraded_${currentPart2Band}` ? <Check className="w-3 h-3 text-[#4A5D4E]" /> : <Copy className="w-3 h-3" />}
                     <span>{copiedKey === `part2_upgraded_${currentPart2Band}` ? "Đã copy" : "Copy câu"}</span>
                   </button>
                 </div>
 
                 {/* Thanh Nút Chọn Xem Theo Các Mức Band */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-2 rounded-lg bg-slate-900/60 border border-slate-800/60 text-xs">
-                  <span className="text-[11px] font-semibold text-slate-400 flex items-center gap-1">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-2 rounded-lg bg-white border border-[#E7E2D9] text-xs">
+                  <span className="text-[11px] font-semibold text-[#7A7369] flex items-center gap-1">
                     <span>Chọn mức Band nâng cấp:</span>
                   </span>
 
@@ -1161,19 +1161,19 @@ In conclusion, while..., I believe that...`;
                           className={`px-2.5 py-1 rounded-lg text-[11px] font-bold font-mono transition cursor-pointer flex items-center gap-1 ${
                             isSelected
                               ? isHigher
-                                ? "bg-purple-600 text-white shadow-md shadow-purple-600/30 ring-1 ring-purple-400"
-                                : "bg-blue-600 text-white shadow-md shadow-blue-600/30 ring-1 ring-blue-400"
+                                ? "bg-[#B88758] text-white shadow-xs"
+                                : "bg-[#4A5D4E] text-white shadow-xs"
                               : isHigher
-                                ? "bg-slate-950 text-purple-300 hover:bg-purple-950/60 hover:text-purple-200 border border-purple-500/30"
+                                ? "bg-[#FAF4EE] text-[#8C5D33] hover:bg-[#F4ECE3] border border-[#EADBCC]"
                                 : isTarget
-                                  ? "bg-slate-950 text-blue-300 hover:bg-slate-800 border border-blue-500/40"
-                                  : "bg-slate-950 text-slate-400 hover:bg-slate-800 hover:text-slate-200 border border-slate-800"
+                                  ? "bg-[#EDF3EE] text-[#3D5240] hover:bg-[#E2ECE3] border border-[#CAD8C8]"
+                                  : "bg-white text-[#6E675E] hover:text-[#2B2826] border border-[#DDD6CB]"
                           }`}
                           title={`Xem câu nâng cấp chuẩn Band ${band}${isTarget ? ' (Mục tiêu của bạn)' : isHigher ? ' (Cao hơn mục tiêu)' : ''}`}
                         >
                           <span>Band {band}</span>
                           {isHigher && !isSelected && <span className="text-[9px]">⭐</span>}
-                          {isTarget && !isSelected && <span className="text-[9px] text-blue-400">•</span>}
+                          {isTarget && !isSelected && <span className="text-[9px] text-[#4A5D4E]">•</span>}
                         </button>
                       );
                     })}
@@ -1181,8 +1181,8 @@ In conclusion, while..., I believe that...`;
                 </div>
 
                 {/* Nội dung câu nâng cấp */}
-                <div className="p-3 rounded-lg bg-slate-900/90 border border-slate-800/80">
-                  <p className="text-xs sm:text-sm font-mono text-emerald-300 italic font-semibold leading-relaxed">
+                <div className="p-3 rounded-lg bg-white border border-[#E7E2D9] shadow-xs">
+                  <p className="text-xs sm:text-sm font-mono text-[#2B2826] italic font-semibold leading-relaxed">
                     "{currentPart2Sentence}"
                   </p>
                 </div>
@@ -1211,37 +1211,37 @@ In conclusion, while..., I believe that...`;
       {activePart === 3 && (
         <div className="space-y-4 animate-fadeIn">
           
-          <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-blue-500/30 space-y-3.5 shadow-lg">
+          <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E7E2D9] space-y-3.5 shadow-xs">
             
             {/* Header Phần 3 */}
-            <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-              <div className="flex items-center gap-2 text-blue-400 font-extrabold text-xs sm:text-sm">
+            <div className="flex items-center justify-between pb-2 border-b border-[#E7E2D9]">
+              <div className="flex items-center gap-2 text-[#4A5D4E] font-extrabold text-xs sm:text-sm">
                 <Layers className="w-4 h-4" />
                 <span>Phần 3: Dịch 2 câu & Chuyển câu (Cohesion)</span>
               </div>
-              <span className="text-[10px] text-slate-400 bg-slate-800 px-2 py-0.5 rounded-full">
+              <span className="text-[10px] text-[#6E675E] bg-[#F2EFE9] px-2 py-0.5 rounded-full border border-[#DDD6CB]">
                 Mục tiêu: Band {targetBand}
               </span>
             </div>
 
             {/* Đoạn 2 câu tiếng Việt mẫu do Web đưa ra */}
-            <div className="p-3.5 rounded-xl bg-slate-950 border border-blue-500/30 space-y-2">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-blue-400">
+            <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#CAD8C8] space-y-2">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-[#4A5D4E]">
                 🇻🇳 Đoạn 2 Câu Tiếng Việt Cần Dịch &amp; Móc Nối:
               </span>
               
-              <div className="space-y-1 text-xs sm:text-sm text-slate-200 leading-relaxed font-sans">
+              <div className="space-y-1 text-xs sm:text-sm text-[#2B2826] leading-relaxed font-sans">
                 <p>
-                  <strong className="text-blue-300 font-bold">Câu 1:</strong> "{twoSentencePracticeData.sentence1Vietnamese}"
+                  <strong className="text-[#3D5240] font-bold">Câu 1:</strong> "{twoSentencePracticeData.sentence1Vietnamese}"
                 </p>
                 <p>
-                  <strong className="text-blue-400 font-bold">Câu 2 (Chuyển câu):</strong> "{twoSentencePracticeData.sentence2Vietnamese}"
+                  <strong className="text-[#4A5D4E] font-bold">Câu 2 (Chuyển câu):</strong> "{twoSentencePracticeData.sentence2Vietnamese}"
                 </p>
               </div>
 
               <div className="flex items-center gap-2 pt-1 flex-wrap">
-                <span className="text-[11px] text-slate-400">Bắt buộc dùng từ:</span>
-                <span className="px-2 py-0.5 rounded-md bg-blue-500/20 text-blue-300 text-xs font-mono font-bold">
+                <span className="text-[11px] text-[#7A7369]">Bắt buộc dùng từ:</span>
+                <span className="px-2 py-0.5 rounded-md bg-[#EDF3EE] text-[#3D5240] border border-[#CAD8C8] text-xs font-mono font-bold">
                   {selectedVocab.word}
                 </span>
               </div>
@@ -1250,15 +1250,15 @@ In conclusion, while..., I believe that...`;
             {/* Gợi ý liên từ chuyển câu (Cohesion) chèn nhanh */}
             {twoSentencePracticeData.linkingSuggestions && (
               <div className="flex flex-wrap items-center gap-1.5 text-xs">
-                <span className="text-slate-400 text-[11px] font-semibold flex items-center gap-1">
-                  <Sparkles className="w-3 h-3 text-blue-400" /> Nhấn để chèn liên từ chuyển câu:
+                <span className="text-[#7A7369] text-[11px] font-semibold flex items-center gap-1">
+                  <Sparkles className="w-3 h-3 text-[#4A5D4E]" /> Nhấn để chèn liên từ chuyển câu:
                 </span>
                 {twoSentencePracticeData.linkingSuggestions.map((link, i) => (
                   <button
                     key={i}
                     type="button"
                     onClick={() => insertText(link, 3)}
-                    className="px-2 py-0.5 rounded bg-blue-500/15 hover:bg-blue-500/25 text-blue-300 border border-blue-500/30 text-[11px] font-mono transition cursor-pointer"
+                    className="px-2 py-0.5 rounded bg-white hover:bg-[#FAF8F5] border border-[#DDD6CB] text-[#4A5D4E] text-[11px] font-mono transition cursor-pointer shadow-xs"
                   >
                     + {link}
                   </button>
@@ -1273,9 +1273,9 @@ In conclusion, while..., I believe that...`;
                 value={part3Input}
                 onChange={(e) => setPart3Input(e.target.value)}
                 placeholder={`Dịch cả 2 câu trên sang tiếng Anh, dùng từ "${selectedVocab.word}" và liên từ chuyển câu học thuật (ví dụ: Consequently, Therefore...)...`}
-                className="w-full p-3.5 rounded-xl bg-slate-950 border border-slate-700 text-slate-100 text-xs sm:text-sm font-mono focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition resize-y leading-relaxed"
+                className="w-full p-3.5 rounded-xl bg-[#FAF8F5] border border-[#DDD6CB] text-[#2B2826] text-xs sm:text-sm font-mono focus:outline-none focus:border-[#4A5D4E] focus:ring-1 focus:ring-[#4A5D4E] transition resize-y leading-relaxed placeholder-[#968E84]"
               />
-              <div className="absolute right-2.5 bottom-2.5 text-[10px] text-slate-400 bg-slate-900/90 px-2 py-0.5 rounded">
+              <div className="absolute right-2.5 bottom-2.5 text-[10px] text-[#7A7369] bg-white px-2 py-0.5 rounded border border-[#E7E2D9]">
                 {part3Input.split(/\s+/).filter(Boolean).length} từ
               </div>
             </div>
@@ -1285,7 +1285,7 @@ In conclusion, while..., I believe that...`;
               <button
                 type="button"
                 onClick={() => setPart3Input("")}
-                className="text-xs text-slate-400 hover:text-white transition cursor-pointer"
+                className="text-xs text-[#7A7369] hover:text-[#2B2826] transition cursor-pointer"
               >
                 Xóa làm lại
               </button>
@@ -1294,7 +1294,7 @@ In conclusion, while..., I believe that...`;
                 type="button"
                 onClick={handleGradePart3}
                 disabled={isEvaluatingPart3 || !part3Input.trim()}
-                className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md shadow-blue-600/30 transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
+                className="px-5 py-2 rounded-xl bg-[#4A5D4E] hover:bg-[#3D4E41] text-white font-bold text-xs shadow-xs transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
               >
                 {isEvaluatingPart3 ? (
                   <>
@@ -1314,51 +1314,51 @@ In conclusion, while..., I believe that...`;
 
           {/* KẾT QUẢ CHẤM ĐIỂM & CẶP CÂU NÂNG CẤP ĐÚNG SỐ BAND (PHẦN 3) */}
           {part3Result && (
-            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-blue-500/40 shadow-xl space-y-4 animate-fadeIn">
+            <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#CAD8C8] shadow-xs space-y-4 animate-fadeIn">
               
               {/* Header Điểm */}
-              <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+              <div className="flex items-center justify-between pb-3 border-b border-[#E7E2D9]">
                 <div className="flex items-center gap-3">
                   <div className={`w-12 h-12 rounded-xl flex flex-col items-center justify-center font-black ${
                     part3Result.isTargetMet
-                      ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/30"
-                      : "bg-amber-600 text-white shadow-md shadow-amber-600/30"
+                      ? "bg-[#4A5D4E] text-white shadow-xs"
+                      : "bg-[#B88758] text-white shadow-xs"
                   }`}>
-                    <span className="text-[9px] uppercase tracking-wider opacity-80">BAND</span>
+                    <span className="text-[9px] uppercase tracking-wider opacity-90">BAND</span>
                     <span className="text-xl leading-none">{part3Result.scores?.overallBand}</span>
                   </div>
 
                   <div>
-                    <h4 className="text-xs sm:text-sm font-bold text-white">
+                    <h4 className="text-xs sm:text-sm font-bold text-[#2B2826]">
                       {part3Result.isTargetMet ? "Tuyệt vời! Đạt chuẩn Coherence & Cohesion" : "Hoàn thành bài tập chuyển câu"}
                     </h4>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-[#7A7369]">
                       Cohesion: {part3Result.scores?.coherenceCohesion} • Lexical: {part3Result.scores?.lexicalResource} • Grammar: {part3Result.scores?.grammarRange}
                     </p>
                   </div>
                 </div>
 
-                <span className="text-[10px] px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-bold">
+                <span className="text-[10px] px-2.5 py-1 rounded-full bg-[#EDF3EE] text-[#3D5240] border border-[#CAD8C8] font-bold">
                   Đã lưu lịch sử
                 </span>
               </div>
 
               {/* CẶP CÂU NÂNG CẤP ĐÚNG THEO BAND MỤC TIÊU & CHỌN BAND CAO HƠN */}
-              <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950 border border-blue-500/30 space-y-3">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-[#FAF8F5] border border-[#CAD8C8] space-y-3">
                 {/* Header thanh công cụ cặp câu nâng cấp */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2.5 border-b border-slate-800/80">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2.5 border-b border-[#E7E2D9]">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-blue-400">
-                      <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-[#4A5D4E]">
+                      <Sparkles className="w-3.5 h-3.5 text-[#4A5D4E]" />
                       <span>CẶP CÂU NÂNG CẤP CHUẨN BAND {currentPart3Band}:</span>
                     </div>
 
                     {parseFloat(currentPart3Band) > parseFloat(targetBand) ? (
-                      <span className="text-[10px] px-2 py-0.5 rounded-md bg-purple-500/20 text-purple-300 border border-purple-500/30 font-bold flex items-center gap-1">
+                      <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#FAF4EE] text-[#8C5D33] border border-[#EADBCC] font-bold flex items-center gap-1">
                         <span>🚀</span> Nâng cấp cao hơn (+{(parseFloat(currentPart3Band) - parseFloat(targetBand)).toFixed(1)})
                       </span>
                     ) : currentPart3Band === targetBand ? (
-                      <span className="text-[10px] px-2 py-0.5 rounded-md bg-blue-500/20 text-blue-300 border border-blue-500/30 font-bold">
+                      <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#EDF3EE] text-[#3D5240] border border-[#CAD8C8] font-bold">
                         🎯 Band mục tiêu
                       </span>
                     ) : null}
@@ -1367,16 +1367,16 @@ In conclusion, while..., I believe that...`;
                   <button
                     type="button"
                     onClick={() => handleCopy(currentPart3Pair, `part3_upgraded_${currentPart3Band}`)}
-                    className="flex items-center gap-1 px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[10px] transition cursor-pointer self-start sm:self-auto shrink-0"
+                    className="flex items-center gap-1 px-2.5 py-1 rounded bg-white hover:bg-[#FAF8F5] border border-[#DDD6CB] text-[#5A524A] text-[10px] transition cursor-pointer self-start sm:self-auto shrink-0 shadow-xs"
                   >
-                    {copiedKey === `part3_upgraded_${currentPart3Band}` ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                    {copiedKey === `part3_upgraded_${currentPart3Band}` ? <Check className="w-3 h-3 text-[#4A5D4E]" /> : <Copy className="w-3 h-3" />}
                     <span>{copiedKey === `part3_upgraded_${currentPart3Band}` ? "Đã copy" : "Copy cặp câu"}</span>
                   </button>
                 </div>
 
                 {/* Thanh Nút Chọn Xem Theo Các Mức Band */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-2 rounded-lg bg-slate-900/60 border border-slate-800/60 text-xs">
-                  <span className="text-[11px] font-semibold text-slate-400 flex items-center gap-1">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-2 rounded-lg bg-white border border-[#E7E2D9] text-xs">
+                  <span className="text-[11px] font-semibold text-[#7A7369] flex items-center gap-1">
                     <span>Chọn mức Band nâng cấp:</span>
                   </span>
 
@@ -1394,19 +1394,19 @@ In conclusion, while..., I believe that...`;
                           className={`px-2.5 py-1 rounded-lg text-[11px] font-bold font-mono transition cursor-pointer flex items-center gap-1 ${
                             isSelected
                               ? isHigher
-                                ? "bg-purple-600 text-white shadow-md shadow-purple-600/30 ring-1 ring-purple-400"
-                                : "bg-blue-600 text-white shadow-md shadow-blue-600/30 ring-1 ring-blue-400"
+                                ? "bg-[#B88758] text-white shadow-xs"
+                                : "bg-[#4A5D4E] text-white shadow-xs"
                               : isHigher
-                                ? "bg-slate-950 text-purple-300 hover:bg-purple-950/60 hover:text-purple-200 border border-purple-500/30"
+                                ? "bg-[#FAF4EE] text-[#8C5D33] hover:bg-[#F4ECE3] border border-[#EADBCC]"
                                 : isTarget
-                                  ? "bg-slate-950 text-blue-300 hover:bg-slate-800 border border-blue-500/40"
-                                  : "bg-slate-950 text-slate-400 hover:bg-slate-800 hover:text-slate-200 border border-slate-800"
+                                  ? "bg-[#EDF3EE] text-[#3D5240] hover:bg-[#E2ECE3] border border-[#CAD8C8]"
+                                  : "bg-white text-[#6E675E] hover:text-[#2B2826] border border-[#DDD6CB]"
                           }`}
                           title={`Xem cặp câu nâng cấp chuẩn Band ${band}${isTarget ? ' (Mục tiêu của bạn)' : isHigher ? ' (Cao hơn mục tiêu)' : ''}`}
                         >
                           <span>Band {band}</span>
                           {isHigher && !isSelected && <span className="text-[9px]">⭐</span>}
-                          {isTarget && !isSelected && <span className="text-[9px] text-blue-400">•</span>}
+                          {isTarget && !isSelected && <span className="text-[9px] text-[#4A5D4E]">•</span>}
                         </button>
                       );
                     })}
@@ -1414,8 +1414,8 @@ In conclusion, while..., I believe that...`;
                 </div>
 
                 {/* Nội dung cặp câu nâng cấp */}
-                <div className="p-3 rounded-lg bg-slate-900/90 border border-slate-800/80">
-                  <p className="text-xs sm:text-sm font-mono text-emerald-300 italic font-semibold leading-relaxed">
+                <div className="p-3 rounded-lg bg-white border border-[#E7E2D9] shadow-xs">
+                  <p className="text-xs sm:text-sm font-mono text-[#2B2826] italic font-semibold leading-relaxed">
                     "{currentPart3Pair}"
                   </p>
                 </div>
@@ -1444,30 +1444,30 @@ In conclusion, while..., I believe that...`;
       {activePart === 4 && (
         <div className="space-y-4 animate-fadeIn">
           {/* Main Card */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 shadow-lg">
+          <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E7E2D9] space-y-4 shadow-xs">
             
             {/* Header: Title + Timer */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#E7E2D9]">
               <div className="space-y-0.5">
-                <div className="flex items-center gap-2 text-indigo-400 font-extrabold text-sm sm:text-base">
-                  <FileText className="w-4 h-4" />
+                <div className="flex items-center gap-2 text-[#4A5D4E] font-extrabold text-sm sm:text-base">
+                  <FileText className="w-4 h-4 text-[#4A5D4E]" />
                   <span>Phần 4: Viết Full {isTask1 ? "Report (Task 1)" : "Essay (Task 2)"}</span>
                 </div>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-[#7A7369]">
                   Vận dụng toàn diện từ vựng Band 8.0 của chủ đề để hoàn thiện bài viết hoàn chỉnh.
                 </p>
               </div>
 
               {/* Countdown Timer Widget */}
-              <div className="flex items-center gap-2 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800 self-start sm:self-auto">
-                <Clock className="w-4 h-4 text-amber-400 shrink-0" />
-                <span className={`font-mono text-sm font-bold ${essayTimeLeft < 300 ? "text-red-400 animate-pulse" : "text-amber-300"}`}>
+              <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl border border-[#DDD6CB] self-start sm:self-auto shadow-xs">
+                <Clock className="w-4 h-4 text-[#B88758] shrink-0" />
+                <span className={`font-mono text-sm font-bold ${essayTimeLeft < 300 ? "text-[#B95C48] animate-pulse" : "text-[#785334]"}`}>
                   {formatTimer(essayTimeLeft)}
                 </span>
                 <button
                   type="button"
                   onClick={() => setIsTimerRunning(prev => !prev)}
-                  className="p-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition cursor-pointer"
+                  className="p-1 rounded-lg bg-[#F2EFE9] hover:bg-[#EAE5DC] text-[#2B2826] transition cursor-pointer"
                   title={isTimerRunning ? "Tạm dừng đồng hồ" : "Bắt đầu tính giờ"}
                 >
                   {isTimerRunning ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -1478,7 +1478,7 @@ In conclusion, while..., I believe that...`;
                     setIsTimerRunning(false);
                     setEssayTimeLeft(isTask1 ? 20 * 60 : 40 * 60);
                   }}
-                  className="p-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition cursor-pointer"
+                  className="p-1 rounded-lg bg-[#F2EFE9] hover:bg-[#EAE5DC] text-[#7A7369] hover:text-[#2B2826] transition cursor-pointer"
                   title="Đặt lại đồng hồ về ban đầu"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
@@ -1487,22 +1487,22 @@ In conclusion, while..., I believe that...`;
             </div>
 
             {/* Banner Khuyên Dùng: Pop-up Quy Trình Bóc Tách Từng Bước */}
-            <div className="p-3.5 rounded-xl bg-gradient-to-r from-indigo-950/90 via-blue-950/80 to-purple-950/90 border border-indigo-500/40 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-fadeIn">
+            <div className="p-3.5 rounded-xl bg-[#EDF3EE] border border-[#CAD8C8] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-fadeIn">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center justify-center shrink-0">
-                  <BookOpen className="w-5 h-5 text-indigo-300" />
+                <div className="w-9 h-9 rounded-xl bg-white text-[#4A5D4E] border border-[#CAD8C8] flex items-center justify-center shrink-0 shadow-xs">
+                  <BookOpen className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-xs sm:text-sm font-black text-white">Quy Trình Bóc Tách Viết Bài Chuẩn Giám Khảo</span>
-                    <span className="text-[10px] bg-indigo-500/30 text-indigo-200 px-2 py-0.5 rounded-full font-bold border border-indigo-400/30">
+                    <span className="text-xs sm:text-sm font-black text-[#2B2826]">Quy Trình Bóc Tách Viết Bài Chuẩn Giám Khảo</span>
+                    <span className="text-[10px] bg-white text-[#3D5240] px-2 py-0.5 rounded-full font-bold border border-[#CAD8C8]">
                       {isTask1 ? "6 Bước Task 1" : "7 Bước Task 2"}
                     </span>
-                    <span className="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full font-bold border border-amber-400/30">
+                    <span className="text-[10px] bg-[#FAF4EE] text-[#8C5D33] px-2 py-0.5 rounded-full font-bold border border-[#EADBCC]">
                       ⭐ Khuyên xem trước khi viết
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-300 leading-snug mt-0.5">
+                  <p className="text-[11px] text-[#5A524A] leading-snug mt-0.5">
                     Trình tự các bước chuẩn thi thật: Phân tích đề &rarr; Dàn ý &amp; Từ vựng &rarr; Mở bài &rarr; Thân bài 1 &rarr; Thân bài 2 &rarr; Kết bài &rarr; Soát lỗi.
                   </p>
                 </div>
@@ -1511,36 +1511,36 @@ In conclusion, while..., I believe that...`;
               <button
                 type="button"
                 onClick={() => setIsProcessModalOpen(true)}
-                className="py-2 px-3.5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-black text-xs flex items-center justify-center gap-1.5 shadow-md shadow-indigo-950/50 transition cursor-pointer shrink-0 ring-1 ring-white/20 active:scale-95"
+                className="py-2 px-3.5 rounded-xl bg-[#4A5D4E] hover:bg-[#3D4E41] text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs transition cursor-pointer shrink-0 active:scale-95"
               >
-                <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                <Sparkles className="w-3.5 h-3.5 text-[#E0EAE1]" />
                 <span>Mở Pop-up Quy Trình Luyện</span>
               </button>
             </div>
 
             {/* Prompt Quote Display */}
-            <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 space-y-1.5">
-              <div className="flex items-center justify-between text-[11px] text-slate-400">
-                <span className="font-bold uppercase tracking-wider text-blue-400 flex items-center gap-1">
+            <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-1.5">
+              <div className="flex items-center justify-between text-[11px] text-[#7A7369]">
+                <span className="font-bold uppercase tracking-wider text-[#4A5D4E] flex items-center gap-1">
                   <span>📌</span> Đề bài chính thức ({topic?.tag || (isTask1 ? 'IELTS Academic Task 1' : 'IELTS Writing Task 2')}):
                 </span>
-                <span className="text-[10px] text-slate-500 font-mono">
+                <span className="text-[10px] text-[#7A7369] font-mono">
                   Yêu cầu tối thiểu: {minWordsRequired} từ
                 </span>
               </div>
-              <p className="text-xs sm:text-sm text-slate-200 font-medium italic leading-relaxed pl-2 border-l-2 border-blue-500/50">
+              <p className="text-xs sm:text-sm text-[#2B2826] font-medium italic leading-relaxed pl-2 border-l-2 border-[#4A5D4E]">
                 "{topic?.ieltsPrompt || 'Đề bài chưa được cập nhật'}"
               </p>
             </div>
 
             {/* Live Target Words Checklist Tracker */}
-            <div className="p-3.5 rounded-xl bg-blue-950/20 border border-blue-500/20 space-y-2">
+            <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold text-blue-300 uppercase tracking-wider flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                <span className="text-[11px] font-bold text-[#4A5D4E] uppercase tracking-wider flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#B88758]" />
                   Theo dõi từ vựng Band 8.0 trong bài ({usedWordsCount}/{topicVocabs.length}):
                 </span>
-                <span className="text-[10px] text-slate-400 italic">
+                <span className="text-[10px] text-[#7A7369] italic">
                   (Bấm vào từ để chèn nhanh vào bài)
                 </span>
               </div>
@@ -1555,12 +1555,12 @@ In conclusion, while..., I believe that...`;
                       onClick={() => insertIntoEssay(vocab.word)}
                       className={`text-[11px] px-2 py-1 rounded-lg border font-mono transition cursor-pointer flex items-center gap-1 ${
                         used
-                          ? "bg-emerald-950/60 border-emerald-500/50 text-emerald-300 font-bold shadow-sm"
-                          : "bg-slate-900 border-slate-800 text-slate-300 hover:border-blue-500/50 hover:text-white"
+                          ? "bg-[#EDF3EE] border-[#CAD8C8] text-[#3D5240] font-bold shadow-xs"
+                          : "bg-white border-[#DDD6CB] text-[#5A524A] hover:border-[#CAD8C8] hover:text-[#2B2826]"
                       }`}
                       title={`Nghĩa: ${vocab.meaning || ''} • Bấm để chèn`}
                     >
-                      {used ? <Check className="w-3 h-3 text-emerald-400" /> : <Plus className="w-3 h-3 text-slate-500" />}
+                      {used ? <Check className="w-3 h-3 text-[#3D5240]" /> : <Plus className="w-3 h-3 text-[#968E84]" />}
                       <span>{vocab.word}</span>
                     </button>
                   );
@@ -1570,14 +1570,14 @@ In conclusion, while..., I believe that...`;
 
             {/* Writing Scaffold / Outline quick inserters */}
             <div className="space-y-1.5">
-              <span className="text-[11px] font-semibold text-slate-400 flex items-center gap-1">
+              <span className="text-[11px] font-semibold text-[#7A7369] flex items-center gap-1">
                 <span>⚡</span> Khung dàn ý &amp; Liên từ học thuật hỗ trợ viết nhanh:
               </span>
               <div className="flex flex-wrap gap-1.5">
                 <button
                   type="button"
                   onClick={() => insertOutlineScaffold()}
-                  className="px-2.5 py-1 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 text-[11px] font-bold transition cursor-pointer flex items-center gap-1"
+                  className="px-2.5 py-1 rounded-lg bg-[#EDF3EE] hover:bg-[#E2ECE3] text-[#3D5240] border border-[#CAD8C8] text-[11px] font-bold transition cursor-pointer flex items-center gap-1 shadow-xs"
                 >
                   <Plus className="w-3 h-3" />
                   <span>{isTask1 ? "Chèn Khung Task 1 (3-4 đoạn)" : "Chèn Khung Essay (4 đoạn tiêu chuẩn)"}</span>
@@ -1588,7 +1588,7 @@ In conclusion, while..., I believe that...`;
                     key={idx}
                     type="button"
                     onClick={() => insertIntoEssay(item.text)}
-                    className="px-2 py-1 rounded-lg bg-slate-950 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 text-[11px] font-medium transition cursor-pointer"
+                    className="px-2 py-1 rounded-lg bg-white hover:bg-[#FAF8F5] text-[#5A524A] hover:text-[#2B2826] border border-[#DDD6CB] text-[11px] font-medium transition cursor-pointer shadow-xs"
                     title={item.tip}
                   >
                     + {item.text}
@@ -1609,7 +1609,7 @@ In conclusion, while..., I believe that...`;
                       : "Bắt đầu viết bài Full Essay Task 2 tại đây (tối thiểu 250 từ)... Hãy chia bài viết thành 4 đoạn văn mạch lạc: Mở bài, Thân bài 1, Thân bài 2 và Kết bài."
                   }
                   rows={14}
-                  className="w-full p-4 rounded-xl bg-slate-950 border border-slate-800 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-white placeholder-slate-600 font-sans text-xs sm:text-sm leading-relaxed outline-none transition resize-y shadow-inner"
+                  className="w-full p-4 rounded-xl bg-[#FAF8F5] border border-[#DDD6CB] focus:border-[#4A5D4E] focus:ring-1 focus:ring-[#4A5D4E] text-[#2B2826] placeholder-[#968E84] font-sans text-xs sm:text-sm leading-relaxed outline-none transition resize-y shadow-inner"
                 />
               </div>
 
@@ -1618,24 +1618,24 @@ In conclusion, while..., I believe that...`;
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className={`text-xs px-2.5 py-1 rounded-lg font-mono font-bold border flex items-center gap-1.5 ${
                     currentWordCount >= minWordsRequired
-                      ? "bg-emerald-950/60 border-emerald-500/50 text-emerald-300"
-                      : "bg-amber-950/60 border-amber-500/50 text-amber-300"
+                      ? "bg-[#EDF3EE] border-[#CAD8C8] text-[#3D5240]"
+                      : "bg-[#FAF4EE] border-[#EADBCC] text-[#8C5D33]"
                   }`}>
                     {currentWordCount >= minWordsRequired ? (
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#3D5240]" />
                     ) : (
-                      <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
+                      <AlertTriangle className="w-3.5 h-3.5 text-[#B88758]" />
                     )}
                     <span>{currentWordCount} / {minWordsRequired} từ</span>
                     {currentWordCount < minWordsRequired && (
-                      <span className="text-[10px] font-normal text-amber-400/80">
+                      <span className="text-[10px] font-normal text-[#8C5D33]">
                         (cần thêm {minWordsRequired - currentWordCount} từ)
                       </span>
                     )}
                   </span>
 
-                  <span className="text-[11px] text-slate-400">
-                    Đoạn văn: <strong className="text-white">{essayParagraphCount}</strong> đoạn
+                  <span className="text-[11px] text-[#7A7369]">
+                    Đoạn văn: <strong className="text-[#2B2826]">{essayParagraphCount}</strong> đoạn
                   </span>
 
                   {essayInput.length > 0 && (
@@ -1647,7 +1647,7 @@ In conclusion, while..., I believe that...`;
                           setEssayResult(null);
                         }
                       }}
-                      className="text-[11px] text-slate-400 hover:text-red-400 transition underline cursor-pointer ml-1"
+                      className="text-[11px] text-[#7A7369] hover:text-[#B95C48] transition underline cursor-pointer ml-1"
                     >
                       Xóa làm lại
                     </button>
@@ -1658,10 +1658,10 @@ In conclusion, while..., I believe that...`;
                   type="button"
                   onClick={handleGradeEssay}
                   disabled={isEvaluatingEssay || currentWordCount < 25}
-                  className={`px-5 py-2.5 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-lg cursor-pointer ${
+                  className={`px-5 py-2.5 rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-xs cursor-pointer ${
                     currentWordCount < 25
-                      ? "bg-slate-800 text-slate-500 cursor-not-allowed border border-slate-700/50"
-                      : "bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white shadow-indigo-600/30 ring-1 ring-white/20 active:scale-95"
+                      ? "bg-[#F2EFE9] text-[#A8A196] cursor-not-allowed border border-[#DDD6CB]"
+                      : "bg-[#4A5D4E] hover:bg-[#3D4E41] text-white active:scale-95"
                   }`}
                 >
                   {isEvaluatingEssay ? (
@@ -1671,7 +1671,7 @@ In conclusion, while..., I believe that...`;
                     </>
                   ) : (
                     <>
-                      <Sparkles className="w-4 h-4 text-amber-300" />
+                      <Sparkles className="w-4 h-4 text-[#E0EAE1]" />
                       <span>Nộp bài &amp; Chấm điểm chuẩn IELTS</span>
                     </>
                   )}
@@ -1683,23 +1683,23 @@ In conclusion, while..., I believe that...`;
 
           {/* ================= ESSAY EVALUATION RESULTS ================= */}
           {essayResult && (
-            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 shadow-xl animate-fadeIn">
+            <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#CAD8C8] space-y-4 shadow-xs animate-fadeIn">
               
               {/* Overall Band Banner */}
-              <div className="p-4 rounded-xl bg-gradient-to-r from-slate-950 via-indigo-950/40 to-slate-950 border border-indigo-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="p-4 rounded-xl bg-[#EDF3EE] border border-[#CAD8C8] flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 border border-indigo-500/40 flex items-center justify-center shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-[#4A5D4E] text-white flex items-center justify-center shrink-0 shadow-xs">
                     <Award className="w-7 h-7" />
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                    <span className="text-[10px] uppercase font-bold text-[#7A7369] tracking-wider">
                       Kết quả chấm điểm toàn diện {isTask1 ? 'Task 1' : 'Task 2'}
                     </span>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-2xl font-black text-white font-mono">
+                      <span className="text-2xl font-black text-[#2B2826] font-mono">
                         Band {essayResult.scores?.overallBand || "6.5"}
                       </span>
-                      <span className="text-xs text-slate-400">
+                      <span className="text-xs text-[#7A7369]">
                         (Mục tiêu của bạn: Band {targetBand})
                       </span>
                     </div>
@@ -1709,8 +1709,8 @@ In conclusion, while..., I believe that...`;
                 <div className="flex items-center gap-2">
                   <span className={`px-3 py-1 rounded-full text-xs font-bold border ${
                     (essayResult.scores?.overallBand || 0) >= parseFloat(targetBand)
-                      ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
-                      : "bg-amber-500/20 text-amber-300 border-amber-500/40"
+                      ? "bg-white text-[#3D5240] border-[#CAD8C8]"
+                      : "bg-white text-[#8C5D33] border-[#EADBCC]"
                   }`}>
                     {(essayResult.scores?.overallBand || 0) >= parseFloat(targetBand)
                       ? "✓ Đạt mục tiêu đề ra"
@@ -1722,53 +1722,53 @@ In conclusion, while..., I believe that...`;
               {/* 4 IELTS Criteria Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 {/* TR / TA */}
-                <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 space-y-1">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+                <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-1">
+                  <span className="text-[10px] font-bold text-[#7A7369] uppercase tracking-wider block">
                     {isTask1 ? "Task Achievement (TA)" : "Task Response (TR)"}
                   </span>
-                  <div className="text-lg font-black text-blue-400 font-mono">
+                  <div className="text-lg font-black text-[#4A5D4E] font-mono">
                     {essayResult.scores?.taskResponse?.toFixed(1) || "6.5"}
                   </div>
-                  <span className="text-[10px] text-slate-400 block">
+                  <span className="text-[10px] text-[#7A7369] block">
                     {essayResult.wordCount} từ • {essayResult.paragraphCount} đoạn
                   </span>
                 </div>
 
                 {/* CC */}
-                <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 space-y-1">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+                <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-1">
+                  <span className="text-[10px] font-bold text-[#7A7369] uppercase tracking-wider block">
                     Coherence &amp; Cohesion (CC)
                   </span>
-                  <div className="text-lg font-black text-emerald-400 font-mono">
+                  <div className="text-lg font-black text-[#3D5240] font-mono">
                     {essayResult.scores?.coherenceCohesion?.toFixed(1) || "6.5"}
                   </div>
-                  <span className="text-[10px] text-slate-400 block">
+                  <span className="text-[10px] text-[#7A7369] block">
                     {essayResult.detectedCohesiveDevices?.length || 0} liên từ mạch lạc
                   </span>
                 </div>
 
                 {/* LR */}
-                <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 space-y-1">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+                <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-1">
+                  <span className="text-[10px] font-bold text-[#7A7369] uppercase tracking-wider block">
                     Lexical Resource (LR)
                   </span>
-                  <div className="text-lg font-black text-purple-400 font-mono">
+                  <div className="text-lg font-black text-[#B88758] font-mono">
                     {essayResult.scores?.lexicalResource?.toFixed(1) || "6.5"}
                   </div>
-                  <span className="text-[10px] text-slate-400 block">
+                  <span className="text-[10px] text-[#7A7369] block">
                     {essayResult.usedTargetWords?.length || 0} từ Band 8.0
                   </span>
                 </div>
 
                 {/* GRA */}
-                <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 space-y-1">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+                <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-1">
+                  <span className="text-[10px] font-bold text-[#7A7369] uppercase tracking-wider block">
                     Grammar Range (GRA)
                   </span>
-                  <div className="text-lg font-black text-amber-400 font-mono">
+                  <div className="text-lg font-black text-[#B95C48] font-mono">
                     {essayResult.scores?.grammarRange?.toFixed(1) || "6.5"}
                   </div>
-                  <span className="text-[10px] text-slate-400 block">
+                  <span className="text-[10px] text-[#7A7369] block">
                     {essayResult.detectedStructures?.length || 0} cấu trúc phức hợp
                   </span>
                 </div>
@@ -1777,15 +1777,15 @@ In conclusion, while..., I believe that...`;
               {/* Strengths & Improvements */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {/* Strengths */}
-                <div className="p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-500/30 space-y-2">
-                  <span className="text-xs font-bold text-emerald-300 flex items-center gap-1.5 uppercase tracking-wide">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <div className="p-3.5 rounded-xl bg-white border border-[#CAD8C8] space-y-2 shadow-xs">
+                  <span className="text-xs font-bold text-[#3D5240] flex items-center gap-1.5 uppercase tracking-wide">
+                    <CheckCircle2 className="w-4 h-4 text-[#4A5D4E]" />
                     Điểm mạnh của bài viết (Strengths):
                   </span>
-                  <ul className="space-y-1 text-xs text-slate-300">
+                  <ul className="space-y-1 text-xs text-[#2B2826]">
                     {essayResult.strengths?.map((str, idx) => (
                       <li key={idx} className="flex items-start gap-1.5">
-                        <span className="text-emerald-400 font-bold">•</span>
+                        <span className="text-[#4A5D4E] font-bold">•</span>
                         <span>{str}</span>
                       </li>
                     ))}
@@ -1793,15 +1793,15 @@ In conclusion, while..., I believe that...`;
                 </div>
 
                 {/* Improvements */}
-                <div className="p-3.5 rounded-xl bg-amber-950/30 border border-amber-500/30 space-y-2">
-                  <span className="text-xs font-bold text-amber-300 flex items-center gap-1.5 uppercase tracking-wide">
-                    <AlertTriangle className="w-4 h-4 text-amber-400" />
+                <div className="p-3.5 rounded-xl bg-white border border-[#EADBCC] space-y-2 shadow-xs">
+                  <span className="text-xs font-bold text-[#8C5D33] flex items-center gap-1.5 uppercase tracking-wide">
+                    <AlertTriangle className="w-4 h-4 text-[#B88758]" />
                     Điểm cần tối ưu nâng Band (Improvements):
                   </span>
-                  <ul className="space-y-1 text-xs text-slate-300">
+                  <ul className="space-y-1 text-xs text-[#2B2826]">
                     {essayResult.improvements?.map((imp, idx) => (
                       <li key={idx} className="flex items-start gap-1.5">
-                        <span className="text-amber-400 font-bold">•</span>
+                        <span className="text-[#B88758] font-bold">•</span>
                         <span>{imp}</span>
                       </li>
                     ))}
@@ -1811,25 +1811,25 @@ In conclusion, while..., I believe that...`;
 
               {/* Paragraph-by-paragraph examiner feedback */}
               {essayResult.paragraphFeedbacks && essayResult.paragraphFeedbacks.length > 0 && (
-                <div className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 space-y-3">
-                  <span className="text-xs font-bold text-blue-300 uppercase tracking-wide flex items-center gap-1.5">
+                <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-3">
+                  <span className="text-xs font-bold text-[#4A5D4E] uppercase tracking-wide flex items-center gap-1.5">
                     <span>📑</span> Nhận xét chi tiết cấu trúc từng đoạn văn:
                   </span>
                   <div className="space-y-2.5">
                     {essayResult.paragraphFeedbacks.map((pf) => (
-                      <div key={pf.index} className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 space-y-1 text-xs">
+                      <div key={pf.index} className="p-2.5 rounded-lg bg-white border border-[#E7E2D9] space-y-1 text-xs shadow-xs">
                         <div className="flex items-center justify-between">
-                          <span className="font-bold text-white flex items-center gap-1.5">
-                            <span className="w-4 h-4 rounded-full bg-blue-600/30 text-blue-300 text-[10px] flex items-center justify-center font-bold">
+                          <span className="font-bold text-[#2B2826] flex items-center gap-1.5">
+                            <span className="w-4 h-4 rounded-full bg-[#EDF3EE] text-[#3D5240] text-[10px] flex items-center justify-center font-bold">
                               {pf.index}
                             </span>
                             {pf.title}
                           </span>
-                          <span className="text-[10px] text-slate-400 font-mono">
+                          <span className="text-[10px] text-[#7A7369] font-mono">
                             {pf.wordCount} từ • {pf.role}
                           </span>
                         </div>
-                        <p className="text-[11px] text-slate-300 pl-5 leading-relaxed">
+                        <p className="text-[11px] text-[#5A524A] pl-5 leading-relaxed">
                           💡 <strong>Lời khuyên giám khảo:</strong> {pf.tip}
                         </p>
                       </div>
@@ -1839,36 +1839,36 @@ In conclusion, while..., I believe that...`;
               )}
 
               {/* Model Essay toggle */}
-              <div className="pt-2 border-t border-slate-800">
+              <div className="pt-2 border-t border-[#E7E2D9]">
                 <button
                   type="button"
                   onClick={() => setShowModelEssay(prev => !prev)}
-                  className="w-full py-2 px-3 rounded-xl bg-slate-950 hover:bg-slate-850 text-slate-300 hover:text-white border border-slate-800 text-xs font-bold transition flex items-center justify-between cursor-pointer"
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#FAF8F5] hover:bg-[#F2EFE9] text-[#2B2826] border border-[#DDD6CB] text-xs font-bold transition flex items-center justify-between cursor-pointer"
                 >
                   <span className="flex items-center gap-2">
-                    <BookOpen className="w-4 h-4 text-purple-400" />
+                    <BookOpen className="w-4 h-4 text-[#4A5D4E]" />
                     <span>Bài mẫu tham khảo Band 8.5+ cho đề bài này</span>
                   </span>
                   <span>{showModelEssay ? "Thu gọn ▲" : "Xem bài mẫu ▼"}</span>
                 </button>
 
                 {showModelEssay && (
-                  <div className="mt-2.5 p-4 rounded-xl bg-slate-950/90 border border-purple-500/30 space-y-3 text-xs leading-relaxed animate-fadeIn">
-                    <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-                      <span className="text-[11px] font-bold text-purple-300 uppercase tracking-wider">
+                  <div className="mt-2.5 p-4 rounded-xl bg-white border border-[#E7E2D9] space-y-3 text-xs leading-relaxed animate-fadeIn shadow-xs">
+                    <div className="flex items-center justify-between pb-2 border-b border-[#E7E2D9]">
+                      <span className="text-[11px] font-bold text-[#4A5D4E] uppercase tracking-wider">
                         Sample Model Essay (Exemplary Band 8.5+ Answer)
                       </span>
                       <button
                         type="button"
                         onClick={() => handleCopy(getModelEssayText(), 'model-essay')}
-                        className="text-[11px] text-slate-400 hover:text-white flex items-center gap-1 cursor-pointer"
+                        className="text-[11px] text-[#7A7369] hover:text-[#2B2826] flex items-center gap-1 cursor-pointer"
                       >
-                        {copiedKey === 'model-essay' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                        {copiedKey === 'model-essay' ? <Check className="w-3 h-3 text-[#4A5D4E]" /> : <Copy className="w-3 h-3" />}
                         <span>Sao chép bài mẫu</span>
                       </button>
                     </div>
 
-                    <div className="text-slate-300 space-y-2 whitespace-pre-line font-serif text-xs sm:text-sm">
+                    <div className="text-[#2B2826] space-y-2 whitespace-pre-line font-serif text-xs sm:text-sm">
                       {getModelEssayText()}
                     </div>
                   </div>

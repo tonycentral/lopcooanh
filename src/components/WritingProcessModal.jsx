@@ -427,30 +427,30 @@ export default function WritingProcessModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/85 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/40 backdrop-blur-xs animate-fadeIn text-[#2B2826]">
       <div 
-        className="bg-slate-900 border border-slate-700/90 rounded-2xl w-full max-w-4xl max-h-[92vh] overflow-hidden flex flex-col shadow-2xl animate-scaleUp"
+        className="bg-white border border-[#E7E2D9] rounded-2xl w-full max-w-4xl max-h-[92vh] overflow-hidden flex flex-col shadow-xl animate-scaleUp"
         onClick={(e) => e.stopPropagation()}
       >
         {/* ================= MODAL TOP HEADER ================= */}
-        <div className="px-5 py-4 border-b border-slate-800 bg-slate-950/70 flex items-center justify-between shrink-0">
+        <div className="px-5 py-4 border-b border-[#E7E2D9] bg-[#FAF8F5] flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500/20 to-blue-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center shrink-0 shadow-inner">
-              <BookOpen className="w-5 h-5 text-indigo-300" />
+            <div className="w-10 h-10 rounded-xl bg-white text-[#4A5D4E] border border-[#CAD8C8] flex items-center justify-center shrink-0 shadow-xs">
+              <BookOpen className="w-5 h-5 text-[#4A5D4E]" />
             </div>
             <div>
               <div className="flex items-center gap-2 flex-wrap">
-                <h2 className="text-base sm:text-lg font-black text-white leading-tight">
+                <h2 className="text-base sm:text-lg font-black text-[#2B2826] leading-tight">
                   Quy Trình Bóc Tách Viết Bài Chuẩn Giám Khảo
                 </h2>
-                <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#EDF3EE] text-[#3D5240] border border-[#CAD8C8]">
                   {isTask1 ? 'Task 1 (Report)' : 'Task 2 (Full Essay)'}
                 </span>
-                <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#FAF4EE] text-[#8C5D33] border border-[#EADBCC]">
                   Chuẩn Band {targetBand}
                 </span>
               </div>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-[#7A7369] mt-0.5">
                 Bóc tách từng bước chi tiết để người học nắm vững phương pháp và luyện theo từng đoạn.
               </p>
             </div>
@@ -459,7 +459,7 @@ export default function WritingProcessModal({
           <button
             type="button"
             onClick={onClose}
-            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer"
+            className="p-2 rounded-xl text-[#7A7369] hover:text-[#2B2826] hover:bg-[#F2EFE9] transition cursor-pointer"
             title="Đóng cửa sổ hướng dẫn"
           >
             <X className="w-5 h-5" />
@@ -467,7 +467,7 @@ export default function WritingProcessModal({
         </div>
 
         {/* ================= STEPPER PROGRESS BAR ================= */}
-        <div className="px-4 py-2.5 bg-slate-950 border-b border-slate-800/80 shrink-0 overflow-x-auto scrollbar-thin">
+        <div className="px-4 py-2.5 bg-[#F0EDE6] border-b border-[#DDD6CB] shrink-0 overflow-x-auto scrollbar-thin">
           <div className="flex items-center gap-1.5 min-w-max">
             {currentSteps.map((step, idx) => {
               const isActive = idx === currentStepIndex;
@@ -477,16 +477,16 @@ export default function WritingProcessModal({
                   key={step.id}
                   type="button"
                   onClick={() => setCurrentStepIndex(idx)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer shadow-xs ${
                     isActive
-                      ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-indigo-900/40 ring-1 ring-white/20"
+                      ? "bg-[#4A5D4E] text-white"
                       : isPast
-                        ? "bg-slate-850 hover:bg-slate-800 text-emerald-400 border border-emerald-500/30"
-                        : "bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-800"
+                        ? "bg-white hover:bg-[#FAF8F5] text-[#3D5240] border border-[#CAD8C8]"
+                        : "bg-white hover:bg-[#FAF8F5] text-[#6E675E] border border-[#DDD6CB]"
                   }`}
                 >
                   <span className={`w-4 h-4 rounded-full text-[10px] flex items-center justify-center font-black ${
-                    isActive ? "bg-white/20 text-white" : isPast ? "bg-emerald-500/20 text-emerald-400" : "bg-slate-800 text-slate-400"
+                    isActive ? "bg-white/20 text-white" : isPast ? "bg-[#EDF3EE] text-[#3D5240]" : "bg-[#F2EFE9] text-[#6E675E]"
                   }`}>
                     {isPast ? "✓" : step.number}
                   </span>
@@ -501,31 +501,31 @@ export default function WritingProcessModal({
         <div className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 space-y-5 scrollbar-thin">
           
           {/* Step Header Banner */}
-          <div className="p-4 rounded-2xl bg-gradient-to-br from-slate-950 via-indigo-950/30 to-slate-950 border border-indigo-500/30 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="p-4 rounded-2xl bg-[#EDF3EE] border border-[#CAD8C8] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="space-y-1">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-[11px] font-black uppercase text-indigo-400 bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-500/30">
+                <span className="text-[11px] font-black uppercase text-[#3D5240] bg-white px-2.5 py-0.5 rounded-md border border-[#CAD8C8]">
                   Bước {currentStep.number} / {currentSteps.length}
                 </span>
-                <span className="text-xs text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded-md border border-amber-500/20 font-mono font-bold flex items-center gap-1">
+                <span className="text-xs text-[#8C5D33] bg-[#FAF4EE] px-2 py-0.5 rounded-md border border-[#EADBCC] font-mono font-bold flex items-center gap-1">
                   <Clock className="w-3 h-3" />
                   Thời gian: {currentStep.timeAllocated}
                 </span>
-                <span className="text-xs text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20 font-bold">
+                <span className="text-xs text-[#3D5240] bg-white px-2 py-0.5 rounded-md border border-[#CAD8C8] font-bold">
                   {currentStep.badge}
                 </span>
               </div>
-              <h3 className="text-base sm:text-lg font-black text-white">
+              <h3 className="text-base sm:text-lg font-black text-[#2B2826]">
                 {currentStep.title}
               </h3>
-              <p className="text-xs text-slate-300">
+              <p className="text-xs text-[#5A524A]">
                 {currentStep.subtitle}
               </p>
             </div>
 
             {currentStep.goal && (
-              <div className="sm:max-w-xs p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-[11px] text-slate-300">
-                <strong className="text-indigo-300 block mb-0.5 font-bold">🎯 Mục tiêu bước này:</strong>
+              <div className="sm:max-w-xs p-2.5 rounded-xl bg-white border border-[#CAD8C8] text-[11px] text-[#2B2826] shadow-xs">
+                <strong className="text-[#3D5240] block mb-0.5 font-bold">🎯 Mục tiêu bước này:</strong>
                 {currentStep.goal}
               </div>
             )}
@@ -533,18 +533,18 @@ export default function WritingProcessModal({
 
           {/* Phương pháp & Nguyên tắc bóc tách */}
           {currentStep.methodology && currentStep.methodology.length > 0 && (
-            <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 space-y-3">
-              <span className="text-xs font-bold text-blue-300 uppercase tracking-wide flex items-center gap-1.5">
+            <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-3">
+              <span className="text-xs font-bold text-[#4A5D4E] uppercase tracking-wide flex items-center gap-1.5">
                 <span>📚</span> Phương pháp &amp; Kỹ thuật thực hiện:
               </span>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {currentStep.methodology.map((m, idx) => (
-                  <div key={idx} className="p-3 rounded-lg bg-slate-900 border border-slate-800/80 space-y-1 text-xs">
-                    <h4 className="font-bold text-white flex items-center gap-1.5 text-[12px]">
-                      <span className="text-indigo-400">•</span>
+                  <div key={idx} className="p-3 rounded-lg bg-white border border-[#E7E2D9] space-y-1 text-xs shadow-xs">
+                    <h4 className="font-bold text-[#2B2826] flex items-center gap-1.5 text-[12px]">
+                      <span className="text-[#4A5D4E]">•</span>
                       <span>{m.heading}</span>
                     </h4>
-                    <p className="text-slate-300 text-[11px] leading-relaxed pl-3">
+                    <p className="text-[#5A524A] text-[11px] leading-relaxed pl-3">
                       {m.content}
                     </p>
                   </div>
@@ -555,14 +555,14 @@ export default function WritingProcessModal({
 
           {/* Áp dụng vào đề bài hiện tại */}
           {currentStep.currentTopicApplication && (
-            <div className="p-4 rounded-xl bg-blue-950/20 border border-blue-500/30 space-y-2.5">
-              <span className="text-xs font-bold text-blue-300 uppercase tracking-wide flex items-center gap-1.5">
+            <div className="p-4 rounded-xl bg-[#EDF3EE] border border-[#CAD8C8] space-y-2.5">
+              <span className="text-xs font-bold text-[#3D5240] uppercase tracking-wide flex items-center gap-1.5">
                 <span>📌</span> {currentStep.currentTopicApplication.label}
               </span>
               
               {currentStep.currentTopicApplication.prompt && (
-                <div className="p-3 rounded-lg bg-slate-950/80 border border-slate-800">
-                  <p className="text-xs text-slate-200 italic font-serif leading-relaxed">
+                <div className="p-3 rounded-lg bg-white border border-[#CAD8C8] shadow-xs">
+                  <p className="text-xs text-[#2B2826] italic font-serif leading-relaxed">
                     "{currentStep.currentTopicApplication.prompt}"
                   </p>
                 </div>
@@ -571,7 +571,7 @@ export default function WritingProcessModal({
               {/* Danh sách từ vựng gợi ý ở Bước 2 */}
               {currentStep.currentTopicApplication.words && (
                 <div className="space-y-1.5 pt-1">
-                  <span className="text-[11px] text-slate-400 font-semibold block">
+                  <span className="text-[11px] text-[#5A524A] font-semibold block">
                     Bấm vào từ vựng để copy vào nháp:
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -579,15 +579,15 @@ export default function WritingProcessModal({
                       <div 
                         key={idx}
                         onClick={() => handleCopy(w.word, `vocab_${idx}`)}
-                        className="p-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-blue-500/50 flex items-center justify-between text-xs cursor-pointer transition group"
+                        className="p-2 rounded-lg bg-white border border-[#DDD6CB] hover:border-[#CAD8C8] flex items-center justify-between text-xs cursor-pointer transition group shadow-xs"
                         title="Bấm để copy từ"
                       >
                         <div>
-                          <span className="font-bold text-white font-mono">{w.word}</span>
-                          {w.ipa && <span className="text-[10px] text-blue-300 ml-1.5 font-mono italic">{w.ipa}</span>}
-                          <div className="text-[10px] text-slate-400 line-clamp-1">{w.meaning}</div>
+                          <span className="font-bold text-[#2B2826] font-mono">{w.word}</span>
+                          {w.ipa && <span className="text-[10px] text-[#4A5D4E] ml-1.5 font-mono italic">{w.ipa}</span>}
+                          <div className="text-[10px] text-[#7A7369] line-clamp-1">{w.meaning}</div>
                         </div>
-                        <span className="text-[10px] text-indigo-400 group-hover:text-white shrink-0">
+                        <span className="text-[10px] text-[#4A5D4E] group-hover:underline shrink-0">
                           {copiedKey === `vocab_${idx}` ? "Đã copy ✓" : "Copy"}
                         </span>
                       </div>
@@ -597,7 +597,7 @@ export default function WritingProcessModal({
               )}
 
               {currentStep.currentTopicApplication.tip && (
-                <p className="text-[11px] text-slate-300 bg-slate-900/60 p-2 rounded-lg border border-slate-800/60 leading-relaxed">
+                <p className="text-[11px] text-[#5A524A] bg-white p-2 rounded-lg border border-[#CAD8C8] leading-relaxed shadow-xs">
                   💡 <strong>Gợi ý giám khảo:</strong> {currentStep.currentTopicApplication.tip}
                 </p>
               )}
@@ -606,31 +606,31 @@ export default function WritingProcessModal({
 
           {/* Các mẫu câu ăn điểm (Templates) */}
           {currentStep.templates && currentStep.templates.length > 0 && (
-            <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 space-y-2.5">
-              <span className="text-xs font-bold text-amber-300 uppercase tracking-wide flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-2.5">
+              <span className="text-xs font-bold text-[#B88758] uppercase tracking-wide flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-[#B88758]" />
                 Mẫu câu học thuật chuẩn Band 8.0+ có thể áp dụng:
               </span>
 
               <div className="space-y-2">
                 {currentStep.templates.map((tpl, idx) => (
-                  <div key={idx} className="p-3 rounded-lg bg-slate-900 border border-slate-800 space-y-1.5">
+                  <div key={idx} className="p-3 rounded-lg bg-white border border-[#E7E2D9] space-y-1.5 shadow-xs">
                     <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-bold text-slate-300">{tpl.title}</span>
+                      <span className="text-[11px] font-bold text-[#2B2826]">{tpl.title}</span>
                       <div className="flex items-center gap-1.5">
                         <button
                           type="button"
                           onClick={() => handleCopy(tpl.text, `tpl_${idx}`)}
-                          className="text-[10px] px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1 cursor-pointer"
+                          className="text-[10px] px-2 py-0.5 rounded bg-[#F2EFE9] hover:bg-[#EAE5DC] text-[#5A524A] flex items-center gap-1 cursor-pointer"
                         >
-                          {copiedKey === `tpl_${idx}` ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                          {copiedKey === `tpl_${idx}` ? <Check className="w-3 h-3 text-[#4A5D4E]" /> : <Copy className="w-3 h-3" />}
                           <span>{copiedKey === `tpl_${idx}` ? "Đã chép" : "Sao chép"}</span>
                         </button>
                         {onInsertStepText && (
                           <button
                             type="button"
                             onClick={() => onInsertStepText(tpl.text)}
-                            className="text-[10px] px-2 py-0.5 rounded bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-300 border border-indigo-500/30 flex items-center gap-1 cursor-pointer font-bold"
+                            className="text-[10px] px-2 py-0.5 rounded bg-[#EDF3EE] hover:bg-[#E2ECE3] text-[#3D5240] border border-[#CAD8C8] flex items-center gap-1 cursor-pointer font-bold"
                             title="Chèn mẫu này trực tiếp vào bài viết ở Tab 4"
                           >
                             <Plus className="w-3 h-3" />
@@ -639,7 +639,7 @@ export default function WritingProcessModal({
                         )}
                       </div>
                     </div>
-                    <p className="text-xs font-mono text-emerald-300/90 italic leading-relaxed pl-2 border-l-2 border-emerald-500/40">
+                    <p className="text-xs font-mono text-[#2B2826] italic leading-relaxed pl-2 border-l-2 border-[#4A5D4E]">
                       "{tpl.text}"
                     </p>
                   </div>
@@ -650,13 +650,13 @@ export default function WritingProcessModal({
 
           {/* Ô Luyện Viết Nháp Cho Từng Bước (Interactive Drafting Pad) */}
           {currentStep.draftKey && (
-            <div className="p-4 rounded-2xl bg-indigo-950/20 border border-indigo-500/30 space-y-2.5">
+            <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#CAD8C8] space-y-2.5">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-indigo-300 uppercase tracking-wide flex items-center gap-1.5">
-                  <PenTool className="w-3.5 h-3.5 text-indigo-400" />
+                <span className="text-xs font-bold text-[#4A5D4E] uppercase tracking-wide flex items-center gap-1.5">
+                  <PenTool className="w-3.5 h-3.5 text-[#4A5D4E]" />
                   Ô Luyện Viết Bóc Tách Cho Bước {currentStep.number}:
                 </span>
-                <span className="text-[10px] text-slate-400">
+                <span className="text-[10px] text-[#7A7369]">
                   (Viết nháp riêng đoạn này để rèn luyện)
                 </span>
               </div>
@@ -666,21 +666,21 @@ export default function WritingProcessModal({
                 onChange={(e) => setDrafts(prev => ({ ...prev, [currentStep.draftKey]: e.target.value }))}
                 placeholder={currentStep.placeholder || 'Viết đoạn văn của bước này tại đây...'}
                 rows={4}
-                className="w-full p-3 rounded-xl bg-slate-950 border border-slate-800 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-white placeholder-slate-600 font-sans text-xs leading-relaxed outline-none transition resize-y"
+                className="w-full p-3 rounded-xl bg-white border border-[#DDD6CB] focus:border-[#4A5D4E] focus:ring-1 focus:ring-[#4A5D4E] text-[#2B2826] placeholder-[#968E84] font-sans text-xs leading-relaxed outline-none transition resize-y shadow-xs"
               />
 
               <div className="flex items-center justify-between text-xs pt-1">
-                <span className="text-[11px] text-slate-400 font-mono">
-                  Độ dài: <strong className="text-white">{(drafts[currentStep.draftKey] || '').trim().split(/\s+/).filter(Boolean).length}</strong> từ
+                <span className="text-[11px] text-[#7A7369] font-mono">
+                  Độ dài: <strong className="text-[#2B2826]">{(drafts[currentStep.draftKey] || '').trim().split(/\s+/).filter(Boolean).length}</strong> từ
                 </span>
 
                 {onInsertStepText && drafts[currentStep.draftKey] && drafts[currentStep.draftKey].trim().length > 0 && (
                   <button
                     type="button"
                     onClick={() => handleInsertDraft(currentStep.draftKey)}
-                    className="px-3 py-1.5 rounded-lg bg-emerald-600/30 hover:bg-emerald-600/50 text-emerald-300 border border-emerald-500/40 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+                    className="px-3 py-1.5 rounded-lg bg-[#EDF3EE] hover:bg-[#E2ECE3] text-[#3D5240] border border-[#CAD8C8] text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-xs"
                   >
-                    <Plus className="w-3.5 h-3.5 text-emerald-400" />
+                    <Plus className="w-3.5 h-3.5 text-[#4A5D4E]" />
                     <span>Chèn đoạn này vào Bài viết chính (Tab 4)</span>
                   </button>
                 )}
@@ -690,18 +690,18 @@ export default function WritingProcessModal({
 
           {/* Checklist tự kiểm tra ở Bước Cuối (Proofreading) */}
           {currentStep.checklist && (
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-3">
-              <span className="text-xs font-bold text-emerald-300 uppercase tracking-wide flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#E7E2D9] space-y-3">
+              <span className="text-xs font-bold text-[#4A5D4E] uppercase tracking-wide flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#4A5D4E]" />
                 Checklist 4 Tiêu Chí Chấm Thi:
               </span>
               <div className="space-y-2">
                 {currentStep.checklist.map((chk, idx) => (
-                  <div key={idx} className="p-3 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-2.5 text-xs">
-                    <span className="text-emerald-400 font-bold shrink-0">✓</span>
+                  <div key={idx} className="p-3 rounded-lg bg-white border border-[#E7E2D9] flex items-start gap-2.5 text-xs shadow-xs">
+                    <span className="text-[#4A5D4E] font-bold shrink-0">✓</span>
                     <div>
-                      <strong className="text-white font-bold block mb-0.5">{chk.criteria}</strong>
-                      <p className="text-slate-300 text-[11px] leading-relaxed">{chk.check}</p>
+                      <strong className="text-[#2B2826] font-bold block mb-0.5">{chk.criteria}</strong>
+                      <p className="text-[#5A524A] text-[11px] leading-relaxed">{chk.check}</p>
                     </div>
                   </div>
                 ))}
@@ -712,7 +712,7 @@ export default function WritingProcessModal({
         </div>
 
         {/* ================= MODAL BOTTOM FOOTER & CONTROLS ================= */}
-        <div className="px-5 py-3.5 border-t border-slate-800 bg-slate-950 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0">
+        <div className="px-5 py-3.5 border-t border-[#E7E2D9] bg-[#FAF8F5] flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0">
           <div className="flex items-center gap-2">
             <button
               type="button"
@@ -720,8 +720,8 @@ export default function WritingProcessModal({
               onClick={() => setCurrentStepIndex(prev => Math.max(0, prev - 1))}
               className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1 transition ${
                 isFirstStep
-                  ? "bg-slate-900 text-slate-600 border border-slate-800 cursor-not-allowed"
-                  : "bg-slate-850 hover:bg-slate-800 text-slate-200 border border-slate-700/80 cursor-pointer"
+                  ? "bg-[#F2EFE9] text-[#A8A196] border border-[#DDD6CB] cursor-not-allowed"
+                  : "bg-white hover:bg-[#FAF8F5] text-[#2B2826] border border-[#DDD6CB] cursor-pointer shadow-xs"
               }`}
             >
               <ArrowLeft className="w-3.5 h-3.5" />
@@ -734,8 +734,8 @@ export default function WritingProcessModal({
               onClick={() => setCurrentStepIndex(prev => Math.min(currentSteps.length - 1, prev + 1))}
               className={`px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-1 transition ${
                 isLastStep
-                  ? "bg-slate-900 text-slate-600 border border-slate-800 cursor-not-allowed"
-                  : "bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-300 border border-indigo-500/40 cursor-pointer"
+                  ? "bg-[#F2EFE9] text-[#A8A196] border border-[#DDD6CB] cursor-not-allowed"
+                  : "bg-[#EDF3EE] hover:bg-[#E2ECE3] text-[#3D5240] border border-[#CAD8C8] cursor-pointer shadow-xs"
               }`}
             >
               <span>Bước tiếp theo</span>
@@ -749,7 +749,7 @@ export default function WritingProcessModal({
               <button
                 type="button"
                 onClick={handleCompileFullEssay}
-                className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs flex items-center gap-1.5 transition shadow-md shadow-emerald-900/30 cursor-pointer"
+                className="px-3.5 py-2 rounded-xl bg-[#4A5D4E] hover:bg-[#3D4E41] text-white font-bold text-xs flex items-center gap-1.5 transition shadow-xs cursor-pointer"
                 title="Gộp các đoạn đã nháp ở trên thành bài viết hoàn chỉnh và đưa sang Tab 4"
               >
                 <Send className="w-3.5 h-3.5" />
@@ -760,7 +760,7 @@ export default function WritingProcessModal({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-bold text-xs transition cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-white hover:bg-[#FAF8F5] text-[#6E675E] hover:text-[#2B2826] border border-[#DDD6CB] font-bold text-xs transition cursor-pointer shadow-xs"
             >
               Đóng hướng dẫn
             </button>

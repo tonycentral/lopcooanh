@@ -36,7 +36,7 @@ export default function Header({
   currentView
 }) {
   return (
-    <header className="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-md shrink-0">
+    <header className="sticky top-0 z-40 bg-[#F8F6F1]/95 backdrop-blur-md border-b border-[#E7E2D9] shadow-[0_1px_3px_rgba(0,0,0,0.03)] shrink-0">
       <div className="w-full px-3 sm:px-5 h-14 flex items-center justify-between gap-2.5">
         
         {/* Logo & App title - Clickable to return to Welcome Page */}
@@ -45,23 +45,23 @@ export default function Header({
           className="flex items-center gap-2.5 cursor-pointer group select-none shrink-0"
           title="Về Trang Chào Mừng Lớp Cô Oanh"
         >
-          <div className="w-9 h-9 rounded-xl bg-blue-600/15 border border-blue-500/40 p-0.5 flex items-center justify-center shadow-md shadow-blue-950/40 group-hover:scale-105 transition-transform shrink-0 overflow-hidden bg-slate-950">
+          <div className="w-9 h-9 rounded-xl bg-white border border-[#E7E2D9] p-0.5 flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform shrink-0 overflow-hidden">
             <img 
               src="./logo.png" 
               alt="Logo Lớp cô Oanh" 
-              className="w-full h-full object-contain drop-shadow" 
+              className="w-full h-full object-contain" 
             />
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-base sm:text-lg tracking-tight text-white group-hover:text-blue-300 transition leading-none">
+              <span className="font-extrabold text-base sm:text-lg tracking-tight text-[#2B2826] group-hover:text-[#4A5D4E] transition leading-none">
                 Lớp cô Oanh
               </span>
-              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/30">
+              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#EDF3EE] text-[#3D5240] border border-[#CAD8C8]">
                 {activeTask === "task1" ? "Task 1" : "Task 2"}
               </span>
             </div>
-            <p className="text-[10px] text-slate-400 hidden md:block leading-none mt-0.5">
+            <p className="text-[10px] text-[#7A7369] hidden md:block leading-none mt-0.5">
               Website chuyên cải thiện writing
             </p>
           </div>
@@ -74,22 +74,22 @@ export default function Header({
           {(currentView === 'practice' || currentView === 'flashcard') && (
             <button
               onClick={onGoWelcome}
-              className="hidden xl:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 text-xs font-semibold text-slate-300 hover:text-white transition cursor-pointer"
+              className="hidden xl:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E7E2D9] text-xs font-semibold text-[#5A524A] hover:text-[#2B2826] transition cursor-pointer shadow-xs"
               title="Quay lại Trang Chào Mừng"
             >
-              <Home className="w-3.5 h-3.5 text-blue-400" />
+              <Home className="w-3.5 h-3.5 text-[#4A5D4E]" />
               <span>Trang chủ</span>
             </button>
           )}
 
           {/* Mode Switcher: Luyện Viết vs Flashcard */}
-          <div className="flex items-center p-0.5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs shadow-inner">
+          <div className="flex items-center p-0.5 rounded-xl bg-[#F0EDE6] border border-[#DDD6CB] text-xs shadow-xs">
             <button
               onClick={onGoPractice}
               className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-bold transition cursor-pointer ${
                 currentView === 'practice'
-                  ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-[#4A5D4E] text-white shadow-xs"
+                  : "text-[#6E675E] hover:text-[#2B2826]"
               }`}
               title="Khu vực Luyện Viết Task 1 & Task 2"
             >
@@ -100,14 +100,14 @@ export default function Header({
               onClick={onOpenFlashcard}
               className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-bold transition cursor-pointer ${
                 currentView === 'flashcard'
-                  ? "bg-gradient-to-r from-emerald-600 to-green-600 text-white shadow-md shadow-emerald-600/30"
-                  : "text-emerald-400 hover:text-emerald-300"
+                  ? "bg-[#655243] text-white shadow-xs"
+                  : "text-[#6E675E] hover:text-[#2B2826]"
               }`}
               title="Học Nhanh Từ Vựng (Flashcard Tương Tác)"
             >
               <Layers className="w-3 h-3" />
               <span>Flashcard</span>
-              <span className="text-[9px] px-1 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 font-black border border-emerald-500/30 animate-pulse hidden xs:inline">
+              <span className="text-[9px] px-1 py-0.2 rounded-full bg-[#EDF3EE] text-[#3D5240] font-black border border-[#CAD8C8] hidden xs:inline">
                 Smart
               </span>
             </button>
@@ -115,13 +115,13 @@ export default function Header({
 
           {/* Quick Task 1 / Task 2 Switcher */}
           {onToggleTask && (
-            <div className="hidden sm:flex items-center p-0.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs">
+            <div className="hidden sm:flex items-center p-0.5 rounded-xl bg-[#F0EDE6] border border-[#DDD6CB] text-xs shadow-xs">
               <button
                 onClick={() => onToggleTask("task1")}
                 className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-bold transition cursor-pointer ${
                   activeTask === "task1"
-                    ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
-                    : "text-slate-400 hover:text-slate-200"
+                    ? "bg-[#4A5D4E] text-white shadow-xs"
+                    : "text-[#6E675E] hover:text-[#2B2826]"
                 }`}
               >
                 <BarChart3 className="w-3 h-3" />
@@ -131,8 +131,8 @@ export default function Header({
                 onClick={() => onToggleTask("task2")}
                 className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-bold transition cursor-pointer ${
                   activeTask === "task2"
-                    ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
-                    : "text-slate-400 hover:text-slate-200"
+                    ? "bg-[#4A5D4E] text-white shadow-xs"
+                    : "text-[#6E675E] hover:text-[#2B2826]"
                 }`}
               >
                 <FileText className="w-3 h-3" />
@@ -144,30 +144,30 @@ export default function Header({
           {/* 1-Line Target Band Button */}
           <button
             onClick={onOpenBandModal}
-            className="group flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-800 border border-slate-700/80 hover:border-blue-500/50 transition cursor-pointer select-none text-xs"
+            className="group flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E7E2D9] hover:border-[#CAD8C8] transition cursor-pointer select-none text-xs shadow-xs"
             title="Nhấn để đổi mục tiêu Band"
           >
-            <Target className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-            <span className="text-slate-400">Mục tiêu:</span>
-            <span className="font-bold text-white">Band {targetBand}</span>
-            <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 font-medium ml-0.5">
+            <Target className="w-3.5 h-3.5 text-[#4A5D4E] shrink-0" />
+            <span className="text-[#7A7369]">Mục tiêu:</span>
+            <span className="font-bold text-[#2B2826]">Band {targetBand}</span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#EDF3EE] text-[#3D5240] font-medium ml-0.5 border border-[#CAD8C8]">
               Đổi
             </span>
           </button>
 
           {/* Chấm điểm hiện trạng người dùng (Trung bình 7 ngày gần nhất) */}
           <div
-            className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/60 border border-slate-700/60 text-xs select-none"
+            className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-[#E7E2D9] text-xs select-none shadow-xs"
             title="Điểm trung bình các bài đã làm trong 7 ngày gần nhất"
           >
-            <TrendingUp className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-            <span className="text-slate-400">Hiện trạng (7 ngày):</span>
+            <TrendingUp className="w-3.5 h-3.5 text-[#B88758] shrink-0" />
+            <span className="text-[#7A7369]">Hiện trạng (7 ngày):</span>
             <span className={`font-bold ${
               current7DayScore !== null
                 ? parseFloat(current7DayScore) >= parseFloat(targetBand)
-                  ? "text-emerald-400"
-                  : "text-amber-400"
-                : "text-slate-500"
+                  ? "text-[#3D5240]"
+                  : "text-[#B88758]"
+                : "text-[#A8A196]"
             }`}>
               {current7DayScore !== null ? `Band ${current7DayScore.toFixed(1)}` : "--"}
             </span>
@@ -181,12 +181,12 @@ export default function Header({
           {/* Contact cô Oanh button */}
           <button
             onClick={onOpenContact}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 hover:text-emerald-300 border border-emerald-500/30 text-xs font-bold transition cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#EDF3EE] hover:bg-[#E3EDE5] text-[#3D5240] border border-[#CAD8C8] text-xs font-bold transition cursor-pointer shadow-xs"
             title="Liên hệ cô Oanh học trực tiếp (Zalo 0899.488.299)"
           >
-            <PhoneCall className="w-3.5 h-3.5 text-emerald-400" />
+            <PhoneCall className="w-3.5 h-3.5 text-[#4A5D4E]" />
             <span className="hidden sm:inline">Học với cô Oanh</span>
-            <span className="text-[10px] font-mono text-emerald-300 bg-emerald-500/20 px-1.5 py-0.5 rounded hidden xl:inline">
+            <span className="text-[10px] font-mono text-[#3D5240] bg-white px-1.5 py-0.5 rounded border border-[#CAD8C8] hidden xl:inline">
               0899.488.299
             </span>
           </button>
@@ -196,20 +196,20 @@ export default function Header({
             <div className="flex items-center gap-1">
               <button
                 onClick={onOpenAuth}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-800 border border-emerald-500/40 text-xs text-white transition cursor-pointer"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#CAD8C8] text-xs text-[#2B2826] transition cursor-pointer shadow-xs"
                 title="Tài khoản đám mây Supabase (Đã kết nối)"
               >
-                <Cloud className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span className="font-semibold text-emerald-300 max-w-[120px] sm:max-w-[160px] truncate">
+                <Cloud className="w-3.5 h-3.5 text-[#4A5D4E] shrink-0" />
+                <span className="font-semibold text-[#3D5240] max-w-[120px] sm:max-w-[160px] truncate">
                   {currentUser?.user_metadata?.full_name || currentUser?.email}
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" title="Đã đồng bộ đám mây" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#4A5D4E]" title="Đã đồng bộ đám mây" />
               </button>
 
               {onSignOut && (
                 <button
                   onClick={onSignOut}
-                  className="p-1.5 sm:p-2 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition cursor-pointer"
+                  className="p-1.5 sm:p-2 rounded-xl text-[#7A7369] hover:text-[#B95C48] hover:bg-[#F2EFE9] transition cursor-pointer"
                   title="Đăng xuất tài khoản"
                 >
                   <LogOut className="w-3.5 h-3.5" />
@@ -219,7 +219,7 @@ export default function Header({
           ) : (
             <button
               onClick={onOpenAuth}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition shadow-md shadow-blue-600/30 cursor-pointer active:scale-95 shrink-0"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#4A5D4E] hover:bg-[#3D4E41] text-white font-bold text-xs transition shadow-xs cursor-pointer active:scale-95 shrink-0"
               title="Đăng nhập / Đăng ký để đồng bộ bài viết và từ vựng"
             >
               <User className="w-3.5 h-3.5" />
@@ -231,10 +231,10 @@ export default function Header({
           {onOpenSources && (
             <button
               onClick={onOpenSources}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-xs text-blue-300 hover:text-white transition cursor-pointer"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E7E2D9] text-xs text-[#5A524A] hover:text-[#2B2826] transition cursor-pointer shadow-xs"
               title="Kho đề thi & Nguồn bổ sung chủ đề (Cambridge, Simon, AWL)"
             >
-              <Database className="w-3.5 h-3.5 text-blue-400" />
+              <Database className="w-3.5 h-3.5 text-[#4A5D4E]" />
               <span className="font-semibold hidden lg:inline">Nguồn Cambridge</span>
             </button>
           )}
@@ -242,7 +242,7 @@ export default function Header({
           {/* History Drawer */}
           <button
             onClick={onOpenHistory}
-            className="p-2 sm:p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800 border border-transparent hover:border-slate-700 transition cursor-pointer"
+            className="p-2 sm:p-2.5 rounded-xl text-[#6E675E] hover:text-[#2B2826] hover:bg-[#FAF8F5] border border-transparent hover:border-[#E7E2D9] transition cursor-pointer"
             title="Lịch sử chấm câu"
           >
             <History className="w-4 h-4 sm:w-5 sm:h-5" />
