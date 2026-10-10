@@ -363,8 +363,10 @@ export default function SentencePractice({
 
   const insertText = (text, partNum) => {
     if (partNum === 2) {
+      if (part2Result) return;
       setPart2Input(prev => prev ? `${prev} ${text}` : text);
     } else if (partNum === 3) {
+      if (part3Result) return;
       setPart3Input(prev => prev ? `${prev} ${text}` : text);
     }
   };
@@ -607,9 +609,10 @@ export default function SentencePractice({
               <textarea
                 value={vietnameseMeaningInput}
                 onChange={(e) => setVietnameseMeaningInput(e.target.value)}
+                disabled={Boolean(part1Result)}
                 placeholder="Ghi nghĩa tiếng Việt của từ theo cách hiểu của bạn..."
                 rows={2}
-                className="w-full p-3 rounded-xl bg-white border border-[#E6E2D8] text-[#24211E] text-xs sm:text-sm focus:outline-none focus:border-[#3E4F42] transition placeholder-[#7A7369] resize-none font-sans"
+                className="w-full p-3 rounded-xl bg-white border border-[#E6E2D8] text-[#24211E] text-xs sm:text-sm focus:outline-none focus:border-[#3E4F42] transition placeholder-[#7A7369] resize-none font-sans disabled:bg-[#FAF8F5] disabled:text-[#7A7369] disabled:cursor-not-allowed"
               />
             </div>
 
@@ -628,13 +631,14 @@ export default function SentencePractice({
                 type="text"
                 value={synonymInput}
                 onChange={(e) => setSynonymInput(e.target.value)}
+                disabled={Boolean(part1Result)}
                 placeholder="Nhập từ đồng nghĩa tiếng Anh..."
-                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E6E2D8] text-[#24211E] text-xs font-mono focus:outline-none focus:border-[#3E4F42] transition placeholder-[#7A7369]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E6E2D8] text-[#24211E] text-xs font-mono focus:outline-none focus:border-[#3E4F42] transition placeholder-[#7A7369] disabled:bg-[#FAF8F5] disabled:text-[#7A7369] disabled:cursor-not-allowed"
               />
             </div>
 
             {/* Nút hành động */}
-            <div className="flex items-center justify-between pt-1">
+            <div className="flex items-center justify-end gap-2 pt-1">
               <button
                 type="button"
                 onClick={() => {
@@ -642,7 +646,7 @@ export default function SentencePractice({
                   setSynonymInput("");
                   setPart1Result(null);
                 }}
-                className="text-xs text-[#7A7369] hover:text-[#24211E] transition cursor-pointer"
+                className="px-4 py-2.5 rounded-xl border border-[#E6E2D8] bg-white hover:bg-[#FAF8F5] text-[#7A7369] hover:text-[#24211E] text-xs font-semibold transition cursor-pointer"
               >
                 Làm lại
               </button>
@@ -650,10 +654,10 @@ export default function SentencePractice({
               <button
                 type="button"
                 onClick={handleGradePart1}
-                disabled={!vietnameseMeaningInput.trim() && !synonymInput.trim()}
-                className="px-5 py-2.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-xs shadow-xs transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
+                disabled={Boolean(part1Result) || (!vietnameseMeaningInput.trim() && !synonymInput.trim())}
+                className="px-5 py-2.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-semibold text-xs shadow-xs transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
               >
-                <span>Kiểm tra &amp; Đánh giá</span>
+                <span>Kiểm tra</span>
               </button>
             </div>
           </div>
@@ -772,7 +776,8 @@ export default function SentencePractice({
                 <button
                   type="button"
                   onClick={() => insertText(selectedVocab.word, 2)}
-                  className="px-2 py-0.5 rounded-md bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3] text-xs font-mono font-medium hover:bg-[#EDF3EE] transition cursor-pointer"
+                  disabled={Boolean(part2Result)}
+                  className="px-2 py-0.5 rounded-md bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3] text-xs font-mono font-medium hover:bg-[#EDF3EE] transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   + {selectedVocab.word}
                 </button>
@@ -785,8 +790,9 @@ export default function SentencePractice({
                 rows={3}
                 value={part2Input}
                 onChange={(e) => setPart2Input(e.target.value)}
+                disabled={Boolean(part2Result) || isEvaluatingPart2}
                 placeholder={`Dịch câu trên sang tiếng Anh có sử dụng từ "${selectedVocab.word}"...`}
-                className="w-full p-3.5 rounded-xl bg-white border border-[#E6E2D8] text-[#24211E] text-xs sm:text-sm font-sans focus:outline-none focus:border-[#3E4F42] transition resize-y leading-relaxed placeholder-[#7A7369]"
+                className="w-full p-3.5 rounded-xl bg-white border border-[#E6E2D8] text-[#24211E] text-xs sm:text-sm font-sans focus:outline-none focus:border-[#3E4F42] transition resize-y leading-relaxed placeholder-[#7A7369] disabled:bg-[#FAF8F5] disabled:text-[#7A7369] disabled:cursor-not-allowed"
               />
               <div className="absolute right-2.5 bottom-2.5 text-[10px] text-[#7A7369] bg-[#FAF8F5] px-2 py-0.5 rounded border border-[#E6E2D8]">
                 {part2Input.split(/\s+/).filter(Boolean).length} từ
@@ -802,7 +808,8 @@ export default function SentencePractice({
                     key={i}
                     type="button"
                     onClick={() => insertText(syn, 2)}
-                    className="px-2 py-0.5 rounded bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-[#3E4F42] text-[11px] font-mono transition cursor-pointer"
+                    disabled={Boolean(part2Result)}
+                    className="px-2 py-0.5 rounded bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-[#3E4F42] text-[11px] font-mono transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     + {syn}
                   </button>
@@ -811,20 +818,24 @@ export default function SentencePractice({
             )}
 
             {/* Nút hành động */}
-            <div className="flex items-center justify-between pt-1">
+            <div className="flex items-center justify-end gap-2 pt-1">
               <button
                 type="button"
-                onClick={() => setPart2Input("")}
-                className="text-xs text-[#7A7369] hover:text-[#24211E] transition cursor-pointer"
+                onClick={() => {
+                  setPart2Input("");
+                  setPart2Result(null);
+                  setPart2ViewBand(null);
+                }}
+                className="px-4 py-2 rounded-xl border border-[#E6E2D8] bg-white hover:bg-[#FAF8F5] text-[#7A7369] hover:text-[#24211E] text-xs font-semibold transition cursor-pointer"
               >
-                Xóa làm lại
+                Làm lại
               </button>
 
               <button
                 type="button"
                 onClick={handleGradePart2}
-                disabled={isEvaluatingPart2 || !part2Input.trim()}
-                className="px-5 py-2 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-xs shadow-xs transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
+                disabled={isEvaluatingPart2 || Boolean(part2Result) || !part2Input.trim()}
+                className="px-5 py-2 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-semibold text-xs shadow-xs transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
               >
                 {isEvaluatingPart2 ? (
                   <>
@@ -834,7 +845,7 @@ export default function SentencePractice({
                 ) : (
                   <>
                     <Send className="w-3.5 h-3.5" />
-                    <span>Chấm câu & Gợi ý</span>
+                    <span>Kiểm tra</span>
                   </>
                 )}
               </button>
@@ -1034,7 +1045,8 @@ export default function SentencePractice({
                     key={i}
                     type="button"
                     onClick={() => insertText(link, 3)}
-                    className="px-2 py-0.5 rounded-lg bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-[#3E4F42] text-[11px] font-mono transition cursor-pointer"
+                    disabled={Boolean(part3Result)}
+                    className="px-2 py-0.5 rounded-lg bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-[#3E4F42] text-[11px] font-mono transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     + {link}
                   </button>
@@ -1048,8 +1060,9 @@ export default function SentencePractice({
                 rows={5}
                 value={part3Input}
                 onChange={(e) => setPart3Input(e.target.value)}
+                disabled={Boolean(part3Result) || isEvaluatingPart3}
                 placeholder={`Viết cả đoạn văn trên sang tiếng Anh (khoảng 35 - 65 từ), sử dụng từ "${selectedVocab.word}" và các liên từ chuyển câu học thuật...`}
-                className="w-full p-3.5 rounded-xl bg-white border border-[#E6E2D8] text-[#24211E] text-xs sm:text-sm font-sans focus:outline-none focus:border-[#3E4F42] transition resize-y leading-relaxed placeholder-[#7A7369]"
+                className="w-full p-3.5 rounded-xl bg-white border border-[#E6E2D8] text-[#24211E] text-xs sm:text-sm font-sans focus:outline-none focus:border-[#3E4F42] transition resize-y leading-relaxed placeholder-[#7A7369] disabled:bg-[#FAF8F5] disabled:text-[#7A7369] disabled:cursor-not-allowed"
               />
               <div className="absolute right-2.5 bottom-2.5 text-[10px] text-[#7A7369] bg-[#FAF8F5] px-2 py-0.5 rounded border border-[#E6E2D8]">
                 {part3Input.split(/\s+/).filter(Boolean).length} từ
@@ -1057,30 +1070,34 @@ export default function SentencePractice({
             </div>
 
             {/* Nút hành động */}
-            <div className="flex items-center justify-between pt-1">
+            <div className="flex items-center justify-end gap-2 pt-1">
               <button
                 type="button"
-                onClick={() => setPart3Input("")}
-                className="text-xs text-[#7A7369] hover:text-[#24211E] transition cursor-pointer"
+                onClick={() => {
+                  setPart3Input("");
+                  setPart3Result(null);
+                  setPart3ViewBand(null);
+                }}
+                className="px-4 py-2 rounded-xl border border-[#E6E2D8] bg-white hover:bg-[#FAF8F5] text-[#7A7369] hover:text-[#24211E] text-xs font-semibold transition cursor-pointer"
               >
-                Xóa làm lại
+                Làm lại
               </button>
 
               <button
                 type="button"
                 onClick={handleGradePart3}
-                disabled={isEvaluatingPart3 || !part3Input.trim()}
-                className="px-5 py-2 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-xs shadow-xs transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
+                disabled={isEvaluatingPart3 || Boolean(part3Result) || !part3Input.trim()}
+                className="px-5 py-2 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-semibold text-xs shadow-xs transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
               >
                 {isEvaluatingPart3 ? (
                   <>
                     <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                    <span>Đang chấm đoạn văn...</span>
+                    <span>Đang chấm...</span>
                   </>
                 ) : (
                   <>
                     <Send className="w-3.5 h-3.5" />
-                    <span>Chấm đoạn văn &amp; Gợi ý</span>
+                    <span>Kiểm tra</span>
                   </>
                 )}
               </button>

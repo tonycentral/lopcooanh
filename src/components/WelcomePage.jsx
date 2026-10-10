@@ -17,6 +17,7 @@ export default function WelcomePage({
   onOpenContactModal,
   onChangeEmail,
   onOpenAuth,
+  onOpenSettings,
   onSignOut,
   currentUser,
   studentEmail,
@@ -62,9 +63,9 @@ export default function WelcomePage({
         {currentUser ? (
           <div className="flex items-center gap-2">
             <button
-              onClick={onOpenAuth}
+              onClick={onOpenSettings || onOpenAuth}
               className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-xs text-[#24211E] transition cursor-pointer max-w-[220px] shadow-xs"
-              title="Tài khoản đã kết nối"
+              title="Cài đặt tài khoản & AI"
             >
               <Cloud className="w-3.5 h-3.5 text-[#3E4F42] shrink-0" />
               <span className="font-medium text-[#3E4F42] truncate">{currentUser?.user_metadata?.full_name || currentUser?.email}</span>

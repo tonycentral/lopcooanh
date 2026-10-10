@@ -15,6 +15,7 @@ import AdminDashboard from './components/AdminDashboard';
 import FlashcardPage from './components/flashcards/FlashcardPage';
 import SourcesDatabankModal from './components/SourcesDatabankModal';
 import AuthModal from './components/AuthModal';
+import SettingsModal from './components/SettingsModal';
 import FullEssayWorkspace from './components/FullEssayWorkspace';
 
 
@@ -28,6 +29,7 @@ import {
   getStoredTargetBand, 
   saveTargetBand, 
   getStoredApiKey, 
+  saveApiKey,
   getStoredStats,
   getAverageScoreLast7Days
 } from './services/storage';
@@ -48,6 +50,7 @@ import {
   upsertCloudProfile, 
   fetchCloudProfile 
 } from './services/authService';
+import { supabase } from './services/supabaseClient';
 
 export default function App() {
   // Current view: 'welcome' | 'practice' | 'admin' (ẩn bí mật)
@@ -194,9 +197,41 @@ export default function App() {
     }
   };
 
-  // API key & grading stats
-  const [apiKey] = useState(() => getStoredApiKey());
+  // Settings Modal & API key
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+  const [apiKey, setApiKey] = useState(() => getStoredApiKey());
   const [, setStats] = useState(() => getStoredStats());
+
+  const handleSaveApiKey = (key) => {
+    saveApiKey(key);
+    setApiKey(key);
+  };
+
+  const handleUpdateFullName = async (newName) => {
+    if (!currentUser || !newName.trim()) return;
+    try {
+      if (supabase) {
+        await supabase.auth.updateUser({
+          data: { full_name: newName.trim() }
+        });
+      }
+      await upsertCloudProfile(currentUser.id, {
+        email: currentUser.email,
+        full_name: newName.trim(),
+        target_band: targetBand,
+        selected_task: activeTask
+      });
+      setCurrentUser(prev => ({
+        ...prev,
+        user_metadata: {
+          ...prev?.user_metadata,
+          full_name: newName.trim()
+        }
+      }));
+    } catch (e) {
+      console.error("Lỗi cập nhật tên:", e);
+    }
+  };
 
   // Available topics based on selected task + custom added topics
   const [customTask1Topics, setCustomTask1Topics] = useState([]);
@@ -369,6 +404,7 @@ export default function App() {
           onSettingsChange={handleSettingsChange}
           onChangeEmail={() => setIsAuthModalOpen(true)}
           onOpenAuth={() => setIsAuthModalOpen(true)}
+          onOpenSettings={() => setIsSettingsModalOpen(true)}
           onSignOut={handleSignOut}
           onStartPractice={() => {
             if (!currentUser) {
@@ -421,6 +457,7 @@ export default function App() {
             onGoPractice={() => setCurrentView('vocab_practice')}
             currentUser={currentUser}
             onOpenAuth={() => setIsAuthModalOpen(true)}
+            onOpenSettings={() => setIsSettingsModalOpen(true)}
             onSignOut={handleSignOut}
             studentEmail={studentEmail}
             activeTask={activeTask}
@@ -468,6 +505,7 @@ export default function App() {
             onGoPractice={() => setCurrentView('vocab_practice')}
             currentUser={currentUser}
             onOpenAuth={() => setIsAuthModalOpen(true)}
+            onOpenSettings={() => setIsSettingsModalOpen(true)}
             onSignOut={handleSignOut}
             studentEmail={studentEmail}
             activeTask={activeTask}
@@ -664,9 +702,25 @@ export default function App() {
         totalVocabCount={currentTopics.reduce((acc, t) => acc + (t.vocabularies?.length || 0), 0)}
       />
 
+      {/* Cài đặt tài khoản & AI (Gemini Key, hồ sơ học viên, target band) */}
+      <SettingsModal
+        isOpen={isSettingsModalOpen}
+        onClose={() => setIsSettingsModalOpen(false)}
+        currentUser={currentUser}
+        studentEmail={studentEmail}
+        onUpdateFullName={handleUpdateFullName}
+        targetBand={targetBand}
+        onSelectBand={handleUpdateTargetBand}
+        current7DayScore={current7DayScore}
+        apiKey={apiKey}
+        onSaveApiKey={handleSaveApiKey}
+        onResetData={handleRefreshStats}
+        onSignOut={handleSignOut}
+      />
+
       {/* Tài Khoản & Đồng Bộ Đám Mây Supabase Auth Modal (Không cho phép Guest Mode) */}
       <AuthModal
-        isOpen={isAuthModalOpen}
+        isOpen={isAuthModalOpen && !currentUser}
         onClose={() => {
           if (currentUser) {
             setIsAuthModalOpen(false);
