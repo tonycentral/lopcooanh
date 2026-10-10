@@ -1,13 +1,47 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'caphevietnam';
+  src: local('caphevietnam'),
+       url('./assets/fonts/caphevietnam-RegularFont.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'caphevietnam';
+  src: local('caphevietnam'),
+       url('./assets/fonts/caphevietnam-RegularFont.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: 'caphevietnam', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: 'caphevietnam', Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
 @layer base {
-  body {
+  html, body {
     background-color: #F8F6F1;
     color: #2B2826;
     min-height: 100vh;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: 'caphevietnam', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+
+  button, input, optgroup, select, textarea {
+    font-family: inherit;
+  }
+}
+
+/* Áp dụng font caphevietnam cho toàn bộ typography */
+.font-sans,
+.font-serif {
+  font-family: 'caphevietnam', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
 }
 
 /* Japandi Minimal Scrollbars */
