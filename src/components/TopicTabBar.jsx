@@ -152,7 +152,27 @@ export default function TopicTabBar({
         </button>
       </div>
 
-      {/* Prominent, Legible IELTS Prompt Card - Clean & Minimalist */}
+      {/* Clean Topic Header for Vocabulary Practice - NO Task badge, NO IELTS exam prompt */}
+      {hidePromptCard && selectedTopic && (
+        <div className="flex items-center justify-between px-3.5 py-2 rounded-2xl bg-white border border-[#E6E2D8] shadow-xs">
+          <div className="flex items-center gap-2 min-w-0">
+            <span className="text-[10px] font-bold text-[#A67C52] uppercase tracking-wider shrink-0">
+              Chủ đề:
+            </span>
+            <span className="font-bold text-xs sm:text-sm text-[#24211E] truncate">
+              {selectedTopic.vietnameseName || selectedTopic.name}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0 text-xs text-[#7A7369]">
+            <span className="text-[11px] font-medium bg-[#FAF8F5] px-2.5 py-1 rounded-lg border border-[#E6E2D8]">
+              {selectedTopic.vocabularies?.length || 0} từ vựng trọng tâm
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* Prominent, Legible IELTS Prompt Card - Clean & Minimalist (Chỉ hiển thị khi làm bài Task) */}
       {!hidePromptCard && selectedTopic && (
         <div className="px-4 py-3 rounded-2xl bg-white border border-[#E6E2D8] shadow-xs space-y-1.5">
           <div className="flex items-center justify-between gap-2">

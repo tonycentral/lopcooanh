@@ -173,7 +173,8 @@ export default function SentencePractice({
   onOpenChartModal,
   onSentenceGraded,
   activePart: controlledActivePart,
-  onPartChange
+  onPartChange,
+  onGoFullEssay
 }) {
   // 3-Part State: 1 = Hiểu từ, 2 = Dịch 1 câu, 3 = Luyện viết đoạn văn
   const [internalActivePart, setInternalActivePart] = useState(1);
@@ -429,28 +430,35 @@ export default function SentencePractice({
   if (!selectedVocab) {
     return (
       <div className="space-y-4 text-[#24211E]">
-        {/* Navigation Switcher */}
-        <div className="grid grid-cols-3 gap-1 p-1 rounded-2xl bg-[#F4EFEA] border border-[#E6E2D8] shadow-xs">
+        {/* Navigation Switcher: 1.1 -> 1.2 -> 1.3 -> 1.4 */}
+        <div className="grid grid-cols-4 gap-1 p-1 rounded-2xl bg-[#F4EFEA] border border-[#E6E2D8] shadow-xs">
           <button
             onClick={() => setActivePart(1)}
-            className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold text-[#7A7369] hover:text-[#24211E] transition flex items-center justify-center gap-1 cursor-pointer"
+            className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold text-[#7A7369] hover:text-[#24211E] transition flex items-center justify-center gap-1 cursor-pointer truncate"
           >
-            <span className="w-4 h-4 rounded-full bg-black/10 text-[10px] flex items-center justify-center font-black">1</span>
-            <span className="truncate">Hiểu từ vựng</span>
+            <span>1.1 Từ vựng</span>
           </button>
           <button
             onClick={() => setActivePart(2)}
-            className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold text-[#7A7369] hover:text-[#24211E] transition flex items-center justify-center gap-1 cursor-pointer"
+            className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold text-[#7A7369] hover:text-[#24211E] transition flex items-center justify-center gap-1 cursor-pointer truncate"
           >
-            <span className="w-4 h-4 rounded-full bg-black/10 text-[10px] flex items-center justify-center font-black">2</span>
-            <span className="truncate">Luyện viết câu</span>
+            <span>1.2 Viết 1 câu</span>
           </button>
           <button
             onClick={() => setActivePart(3)}
-            className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold text-[#7A7369] hover:text-[#24211E] transition flex items-center justify-center gap-1 cursor-pointer"
+            className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold text-[#7A7369] hover:text-[#24211E] transition flex items-center justify-center gap-1 cursor-pointer truncate"
           >
-            <span className="w-4 h-4 rounded-full bg-black/10 text-[10px] flex items-center justify-center font-black">3</span>
-            <span className="truncate">Luyện viết đoạn văn</span>
+            <span>1.3 Viết 1 đoạn</span>
+          </button>
+          <button
+            onClick={() => {
+              if (onGoFullEssay) onGoFullEssay();
+            }}
+            className="py-2 px-1 sm:px-2 rounded-xl text-[10px] sm:text-xs font-bold text-[#7A7369] hover:text-[#3E4F42] hover:bg-white/70 transition flex items-center justify-center gap-1 cursor-pointer truncate"
+            title="Chuyển sang 1.4: Viết bài hoàn chỉnh"
+          >
+            <span>1.4 Viết 1 bài</span>
+            <ArrowRight className="w-3 h-3 shrink-0" />
           </button>
         </div>
 
@@ -530,9 +538,9 @@ export default function SentencePractice({
         </div>
       )}
 
-      {/* 3-Part Navigation Switcher: Hiểu từ -> Luyện câu -> Luyện đoạn */}
-      <div className="grid grid-cols-3 gap-1 p-1 rounded-2xl bg-[#F4EFEA] border border-[#E6E2D8] shadow-xs">
-        {/* Tab Phần 1: Hiểu từ */}
+      {/* 4-Step Navigation Switcher: 1.1 Học từ vựng -> 1.2 Viết câu -> 1.3 Viết đoạn -> 1.4 Viết bài */}
+      <div className="grid grid-cols-4 gap-1 p-1 rounded-2xl bg-[#F4EFEA] border border-[#E6E2D8] shadow-xs">
+        {/* Tab 1.1: Học từ vựng */}
         <button
           onClick={() => setActivePart(1)}
           className={`py-2 px-1 sm:px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer text-center ${
@@ -541,14 +549,13 @@ export default function SentencePractice({
               : "text-[#7A7369] hover:text-[#24211E]"
           }`}
         >
-          <span className="w-4 h-4 rounded-full bg-white/20 text-[10px] flex items-center justify-center font-black shrink-0">1</span>
-          <span className="truncate">Hiểu từ vựng</span>
+          <span className="truncate">1.1 Từ vựng</span>
           {part1Result && part1Result.isCorrect && (
             <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0" />
           )}
         </button>
 
-        {/* Tab Phần 2: Luyện viết câu */}
+        {/* Tab 1.2: Học viết 1 câu */}
         <button
           onClick={() => setActivePart(2)}
           className={`py-2 px-1 sm:px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer text-center ${
@@ -557,14 +564,13 @@ export default function SentencePractice({
               : "text-[#7A7369] hover:text-[#24211E]"
           }`}
         >
-          <span className="w-4 h-4 rounded-full bg-white/20 text-[10px] flex items-center justify-center font-black shrink-0">2</span>
-          <span className="truncate">Luyện viết câu</span>
+          <span className="truncate">1.2 Viết 1 câu</span>
           {part2Result && (
             <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0" />
           )}
         </button>
 
-        {/* Tab Phần 3: Luyện viết đoạn văn */}
+        {/* Tab 1.3: Học viết một đoạn */}
         <button
           onClick={() => setActivePart(3)}
           className={`py-2 px-1 sm:px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 cursor-pointer text-center ${
@@ -573,16 +579,27 @@ export default function SentencePractice({
               : "text-[#7A7369] hover:text-[#24211E]"
           }`}
         >
-          <span className="w-4 h-4 rounded-full bg-white/20 text-[10px] flex items-center justify-center font-black shrink-0">3</span>
-          <span className="truncate">Luyện viết đoạn văn</span>
+          <span className="truncate">1.3 Viết 1 đoạn</span>
           {part3Result && (
             <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0" />
           )}
         </button>
+
+        {/* Tab 1.4: Học viết một bài */}
+        <button
+          onClick={() => {
+            if (onGoFullEssay) onGoFullEssay();
+          }}
+          className="py-2 px-1 sm:px-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1 cursor-pointer text-center text-[#7A7369] hover:text-[#3E4F42] hover:bg-white/70"
+          title="Chuyển sang 1.4: Viết bài hoàn chỉnh (Full Essay Task 1 & Task 2)"
+        >
+          <span className="truncate">1.4 Viết 1 bài</span>
+          <ArrowRight className="w-3 h-3 shrink-0" />
+        </button>
       </div>
 
       {/* ========================================================================= */}
-      {/* ==================== PHẦN 1: CHẤM ĐIỂM HIỂU TỪ VỰNG ===================== */}
+      {/* ==================== 1.1: CHẤM ĐIỂM HIỂU TỪ VỰNG ===================== */}
       {/* ========================================================================= */}
       {activePart === 1 && (
         <div className="space-y-4 animate-fadeIn">
@@ -591,7 +608,7 @@ export default function SentencePractice({
             <div className="flex items-center justify-between pb-2 border-b border-[#E6E2D8]">
               <div className="flex items-center gap-2 text-[#24211E] font-medium text-xs sm:text-sm">
                 <HelpCircle className="w-4 h-4 text-[#3E4F42]" />
-                <span>Hiểu từ: <strong className="font-serif text-[#3E4F42]">{selectedVocab.word}</strong></span>
+                <span>1.1 Hiểu từ vựng: <strong className="font-serif text-[#3E4F42]">{selectedVocab.word}</strong></span>
               </div>
             </div>
 
@@ -710,7 +727,7 @@ export default function SentencePractice({
                   onClick={() => setActivePart(2)}
                   className="px-3.5 py-1.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-bold text-xs transition cursor-pointer flex items-center gap-1 shrink-0 shadow-xs"
                 >
-                  <span>Sang Phần 2 (Luyện câu)</span>
+                  <span>Sang 1.2 Học viết 1 câu</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -748,7 +765,7 @@ export default function SentencePractice({
       )}
 
       {/* ========================================================================= */}
-      {/* ==================== PHẦN 2: DỊCH 1 CÂU CÓ DÙNG TỪ ====================== */}
+      {/* ==================== 1.2: DỊCH 1 CÂU CÓ DÙNG TỪ ====================== */}
       {/* ========================================================================= */}
       {activePart === 2 && (
         <div className="space-y-4 animate-fadeIn">
@@ -759,7 +776,7 @@ export default function SentencePractice({
             <div className="flex items-center justify-between pb-2 border-b border-[#E6E2D8]">
               <div className="flex items-center gap-2 text-[#24211E] font-medium text-xs sm:text-sm">
                 <BookOpen className="w-4 h-4 text-[#3E4F42]" />
-                <span>Dịch câu có từ: <strong className="font-serif text-[#3E4F42]">{selectedVocab.word}</strong></span>
+                <span>1.2 Dịch 1 câu có từ: <strong className="font-serif text-[#3E4F42]">{selectedVocab.word}</strong></span>
               </div>
             </div>
 
@@ -884,7 +901,7 @@ export default function SentencePractice({
                   onClick={() => setActivePart(3)}
                   className="px-3.5 py-1.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-bold text-xs transition cursor-pointer flex items-center gap-1.5 shadow-xs"
                 >
-                  <span>Tiếp tục Phần 3</span>
+                  <span>Sang 1.3 Học viết một đoạn</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -985,7 +1002,7 @@ export default function SentencePractice({
       )}
 
       {/* ========================================================================= */}
-      {/* ==================== PHẦN 3: LUYỆN VIẾT ĐOẠN VĂN (PARAGRAPH) ============ */}
+      {/* ==================== 1.3: LUYỆN VIẾT ĐOẠN VĂN (PARAGRAPH) ============ */}
       {/* ========================================================================= */}
       {activePart === 3 && (
         <div className="space-y-4 animate-fadeIn">
@@ -996,7 +1013,7 @@ export default function SentencePractice({
             <div className="flex items-center justify-between pb-2 border-b border-[#E6E2D8]">
               <div className="flex items-center gap-2 text-[#3E4F42] font-extrabold text-xs sm:text-sm">
                 <Layers className="w-4 h-4" />
-                <span>Phần 3: Luyện Viết Theo Đoạn Văn (Academic Paragraph)</span>
+                <span>1.3 Luyện Viết Theo Đoạn Văn (Academic Paragraph)</span>
               </div>
               <span className="text-[10px] text-[#7A7369] bg-[#F4EFEA] px-2 py-0.5 rounded-full border border-[#E6E2D8]">
                 Mục tiêu: Band {targetBand}
@@ -1223,6 +1240,20 @@ export default function SentencePractice({
                 targetBand={currentPart3Band} 
                 isPart3={true} 
               />
+
+              {/* Nút Chuyển Tiếp Sang 1.4: Viết Một Bài Luận Hoàn Chỉnh */}
+              {onGoFullEssay && (
+                <div className="pt-2 flex justify-end">
+                  <button
+                    type="button"
+                    onClick={onGoFullEssay}
+                    className="px-4 py-2.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-bold text-xs transition cursor-pointer flex items-center gap-1.5 shadow-xs"
+                  >
+                    <span>Sang 1.4 Học viết một bài (Full Essay)</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              )}
 
             </div>
           )}

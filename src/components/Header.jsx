@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { 
   Target, 
   Home, 
@@ -12,7 +12,9 @@ import {
   Cloud, 
   LogOut,
   Check,
-  Settings
+  Settings,
+  Sparkles,
+  FileEdit
 } from 'lucide-react';
 
 export default function Header({ 
@@ -31,7 +33,9 @@ export default function Header({
   studentEmail,
   activeTask,
   onToggleTask,
-  currentView
+  currentView,
+  activeWritingStep,
+  onSelectWritingStep
 }) {
   const [isFunctionDropdownOpen, setIsFunctionDropdownOpen] = useState(false);
   const [isTaskDropdownOpen, setIsTaskDropdownOpen] = useState(false);
@@ -63,65 +67,92 @@ export default function Header({
   const currentNum = current7DayScore !== null ? current7DayScore : 0;
   const progressPercent = Math.min(100, Math.round((currentNum / targetNum) * 100));
 
-  // Definition of learning features (Học từ vựng vs Viết full task vs Flashcard)
-  const LEARNING_FEATURES = [
+  // Definition of unified progressive structure: 1. Học viết (1.1 -> 1.2 -> 1.3 -> 1.4) & 2. Flashcards
+  const UNIFIED_SECTIONS = [
     {
-      id: 'vocab_practice',
-      title: 'Học Từ Vựng (Câu & Đoạn)',
-      subtitle: 'Luyện nhóm từ vựng, viết câu & đoạn văn',
-      icon: BookOpen,
-      action: () => {
-        setIsFunctionDropdownOpen(false);
-        if (onGoVocabPractice) onGoVocabPractice();
-        else if (onGoPractice) onGoPractice();
-      }
+      group: "1. HỌC VIẾT",
+      items: [
+        {
+          id: '1.1',
+          title: '1.1 Học từ vựng',
+          subtitle: 'Nắm nghĩa & collocations theo 10 chủ đề',
+          icon: BookOpen,
+          action: () => {
+            setIsFunctionDropdownOpen(false);
+            if (onSelectWritingStep) onSelectWritingStep('1.1');
+            else if (onGoVocabPractice) onGoVocabPractice();
+            else if (onGoPractice) onGoPractice();
+          }
+        },
+        {
+          id: '1.2',
+          title: '1.2 Học viết 1 câu',
+          subtitle: 'Dịch & áp dụng từ vựng vào câu đơn',
+          icon: FileEdit,
+          action: () => {
+            setIsFunctionDropdownOpen(false);
+            if (onSelectWritingStep) onSelectWritingStep('1.2');
+            else if (onGoVocabPractice) onGoVocabPractice();
+            else if (onGoPractice) onGoPractice();
+          }
+        },
+        {
+          id: '1.3',
+          title: '1.3 Học viết một đoạn',
+          subtitle: 'Viết đoạn văn PEEL với liên từ mạch lạc',
+          icon: Layers,
+          action: () => {
+            setIsFunctionDropdownOpen(false);
+            if (onSelectWritingStep) onSelectWritingStep('1.3');
+            else if (onGoVocabPractice) onGoVocabPractice();
+            else if (onGoPractice) onGoPractice();
+          }
+        },
+        {
+          id: '1.4',
+          title: '1.4 Học viết một bài',
+          subtitle: 'Viết full bài luận Task 1 & Task 2 kèm bài mẫu',
+          icon: PenTool,
+          action: () => {
+            setIsFunctionDropdownOpen(false);
+            if (onSelectWritingStep) onSelectWritingStep('1.4');
+            else if (onGoFullEssay) onGoFullEssay();
+          }
+        }
+      ]
     },
     {
-      id: 'full_essay',
-      title: 'Viết Full Task (Full Essay)',
-      subtitle: 'Tự viết, viết theo hướng dẫn & dịch theo đề xuất',
-      icon: PenTool,
-      action: () => {
-        setIsFunctionDropdownOpen(false);
-        if (onGoFullEssay) onGoFullEssay();
-      }
-    },
-    {
-      id: 'flashcard',
-      title: 'Flashcard Từ Vựng',
-      subtitle: 'Phản xạ từ vựng học thuật',
-      icon: Layers,
-      action: () => {
-        setIsFunctionDropdownOpen(false);
-        if (onOpenFlashcard) onOpenFlashcard();
-      }
+      group: "2. FLASHCARDS",
+      items: [
+        {
+          id: '2.0',
+          title: '2. Flashcards',
+          subtitle: 'Phản xạ từ vựng học thuật qua thẻ ghi nhớ',
+          icon: Sparkles,
+          action: () => {
+            setIsFunctionDropdownOpen(false);
+            if (onOpenFlashcard) onOpenFlashcard();
+          }
+        }
+      ]
     }
   ];
 
-  // Definition of 3 distinct practice sections
-  const PRACTICE_SECTIONS = [
-    {
-      id: 'task1',
-      title: 'Task 1',
-      subtitle: 'Biểu đồ, Bản đồ & Quy trình',
-      icon: BarChart3
-    },
-    {
-      id: 'task2',
-      title: 'Task 2',
-      subtitle: 'Bài luận Essay học thuật',
-      icon: FileText
+  // Determine current active step ID (1.1, 1.2, 1.3, 1.4, 2.0)
+  const currentStepId = useMemo(() => {
+    if (currentView === 'flashcard') return '2.0';
+    if (currentView === 'full_essay') return '1.4';
+    if (activeWritingStep) return activeWritingStep;
+    return '1.1';
+  }, [currentView, activeWritingStep]);
+
+  const currentItem = useMemo(() => {
+    for (const group of UNIFIED_SECTIONS) {
+      const found = group.items.find(it => it.id === currentStepId);
+      if (found) return found;
     }
-  ];
-
-  const currentFeature = LEARNING_FEATURES.find(f => {
-    if (currentView === 'vocab_practice' || currentView === 'practice') return f.id === 'vocab_practice';
-    if (currentView === 'full_essay') return f.id === 'full_essay';
-    if (currentView === 'flashcard') return f.id === 'flashcard';
-    return f.id === 'vocab_practice';
-  }) || LEARNING_FEATURES[0];
-
-  const currentSection = PRACTICE_SECTIONS.find(s => s.id === activeTask) || PRACTICE_SECTIONS[1];
+    return UNIFIED_SECTIONS[0].items[0];
+  }, [currentStepId]);
 
   return (
     <header className="sticky top-0 z-40 bg-[#F8F6F1]/95 backdrop-blur-md border-b border-[#E6E2D8] shadow-[0_1px_3px_rgba(0,0,0,0.03)] shrink-0">
@@ -145,7 +176,7 @@ export default function Header({
           </span>
         </div>
 
-        {/* Center: Dropdown 1 (Chức năng), Dropdown 2 (3 Phần Luyện Tập), Unified Progress Widget */}
+        {/* Center: Dropdown 1 (Cơ cấu học thống nhất 1.1 - 1.4 & 2. Flashcards), Dropdown 2 (Chỉ hiện Task 1/2 khi ở 1.4) */}
         <div className="flex items-center gap-2">
           
           {/* Home button */}
@@ -160,113 +191,126 @@ export default function Header({
             </button>
           )}
 
-          {/* ================= DROPDOWN 1: CHỨC NĂNG HỌC (Luyện viết / Flashcard / ...) ================= */}
+          {/* ================= DROPDOWN 1: CƠ CẤU MỤC HỌC THỐNG NHẤT ================= */}
           <div className="relative" ref={functionDropdownRef}>
             <button
               onClick={() => {
                 setIsFunctionDropdownOpen(prev => !prev);
                 setIsTaskDropdownOpen(false);
               }}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#3E4F42]/30 text-xs font-medium text-[#24211E] transition cursor-pointer shadow-2xs select-none"
-              title="Chọn chức năng học tập"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#3E4F42]/30 text-xs font-semibold text-[#24211E] transition cursor-pointer shadow-2xs select-none"
+              title="Chọn mục học tập (1.1 Từ vựng, 1.2 Viết câu, 1.3 Viết đoạn, 1.4 Viết một bài, 2. Flashcards)"
             >
-              {currentFeature && <currentFeature.icon className="w-3.5 h-3.5 text-[#3E4F42]" />}
-              <span>{currentFeature ? currentFeature.title : "Chức năng"}</span>
+              {currentItem && <currentItem.icon className="w-3.5 h-3.5 text-[#3E4F42]" />}
+              <span>{currentItem ? currentItem.title : "1. Học viết"}</span>
               <ChevronDown className={`w-3 h-3 text-[#7A7369] transition-transform duration-200 ${isFunctionDropdownOpen ? "rotate-180" : ""}`} />
             </button>
 
             {isFunctionDropdownOpen && (
-              <div className="absolute top-full left-0 mt-1.5 w-60 bg-white border border-[#E6E2D8] rounded-2xl shadow-lg p-1.5 z-50 animate-in fade-in-50 duration-150">
-                <div className="px-2.5 py-1 text-[10px] font-semibold text-[#7A7369] uppercase tracking-wider">
-                  Chức năng học tập
-                </div>
-                <div className="space-y-0.5">
-                  {LEARNING_FEATURES.map((feature) => {
-                    const isActive = currentView === feature.id || (feature.id === 'vocab_practice' && currentView === 'practice');
-                    const Icon = feature.icon;
-                    return (
-                      <button
-                        key={feature.id}
-                        onClick={feature.action}
-                        className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-left text-xs transition cursor-pointer ${
-                          isActive 
-                            ? "bg-[#EDF3EE] text-[#3E4F42] font-semibold" 
-                            : "text-[#24211E] hover:bg-[#FAF8F5]"
-                        }`}
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <div className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 ${
-                            isActive ? "bg-[#3E4F42] text-white" : "bg-[#F4EFEA] text-[#7A7369]"
-                          }`}>
-                            <Icon className="w-3.5 h-3.5" />
-                          </div>
-                          <div>
-                            <div className="leading-tight font-medium">{feature.title}</div>
-                            <div className="text-[10px] text-[#7A7369] leading-tight mt-0.5">{feature.subtitle}</div>
-                          </div>
-                        </div>
-                        {isActive && <Check className="w-3.5 h-3.5 text-[#3E4F42] shrink-0" />}
-                      </button>
-                    );
-                  })}
-                </div>
+              <div className="absolute top-full left-0 mt-1.5 w-64 bg-white border border-[#E6E2D8] rounded-2xl shadow-xl p-2 z-50 animate-in fade-in-50 duration-150">
+                {UNIFIED_SECTIONS.map((section, sIdx) => (
+                  <div key={section.group} className={sIdx > 0 ? "pt-2 mt-1 border-t border-[#E6E2D8]" : ""}>
+                    <div className="px-2.5 py-1 text-[10px] font-bold text-[#A67C52] uppercase tracking-wider">
+                      {section.group}
+                    </div>
+                    <div className="space-y-0.5 mt-0.5">
+                      {section.items.map((item) => {
+                        const isActive = item.id === currentStepId;
+                        const Icon = item.icon;
+                        return (
+                          <button
+                            key={item.id}
+                            type="button"
+                            onClick={item.action}
+                            className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-left text-xs transition cursor-pointer ${
+                              isActive 
+                                ? "bg-[#EDF3EE] text-[#3E4F42] font-bold" 
+                                : "text-[#24211E] hover:bg-[#FAF8F5]"
+                            }`}
+                          >
+                            <div className="flex items-center gap-2.5 min-w-0">
+                              <div className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 ${
+                                isActive ? "bg-[#3E4F42] text-white" : "bg-[#F4EFEA] text-[#7A7369]"
+                              }`}>
+                                <Icon className="w-3.5 h-3.5" />
+                              </div>
+                              <div className="min-w-0">
+                                <div className="leading-tight truncate">{item.title}</div>
+                                <div className="text-[10px] text-[#7A7369] leading-tight truncate mt-0.5">{item.subtitle}</div>
+                              </div>
+                            </div>
+                            {isActive && <Check className="w-3.5 h-3.5 text-[#3E4F42] shrink-0 ml-1.5" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
           </div>
 
-          {/* ================= DROPDOWN 2: PHÂN MỤC LUYỆN TẬP (Task 1 / Task 2 / Từ vựng) ================= */}
-          {onToggleTask && (
+          {/* ================= DROPDOWN 2: CHỈ HIỂN THỊ KHI Ở 1.4 HỌC VIẾT MỘT BÀI ================= */}
+          {currentView === 'full_essay' && onToggleTask && (
             <div className="relative" ref={taskDropdownRef}>
               <button
                 onClick={() => {
                   setIsTaskDropdownOpen(prev => !prev);
                   setIsFunctionDropdownOpen(false);
                 }}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#3E4F42]/30 text-xs font-medium text-[#24211E] transition cursor-pointer shadow-2xs select-none"
-                title="Chọn phần luyện tập (Task 1 / Task 2 / Từ vựng)"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#3E4F42]/30 text-xs font-semibold text-[#3E4F42] transition cursor-pointer shadow-2xs select-none"
+                title="Chọn dạng đề thi (Task 1 hoặc Task 2)"
               >
-                {currentSection && <currentSection.icon className="w-3.5 h-3.5 text-[#3E4F42]" />}
-                <span>{currentSection ? currentSection.title : "Luyện tập"}</span>
+                {activeTask === 'task1' ? <BarChart3 className="w-3.5 h-3.5" /> : <FileText className="w-3.5 h-3.5" />}
+                <span>{activeTask === 'task1' ? "Task 1 (Biểu đồ)" : "Task 2 (Bài luận)"}</span>
                 <ChevronDown className={`w-3 h-3 text-[#7A7369] transition-transform duration-200 ${isTaskDropdownOpen ? "rotate-180" : ""}`} />
               </button>
 
               {isTaskDropdownOpen && (
-                <div className="absolute top-full left-0 mt-1.5 w-64 bg-white border border-[#E6E2D8] rounded-2xl shadow-lg p-1.5 z-50 animate-in fade-in-50 duration-150">
-                  <div className="px-2.5 py-1 text-[10px] font-semibold text-[#7A7369] uppercase tracking-wider">
-                    Phần luyện tập
+                <div className="absolute top-full left-0 mt-1.5 w-60 bg-white border border-[#E6E2D8] rounded-2xl shadow-xl p-1.5 z-50 animate-in fade-in-50 duration-150">
+                  <div className="px-2.5 py-1 text-[10px] font-bold text-[#A67C52] uppercase tracking-wider">
+                    Dạng bài luận IELTS
                   </div>
                   <div className="space-y-0.5">
-                    {PRACTICE_SECTIONS.map((section) => {
-                      const isActive = activeTask === section.id;
-                      const Icon = section.icon;
-                      return (
-                        <button
-                          key={section.id}
-                          onClick={() => {
-                            setIsTaskDropdownOpen(false);
-                            onToggleTask(section.id);
-                          }}
-                          className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-left text-xs transition cursor-pointer ${
-                            isActive 
-                              ? "bg-[#EDF3EE] text-[#3E4F42] font-semibold" 
-                              : "text-[#24211E] hover:bg-[#FAF8F5]"
-                          }`}
-                        >
-                          <div className="flex items-center gap-2.5">
-                            <div className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 ${
-                              isActive ? "bg-[#3E4F42] text-white" : "bg-[#F4EFEA] text-[#7A7369]"
-                            }`}>
-                              <Icon className="w-3.5 h-3.5" />
-                            </div>
-                            <div>
-                              <div className="leading-tight font-medium">{section.title}</div>
-                              <div className="text-[10px] text-[#7A7369] leading-tight mt-0.5">{section.subtitle}</div>
-                            </div>
-                          </div>
-                          {isActive && <Check className="w-3.5 h-3.5 text-[#3E4F42] shrink-0" />}
-                        </button>
-                      );
-                    })}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsTaskDropdownOpen(false);
+                        onToggleTask('task1');
+                      }}
+                      className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-left text-xs transition cursor-pointer ${
+                        activeTask === 'task1' ? "bg-[#EDF3EE] text-[#3E4F42] font-bold" : "text-[#24211E] hover:bg-[#FAF8F5]"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <BarChart3 className="w-3.5 h-3.5 text-[#3E4F42]" />
+                        <div>
+                          <div>Task 1 (Report)</div>
+                          <div className="text-[10px] text-[#7A7369]">Biểu đồ, Bản đồ & Quy trình</div>
+                        </div>
+                      </div>
+                      {activeTask === 'task1' && <Check className="w-3.5 h-3.5 text-[#3E4F42]" />}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsTaskDropdownOpen(false);
+                        onToggleTask('task2');
+                      }}
+                      className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-left text-xs transition cursor-pointer ${
+                        activeTask === 'task2' ? "bg-[#EDF3EE] text-[#3E4F42] font-bold" : "text-[#24211E] hover:bg-[#FAF8F5]"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <FileText className="w-3.5 h-3.5 text-[#3E4F42]" />
+                        <div>
+                          <div>Task 2 (Essay)</div>
+                          <div className="text-[10px] text-[#7A7369]">Bài luận nghị luận học thuật</div>
+                        </div>
+                      </div>
+                      {activeTask === 'task2' && <Check className="w-3.5 h-3.5 text-[#3E4F42]" />}
+                    </button>
                   </div>
                 </div>
               )}

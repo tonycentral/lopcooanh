@@ -251,6 +251,34 @@ export default function App() {
   const [selectedVocab, setSelectedVocab] = useState(() => currentTopics[0]?.vocabularies[0] || null);
   const [practiceActivePart, setPracticeActivePart] = useState(1);
 
+  // Unified 1.1 - 1.4 & 2. Flashcard navigation handler
+  const handleSelectWritingStep = (step) => {
+    if (step === '1.1') {
+      setCurrentView('vocab_practice');
+      setPracticeActivePart(1);
+    } else if (step === '1.2') {
+      setCurrentView('vocab_practice');
+      setPracticeActivePart(2);
+    } else if (step === '1.3') {
+      setCurrentView('vocab_practice');
+      setPracticeActivePart(3);
+    } else if (step === '1.4') {
+      setCurrentView('full_essay');
+    } else if (step === '2.0') {
+      setCurrentView('flashcard');
+    }
+  };
+
+  const activeWritingStep = currentView === 'full_essay' 
+    ? '1.4' 
+    : currentView === 'flashcard' 
+    ? '2.0' 
+    : practiceActivePart === 2 
+    ? '1.2' 
+    : practiceActivePart === 3 
+    ? '1.3' 
+    : '1.1';
+
   // Modal States
   const [isBandModalOpen, setIsBandModalOpen] = useState(false);
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
@@ -463,6 +491,8 @@ export default function App() {
             activeTask={activeTask}
             onToggleTask={handleToggleTask}
             currentView={currentView}
+            activeWritingStep={activeWritingStep}
+            onSelectWritingStep={handleSelectWritingStep}
           />
 
           <div className="flex-1 min-h-0 overflow-y-auto p-3 sm:p-4">
@@ -511,6 +541,8 @@ export default function App() {
             activeTask={activeTask}
             onToggleTask={handleToggleTask}
             currentView={currentView}
+            activeWritingStep={activeWritingStep}
+            onSelectWritingStep={handleSelectWritingStep}
           />
 
           {/* Section 1: Thanh chọn nhóm chủ đề & topic */}
@@ -524,7 +556,7 @@ export default function App() {
               onOpenChartModal={() => setIsChartModalOpen(true)}
               task1Layout={task1Layout}
               onToggleTask1Layout={handleToggleTask1Layout}
-              hidePromptCard={activeTask === 'vocab'}
+              hidePromptCard={true}
             />
           </section>
 
@@ -572,6 +604,7 @@ export default function App() {
                         onSentenceGraded={handleRefreshStats}
                         activePart={practiceActivePart}
                         onPartChange={setPracticeActivePart}
+                        onGoFullEssay={() => setCurrentView('full_essay')}
                       />
                     </div>
                   </div>
@@ -616,6 +649,7 @@ export default function App() {
                         onSentenceGraded={handleRefreshStats}
                         activePart={practiceActivePart}
                         onPartChange={setPracticeActivePart}
+                        onGoFullEssay={() => setCurrentView('full_essay')}
                       />
                     </div>
                   </div>
@@ -653,6 +687,7 @@ export default function App() {
                       onSentenceGraded={handleRefreshStats}
                       activePart={practiceActivePart}
                       onPartChange={setPracticeActivePart}
+                      onGoFullEssay={() => setCurrentView('full_essay')}
                     />
                   </div>
                 </div>
