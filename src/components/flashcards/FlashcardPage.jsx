@@ -12,6 +12,7 @@ import {
   addXP, 
   extractAllVocabularies 
 } from '../../services/flashcardService';
+import { getSynonymVocab } from '../../services/synonymService';
 import { 
   Layers, 
   Sparkles, 
@@ -55,6 +56,7 @@ export default function FlashcardPage({
   const [sessionXp, setSessionXp] = useState(0);
   const [sessionMasteredCount, setSessionMasteredCount] = useState(0);
   const [isSessionFinished, setIsSessionFinished] = useState(false);
+  const [extraCards, setExtraCards] = useState([]);
 
   // Deck of cards filtered by selected criteria
   const activeDeck = useMemo(() => {
@@ -76,8 +78,12 @@ export default function FlashcardPage({
       list = allVocabularies;
     }
 
-    return list.length > 0 ? list : allVocabularies.slice(0, 10);
-  }, [filterMode, currentTopic, allVocabularies, progress.needsReviewWordIds]);
+    const baseList = list.length > 0 ? list : allVocabularies.slice(0, 10);
+    if (!extraCards.length) return baseList;
+    const existingWords = new Set(baseList.map(c => c.word?.toLowerCase().trim()));
+    const validExtras = extraCards.filter(c => !existingWords.has(c.word?.toLowerCase().trim()));
+    return [...validExtras, ...baseList];
+  }, [filterMode, currentTopic, allVocabularies, progress.needsReviewWordIds, extraCards]);
 
   const currentCard = activeDeck[currentIndex] || activeDeck[0];
 
@@ -86,6 +92,26 @@ export default function FlashcardPage({
     setCurrentIndex(0);
     setIsSessionFinished(false);
   }, [filterMode, activeMode]);
+
+  // Handle click on synonym in Flashcard -> Mở ngay flashcard của từ mới
+  const handleSelectSynonymCard = (syn) => {
+    if (!syn) return;
+    const cleanSyn = syn.trim().toLowerCase();
+    const existingIdx = activeDeck.findIndex(c => c.word && c.word.toLowerCase().trim() === cleanSyn);
+    if (existingIdx !== -1) {
+      setCurrentIndex(existingIdx);
+      return;
+    }
+
+    let found = allVocabularies.find(c => c.word && c.word.toLowerCase().trim() === cleanSyn);
+    if (!found) {
+      found = getSynonymVocab(syn, currentCard, currentTopic?.name || "IELTS Writing");
+    }
+    if (found) {
+      setExtraCards(prev => [found, ...prev]);
+      setCurrentIndex(0);
+    }
+  };
 
   // Handle card result from ClassicCardView
   const handleCardResult = (isMastered) => {
@@ -304,6 +330,7 @@ export default function FlashcardPage({
             card={currentCard}
             onMarkCard={handleCardResult}
             soundEnabled={soundEnabled}
+            onSelectSynonym={handleSelectSynonymCard}
           />
         )}
 

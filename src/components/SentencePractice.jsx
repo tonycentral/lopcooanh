@@ -24,6 +24,7 @@ import {
 import { evaluateWithGemini } from '../services/geminiService';
 import { analyzeUpgradeDetails } from '../services/upgradeDetailHelper';
 import { saveHistoryEntry } from '../services/storage';
+import { getSynonymVocab, findVocabInList } from '../services/synonymService';
 
 const AVAILABLE_BANDS = ["6.5", "7.0", "7.5", "8.0", "8.5"];
 
@@ -167,6 +168,7 @@ export default function SentencePractice({
   topic, 
   targetBand = "7.0", 
   selectedVocab, 
+  onSelectVocab,
   apiKey,
   studentEmail,
   activeTask = "task2",
@@ -182,6 +184,19 @@ export default function SentencePractice({
   const setActivePart = (newPart) => {
     setInternalActivePart(newPart);
     if (onPartChange) onPartChange(newPart);
+  };
+
+  // Handler khi click vào từ đồng nghĩa ở thanh thông tin từ
+  const handleSynonymClickInPractice = (syn) => {
+    if (!syn || !onSelectVocab) return;
+    const cleanSyn = syn.trim();
+    let target = findVocabInList(cleanSyn, topic?.vocabularies || []);
+    if (!target) {
+      target = getSynonymVocab(cleanSyn, selectedVocab, topic?.name || "IELTS Writing");
+    }
+    if (target) {
+      onSelectVocab(target);
+    }
   };
 
   // ================= STATE CHO PHẦN 1: ĐÁNH GIÁ NGHĨA TIẾNG VIỆT & TỪ ĐỒNG NGHĨA =================
@@ -524,13 +539,16 @@ export default function SentencePractice({
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {selectedVocab.synonyms.map((syn, idx) => (
-                  <span
+                  <button
                     key={idx}
-                    className="text-xs px-2 py-0.5 rounded-md bg-[#FAF5EE] border border-[#E6E2D8] text-[#A67C52] font-mono font-medium hover:bg-[#FAF5EE] transition select-text"
-                    title={`Từ đồng nghĩa Band 7.5+ của "${selectedVocab.word}": ${syn}`}
+                    type="button"
+                    onClick={() => handleSynonymClickInPractice(syn)}
+                    className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-md bg-[#FAF5EE] border border-[#E6E2D8] hover:border-[#3E4F42] hover:bg-[#EDF3EE] hover:text-[#3E4F42] text-[#A67C52] font-mono font-medium transition cursor-pointer group shadow-2xs"
+                    title={`Chuyển sang luyện tập từ đồng nghĩa "${syn}"`}
                   >
-                    {syn}
-                  </span>
+                    <span>{syn}</span>
+                    <span className="text-[10px] text-[#A67C52] group-hover:text-[#3E4F42] font-sans opacity-70 group-hover:opacity-100 transition group-hover:translate-x-0.5">&rarr;</span>
+                  </button>
                 ))}
               </div>
             </div>

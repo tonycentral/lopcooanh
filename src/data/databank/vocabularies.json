@@ -59364,5 +59364,290 @@
     ],
     "exampleSentence": "The development of indigenous ethnography is regarded by experts as a critical parameter in culture_arts policy.",
     "wordFamily": "indigenous (n)"
+  },
+  {
+    "id": "V_BC_EARMARK",
+    "topicId": "task1_bar_chart",
+    "word": "earmark",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈɪə.mɑːk/",
+    "meaning": "Dành riêng, phân bổ ngân sách hoặc nguồn lực cho mục đích cụ thể",
+    "definitionEn": "to set aside money or resources for a specific purpose",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "set aside, reserve for",
+    "synonyms": [
+      "allocate",
+      "apportion",
+      "reserve",
+      "designate"
+    ],
+    "collocations": [
+      "earmark funds for",
+      "earmark budget for education",
+      "earmark resources"
+    ],
+    "exampleSentence": "The municipal council agreed to earmark substantial revenue for public transit infrastructure.",
+    "wordFamily": "earmarked (adj), earmarking (n)"
+  },
+  {
+    "id": "V_BC_APPORTION",
+    "topicId": "task1_bar_chart",
+    "word": "apportion",
+    "partOfSpeech": "verb",
+    "ipa": "/əˈpɔː.ʃən/",
+    "meaning": "Phân chia, phân bổ tài nguyên theo tỉ lệ định sẵn",
+    "definitionEn": "to divide and allocate resources or responsibilities proportionally",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "divide, share out, assign",
+    "synonyms": [
+      "allocate",
+      "earmark",
+      "distribute",
+      "allot"
+    ],
+    "collocations": [
+      "apportion resources fairly",
+      "apportion expenses among departments",
+      "equitably apportion"
+    ],
+    "exampleSentence": "Authorities must apportion medical expenditure equitably across urban and rural clinics.",
+    "wordFamily": "apportionment (n), apportioned (adj)"
+  },
+  {
+    "id": "V_BC_DISTRIBUTE",
+    "topicId": "task1_bar_chart",
+    "word": "distribute",
+    "partOfSpeech": "verb",
+    "ipa": "/dɪˈstrɪb.juːt/",
+    "meaning": "Phân phát, phân phối đều khắp hoặc trải rộng",
+    "definitionEn": "to spread or supply something over an area or among individuals",
+    "cefrBand": "B2 - C1 (Band 7.0 - 7.5)",
+    "basicEquivalent": "give out, spread out",
+    "synonyms": [
+      "allocate",
+      "disperse",
+      "disseminate",
+      "apportion"
+    ],
+    "collocations": [
+      "distribute wealth evenly",
+      "distribute funding proportionally",
+      "unevenly distributed"
+    ],
+    "exampleSentence": "Household budgets were distributed unevenly across housing, education, and leisure pursuits.",
+    "wordFamily": "distribution (n), distributive (adj)"
+  },
+  {
+    "id": "V_BC_EXCESSIVELY",
+    "topicId": "task1_bar_chart",
+    "word": "excessively",
+    "partOfSpeech": "adverb",
+    "ipa": "/ɪkˈses.ɪv.li/",
+    "meaning": "Quá mức, vượt quá giới hạn hợp lý hoặc cân bằng",
+    "definitionEn": "to a greater degree or in greater amounts than is necessary or normal",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "too much, overly",
+    "synonyms": [
+      "disproportionately",
+      "inordinately",
+      "immoderately"
+    ],
+    "collocations": [
+      "spend excessively on",
+      "excessively high proportion",
+      "excessively reliant on"
+    ],
+    "exampleSentence": "Families in developing areas spent excessively on basic housing necessities relative to their income.",
+    "wordFamily": "excess (n), excessive (adj)"
+  },
+  {
+    "id": "V_BC_UNEVENLY",
+    "topicId": "task1_bar_chart",
+    "word": "unevenly",
+    "partOfSpeech": "adverb",
+    "ipa": "/ʌnˈiː.vən.li/",
+    "meaning": "Không đồng đều, lệch lạc về mặt tỉ lệ hoặc phân bố",
+    "definitionEn": "in a manner that is not regular, equal, or balanced",
+    "cefrBand": "B2 - C1 (Band 7.0 - 7.5)",
+    "basicEquivalent": "not equally, irregularly",
+    "synonyms": [
+      "disproportionately",
+      "asymmetrically",
+      "disparately"
+    ],
+    "collocations": [
+      "unevenly distributed",
+      "apportioned unevenly",
+      "spread unevenly"
+    ],
+    "exampleSentence": "Financial resources were distributed unevenly among the five surveyed nations throughout 2023.",
+    "wordFamily": "uneven (adj), unevenness (n)"
+  },
+  {
+    "id": "V_BC_OVERWHELMINGLY",
+    "topicId": "task1_bar_chart",
+    "word": "overwhelmingly",
+    "partOfSpeech": "adverb",
+    "ipa": "/ˌəʊ.vəˈwel.mɪŋ.li/",
+    "meaning": "Một cách áp đảo, chiếm ưu thế vượt trội hoàn toàn",
+    "definitionEn": "in a way that is vast or overpowering",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "mostly, greatly",
+    "synonyms": [
+      "predominantly",
+      "massively",
+      "disproportionately"
+    ],
+    "collocations": [
+      "overwhelmingly dominant",
+      "voted overwhelmingly",
+      "overwhelmingly concentrated"
+    ],
+    "exampleSentence": "Expenditure was overwhelmingly dominated by residential housing in the vast majority of countries.",
+    "wordFamily": "overwhelm (v), overwhelming (adj)"
+  },
+  {
+    "id": "V_BC_DIVERGENCE",
+    "topicId": "task1_bar_chart",
+    "word": "divergence",
+    "partOfSpeech": "noun",
+    "ipa": "/daɪˈvɜː.dʒəns/",
+    "meaning": "Sự phân kỳ, sự tách biệt hoặc khoảng cách khác biệt ngày càng lớn",
+    "definitionEn": "the process or state of separating into different directions or values",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "difference, separation",
+    "synonyms": [
+      "disparity",
+      "discrepancy",
+      "gap",
+      "variance"
+    ],
+    "collocations": [
+      "sharp divergence between",
+      "growing divergence in trends",
+      "marked divergence"
+    ],
+    "exampleSentence": "A sharp divergence was recorded between housing outlay and recreational leisure spending.",
+    "wordFamily": "diverge (v), divergent (adj)"
+  },
+  {
+    "id": "V_BC_IMBALANCE",
+    "topicId": "task1_bar_chart",
+    "word": "imbalance",
+    "partOfSpeech": "noun",
+    "ipa": "/ɪmˈbæl.əns/",
+    "meaning": "Sự mất cân bằng, tình trạng lệch tỉ trọng giữa các yếu tố",
+    "definitionEn": "a state or condition in which different elements do not have equal importance or quantity",
+    "cefrBand": "B2 - C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "unequal state, lopsidedness",
+    "synonyms": [
+      "disparity",
+      "asymmetry",
+      "inequality",
+      "disproportion"
+    ],
+    "collocations": [
+      "structural imbalance",
+      "address the budgetary imbalance",
+      "conspicuous imbalance"
+    ],
+    "exampleSentence": "A conspicuous imbalance characterized the household budget allocation between Country A and Country E.",
+    "wordFamily": "imbalanced (adj)"
+  },
+  {
+    "id": "V_BC_PREVAIL",
+    "topicId": "task1_bar_chart",
+    "word": "prevail",
+    "partOfSpeech": "verb",
+    "ipa": "/prɪˈveɪl/",
+    "meaning": "Chiếm ưu thế, thịnh hành hoặc lấn át các yếu tố khác",
+    "definitionEn": "to be widespread or current; to gain mastery or predominance",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "win, be most common",
+    "synonyms": [
+      "dominate",
+      "predominate",
+      "rule",
+      "lead"
+    ],
+    "collocations": [
+      "prevail over other categories",
+      "prevail as the primary expenditure",
+      "continue to prevail"
+    ],
+    "exampleSentence": "Housing costs prevailed over both education and recreation across four out of five countries.",
+    "wordFamily": "prevalence (n), prevailing (adj)"
+  },
+  {
+    "id": "V_BC_OUTLAY",
+    "topicId": "task1_bar_chart",
+    "word": "outlay",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈaʊt.leɪ/",
+    "meaning": "Khoản tiền chi ra ban đầu hoặc tổng kinh phí đầu tư",
+    "definitionEn": "an amount of money spent on something",
+    "cefrBand": "C1 (Band 7.5 - 8.5)",
+    "basicEquivalent": "spending, money paid",
+    "synonyms": [
+      "expenditure",
+      "spending",
+      "disbursement",
+      "investment"
+    ],
+    "collocations": [
+      "financial outlay",
+      "capital outlay for housing",
+      "annual outlay"
+    ],
+    "exampleSentence": "The financial outlay allocated to schooling in Country E exceeded all other recorded parameters.",
+    "wordFamily": "outlays (plural n)"
+  },
+  {
+    "id": "V_BC_DISBURSEMENT",
+    "topicId": "task1_bar_chart",
+    "word": "disbursement",
+    "partOfSpeech": "noun",
+    "ipa": "/dɪsˈbɜːs.mənt/",
+    "meaning": "Sự giải ngân, khoản tiền được chi trả chính thức",
+    "definitionEn": "the payment of money from a fund",
+    "cefrBand": "C1 (Band 8.0 - 8.5)",
+    "basicEquivalent": "payment, paying out",
+    "synonyms": [
+      "expenditure",
+      "outlay",
+      "allocation",
+      "spending"
+    ],
+    "collocations": [
+      "budgetary disbursement",
+      "disbursement of public funds",
+      "regular disbursements"
+    ],
+    "exampleSentence": "Careful monitoring of household disbursement reveals distinct regional socioeconomic priorities.",
+    "wordFamily": "disburse (v), disbursed (adj)"
+  },
+  {
+    "id": "V_BC_ECLIPSE",
+    "topicId": "task1_bar_chart",
+    "word": "eclipse",
+    "partOfSpeech": "verb",
+    "ipa": "/ɪˈklɪps/",
+    "meaning": "Lấn át, che mờ, làm lu mờ thứ khác do quy mô vượt trội",
+    "definitionEn": "to obscure or surpass someone or something in importance or prominence",
+    "cefrBand": "C1 (Band 8.0 - 8.5)",
+    "basicEquivalent": "overshadow, surpass completely",
+    "synonyms": [
+      "surpass",
+      "outshine",
+      "overshadow",
+      "dominate"
+    ],
+    "collocations": [
+      "eclipse all competitors",
+      "eclipse other budget categories",
+      "completely eclipsed by"
+    ],
+    "exampleSentence": "Housing costs effectively eclipsed every other item on the balance sheet for families in Country A.",
+    "wordFamily": "eclipsed (adj), eclipsing (gerund)"
   }
 ]

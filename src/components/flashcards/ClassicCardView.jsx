@@ -12,7 +12,8 @@ import { speakWord, playFlipSound } from '../../services/soundEffects';
 export default function ClassicCardView({ 
   card, 
   onMarkCard, 
-  soundEnabled 
+  soundEnabled,
+  onSelectSynonym 
 }) {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -193,17 +194,30 @@ export default function ClassicCardView({
             {/* Synonyms */}
             {card.synonyms && card.synonyms.length > 0 && (
               <div className="py-1">
-                <div className="text-[11px] font-semibold uppercase tracking-wider text-[#7A7369] mb-1 flex items-center gap-1">
-                  <Tag className="w-3.5 h-3.5 text-[#A67C52]" /> Từ đồng nghĩa:
+                <div className="text-[11px] font-semibold uppercase tracking-wider text-[#7A7369] mb-1 flex items-center justify-between">
+                  <div className="flex items-center gap-1">
+                    <Tag className="w-3.5 h-3.5 text-[#A67C52]" />
+                    <span>Từ đồng nghĩa:</span>
+                  </div>
+                  <span className="text-[9px] text-[#A67C52] font-mono italic">
+                    (Click để xem thẻ từ mới)
+                  </span>
                 </div>
                 <div className="flex flex-wrap gap-1.5">
                   {card.synonyms.map((syn, idx) => (
-                    <span 
+                    <button 
                       key={idx}
-                      className="text-xs px-2 py-0.5 rounded-md bg-white border border-[#E6E2D8] text-[#24211E] font-mono"
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (onSelectSynonym) onSelectSynonym(syn);
+                      }}
+                      className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-md bg-white hover:bg-[#EDF3EE] border border-[#E6E2D8] hover:border-[#3E4F42] text-[#24211E] hover:text-[#3E4F42] font-mono transition cursor-pointer group shadow-2xs"
+                      title={`Xem thẻ flashcard của từ đồng nghĩa "${syn}"`}
                     >
-                      {syn}
-                    </span>
+                      <span>{syn}</span>
+                      <span className="text-[10px] text-[#A67C52] group-hover:text-[#3E4F42] font-sans opacity-70 group-hover:opacity-100 transition group-hover:translate-x-0.5">&rarr;</span>
+                    </button>
                   ))}
                 </div>
               </div>

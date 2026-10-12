@@ -15,6 +15,7 @@ import {
   Search
 } from 'lucide-react';
 import { getKnownWords, toggleKnownWord, resetKnownWordsForTopic } from '../services/userService';
+import { getSynonymVocab, findVocabInList } from '../services/synonymService';
 
 export default function VocabularyList({ 
   vocabularies = [], 
@@ -30,6 +31,9 @@ export default function VocabularyList({
   const [knownWordIds, setKnownWordIds] = useState(() => getKnownWords(studentEmail));
   const [pageIndex, setPageIndex] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
+  const [dynamicVocabs, setDynamicVocabs] = useState([]);
+  const [highlightedWordId, setHighlightedWordId] = useState(null);
+  const [synonymToast, setSynonymToast] = useState(null);
   const PAGE_SIZE = 5;
 
   // Refresh known words if studentEmail changes
@@ -37,13 +41,28 @@ export default function VocabularyList({
     setKnownWordIds(getKnownWords(studentEmail));
   }, [studentEmail]);
 
+  // Reset dynamically unlocked synonyms when base vocabularies change (e.g. switched topic)
+  useEffect(() => {
+    setDynamicVocabs([]);
+    setHighlightedWordId(null);
+    setSynonymToast(null);
+  }, [vocabularies]);
+
+  // Combined vocabularies: Original topic words + dynamically activated synonyms
+  const combinedVocabs = useMemo(() => {
+    if (!dynamicVocabs.length) return vocabularies || [];
+    const existingWords = new Set((vocabularies || []).map(v => v.word.toLowerCase().trim()));
+    const additional = dynamicVocabs.filter(v => !existingWords.has(v.word.toLowerCase().trim()));
+    return [...vocabularies, ...additional];
+  }, [vocabularies, dynamicVocabs]);
+
   // Sort vocabularies: Unlearned words FIRST, Known words LAST (Không ưu tiên hiển thị từ đã biết)
   const sortedVocabs = useMemo(() => {
-    if (!vocabularies || vocabularies.length === 0) return [];
+    if (!combinedVocabs || combinedVocabs.length === 0) return [];
     const unlearned = [];
     const known = [];
 
-    vocabularies.forEach(vocab => {
+    combinedVocabs.forEach(vocab => {
       if (knownWordIds.includes(vocab.id)) {
         known.push(vocab);
       } else {
@@ -52,7 +71,7 @@ export default function VocabularyList({
     });
 
     return [...unlearned, ...known];
-  }, [vocabularies, knownWordIds]);
+  }, [combinedVocabs, knownWordIds]);
 
   // Filter vocabularies by search query (matches word, meaning, and synonyms)
   const filteredVocabs = useMemo(() => {
@@ -94,6 +113,60 @@ export default function VocabularyList({
   const handlePracticeWord = (vocab) => {
     if (onSelectVocab) onSelectVocab(vocab);
     if (onStartPractice) onStartPractice(vocab);
+  };
+
+  // Handle click on any synonym tag -> mở ngay từ vựng mới & luyện tập
+  const handleSelectSynonym = (e, synWord, parentVocab) => {
+    e.stopPropagation();
+    if (!synWord) return;
+    const cleanSyn = synWord.trim();
+
+    // 1. Kiểm tra xem từ đã có trong danh sách hiện tại chưa
+    let target = findVocabInList(cleanSyn, combinedVocabs);
+
+    // 2. Nếu chưa có trong danh sách, lấy từ kho từ điển đồng nghĩa (Synonym Databank)
+    if (!target) {
+      target = getSynonymVocab(cleanSyn, parentVocab, "IELTS Writing");
+      if (target) {
+        setDynamicVocabs(prev => [target, ...prev]);
+      }
+    }
+
+    if (target) {
+      // Xóa bộ lọc tìm kiếm nếu đang lọc để hiển thị ngay từ mới
+      if (searchQuery.trim()) {
+        setSearchQuery('');
+      }
+
+      // Kích hoạt từ vựng mới cho toàn ứng dụng và bảng luyện tập
+      if (onSelectVocab) onSelectVocab(target);
+      if (onStartPractice) onStartPractice(target);
+
+      // Định vị trang chứa từ mới và kích hoạt hiệu ứng highlight
+      const targetId = target.id;
+      setHighlightedWordId(targetId);
+
+      setTimeout(() => {
+        const idx = filteredVocabs.findIndex(v => 
+          v.id === targetId || v.word.toLowerCase().trim() === cleanSyn.toLowerCase()
+        );
+        if (idx !== -1) {
+          setPageIndex(Math.floor(idx / PAGE_SIZE));
+        } else {
+          setPageIndex(0);
+        }
+
+        setTimeout(() => setHighlightedWordId(null), 2500);
+      }, 60);
+
+      // Hiển thị thông báo Toast xác nhận
+      setSynonymToast({
+        word: target.word,
+        meaning: target.meaning,
+        parent: parentVocab.word || ""
+      });
+      setTimeout(() => setSynonymToast(null), 3500);
+    }
   };
 
   // Số lượng từ đã biết riêng trong chủ đề hiện tại
@@ -187,6 +260,28 @@ export default function VocabularyList({
           </button>
         </div>
       </div>
+
+      {/* Toast thông báo mở từ đồng nghĩa */}
+      {synonymToast && (
+        <div className="mb-2 p-2.5 rounded-xl bg-[#EDF3EE] border border-[#3E4F42]/30 text-xs text-[#24211E] flex items-center justify-between gap-2 animate-fadeIn shadow-2xs shrink-0">
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <Sparkles className="w-3.5 h-3.5 text-[#3E4F42] shrink-0" />
+            <span>
+              Đã mở từ mới: <strong className="font-serif font-bold text-[#3E4F42]">{synonymToast.word}</strong>
+              {synonymToast.parent && (
+                <span className="text-[#7A7369] ml-1">(Đồng nghĩa của "{synonymToast.parent}")</span>
+              )}
+            </span>
+          </div>
+          <button 
+            type="button"
+            onClick={() => setSynonymToast(null)}
+            className="text-[#7A7369] hover:text-[#24211E] text-xs px-1 cursor-pointer font-bold"
+          >
+            ✕
+          </button>
+        </div>
+      )}
 
       {/* Quick Search for Words & Synonyms */}
       <div className="relative mb-2 shrink-0">
@@ -287,7 +382,8 @@ export default function VocabularyList({
           </div>
         ) : (
           currentBatch.map((vocab) => {
-            const isSelected = selectedVocab?.id === vocab.id;
+            const isSelected = selectedVocab?.id === vocab.id || (selectedVocab?.word && vocab.word && selectedVocab.word.toLowerCase().trim() === vocab.word.toLowerCase().trim());
+            const isHighlighted = highlightedWordId === vocab.id;
             const isKnown = knownWordIds.includes(vocab.id);
 
             return (
@@ -295,11 +391,13 @@ export default function VocabularyList({
                 key={vocab.id}
                 onClick={() => handlePracticeWord(vocab)}
                 className={`p-3 rounded-xl border transition-all cursor-pointer text-left select-none flex flex-col gap-2 ${
-                  isSelected
-                    ? "bg-[#FAF8F5] border-[#3E4F42] shadow-xs ring-1 ring-[#3E4F42]"
-                    : isKnown
-                      ? "bg-white/60 hover:bg-[#FAF8F5] border-[#E6E2D8] opacity-75"
-                      : "bg-white hover:bg-[#FAF8F5] border-[#E6E2D8] shadow-2xs"
+                  isHighlighted
+                    ? "bg-[#FAF8F5] border-[#3E4F42] shadow-md ring-2 ring-[#3E4F42] scale-[1.01]"
+                    : isSelected
+                      ? "bg-[#FAF8F5] border-[#3E4F42] shadow-xs ring-1 ring-[#3E4F42]"
+                      : isKnown
+                        ? "bg-white/60 hover:bg-[#FAF8F5] border-[#E6E2D8] opacity-75"
+                        : "bg-white hover:bg-[#FAF8F5] border-[#E6E2D8] shadow-2xs"
                 }`}
               >
                 {/* TỪ VỰNG VÀ PHIÊN ÂM (IPA) */}
@@ -320,6 +418,12 @@ export default function VocabularyList({
                         {vocab.partOfSpeech}
                       </span>
                     )}
+
+                    {vocab.isFromSynonymBank && (
+                      <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-[#FAF5EE] text-[#A67C52] border border-[#E6E2D8] font-medium font-mono">
+                        Từ đồng nghĩa
+                      </span>
+                    )}
                   </div>
 
                   {isKnown && (
@@ -337,21 +441,30 @@ export default function VocabularyList({
                   </div>
                 )}
 
-                {/* TỪ ĐỒNG NGHĨA */}
+                {/* TỪ ĐỒNG NGHĨA - Bấm vào để mở ngay từ mới */}
                 {vocab.synonyms && vocab.synonyms.length > 0 && (
                   <div className="pt-1.5 border-t border-[#F4EFEA] space-y-1">
-                    <div className="text-[10px] font-medium text-[#7A7369] flex items-center gap-1">
-                      <Tag className="w-3 h-3 text-[#A67C52]" />
-                      <span>Đồng nghĩa:</span>
+                    <div className="text-[10px] font-medium text-[#7A7369] flex items-center justify-between">
+                      <div className="flex items-center gap-1">
+                        <Tag className="w-3 h-3 text-[#A67C52]" />
+                        <span>Đồng nghĩa:</span>
+                      </div>
+                      <span className="text-[9px] text-[#A67C52] font-mono italic">
+                        (Click để mở từ mới &amp; luyện tập)
+                      </span>
                     </div>
                     <div className="flex flex-wrap gap-1">
                       {vocab.synonyms.map((syn, sIdx) => (
-                        <span
+                        <button
                           key={sIdx}
-                          className="text-xs px-2 py-0.5 rounded-md bg-[#FAF8F5] border border-[#E6E2D8] text-[#24211E] font-mono hover:bg-[#F4EFEA] transition select-text"
+                          type="button"
+                          onClick={(e) => handleSelectSynonym(e, syn, vocab)}
+                          className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-md bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#3E4F42] hover:bg-[#EDF3EE] hover:text-[#3E4F42] text-[#24211E] font-mono transition cursor-pointer group shadow-2xs"
+                          title={`Bấm để mở và luyện tập từ đồng nghĩa "${syn}"`}
                         >
-                          {syn}
-                        </span>
+                          <span>{syn}</span>
+                          <span className="text-[10px] text-[#A67C52] group-hover:text-[#3E4F42] font-sans opacity-70 group-hover:opacity-100 transition group-hover:translate-x-0.5">&rarr;</span>
+                        </button>
                       ))}
                     </div>
                   </div>
