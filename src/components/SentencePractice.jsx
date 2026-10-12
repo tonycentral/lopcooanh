@@ -14,7 +14,9 @@ import {
   Copy,
   Check,
   Tag,
-  Shuffle
+  Shuffle,
+  Eye,
+  EyeOff
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { 
@@ -212,12 +214,14 @@ export default function SentencePractice({
   const [isEvaluatingPart2, setIsEvaluatingPart2] = useState(false);
   const [part2Result, setPart2Result] = useState(null);
   const [part2ViewBand, setPart2ViewBand] = useState(null);
+  const [showModelSentence, setShowModelSentence] = useState(false);
 
   // ================= STATE CHO PHẦN 3: LUYỆN VIẾT ĐOẠN VĂN =================
   const [part3Input, setPart3Input] = useState("");
   const [isEvaluatingPart3, setIsEvaluatingPart3] = useState(false);
   const [part3Result, setPart3Result] = useState(null);
   const [part3ViewBand, setPart3ViewBand] = useState(null);
+  const [showModelParagraph, setShowModelParagraph] = useState(false);
 
   // Copy status
   const [copiedKey, setCopiedKey] = useState(null);
@@ -290,6 +294,7 @@ export default function SentencePractice({
     setPart2Input("");
     setPart2Result(null);
     setPart2ViewBand(null);
+    setShowModelSentence(false);
   };
 
   // Reset when selected vocabulary changes
@@ -303,11 +308,13 @@ export default function SentencePractice({
     setIsEvaluatingPart2(false);
     setPart2Result(null);
     setPart2ViewBand(null);
+    setShowModelSentence(false);
 
     setPart3Input("");
     setIsEvaluatingPart3(false);
     setPart3Result(null);
     setPart3ViewBand(null);
+    setShowModelParagraph(false);
 
     setActivePart(1);
   }, [selectedVocab]);
@@ -903,15 +910,27 @@ export default function SentencePractice({
               <p className="text-xs sm:text-sm text-[#24211E] leading-relaxed select-text font-serif">
                 "{sentencePracticeData?.vietnamesePrompt || selectedVocab.vietnamesePrompt}"
               </p>
-              <div className="flex items-center gap-2 pt-1">
-                <span className="text-[11px] text-[#7A7369]">Từ khóa bắt buộc:</span>
+              <div className="flex items-center justify-between gap-2 pt-1 flex-wrap">
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] text-[#7A7369]">Từ khóa bắt buộc:</span>
+                  <button
+                    type="button"
+                    onClick={() => insertText(selectedVocab.word, 2)}
+                    disabled={Boolean(part2Result)}
+                    className="px-2 py-0.5 rounded-md bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3] text-xs font-mono font-medium hover:bg-[#EDF3EE] transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    + {selectedVocab.word}
+                  </button>
+                </div>
+
                 <button
                   type="button"
-                  onClick={() => insertText(selectedVocab.word, 2)}
-                  disabled={Boolean(part2Result)}
-                  className="px-2 py-0.5 rounded-md bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3] text-xs font-mono font-medium hover:bg-[#EDF3EE] transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  onClick={() => setShowModelSentence(prev => !prev)}
+                  className="px-2.5 py-1 rounded-lg bg-[#FAF5EE] hover:bg-[#F3EADF] text-[#A67C52] border border-[#E6E2D8] text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 shadow-2xs"
+                  title="Hiện câu dịch mẫu để học tập hoặc tham khảo"
                 >
-                  + {selectedVocab.word}
+                  {showModelSentence ? <EyeOff className="w-3.5 h-3.5 text-[#A67C52]" /> : <Eye className="w-3.5 h-3.5 text-[#A67C52]" />}
+                  <span>{showModelSentence ? "Ẩn câu dịch mẫu" : "Xem câu dịch mẫu"}</span>
                 </button>
               </div>
             </div>
@@ -949,38 +968,109 @@ export default function SentencePractice({
               </div>
             )}
 
+            {/* HỘP HIỂN THỊ CÂU DỊCH MẪU THAM KHẢO (KHI BẤM XEM) */}
+            {showModelSentence && (
+              <div className="p-3.5 sm:p-4 rounded-xl bg-[#FAF8F5] border border-[#D1DDD3] space-y-2.5 animate-fadeIn">
+                <div className="flex items-center justify-between gap-2 flex-wrap pb-2 border-b border-[#E6E2D8]">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#3E4F42]">
+                    <Sparkles className="w-3.5 h-3.5 text-[#A67C52]" />
+                    <span>CÂU DỊCH MẪU THAM KHẢO (MODEL SENTENCE):</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => handleCopy(sentencePracticeData?.modelTranslation || selectedVocab.modelSentence, "model_sentence_part2")}
+                      className="flex items-center gap-1 px-2.5 py-1 rounded bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-[#7A7369] text-[11px] transition cursor-pointer shadow-2xs"
+                    >
+                      {copiedKey === "model_sentence_part2" ? <Check className="w-3 h-3 text-[#3E4F42]" /> : <Copy className="w-3 h-3" />}
+                      <span>{copiedKey === "model_sentence_part2" ? "Đã copy" : "Copy"}</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const sample = sentencePracticeData?.modelTranslation || selectedVocab.modelSentence || "";
+                        setPart2Input(sample);
+                      }}
+                      disabled={Boolean(part2Result)}
+                      className="flex items-center gap-1 px-2.5 py-1 rounded bg-[#EDF3EE] hover:bg-[#E2EDE4] border border-[#D1DDD3] text-[#3E4F42] text-[11px] font-medium transition cursor-pointer disabled:opacity-50"
+                      title="Chèn câu mẫu vào khung làm bài để luyện tập"
+                    >
+                      <span>✍️ Dùng câu này</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="p-3 rounded-lg bg-white border border-[#E6E2D8] shadow-2xs">
+                  <p className="text-xs sm:text-sm font-serif text-[#24211E] italic leading-relaxed select-text">
+                    "{sentencePracticeData?.modelTranslation || selectedVocab.modelSentence}"
+                  </p>
+                </div>
+
+                {sentencePracticeData?.bandUpgrades && (
+                  <div className="space-y-1.5 pt-1">
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-[#A67C52] block">
+                      Các phiên bản Band nâng cấp:
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {["7.0", "8.0"].map((b) => sentencePracticeData.bandUpgrades[b] ? (
+                        <div key={b} className="p-2 rounded-lg bg-white border border-[#E6E2D8] text-xs space-y-0.5">
+                          <span className="text-[9px] font-bold font-mono px-1.5 py-0.2 rounded bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3]">
+                            Band {b}
+                          </span>
+                          <p className="font-serif italic text-[#24211E] text-[11px] leading-relaxed select-text">
+                            "{sentencePracticeData.bandUpgrades[b]}"
+                          </p>
+                        </div>
+                      ) : null)}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* Nút hành động */}
-            <div className="flex items-center justify-end gap-2 pt-1">
+            <div className="flex items-center justify-between gap-2 pt-1 flex-wrap">
               <button
                 type="button"
-                onClick={() => {
-                  setPart2Input("");
-                  setPart2Result(null);
-                  setPart2ViewBand(null);
-                }}
-                className="px-4 py-2 rounded-xl border border-[#E6E2D8] bg-white hover:bg-[#FAF8F5] text-[#7A7369] hover:text-[#24211E] text-xs font-semibold transition cursor-pointer"
+                onClick={() => setShowModelSentence(prev => !prev)}
+                className="px-3.5 py-2 rounded-xl border border-[#D1DDD3] bg-white hover:bg-[#FAF8F5] text-[#3E4F42] hover:text-[#24211E] text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 shadow-2xs"
               >
-                Làm lại
+                {showModelSentence ? <EyeOff className="w-3.5 h-3.5 text-[#A67C52]" /> : <Eye className="w-3.5 h-3.5 text-[#3E4F42]" />}
+                <span>{showModelSentence ? "Ẩn câu dịch mẫu" : "Xem câu dịch mẫu"}</span>
               </button>
 
-              <button
-                type="button"
-                onClick={handleGradePart2}
-                disabled={isEvaluatingPart2 || Boolean(part2Result) || !part2Input.trim()}
-                className="px-5 py-2 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-semibold text-xs shadow-xs transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
-              >
-                {isEvaluatingPart2 ? (
-                  <>
-                    <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                    <span>Đang chấm...</span>
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-3.5 h-3.5" />
-                    <span>Kiểm tra</span>
-                  </>
-                )}
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPart2Input("");
+                    setPart2Result(null);
+                    setPart2ViewBand(null);
+                  }}
+                  className="px-4 py-2 rounded-xl border border-[#E6E2D8] bg-white hover:bg-[#FAF8F5] text-[#7A7369] hover:text-[#24211E] text-xs font-semibold transition cursor-pointer"
+                >
+                  Làm lại
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleGradePart2}
+                  disabled={isEvaluatingPart2 || Boolean(part2Result) || !part2Input.trim()}
+                  className="px-5 py-2 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-semibold text-xs shadow-xs transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
+                >
+                  {isEvaluatingPart2 ? (
+                    <>
+                      <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                      <span>Đang chấm...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-3.5 h-3.5" />
+                      <span>Kiểm tra</span>
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
 
           </div>
@@ -1174,11 +1264,23 @@ export default function SentencePractice({
                 </div>
               )}
 
-              <div className="flex items-center gap-2 pt-1 flex-wrap">
-                <span className="text-[11px] text-[#7A7369]">Từ vựng bắt buộc trong đoạn:</span>
-                <span className="px-2 py-0.5 rounded-md bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3] text-xs font-mono font-bold">
-                  {selectedVocab.word}
-                </span>
+              <div className="flex items-center justify-between gap-2 pt-1 flex-wrap">
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] text-[#7A7369]">Từ vựng bắt buộc trong đoạn:</span>
+                  <span className="px-2 py-0.5 rounded-md bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3] text-xs font-mono font-bold">
+                    {selectedVocab.word}
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setShowModelParagraph(prev => !prev)}
+                  className="px-2.5 py-1 rounded-lg bg-[#FAF5EE] hover:bg-[#F3EADF] text-[#A67C52] border border-[#E6E2D8] text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 shadow-2xs"
+                  title="Hiện đoạn văn mẫu học thuật để học tập hoặc tham khảo"
+                >
+                  {showModelParagraph ? <EyeOff className="w-3.5 h-3.5 text-[#A67C52]" /> : <Eye className="w-3.5 h-3.5 text-[#A67C52]" />}
+                  <span>{showModelParagraph ? "Ẩn đoạn văn mẫu" : "Xem đoạn văn mẫu"}</span>
+                </button>
               </div>
             </div>
 
@@ -1215,38 +1317,98 @@ export default function SentencePractice({
               </div>
             </div>
 
+            {/* HỘP HIỂN THỊ ĐOẠN VĂN MẪU THAM KHẢO (KHI BẤM XEM) */}
+            {showModelParagraph && (
+              <div className="p-3.5 sm:p-4 rounded-xl bg-[#FAF8F5] border border-[#D1DDD3] space-y-2.5 animate-fadeIn">
+                <div className="flex items-center justify-between gap-2 flex-wrap pb-2 border-b border-[#E6E2D8]">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#3E4F42]">
+                    <Sparkles className="w-3.5 h-3.5 text-[#A67C52]" />
+                    <span>ĐOẠN VĂN MẪU THAM KHẢO (PEEL MODEL PARAGRAPH):</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => handleCopy(paragraphPracticeData?.modelParagraph, "model_paragraph_part3")}
+                      className="flex items-center gap-1 px-2.5 py-1 rounded bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-[#7A7369] text-[11px] transition cursor-pointer shadow-2xs"
+                    >
+                      {copiedKey === "model_paragraph_part3" ? <Check className="w-3 h-3 text-[#3E4F42]" /> : <Copy className="w-3 h-3" />}
+                      <span>{copiedKey === "model_paragraph_part3" ? "Đã copy" : "Copy"}</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const sample = paragraphPracticeData?.modelParagraph || "";
+                        setPart3Input(sample);
+                      }}
+                      disabled={Boolean(part3Result)}
+                      className="flex items-center gap-1 px-2.5 py-1 rounded bg-[#EDF3EE] hover:bg-[#E2EDE4] border border-[#D1DDD3] text-[#3E4F42] text-[11px] font-medium transition cursor-pointer disabled:opacity-50"
+                      title="Chèn đoạn văn mẫu vào khung làm bài"
+                    >
+                      <span>✍️ Dùng đoạn này</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="p-3 rounded-lg bg-white border border-[#E6E2D8] shadow-2xs">
+                  <p className="text-xs sm:text-sm font-serif text-[#24211E] italic leading-relaxed select-text">
+                    "{paragraphPracticeData?.modelParagraph}"
+                  </p>
+                </div>
+
+                {paragraphPracticeData?.structure && (
+                  <div className="pt-1 border-t border-[#E6E2D8] space-y-1 text-xs text-[#7A7369]">
+                    <div><strong className="text-[#3E4F42]">1. Topic Sentence:</strong> <span className="font-serif italic text-[#24211E]">{paragraphPracticeData.structure.ts}</span></div>
+                    <div><strong className="text-[#3E4F42]">2. Explanation (Target Word):</strong> <span className="font-serif italic text-[#24211E]">{paragraphPracticeData.structure.ex}</span></div>
+                    <div><strong className="text-[#3E4F42]">3. Evidence/Example:</strong> <span className="font-serif italic text-[#24211E]">{paragraphPracticeData.structure.ev}</span></div>
+                    <div><strong className="text-[#3E4F42]">4. Concluding:</strong> <span className="font-serif italic text-[#24211E]">{paragraphPracticeData.structure.cs}</span></div>
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* Nút hành động */}
-            <div className="flex items-center justify-end gap-2 pt-1">
+            <div className="flex items-center justify-between gap-2 pt-1 flex-wrap">
               <button
                 type="button"
-                onClick={() => {
-                  setPart3Input("");
-                  setPart3Result(null);
-                  setPart3ViewBand(null);
-                }}
-                className="px-4 py-2 rounded-xl border border-[#E6E2D8] bg-white hover:bg-[#FAF8F5] text-[#7A7369] hover:text-[#24211E] text-xs font-semibold transition cursor-pointer"
+                onClick={() => setShowModelParagraph(prev => !prev)}
+                className="px-3.5 py-2 rounded-xl border border-[#D1DDD3] bg-white hover:bg-[#FAF8F5] text-[#3E4F42] hover:text-[#24211E] text-xs font-semibold transition cursor-pointer flex items-center gap-1.5 shadow-2xs"
               >
-                Làm lại
+                {showModelParagraph ? <EyeOff className="w-3.5 h-3.5 text-[#A67C52]" /> : <Eye className="w-3.5 h-3.5 text-[#3E4F42]" />}
+                <span>{showModelParagraph ? "Ẩn đoạn văn mẫu" : "Xem đoạn văn mẫu"}</span>
               </button>
 
-              <button
-                type="button"
-                onClick={handleGradePart3}
-                disabled={isEvaluatingPart3 || Boolean(part3Result) || !part3Input.trim()}
-                className="px-5 py-2 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-semibold text-xs shadow-xs transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
-              >
-                {isEvaluatingPart3 ? (
-                  <>
-                    <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                    <span>Đang chấm...</span>
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-3.5 h-3.5" />
-                    <span>Kiểm tra</span>
-                  </>
-                )}
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPart3Input("");
+                    setPart3Result(null);
+                    setPart3ViewBand(null);
+                  }}
+                  className="px-4 py-2 rounded-xl border border-[#E6E2D8] bg-white hover:bg-[#FAF8F5] text-[#7A7369] hover:text-[#24211E] text-xs font-semibold transition cursor-pointer"
+                >
+                  Làm lại
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleGradePart3}
+                  disabled={isEvaluatingPart3 || Boolean(part3Result) || !part3Input.trim()}
+                  className="px-5 py-2 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-semibold text-xs shadow-xs transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
+                >
+                  {isEvaluatingPart3 ? (
+                    <>
+                      <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                      <span>Đang chấm...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-3.5 h-3.5" />
+                      <span>Kiểm tra</span>
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
 
           </div>
