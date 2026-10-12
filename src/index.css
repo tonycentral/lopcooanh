@@ -24,6 +24,22 @@
 }
 
 @layer base {
+  html {
+    font-size: 16.5px;
+  }
+
+  @media (min-width: 640px) {
+    html {
+      font-size: 17.5px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      font-size: 18px;
+    }
+  }
+
   html, body {
     background-color: #F8F6F1;
     color: #2B2826;
@@ -31,6 +47,8 @@
     font-family: 'caphevietnam', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.015em;
+    line-height: 1.55;
   }
 
   button, input, optgroup, select, textarea {
@@ -42,6 +60,17 @@
 .font-sans,
 .font-serif {
   font-family: 'caphevietnam', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  letter-spacing: 0.012em;
+}
+
+/* Tăng kích thước chữ cho các tag/badge nhỏ để font caphevietnam hiển thị rõ ràng, dễ đọc */
+.text-\[10px\] {
+  font-size: 0.75rem !important;
+  line-height: 1.25 !important;
+}
+.text-\[11px\] {
+  font-size: 0.8125rem !important;
+  line-height: 1.3 !important;
 }
 
 /* Japandi Minimal Scrollbars */
