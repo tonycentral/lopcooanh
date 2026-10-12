@@ -395,7 +395,7 @@ export function evaluateComprehensionTest(vocab, params) {
  * PHẦN 2: Chấm điểm dịch 1 câu có sử dụng từ đang luyện tập
  * Đưa ra câu nâng cấp đúng với số Band mục tiêu + chi tiết các phần nâng cấp
  */
-export function evaluatePart2Translation(userSentence, vocab, targetBand = "7.0") {
+export function evaluatePart2Translation(userSentence, vocab, targetBand = "7.0", activeSentenceData = null) {
   const sentence = (userSentence || "").trim();
   const words = sentence.split(/\s+/).filter(Boolean);
   const wordCount = words.length;
@@ -449,7 +449,7 @@ export function evaluatePart2Translation(userSentence, vocab, targetBand = "7.0"
   const targetBandNum = parseFloat(targetBand) || 7.0;
 
   // Retrieve upgraded sentence tailored to target band
-  const practiceData = vocab.sentencePractice || {};
+  const practiceData = activeSentenceData || vocab.sentencePractice || {};
   const bandKey = parseFloat(targetBand) >= 8.5 ? "8.5" : parseFloat(targetBand) >= 8.0 ? "8.0" : parseFloat(targetBand) >= 7.5 ? "7.5" : parseFloat(targetBand) >= 7.0 ? "7.0" : "6.5";
   const upgradedSentence = practiceData.bandUpgrades?.[bandKey] || practiceData.bandUpgrades?.["7.5"] || practiceData.modelTranslation || vocab.modelSentence || "";
 

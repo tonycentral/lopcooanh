@@ -13,7 +13,8 @@ import {
   Lightbulb,
   Copy,
   Check,
-  Tag
+  Tag,
+  Shuffle
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { 
@@ -25,6 +26,7 @@ import { evaluateWithGemini } from '../services/geminiService';
 import { analyzeUpgradeDetails } from '../services/upgradeDetailHelper';
 import { saveHistoryEntry } from '../services/storage';
 import { getSynonymVocab, findVocabInList } from '../services/synonymService';
+import { generateParagraphPractice } from '../data/vocabEnhancer';
 
 const AVAILABLE_BANDS = ["6.5", "7.0", "7.5", "8.0", "8.5"];
 
@@ -220,6 +222,76 @@ export default function SentencePractice({
   // Copy status
   const [copiedKey, setCopiedKey] = useState(null);
 
+  // Danh sách các biến thể câu luyện dịch cho từ vựng này
+  const sentenceVariants = useMemo(() => {
+    if (selectedVocab?.practiceSentences && selectedVocab.practiceSentences.length > 0) {
+      return selectedVocab.practiceSentences;
+    }
+    if (selectedVocab?.sentencePractice) {
+      return [selectedVocab.sentencePractice];
+    }
+    return [];
+  }, [selectedVocab]);
+
+  const [activeVariantIdx, setActiveVariantIdx] = useState(0);
+
+  // Mỗi session / khi chọn từ vựng: Tự động chọn ngẫu nhiên một câu khác nhau để không trùng lặp
+  useEffect(() => {
+    if (!selectedVocab) return;
+    const total = sentenceVariants.length;
+    if (total <= 1) {
+      setActiveVariantIdx(0);
+      return;
+    }
+
+    const key = `session_variant_idx_${selectedVocab.id || selectedVocab.word.toLowerCase()}`;
+    const stored = sessionStorage.getItem(key);
+    if (stored !== null) {
+      const parsed = parseInt(stored, 10);
+      if (!isNaN(parsed) && parsed >= 0 && parsed < total) {
+        setActiveVariantIdx(parsed);
+        return;
+      }
+    }
+
+    // Chọn ngẫu nhiên biến thể câu cho session mới này
+    const randIdx = Math.floor(Math.random() * total);
+    try {
+      sessionStorage.setItem(key, randIdx.toString());
+    } catch (e) {}
+    setActiveVariantIdx(randIdx);
+  }, [selectedVocab?.id, selectedVocab?.word, sentenceVariants.length]);
+
+  // Dữ liệu câu luyện dịch đang kích hoạt
+  const sentencePracticeData = useMemo(() => {
+    if (sentenceVariants.length === 0) return selectedVocab?.sentencePractice || null;
+    return sentenceVariants[activeVariantIdx % sentenceVariants.length] || sentenceVariants[0];
+  }, [sentenceVariants, activeVariantIdx, selectedVocab]);
+
+  // Dữ liệu đoạn văn luyện viết (Part 3) đồng bộ với ngữ cảnh câu đã chọn
+  const paragraphPracticeData = useMemo(() => {
+    if (selectedVocab) {
+      return generateParagraphPractice(selectedVocab, topic?.name || "IELTS Writing", sentencePracticeData);
+    }
+    return null;
+  }, [selectedVocab, sentencePracticeData, topic]);
+  const twoSentencePracticeData = paragraphPracticeData;
+
+  // Hàm đổi thủ công sang câu luyện tập khác cho từ này
+  const handleCycleSentenceVariant = () => {
+    if (sentenceVariants.length <= 1) return;
+    const nextIdx = (activeVariantIdx + 1) % sentenceVariants.length;
+    setActiveVariantIdx(nextIdx);
+    const key = `session_variant_idx_${selectedVocab?.id || selectedVocab?.word.toLowerCase()}`;
+    try {
+      sessionStorage.setItem(key, nextIdx.toString());
+    } catch (e) {}
+    // Reset để học viên dịch câu mới
+    setPart2Input("");
+    setPart2Result(null);
+    setPart2ViewBand(null);
+  };
+
   // Reset when selected vocabulary changes
   useEffect(() => {
     setVietnameseMeaningInput("");
@@ -291,7 +363,7 @@ export default function SentencePractice({
     setIsEvaluatingPart2(true);
 
     try {
-      let res = evaluatePart2Translation(part2Input, selectedVocab, targetBand);
+      let res = evaluatePart2Translation(part2Input, selectedVocab, targetBand, sentencePracticeData);
 
       // Nếu người dùng cấu hình API Key trong Cài đặt, có thể tận dụng chấm điểm từ AI Examiner
       if (apiKey) {
@@ -301,8 +373,8 @@ export default function SentencePractice({
             targetWord: selectedVocab.word,
             synonyms: selectedVocab.synonyms,
             topicName: topic?.name,
-            vietnamesePrompt: sentencePracticeData.vietnamesePrompt,
-            modelSentence: sentencePracticeData.modelTranslation,
+            vietnamesePrompt: sentencePracticeData?.vietnamesePrompt,
+            modelSentence: sentencePracticeData?.modelTranslation,
             studentSentence: part2Input
           }, apiKey);
 
@@ -388,10 +460,6 @@ export default function SentencePractice({
   };
 
 
-
-  const sentencePracticeData = selectedVocab?.sentencePractice;
-  const paragraphPracticeData = selectedVocab?.paragraphPractice || selectedVocab?.twoSentencePractice;
-  const twoSentencePracticeData = paragraphPracticeData;
 
   // Mức Band đang xem và câu nâng cấp tương ứng (Phần 2)
   const currentPart2Band = part2ViewBand || targetBand;
@@ -791,20 +859,49 @@ export default function SentencePractice({
           <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E6E2D8] space-y-3.5 shadow-xs">
             
             {/* Header Phần 2 */}
-            <div className="flex items-center justify-between pb-2 border-b border-[#E6E2D8]">
+            <div className="flex items-center justify-between pb-2 border-b border-[#E6E2D8] gap-2 flex-wrap">
               <div className="flex items-center gap-2 text-[#24211E] font-medium text-xs sm:text-sm">
                 <BookOpen className="w-4 h-4 text-[#3E4F42]" />
                 <span>1.2 Dịch 1 câu có từ: <strong className="font-serif text-[#3E4F42]">{selectedVocab.word}</strong></span>
               </div>
+
+              {sentenceVariants.length > 1 && (
+                <button
+                  type="button"
+                  onClick={handleCycleSentenceVariant}
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium text-[#3E4F42] bg-[#FAF8F5] hover:bg-[#EDF3EE] border border-[#D1DDD3] transition cursor-pointer shadow-2xs"
+                  title="Đổi sang câu luyện dịch khác cho từ vựng này"
+                >
+                  <Shuffle className="w-3 h-3 text-[#3E4F42]" />
+                  <span>Đổi câu khác</span>
+                  <span className="font-mono text-[10px] bg-white px-1.5 py-0.2 rounded border border-[#E6E2D8] text-[#7A7369]">
+                    {activeVariantIdx + 1}/{sentenceVariants.length}
+                  </span>
+                </button>
+              )}
             </div>
 
             {/* Câu tiếng Việt mẫu */}
             <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] space-y-1.5">
-              <span className="text-[10px] uppercase font-medium tracking-wider text-[#A67C52]">
-                Câu cần dịch:
-              </span>
+              <div className="flex items-center justify-between gap-2 flex-wrap">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] uppercase font-medium tracking-wider text-[#A67C52]">
+                    Câu cần dịch:
+                  </span>
+                  {sentencePracticeData?.domain && (
+                    <span className="text-[10px] px-2 py-0.5 rounded-md bg-white text-[#3E4F42] border border-[#E6E2D8] font-medium flex items-center gap-1">
+                      <span>🏷️</span> {sentencePracticeData.domain}
+                    </span>
+                  )}
+                </div>
+                {sentenceVariants.length > 1 && (
+                  <span className="text-[10px] text-[#7A7369] font-mono">
+                    Session variant: {activeVariantIdx + 1} of {sentenceVariants.length}
+                  </span>
+                )}
+              </div>
               <p className="text-xs sm:text-sm text-[#24211E] leading-relaxed select-text font-serif">
-                "{sentencePracticeData.vietnamesePrompt}"
+                "{sentencePracticeData?.vietnamesePrompt || selectedVocab.vietnamesePrompt}"
               </p>
               <div className="flex items-center gap-2 pt-1">
                 <span className="text-[11px] text-[#7A7369]">Từ khóa bắt buộc:</span>
@@ -914,14 +1011,28 @@ export default function SentencePractice({
                   </div>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => setActivePart(3)}
-                  className="px-3.5 py-1.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-bold text-xs transition cursor-pointer flex items-center gap-1.5 shadow-xs"
-                >
-                  <span>Sang 1.3 Học viết một đoạn</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                <div className="flex items-center gap-2 flex-wrap">
+                  {sentenceVariants.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={handleCycleSentenceVariant}
+                      className="px-3 py-1.5 rounded-xl border border-[#D1DDD3] bg-[#FAF8F5] hover:bg-[#EDF3EE] text-[#3E4F42] font-semibold text-xs transition cursor-pointer flex items-center gap-1.5 shadow-xs"
+                      title="Chuyển sang một câu luyện dịch khác với từ vựng này"
+                    >
+                      <Shuffle className="w-3.5 h-3.5" />
+                      <span>Thử câu khác ({activeVariantIdx + 1}/{sentenceVariants.length})</span>
+                    </button>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => setActivePart(3)}
+                    className="px-3.5 py-1.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-bold text-xs transition cursor-pointer flex items-center gap-1.5 shadow-xs"
+                  >
+                    <span>Sang 1.3 Học viết một đoạn</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
               </div>
 
               {/* CÂU NÂNG CẤP ĐÚNG THEO BAND MỤC TIÊU & CHỌN BAND CAO HƠN */}
