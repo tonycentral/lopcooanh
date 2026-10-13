@@ -123,3 +123,45 @@ export function extractAllVocabularies(task1Topics = [], task2Topics = []) {
 
   return all;
 }
+
+const CUSTOM_FLASHCARDS_KEY = 'lopcooanh_custom_flashcards';
+
+export function getSavedCustomWords() {
+  try {
+    const raw = localStorage.getItem(CUSTOM_FLASHCARDS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+export function saveFlashcardWord(wordData) {
+  try {
+    const existing = getSavedCustomWords();
+    const cleanWord = (wordData.word || '').toLowerCase().trim();
+    if (!cleanWord) return;
+    
+    const idx = existing.findIndex(w => (w.word || '').toLowerCase().trim() === cleanWord);
+    const newWord = {
+      id: `custom-word-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+      word: wordData.word,
+      ipa: wordData.ipa || "",
+      partOfSpeech: wordData.pos || "noun",
+      meaning: wordData.meaning || "",
+      topicName: wordData.topicName || "IELTS Reading",
+      exampleSentence: wordData.exampleSentence || "",
+      synonyms: wordData.synonyms || [],
+      savedAt: new Date().toISOString()
+    };
+
+    if (idx >= 0) {
+      existing[idx] = { ...existing[idx], ...newWord };
+    } else {
+      existing.unshift(newWord);
+    }
+    localStorage.setItem(CUSTOM_FLASHCARDS_KEY, JSON.stringify(existing));
+    return newWord;
+  } catch (e) {
+    console.error("Error saving flashcard word:", e);
+  }
+}

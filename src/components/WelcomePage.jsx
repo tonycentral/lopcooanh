@@ -14,6 +14,7 @@ export default function WelcomePage({
   onStartPractice, 
   onStartFullEssay,
   onStartFlashcard,
+  onStartReading,
   onOpenContactModal,
   onChangeEmail,
   onOpenAuth,
@@ -263,6 +264,23 @@ export default function WelcomePage({
                 className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-[#FAF8F5] text-[#24211E] border border-[#D1DDD3] font-medium text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] shadow-2xs"
               >
                 <span>✍️ Luyện viết toàn bộ ({selectedTask === "task1" ? "Task 1 Report" : "Task 2 Essay"})</span>
+                <ArrowRight className="w-4 h-4 text-[#3E4F42]" />
+              </button>
+            )}
+
+            {onStartReading && (
+              <button
+                type="button"
+                onClick={() => {
+                  if (!currentUser) {
+                    onOpenAuth();
+                    return;
+                  }
+                  onStartReading();
+                }}
+                className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-[#FAF8F5] text-[#24211E] border border-[#D1DDD3] font-medium text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] shadow-2xs"
+              >
+                <span>📖 Luyện đọc (IELTS Reading • 10 Chủ đề • Tra từ &amp; Thi thử)</span>
                 <ArrowRight className="w-4 h-4 text-[#3E4F42]" />
               </button>
             )}

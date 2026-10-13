@@ -26,6 +26,7 @@ export default function Header({
   onGoVocabPractice,
   onGoFullEssay,
   onGoPractice,
+  onGoReading,
   currentUser,
   onOpenAuth,
   onOpenSettings,
@@ -122,11 +123,38 @@ export default function Header({
       ]
     },
     {
-      group: "2. FLASHCARDS",
+      group: "2. LUYỆN ĐỌC (IELTS READING)",
       items: [
         {
-          id: '2.0',
-          title: '2. Flashcards',
+          id: '2.1',
+          title: '2.1 Luyện đọc & Tra từ vựng',
+          subtitle: 'Vừa đọc vừa click tra từ trên bài theo 10 chủ đề',
+          icon: BookOpen,
+          action: () => {
+            setIsFunctionDropdownOpen(false);
+            if (onGoReading) onGoReading('practice');
+            else if (onSelectWritingStep) onSelectWritingStep('2.1');
+          }
+        },
+        {
+          id: '2.2',
+          title: '2.2 Thi thử Reading bấm giờ',
+          subtitle: 'Đề thi reading tính giờ 50 đề / chủ đề',
+          icon: FileText,
+          action: () => {
+            setIsFunctionDropdownOpen(false);
+            if (onGoReading) onGoReading('test');
+            else if (onSelectWritingStep) onSelectWritingStep('2.2');
+          }
+        }
+      ]
+    },
+    {
+      group: "3. FLASHCARDS",
+      items: [
+        {
+          id: '3.0',
+          title: '3. Flashcards',
           subtitle: 'Phản xạ từ vựng học thuật qua thẻ ghi nhớ',
           icon: Sparkles,
           action: () => {
@@ -138,9 +166,10 @@ export default function Header({
     }
   ];
 
-  // Determine current active step ID (1.1, 1.2, 1.3, 1.4, 2.0)
+  // Determine current active step ID (1.1, 1.2, 1.3, 1.4, 2.1, 2.2, 3.0)
   const currentStepId = useMemo(() => {
-    if (currentView === 'flashcard') return '2.0';
+    if (currentView === 'reading') return '2.1';
+    if (currentView === 'flashcard') return '3.0';
     if (currentView === 'full_essay') return '1.4';
     if (activeWritingStep) return activeWritingStep;
     return '1.1';
@@ -180,7 +209,7 @@ export default function Header({
         <div className="flex items-center gap-2">
           
           {/* Home button */}
-          {(currentView === 'practice' || currentView === 'vocab_practice' || currentView === 'full_essay' || currentView === 'flashcard') && (
+          {(currentView === 'practice' || currentView === 'vocab_practice' || currentView === 'full_essay' || currentView === 'flashcard' || currentView === 'reading') && (
             <button
               onClick={onGoWelcome}
               className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-xs font-medium text-[#7A7369] hover:text-[#24211E] transition cursor-pointer"

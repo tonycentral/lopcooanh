@@ -17,6 +17,7 @@ import SourcesDatabankModal from './components/SourcesDatabankModal';
 import AuthModal from './components/AuthModal';
 import SettingsModal from './components/SettingsModal';
 import FullEssayWorkspace from './components/FullEssayWorkspace';
+import ReadingWorkspace from './components/reading/ReadingWorkspace';
 
 
 import { 
@@ -251,7 +252,7 @@ export default function App() {
   const [selectedVocab, setSelectedVocab] = useState(() => currentTopics[0]?.vocabularies[0] || null);
   const [practiceActivePart, setPracticeActivePart] = useState(1);
 
-  // Unified 1.1 - 1.4 & 2. Flashcard navigation handler
+  // Unified 1.1 - 1.4, 2. Reading, 3. Flashcard navigation handler
   const handleSelectWritingStep = (step) => {
     if (step === '1.1') {
       setCurrentView('vocab_practice');
@@ -264,15 +265,19 @@ export default function App() {
       setPracticeActivePart(3);
     } else if (step === '1.4') {
       setCurrentView('full_essay');
-    } else if (step === '2.0') {
+    } else if (step === '2.1' || step === '2.2') {
+      setCurrentView('reading');
+    } else if (step === '3.0' || step === '2.0') {
       setCurrentView('flashcard');
     }
   };
 
-  const activeWritingStep = currentView === 'full_essay' 
+  const activeWritingStep = currentView === 'reading'
+    ? '2.1'
+    : currentView === 'full_essay' 
     ? '1.4' 
     : currentView === 'flashcard' 
-    ? '2.0' 
+    ? '3.0' 
     : practiceActivePart === 2 
     ? '1.2' 
     : practiceActivePart === 3 
@@ -450,6 +455,14 @@ export default function App() {
             recordUserVisit();
             setCurrentView('full_essay');
           }}
+          onStartReading={() => {
+            if (!currentUser) {
+              setIsAuthModalOpen(true);
+              return;
+            }
+            recordUserVisit();
+            setCurrentView('reading');
+          }}
           onStartFlashcard={() => {
             if (!currentUser) {
               setIsAuthModalOpen(true);
@@ -483,6 +496,13 @@ export default function App() {
             }}
             onGoFullEssay={() => setCurrentView('full_essay')}
             onGoPractice={() => setCurrentView('vocab_practice')}
+            onGoReading={(mode) => {
+              if (!currentUser) {
+                setIsAuthModalOpen(true);
+                return;
+              }
+              setCurrentView('reading');
+            }}
             currentUser={currentUser}
             onOpenAuth={() => setIsAuthModalOpen(true)}
             onOpenSettings={() => setIsSettingsModalOpen(true)}
@@ -506,6 +526,59 @@ export default function App() {
               studentEmail={studentEmail}
               onOpenChartModal={() => setIsChartModalOpen(true)}
               onEssayGraded={handleRefreshStats}
+            />
+          </div>
+        </div>
+      ) : currentView === 'reading' ? (
+        /* MODE 3: LUYỆN ĐỌC (IELTS READING WORKSPACE - 10 CHỦ ĐỀ • 50 ĐỀ / CHỦ ĐỀ) */
+        <div className="h-screen flex flex-col overflow-hidden bg-[#F8F6F1] text-[#24211E]">
+          <Header
+            targetBand={targetBand}
+            current7DayScore={current7DayScore}
+            onOpenBandModal={() => setIsBandModalOpen(true)}
+            onGoWelcome={() => setCurrentView('welcome')}
+            onOpenFlashcard={() => {
+              if (!currentUser) {
+                setIsAuthModalOpen(true);
+                return;
+              }
+              setCurrentView('flashcard');
+            }}
+            onGoVocabPractice={() => {
+              if (!currentUser) {
+                setIsAuthModalOpen(true);
+                return;
+              }
+              setCurrentView('vocab_practice');
+            }}
+            onGoFullEssay={() => setCurrentView('full_essay')}
+            onGoPractice={() => setCurrentView('vocab_practice')}
+            onGoReading={(mode) => {
+              if (!currentUser) {
+                setIsAuthModalOpen(true);
+                return;
+              }
+              setCurrentView('reading');
+            }}
+            currentUser={currentUser}
+            onOpenAuth={() => setIsAuthModalOpen(true)}
+            onOpenSettings={() => setIsSettingsModalOpen(true)}
+            onSignOut={handleSignOut}
+            studentEmail={studentEmail}
+            activeTask={activeTask}
+            onToggleTask={handleToggleTask}
+            currentView={currentView}
+            activeWritingStep={activeWritingStep}
+            onSelectWritingStep={handleSelectWritingStep}
+          />
+
+          <div className="flex-1 min-h-0 overflow-hidden">
+            <ReadingWorkspace
+              studentEmail={studentEmail}
+              targetBand={targetBand}
+              onReadingGraded={handleRefreshStats}
+              onGoWelcome={() => setCurrentView('welcome')}
+              onOpenFlashcard={() => setCurrentView('flashcard')}
             />
           </div>
         </div>
@@ -533,6 +606,13 @@ export default function App() {
             }}
             onGoFullEssay={() => setCurrentView('full_essay')}
             onGoPractice={() => setCurrentView('vocab_practice')}
+            onGoReading={(mode) => {
+              if (!currentUser) {
+                setIsAuthModalOpen(true);
+                return;
+              }
+              setCurrentView('reading');
+            }}
             currentUser={currentUser}
             onOpenAuth={() => setIsAuthModalOpen(true)}
             onOpenSettings={() => setIsSettingsModalOpen(true)}
