@@ -1,3 +1,4 @@
+// src/components/flashcards/ClassicCardView.jsx
 import React, { useState, useEffect } from 'react';
 import { 
   Volume2, 
@@ -5,7 +6,8 @@ import {
   CheckCircle2, 
   XCircle, 
   Bookmark, 
-  Tag
+  Tag,
+  Sparkles
 } from 'lucide-react';
 import { speakWord, playFlipSound } from '../../services/soundEffects';
 
@@ -13,9 +15,11 @@ export default function ClassicCardView({
   card, 
   onMarkCard, 
   soundEnabled,
-  onSelectSynonym 
+  onSelectSynonym,
+  isMastered = false
 }) {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [toastMessage, setToastMessage] = useState(null);
 
   // Auto pronounce word on card mount
   useEffect(() => {
@@ -23,7 +27,7 @@ export default function ClassicCardView({
     if (card?.word && soundEnabled) {
       speakWord(card.word);
     }
-  }, [card?.id, soundEnabled]);
+  }, [card?.id, card?.word, soundEnabled]);
 
   // Keyboard shortcut listener
   useEffect(() => {
@@ -34,11 +38,11 @@ export default function ClassicCardView({
       }
       if (e.key === '1' || e.code === 'ArrowLeft') {
         e.preventDefault();
-        onMarkCard(false);
+        handleMark(false);
       }
       if (e.key === '2' || e.code === 'ArrowRight') {
         e.preventDefault();
-        onMarkCard(true);
+        handleMark(true);
       }
       if (e.key === 'r' || e.key === 'R') {
         e.preventDefault();
@@ -48,7 +52,7 @@ export default function ClassicCardView({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isFlipped, card]);
+  }, [isFlipped, card, onMarkCard]);
 
   const handleFlip = () => {
     if (soundEnabled) playFlipSound();
@@ -58,6 +62,19 @@ export default function ClassicCardView({
   const handleSpeak = (e) => {
     e.stopPropagation();
     if (card?.word) speakWord(card.word);
+  };
+
+  const handleMark = (mastered) => {
+    if (!card) return;
+    
+    // Show toast feedback
+    const msg = mastered 
+      ? `✓ Đã lưu: Đã thuộc từ "${card.word}" (+10 XP)!` 
+      : `⚠️ Đã lưu: Cần ôn lại từ "${card.word}"`;
+    setToastMessage(msg);
+    setTimeout(() => setToastMessage(null), 1800);
+
+    onMarkCard(mastered);
   };
 
   if (!card) return null;
@@ -71,7 +88,11 @@ export default function ClassicCardView({
         className="w-full h-[360px] sm:h-[420px] cursor-pointer perspective-1000 select-none group"
       >
         <div 
-          className={`relative w-full h-full rounded-3xl transition-transform duration-500 transform-style-3d shadow-sm border border-[#E6E2D8] ${
+          className={`relative w-full h-full rounded-3xl transition-transform duration-500 transform-style-3d shadow-sm border ${
+            isMastered 
+              ? "border-emerald-300 ring-1 ring-emerald-200" 
+              : "border-[#E6E2D8]"
+          } ${
             isFlipped
               ? "rotate-y-180 bg-[#FAF8F5]"
               : "bg-white hover:border-[#3E4F42]/40"
@@ -81,19 +102,27 @@ export default function ClassicCardView({
           <div className="absolute inset-0 w-full h-full p-6 sm:p-8 flex flex-col justify-between backface-hidden rounded-3xl bg-white">
             
             {/* Top Badge Row */}
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
               <div className="flex items-center gap-2">
                 <span className="text-[11px] font-medium uppercase px-2.5 py-0.5 rounded-full bg-[#EDF3EE] text-[#3E4F42] border border-[#3E4F42]/20">
-                  {card.taskType === 'task1' ? 'Task 1' : 'Task 2'}
+                  {card.taskType === 'task1' ? 'Task 1' : card.taskType === 'custom' ? 'Tự lưu' : 'Task 2'}
                 </span>
-                <span className="text-xs text-[#7A7369] font-medium truncate max-w-[200px]">
+                <span className="text-xs text-[#7A7369] font-medium truncate max-w-[180px]">
                   {card.topicVietnameseName || card.topicName}
                 </span>
               </div>
 
-              <span className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-[#F4EFEA] text-[#7A7369] border border-[#E6E2D8]">
-                Band 7.5 - 8.5
-              </span>
+              <div className="flex items-center gap-1.5">
+                {isMastered && (
+                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 flex items-center gap-1 shadow-2xs animate-in fade-in">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                    <span>ĐÃ THUỘC</span>
+                  </span>
+                )}
+                <span className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-[#F4EFEA] text-[#7A7369] border border-[#E6E2D8]">
+                  Band 7.5 - 8.5
+                </span>
+              </div>
             </div>
 
             {/* Center Content: Word & IPA */}
@@ -152,6 +181,11 @@ export default function ClassicCardView({
               <div className="flex items-baseline gap-2">
                 <span className="text-xl sm:text-2xl font-serif font-bold text-[#24211E]">{card.word}</span>
                 <span className="text-xs text-[#7A7369] italic font-mono">({card.partOfSpeech})</span>
+                {isMastered && (
+                  <span className="text-[10px] font-bold px-2 py-0.2 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 ml-1">
+                    ✓ Đã thuộc
+                  </span>
+                )}
               </div>
               <button
                 onClick={handleSpeak}
@@ -246,12 +280,20 @@ export default function ClassicCardView({
         </div>
       </div>
 
+      {/* Floating Status Toast */}
+      {toastMessage && (
+        <div className="px-3.5 py-1.5 rounded-xl bg-[#24211E] text-white text-xs font-semibold shadow-lg animate-in fade-in slide-in-from-bottom-2 flex items-center gap-1.5">
+          <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+          <span>{toastMessage}</span>
+        </div>
+      )}
+
       {/* Action Buttons: Spaced Repetition Style */}
       <div className="w-full flex items-center justify-center gap-3 sm:gap-4 pt-1">
         
         {/* Needs Review (Chưa nhớ) */}
         <button
-          onClick={() => onMarkCard(false)}
+          onClick={() => handleMark(false)}
           className="flex-1 max-w-[200px] flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white hover:bg-[#F4EFEA] border border-[#E6E2D8] text-[#7A7369] hover:text-[#24211E] font-medium text-xs sm:text-sm transition cursor-pointer shadow-xs active:scale-95"
           title="Phím 1 hoặc Mũi tên trái"
         >
@@ -271,12 +313,16 @@ export default function ClassicCardView({
 
         {/* Mastered (Đã thuộc) */}
         <button
-          onClick={() => onMarkCard(true)}
-          className="flex-1 max-w-[200px] flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-xs sm:text-sm transition cursor-pointer shadow-xs active:scale-95"
+          onClick={() => handleMark(true)}
+          className={`flex-1 max-w-[200px] flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl font-medium text-xs sm:text-sm transition cursor-pointer shadow-xs active:scale-95 ${
+            isMastered
+              ? "bg-emerald-700 hover:bg-emerald-800 text-white ring-2 ring-emerald-500/40"
+              : "bg-[#3E4F42] hover:bg-[#334237] text-white"
+          }`}
           title="Phím 2 hoặc Mũi tên phải (+10 XP)"
         >
-          <CheckCircle2 className="w-4 h-4" />
-          <span>Đã Thuộc</span>
+          <CheckCircle2 className={`w-4 h-4 ${isMastered ? "text-emerald-200" : ""}`} />
+          <span>{isMastered ? "✓ Đã Thuộc" : "Đã Thuộc"}</span>
           <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/20 text-white hidden sm:inline">2</span>
         </button>
 

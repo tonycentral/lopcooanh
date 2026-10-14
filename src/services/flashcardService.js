@@ -1,4 +1,5 @@
-// Flashcard state and gamification storage for interactive learning
+// src/services/flashcardService.js
+// Flashcard state, Spaced Repetition persistence and gamification storage for interactive learning
 
 const FLASHCARD_STORAGE_KEY = 'lopcooanh_flashcard_progress';
 
@@ -6,10 +7,18 @@ export function getFlashcardProgress() {
   try {
     const raw = localStorage.getItem(FLASHCARD_STORAGE_KEY);
     if (raw) {
-      return JSON.parse(raw);
+      const parsed = JSON.parse(raw);
+      return {
+        xp: parsed.xp || 0,
+        streak: parsed.streak || 1,
+        lastActiveDate: parsed.lastActiveDate || new Date().toISOString().slice(0, 10),
+        masteredWordIds: Array.isArray(parsed.masteredWordIds) ? parsed.masteredWordIds : [],
+        needsReviewWordIds: Array.isArray(parsed.needsReviewWordIds) ? parsed.needsReviewWordIds : [],
+        totalCompletedSessions: parsed.totalCompletedSessions || 0
+      };
     }
   } catch (e) {
-    console.error(e);
+    console.error("Error reading flashcard progress:", e);
   }
   return {
     xp: 0,
@@ -25,11 +34,49 @@ export function saveFlashcardProgress(progress) {
   try {
     localStorage.setItem(FLASHCARD_STORAGE_KEY, JSON.stringify(progress));
   } catch (e) {
-    console.error(e);
+    console.error("Error saving flashcard progress:", e);
   }
 }
 
-export function recordCardResult(wordId, isMastered) {
+/**
+ * Checks whether a card or word has been marked as mastered (Đã thuộc)
+ */
+export function isWordMastered(wordOrCard, progress) {
+  if (!wordOrCard) return false;
+  const p = progress || getFlashcardProgress();
+  const mastered = p.masteredWordIds || [];
+
+  const id = typeof wordOrCard === 'string' ? wordOrCard : wordOrCard?.id;
+  const word = (typeof wordOrCard === 'string' ? wordOrCard : wordOrCard?.word || '').toLowerCase().trim();
+
+  if (id && mastered.includes(id)) return true;
+  if (word && mastered.includes(word)) return true;
+  return false;
+}
+
+/**
+ * Checks whether a card or word needs review (Cần ôn lại)
+ */
+export function isWordNeedsReview(wordOrCard, progress) {
+  if (!wordOrCard) return false;
+  const p = progress || getFlashcardProgress();
+  const needsReview = p.needsReviewWordIds || [];
+
+  const id = typeof wordOrCard === 'string' ? wordOrCard : wordOrCard?.id;
+  const word = (typeof wordOrCard === 'string' ? wordOrCard : wordOrCard?.word || '').toLowerCase().trim();
+
+  if (id && needsReview.includes(id)) return true;
+  if (word && needsReview.includes(word)) return true;
+  return false;
+}
+
+/**
+ * Records learning result for a card.
+ * Tracks BOTH the card ID and normalized word text for 100% reliable persistence.
+ */
+export function recordCardResult(wordOrCard, isMastered) {
+  if (!wordOrCard) return getFlashcardProgress();
+  
   const progress = getFlashcardProgress();
   const today = new Date().toISOString().slice(0, 10);
 
@@ -46,23 +93,38 @@ export function recordCardResult(wordId, isMastered) {
     progress.lastActiveDate = today;
   }
 
+  const id = typeof wordOrCard === 'string' ? wordOrCard : wordOrCard?.id;
+  const cleanWord = (typeof wordOrCard === 'string' ? wordOrCard : wordOrCard?.word || '').toLowerCase().trim();
+
+  const keysToTrack = [];
+  if (id) keysToTrack.push(id);
+  if (cleanWord && !keysToTrack.includes(cleanWord)) keysToTrack.push(cleanWord);
+
   if (isMastered) {
-    if (!progress.masteredWordIds.includes(wordId)) {
-      progress.masteredWordIds.push(wordId);
-    }
-    progress.needsReviewWordIds = progress.needsReviewWordIds.filter(id => id !== wordId);
+    // Add to mastered
+    keysToTrack.forEach(k => {
+      if (!progress.masteredWordIds.includes(k)) {
+        progress.masteredWordIds.push(k);
+      }
+    });
+    // Remove from needs review
+    progress.needsReviewWordIds = progress.needsReviewWordIds.filter(k => !keysToTrack.includes(k));
     progress.xp += 10;
   } else {
-    if (!progress.needsReviewWordIds.includes(wordId)) {
-      progress.needsReviewWordIds.push(wordId);
-    }
-    progress.masteredWordIds = progress.masteredWordIds.filter(id => id !== wordId);
-    progress.xp = Math.max(0, progress.xp + 2); // Consolation XP for practicing
+    // Add to needs review
+    keysToTrack.forEach(k => {
+      if (!progress.needsReviewWordIds.includes(k)) {
+        progress.needsReviewWordIds.push(k);
+      }
+    });
+    // Remove from mastered
+    progress.masteredWordIds = progress.masteredWordIds.filter(k => !keysToTrack.includes(k));
+    progress.xp = Math.max(0, progress.xp + 2); // Consolation XP
   }
 
   saveFlashcardProgress(progress);
 
-  // Đồng bộ lên Supabase Cloud nếu người dùng đã đăng nhập
+  // Sync to Supabase Cloud if signed in
   import('./supabaseClient').then(({ supabase, isSupabaseConfigured }) => {
     if (isSupabaseConfigured && supabase) {
       import('./authService').then(({ getCurrentUser }) => {
@@ -93,6 +155,19 @@ export function addXP(amount) {
   return progress.xp;
 }
 
+/**
+ * Fisher-Yates array shuffle algorithm for unbiased random card ordering
+ */
+export function shuffleArray(arr) {
+  if (!Array.isArray(arr)) return [];
+  const shuffled = [...arr];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 // Flatten all vocabularies from topics with topic metadata
 export function extractAllVocabularies(task1Topics = [], task2Topics = []) {
   const all = [];
@@ -102,10 +177,12 @@ export function extractAllVocabularies(task1Topics = [], task2Topics = []) {
     topics.forEach(topic => {
       if (topic.vocabularies && Array.isArray(topic.vocabularies)) {
         topic.vocabularies.forEach(vocab => {
-          if (!seenWords.has(vocab.word.toLowerCase())) {
-            seenWords.add(vocab.word.toLowerCase());
+          const clean = (vocab.word || '').toLowerCase().trim();
+          if (clean && !seenWords.has(clean)) {
+            seenWords.add(clean);
             all.push({
               ...vocab,
+              id: vocab.id || `vocab-${clean.replace(/[^a-z0-9]/g, '-')}`,
               topicId: topic.id,
               topicName: topic.name,
               topicVietnameseName: topic.vietnameseName,
@@ -120,6 +197,28 @@ export function extractAllVocabularies(task1Topics = [], task2Topics = []) {
 
   processList(task2Topics, 'task2');
   processList(task1Topics, 'task1');
+
+  // Also include custom flashcards saved by user
+  const customWords = getSavedCustomWords();
+  customWords.forEach(cw => {
+    const clean = (cw.word || '').toLowerCase().trim();
+    if (clean && !seenWords.has(clean)) {
+      seenWords.add(clean);
+      all.push({
+        id: cw.id || `custom-${clean}`,
+        word: cw.word,
+        ipa: cw.ipa || "",
+        partOfSpeech: cw.partOfSpeech || "noun",
+        meaning: cw.meaning || "",
+        topicId: "custom",
+        topicName: cw.topicName || "Tự lưu",
+        topicVietnameseName: cw.topicName || "Từ vựng của tôi",
+        taskType: "custom",
+        modelSentence: cw.exampleSentence || "",
+        synonyms: cw.synonyms || []
+      });
+    }
+  });
 
   return all;
 }

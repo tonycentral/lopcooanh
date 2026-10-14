@@ -1,3 +1,4 @@
+// src/components/flashcards/FlashcardPage.jsx
 import React, { useState, useEffect, useMemo } from 'react';
 import FlashcardTopBar from './FlashcardTopBar';
 import ClassicCardView from './ClassicCardView';
@@ -10,9 +11,13 @@ import {
   getFlashcardProgress, 
   recordCardResult, 
   addXP, 
-  extractAllVocabularies 
+  extractAllVocabularies,
+  isWordMastered,
+  isWordNeedsReview,
+  shuffleArray
 } from '../../services/flashcardService';
 import { getSynonymVocab } from '../../services/synonymService';
+import { playCorrectSound, playIncorrectSound } from '../../services/soundEffects';
 import { 
   Layers, 
   Sparkles, 
@@ -25,7 +30,8 @@ import {
   ArrowRight,
   Heart,
   Flame,
-  Award
+  Award,
+  Shuffle
 } from 'lucide-react';
 
 export default function FlashcardPage({ 
@@ -43,8 +49,15 @@ export default function FlashcardPage({
   // Persistent progress
   const [progress, setProgress] = useState(() => getFlashcardProgress());
 
-  // Filter mode: 'current' (chủ đề hiện tại) | 'all' (tất cả) | 'weak' (từ chưa nhớ) | 'daily10' (10 từ ngẫu nhiên)
+  // Filter mode: 'current' | 'all' | 'weak' | 'mastered' | 'daily10'
   const [filterMode, setFilterMode] = useState('current');
+
+  // Random word order active by default as requested
+  const [isRandomOrder, setIsRandomOrder] = useState(true);
+  const [shuffleKey, setShuffleKey] = useState(0);
+
+  // Toggle to optionally hide mastered words during practice
+  const [hideMastered, setHideMastered] = useState(false);
 
   // Active study mode: 'card' (Lật thẻ) | 'quiz' (Trắc nghiệm) | 'match' (Nối cặp) | 'fill' (Điền từ)
   const [activeMode, setActiveMode] = useState('card');
@@ -58,32 +71,58 @@ export default function FlashcardPage({
   const [isSessionFinished, setIsSessionFinished] = useState(false);
   const [extraCards, setExtraCards] = useState([]);
 
-  // Deck of cards filtered by selected criteria
+  // Calculate unique mastered & needs-review counts
+  const masteredCount = useMemo(() => {
+    return allVocabularies.filter(v => isWordMastered(v, progress)).length;
+  }, [allVocabularies, progress]);
+
+  const needsReviewCount = useMemo(() => {
+    return allVocabularies.filter(v => isWordNeedsReview(v, progress)).length;
+  }, [allVocabularies, progress]);
+
+  // Deck of cards filtered by selected criteria and randomized if enabled
   const activeDeck = useMemo(() => {
     let list = [];
 
     if (filterMode === 'current' && currentTopic) {
       list = allVocabularies.filter(v => v.topicId === currentTopic.id);
     } else if (filterMode === 'weak') {
-      const weakIds = new Set(progress.needsReviewWordIds || []);
-      list = allVocabularies.filter(v => weakIds.has(v.id));
+      list = allVocabularies.filter(v => isWordNeedsReview(v, progress));
       if (list.length === 0) {
-        // Fallback if no weak words
+        list = allVocabularies.slice(0, 10);
+      }
+    } else if (filterMode === 'mastered') {
+      list = allVocabularies.filter(v => isWordMastered(v, progress));
+      if (list.length === 0) {
         list = allVocabularies.slice(0, 10);
       }
     } else if (filterMode === 'daily10') {
-      list = [...allVocabularies].sort(() => 0.5 - Math.random()).slice(0, 10);
+      list = shuffleArray(allVocabularies).slice(0, 10);
     } else {
       // 'all'
       list = allVocabularies;
     }
 
-    const baseList = list.length > 0 ? list : allVocabularies.slice(0, 10);
+    // Filter out mastered words if hideMastered is ON and not in 'mastered' view
+    if (hideMastered && filterMode !== 'mastered') {
+      const unmastered = list.filter(v => !isWordMastered(v, progress));
+      if (unmastered.length > 0) {
+        list = unmastered;
+      }
+    }
+
+    let baseList = list.length > 0 ? list : allVocabularies.slice(0, 10);
+
+    // Apply Random Shuffle by default as requested
+    if (isRandomOrder && filterMode !== 'daily10') {
+      baseList = shuffleArray(baseList);
+    }
+
     if (!extraCards.length) return baseList;
     const existingWords = new Set(baseList.map(c => c.word?.toLowerCase().trim()));
     const validExtras = extraCards.filter(c => !existingWords.has(c.word?.toLowerCase().trim()));
     return [...validExtras, ...baseList];
-  }, [filterMode, currentTopic, allVocabularies, progress.needsReviewWordIds, extraCards]);
+  }, [filterMode, currentTopic, allVocabularies, progress, hideMastered, isRandomOrder, shuffleKey, extraCards]);
 
   const currentCard = activeDeck[currentIndex] || activeDeck[0];
 
@@ -117,12 +156,15 @@ export default function FlashcardPage({
   const handleCardResult = (isMastered) => {
     if (!currentCard) return;
 
-    const updated = recordCardResult(currentCard.id, isMastered);
+    const updated = recordCardResult(currentCard, isMastered);
     setProgress(updated);
 
     if (isMastered) {
       setSessionXp(prev => prev + 10);
       setSessionMasteredCount(prev => prev + 1);
+      if (soundEnabled) playCorrectSound();
+    } else {
+      if (soundEnabled) playIncorrectSound();
     }
 
     goToNextCard();
@@ -133,14 +175,16 @@ export default function FlashcardPage({
     if (!currentCard) return;
 
     if (isCorrect) {
-      const updated = recordCardResult(currentCard.id, true);
+      const updated = recordCardResult(currentCard, true);
       setProgress(updated);
       setSessionXp(prev => prev + 10);
       setSessionMasteredCount(prev => prev + 1);
+      if (soundEnabled) playCorrectSound();
     } else {
-      const updated = recordCardResult(currentCard.id, false);
+      const updated = recordCardResult(currentCard, false);
       setProgress(updated);
       setHearts(prev => Math.max(0, prev - 1));
+      if (soundEnabled) playIncorrectSound();
     }
 
     goToNextCard();
@@ -169,6 +213,14 @@ export default function FlashcardPage({
     setSessionXp(0);
     setSessionMasteredCount(0);
     setIsSessionFinished(false);
+    if (isRandomOrder) {
+      setShuffleKey(k => k + 1);
+    }
+  };
+
+  const handleShuffleDeck = () => {
+    setShuffleKey(k => k + 1);
+    setCurrentIndex(0);
   };
 
   const handleRestoreHearts = () => {
@@ -197,6 +249,15 @@ export default function FlashcardPage({
         onClose={onClose}
         onResetSession={handleResetSession}
         activeModeTitle={MODE_TITLES[activeMode]}
+        isRandomOrder={isRandomOrder}
+        onToggleRandom={() => {
+          setIsRandomOrder(prev => !prev);
+          setShuffleKey(k => k + 1);
+          setCurrentIndex(0);
+        }}
+        onShuffleDeck={handleShuffleDeck}
+        masteredCount={masteredCount}
+        needsReviewCount={needsReviewCount}
       />
 
       {/* Mode Switcher Tabs & Filters */}
@@ -250,7 +311,7 @@ export default function FlashcardPage({
         </div>
 
         {/* Filter Pills */}
-        <div className="flex items-center gap-1.5 text-xs overflow-x-auto scrollbar-none">
+        <div className="flex items-center gap-1.5 text-xs overflow-x-auto scrollbar-none flex-wrap">
           <span className="text-[#7A7369] font-medium hidden md:inline flex items-center gap-1">
             <Filter className="w-3 h-3" /> Lọc:
           </span>
@@ -259,45 +320,76 @@ export default function FlashcardPage({
             onClick={() => setFilterMode('current')}
             className={`px-2.5 py-1 rounded-xl font-medium transition cursor-pointer whitespace-nowrap ${
               filterMode === 'current'
-                ? "bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3]"
+                ? "bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3] font-bold"
                 : "bg-white text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
             }`}
           >
-            Chủ đề đang học ({currentTopic?.vietnameseName || currentTopic?.name || "Hiện tại"})
+            Chủ đề ({currentTopic?.vietnameseName || currentTopic?.name || "Hiện tại"})
           </button>
 
           <button
             onClick={() => setFilterMode('all')}
             className={`px-2.5 py-1 rounded-xl font-medium transition cursor-pointer whitespace-nowrap ${
               filterMode === 'all'
-                ? "bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3]"
+                ? "bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3] font-bold"
                 : "bg-white text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
             }`}
           >
-            Tất cả ({allVocabularies.length} từ)
-          </button>
-
-          <button
-            onClick={() => setFilterMode('daily10')}
-            className={`px-2.5 py-1 rounded-xl font-medium transition cursor-pointer whitespace-nowrap ${
-              filterMode === 'daily10'
-                ? "bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3]"
-                : "bg-white text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
-            }`}
-          >
-            Ngẫu nhiên 10 từ
+            Tất cả ({allVocabularies.length})
           </button>
 
           <button
             onClick={() => setFilterMode('weak')}
             className={`px-2.5 py-1 rounded-xl font-medium transition cursor-pointer whitespace-nowrap ${
               filterMode === 'weak'
-                ? "bg-[#FAF5EE] text-[#A67C52] border border-[#F4EFEA]"
+                ? "bg-amber-100 text-amber-900 border border-amber-300 font-bold"
                 : "bg-white text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
             }`}
           >
-            Từ cần ôn ({progress.needsReviewWordIds?.length || 0})
+            Cần ôn ({needsReviewCount})
           </button>
+
+          <button
+            onClick={() => setFilterMode('mastered')}
+            className={`px-2.5 py-1 rounded-xl font-medium transition cursor-pointer whitespace-nowrap ${
+              filterMode === 'mastered'
+                ? "bg-emerald-100 text-emerald-900 border border-emerald-300 font-bold"
+                : "bg-white text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
+            }`}
+          >
+            Đã thuộc ({masteredCount})
+          </button>
+
+          <button
+            onClick={() => setFilterMode('daily10')}
+            className={`px-2.5 py-1 rounded-xl font-medium transition cursor-pointer whitespace-nowrap ${
+              filterMode === 'daily10'
+                ? "bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3] font-bold"
+                : "bg-white text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
+            }`}
+          >
+            Ngẫu nhiên 10 từ
+          </button>
+
+          {/* Toggle Bỏ qua từ đã thuộc */}
+          {filterMode !== 'mastered' && (
+            <button
+              onClick={() => {
+                setHideMastered(prev => !prev);
+                setCurrentIndex(0);
+              }}
+              className={`px-2.5 py-1 rounded-xl text-[11px] font-medium transition cursor-pointer flex items-center gap-1 border ${
+                hideMastered
+                  ? "bg-emerald-600 text-white border-emerald-600 font-bold shadow-2xs"
+                  : "bg-[#FAF8F5] text-[#7A7369] border-[#E6E2D8] hover:text-[#24211E]"
+              }`}
+              title="Ẩn những từ đã thuộc để tập trung học các từ còn lại"
+            >
+              <CheckCircle2 className="w-3 h-3" />
+              <span>{hideMastered ? "Đang ẩn từ đã thuộc" : "Ẩn từ đã thuộc"}</span>
+            </button>
+          )}
+
         </div>
 
       </div>
@@ -331,6 +423,7 @@ export default function FlashcardPage({
             onMarkCard={handleCardResult}
             soundEnabled={soundEnabled}
             onSelectSynonym={handleSelectSynonymCard}
+            isMastered={isWordMastered(currentCard, progress)}
           />
         )}
 
