@@ -38,6 +38,7 @@ import {
   getPassageById, 
   calculateReadingBand 
 } from '../../data/readingData';
+import { getAllVocabularies } from '../../data/databank/databankService';
 import ReadingPassageViewer from './ReadingPassageViewer';
 import ReadingQuestionsViewer from './ReadingQuestionsViewer';
 import ReadingVocabDrawer from './ReadingVocabDrawer';
@@ -789,21 +790,53 @@ export default function ReadingWorkspace({
                 onClose={() => setIsVocabDrawerOpen(false)}
                 studentEmail={studentEmail}
                 topicName={currentPassage?.topicName}
-                onSearchWord={(word) => {
-                  // Search in current passage vocabularies
-                  const found = currentPassage?.vocabularies?.find(v => v.word.toLowerCase() === word.toLowerCase());
+                onSearchWord={(queryWord) => {
+                  const clean = (queryWord || '').trim().toLowerCase();
+                  if (!clean) return;
+
+                  // 1. Search in current passage vocabularies (including aliases/matchWords)
+                  const found = currentPassage?.vocabularies?.find(v => 
+                    v.word.toLowerCase() === clean ||
+                    (Array.isArray(v.matchWords) && v.matchWords.some(m => m.toLowerCase() === clean))
+                  );
                   if (found) {
                     setActiveVocab(found);
-                  } else {
-                    setActiveVocab({
-                      word: word,
-                      ipa: "",
-                      pos: "từ tra cứu",
-                      meaning: `Tra cứu nghĩa cho từ: "${word}"`,
-                      definition: `Contextual lookup for "${word}"`,
-                      contextSentence: `Word found in reading passage.`
-                    });
+                    return;
                   }
+
+                  // 2. Search in central databank (2,660+ words)
+                  try {
+                    const allVocabs = getAllVocabularies();
+                    const inBank = allVocabs.find(v => 
+                      v.word?.toLowerCase() === clean ||
+                      (v.wordFamily && v.wordFamily.toLowerCase().includes(clean))
+                    );
+                    if (inBank) {
+                      setActiveVocab({
+                        word: inBank.word,
+                        ipa: inBank.ipa || "",
+                        pos: inBank.partOfSpeech || "từ vựng",
+                        meaning: inBank.meaning || "",
+                        definition: inBank.definitionEn || "",
+                        synonyms: inBank.synonyms || [],
+                        collocations: inBank.collocations || [],
+                        contextSentence: inBank.exampleSentence || ""
+                      });
+                      return;
+                    }
+                  } catch (e) {
+                    console.error("Error searching in databank:", e);
+                  }
+
+                  // 3. Fallback
+                  setActiveVocab({
+                    word: queryWord,
+                    ipa: "",
+                    pos: "từ tra cứu",
+                    meaning: `Đang tra cứu nghĩa cho từ: "${queryWord}" trong bài đọc`,
+                    definition: `Contextual lookup for "${queryWord}"`,
+                    contextSentence: `Word searched during reading session.`
+                  });
                 }}
               />
             </div>

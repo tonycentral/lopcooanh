@@ -59649,5 +59649,1252 @@
     ],
     "exampleSentence": "Housing costs effectively eclipsed every other item on the balance sheet for families in Country A.",
     "wordFamily": "eclipsed (adj), eclipsing (gerund)"
+  },
+  {
+    "id": "V_RD_NEXUS",
+    "topicId": "transport",
+    "word": "nexus",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈnek.səs/",
+    "meaning": "Đầu mối giao thương, điểm kết nối trung tâm quan trọng nhất",
+    "definitionEn": "a central connection or series of connections linking two or more things; a focal hub",
+    "cefrBand": "C2 (Band 8.5 - 9.0)",
+    "basicEquivalent": "center, link, central hub",
+    "synonyms": [
+      "focal point",
+      "nucleus",
+      "core",
+      "crossroads",
+      "epicenter"
+    ],
+    "collocations": [
+      "commercial nexus",
+      "central nexus",
+      "nexus of transport"
+    ],
+    "exampleSentence": "In the nineteenth century, London served as the commercial nexus of the global British Empire.",
+    "wordFamily": "nexuses (plural)"
+  },
+  {
+    "id": "V_RD_UNPRECEDENTED",
+    "topicId": "transport",
+    "word": "unprecedented",
+    "partOfSpeech": "adjective",
+    "ipa": "/ʌnˈpres.ɪ.den.tɪd/",
+    "meaning": "Chưa từng có tiền lệ, vô tiền khoáng hậu",
+    "definitionEn": "never done or known before; extraordinary in scale, speed, or occurrence",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "never seen before, extraordinary",
+    "synonyms": [
+      "unparalleled",
+      "unequaled",
+      "groundbreaking",
+      "novel"
+    ],
+    "collocations": [
+      "unprecedented velocity",
+      "unprecedented scale",
+      "unprecedented growth"
+    ],
+    "exampleSentence": "London's population exploded with unprecedented velocity, doubling from under one million to two million.",
+    "wordFamily": "precedent (n), precedented (adj)"
+  },
+  {
+    "id": "V_RD_CATASTROPHIC",
+    "topicId": "transport",
+    "word": "catastrophic",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˌkæt.əˈstrɒf.ɪk/",
+    "meaning": "Thảm khốc, tai hại nghiêm trọng, tồi tệ cùng cực",
+    "definitionEn": "involving or causing sudden great damage or suffering; extremely disastrous",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "disastrous, terrible, devastating",
+    "synonyms": [
+      "disastrous",
+      "devastating",
+      "ruinous",
+      "calamitous"
+    ],
+    "collocations": [
+      "catastrophic gridlock",
+      "catastrophic failure",
+      "catastrophic consequences"
+    ],
+    "exampleSentence": "Surface streets were paralyzed by catastrophic traffic gridlock and endless transit blockages.",
+    "wordFamily": "catastrophe (n), catastrophically (adv)"
+  },
+  {
+    "id": "V_RD_OMNIBUS",
+    "topicId": "transport",
+    "word": "omnibus",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈɒm.nɪ.bəs/",
+    "meaning": "Xe buýt nhiều chỗ kéo bằng ngựa thời kỳ đầu",
+    "definitionEn": "a horse-drawn public vehicle designed to transport a large number of passengers along fixed urban routes",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "horse bus, public carriage",
+    "synonyms": [
+      "horse-drawn bus",
+      "public carriage",
+      "horse tram"
+    ],
+    "collocations": [
+      "horse-drawn omnibus",
+      "omnibus carriages",
+      "omnibus route"
+    ],
+    "exampleSentence": "Tens of thousands of horse-drawn omnibus carriages congested the medieval thoroughfares of the capital.",
+    "wordFamily": "omnibuses (plural)"
+  },
+  {
+    "id": "V_RD_HANSOM_CAB",
+    "topicId": "transport",
+    "word": "hansom cab",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈhæn.səm kæb/",
+    "meaning": "Xe ngựa hai bánh mui trần thời Victoria (phương tiện cá nhân phổ biến ở London thế kỷ 19)",
+    "definitionEn": "a two-wheeled horse-drawn carriage accommodating two passengers inside with the driver mounted on an elevated rear seat",
+    "cefrBand": "C2 (Band 8.5 - 9.0)",
+    "basicEquivalent": "two-wheeled horse carriage, private cab",
+    "synonyms": [
+      "two-wheeled cab",
+      "Victorian carriage",
+      "hackney cab"
+    ],
+    "collocations": [
+      "private hansom cabs",
+      "hire a hansom cab"
+    ],
+    "exampleSentence": "Private hansom cabs and heavy freight wagons competed for space along narrow cobblestone streets.",
+    "wordFamily": "hansom cabs (plural)"
+  },
+  {
+    "id": "V_RD_THOROUGHFARE",
+    "topicId": "transport",
+    "word": "thoroughfare",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈθʌr.ə.feər/",
+    "meaning": "Tuyến huyết mạch giao thông, đại lộ chính xuyên suốt đô thị",
+    "definitionEn": "a main road or public highway in a town or city, typically busy and vital for commerce",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "main road, public street, artery",
+    "synonyms": [
+      "artery",
+      "arterial highway",
+      "boulevard",
+      "passageway"
+    ],
+    "collocations": [
+      "medieval thoroughfares",
+      "major thoroughfare",
+      "congested thoroughfare"
+    ],
+    "exampleSentence": "Wagons competed for passage along narrow medieval thoroughfares, creating hour-long delays.",
+    "wordFamily": "thoroughfares (plural)"
+  },
+  {
+    "id": "V_RD_PERIPHERY",
+    "topicId": "transport",
+    "word": "periphery",
+    "partOfSpeech": "noun",
+    "ipa": "/pəˈrɪf.ər.i/",
+    "meaning": "Vùng ngoại vi, vùng biên bao quanh lõi trung tâm",
+    "definitionEn": "the outer limits or edge of an area or surface, contrasting with the central core",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "outer edge, outskirts, boundary",
+    "synonyms": [
+      "outskirts",
+      "fringes",
+      "perimeter",
+      "borderland"
+    ],
+    "collocations": [
+      "periphery of the urban core",
+      "outer periphery",
+      "economic periphery"
+    ],
+    "exampleSentence": "Rail companies constructed terminal stations on the periphery of the urban core.",
+    "wordFamily": "peripheral (adj), peripherally (adv)"
+  },
+  {
+    "id": "V_RD_LOCOMOTIVE",
+    "topicId": "transport",
+    "word": "locomotive",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌləʊ.kəˈməʊ.tɪv/",
+    "meaning": "Đầu máy xe lửa (chạy bằng hơi nước hoặc điện)",
+    "definitionEn": "a powered rail vehicle used for pulling trains",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "train engine, rail motor",
+    "synonyms": [
+      "engine",
+      "rail motor",
+      "steam engine"
+    ],
+    "collocations": [
+      "steam locomotives",
+      "coal-fired locomotives",
+      "locomotive smoke"
+    ],
+    "exampleSentence": "Royal commissions prohibited coal-fired locomotives from penetrating the historic inner city.",
+    "wordFamily": "locomotives (plural), locomotion (n)"
+  },
+  {
+    "id": "V_RD_DISEMBARK",
+    "topicId": "transport",
+    "word": "disembark",
+    "partOfSpeech": "verb",
+    "ipa": "/ˌdɪs.ɪmˈbɑːk/",
+    "meaning": "Xuống tàu, rời khỏi phương tiện vận tải (tàu hỏa, tàu thủy)",
+    "definitionEn": "leave a ship, aircraft, train, or other vehicle after a journey",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "get off, alight, step off",
+    "synonyms": [
+      "alight",
+      "detrain",
+      "deplane",
+      "exit"
+    ],
+    "collocations": [
+      "disembark at edge stations",
+      "disembark safely",
+      "passengers disembark"
+    ],
+    "exampleSentence": "Millions of commuters arriving daily were forced to disembark at edge stations and walk to work.",
+    "wordFamily": "disembarkation (n), disembarkment (n)"
+  },
+  {
+    "id": "V_RD_ASPHYXIATE",
+    "topicId": "transport",
+    "word": "asphyxiate",
+    "partOfSpeech": "verb",
+    "ipa": "/əsˈfɪk.si.eɪt/",
+    "meaning": "Làm ngạt thở, gây tử vong vì thiếu dưỡng khí hoặc hít phải khói độc",
+    "definitionEn": "kill someone by depriving them of air, or die from lack of oxygen",
+    "cefrBand": "C2 (Band 8.5 - 9.0)",
+    "basicEquivalent": "suffocate, choke",
+    "synonyms": [
+      "suffocate",
+      "smother",
+      "stifle",
+      "choke"
+    ],
+    "collocations": [
+      "asphyxiated by subterranean fumes",
+      "risk of asphyxiation"
+    ],
+    "exampleSentence": "Critics predicted that underground passengers would be asphyxiated by subterranean fumes.",
+    "wordFamily": "asphyxiation (n), asphyxiated (adj)"
+  },
+  {
+    "id": "V_RD_GARNER",
+    "topicId": "transport",
+    "word": "garner",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈɡɑː.nər/",
+    "meaning": "Thu thập, gom góp, giành được (sự ủng hộ chính trị, nguồn tài chính)",
+    "definitionEn": "gather or collect something, especially information, approval, or support",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "gather, collect, secure, win",
+    "synonyms": [
+      "accumulate",
+      "amass",
+      "secure",
+      "acquire",
+      "glean"
+    ],
+    "collocations": [
+      "garner financial backing",
+      "garner widespread support",
+      "garner acclaim"
+    ],
+    "exampleSentence": "Pearson successfully garnered political and financial backing for the underground project.",
+    "wordFamily": "garnered (past)"
+  },
+  {
+    "id": "V_RD_EXCAVATE",
+    "topicId": "transport",
+    "word": "excavate",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈek.skə.veɪt/",
+    "meaning": "Đào bới, khai quật đất đá tạo hố móng",
+    "definitionEn": "make a hole or channel by digging away earth and stone",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "dig up, hollow out, unearth",
+    "synonyms": [
+      "hollow out",
+      "dig out",
+      "unearth",
+      "trench"
+    ],
+    "collocations": [
+      "excavate a colossal trench",
+      "excavate tunnels",
+      "excavate foundations"
+    ],
+    "exampleSentence": "Workers excavated a colossal trench along major avenues before roofing it over.",
+    "wordFamily": "excavation (n), excavator (n)"
+  },
+  {
+    "id": "V_RD_SUBTERRANEAN",
+    "topicId": "transport",
+    "word": "subterranean",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˌsʌb.təˈreɪ.ni.ən/",
+    "meaning": "Dưới lòng đất, ngầm bên dưới bề mặt",
+    "definitionEn": "existing, occurring, or done under the earth's surface",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "underground, below ground",
+    "synonyms": [
+      "underground",
+      "subsurface",
+      "sunken"
+    ],
+    "collocations": [
+      "subterranean railway",
+      "subterranean tunnels",
+      "subterranean fumes"
+    ],
+    "exampleSentence": "Charles Pearson campaigned for an unorthodox solution: constructing a subterranean railway.",
+    "wordFamily": "subterrane (n)"
+  },
+  {
+    "id": "V_RD_CUT_AND_COVER",
+    "topicId": "transport",
+    "word": "cut-and-cover",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌkʌt.ənˈkʌv.ər/",
+    "meaning": "Phương pháp đào mở rồi lấp lại (kỹ thuật thi công hầm ngầm nông)",
+    "definitionEn": "a method of tunnel construction involving excavating a trench, roofing it over, and restoring the ground above",
+    "cefrBand": "C2 (Band 8.5 - 9.0)",
+    "basicEquivalent": "open trench tunneling",
+    "synonyms": [
+      "open-trench construction",
+      "shallow tunneling"
+    ],
+    "collocations": [
+      "cut-and-cover technique",
+      "cut-and-cover method",
+      "cut-and-cover excavation"
+    ],
+    "exampleSentence": "The initial line utilized a construction technique known as cut-and-cover.",
+    "wordFamily": "cut-and-cover (adj)"
+  },
+  {
+    "id": "V_RD_METROPOLIS",
+    "topicId": "transport",
+    "word": "metropolis",
+    "partOfSpeech": "noun",
+    "ipa": "/məˈtrɒp.əl.ɪs/",
+    "meaning": "Đại đô thị, thành phố siêu lớn và sôi động bậc nhất",
+    "definitionEn": "a very large and densely populated industrial and commercial city",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "megacity, huge city, capital",
+    "synonyms": [
+      "megacity",
+      "conurbation",
+      "urban hub"
+    ],
+    "collocations": [
+      "decentralized metropolis",
+      "sprawling metropolis",
+      "bustling metropolis"
+    ],
+    "exampleSentence": "The rapid transit system transformed London into the modern decentralized metropolis we recognize today.",
+    "wordFamily": "metropolises (plural), metropolitan (adj)"
+  },
+  {
+    "id": "V_RD_CRAM",
+    "topicId": "transport",
+    "word": "cram",
+    "partOfSpeech": "verb",
+    "ipa": "/kræm/",
+    "meaning": "Nhồi nhét, chen chúc chật chội vào một không gian hẹp",
+    "definitionEn": "completely fill a place or container to the point of overflowing; force people into a tight space",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "pack tightly, squeeze into, crowd",
+    "synonyms": [
+      "squeeze",
+      "pack",
+      "jam",
+      "stuff"
+    ],
+    "collocations": [
+      "cram into carriages",
+      "cram into buses",
+      "cram full"
+    ],
+    "exampleSentence": "Commuters were forced to disembark and cram into overcrowded surface horse-carriages.",
+    "wordFamily": "crammed (adj)"
+  },
+  {
+    "id": "V_RD_SPUR",
+    "topicId": "transport",
+    "word": "spur",
+    "partOfSpeech": "verb",
+    "ipa": "/spɜːr/",
+    "meaning": "Thúc đẩy, tạo động lực mạnh mẽ để phát triển nhanh",
+    "definitionEn": "give an incentive or encouragement to someone or cause something to happen faster",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "encourage, trigger, stimulate",
+    "synonyms": [
+      "stimulate",
+      "galvanize",
+      "propel",
+      "prompt",
+      "motivate"
+    ],
+    "collocations": [
+      "spur economic growth",
+      "spur the development of",
+      "spur innovation"
+    ],
+    "exampleSentence": "The success of the Metropolitan spurred the development of deep-level tube lines.",
+    "wordFamily": "spurred (past)"
+  },
+  {
+    "id": "V_RD_BLUBBER",
+    "topicId": "environment",
+    "word": "blubber",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈblʌb.ər/",
+    "meaning": "Lớp mỡ dày dưới da của động vật biển hàn đới",
+    "definitionEn": "the thick layer of insulating fat beneath the skin of whales, seals, and polar marine animals",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "marine animal fat layer",
+    "synonyms": [
+      "adipose blubber",
+      "subcutaneous fat"
+    ],
+    "collocations": [
+      "layer of blubber",
+      "insulating blubber",
+      "dense blubber"
+    ],
+    "exampleSentence": "Polar bears possess a thick layer of adipose tissue known as blubber measuring up to 11 centimetres.",
+    "wordFamily": "blubbery (adj)"
+  },
+  {
+    "id": "V_RD_SATURATED_FATS",
+    "topicId": "environment",
+    "word": "saturated fats",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈsætʃ.ər.eɪ.tɪd fæts/",
+    "meaning": "Chất béo bão hòa",
+    "definitionEn": "types of dietary fat containing a high proportion of saturated fatty acid molecules",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "solid fats, animal lipids",
+    "synonyms": [
+      "solid lipids",
+      "saturated lipids"
+    ],
+    "collocations": [
+      "consume saturated fats",
+      "rich in saturated fats"
+    ],
+    "exampleSentence": "Polar bears consume immense quantities of saturated fats without developing heart disease.",
+    "wordFamily": "saturated fat (singular), saturate (v)"
+  },
+  {
+    "id": "V_RD_CORONARY_AILMENTS",
+    "topicId": "environment",
+    "word": "coronary ailments",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈkɒr.ə.nər.i ˈeɪl.mənts/",
+    "meaning": "Các bệnh về tim và động mạch vành",
+    "definitionEn": "medical disorders and diseases specifically affecting the heart and its supplying coronary arteries",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "heart problems, cardiac disease",
+    "synonyms": [
+      "cardiovascular disease",
+      "cardiac disorders",
+      "heart conditions"
+    ],
+    "collocations": [
+      "manifest coronary ailments",
+      "prevent coronary ailments"
+    ],
+    "exampleSentence": "Unlike humans, polar bears manifest no coronary ailments despite a diet rich in fats.",
+    "wordFamily": "coronary ailment (singular), coronary (adj)"
+  },
+  {
+    "id": "V_RD_PURGE",
+    "topicId": "environment",
+    "word": "purge",
+    "partOfSpeech": "verb",
+    "ipa": "/pɜːdʒ/",
+    "meaning": "Đào thải, thanh lọc triệt để chất có hại",
+    "definitionEn": "rid an organism or system of an unwanted substance or toxic element",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "cleanse, eliminate, expel",
+    "synonyms": [
+      "cleanse",
+      "eliminate",
+      "expel",
+      "clear out"
+    ],
+    "collocations": [
+      "purge bad cholesterol",
+      "purge toxins",
+      "purge from blood"
+    ],
+    "exampleSentence": "This mutation effectively permits bears to purge low-density lipoprotein from their bloodstream.",
+    "wordFamily": "purged (past), purgation (n)"
+  },
+  {
+    "id": "V_RD_DOGMA",
+    "topicId": "environment",
+    "word": "dogma",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈdɒɡ.mə/",
+    "meaning": "Giáo điều, định kiến lý thuyết được thừa nhận không kiểm chứng",
+    "definitionEn": "a principle or set of principles laid down by an authority as incontrovertibly true",
+    "cefrBand": "C2 (Band 8.5 - 9.0)",
+    "basicEquivalent": "rigid belief, unquestioned theory",
+    "synonyms": [
+      "creed",
+      "tenet",
+      "orthodoxy",
+      "doctrine"
+    ],
+    "collocations": [
+      "prevailing scientific dogma",
+      "entrenched dogma",
+      "challenge dogma"
+    ],
+    "exampleSentence": "Prevailing scientific dogma previously maintained that deliberate tool usage was exclusive to primates.",
+    "wordFamily": "dogmatic (adj), dogmatically (adv)"
+  },
+  {
+    "id": "V_RD_PERENNIAL",
+    "topicId": "environment",
+    "word": "perennial",
+    "partOfSpeech": "adjective",
+    "ipa": "/pəˈren.i.əl/",
+    "meaning": "Lưu niên, tồn tại vĩnh cửu qua nhiều năm",
+    "definitionEn": "lasting or existing for a long or apparently infinite time; enduring or continually recurring",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "year-round, permanent, enduring",
+    "synonyms": [
+      "enduring",
+      "perpetual",
+      "abiding",
+      "everlasting"
+    ],
+    "collocations": [
+      "perennial sea ice",
+      "perennial problem",
+      "perennial challenge"
+    ],
+    "exampleSentence": "The retreat of perennial Arctic sea ice poses an existential crisis for wildlife.",
+    "wordFamily": "perennially (adv)"
+  },
+  {
+    "id": "V_RD_DISINTEGRATE",
+    "topicId": "environment",
+    "word": "disintegrate",
+    "partOfSpeech": "verb",
+    "ipa": "/dɪsˈɪn.tɪ.ɡreɪt/",
+    "meaning": "Tan rã, vỡ vụn thành nhiều mảnh nhỏ",
+    "definitionEn": "break up into small parts, typically as the result of impact, melting, or decay",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "break apart, crumble, fragment",
+    "synonyms": [
+      "fragment",
+      "dissolve",
+      "crumble",
+      "splinter"
+    ],
+    "collocations": [
+      "ice floes disintegrate",
+      "disintegrate rapidly"
+    ],
+    "exampleSentence": "Sea ice floes disintegrate earlier each spring due to greenhouse warming.",
+    "wordFamily": "disintegration (n)"
+  },
+  {
+    "id": "V_RD_TUNDRA",
+    "topicId": "environment",
+    "word": "tundra",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈtʌn.drə/",
+    "meaning": "Đài nguyên, vùng thảo nguyên lạnh giá cận cực",
+    "definitionEn": "a vast, flat, treeless Arctic region in which subsoil is permanently frozen",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "frozen arctic plain",
+    "synonyms": [
+      "arctic plains",
+      "subpolar barren"
+    ],
+    "collocations": [
+      "mainland tundra",
+      "arctic tundra",
+      "tundra ecosystem"
+    ],
+    "exampleSentence": "Diminishing sea ice forces bears to endure prolonged fasting on the barren mainland tundra.",
+    "wordFamily": "tundras (plural)"
+  },
+  {
+    "id": "V_RD_DIALECTIC",
+    "topicId": "environment",
+    "word": "dialectic",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌdaɪ.əˈlek.tɪk/",
+    "meaning": "Mối quan hệ biện chứng tương tác hai chiều",
+    "definitionEn": "the dynamic interplay of opposing forces, ideas, or factors that drive change",
+    "cefrBand": "C2 (Band 8.5 - 9.0)",
+    "basicEquivalent": "interaction of opposites, dynamic interplay",
+    "synonyms": [
+      "interplay",
+      "reciprocal dynamic",
+      "interplay of forces"
+    ],
+    "collocations": [
+      "dialectic of hydraulic innovation",
+      "ongoing dialectic"
+    ],
+    "exampleSentence": "Dutch history reflects an ongoing dialectic of hydraulic innovation and territorial reclamation.",
+    "wordFamily": "dialectical (adj), dialectically (adv)"
+  },
+  {
+    "id": "V_RD_STORM_SURGE",
+    "topicId": "environment",
+    "word": "storm surge",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈstɔːm sɜːdʒ/",
+    "meaning": "Nước dâng do bão và triều cường",
+    "definitionEn": "a rising of sea water caused by high storm winds and abnormal atmospheric low pressure",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "storm flood, coastal deluge",
+    "synonyms": [
+      "tidal surge",
+      "storm tide",
+      "coastal inundation"
+    ],
+    "collocations": [
+      "lethal storm surge",
+      "storm surge barriers",
+      "storm surge protection"
+    ],
+    "exampleSentence": "A catastrophic North Sea storm surge breached obsolete dikes in 1953.",
+    "wordFamily": "storm surges (plural)"
+  },
+  {
+    "id": "V_RD_IMPENETRABLE",
+    "topicId": "environment",
+    "word": "impenetrable",
+    "partOfSpeech": "adjective",
+    "ipa": "/ɪmˈpen.ɪ.trə.bəl/",
+    "meaning": "Bất khả xâm phạm, không thể xuyên thủng",
+    "definitionEn": "impossible to pass through or enter; incapable of being penetrated",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "unbreakable, solid, impassable",
+    "synonyms": [
+      "impassable",
+      "invulnerable",
+      "impermeable"
+    ],
+    "collocations": [
+      "impenetrable barrier",
+      "impenetrable defense",
+      "impenetrable wall"
+    ],
+    "exampleSentence": "When storm surges exceed three metres, the steel gates descend to form an impenetrable barrier.",
+    "wordFamily": "impenetrability (n), impenetrably (adv)"
+  },
+  {
+    "id": "V_RD_FLOODPLAIN",
+    "topicId": "environment",
+    "word": "floodplain",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈflʌd.pleɪn/",
+    "meaning": "Bãi bồi ngập lũ ven sông",
+    "definitionEn": "an area of low-lying ground adjacent to a river, formed mainly of river sediments and subject to flooding",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "river flats, overflow plain",
+    "synonyms": [
+      "alluvial plain",
+      "bottomland",
+      "river valley"
+    ],
+    "collocations": [
+      "lowering floodplains",
+      "natural floodplain",
+      "floodplain management"
+    ],
+    "exampleSentence": "This initiative intentionally lowers floodplains to give seasonal torrents room to expand.",
+    "wordFamily": "floodplains (plural)"
+  },
+  {
+    "id": "V_RD_HYDRODYNAMICS",
+    "topicId": "environment",
+    "word": "hydrodynamics",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌhaɪ.drəʊ.daɪˈnæm.ɪks/",
+    "meaning": "Thủy động lực học (khoa học nghiên cứu dòng chảy chất lỏng)",
+    "definitionEn": "the branch of science concerned with forces acting on or exerted by liquids in motion",
+    "cefrBand": "C2 (Band 8.5 - 9.0)",
+    "basicEquivalent": "fluid motion mechanics, water physics",
+    "synonyms": [
+      "fluid mechanics",
+      "hydraulics"
+    ],
+    "collocations": [
+      "ecological hydrodynamics",
+      "hydrodynamic forces",
+      "hydrodynamic modeling"
+    ],
+    "exampleSentence": "True climate resilience requires working harmoniously with ecological hydrodynamics.",
+    "wordFamily": "hydrodynamic (adj)"
+  },
+  {
+    "id": "V_RD_ALGORITHM_AVERSION",
+    "topicId": "technology",
+    "word": "algorithm aversion",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈæl.ɡə.rɪ.ðəm əˈvɜː.ʃən/",
+    "meaning": "Định kiến chống đối thuật toán (mất niềm tin vào máy tính sau khi thấy nó mắc lỗi)",
+    "definitionEn": "the psychological bias where people rapidly lose trust in an algorithm after observing it make an error",
+    "cefrBand": "C2 (Band 8.5 - 9.0)",
+    "basicEquivalent": "distrust of algorithms, anti-AI bias",
+    "synonyms": [
+      "algorithmic skepticism",
+      "computational distrust"
+    ],
+    "collocations": [
+      "exhibit algorithm aversion",
+      "dubbed algorithm aversion"
+    ],
+    "exampleSentence": "Participants demonstrated acute algorithm aversion when computational models made single errors.",
+    "wordFamily": "averse (adj)"
+  },
+  {
+    "id": "V_RD_FALLIBLE",
+    "topicId": "technology",
+    "word": "fallible",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˈfæl.ə.bəl/",
+    "meaning": "Có thể mắc sai lầm, không hoàn hảo tuyệt đối",
+    "definitionEn": "capable of making mistakes or being erroneous",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "imperfect, prone to error",
+    "synonyms": [
+      "flawed",
+      "errant",
+      "human",
+      "imperfect"
+    ],
+    "collocations": [
+      "fallible human expert",
+      "inherently fallible",
+      "fallible memory"
+    ],
+    "exampleSentence": "People readily forgive fallible human experts, but expect absolute infallibility from algorithms.",
+    "wordFamily": "fallibility (n), infallible (opposite)"
+  },
+  {
+    "id": "V_RD_WHITE_COLLAR",
+    "topicId": "technology",
+    "word": "white-collar",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˌwaɪtˈkɒl.ər/",
+    "meaning": "Thuộc giới lao động trí óc, chuyên viên văn phòng",
+    "definitionEn": "relating to professional, clerical, or administrative office work",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "office-based, professional",
+    "synonyms": [
+      "professional",
+      "administrative",
+      "clerical"
+    ],
+    "collocations": [
+      "white-collar professions",
+      "white-collar workers",
+      "white-collar automation"
+    ],
+    "exampleSentence": "Generative AI directly encroaches upon analytical white-collar professions like accounting and law.",
+    "wordFamily": "blue-collar (opposite)"
+  },
+  {
+    "id": "V_RD_COGNITIVE_PROSTHETICS",
+    "topicId": "technology",
+    "word": "cognitive prosthetics",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈkɒɡ.nə.tɪv prɒsˈθet.ɪks/",
+    "meaning": "Công cụ trợ lực nhận thức (công nghệ mở rộng và bổ trợ tư duy con người)",
+    "definitionEn": "technological tools designed to amplify, extend, or complement human mental capacities",
+    "cefrBand": "C2 (Band 8.5 - 9.0)",
+    "basicEquivalent": "mental aids, AI assistants",
+    "synonyms": [
+      "intellectual amplifiers",
+      "cognitive aids"
+    ],
+    "collocations": [
+      "deploy as cognitive prosthetics",
+      "act as cognitive prosthetics"
+    ],
+    "exampleSentence": "Progressive organizations deploy AI systems as cognitive prosthetics that augment human judgment.",
+    "wordFamily": "cognitive prosthetic (singular)"
+  },
+  {
+    "id": "V_RD_DISLOCATION",
+    "topicId": "technology",
+    "word": "dislocation",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌdɪs.ləˈkeɪ.ʃən/",
+    "meaning": "Sự đứt gãy, xáo trộn cơ cấu kinh tế - xã hội",
+    "definitionEn": "disturbance or disruption from an established, normal, or proper position or state",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "disruption, upheaval",
+    "synonyms": [
+      "upheaval",
+      "disruption",
+      "disturbance"
+    ],
+    "collocations": [
+      "economic dislocation",
+      "social dislocation",
+      "labor market dislocation"
+    ],
+    "exampleSentence": "Robust policy interventions are needed to mitigate economic dislocation caused by automation.",
+    "wordFamily": "dislocate (v)"
+  },
+  {
+    "id": "V_RD_HALLMARK",
+    "topicId": "education",
+    "word": "hallmark",
+    "partOfSpeech": "noun",
+    "ipa": "/ˈhɔːl.mɑːk/",
+    "meaning": "Dấu ấn đặc trưng, nét tiêu biểu bản sắc",
+    "definitionEn": "a distinctive feature or characteristic of something",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "trademark, signature feature",
+    "synonyms": [
+      "trademark",
+      "signature feature",
+      "distinguishing trait"
+    ],
+    "collocations": [
+      "ubiquitous hallmark",
+      "hallmark of childhood",
+      "classic hallmark"
+    ],
+    "exampleSentence": "Spontaneous play is a ubiquitous hallmark of healthy childhood across all human societies.",
+    "wordFamily": "hallmarks (plural)"
+  },
+  {
+    "id": "V_RD_SYNAPTIC_PLASTICITY",
+    "topicId": "education",
+    "word": "synaptic plasticity",
+    "partOfSpeech": "noun",
+    "ipa": "/sɪˈnæp.tɪk plæsˈtɪs.ə.ti/",
+    "meaning": "Độ mềm dẻo khớp thần kinh (khả năng não bộ tái cấu trúc để tiếp thu tri thức)",
+    "definitionEn": "the ability of synapses to strengthen or weaken over time in response to learning and experience",
+    "cefrBand": "C2 (Band 8.5 - 9.0)",
+    "basicEquivalent": "brain flexibility, neural adaptation",
+    "synonyms": [
+      "neural plasticity",
+      "neuroplasticity"
+    ],
+    "collocations": [
+      "facilitates synaptic plasticity",
+      "promote synaptic plasticity"
+    ],
+    "exampleSentence": "Imaginative play stimulates BDNF release, which facilitates synaptic plasticity in the prefrontal cortex.",
+    "wordFamily": "synapse (n), synaptic (adj)"
+  },
+  {
+    "id": "V_RD_NEUROGENESIS",
+    "topicId": "education",
+    "word": "neurogenesis",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌnjʊə.rəʊˈdʒen.ə.sɪs/",
+    "meaning": "Quá trình sản sinh tế bào nơ-ron thần kinh mới",
+    "definitionEn": "the growth and development of nervous tissue and the creation of new neurons in the brain",
+    "cefrBand": "C2 (Band 8.5 - 9.0)",
+    "basicEquivalent": "neuron growth, brain cell creation",
+    "synonyms": [
+      "neural regeneration",
+      "neuronal generation"
+    ],
+    "collocations": [
+      "facilitates neurogenesis",
+      "stimulate neurogenesis"
+    ],
+    "exampleSentence": "Exploratory physical activity triggers neurogenesis, enhancing memory and cognitive capacity.",
+    "wordFamily": "neurogenic (adj)"
+  },
+  {
+    "id": "V_RD_EXECUTIVE_FUNCTION",
+    "topicId": "education",
+    "word": "executive function",
+    "partOfSpeech": "noun",
+    "ipa": "/ɪɡˈzek.jə.tɪv ˈfʌŋk.ʃən/",
+    "meaning": "Chức năng điều hành não bộ (tập trung, lập kế hoạch, kiềm chế xung động)",
+    "definitionEn": "a set of cognitive processes including attentional control, working memory, reasoning, and impulse inhibition",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "self-control and planning",
+    "synonyms": [
+      "cognitive control",
+      "mental regulation"
+    ],
+    "collocations": [
+      "executive function skills",
+      "prefrontal executive function"
+    ],
+    "exampleSentence": "The prefrontal cortex is the cerebral region responsible for executive function and impulse inhibition.",
+    "wordFamily": "executive functions (plural)"
+  },
+  {
+    "id": "V_RD_PERPETUATE",
+    "topicId": "education",
+    "word": "perpetuate",
+    "partOfSpeech": "verb",
+    "ipa": "/pəˈpetʃ.u.eɪt/",
+    "meaning": "Duy trì liên tục, kéo dài một tình trạng hay trò chơi",
+    "definitionEn": "make something (typically an activity or situation) continue indefinitely",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "maintain, keep going, prolong",
+    "synonyms": [
+      "sustain",
+      "continue",
+      "prolong",
+      "preserve"
+    ],
+    "collocations": [
+      "perpetuate the game",
+      "perpetuate traditions"
+    ],
+    "exampleSentence": "Because children want to perpetuate the game, they learn to negotiate rules and regulate emotions.",
+    "wordFamily": "perpetuation (n), perpetual (adj)"
+  },
+  {
+    "id": "V_RD_INDUCTIVELY",
+    "topicId": "education",
+    "word": "inductively",
+    "partOfSpeech": "adverb",
+    "ipa": "/ɪnˈdʌk.tɪv.li/",
+    "meaning": "Theo phương pháp quy nạp (từ thực tế trải nghiệm đúc kết ra chân lý)",
+    "definitionEn": "characterized by the inference of general laws from particular instances or hands-on observations",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "from examples to rules, bottom-up",
+    "synonyms": [
+      "empirically",
+      "bottom-up",
+      "experientially"
+    ],
+    "collocations": [
+      "discovered inductively",
+      "reason inductively"
+    ],
+    "exampleSentence": "Scientific concepts and mathematical patterns are discovered inductively through playful experimentation.",
+    "wordFamily": "inductive (adj), induction (n)"
+  },
+  {
+    "id": "V_RD_ELUCIDATE",
+    "topicId": "education",
+    "word": "elucidate",
+    "partOfSpeech": "verb",
+    "ipa": "/iˈluː.sɪ.deɪt/",
+    "meaning": "Làm sáng tỏ, giải thích rõ ràng và mạch lạc",
+    "definitionEn": "make something clear; explain in detail with precision",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "clarify, explain, make clear",
+    "synonyms": [
+      "clarify",
+      "illuminate",
+      "explicate",
+      "demystify"
+    ],
+    "collocations": [
+      "elucidate the mechanism",
+      "elucidate complex dynamics",
+      "elucidate the findings"
+    ],
+    "exampleSentence": "Investigators have begun elucidating the complex interplay between systemic variables and tangible outcomes.",
+    "wordFamily": "elucidation (n), elucidative (adj)"
+  },
+  {
+    "id": "V_RD_CASCADING",
+    "topicId": "technology",
+    "word": "cascading",
+    "partOfSpeech": "adjective",
+    "ipa": "/kæsˈkeɪ.dɪŋ/",
+    "meaning": "Gây hiệu ứng dây chuyền liên hoàn, dồn dập nối tiếp",
+    "definitionEn": "passing through or causing a succession of steps, stages, or consequences",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "domino effect, ripple, sequential",
+    "synonyms": [
+      "ripple",
+      "domino effect",
+      "cumulative",
+      "sequential"
+    ],
+    "collocations": [
+      "cascading systemic fluctuations",
+      "cascading failure",
+      "cascading impacts"
+    ],
+    "exampleSentence": "External disturbances precipitated cascading systemic fluctuations across financial markets.",
+    "wordFamily": "cascade (n/v)"
+  },
+  {
+    "id": "V_RD_DISPARATE",
+    "topicId": "education",
+    "word": "disparate",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˈdɪs.pər.ət/",
+    "meaning": "Khác biệt rõ rệt, không đồng nhất về bản chất",
+    "definitionEn": "essentially different in kind; not able to be compared",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "different, distinct, unalike",
+    "synonyms": [
+      "divergent",
+      "heterogeneous",
+      "dissimilar",
+      "contrasting"
+    ],
+    "collocations": [
+      "disparate consequences",
+      "disparate outcomes",
+      "disparate elements"
+    ],
+    "exampleSentence": "Targeted strategic interventions produce markedly disparate consequences depending on local baseline resilience.",
+    "wordFamily": "disparity (n)"
+  },
+  {
+    "id": "V_RD_STOCHASTIC",
+    "topicId": "technology",
+    "word": "stochastic",
+    "partOfSpeech": "adjective",
+    "ipa": "/stəˈkæs.tɪk/",
+    "meaning": "Mang tính xác suất, ngẫu nhiên theo biến thiên thống kê",
+    "definitionEn": "having a random probability distribution or pattern that may be analyzed statistically but not predicted precisely",
+    "cefrBand": "C2 (Band 8.5 - 9.0)",
+    "basicEquivalent": "random, probabilistic",
+    "synonyms": [
+      "probabilistic",
+      "random",
+      "aleatory"
+    ],
+    "collocations": [
+      "stochastic volatility",
+      "stochastic process",
+      "stochastic modeling"
+    ],
+    "exampleSentence": "Creating an illusion of predictability where stochastic volatility dominates the system.",
+    "wordFamily": "stochastically (adv)"
+  },
+  {
+    "id": "V_RD_COALESCE",
+    "topicId": "society_family",
+    "word": "coalesce",
+    "partOfSpeech": "verb",
+    "ipa": "/kəʊ.əˈles/",
+    "meaning": "Hợp nhất, kết tụ lại thành một khối thống nhất",
+    "definitionEn": "come together to form one mass, whole, or unified agreement",
+    "cefrBand": "C2 (Band 8.5 - 9.0)",
+    "basicEquivalent": "unite, merge, come together",
+    "synonyms": [
+      "converge",
+      "unite",
+      "fuse",
+      "amalgamate"
+    ],
+    "collocations": [
+      "consensus coalesces",
+      "coalesce into a framework",
+      "ideas coalesce"
+    ],
+    "exampleSentence": "As academic consensus coalesces, the strategic imperative of mastering these dynamics becomes clear.",
+    "wordFamily": "coalescence (n)"
+  },
+  {
+    "id": "V_RD_RELEGATE",
+    "topicId": "education",
+    "word": "relegate",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈrel.ɪ.ɡeɪt/",
+    "meaning": "Đẩy xuống vị trí thấp hơn, gạt ra vị trí phụ",
+    "definitionEn": "consign or dismiss to an inferior rank or position",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "demote, downgrade, push aside",
+    "synonyms": [
+      "downgrade",
+      "demote",
+      "marginalize"
+    ],
+    "collocations": [
+      "relegated to peripheral research",
+      "relegate to second place"
+    ],
+    "exampleSentence": "Historically relegated to peripheral research, recent breakthroughs have highlighted its importance.",
+    "wordFamily": "relegation (n)"
+  },
+  {
+    "id": "V_RD_EMPIRICAL",
+    "topicId": "education",
+    "word": "empirical",
+    "partOfSpeech": "adjective",
+    "ipa": "/ɪmˈpɪr.ɪ.kəl/",
+    "meaning": "Thực nghiệm, dựa trên quan sát và bằng chứng thực tế",
+    "definitionEn": "based on, concerned with, or verifiable by observation or experience rather than theory or pure logic",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "evidence-based, observed, experimental",
+    "synonyms": [
+      "evidence-based",
+      "observational",
+      "verifiable",
+      "factual"
+    ],
+    "collocations": [
+      "empirical breakthroughs",
+      "empirical evidence",
+      "empirical measurements"
+    ],
+    "exampleSentence": "Recent empirical breakthroughs have illuminated fundamental structural mechanisms.",
+    "wordFamily": "empirically (adv), empiricism (n)"
+  },
+  {
+    "id": "V_RD_FLUCTUATION",
+    "topicId": "business",
+    "word": "fluctuation",
+    "partOfSpeech": "noun",
+    "ipa": "/ˌflʌk.tʃuˈeɪ.ʃən/",
+    "meaning": "Sự dao động, biến động lên xuống thất thường",
+    "definitionEn": "an irregular rising and falling in number or amount; a variation",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "change, variation, swinging",
+    "synonyms": [
+      "variation",
+      "oscillation",
+      "volatility",
+      "instability"
+    ],
+    "collocations": [
+      "systemic fluctuations",
+      "price fluctuations",
+      "sharp fluctuation"
+    ],
+    "exampleSentence": "External disturbances precipitated cascading systemic fluctuations over prolonged horizons.",
+    "wordFamily": "fluctuate (v), fluctuating (adj)"
+  },
+  {
+    "id": "V_RD_LONGITUDINAL",
+    "topicId": "education",
+    "word": "longitudinal",
+    "partOfSpeech": "adjective",
+    "ipa": "/ˌlɒŋ.ɡɪˈtʃuː.dɪ.nəl/",
+    "meaning": "Dọc theo thời gian dài (nghiên cứu theo dõi cùng một đối tượng qua nhiều năm)",
+    "definitionEn": "involving information about an individual or group gathered over a long period of time",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "long-term, tracking over time",
+    "synonyms": [
+      "long-term",
+      "extended-period",
+      "cohort-tracking"
+    ],
+    "collocations": [
+      "longitudinal datasets",
+      "longitudinal study",
+      "longitudinal research"
+    ],
+    "exampleSentence": "Longitudinal datasets gathered over consecutive decades indicate that interventions produce disparate results.",
+    "wordFamily": "longitudinally (adv)"
+  },
+  {
+    "id": "V_RD_FORTIFY",
+    "topicId": "environment",
+    "word": "fortify",
+    "partOfSpeech": "verb",
+    "ipa": "/ˈfɔː.tɪ.faɪ/",
+    "meaning": "Củng cố, gia cố cho kiên cố vững chãi",
+    "definitionEn": "strengthen with defensive works or make stronger and more resilient",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "strengthen, reinforce, brace",
+    "synonyms": [
+      "reinforce",
+      "strengthen",
+      "bolster",
+      "buttress"
+    ],
+    "collocations": [
+      "sufficiently fortified",
+      "fortify infrastructure",
+      "fortify defenses"
+    ],
+    "exampleSentence": "In contexts where foundational infrastructure was sufficiently fortified, adverse impacts were avoided.",
+    "wordFamily": "fortification (n), fortified (adj)"
+  },
+  {
+    "id": "V_RD_ANOMALY",
+    "topicId": "technology",
+    "word": "anomaly",
+    "partOfSpeech": "noun",
+    "ipa": "/əˈnɒm.ə.li/",
+    "meaning": "Điều dị thường, sai lệch khác lạ so với quy chuẩn thông thường",
+    "definitionEn": "something that deviates from what is standard, normal, or expected",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "oddity, irregularity, deviation",
+    "synonyms": [
+      "irregularity",
+      "deviation",
+      "aberration",
+      "peculiarity"
+    ],
+    "collocations": [
+      "localized anomalies",
+      "statistical anomaly",
+      "detect anomalies"
+    ],
+    "exampleSentence": "Critics argue that localized anomalies may distort statistical correlations.",
+    "wordFamily": "anomalous (adj), anomalies (plural)"
+  },
+  {
+    "id": "V_RD_PRESCRIPTION",
+    "topicId": "education",
+    "word": "prescription",
+    "partOfSpeech": "noun",
+    "ipa": "/prɪˈskrɪp.ʃən/",
+    "meaning": "Định hướng bắt buộc, chỉ dẫn áp đặt từ trên xuống",
+    "definitionEn": "a recommendation that is authoritatively put forward or required",
+    "cefrBand": "C1 (Band 7.0 - 8.0)",
+    "basicEquivalent": "order, directive, mandatory rule",
+    "synonyms": [
+      "directive",
+      "mandate",
+      "instruction",
+      "injunction"
+    ],
+    "collocations": [
+      "rigid top-down prescriptions",
+      "policy prescriptions"
+    ],
+    "exampleSentence": "Rather than enforcing rigid top-down prescriptions, progressive stakeholders emphasize iterative monitoring.",
+    "wordFamily": "prescriptive (adj), prescribe (v)"
+  },
+  {
+    "id": "V_RD_CONSENSUS",
+    "topicId": "society_family",
+    "word": "consensus",
+    "partOfSpeech": "noun",
+    "ipa": "/kənˈsen.səs/",
+    "meaning": "Sự đồng thuận chung, sự nhất trí của đa số",
+    "definitionEn": "a general agreement among a group of people",
+    "cefrBand": "B2 (Band 6.0 - 6.5)",
+    "basicEquivalent": "general agreement, broad accord",
+    "synonyms": [
+      "agreement",
+      "harmony",
+      "unanimity",
+      "accord"
+    ],
+    "collocations": [
+      "academic consensus",
+      "reach consensus",
+      "scientific consensus"
+    ],
+    "exampleSentence": "As academic consensus coalesces, the strategic imperative of mastering these dynamics will determine progress.",
+    "wordFamily": "consensual (adj)"
   }
 ]

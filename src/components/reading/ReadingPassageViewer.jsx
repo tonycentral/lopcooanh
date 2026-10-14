@@ -43,16 +43,38 @@ export default function ReadingPassageViewer({
     return getXRaySentencesForPassage(passage);
   }, [passage]);
 
-  // Map of lowercase words to vocab objects for lightning-fast token matching
-  const vocabMap = useMemo(() => {
+  // Helper to escape regex special characters
+  const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  // Map of lowercase words and phrases to vocab objects for lightning-fast token matching
+  const { vocabLookupMap, vocabRegex } = useMemo(() => {
     const map = new Map();
-    if (!passage?.vocabularies) return map;
+    const terms = [];
+    if (!passage?.vocabularies) return { vocabLookupMap: map, vocabRegex: null };
+
     passage.vocabularies.forEach(v => {
-      if (v.word) {
-        map.set(v.word.toLowerCase().trim(), v);
+      if (!v.word) return;
+      const primary = v.word.toLowerCase().trim();
+      map.set(primary, v);
+      terms.push(primary);
+
+      // Also register matchWords / aliases if defined
+      if (Array.isArray(v.matchWords)) {
+        v.matchWords.forEach(alias => {
+          const a = alias.toLowerCase().trim();
+          map.set(a, v);
+          terms.push(a);
+        });
       }
     });
-    return map;
+
+    if (terms.length === 0) return { vocabLookupMap: map, vocabRegex: null };
+
+    // Sort terms by descending length so phrases match before individual words
+    const uniqueTerms = Array.from(new Set(terms)).sort((a, b) => b.length - a.length);
+    const pattern = new RegExp(`\\b(${uniqueTerms.map(escapeRegExp).join('|')})\\b`, 'gi');
+
+    return { vocabLookupMap: map, vocabRegex: pattern };
   }, [passage]);
 
   // List of evidence quotes to highlight after submission
@@ -91,9 +113,9 @@ export default function ReadingPassageViewer({
   const handleLookupSelection = () => {
     if (!selectedTextSnippet) return;
     const clean = selectedTextSnippet.text.toLowerCase().replace(/[^a-z0-9\s-]/gi, '').trim();
-    // Check if it exists in vocabMap
-    if (vocabMap.has(clean)) {
-      onSelectVocab(vocabMap.get(clean));
+    // Check if it exists in vocabLookupMap
+    if (vocabLookupMap.has(clean)) {
+      onSelectVocab(vocabLookupMap.get(clean));
     } else {
       // Create quick lookup object
       onSelectVocab({
@@ -114,6 +136,52 @@ export default function ReadingPassageViewer({
     : fontSize === 'lg' 
     ? 'text-sm sm:text-base leading-loose' 
     : 'text-xs sm:text-sm leading-relaxed';
+
+  // Helper to render text with interactive clickable vocabulary chips
+  const renderInteractiveText = (text) => {
+    if (!text) return null;
+
+    // In Exam/Test Mode (and not submitted): display clean text without hints
+    if (mode === 'test' && !isSubmitted) {
+      return text;
+    }
+
+    if (!vocabRegex || !highlightVocab) {
+      return text;
+    }
+
+    const segments = text.split(vocabRegex);
+
+    return segments.map((seg, idx) => {
+      const cleanSeg = seg.toLowerCase().trim();
+      const vocabData = vocabLookupMap.get(cleanSeg);
+
+      if (vocabData) {
+        const isSelected = selectedVocab?.word?.toLowerCase() === vocabData.word?.toLowerCase() ||
+                           selectedVocab?.word?.toLowerCase() === cleanSeg;
+        return (
+          <button
+            key={idx}
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelectVocab(vocabData);
+            }}
+            className={`inline-block font-sans rounded px-1 py-0.2 mx-0.5 font-semibold transition cursor-pointer text-left ${
+              isSelected
+                ? "bg-[#3E4F42] text-white shadow-2xs scale-105"
+                : "bg-[#EDF3EE] text-[#3E4F42] hover:bg-[#D1DDD3] border-b border-[#3E4F42]/40"
+            }`}
+            title={`Click để tra từ: "${vocabData.word}" (${vocabData.meaning || vocabData.pos})`}
+          >
+            {seg}
+          </button>
+        );
+      }
+
+      return <span key={idx}>{seg}</span>;
+    });
+  };
 
   // Render paragraph content with interactive clickable words in practice mode
   const renderParagraphContent = (paragraphText, paragraphId) => {
@@ -138,55 +206,16 @@ export default function ReadingPassageViewer({
               <span>🎯 Đoạn chứa bằng chứng đáp án ({matchedEvidence?.paragraphRef ? `Đoạn ${matchedEvidence.paragraphRef}` : ''})</span>
             </span>
             <p className="font-serif text-[#24211E] select-text">
-              {paragraphText}
+              {renderInteractiveText(paragraphText)}
             </p>
           </div>
         );
       }
     }
 
-    // In Exam/Test Mode (and not submitted): display clean text without hints
-    if (mode === 'test' && !isSubmitted) {
-      return (
-        <p className="font-serif text-[#24211E] select-text">
-          {paragraphText}
-        </p>
-      );
-    }
-
-    // In Study/Practice Mode: tokenize and make C1/C2 words clickable
-    const words = paragraphText.split(/(\s+|[.,;!?"()]+)/);
-
     return (
       <p className="font-serif text-[#24211E] select-text">
-        {words.map((token, idx) => {
-          const cleanToken = token.toLowerCase().trim();
-          const vocabData = vocabMap.get(cleanToken);
-
-          if (vocabData && highlightVocab) {
-            const isSelected = selectedVocab?.word?.toLowerCase() === cleanToken;
-            return (
-              <button
-                key={idx}
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onSelectVocab(vocabData);
-                }}
-                className={`inline-block font-sans rounded px-1 py-0.2 mx-0.5 font-semibold transition cursor-pointer text-left ${
-                  isSelected
-                    ? "bg-[#3E4F42] text-white shadow-2xs scale-105"
-                    : "bg-[#EDF3EE] text-[#3E4F42] hover:bg-[#D1DDD3] border-b border-[#3E4F42]/40"
-                }`}
-                title={`Click để tra từ: "${vocabData.word}" (${vocabData.meaning || vocabData.pos})`}
-              >
-                {token}
-              </button>
-            );
-          }
-
-          return <span key={idx}>{token}</span>;
-        })}
+        {renderInteractiveText(paragraphText)}
       </p>
     );
   };

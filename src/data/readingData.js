@@ -15,7 +15,7 @@
  * - IELTS Reading Band Calculator (Band 0.0 - 9.0)
  */
 
-import { MASTER_TOPIC_CATEGORIES } from './topicCategories';
+import { MASTER_TOPIC_CATEGORIES } from './topicCategories.js';
 
 export const READING_TOPICS = MASTER_TOPIC_CATEGORIES.filter(t => t.id !== 'ALL').map(t => ({
   id: t.id,
@@ -68,53 +68,190 @@ const CURATED_PASSAGES = {
       vocabularies: [
         {
           word: "adipose",
+          matchWords: ["adipose", "adipose tissue", "adipose lipids"],
           ipa: "/ˈæd.ɪ.pəʊs/",
           pos: "adjective",
-          meaning: "Thuộc về mỡ, chứa chất béo dự trữ",
+          meaning: "Thuộc về mỡ, chứa chất béo dự trữ trong cơ thể",
           definition: "Used for the storage of fat in animal bodies",
           synonyms: ["fatty", "oleaginous", "lipid"],
-          collocations: ["adipose tissue", "adipose accumulation"],
+          collocations: ["adipose tissue", "adipose accumulation", "adipose lipids"],
           contextSentence: "Polar bears possess a thick layer of adipose tissue known as blubber."
         },
         {
+          word: "blubber",
+          matchWords: ["blubber"],
+          ipa: "/ˈblʌb.ər/",
+          pos: "noun",
+          meaning: "Lớp mỡ dày dưới da của động vật biển hàn đới (giữ nhiệt và trữ năng lượng)",
+          definition: "The thick layer of fat under the skin of large marine animals such as seals and whales",
+          synonyms: ["subcutaneous fat", "fat layer"],
+          collocations: ["layer of blubber", "dense blubber"],
+          contextSentence: "A thick layer of adipose tissue known as blubber, which can measure up to 11 centimetres."
+        },
+        {
+          word: "saturated fats",
+          matchWords: ["saturated fats", "saturated fat"],
+          ipa: "/ˈsætʃ.ər.eɪ.tɪd fæts/",
+          pos: "noun",
+          meaning: "Chất béo bão hòa (chất béo dễ gây xơ vữa động mạch ở người)",
+          definition: "Types of dietary fat with a high proportion of saturated fatty acids",
+          synonyms: ["solid fats", "animal lipids"],
+          collocations: ["consume saturated fats", "rich in saturated fats"],
+          contextSentence: "They consume immense quantities of saturated fats from ringed seals."
+        },
+        {
           word: "atherosclerosis",
+          matchWords: ["atherosclerosis"],
           ipa: "/ˌæθ.ə.rəʊ.skləˈrəʊ.sɪs/",
           pos: "noun",
-          meaning: "Bệnh xơ vữa động mạch do mảng bám cholesterol",
-          definition: "A disease of the arteries characterized by the deposition of plaques of fatty material on their inner walls",
+          meaning: "Bệnh xơ vữa động mạch do mảng bám mỡ và cholesterol",
+          definition: "A disease of the arteries characterized by the deposition of plaques of fatty material on inner walls",
           synonyms: ["arterial calcification", "vascular blockage"],
           collocations: ["develop atherosclerosis", "prevent atherosclerosis"],
           contextSentence: "In humans, this diet would precipitate catastrophic cardiovascular disease and atherosclerosis."
         },
         {
           word: "precipitate",
+          matchWords: ["precipitate", "precipitated"],
           ipa: "/prɪˈsɪp.ɪ.teɪt/",
           pos: "verb",
-          meaning: "Làm bùng phát, kích động hoặc đẩy nhanh xảy ra một sự cố xấu",
+          meaning: "Làm bùng phát, kích động hoặc đẩy nhanh xảy ra một sự cố tiêu cực",
           definition: "Cause an event or situation (typically undesirable) to happen suddenly, unexpectedly, or prematurely",
           synonyms: ["trigger", "provoke", "hasten", "instigate"],
           collocations: ["precipitate a crisis", "precipitate severe symptoms"],
           contextSentence: "A diet rich in lipids would inevitably precipitate catastrophic cardiovascular disease."
         },
         {
-          word: "mitigate",
-          ipa: "/ˈmɪt.ɪ.ɡeɪt/",
+          word: "coronary ailments",
+          matchWords: ["coronary ailments", "coronary"],
+          ipa: "/ˈkɒr.ə.nər.i ˈeɪl.mənts/",
+          pos: "noun",
+          meaning: "Các bệnh về mạch vành tim và cơ tim",
+          definition: "Medical disorders affecting the coronary arteries and blood supply to the heart",
+          synonyms: ["heart diseases", "cardiac disorders", "cardiovascular conditions"],
+          collocations: ["manifest coronary ailments", "suffer from coronary ailments"],
+          contextSentence: "Yet, polar bears manifest no such coronary ailments."
+        },
+        {
+          word: "genome",
+          matchWords: ["genome"],
+          ipa: "/ˈdʒiː.nəʊm/",
+          pos: "noun",
+          meaning: "Bộ gen hoàn chỉnh của một sinh vật",
+          definition: "The complete set of genes or genetic material present in a cell or organism",
+          synonyms: ["genetic sequence", "genetic blueprint"],
+          collocations: ["decoded the genome", "sequence the genome"],
+          contextSentence: "Researchers decoded the genome of both polar bears and brown bears."
+        },
+        {
+          word: "mutation",
+          matchWords: ["mutation", "mutations"],
+          ipa: "/mjuːˈteɪ.ʃən/",
+          pos: "noun",
+          meaning: "Đột biến gen (sự thay đổi vĩnh viễn trong cấu trúc DNA)",
+          definition: "The changing of the structure of a gene resulting in a variant form",
+          synonyms: ["genetic alteration", "variation", "anomaly"],
+          collocations: ["genetic mutation", "unique mutation"],
+          contextSentence: "They discovered that polar bears possess a unique mutation in a gene designated APOB."
+        },
+        {
+          word: "purge",
+          matchWords: ["purge", "purging", "purged"],
+          ipa: "/pɜːdʒ/",
           pos: "verb",
-          meaning: "Làm dịu bớt, giảm nhẹ tác hại hoặc mức độ nghiêm trọng",
-          definition: "Make something bad less severe, serious, or painful",
-          synonyms: ["alleviate", "lessen", "diminish", "curb"],
-          collocations: ["mitigate ecological impact", "mitigate global warming"],
-          contextSentence: "The rapid retreat of sea ice poses an existential crisis that physiological ingenuity alone cannot mitigate."
+          meaning: "Đào thải, thanh lọc, loại bỏ triệt để chất độc hoặc chất béo có hại",
+          definition: "Rid an organism or system of an unwanted feeling, substance, or toxin",
+          synonyms: ["cleanse", "eliminate", "expel", "clear out"],
+          collocations: ["purge cholesterol", "purge toxins from blood"],
+          contextSentence: "This genetic mutation effectively permits polar bears to purge low-density lipoprotein (LDL) from their blood."
+        },
+        {
+          word: "synthesize",
+          matchWords: ["synthesize", "synthesizing"],
+          ipa: "/ˈsɪn.θə.saɪz/",
+          pos: "verb",
+          meaning: "Tổng hợp nhân tạo các hợp chất hóa học hoặc dược liệu",
+          definition: "Produce a substance or therapy through chemical synthesis",
+          synonyms: ["manufacture", "compound", "produce chemically"],
+          collocations: ["synthesize therapies", "synthesize pharmaceutical drugs"],
+          contextSentence: "They could synthesize innovative pharmaceutical therapies to combat cardiovascular conditions."
         },
         {
           word: "acumen",
+          matchWords: ["acumen"],
           ipa: "/ˈæk.jʊ.mən/",
           pos: "noun",
           meaning: "Sự nhạy bén, năng lực phán đoán sắc sảo và chính xác",
           definition: "The ability to make good judgments and quick decisions, typically in a particular domain",
           synonyms: ["sharpness", "shrewdness", "perspicacity"],
-          collocations: ["hunting acumen", "intellectual acumen"],
+          collocations: ["hunting acumen", "tactical acumen"],
           contextSentence: "Polar bears have fascinated cognitive biologists through their exceptional problem-solving and hunting acumen."
+        },
+        {
+          word: "dogma",
+          matchWords: ["dogma"],
+          ipa: "/ˈdɒɡ.mə/",
+          pos: "noun",
+          meaning: "Giáo điều, định kiến lý thuyết được thừa nhận không kiểm chứng",
+          definition: "A principle or set of principles laid down by authority as incontrovertibly true",
+          synonyms: ["orthodoxy", "doctrine", "creed"],
+          collocations: ["prevailing scientific dogma", "entrenched dogma"],
+          contextSentence: "For decades, prevailing scientific dogma maintained that deliberate tool usage was exclusive to primates."
+        },
+        {
+          word: "mitigate",
+          matchWords: ["mitigate", "mitigating"],
+          ipa: "/ˈmɪt.ɪ.ɡeɪt/",
+          pos: "verb",
+          meaning: "Làm dịu bớt, giảm nhẹ tác hại hoặc mức độ nghiêm trọng",
+          definition: "Make something bad less severe, serious, or painful",
+          synonyms: ["alleviate", "lessen", "diminish", "curb"],
+          collocations: ["mitigate ecological impact", "mitigate the crisis"],
+          contextSentence: "The rapid retreat of perennial Arctic sea ice poses an existential crisis that physiological ingenuity alone cannot mitigate."
+        },
+        {
+          word: "perennial",
+          matchWords: ["perennial"],
+          ipa: "/pəˈren.i.əl/",
+          pos: "adjective",
+          meaning: "Lưu niên, tồn tại vĩnh cửu qua nhiều mùa hoặc năm tháng",
+          definition: "Lasting or existing for a long or apparently infinite time; continually recurring",
+          synonyms: ["enduring", "everlasting", "perpetual"],
+          collocations: ["perennial sea ice", "perennial challenge"],
+          contextSentence: "The rapid retreat of perennial Arctic sea ice poses an existential crisis."
+        },
+        {
+          word: "disintegrate",
+          matchWords: ["disintegrate", "disintegrating"],
+          ipa: "/dɪsˈɪn.tɪ.ɡreɪt/",
+          pos: "verb",
+          meaning: "Tan rã, vỡ vụn thành nhiều mảnh rời rạc",
+          definition: "Break up into small parts, typically as the result of impact or melting",
+          synonyms: ["fragment", "dissolve", "crumble"],
+          collocations: ["ice floes disintegrate", "disintegrate rapidly"],
+          contextSentence: "Ice floes disintegrate earlier each spring and freeze later each autumn."
+        },
+        {
+          word: "tundra",
+          matchWords: ["tundra"],
+          ipa: "/ˈtʌn.drə/",
+          pos: "noun",
+          meaning: "Đài nguyên, vùng đồng bằng lạnh giá cận cực",
+          definition: "A vast, flat, treeless Arctic region in which subsoil is permanently frozen",
+          synonyms: ["arctic plain", "polar heath"],
+          collocations: ["mainland tundra", "barren tundra"],
+          contextSentence: "Forces bears to endure prolonged fasting periods on mainland tundra."
+        },
+        {
+          word: "malnutrition",
+          matchWords: ["malnutrition"],
+          ipa: "/ˌmæl.njuːˈtrɪʃ.ən/",
+          pos: "noun",
+          meaning: "Tình trạng suy dinh dưỡng do thiếu hụt thức ăn",
+          definition: "Lack of proper nutrition caused by not having enough food or the right kind of food",
+          synonyms: ["undernourishment", "starvation"],
+          collocations: ["acute malnutrition", "suffer from malnutrition"],
+          contextSentence: "Leading to acute malnutrition, reduced cub survival rates, and population collapse."
         }
       ],
       questions: [
@@ -124,7 +261,7 @@ const CURATED_PASSAGES = {
           prompt: "Polar bears consume a diet that contains significantly more fats than brown bears.",
           options: ["TRUE", "FALSE", "NOT GIVEN"],
           correctAnswer: "TRUE",
-          explanation: "Đoạn A và B nêu rõ polar bears chủ yếu ăn ringed seals chứa immense quantities of saturated fats, và bộ gen của chúng đã biến đổi khác biệt so with brown bears để thích nghi với chế độ ăn này.",
+          explanation: "Đoạn A và B nêu rõ polar bears chủ yếu ăn ringed seals chứa immense quantities of saturated fats, và bộ gen của chúng đã biến đổi khác biệt so với brown bears để thích nghi với chế độ ăn này.",
           paragraphRef: "B",
           evidenceQuote: "They discovered that polar bears possess a unique mutation in a gene designated APOB... unlike brown bears."
         },
@@ -233,26 +370,106 @@ const CURATED_PASSAGES = {
       vocabularies: [
         {
           word: "inundation",
+          matchWords: ["inundation", "inundating"],
           ipa: "/ˌɪn.ʌnˈdeɪ.ʃən/",
           pos: "noun",
-          meaning: "Sự ngập lụt, ngập úng trên diện rộng",
+          meaning: "Sự ngập lụt, ngập úng trên diện rộng do lũ tràn",
           definition: "An overwhelming abundance or flooding of water covering land normally dry",
           synonyms: ["deluge", "flooding", "submersion"],
           collocations: ["catastrophic inundation", "risk of inundation"],
           contextSentence: "Nearly two-thirds of its territory is vulnerable to catastrophic inundation from the North Sea."
         },
         {
+          word: "dialectic",
+          matchWords: ["dialectic"],
+          ipa: "/ˌdaɪ.əˈlek.tɪk/",
+          pos: "noun",
+          meaning: "Mối quan hệ biện chứng, tương tác đối lập thúc đẩy phát triển",
+          definition: "The dynamic interplay of opposing forces, ideas, or factors that drive change",
+          synonyms: ["interplay", "reciprocal dynamic"],
+          collocations: ["dialectic of hydraulic innovation", "ongoing dialectic"],
+          contextSentence: "The relationship with water has been an ongoing dialectic of hydraulic innovation and territorial reclamation."
+        },
+        {
+          word: "hydraulic",
+          matchWords: ["hydraulic", "hydraulic innovation"],
+          ipa: "/haɪˈdrɔː.lɪk/",
+          pos: "adjective",
+          meaning: "Thuộc về thủy lực, liên quan đến cơ học chuyển động của nước",
+          definition: "Operated by or relating to the pressure of water or other liquids in motion",
+          synonyms: ["water-powered", "fluid-operated"],
+          collocations: ["hydraulic innovation", "hydraulic engineers"],
+          contextSentence: "An ongoing dialectic of hydraulic innovation and territorial reclamation."
+        },
+        {
+          word: "reclamation",
+          matchWords: ["reclamation", "territorial reclamation"],
+          ipa: "/ˌrek.ləˈmeɪ.ʃən/",
+          pos: "noun",
+          meaning: "Hoạt động lấn biển, phục hồi và cải tạo đất đai từ mặt nước",
+          definition: "The act of returning something to a former, better state, or reclaiming land from sea or river",
+          synonyms: ["land reclamation", "territorial recovery"],
+          collocations: ["territorial reclamation", "coastal reclamation"],
+          contextSentence: "An ongoing dialectic of hydraulic innovation and territorial reclamation."
+        },
+        {
+          word: "seminal",
+          matchWords: ["seminal"],
+          ipa: "/ˈsem.ɪ.nəl/",
+          pos: "adjective",
+          meaning: "Mang tính bước ngoặt định hình lịch sử, có ảnh hưởng sâu sắc về sau",
+          definition: "Strongly influencing later developments; groundbreaking",
+          synonyms: ["groundbreaking", "pivotal", "epoch-making"],
+          collocations: ["seminal turning point", "seminal study"],
+          contextSentence: "The seminal turning point in modern Dutch water management occurred on the night of 31 January 1953."
+        },
+        {
+          word: "storm surge",
+          matchWords: ["storm surge", "storm surges"],
+          ipa: "/ˈstɔːm sɜːdʒ/",
+          pos: "noun",
+          meaning: "Nước dâng do bão và triều cường dội vào bờ biển",
+          definition: "A rising of sea water caused by low atmospheric pressure and high winds associated with a storm",
+          synonyms: ["tidal surge", "storm tide"],
+          collocations: ["lethal storm surge", "storm surge barriers"],
+          contextSentence: "A lethal North Sea storm surge breached obsolete dikes in 1953."
+        },
+        {
+          word: "dikes",
+          matchWords: ["dikes", "dykes", "dike", "dyke"],
+          ipa: "/daɪks/",
+          pos: "noun",
+          meaning: "Các con đê ngăn nước biển hoặc sông ngập",
+          definition: "Long walls or embankments built to prevent flooding from the sea or a river",
+          synonyms: ["levees", "embankments", "seawalls"],
+          collocations: ["obsolete dikes", "elevate static dikes"],
+          contextSentence: "A lethal storm surge breached obsolete dikes, inundating 150,000 hectares."
+        },
+        {
           word: "galvanize",
+          matchWords: ["galvanize", "galvanized"],
           ipa: "/ˈɡæl.və.naɪz/",
           pos: "verb",
-          meaning: "Thúc đẩy, kích hoạt hành động quyết liệt sau một cú sốc",
+          meaning: "Thúc đẩy, kích hoạt hành động quyết liệt sau biến cố",
           definition: "Shock or excite someone into taking immediate action",
           synonyms: ["stimulate", "electrify", "motivate", "spur"],
           collocations: ["galvanize public resolve", "galvanize political action"],
           contextSentence: "This national trauma galvanized public resolve and prompted the immediate passage of the Delta Act."
         },
         {
+          word: "estuaries",
+          matchWords: ["estuaries", "estuary"],
+          ipa: "/ˈes.tʃu.ə.riz/",
+          pos: "noun",
+          meaning: "Cửa sông đổ ra biển nơi nước mặn và nước ngọt hòa lẫn",
+          definition: "The tidal mouths of large rivers where the tide meets the stream",
+          synonyms: ["river mouths", "inlets"],
+          collocations: ["seal estuaries", "sensitive estuary"],
+          contextSentence: "Unlike traditional static dams that permanently seal estuaries."
+        },
+        {
           word: "decimate",
+          matchWords: ["decimate", "decimating"],
           ipa: "/ˈdes.ɪ.meɪt/",
           pos: "verb",
           meaning: "Tàn phá, tiêu diệt một tỉ lệ lớn sinh vật hoặc tài nguyên",
@@ -262,7 +479,19 @@ const CURATED_PASSAGES = {
           contextSentence: "Unlike traditional dams that permanently seal estuaries and decimate marine biospheres."
         },
         {
+          word: "impenetrable",
+          matchWords: ["impenetrable"],
+          ipa: "/ɪmˈpen.ɪ.trə.bəl/",
+          pos: "adjective",
+          meaning: "Bất khả xâm phạm, không thể xuyên thủng",
+          definition: "Impossible to pass through or enter; incapable of being breached",
+          synonyms: ["impassable", "invulnerable", "impermeable"],
+          collocations: ["impenetrable barrier", "impenetrable defense"],
+          contextSentence: "The gates descend, forming an impenetrable barrier against tidal surges."
+        },
+        {
           word: "paradigm shift",
+          matchWords: ["paradigm shift"],
           ipa: "/ˈpær.ə.daɪm ʃɪft/",
           pos: "noun",
           meaning: "Sự chuyển dịch hệ tư duy căn bản, thay đổi toàn diện góc nhìn",
@@ -270,6 +499,28 @@ const CURATED_PASSAGES = {
           synonyms: ["fundamental transformation", "revolution in thinking"],
           collocations: ["spearhead a paradigm shift", "represent a paradigm shift"],
           contextSentence: "The Netherlands has spearheaded a paradigm shift known as the 'Room for the River' program."
+        },
+        {
+          word: "floodplains",
+          matchWords: ["floodplains", "floodplain"],
+          ipa: "/ˈflʌd.pleɪnz/",
+          pos: "noun",
+          meaning: "Bãi bồi ngập lũ ven sông",
+          definition: "Low-lying ground adjacent to rivers formed by river sediments and subject to flooding",
+          synonyms: ["alluvial plains", "overflow land"],
+          collocations: ["lowers floodplains", "natural floodplains"],
+          contextSentence: "This progressive initiative intentionally lowers floodplains and creates bypass channels."
+        },
+        {
+          word: "hydrodynamics",
+          matchWords: ["hydrodynamics"],
+          ipa: "/ˌhaɪ.drəʊ.daɪˈnæm.ɪks/",
+          pos: "noun",
+          meaning: "Thủy động lực học (khoa học về lực và chuyển động của dòng chất lỏng)",
+          definition: "The branch of science concerned with forces acting on or exerted by liquids",
+          synonyms: ["fluid dynamics", "hydraulics"],
+          collocations: ["ecological hydrodynamics", "hydrodynamic forces"],
+          contextSentence: "True climate resilience requires working harmoniously with ecological hydrodynamics."
         }
       ],
       questions: [
@@ -357,43 +608,135 @@ const CURATED_PASSAGES = {
       vocabularies: [
         {
           word: "pervasive",
+          matchWords: ["pervasive"],
           ipa: "/pəˈveɪ.sɪv/",
           pos: "adjective",
           meaning: "Lan tỏa khắp nơi, thâm nhập sâu rộng vào mọi mặt",
           definition: "Spreading widely throughout an area or a group of people",
           synonyms: ["ubiquitous", "omnipresent", "prevalent"],
-          collocations: ["pervasive influence", "pervasive phenomenon"],
+          collocations: ["pervasive force", "pervasive phenomenon"],
           contextSentence: "AI has advanced into a pervasive force transforming commercial enterprises."
         },
         {
+          word: "polarized",
+          matchWords: ["polarized", "polarize"],
+          ipa: "/ˈpəʊ.lə.raɪzd/",
+          pos: "adjective",
+          meaning: "Bị phân cực gay gắt thành hai thái cực trái ngược",
+          definition: "Divided into sharply contrasting groups or sets of opinions or beliefs",
+          synonyms: ["divided", "split", "opposing"],
+          collocations: ["deeply polarized", "polarized attitudes"],
+          contextSentence: "Societal attitudes toward automated intelligence remain deeply polarized."
+        },
+        {
+          word: "apprehension",
+          matchWords: ["apprehension", "acute apprehension"],
+          ipa: "/ˌæp.rɪˈhen.ʃən/",
+          pos: "noun",
+          meaning: "Nỗi lo âu, e sợ về tương lai xấu",
+          definition: "Anxiety or fear that something bad or unpleasant will happen",
+          synonyms: ["anxiety", "trepidation", "dread", "unease"],
+          collocations: ["acute apprehension", "growing apprehension"],
+          contextSentence: "A substantial demographic expresses acute apprehension regarding technological displacement."
+        },
+        {
           word: "opacity",
+          matchWords: ["opacity", "algorithmic opacity"],
           ipa: "/əʊˈpæs.ə.ti/",
           pos: "noun",
-          meaning: "Sự thiếu minh bạch, mù mờ, khó hiểu",
+          meaning: "Sự thiếu minh bạch, mờ mịt, khó nắm bắt cơ chế",
           definition: "The quality of being difficult to understand or see through",
           synonyms: ["obscurity", "indecipherability", "lack of transparency"],
           collocations: ["algorithmic opacity", "procedural opacity"],
-          contextSentence: "Workers express acute apprehension regarding technological displacement and algorithmic opacity."
+          contextSentence: "Workers express acute apprehension regarding displacement and algorithmic opacity."
+        },
+        {
+          word: "algorithm aversion",
+          matchWords: ["algorithm aversion"],
+          ipa: "/ˈæl.ɡə.rɪ.ðəm əˈvɜː.ʃən/",
+          pos: "noun",
+          meaning: "Định kiến ghét bỏ thuật toán (mất niềm tin vào máy tính sau khi thấy nó mắc lỗi)",
+          definition: "The psychological reluctance of people to use algorithms after seeing them make a mistake",
+          synonyms: ["anti-algorithmic bias", "algorithmic distrust"],
+          collocations: ["dubbed algorithm aversion", "manifest algorithm aversion"],
+          contextSentence: "Empirical experiments reveal a pervasive phenomenon dubbed 'algorithm aversion'."
+        },
+        {
+          word: "fallible",
+          matchWords: ["fallible"],
+          ipa: "/ˈfæl.ə.bəl/",
+          pos: "adjective",
+          meaning: "Có thể phạm sai lầm, không hoàn hảo",
+          definition: "Capable of making mistakes or being wrong",
+          synonyms: ["imperfect", "flawed", "errant"],
+          collocations: ["fallible human expert", "fallible memory"],
+          contextSentence: "Their trust eroded precipitously faster than trust in the fallible human expert."
         },
         {
           word: "omniscience",
+          matchWords: ["omniscience"],
           ipa: "/ɒmˈnɪs.i.əns/",
           pos: "noun",
           meaning: "Sự toàn tri, biết hết mọi điều một cách tuyệt đối",
           definition: "The state of knowing everything",
           synonyms: ["all-knowing nature", "supreme knowledge"],
-          collocations: ["claim omniscience", "flawless omniscience"],
+          collocations: ["flawless omniscience", "claim omniscience"],
           contextSentence: "Humans expect flawless omniscience from mathematical algorithms."
         },
         {
+          word: "deep neural networks",
+          matchWords: ["deep neural networks", "neural networks"],
+          ipa: "/diːp ˈnjʊə.rəl ˈnet.wɜːks/",
+          pos: "noun",
+          meaning: "Mạng nơ-ron sâu đa tầng (mô hình học máy nhiều lớp phức tạp)",
+          definition: "Artificial neural networks with multiple layers between the input and output layers",
+          synonyms: ["deep learning models", "multilayer perceptrons"],
+          collocations: ["inherent to deep neural networks", "train deep neural networks"],
+          contextSentence: "This resistance is exacerbated by the black box dilemma inherent to modern deep neural networks."
+        },
+        {
           word: "encroach",
+          matchWords: ["encroach", "encroaching", "encroaches"],
           ipa: "/ɪnˈkrəʊtʃ/",
           pos: "verb",
           meaning: "Xâm lấn, lấn sân sang lãnh địa của người khác",
           definition: "Intrude on a person's territory or a right",
           synonyms: ["infringe", "trespass", "impinge"],
-          collocations: ["encroach upon jobs", "encroach on civil liberties"],
-          contextSentence: "Generative AI and cognitive automation directly encroach upon white-collar professions."
+          collocations: ["encroach upon professions", "encroach on liberties"],
+          contextSentence: "Generative AI directly encroaches upon white-collar, creative, and analytical professions."
+        },
+        {
+          word: "white-collar",
+          matchWords: ["white-collar"],
+          ipa: "/ˌwaɪtˈkɒl.ər/",
+          pos: "adjective",
+          meaning: "Thuộc giới lao động trí óc, nhân viên văn phòng",
+          definition: "Relating to work done in offices by administrative and professional personnel",
+          synonyms: ["professional", "administrative", "clerical"],
+          collocations: ["white-collar professions", "white-collar workforce"],
+          contextSentence: "Encroaches upon white-collar, creative, and analytical professions."
+        },
+        {
+          word: "cognitive prosthetics",
+          matchWords: ["cognitive prosthetics"],
+          ipa: "/ˈkɒɡ.nə.tɪv prɒsˈθet.ɪks/",
+          pos: "noun",
+          meaning: "Công cụ trợ lực nhận thức (công nghệ nâng tầm và trợ giúp tư duy con người)",
+          definition: "Technological tools designed to amplify or assist human mental capacities",
+          synonyms: ["intellectual amplifiers", "cognitive aids"],
+          collocations: ["deploy as cognitive prosthetics", "cognitive prosthetics augmenting human judgment"],
+          contextSentence: "Deploy algorithms as cognitive prosthetics that augment human judgment."
+        },
+        {
+          word: "dislocation",
+          matchWords: ["dislocation", "economic dislocation"],
+          ipa: "/ˌdɪs.ləˈkeɪ.ʃən/",
+          pos: "noun",
+          meaning: "Sự xáo trộn, đứt gãy và chao đảo trật tự kinh tế - xã hội",
+          definition: "Disturbance from an established normal condition or order",
+          synonyms: ["upheaval", "disruption", "disturbance"],
+          collocations: ["economic dislocation", "mitigate dislocation"],
+          contextSentence: "To bridge the trust chasm and mitigate economic dislocation."
         }
       ],
       questions: [
@@ -481,6 +824,7 @@ const CURATED_PASSAGES = {
       vocabularies: [
         {
           word: "ubiquitous",
+          matchWords: ["ubiquitous"],
           ipa: "/juːˈbɪk.wɪ.təs/",
           pos: "adjective",
           meaning: "Phổ biến ở mọi nơi, có mặt khắp chốn",
@@ -490,7 +834,30 @@ const CURATED_PASSAGES = {
           contextSentence: "Play is a ubiquitous hallmark of childhood across all human societies."
         },
         {
+          word: "hallmark",
+          matchWords: ["hallmark"],
+          ipa: "/ˈhɔːl.mɑːk/",
+          pos: "noun",
+          meaning: "Dấu ấn đặc trưng, nét tiêu biểu làm nên bản sắc",
+          definition: "A distinctive feature or characteristic of something",
+          synonyms: ["trademark", "signature feature", "distinguishing trait"],
+          collocations: ["ubiquitous hallmark", "hallmark of childhood"],
+          contextSentence: "Play is a ubiquitous hallmark of childhood across all societies."
+        },
+        {
+          word: "plummet",
+          matchWords: ["plummet", "plummeted"],
+          ipa: "/ˈplʌm.ɪt/",
+          pos: "verb",
+          meaning: "Lao dốc, sụt giảm thẳng đứng nhanh chóng",
+          definition: "Fall or drop straight down at high speed; decrease rapidly",
+          synonyms: ["plunge", "nosedive", "tumble"],
+          collocations: ["plummeted dramatically", "plummet sharply"],
+          contextSentence: "Opportunities for spontaneous, child-directed play have plummeted dramatically."
+        },
+        {
           word: "frivolous",
+          matchWords: ["frivolous"],
           ipa: "/ˈfrɪv.əl.əs/",
           pos: "adjective",
           meaning: "Phù phiếm, vô bổ, không có giá trị nghiêm túc",
@@ -500,14 +867,81 @@ const CURATED_PASSAGES = {
           contextSentence: "Far from being a frivolous diversion, play serves as a vital neurobiological engine."
         },
         {
+          word: "synaptic plasticity",
+          matchWords: ["synaptic plasticity"],
+          ipa: "/sɪˈnæp.tɪk plæsˈtɪs.ə.ti/",
+          pos: "noun",
+          meaning: "Độ dẻo dai liên kết khớp thần kinh (khả năng tái tạo kết nối của não)",
+          definition: "The ability of synapses to strengthen or weaken over time",
+          synonyms: ["neuroplasticity", "neural adaptability"],
+          collocations: ["facilitates synaptic plasticity", "promote synaptic plasticity"],
+          contextSentence: "A crucial protein that facilitates synaptic plasticity and neurogenesis in the prefrontal cortex."
+        },
+        {
+          word: "neurogenesis",
+          matchWords: ["neurogenesis"],
+          ipa: "/ˌnjʊə.rəʊˈdʒen.ə.sɪs/",
+          pos: "noun",
+          meaning: "Quá trình sản sinh tế bào nơ-ron mới trong não bộ",
+          definition: "The creation and growth of new neurons in the brain",
+          synonyms: ["neural regeneration", "neuronal production"],
+          collocations: ["facilitates neurogenesis", "stimulate neurogenesis"],
+          contextSentence: "Facilitates synaptic plasticity and neurogenesis in the prefrontal cortex."
+        },
+        {
+          word: "prefrontal cortex",
+          matchWords: ["prefrontal cortex"],
+          ipa: "/priːˈfrʌn.təl ˈkɔː.teks/",
+          pos: "noun",
+          meaning: "Vỏ não trước trán (trung tâm tư duy bậc cao và kiềm chế xung động)",
+          definition: "The cerebral cortex covering the front part of the frontal lobe, responsible for decision-making",
+          synonyms: ["frontal lobe", "executive brain center"],
+          collocations: ["prefrontal cortex maturation", "in the prefrontal cortex"],
+          contextSentence: "In the prefrontal cortex—the cerebral region responsible for executive function."
+        },
+        {
+          word: "executive function",
+          matchWords: ["executive function"],
+          ipa: "/ɪɡˈzek.jə.tɪv ˈfʌŋk.ʃən/",
+          pos: "noun",
+          meaning: "Chức năng điều hành não bộ (tập trung, lập kế hoạch, kiềm chế xung động)",
+          definition: "A set of mental processes that enable planning, focusing, remembering, and juggling multiple tasks",
+          synonyms: ["cognitive control", "mental regulation"],
+          collocations: ["responsible for executive function", "executive function skills"],
+          contextSentence: "The cerebral region responsible for executive function, impulse inhibition, and long-term planning."
+        },
+        {
           word: "locus of control",
+          matchWords: ["locus of control"],
           ipa: "/ˈləʊ.kəs əv kənˈtrəʊl/",
           pos: "noun",
-          meaning: "Tâm điểm kiểm soát (nhận thức về việc mình hay hoàn cảnh làm chủ số phận)",
-          definition: "The degree to which people believe that they have control over the outcome of events in their lives",
+          meaning: "Tâm điểm kiểm soát (nhận thức về việc bản thân hay ngoại cảnh quyết định số phận)",
+          definition: "The degree to which people believe they have control over the outcome of events in their lives",
           synonyms: ["perceived agency", "internal/external attribution"],
           collocations: ["external locus of control", "internal locus of control"],
           contextSentence: "Children exhibit an external locus of control—the perception that outcomes are determined by external forces."
+        },
+        {
+          word: "perpetuate",
+          matchWords: ["perpetuate"],
+          ipa: "/pəˈpetʃ.u.eɪt/",
+          pos: "verb",
+          meaning: "Duy trì kéo dài liên tục, tiếp tục không gián đoạn",
+          definition: "Make an activity or situation continue indefinitely",
+          synonyms: ["sustain", "prolong", "continue"],
+          collocations: ["perpetuate the game", "perpetuate myths"],
+          contextSentence: "Because children possess a powerful innate motivation to perpetuate the game."
+        },
+        {
+          word: "inductively",
+          matchWords: ["inductively"],
+          ipa: "/ɪnˈdʌk.tɪv.li/",
+          pos: "adverb",
+          meaning: "Theo phương pháp quy nạp (từ quan sát cụ thể đúc kết ra chân lý)",
+          definition: "In a way that derives general laws from particular instances",
+          synonyms: ["empirically", "bottom-up"],
+          collocations: ["discovered inductively", "learn inductively"],
+          contextSentence: "Fundamental scientific concepts are discovered inductively through curiosity-driven experimentation."
         }
       ],
       questions: [
@@ -584,7 +1018,41 @@ const CURATED_PASSAGES = {
       ],
       vocabularies: [
         {
+          word: "unprecedented",
+          matchWords: ["unprecedented"],
+          ipa: "/ʌnˈpres.ɪ.den.tɪd/",
+          pos: "adjective",
+          meaning: "Chưa từng có tiền lệ, vô tiền khoáng hậu về quy mô hay tốc độ",
+          definition: "Never done or known before; extraordinary in scale or occurrence",
+          synonyms: ["unparalleled", "unequaled", "groundbreaking", "novel"],
+          collocations: ["unprecedented velocity", "unprecedented scale", "unprecedented growth"],
+          contextSentence: "London's population exploded with unprecedented velocity, doubling in fifty years."
+        },
+        {
+          word: "nexus",
+          matchWords: ["nexus", "commercial nexus"],
+          ipa: "/ˈnek.səs/",
+          pos: "noun",
+          meaning: "Đầu mối giao thương, điểm kết nối trung tâm quan trọng nhất",
+          definition: "A connection or series of connections linking two or more things; a focal hub",
+          synonyms: ["hub", "focal point", "nucleus", "core", "crossroads"],
+          collocations: ["commercial nexus", "central nexus", "nexus of transport"],
+          contextSentence: "The British capital was the commercial nexus of the global British Empire."
+        },
+        {
+          word: "catastrophic",
+          matchWords: ["catastrophic"],
+          ipa: "/ˌkæt.əˈstrɒf.ɪk/",
+          pos: "adjective",
+          meaning: "Thảm khốc, tai hại nghiêm trọng, tồi tệ cùng cực",
+          definition: "Involving or causing sudden great damage or suffering; extremely disastrous",
+          synonyms: ["disastrous", "devastating", "ruinous", "calamitous"],
+          collocations: ["catastrophic gridlock", "catastrophic failure", "catastrophic consequences"],
+          contextSentence: "Its surface streets were paralyzed by catastrophic traffic gridlock."
+        },
+        {
           word: "gridlock",
+          matchWords: ["gridlock", "traffic gridlock"],
           ipa: "/ˈɡrɪd.lɒk/",
           pos: "noun",
           meaning: "Sự tắc nghẽn giao thông toàn diện, tê liệt",
@@ -594,24 +1062,235 @@ const CURATED_PASSAGES = {
           contextSentence: "Its surface streets were paralyzed by catastrophic traffic gridlock."
         },
         {
+          word: "omnibus",
+          matchWords: ["omnibus", "horse-drawn omnibus", "omnibus carriages"],
+          ipa: "/ˈɒm.nɪ.bəs/",
+          pos: "noun",
+          meaning: "Xe buýt nhiều chỗ kéo bằng ngựa thời kỳ đầu",
+          definition: "A horse-drawn public vehicle for transporting a large number of passengers along a fixed route",
+          synonyms: ["horse-drawn bus", "public carriage"],
+          collocations: ["horse-drawn omnibus", "omnibus carriages"],
+          contextSentence: "Tens of thousands of horse-drawn omnibus carriages competed for space."
+        },
+        {
+          word: "hansom cabs",
+          matchWords: ["hansom cabs", "hansom cab", "private hansom cabs"],
+          ipa: "/ˈhæn.səm kæbz/",
+          pos: "noun",
+          meaning: "Xe ngựa hai bánh mui trần thời Victoria (phương tiện cá nhân phổ biến ở London thế kỷ 19)",
+          definition: "Two-wheeled horse-drawn carriages accommodating two passengers inside with the driver seated behind",
+          synonyms: ["two-wheeled cabs", "Victorian carriages"],
+          collocations: ["private hansom cabs", "hire a hansom cab"],
+          contextSentence: "Private hansom cabs and heavy freight wagons competed for space along narrow medieval thoroughfares."
+        },
+        {
+          word: "freight wagons",
+          matchWords: ["freight wagons", "freight wagon"],
+          ipa: "/freɪt ˈwæɡ.ənz/",
+          pos: "noun",
+          meaning: "Toa / xe chở hàng hóa nặng bằng ngựa kéo",
+          definition: "Heavy four-wheeled horse-drawn vehicles used for transporting goods and cargo",
+          synonyms: ["cargo wagons", "transport drays"],
+          collocations: ["heavy freight wagons", "horse freight wagons"],
+          contextSentence: "Private hansom cabs and heavy freight wagons competed for space along narrow streets."
+        },
+        {
+          word: "thoroughfares",
+          matchWords: ["thoroughfares", "medieval thoroughfares", "thoroughfare"],
+          ipa: "/ˈθʌr.ə.feəz/",
+          pos: "noun",
+          meaning: "Tuyến đường huyết mạch chính xuyên suốt đô thị",
+          definition: "Main roads or public highways in a town or city, typically busy and vital for traffic",
+          synonyms: ["arteries", "arterial roads", "boulevards"],
+          collocations: ["medieval thoroughfares", "busy thoroughfare"],
+          contextSentence: "Competed for space along narrow medieval thoroughfares, creating hour-long transit blockages."
+        },
+        {
+          word: "pervasive",
+          matchWords: ["pervasive"],
+          ipa: "/pəˈveɪ.sɪv/",
+          pos: "adjective",
+          meaning: "Lan tỏa khắp nơi, bao trùm mọi ngóc ngách",
+          definition: "Spreading widely throughout an area or a group of people",
+          synonyms: ["ubiquitous", "omnipresent", "prevalent"],
+          collocations: ["pervasive pollution", "pervasive influence"],
+          contextSentence: "Creating deafening noise, pervasive pollution, and hour-long transit blockages."
+        },
+        {
+          word: "exacerbate",
+          matchWords: ["exacerbate", "exacerbated"],
+          ipa: "/ɪɡˈzæs.ə.beɪt/",
+          pos: "verb",
+          meaning: "Làm trầm trọng thêm, làm tồi tệ hơn tình hình",
+          definition: "Make a problem, bad situation, or negative feeling worse",
+          synonyms: ["aggravate", "worsen", "compound", "intensify"],
+          collocations: ["exacerbated by", "exacerbate congestion"],
+          contextSentence: "The crisis was exacerbated by the arrival of mainline steam railways."
+        },
+        {
+          word: "periphery",
+          matchWords: ["periphery"],
+          ipa: "/pəˈrɪf.ər.i/",
+          pos: "noun",
+          meaning: "Vùng ngoại vi, vùng ven rìa bên ngoài lõi trung tâm",
+          definition: "The outer limits or edge of an area or surface",
+          synonyms: ["outskirts", "fringes", "borders", "margins"],
+          collocations: ["periphery of the urban core", "outer periphery"],
+          contextSentence: "Constructed grand terminal stations on the periphery of the urban core."
+        },
+        {
+          word: "urban core",
+          matchWords: ["urban core"],
+          ipa: "/ˈɜː.bən kɔːr/",
+          pos: "noun",
+          meaning: "Lõi đô thị, khu vực trung tâm sầm uất và tập trung nhất của thành phố",
+          definition: "The central business district and historic heart of a large city",
+          synonyms: ["city center", "downtown", "inner city"],
+          collocations: ["periphery of the urban core", "density of the urban core"],
+          contextSentence: "Constructed grand terminal stations on the periphery of the urban core—including Paddington, Euston, and Waterloo."
+        },
+        {
+          word: "locomotives",
+          matchWords: ["locomotives", "locomotive"],
+          ipa: "/ˌləʊ.kəˈməʊ.tɪvz/",
+          pos: "noun",
+          meaning: "Đầu máy xe lửa (chạy bằng hơi nước hoặc than đá)",
+          definition: "Powered rail vehicles used for pulling trains",
+          synonyms: ["steam engines", "train engines"],
+          collocations: ["steam locomotives", "coal-fired locomotives"],
+          contextSentence: "Prohibited locomotives from penetrating the historic City of London."
+        },
+        {
+          word: "disembark",
+          matchWords: ["disembark", "disembarking"],
+          ipa: "/ˌdɪs.ɪmˈbɑːk/",
+          pos: "verb",
+          meaning: "Xuống tàu, rời khỏi phương tiện vận tải đường sắt",
+          definition: "Leave a ship, aircraft, or train after a journey",
+          synonyms: ["alight", "detrain", "step off", "exit"],
+          collocations: ["disembark at edge stations", "passengers disembark"],
+          contextSentence: "Millions of commuters arriving daily were forced to disembark at edge stations and cram into surface carriages."
+        },
+        {
+          word: "cram",
+          matchWords: ["cram", "cramming", "crammed"],
+          ipa: "/kræm/",
+          pos: "verb",
+          meaning: "Nhồi nhét, chen chúc chật chội vào không gian hẹp",
+          definition: "Force people or things into a small or tight space",
+          synonyms: ["squeeze", "pack", "jam"],
+          collocations: ["cram into surface horse-carriages", "cram full"],
+          contextSentence: "Forced to disembark at edge stations and cram into surface horse-carriages."
+        },
+        {
           word: "unorthodox",
+          matchWords: ["unorthodox"],
           ipa: "/ʌnˈɔː.θə.dɒks/",
           pos: "adjective",
-          meaning: "Không chính thống, khác thường, đột phá",
+          meaning: "Không chính thống, phá cách, khác thường và đột phá",
           definition: "Contrary to what is usual, traditional, or accepted",
           synonyms: ["unconventional", "novel", "groundbreaking"],
           collocations: ["unorthodox solution", "unorthodox proposal"],
-          contextSentence: "Charles Pearson campaigned tirelessly for an unorthodox solution."
+          contextSentence: "Charles Pearson campaigned tirelessly for an unorthodox solution: constructing a subterranean railway."
+        },
+        {
+          word: "subterranean",
+          matchWords: ["subterranean"],
+          ipa: "/ˌsʌb.təˈreɪ.ni.ən/",
+          pos: "adjective",
+          meaning: "Dưới lòng đất, ngầm bên dưới bề mặt",
+          definition: "Existing, occurring, or done under the earth's surface",
+          synonyms: ["underground", "subsurface", "sunken"],
+          collocations: ["subterranean railway", "subterranean fumes"],
+          contextSentence: "Constructing a subterranean railway beneath the crowded roads."
+        },
+        {
+          word: "asphyxiated",
+          matchWords: ["asphyxiated", "asphyxiate"],
+          ipa: "/əsˈfɪk.si.eɪ.tɪd/",
+          pos: "verb",
+          meaning: "Bị làm ngạt thở, chết ngạt vì thiếu dưỡng khí hoặc ngộ độc khói",
+          definition: "Killed or rendered unconscious by being deprived of oxygen",
+          synonyms: ["suffocated", "smothered", "stifled"],
+          collocations: ["asphyxiated by subterranean fumes", "risk of asphyxiation"],
+          contextSentence: "Predicting that passengers would be asphyxiated by subterranean fumes."
+        },
+        {
+          word: "garnered",
+          matchWords: ["garnered", "garner"],
+          ipa: "/ˈɡɑː.nəd/",
+          pos: "verb",
+          meaning: "Thu thập, gom góp, giành được (sự ủng hộ, nguồn vốn tài chính)",
+          definition: "Gathered or collected something, especially support or backing",
+          synonyms: ["secured", "obtained", "amassed", "acquired"],
+          collocations: ["garnered financial backing", "garner support"],
+          contextSentence: "Pearson successfully garnered financial backing from the City Corporation."
+        },
+        {
+          word: "cut-and-cover",
+          matchWords: ["cut-and-cover"],
+          ipa: "/ˌkʌt.ənˈkʌv.ər/",
+          pos: "noun",
+          meaning: "Phương pháp đào mở rồi lấp (kỹ thuật đào rãnh hầm rồi lợp mái vòm gạch)",
+          definition: "A method of tunnel construction involving digging a trench, roofing it over, and restoring the ground",
+          synonyms: ["open-trench construction", "shallow tunneling method"],
+          collocations: ["cut-and-cover technique", "cut-and-cover method"],
+          contextSentence: "The initial line utilized a construction technique known as 'cut-and-cover'."
+        },
+        {
+          word: "excavated",
+          matchWords: ["excavated", "excavate"],
+          ipa: "/ˈek.skə.veɪ.tɪd/",
+          pos: "verb",
+          meaning: "Đào bới, khai quật đất đá tạo rãnh sâu",
+          definition: "Made a hole or channel by digging away earth and stone",
+          synonyms: ["dug out", "hollowed out", "unearthed"],
+          collocations: ["excavated a colossal trench", "excavated tunnels"],
+          contextSentence: "Workers excavated a colossal trench along major avenues, laid brick retaining walls, and spanned the top with an arched brick roof."
+        },
+        {
+          word: "colossal trench",
+          matchWords: ["colossal trench", "trench"],
+          ipa: "/kəˈlɒs.əl trentʃ/",
+          pos: "noun",
+          meaning: "Rãnh hào đào đất khổng lồ chạy dọc đại lộ",
+          definition: "An extremely large, deep ditch excavated in the earth for construction",
+          synonyms: ["massive trench", "huge excavation"],
+          collocations: ["excavated a colossal trench", "brick-lined trench"],
+          contextSentence: "Workers excavated a colossal trench along major avenues."
         },
         {
           word: "inaugural",
+          matchWords: ["inaugural", "inaugurating"],
           ipa: "/ɪˈnɔː.ɡjə.rəl/",
           pos: "adjective",
           meaning: "Khai trương, khánh thành, mở đầu",
           definition: "Marking the beginning of an institution, activity, or official period",
           synonyms: ["maiden", "opening", "introductory"],
-          collocations: ["inaugural day", "inaugural flight"],
-          contextSentence: "It hauled 40,000 passengers on its inaugural day alone."
+          collocations: ["inaugural day", "inaugurating the world's first"],
+          contextSentence: "It hauled 40,000 passengers on its inaugural day alone, inaugurating the world's first underground transit system."
+        },
+        {
+          word: "suburban",
+          matchWords: ["suburban", "suburban districts"],
+          ipa: "/səˈbɜː.bən/",
+          pos: "adjective",
+          meaning: "Thuộc khu vực ngoại ô, ngoại thành thanh bình",
+          definition: "Relating to or characteristic of a residential district situated on the outskirts of a city",
+          synonyms: ["outlying", "residential perimeter"],
+          collocations: ["suburban districts", "suburban commuters"],
+          contextSentence: "Permitted working-class and clerical laborers to reside in healthier suburban districts."
+        },
+        {
+          word: "metropolis",
+          matchWords: ["metropolis", "decentralized metropolis"],
+          ipa: "/məˈtrɒp.əl.ɪs/",
+          pos: "noun",
+          meaning: "Đại đô thị, trung tâm siêu đô thị rộng lớn",
+          definition: "A very large, bustling city, often an economic and cultural center",
+          synonyms: ["megacity", "conurbation", "great city"],
+          collocations: ["decentralized metropolis", "modern metropolis"],
+          contextSentence: "Transforming London into the modern decentralized metropolis we recognize today."
         }
       ],
       questions: [
@@ -654,10 +1333,6 @@ const CURATED_PASSAGES = {
     }
   ]
 };
-
-// =========================================================================
-// 2. GENERATIVE TEMPLATE ENGINE (Expands to 50 Authentic Tests per Topic)
-// =========================================================================
 
 // Bank of 50 academic passage titles and core themes per topic
 const TOPIC_PASSAGE_CATALOG = {
@@ -1267,6 +1942,7 @@ function generateAcademicTest(topicId, topicMeta, testNumber, catalogItem) {
   const vocabularies = [
     {
       word: "elucidate",
+      matchWords: ["elucidate", "elucidating"],
       ipa: "/iˈluː.sɪ.deɪt/",
       pos: "verb",
       meaning: "Làm sáng tỏ, giải thích rõ ràng và mạch lạc",
@@ -1277,6 +1953,7 @@ function generateAcademicTest(topicId, topicMeta, testNumber, catalogItem) {
     },
     {
       word: "cascading",
+      matchWords: ["cascading"],
       ipa: "/kæsˈkeɪ.dɪŋ/",
       pos: "adjective",
       meaning: "Gây hiệu ứng dây chuyền liên hoàn, dồn dập",
@@ -1287,6 +1964,7 @@ function generateAcademicTest(topicId, topicMeta, testNumber, catalogItem) {
     },
     {
       word: "disparate",
+      matchWords: ["disparate"],
       ipa: "/ˈdɪs.pər.ət/",
       pos: "adjective",
       meaning: "Khác biệt rõ rệt, không đồng nhất về bản chất",
@@ -1297,6 +1975,7 @@ function generateAcademicTest(topicId, topicMeta, testNumber, catalogItem) {
     },
     {
       word: "stochastic",
+      matchWords: ["stochastic", "stochastic volatility"],
       ipa: "/stəˈkæs.tɪk/",
       pos: "adjective",
       meaning: "Mang tính xác suất, ngẫu nhiên theo biến thiên thống kê",
@@ -1307,12 +1986,112 @@ function generateAcademicTest(topicId, topicMeta, testNumber, catalogItem) {
     },
     {
       word: "coalesce",
+      matchWords: ["coalesce", "coalesces"],
       ipa: "/kəʊ.əˈles/",
       pos: "verb",
       meaning: "Hợp nhất, kết tụ lại thành một khối thống nhất",
       definition: "Come together to form one mass or whole",
       synonyms: ["converge", "unite", "fuse"],
       collocations: ["consensus coalesces", "coalesce into a coherent framework"],
+      contextSentence: "As academic consensus coalesces, the strategic imperative will determine future progress."
+    },
+    {
+      word: "relegate",
+      matchWords: ["relegate", "relegated"],
+      ipa: "/ˈrel.ɪ.ɡeɪt/",
+      pos: "verb",
+      meaning: "Đẩy xuống vị trí thấp hơn, gạt ra thứ yếu",
+      definition: "Consign or dismiss to an inferior rank or peripheral position",
+      synonyms: ["downgrade", "demote", "marginalize"],
+      collocations: ["relegated to peripheral research", "relegate to second tier"],
+      contextSentence: "Historically relegated to peripheral research, recent breakthroughs illuminated fundamental mechanisms."
+    },
+    {
+      word: "empirical",
+      matchWords: ["empirical"],
+      ipa: "/ɪmˈpɪr.ɪ.kəl/",
+      pos: "adjective",
+      meaning: "Dựa trên bằng chứng thực nghiệm và quan sát thực tế",
+      definition: "Based on, concerned with, or verifiable by observation or experience rather than theory",
+      synonyms: ["evidence-based", "observational", "experimental"],
+      collocations: ["empirical breakthroughs", "empirical measurements", "empirical validation"],
+      contextSentence: "Recent empirical breakthroughs have illuminated fundamental structural mechanisms."
+    },
+    {
+      word: "equilibrium",
+      matchWords: ["equilibrium"],
+      ipa: "/ˌek.wɪˈlɪb.ri.əm/",
+      pos: "noun",
+      meaning: "Trạng thái cân bằng tĩnh",
+      definition: "A state in which opposing forces or influences are balanced",
+      synonyms: ["balance", "symmetry", "homeostasis"],
+      collocations: ["static equilibrium", "dynamic equilibrium"],
+      contextSentence: "Earlier theoretical paradigms assumed that observable patterns operated under static equilibrium conditions."
+    },
+    {
+      word: "fluctuations",
+      matchWords: ["fluctuations", "fluctuation"],
+      ipa: "/ˌflʌk.tʃuˈeɪ.ʃənz/",
+      pos: "noun",
+      meaning: "Các dao động, biến động liên tục",
+      definition: "Irregular risings and fallings in number, rate, or systemic state",
+      synonyms: ["oscillations", "variations", "swings"],
+      collocations: ["systemic fluctuations", "erratic fluctuations"],
+      contextSentence: "External disturbances precipitated cascading systemic fluctuations."
+    },
+    {
+      word: "longitudinal",
+      matchWords: ["longitudinal"],
+      ipa: "/ˌlɒŋ.ɡɪˈtʃuː.dɪ.nəl/",
+      pos: "adjective",
+      meaning: "Dài hạn, theo dõi đối tượng liên tục qua nhiều năm tháng",
+      definition: "Involving data gathered about the same subjects over an extended period of time",
+      synonyms: ["extended-period", "cohort-tracking"],
+      collocations: ["longitudinal datasets", "longitudinal study"],
+      contextSentence: "Longitudinal datasets gathered over consecutive decades indicate that interventions produce disparate results."
+    },
+    {
+      word: "fortified",
+      matchWords: ["fortified", "fortify"],
+      ipa: "/ˈfɔː.tɪ.faɪd/",
+      pos: "adjective",
+      meaning: "Được gia cố kiên cố, củng cố vững chãi",
+      definition: "Strengthened or protected against attack or adverse impacts",
+      synonyms: ["reinforced", "strengthened", "bolstered"],
+      collocations: ["sufficiently fortified", "fortified infrastructure"],
+      contextSentence: "In contexts where foundational infrastructure was sufficiently fortified, interventions effectively mitigated adverse impacts."
+    },
+    {
+      word: "anomalies",
+      matchWords: ["anomalies", "anomaly"],
+      ipa: "/əˈnɒm.ə.liz/",
+      pos: "noun",
+      meaning: "Những điều dị thường, sai lệch khác chuẩn mực",
+      definition: "Things that deviate from what is standard, normal, or expected",
+      synonyms: ["irregularities", "deviations", "aberrations"],
+      collocations: ["localized anomalies", "statistical anomalies"],
+      contextSentence: "Critics argue that localized anomalies and demographic disparities may distort statistical correlations."
+    },
+    {
+      word: "prescriptions",
+      matchWords: ["prescriptions", "prescription"],
+      ipa: "/prɪˈskrɪp.ʃənz/",
+      pos: "noun",
+      meaning: "Các mệnh lệnh chỉ dẫn áp đặt từ trên xuống",
+      definition: "Recommendations or directives that are authoritatively required",
+      synonyms: ["directives", "mandates", "rules"],
+      collocations: ["top-down prescriptions", "rigid prescriptions"],
+      contextSentence: "Rather than enforcing rigid top-down prescriptions, progressive stakeholders emphasize iterative monitoring."
+    },
+    {
+      word: "consensus",
+      matchWords: ["consensus"],
+      ipa: "/kənˈsen.səs/",
+      pos: "noun",
+      meaning: "Sự đồng thuận chung, sự nhất trí rộng rãi",
+      definition: "A general agreement among members of a group or academic community",
+      synonyms: ["accord", "unanimity", "common agreement"],
+      collocations: ["academic consensus", "consensus coalesces"],
       contextSentence: "As academic consensus coalesces, the strategic imperative will determine future progress."
     }
   ];
