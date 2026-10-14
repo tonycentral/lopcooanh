@@ -3902,7 +3902,11 @@ const ENRICHED_VOCABS_BY_CATEGORY = {};
 
 function getEnrichedVocabsForCategory(catId, categoryName) {
   if (!ENRICHED_VOCABS_BY_CATEGORY[catId]) {
-    const rawList = vocabsByTopic[catId] || [];
+    const rawList = (vocabsByTopic[catId] || []).filter(v => {
+      if (!v || !v.word || !v.meaning) return false;
+      const m = String(v.meaning).toLowerCase();
+      return !m.includes('thuật ngữ') && !m.includes('khái niệm giáo dục');
+    });
     ENRICHED_VOCABS_BY_CATEGORY[catId] = rawList.map((v, i) => enrichVocabulary({
       id: v.id || `${catId}-v${i + 1}`,
       word: v.word,
@@ -3913,7 +3917,7 @@ function getEnrichedVocabsForCategory(catId, categoryName) {
       synonyms: v.synonyms,
       collocations: v.collocations,
       modelSentence: v.exampleSentence || v.modelSentence || "",
-      vietnameseSentence: v.meaning
+      vietnameseSentence: v.vietnameseSentence || v.meaning || ""
     }, categoryName || catId));
   }
   return ENRICHED_VOCABS_BY_CATEGORY[catId];

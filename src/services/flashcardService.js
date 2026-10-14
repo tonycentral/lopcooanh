@@ -168,6 +168,15 @@ export function shuffleArray(arr) {
   return shuffled;
 }
 
+function isValidVocabForFlashcard(v) {
+  if (!v || !v.word || !v.meaning) return false;
+  const m = String(v.meaning).toLowerCase().trim();
+  if (m.includes('thuật ngữ') || m.includes('khái niệm giáo dục')) return false;
+  if (m.length < 4) return false;
+  if (m === v.word.toLowerCase().trim()) return false;
+  return true;
+}
+
 // Flatten all vocabularies from topics with topic metadata
 export function extractAllVocabularies(task1Topics = [], task2Topics = []) {
   const all = [];
@@ -177,6 +186,7 @@ export function extractAllVocabularies(task1Topics = [], task2Topics = []) {
     topics.forEach(topic => {
       if (topic.vocabularies && Array.isArray(topic.vocabularies)) {
         topic.vocabularies.forEach(vocab => {
+          if (!isValidVocabForFlashcard(vocab)) return;
           const clean = (vocab.word || '').toLowerCase().trim();
           if (clean && !seenWords.has(clean)) {
             seenWords.add(clean);

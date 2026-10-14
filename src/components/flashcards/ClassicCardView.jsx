@@ -202,7 +202,9 @@ export default function ClassicCardView({
                 <CheckCircle2 className="w-3.5 h-3.5" /> Nghĩa tiếng Việt:
               </div>
               <p className="text-base sm:text-lg font-medium text-[#24211E] leading-snug">
-                {card.meaning}
+                {card.meaning && !card.meaning.toLowerCase().includes('thuật ngữ')
+                  ? card.meaning 
+                  : (card.definitionEn || card.word)}
               </p>
             </div>
 
@@ -258,12 +260,12 @@ export default function ClassicCardView({
             )}
 
             {/* Example sentence */}
-            {card.modelSentence && (
+            {(card.modelSentence || card.exampleSentence) && (
               <div className="mt-2 p-3 rounded-xl bg-white border border-[#E6E2D8] text-xs space-y-1">
                 <p className="font-serif italic text-[#24211E] leading-relaxed">
-                  "{card.modelSentence}"
+                  "{card.modelSentence || card.exampleSentence}"
                 </p>
-                {card.vietnameseSentence && (
+                {card.vietnameseSentence && !card.vietnameseSentence.toLowerCase().includes('thuật ngữ') && (
                   <p className="text-[11px] text-[#7A7369] leading-normal">
                     &rarr; {card.vietnameseSentence}
                   </p>

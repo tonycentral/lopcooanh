@@ -399,14 +399,17 @@ export function getSynonymVocab(synonymWord, parentVocab = {}, topicName = "IELT
   // 2. Kiểm tra trong Databank vocabularies.json
   if (DATABANK_WORD_MAP.has(lowerWord)) {
     const raw = DATABANK_WORD_MAP.get(lowerWord);
-    return enrichVocabulary({
-      ...raw,
-      id: raw.id || `syn-db-${lowerWord.replace(/\s+/g, '-')}`,
-      modelSentence: raw.exampleSentence || raw.modelSentence || "",
-      vietnameseSentence: raw.meaning || "",
-      isFromSynonymBank: true,
-      parentWord: parentVocab.word || ""
-    }, topicName);
+    const m = (raw.meaning || '').toLowerCase();
+    if (!m.includes('thuật ngữ') && !m.includes('khái niệm giáo dục')) {
+      return enrichVocabulary({
+        ...raw,
+        id: raw.id || `syn-db-${lowerWord.replace(/\s+/g, '-')}`,
+        modelSentence: raw.exampleSentence || raw.modelSentence || "",
+        vietnameseSentence: raw.vietnameseSentence || raw.meaning || "",
+        isFromSynonymBank: true,
+        parentWord: parentVocab.word || ""
+      }, topicName);
+    }
   }
 
   // 3. Fallback Dynamic Generator: Tạo từ vựng học thuật dựa trên từ vựng gốc

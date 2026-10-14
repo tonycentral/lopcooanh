@@ -2,7 +2,8 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { 
   CheckCircle2, 
   XCircle, 
-  ArrowRight
+  ArrowRight,
+  Languages
 } from 'lucide-react';
 import { speakWord, playCorrectSound, playIncorrectSound } from '../../services/soundEffects';
 
@@ -14,6 +15,7 @@ export default function FillBlankView({
 }) {
   const [selectedWord, setSelectedWord] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
+  const [showTranslation, setShowTranslation] = useState(false);
 
   // Generate 4 candidate chips (1 target word + 3 distractors)
   const chips = useMemo(() => {
@@ -27,32 +29,69 @@ export default function FillBlankView({
     return [card.word, ...shuffledOthers].sort(() => 0.5 - Math.random());
   }, [card?.id, allCards]);
 
-  // Construct cloze sentence
+  // Construct cloze sentence (supports both modelSentence and exampleSentence)
   const clozeParts = useMemo(() => {
-    if (!card?.modelSentence || !card?.word) return { before: '', after: '' };
+    const sentence = (card?.modelSentence || card?.exampleSentence || "").trim();
+    const word = (card?.word || "").trim();
+    if (!sentence || !word) return { before: sentence, matched: word, after: '' };
     
-    const regex = new RegExp(`\\b${card.word}\\b`, 'i');
-    const match = card.modelSentence.match(regex);
+    const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`\\b${escaped}\\b`, 'i');
+    const match = sentence.match(regex);
     
-    if (match) {
+    if (match && typeof match.index === 'number') {
       const idx = match.index;
       return {
-        before: card.modelSentence.slice(0, idx),
+        before: sentence.slice(0, idx),
         matched: match[0],
-        after: card.modelSentence.slice(idx + match[0].length)
+        after: sentence.slice(idx + match[0].length)
+      };
+    }
+
+    const looseIdx = sentence.toLowerCase().indexOf(word.toLowerCase());
+    if (looseIdx !== -1) {
+      return {
+        before: sentence.slice(0, looseIdx),
+        matched: sentence.slice(looseIdx, looseIdx + word.length),
+        after: sentence.slice(looseIdx + word.length)
       };
     }
 
     return {
-      before: card.modelSentence,
-      matched: card.word,
+      before: sentence,
+      matched: word,
       after: ''
     };
-  }, [card]);
+  }, [card?.id, card?.word, card?.modelSentence, card?.exampleSentence]);
+
+  // Vietnamese translation with answer-masking when not yet answered
+  const displayTranslation = useMemo(() => {
+    let vn = (card?.vietnameseSentence || "").trim();
+    
+    // Fallback if missing or placeholder
+    if (!vn || /thuật ngữ|khái niệm/i.test(vn)) {
+      const m = card?.meaning || "";
+      if (m) {
+        vn = `Trong câu này, "${m}" là cụm từ chính xác nhất để hoàn thiện ngữ nghĩa.`;
+      } else {
+        vn = "Bản dịch câu đang được hệ thống cập nhật.";
+      }
+    }
+
+    // If user hasn't answered yet, mask the exact target word if present in translation
+    if (!isAnswered && card?.word) {
+      const escaped = card.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const wordRegex = new RegExp(`\\b${escaped}\\b`, 'gi');
+      vn = vn.replace(wordRegex, '____?____');
+    }
+
+    return vn;
+  }, [card, isAnswered]);
 
   useEffect(() => {
     setSelectedWord(null);
     setIsAnswered(false);
+    setShowTranslation(false);
   }, [card?.id]);
 
   const handleSelectChip = (word) => {
@@ -117,13 +156,50 @@ export default function FillBlankView({
           <span>{clozeParts.after}"</span>
         </div>
 
-        {/* Vietnamese Hint / Translation */}
-        {card.vietnameseSentence && (
-          <div className="pt-3 border-t border-[#E6E2D8] text-xs text-[#7A7369] leading-relaxed">
-            <span className="font-semibold text-[#24211E]">Dịch nghĩa: </span>
-            {card.vietnameseSentence}
+        {/* Translation Toggle Button (Only reveals when clicked) */}
+        <div className="pt-3 border-t border-[#E6E2D8]">
+          <div className="flex items-center justify-between">
+            <button
+              type="button"
+              onClick={() => setShowTranslation(prev => !prev)}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition cursor-pointer select-none active:scale-95 shadow-2xs ${
+                showTranslation
+                  ? "bg-[#3E4F42] text-white border border-[#3E4F42]"
+                  : "bg-white hover:bg-[#EDF3EE] text-[#3E4F42] border border-[#E6E2D8] hover:border-[#3E4F42]"
+              }`}
+              title="Nhấn để xem hoặc ẩn bản dịch câu tiếng Việt"
+            >
+              <Languages className="w-3.5 h-3.5" />
+              <span>{showTranslation ? "Ẩn dịch câu" : "Dịch câu trên"}</span>
+              <span className={`text-[10px] font-normal ${showTranslation ? "text-white/80" : "text-[#7A7369]"}`}>
+                {showTranslation ? "(nhấn để ẩn)" : "(nhấn để xem)"}
+              </span>
+            </button>
+
+            {!showTranslation && (
+              <span className="text-[11px] text-[#7A7369] italic">
+                💡 Cần gợi ý? Bấm nút để xem bản dịch
+              </span>
+            )}
           </div>
-        )}
+
+          {/* Revealable Vietnamese Translation Panel */}
+          {showTranslation && (
+            <div className="mt-3 p-3.5 rounded-2xl bg-white border border-[#E6E2D8] text-xs leading-relaxed space-y-1 animate-in fade-in-50 duration-200">
+              <div className="flex items-center gap-1 text-[11px] font-semibold text-[#3E4F42] uppercase tracking-wider">
+                <Languages className="w-3.5 h-3.5" /> Bản dịch câu tiếng Việt:
+              </div>
+              <p className="italic text-[#24211E] font-serif sm:text-sm">
+                "{displayTranslation}"
+              </p>
+              {!isAnswered && (
+                <p className="text-[10px] text-[#7A7369]">
+                  * Chỗ trống đã được giữ nguyên để bạn tự suy luận và chọn từ thích hợp nhất.
+                </p>
+              )}
+            </div>
+          )}
+        </div>
 
       </div>
 
