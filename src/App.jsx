@@ -409,7 +409,7 @@ export default function App() {
   };
 
   return (
-    <div className="bg-slate-950 text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-200">
+    <div className="min-h-screen bg-[#F8F6F1] text-[#24211E] selection:bg-[#C2DDC8] selection:text-[#17221A]">
       
       {/* If view is 'admin', render AdminDashboard (Truy cập qua link ẩn) */}
       {currentView === 'admin' ? (

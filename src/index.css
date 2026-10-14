@@ -74,6 +74,19 @@
   }
 }
 
+/* Text Selection Styling (Đảm bảo độ tương phản cao, chữ luôn đen rõ nét khi bôi đen) */
+::selection,
+*::selection {
+  background-color: #C2DDC8 !important;
+  color: #17221A !important;
+}
+
+::-moz-selection,
+*::-moz-selection {
+  background-color: #C2DDC8 !important;
+  color: #17221A !important;
+}
+
 /* Áp dụng font caphevietnam cho toàn bộ typography */
 .font-sans,
 .font-serif {
