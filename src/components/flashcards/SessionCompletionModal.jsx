@@ -44,7 +44,7 @@ export default function SessionCompletionModal({
         </div>
 
         <div>
-          <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#24211E] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-title font-bold text-[#24211E] tracking-tight">
             Hoàn Thành Bài Học
           </h2>
           <p className="text-xs sm:text-sm text-[#7A7369] mt-1">

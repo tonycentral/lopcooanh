@@ -51,7 +51,7 @@ export default function ReadingResultModal({
         <div className="flex items-center justify-between pb-3 border-b border-[#E6E2D8]">
           <div className="flex items-center gap-2">
             <Trophy className="w-5 h-5 text-[#A67C52]" />
-            <h3 className="font-serif font-bold text-base sm:text-lg text-[#24211E]">
+            <h3 className="font-title font-bold text-base sm:text-lg text-[#24211E]">
               Kết Quả Bài Đọc IELTS Reading
             </h3>
           </div>

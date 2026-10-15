@@ -108,7 +108,7 @@ export default function WelcomePage({
             </div>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#24211E] tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-title font-bold text-[#24211E] tracking-tight">
             Lớp cô Oanh
           </h1>
           {justSaved && (

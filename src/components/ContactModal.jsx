@@ -55,7 +55,7 @@ export default function ContactModal({ isOpen, onClose }) {
               <Sparkles className="w-3 h-3" />
               <span>Học Trực Tiếp 1-kèm-1 &amp; Nhóm Nhỏ</span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#24211E] tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-title font-bold text-[#24211E] tracking-tight">
               Liên Hệ Cô Oanh Writing
             </h2>
             <p className="text-xs text-[#7A7369]">

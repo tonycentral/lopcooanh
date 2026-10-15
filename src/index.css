@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* 1. Font CapheVietnam (Dành riêng cho Title lớn, Brand, Logo) */
 @font-face {
   font-family: 'caphevietnam';
   src: local('caphevietnam'),
@@ -18,43 +19,91 @@
   font-display: swap;
 }
 
+/* 2. Font Plus Jakarta Sans (Chuẩn quốc tế học tiếng Anh, IELTS reading, essay, UI) */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('./assets/fonts/PlusJakartaSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('./assets/fonts/PlusJakartaSans-SemiBold.ttf') format('truetype');
+  font-weight: 500 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('./assets/fonts/PlusJakartaSans-Bold.ttf') format('truetype');
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 3. Font Be Vietnam Pro (Hỗ trợ tiếng Việt sắc nét, chuẩn typography) */
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  src: url('./assets/fonts/BeVietnamPro-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Be Vietnam Pro';
+  src: url('./assets/fonts/BeVietnamPro-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
-  --font-sans: 'caphevietnam', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-serif: 'caphevietnam', Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: 'Plus Jakarta Sans', 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: 'Plus Jakarta Sans', 'Be Vietnam Pro', Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-body: 'Plus Jakarta Sans', 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-title: 'caphevietnam', Georgia, Cambria, serif;
+  --font-brand: 'caphevietnam', Georgia, Cambria, serif;
 
-  --text-xs: 0.95rem;
-  --text-xs--line-height: 1.35rem;
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.25rem;
 
-  --text-sm: 1.05rem;
-  --text-sm--line-height: 1.5rem;
+  --text-sm: 0.925rem;
+  --text-sm--line-height: 1.45rem;
 
-  --text-base: 1.2rem;
-  --text-base--line-height: 1.7rem;
+  --text-base: 1.05rem;
+  --text-base--line-height: 1.65rem;
 
-  --text-lg: 1.35rem;
-  --text-lg--line-height: 1.85rem;
+  --text-lg: 1.2rem;
+  --text-lg--line-height: 1.75rem;
 
-  --text-xl: 1.5rem;
-  --text-xl--line-height: 2rem;
+  --text-xl: 1.4rem;
+  --text-xl--line-height: 1.9rem;
 
   --text-2xl: 1.75rem;
-  --text-2xl--line-height: 2.25rem;
+  --text-2xl--line-height: 2.15rem;
+
+  --text-3xl: 2.15rem;
+  --text-3xl--line-height: 2.5rem;
 }
 
 @layer base {
   html {
-    font-size: 17.5px;
+    font-size: 16px;
   }
 
   @media (min-width: 640px) {
     html {
-      font-size: 19px;
+      font-size: 16.5px;
     }
   }
 
   @media (min-width: 1024px) {
     html {
-      font-size: 20px;
+      font-size: 17px;
     }
   }
 
@@ -62,11 +111,11 @@
     background-color: #F8F6F1;
     color: #2B2826;
     min-height: 100vh;
-    font-family: 'caphevietnam', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    letter-spacing: 0.015em;
-    line-height: 1.55;
+    letter-spacing: -0.01em;
+    line-height: 1.6;
   }
 
   button, input, optgroup, select, textarea {
@@ -87,21 +136,17 @@
   color: #17221A !important;
 }
 
-/* Áp dụng font caphevietnam cho toàn bộ typography */
-.font-sans,
-.font-serif {
-  font-family: 'caphevietnam', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-  letter-spacing: 0.012em;
+/* Utility classes: font-title & font-brand CHỈ DÙNG CHO TIÊU ĐỀ LỚN */
+.font-title,
+.font-brand {
+  font-family: 'caphevietnam', Georgia, Cambria, "Times New Roman", serif !important;
+  letter-spacing: 0.015em;
 }
 
-/* Tăng kích thước chữ cho các tag/badge nhỏ để font caphevietnam hiển thị rõ ràng, dễ đọc */
-.text-\[10px\] {
-  font-size: 0.95rem !important;
-  line-height: 1.3 !important;
-}
-.text-\[11px\] {
-  font-size: 1.02rem !important;
-  line-height: 1.35 !important;
+/* Đảm bảo font-sans & font-serif dùng Plus Jakarta Sans & Be Vietnam Pro */
+.font-sans,
+.font-serif {
+  font-family: 'Plus Jakarta Sans', 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 /* Japandi Minimal Scrollbars */

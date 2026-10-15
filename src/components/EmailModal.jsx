@@ -42,7 +42,7 @@ export default function EmailModal({ isOpen, onSaveEmail }) {
             />
           </div>
 
-          <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#24211E] tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-title font-bold text-[#24211E] tracking-tight">
             Lớp cô Oanh
           </h2>
           <p className="text-xs text-[#7A7369]">

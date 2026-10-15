@@ -118,7 +118,7 @@ export default function SourcesDatabankModal({
               <Library className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-base sm:text-lg font-serif font-semibold text-[#24211E] flex items-center gap-2">
+              <h2 className="text-base sm:text-lg font-title font-semibold text-[#24211E] flex items-center gap-2">
                 <span>Nguồn Tài Liệu &amp; Bổ Sung Chủ Đề</span>
                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#3E4F42]/10 text-[#3E4F42] border border-[#3E4F42]/20 font-mono font-medium">
                   Cambridge • Simon • Liz

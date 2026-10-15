@@ -105,7 +105,7 @@ export default function AdminDashboard({ onExitAdmin }) {
             <Lock className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-base font-serif font-bold text-[#24211E]">Quản Trị Databank</h2>
+            <h2 className="text-base font-title font-bold text-[#24211E]">Quản Trị Databank</h2>
             <p className="text-xs text-[#7A7369] mt-1">Dành cho quản trị viên Lớp cô Oanh</p>
           </div>
 

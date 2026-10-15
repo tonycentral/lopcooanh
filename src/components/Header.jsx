@@ -200,7 +200,7 @@ export default function Header({
               className="w-full h-full object-contain" 
             />
           </div>
-          <span className="font-serif font-bold text-base sm:text-lg text-[#24211E] group-hover:text-[#3E4F42] transition leading-none">
+          <span className="font-title font-bold text-base sm:text-lg text-[#24211E] group-hover:text-[#3E4F42] transition leading-none">
             Lớp cô Oanh
           </span>
         </div>
