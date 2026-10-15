@@ -6,15 +6,18 @@ import {
   Layers, 
   User, 
   Cloud, 
-  LogOut 
+  LogOut,
+  RotateCcw
 } from 'lucide-react';
 import { BAND_OPTIONS } from '../data/bandDescriptors';
+import { getLastActiveLocation, formatLocationLabel } from '../services/userService';
 
 export default function WelcomePage({ 
   onStartPractice, 
   onStartFullEssay,
   onStartFlashcard,
   onStartReading,
+  onResumeLastLocation,
   onOpenContactModal,
   onChangeEmail,
   onOpenAuth,
@@ -27,6 +30,7 @@ export default function WelcomePage({
   onSettingsChange
 }) {
   const [justSaved, setJustSaved] = useState(false);
+  const lastActiveLocation = getLastActiveLocation(studentEmail);
 
   const handleSelectBand = (band) => {
     if (onSettingsChange) {
@@ -236,6 +240,41 @@ export default function WelcomePage({
 
           {/* Nút Bắt Đầu Luyện Tập & Học Nhanh Flashcard */}
           <div className="space-y-2.5 pt-1">
+            
+            {/* Nút Tiếp Tục Bài Học Dở Dang (Nếu có phiên học trước đó) */}
+            {lastActiveLocation && lastActiveLocation.view && (
+              <button
+                type="button"
+                onClick={() => {
+                  if (!currentUser) {
+                    onOpenAuth();
+                    return;
+                  }
+                  if (onResumeLastLocation) {
+                    onResumeLastLocation(lastActiveLocation);
+                  } else {
+                    onStartPractice();
+                  }
+                }}
+                className="w-full py-3 px-4 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-sm transition shadow-sm flex items-center justify-between gap-2 cursor-pointer active:scale-[0.99] border border-[#2D3A30]"
+              >
+                <div className="flex items-center gap-2.5 truncate">
+                  <div className="w-7 h-7 rounded-lg bg-white/15 flex items-center justify-center shrink-0">
+                    <RotateCcw className="w-4 h-4 text-[#C2DDC8]" />
+                  </div>
+                  <div className="text-left truncate">
+                    <div className="text-[10px] text-[#C2DDC8] uppercase font-bold tracking-wider leading-none mb-1">
+                      Tiếp tục bài học dở dang
+                    </div>
+                    <div className="text-xs sm:text-sm font-semibold truncate leading-tight">
+                      {formatLocationLabel(lastActiveLocation) || "Quay lại vị trí trước đó"}
+                    </div>
+                  </div>
+                </div>
+                <ArrowRight className="w-4 h-4 shrink-0 text-[#C2DDC8]" />
+              </button>
+            )}
+
             <button
               type="button"
               onClick={() => {
@@ -245,10 +284,14 @@ export default function WelcomePage({
                 }
                 onStartPractice();
               }}
-              className="w-full py-3 px-4 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-sm transition shadow-xs flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
+              className={`w-full py-2.5 px-4 rounded-xl font-medium text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] ${
+                lastActiveLocation && lastActiveLocation.view
+                  ? "bg-white hover:bg-[#FAF8F5] text-[#24211E] border border-[#D1DDD3] shadow-2xs"
+                  : "bg-[#3E4F42] hover:bg-[#334237] text-white shadow-xs py-3 text-sm"
+              }`}
             >
               <span>📚 Học từ vựng (Luyện câu &amp; đoạn • Band {targetBand})</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className={`w-4 h-4 ${lastActiveLocation && lastActiveLocation.view ? "text-[#3E4F42]" : ""}`} />
             </button>
 
             {onStartFullEssay && (

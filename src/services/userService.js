@@ -4,7 +4,8 @@
 const STORAGE_KEYS = {
   CURRENT_EMAIL: "lopcooanh_student_email",
   PROFILES_MAP: "lopcooanh_student_profiles",
-  LAST_VISIT: "lopcooanh_last_visit_timestamp"
+  LAST_VISIT: "lopcooanh_last_visit_timestamp",
+  LAST_LOCATION: "lopcooanh_last_active_location"
 };
 
 const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000; // 7 ngày = 604,800,000 ms
@@ -253,3 +254,91 @@ export function resetKnownWordsForTopic(email, wordIds = []) {
     return [];
   }
 }
+
+/**
+ * Lưu vị trí / module học tập cuối cùng người dùng đang làm việc
+ * @param {string} email
+ * @param {object} location { view, writingStep, practiceActivePart, activeTask, selectedTopicId, readingTopicId, readingTestNum, readingMode }
+ */
+export function saveLastActiveLocation(email, location) {
+  if (!location || typeof location !== 'object') return;
+  try {
+    const locWithTime = {
+      ...location,
+      updatedAt: Date.now()
+    };
+    const serialized = JSON.stringify(locWithTime);
+    localStorage.setItem(STORAGE_KEYS.LAST_LOCATION, serialized);
+
+    const cleanEmail = email ? email.trim().toLowerCase() : getSavedEmail();
+    if (cleanEmail) {
+      localStorage.setItem(`lopcooanh_last_active_location_${cleanEmail}`, serialized);
+      
+      const map = getProfilesMap();
+      if (map[cleanEmail]) {
+        map[cleanEmail].lastLocation = locWithTime;
+        map[cleanEmail].lastActive = new Date().toISOString();
+        localStorage.setItem(STORAGE_KEYS.PROFILES_MAP, JSON.stringify(map));
+      }
+    }
+  } catch (e) {
+    console.error("Lỗi khi lưu last active location:", e);
+  }
+}
+
+/**
+ * Lấy vị trí học tập cuối cùng
+ * @param {string} [email]
+ * @returns {object|null}
+ */
+export function getLastActiveLocation(email) {
+  try {
+    const cleanEmail = email ? email.trim().toLowerCase() : getSavedEmail();
+    if (cleanEmail) {
+      const perEmail = localStorage.getItem(`lopcooanh_last_active_location_${cleanEmail}`);
+      if (perEmail) {
+        const parsed = JSON.parse(perEmail);
+        if (parsed && parsed.view) return parsed;
+      }
+      const map = getProfilesMap();
+      if (map[cleanEmail]?.lastLocation?.view) {
+        return map[cleanEmail].lastLocation;
+      }
+    }
+
+    const raw = localStorage.getItem(STORAGE_KEYS.LAST_LOCATION);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && parsed.view) return parsed;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Định dạng nhãn tiếng Việt thân thiện cho vị trí học gần nhất
+ */
+export function formatLocationLabel(loc) {
+  if (!loc || !loc.view) return null;
+  if (loc.view === 'reading') {
+    const testNum = loc.readingTestNum ? `Đề ${loc.readingTestNum}` : '50 Đề';
+    const modeName = loc.readingMode === 'test' ? 'Thi thử' : 'Luyện đọc';
+    return `${modeName} IELTS Reading (${testNum})`;
+  }
+  if (loc.view === 'full_essay') {
+    const taskName = loc.activeTask === 'task1' ? 'Task 1 Report' : 'Task 2 Essay';
+    return `Luyện viết toàn bài (${taskName})`;
+  }
+  if (loc.view === 'flashcard') {
+    return 'Thẻ ghi nhớ Flashcards';
+  }
+  if (loc.view === 'vocab_practice') {
+    if (loc.practiceActivePart === 2) return 'Luyện viết 1 câu (Sentence)';
+    if (loc.practiceActivePart === 3) return 'Luyện viết đoạn văn (Paragraph)';
+    return 'Luyện từ vựng học thuật (1.1)';
+  }
+  return null;
+}
+

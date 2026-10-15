@@ -56,6 +56,7 @@ import {
   findRecommendedTestNumber,
   getReadingTestId
 } from '../../services/readingService';
+import { saveLastActiveLocation, getLastActiveLocation } from '../../services/userService';
 
 // Icon mapping for 10 topic categories
 const TOPIC_ICON_MAP = {
@@ -74,6 +75,9 @@ const TOPIC_ICON_MAP = {
 export default function ReadingWorkspace({
   studentEmail,
   targetBand = "7.0",
+  initialMode,
+  initialTopicId,
+  initialTestNum,
   onReadingGraded,
   onGoWelcome,
   onOpenFlashcard
@@ -81,18 +85,34 @@ export default function ReadingWorkspace({
   // Reading Progress & Persistence State
   const [readingProgress, setReadingProgress] = useState(() => getReadingProgress(studentEmail));
 
-  // Selected Topic (out of 10 Master Topics)
-  const [selectedTopicId, setSelectedTopicId] = useState("environment");
+  // Selected Topic (out of 10 Master Topics): Khôi phục chủ đề người dùng đang đọc dở
+  const [selectedTopicId, setSelectedTopicId] = useState(() => {
+    if (initialTopicId && READING_TOPICS.some(t => t.id === initialTopicId)) {
+      return initialTopicId;
+    }
+    const lastLoc = getLastActiveLocation(studentEmail);
+    if (lastLoc?.readingTopicId && READING_TOPICS.some(t => t.id === lastLoc.readingTopicId)) {
+      return lastLoc.readingTopicId;
+    }
+    return "environment";
+  });
   const [isTopicDropdownOpen, setIsTopicDropdownOpen] = useState(false);
   const [isTestDropdownOpen, setIsTestDropdownOpen] = useState(false);
 
   const topicDropdownRef = useRef(null);
   const testDropdownRef = useRef(null);
 
-  // Selected Test Number (1 to 50): Automatically pick recommended test (in-progress or first unattempted)
+  // Selected Test Number (1 to 50): Khôi phục đúng đề thi người dùng đang làm dở
   const [selectedTestNum, setSelectedTestNum] = useState(() => {
+    if (initialTestNum && initialTestNum >= 1 && initialTestNum <= 50) {
+      return initialTestNum;
+    }
+    const lastLoc = getLastActiveLocation(studentEmail);
+    if (lastLoc?.readingTestNum && lastLoc.readingTestNum >= 1 && lastLoc.readingTestNum <= 50) {
+      return lastLoc.readingTestNum;
+    }
     const initProg = getReadingProgress(studentEmail);
-    return findRecommendedTestNumber(initProg, "environment");
+    return findRecommendedTestNumber(initProg, selectedTopicId || "environment");
   });
 
   // Reload progress if studentEmail changes
@@ -116,7 +136,29 @@ export default function ReadingWorkspace({
   }, []);
 
   // Mode: 'practice' (Luyện tập: Vừa đọc vừa click tra từ vựng) | 'test' (Thi thử: Chỉ đọc đề & làm bài bấm giờ)
-  const [readingMode, setReadingMode] = useState("practice");
+  const [readingMode, setReadingMode] = useState(() => {
+    if (initialMode === 'test' || initialMode === 'practice') return initialMode;
+    const lastLoc = getLastActiveLocation(studentEmail);
+    return lastLoc?.readingMode || "practice";
+  });
+
+  // Đồng bộ mode khi props initialMode thay đổi (từ menu Header 2.1 vs 2.2)
+  useEffect(() => {
+    if (initialMode && (initialMode === 'practice' || initialMode === 'test')) {
+      setReadingMode(initialMode);
+    }
+  }, [initialMode]);
+
+  // Tự động lưu vị trí học đọc vào storage để refresh hoặc đăng nhập lại vẫn ở đúng chỗ
+  useEffect(() => {
+    saveLastActiveLocation(studentEmail, {
+      view: 'reading',
+      activeWritingStep: readingMode === 'test' ? '2.2' : '2.1',
+      readingTopicId: selectedTopicId,
+      readingTestNum: selectedTestNum,
+      readingMode
+    });
+  }, [selectedTopicId, selectedTestNum, readingMode, studentEmail]);
 
   // Font size for passage
   const [fontSize, setFontSize] = useState("base");

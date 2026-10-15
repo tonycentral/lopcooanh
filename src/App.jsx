@@ -41,7 +41,9 @@ import {
   saveCurrentEmail, 
   updateSettingsForEmail,
   recordUserVisit,
-  shouldShowWelcomePage
+  shouldShowWelcomePage,
+  saveLastActiveLocation,
+  getLastActiveLocation
 } from './services/userService';
 
 import { 
@@ -54,9 +56,11 @@ import {
 import { supabase } from './services/supabaseClient';
 
 export default function App() {
-  // Current view: 'welcome' | 'practice' | 'admin' (ẩn bí mật)
-  // Chỉ hiển thị Welcome Page nếu lâu quá (> 7 ngày) học viên chưa vào web hoặc là người dùng mới
-  // Nếu đã vào web trong vòng 7 ngày -> vào thẳng workspace luyện tập
+  // Current view: 'welcome' | 'vocab_practice' | 'full_essay' | 'reading' | 'flashcard' | 'admin'
+  // Khởi tạo view thông minh:
+  // 1. Nếu có link admin bí mật (#admin, ?admin=true) -> 'admin'
+  // 2. Nếu > 7 ngày chưa vào hoặc người dùng mới -> 'welcome'
+  // 3. Nếu là học viên quay lại / nhấn refresh (F5) -> Khôi phục chính xác vị trí cuối cùng đang học (reading, full_essay, flashcard, vocab_practice)
   const [currentView, setCurrentView] = useState(() => {
     const hash = window.location.hash.toLowerCase();
     const search = window.location.search.toLowerCase();
@@ -70,7 +74,14 @@ export default function App() {
     ) {
       return 'admin';
     }
-    return shouldShowWelcomePage() ? 'welcome' : 'vocab_practice';
+    if (shouldShowWelcomePage()) {
+      return 'welcome';
+    }
+    const lastLoc = getLastActiveLocation();
+    if (lastLoc?.view && ['reading', 'full_essay', 'vocab_practice', 'flashcard'].includes(lastLoc.view)) {
+      return lastLoc.view;
+    }
+    return 'vocab_practice';
   });
 
   // Lắng nghe link ẩn bí mật vào Admin Dashboard (URL #admin, #admin-cooanh, ?admin=true) hoặc Ctrl+Shift+A
@@ -138,6 +149,21 @@ export default function App() {
             if (profile.selected_task) setActiveTask(profile.selected_task);
           }
         });
+
+        // Khôi phục vị trí học gần nhất của user nếu đang ở màn hình welcome
+        setCurrentView(prev => {
+          if (prev === 'admin') return 'admin';
+          if (prev === 'welcome' && !shouldShowWelcomePage()) {
+            const lastLoc = getLastActiveLocation(user.email);
+            if (lastLoc?.view && ['reading', 'full_essay', 'vocab_practice', 'flashcard'].includes(lastLoc.view)) {
+              if (lastLoc.practiceActivePart) setPracticeActivePart(lastLoc.practiceActivePart);
+              if (lastLoc.activeTask) setActiveTask(lastLoc.activeTask);
+              if (lastLoc.readingMode) setReadingInitialMode(lastLoc.readingMode);
+              return lastLoc.view;
+            }
+          }
+          return prev;
+        });
       } else {
         // Chưa đăng nhập: Học viên bắt buộc phải ở màn hình Chào Mừng & Đăng Nhập
         setCurrentView(prev => (prev === 'admin' ? 'admin' : 'welcome'));
@@ -152,6 +178,15 @@ export default function App() {
         if (profile) {
           if (profile.target_band) setTargetBand(profile.target_band);
           if (profile.selected_task) setActiveTask(profile.selected_task);
+        }
+        if (event === 'SIGNED_IN') {
+          const lastLoc = getLastActiveLocation(user.email);
+          if (lastLoc?.view && ['reading', 'full_essay', 'vocab_practice', 'flashcard'].includes(lastLoc.view)) {
+            setCurrentView(lastLoc.view);
+            if (lastLoc.practiceActivePart) setPracticeActivePart(lastLoc.practiceActivePart);
+            if (lastLoc.activeTask) setActiveTask(lastLoc.activeTask);
+            if (lastLoc.readingMode) setReadingInitialMode(lastLoc.readingMode);
+          }
         }
       } else {
         setCurrentView(prev => (prev === 'admin' ? 'admin' : 'welcome'));
@@ -178,7 +213,10 @@ export default function App() {
 
   // Stored target band & active task (Task 1 or Task 2)
   const [targetBand, setTargetBand] = useState(() => initialProfile?.targetBand || getStoredTargetBand() || "7.0");
-  const [activeTask, setActiveTask] = useState(() => initialProfile?.selectedTask || 'task2');
+  const [activeTask, setActiveTask] = useState(() => {
+    const lastLoc = getLastActiveLocation(studentEmail);
+    return lastLoc?.activeTask || initialProfile?.selectedTask || 'task2';
+  });
   
   // Task 1 Layout Mode: 'three-col' (mặc định: 3 cột song song - Đề & Biểu đồ | Từ vựng | Luyện tập) hoặc 'stacked' (Cột trái 2 tầng)
   const [task1Layout, setTask1Layout] = useState(() => {
@@ -248,9 +286,24 @@ export default function App() {
   }, [activeTask, customTask1Topics, customTask2Topics]);
 
   // Topic, Vocab & Practice Tab State
-  const [selectedTopic, setSelectedTopic] = useState(() => currentTopics[0] || IELTS_TOPICS[0]);
-  const [selectedVocab, setSelectedVocab] = useState(() => currentTopics[0]?.vocabularies[0] || null);
-  const [practiceActivePart, setPracticeActivePart] = useState(1);
+  const [selectedTopic, setSelectedTopic] = useState(() => {
+    const lastLoc = getLastActiveLocation(studentEmail);
+    if (lastLoc?.selectedTopicId) {
+      const found = IELTS_TOPICS.find(t => t.id === lastLoc.selectedTopicId);
+      if (found) return found;
+    }
+    return currentTopics[0] || IELTS_TOPICS[0];
+  });
+  const [selectedVocab, setSelectedVocab] = useState(() => selectedTopic?.vocabularies?.[0] || null);
+  const [practiceActivePart, setPracticeActivePart] = useState(() => {
+    const lastLoc = getLastActiveLocation(studentEmail);
+    return lastLoc?.practiceActivePart || 1;
+  });
+
+  const [readingInitialMode, setReadingInitialMode] = useState(() => {
+    const lastLoc = getLastActiveLocation(studentEmail);
+    return lastLoc?.readingMode || 'practice';
+  });
 
   // Unified 1.1 - 1.4, 2. Reading, 3. Flashcard navigation handler
   const handleSelectWritingStep = (step) => {
@@ -265,7 +318,11 @@ export default function App() {
       setPracticeActivePart(3);
     } else if (step === '1.4') {
       setCurrentView('full_essay');
-    } else if (step === '2.1' || step === '2.2') {
+    } else if (step === '2.1') {
+      setReadingInitialMode('practice');
+      setCurrentView('reading');
+    } else if (step === '2.2') {
+      setReadingInitialMode('test');
       setCurrentView('reading');
     } else if (step === '3.0' || step === '2.0') {
       setCurrentView('flashcard');
@@ -273,7 +330,7 @@ export default function App() {
   };
 
   const activeWritingStep = currentView === 'reading'
-    ? '2.1'
+    ? (readingInitialMode === 'test' ? '2.2' : '2.1')
     : currentView === 'full_essay' 
     ? '1.4' 
     : currentView === 'flashcard' 
@@ -283,6 +340,42 @@ export default function App() {
     : practiceActivePart === 3 
     ? '1.3' 
     : '1.1';
+
+  // Tự động lưu vị trí học tập gần nhất khi người dùng chuyển view, step, hoặc topic
+  useEffect(() => {
+    if (currentView && ['reading', 'full_essay', 'vocab_practice', 'flashcard'].includes(currentView)) {
+      const existing = getLastActiveLocation(studentEmail) || {};
+      saveLastActiveLocation(studentEmail, {
+        ...existing,
+        view: currentView,
+        practiceActivePart,
+        activeTask,
+        selectedTopicId: selectedTopic?.id,
+        activeWritingStep,
+        readingMode: readingInitialMode
+      });
+    }
+  }, [currentView, practiceActivePart, activeTask, selectedTopic?.id, activeWritingStep, readingInitialMode, studentEmail]);
+
+  // Handler khôi phục chính xác vị trí học từ WelcomePage
+  const handleResumeLastLocation = (loc) => {
+    const targetLoc = loc || getLastActiveLocation(studentEmail);
+    if (targetLoc?.view) {
+      if (targetLoc.activeTask) setActiveTask(targetLoc.activeTask);
+      if (targetLoc.practiceActivePart) setPracticeActivePart(targetLoc.practiceActivePart);
+      if (targetLoc.readingMode) setReadingInitialMode(targetLoc.readingMode);
+      if (targetLoc.selectedTopicId) {
+        const found = currentTopics.find(t => t.id === targetLoc.selectedTopicId);
+        if (found) {
+          setSelectedTopic(found);
+          setSelectedVocab(found.vocabularies?.[0] || null);
+        }
+      }
+      setCurrentView(targetLoc.view);
+    } else {
+      setCurrentView('vocab_practice');
+    }
+  };
 
   // Modal States
   const [isBandModalOpen, setIsBandModalOpen] = useState(false);
@@ -435,6 +528,14 @@ export default function App() {
           targetBand={targetBand}
           selectedTask={activeTask}
           onSettingsChange={handleSettingsChange}
+          onResumeLastLocation={(loc) => {
+            if (!currentUser) {
+              setIsAuthModalOpen(true);
+              return;
+            }
+            recordUserVisit();
+            handleResumeLastLocation(loc);
+          }}
           onChangeEmail={() => setIsAuthModalOpen(true)}
           onOpenAuth={() => setIsAuthModalOpen(true)}
           onOpenSettings={() => setIsSettingsModalOpen(true)}
@@ -501,6 +602,9 @@ export default function App() {
                 setIsAuthModalOpen(true);
                 return;
               }
+              if (mode === 'practice' || mode === 'test') {
+                setReadingInitialMode(mode);
+              }
               setCurrentView('reading');
             }}
             currentUser={currentUser}
@@ -558,6 +662,9 @@ export default function App() {
                 setIsAuthModalOpen(true);
                 return;
               }
+              if (mode === 'practice' || mode === 'test') {
+                setReadingInitialMode(mode);
+              }
               setCurrentView('reading');
             }}
             currentUser={currentUser}
@@ -576,6 +683,7 @@ export default function App() {
             <ReadingWorkspace
               studentEmail={studentEmail}
               targetBand={targetBand}
+              initialMode={readingInitialMode}
               onReadingGraded={handleRefreshStats}
               onGoWelcome={() => setCurrentView('welcome')}
               onOpenFlashcard={() => setCurrentView('flashcard')}
@@ -610,6 +718,9 @@ export default function App() {
               if (!currentUser) {
                 setIsAuthModalOpen(true);
                 return;
+              }
+              if (mode === 'practice' || mode === 'test') {
+                setReadingInitialMode(mode);
               }
               setCurrentView('reading');
             }}
@@ -849,6 +960,24 @@ export default function App() {
             saveCurrentEmail(user.email);
           }
           setIsAuthModalOpen(false);
+
+          // Tự động đưa học viên quay về đúng nơi lần cuối đang học
+          const lastLoc = getLastActiveLocation(user?.email);
+          if (lastLoc?.view && ['reading', 'full_essay', 'vocab_practice', 'flashcard'].includes(lastLoc.view)) {
+            setCurrentView(lastLoc.view);
+            if (lastLoc.practiceActivePart) setPracticeActivePart(lastLoc.practiceActivePart);
+            if (lastLoc.activeTask) setActiveTask(lastLoc.activeTask);
+            if (lastLoc.readingMode) setReadingInitialMode(lastLoc.readingMode);
+            if (lastLoc.selectedTopicId) {
+              const found = currentTopics.find(t => t.id === lastLoc.selectedTopicId);
+              if (found) {
+                setSelectedTopic(found);
+                setSelectedVocab(found.vocabularies?.[0] || null);
+              }
+            }
+          } else {
+            setCurrentView('vocab_practice');
+          }
         }}
       />
 
