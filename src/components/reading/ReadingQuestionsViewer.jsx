@@ -28,6 +28,31 @@ export default function ReadingQuestionsViewer({
   const answeredCount = Object.keys(userAnswers).filter(k => (userAnswers[k] || '').trim()).length;
   const totalCount = questions.length;
 
+  // Calculate question sections (Cambridge IELTS standard groupings)
+  const sections = [];
+  let currentSection = null;
+
+  questions.forEach((q, idx) => {
+    if (!currentSection || currentSection.type !== q.type) {
+      currentSection = {
+        type: q.type,
+        startIndex: idx,
+        endIndex: idx,
+        startNum: idx + 1,
+        endNum: idx + 1
+      };
+      sections.push(currentSection);
+    } else {
+      currentSection.endIndex = idx;
+      currentSection.endNum = idx + 1;
+    }
+  });
+
+  const sectionStarts = new Map();
+  sections.forEach(sec => {
+    sectionStarts.set(sec.startIndex, sec);
+  });
+
   return (
     <div className="flex flex-col h-full bg-white border border-[#E6E2D8] rounded-2xl shadow-xs overflow-hidden">
       
@@ -38,9 +63,9 @@ export default function ReadingQuestionsViewer({
             <HelpCircle className="w-3.5 h-3.5" />
           </div>
           <div>
-            <h3 className="text-xs font-bold text-[#24211E] uppercase tracking-wider">Danh Sách Câu Hỏi</h3>
+            <h3 className="text-xs font-bold text-[#24211E] uppercase tracking-wider">Cambridge IELTS Reading</h3>
             <p className="text-[10px] text-[#7A7369]">
-              {isSubmitted ? `Đã nộp bài • ${totalCount} câu hỏi` : `Đã hoàn thành ${answeredCount}/${totalCount} câu`}
+              {isSubmitted ? `Đã nộp bài • ${totalCount} câu hỏi chuẩn Cambridge` : `Đã hoàn thành ${answeredCount}/${totalCount} câu`}
             </p>
           </div>
         </div>
@@ -65,13 +90,68 @@ export default function ReadingQuestionsViewer({
         </div>
       </div>
 
+      {/* Computer-Delivered IELTS Quick Question Palette (1 - 13) */}
+      <div className="px-3 py-2 border-b border-[#E6E2D8] bg-white flex items-center gap-1.5 overflow-x-auto scrollbar-none shrink-0">
+        <span className="text-[10px] font-bold text-[#7A7369] uppercase tracking-wider shrink-0 mr-0.5">
+          Câu:
+        </span>
+        {questions.map((q, idx) => {
+          const qNum = idx + 1;
+          const userVal = userAnswers[q.id] || "";
+          const isFlagged = flaggedQuestions.has(q.id);
+          const isAnswered = Boolean(userVal.trim());
+          const isActive = activeQuestionId === q.id;
+
+          let statusClass = "bg-[#FAF8F5] text-[#7A7369] border-[#E6E2D8] hover:border-[#3E4F42]";
+          if (isSubmitted) {
+            let isCorrect = false;
+            if (q.type === 'sentence_completion') {
+              const cleanUser = userVal.toLowerCase().trim();
+              const acceptable = (q.acceptableAnswers || [q.correctAnswer]).map(a => a.toLowerCase().trim());
+              isCorrect = acceptable.includes(cleanUser);
+            } else {
+              isCorrect = userVal.trim().toUpperCase() === (q.correctAnswer || '').trim().toUpperCase();
+            }
+            statusClass = isCorrect 
+              ? "bg-[#EDF3EE] text-[#3E4F42] border-[#3E4F42] font-bold" 
+              : "bg-[#FEF2F2] text-[#B91C1C] border-[#FECACA] font-bold";
+          } else if (isAnswered) {
+            statusClass = "bg-[#3E4F42] text-white border-[#3E4F42] font-bold";
+          }
+
+          return (
+            <button
+              key={q.id}
+              type="button"
+              onClick={() => {
+                onSelectQuestion && onSelectQuestion(q.id);
+                const el = document.getElementById(`question-card-${q.id}`);
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+              }}
+              className={`relative min-w-[28px] h-7 px-1.5 rounded-lg border text-xs font-mono transition cursor-pointer flex items-center justify-center ${statusClass} ${
+                isActive ? "ring-2 ring-[#A67C52] ring-offset-1" : ""
+              }`}
+              title={`Câu ${qNum} (${q.type === 'tfng' ? 'TFNG' : q.type === 'multiple_choice' ? 'MCQ' : 'Điền từ'})`}
+            >
+              <span>{qNum}</span>
+              {isFlagged && !isSubmitted && (
+                <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#A67C52]" />
+              )}
+            </button>
+          );
+        })}
+      </div>
+
       {/* Questions Scrollable List */}
-      <div className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-5 space-y-6 scrollbar-thin">
+      <div className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-5 space-y-5 scrollbar-thin">
         
         {questions.map((q, idx) => {
           const qNum = idx + 1;
           const userVal = userAnswers[q.id] || "";
           const isFlagged = flaggedQuestions.has(q.id);
+          const section = sectionStarts.get(idx);
 
           // Evaluation for submitted test
           let isCorrect = false;
@@ -86,17 +166,88 @@ export default function ReadingQuestionsViewer({
           }
 
           return (
-            <div 
-              key={q.id}
-              id={`question-card-${q.id}`}
-              onClick={() => onSelectQuestion && onSelectQuestion(q.id)}
-              className={`p-3.5 sm:p-4 rounded-2xl border transition ${
-                activeQuestionId === q.id 
-                  ? "ring-2 ring-[#3E4F42] border-[#3E4F42]" 
-                  : "border-[#E6E2D8] bg-[#FAF8F5]/50 hover:bg-[#FAF8F5]"
-              }`}
-            >
-              {/* Question Header */}
+            <React.Fragment key={q.id}>
+              {/* Cambridge Section Instruction Banner */}
+              {section && (
+                <div className="p-3.5 sm:p-4 rounded-2xl bg-[#FAF8F5] border border-[#D1DDD3] text-[#24211E] space-y-2">
+                  <div className="flex items-center justify-between gap-2 border-b border-[#E6E2D8] pb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#3E4F42]" />
+                      <h4 className="text-xs sm:text-sm font-bold font-mono uppercase tracking-wider text-[#3E4F42]">
+                        Questions {section.startNum}–{section.endNum}
+                      </h4>
+                    </div>
+                    <span className="text-[10px] uppercase font-bold font-mono px-2 py-0.5 rounded bg-white text-[#7A7369] border border-[#E6E2D8]">
+                      {section.type === 'tfng' 
+                        ? 'TRUE / FALSE / NOT GIVEN' 
+                        : section.type === 'sentence_completion' 
+                        ? 'Sentence Completion' 
+                        : 'Multiple Choice (A, B, C, D)'}
+                    </span>
+                  </div>
+
+                  {section.type === 'tfng' && (
+                    <div className="space-y-2 text-xs">
+                      <p className="font-serif italic text-xs text-[#57534E]">
+                        Do the following statements agree with the information given in the Reading Passage?
+                      </p>
+                      <p className="text-[11px] text-[#7A7369]">
+                        In boxes {section.startNum}–{section.endNum} on your answer sheet, choose:
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px] font-mono pt-1">
+                        <div className="p-2 rounded-xl bg-white border border-[#E6E2D8] leading-tight">
+                          <strong className="text-[#3E4F42] block mb-0.5">TRUE</strong>
+                          <span className="text-[10px] text-[#7A7369]">if the statement agrees with the information</span>
+                        </div>
+                        <div className="p-2 rounded-xl bg-white border border-[#E6E2D8] leading-tight">
+                          <strong className="text-[#B45309] block mb-0.5">FALSE</strong>
+                          <span className="text-[10px] text-[#7A7369]">if the statement contradicts the information</span>
+                        </div>
+                        <div className="p-2 rounded-xl bg-white border border-[#E6E2D8] leading-tight">
+                          <strong className="text-[#7A7369] block mb-0.5">NOT GIVEN</strong>
+                          <span className="text-[10px] text-[#7A7369]">if there is no information on this</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {section.type === 'sentence_completion' && (
+                    <div className="space-y-1 text-xs">
+                      <p className="font-serif italic text-xs text-[#57534E]">
+                        Complete the sentences below.
+                      </p>
+                      <p className="text-xs text-[#24211E]">
+                        Choose <strong className="underline decoration-[#3E4F42] decoration-2">NO MORE THAN TWO WORDS</strong> from the passage for each answer.
+                      </p>
+                      <p className="text-[11px] text-[#7A7369]">
+                        Write your answers in boxes {section.startNum}–{section.endNum} on your answer sheet.
+                      </p>
+                    </div>
+                  )}
+
+                  {section.type === 'multiple_choice' && (
+                    <div className="space-y-1 text-xs">
+                      <p className="font-serif italic text-xs text-[#57534E]">
+                        Choose the correct letter, <strong className="text-[#3E4F42]">A</strong>, <strong className="text-[#3E4F42]">B</strong>, <strong className="text-[#3E4F42]">C</strong> or <strong className="text-[#3E4F42]">D</strong>.
+                      </p>
+                      <p className="text-[11px] text-[#7A7369]">
+                        In boxes {section.startNum}–{section.endNum} on your answer sheet, choose the correct letter.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              <div 
+                id={`question-card-${q.id}`}
+                onClick={() => onSelectQuestion && onSelectQuestion(q.id)}
+                className={`p-3.5 sm:p-4 rounded-2xl border transition ${
+                  activeQuestionId === q.id 
+                    ? "ring-2 ring-[#3E4F42] border-[#3E4F42]" 
+                    : "border-[#E6E2D8] bg-[#FAF8F5]/50 hover:bg-[#FAF8F5]"
+                }`}
+              >
+                {/* Question Header */}
               <div className="flex items-start justify-between gap-2 mb-2.5">
                 <div className="flex items-center gap-2">
                   <span className={`w-6 h-6 rounded-lg flex items-center justify-center font-mono font-bold text-xs ${
@@ -262,8 +413,9 @@ export default function ReadingQuestionsViewer({
               )}
 
             </div>
-          );
-        })}
+          </React.Fragment>
+        );
+      })}
 
       </div>
 

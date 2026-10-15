@@ -258,67 +258,57 @@ const CURATED_PASSAGES = {
         {
           id: "q1",
           type: "tfng",
-          prompt: "Polar bears consume a diet that contains significantly more fats than brown bears.",
+          prompt: "Polar bears consume a diet containing significantly higher quantities of saturated fats than brown bears.",
           options: ["TRUE", "FALSE", "NOT GIVEN"],
           correctAnswer: "TRUE",
-          explanation: "Đoạn A và B nêu rõ polar bears chủ yếu ăn ringed seals chứa immense quantities of saturated fats, và bộ gen của chúng đã biến đổi khác biệt so với brown bears để thích nghi với chế độ ăn này.",
+          explanation: "Đoạn A và B nêu rõ polar bears chủ yếu ăn ringed seals chứa lượng lớn mỡ bão hòa (immense quantities of saturated fats), và bộ gen của chúng có đột biến đặc biệt khác với brown bears để thích nghi với chế độ ăn này.",
           paragraphRef: "B",
           evidenceQuote: "They discovered that polar bears possess a unique mutation in a gene designated APOB... unlike brown bears."
         },
         {
           id: "q2",
           type: "tfng",
-          prompt: "The APOB gene in polar bears causes dangerous arterial blockages in their blood vessels.",
+          prompt: "The APOB gene mutation causes dangerous arterial blockages in polar bears' cardiovascular system.",
           options: ["TRUE", "FALSE", "NOT GIVEN"],
           correctAnswer: "FALSE",
-          explanation: "Đoạn B & C khẳng định đột biến ở gen APOB giúp gấu Bắc cực loại bỏ cholesterol xấu (LDL) ra khỏi máu và không hề bị bệnh tim hay tắc động mạch (manifest no such coronary ailments).",
+          explanation: "Đoạn B & C khẳng định đột biến ở gen APOB giúp gấu Bắc cực đào thải cholesterol xấu (LDL) ra khỏi máu và không hề bị bệnh tim hay tắc động mạch (manifest no such coronary ailments).",
           paragraphRef: "B",
           evidenceQuote: "Yet, polar bears manifest no such coronary ailments... permits polar bears to purge low-density lipoprotein."
         },
         {
           id: "q3",
           type: "tfng",
-          prompt: "Pharmaceutical therapies derived from polar bear genetics have already cured thousands of cardiac patients.",
+          prompt: "Pharmaceutical drugs derived from polar bear genetics are currently being prescribed to human cardiac patients.",
           options: ["TRUE", "FALSE", "NOT GIVEN"],
           correctAnswer: "NOT GIVEN",
-          explanation: "Đoạn C chỉ nêu các nhà khoa học đưa ra giả thuyết (hypothesize) rằng trong tương lai có thể tổng hợp thuốc, chứ chưa nói thuốc này đã được tạo ra hay chữa khỏi cho hàng ngàn bệnh nhân.",
+          explanation: "Đoạn C chỉ nêu các nhà khoa học đưa ra giả thuyết (hypothesize) rằng trong tương lai có thể tổng hợp liệu pháp mới, chứ bài đọc không đề cập loại thuốc này hiện đang được kê đơn điều trị.",
           paragraphRef: "C",
           evidenceQuote: "The researchers hypothesize that if molecular biologists can decipher the precise mechanism... they could synthesize innovative pharmaceutical therapies."
         },
         {
           id: "q4",
-          type: "multiple_choice",
-          prompt: "According to Paragraph D, what did field observations in Hudson Bay demonstrate about polar bears?",
-          options: [
-            "A. They are incapable of surviving outside Arctic marine environments.",
-            "B. They exhibit deliberate tactical behavior and problem-solving abilities.",
-            "C. They only hunt when provoked by territorial competitors.",
-            "D. Their predatory efficiency has decreased because of climate shifts."
-          ],
-          correctAnswer: "B",
-          explanation: "Đoạn D miêu tả việc gấu Bắc cực chủ động dùng khối băng để đập lỗ thở của hải cẩu và kiên nhẫn phục kích, chứng minh khả năng giải quyết vấn đề và tính thích nghi hành vi có chủ ý (deliberate tool usage and behavioral adaptability).",
+          type: "tfng",
+          prompt: "Prior to field observations in Hudson Bay, prevailing scientific belief assumed deliberate tool usage was limited to primates and cetaceans.",
+          options: ["TRUE", "FALSE", "NOT GIVEN"],
+          correctAnswer: "TRUE",
+          explanation: "Đoạn D nêu rõ trong hàng thập kỷ, quan điểm khoa học giáo điều cho rằng việc sử dụng công cụ có chủ ý chỉ giới hạn ở linh trưởng và động vật biển có vú (cetaceans).",
           paragraphRef: "D",
-          evidenceQuote: "polar bears intentionally hurling large blocks of sea ice to shatter reinforced seal breathing holes... demonstrating profound behavioral adaptability."
+          evidenceQuote: "For decades, prevailing scientific dogma maintained that deliberate tool usage and complex manipulation were exclusive to primates and cetaceans."
         },
         {
           id: "q5",
-          type: "multiple_choice",
-          prompt: "What is the primary factor driving polar bear populations toward collapse according to Paragraph E?",
-          options: [
-            "A. Unregulated commercial hunting across territorial waters.",
-            "B. The transmission of infectious diseases from migratory brown bears.",
-            "C. The shrinking window of seasonal sea ice necessary for hunting seals.",
-            "D. Toxic bioaccumulation of microplastics in Arctic ocean currents."
-          ],
-          correctAnswer: "C",
-          explanation: "Đoạn E nêu rõ việc băng tan sớm vào mùa xuân và đóng băng muộn vào mùa thu làm thu hẹp khoảng thời gian săn hải cẩu, buộc gấu phải nhịn đói lâu ngày trên bờ dẫn đến suy dinh dưỡng và giảm số lượng.",
+          type: "tfng",
+          prompt: "Adult polar bears can maintain healthy body weight entirely on mainland tundra vegetation when sea ice melts.",
+          options: ["TRUE", "FALSE", "NOT GIVEN"],
+          correctAnswer: "FALSE",
+          explanation: "Đoạn E khẳng định khi mất băng biển, gấu Bắc Cực phải chịu các đợt nhịn ăn kéo dài trên đất liền, dẫn đến suy dinh dưỡng nghiêm trọng và đe dọa sinh tồn chứ không sống khỏe bằng thực vật.",
           paragraphRef: "E",
-          evidenceQuote: "This diminishing ice window forces bears to endure prolonged fasting periods on mainland tundra, leading to acute malnutrition... and population collapse."
+          evidenceQuote: "This diminishing ice window forces bears to endure prolonged fasting periods on mainland tundra, leading to acute malnutrition, reduced cub survival rates, and an alarming trajectory toward population collapse."
         },
         {
           id: "q6",
           type: "sentence_completion",
-          prompt: "Polar bears protect themselves from freezing temperatures with insulating fur and an 11-centimetre layer of ______.",
+          prompt: "Polar bears withstand extreme Arctic temperatures with dense insulating fur and up to 11 centimetres of ______.",
           correctAnswer: "blubber",
           acceptableAnswers: ["blubber", "adipose tissue"],
           explanation: "Trong Đoạn A: 'a thick layer of adipose tissue known as blubber, which can measure up to 11 centimetres in depth.'",
@@ -328,12 +318,92 @@ const CURATED_PASSAGES = {
         {
           id: "q7",
           type: "sentence_completion",
-          prompt: "The specific gene mutation in polar bears is designated as ______.",
+          prompt: "Researchers identified a unique genetic mutation in polar bears designated as ______.",
           correctAnswer: "APOB",
-          acceptableAnswers: ["APOB"],
-          explanation: "Trong Đoạn B: 'a unique mutation in a gene designated APOB, which regulates the transport and clearance of cholesterol.'",
+          acceptableAnswers: ["APOB", "APOB gene"],
+          explanation: "Trong Đoạn B: 'possess a unique mutation in a gene designated APOB, which regulates the transport and clearance of cholesterol.'",
           paragraphRef: "B",
           evidenceQuote: "possess a unique mutation in a gene designated APOB"
+        },
+        {
+          id: "q8",
+          type: "sentence_completion",
+          prompt: "The APOB mutation permits bears to effectively purge ______ from their bloodstream despite high-fat diets.",
+          correctAnswer: "cholesterol",
+          acceptableAnswers: ["cholesterol", "LDL", "bad cholesterol", "low-density lipoprotein"],
+          explanation: "Trong Đoạn C: 'effectively permits polar bears to purge low-density lipoprotein (LDL), commonly referred to as bad cholesterol.'",
+          paragraphRef: "C",
+          evidenceQuote: "effectively permits polar bears to purge low-density lipoprotein (LDL), commonly referred to as 'bad' cholesterol"
+        },
+        {
+          id: "q9",
+          type: "sentence_completion",
+          prompt: "In Hudson Bay, bears were observed intentionally throwing large blocks of ______ to break open breathing holes.",
+          correctAnswer: "sea ice",
+          acceptableAnswers: ["sea ice", "ice"],
+          explanation: "Trong Đoạn D: 'polar bears intentionally hurling large blocks of sea ice to shatter reinforced seal breathing holes.'",
+          paragraphRef: "D",
+          evidenceQuote: "polar bears intentionally hurling large blocks of sea ice to shatter reinforced seal breathing holes"
+        },
+        {
+          id: "q10",
+          type: "multiple_choice",
+          prompt: "According to Paragraph B, what health consequence would humans experience if they consumed a diet as rich in fat as polar bears?",
+          options: [
+            "A. Severe muscle deterioration and joint inflammation.",
+            "B. Fatal arterial blockages, atherosclerosis, and cardiovascular disease.",
+            "C. Spontaneous mutation in their APOB genetic sequences.",
+            "D. Chronic hypothermia caused by excess adipose lipid storage."
+          ],
+          correctAnswer: "B",
+          explanation: "Đoạn B nêu rõ: ở người, chế độ ăn nhiều chất béo như vậy tất yếu sẽ gây xơ vữa động mạch, bệnh tim mạch thảm khốc và tắc nghẽn động mạch tử vong.",
+          paragraphRef: "B",
+          evidenceQuote: "In humans, a diet that rich in adipose lipids would inevitably precipitate catastrophic cardiovascular disease, atherosclerosis, and fatal arterial blockages."
+        },
+        {
+          id: "q11",
+          type: "multiple_choice",
+          prompt: "What potential medical application is suggested by researchers in Paragraph C?",
+          options: [
+            "A. Synthesizing innovative therapies to prevent cardiac arrest and cardiovascular diseases in humans.",
+            "B. Breeding cold-resistant livestock capable of surviving in sub-zero polar regions.",
+            "C. Developing artificial blubber suits for deep-water oceanic explorers.",
+            "D. Eradicating bacterial parasites that infect marine mammal populations."
+          ],
+          correctAnswer: "A",
+          explanation: "Đoạn C giải thích nếu giải mã được cơ chế đột biến APOB, các nhà sinh học phân tử có thể tổng hợp thuốc điều trị tim mạch cho người.",
+          paragraphRef: "C",
+          evidenceQuote: "they could synthesize innovative pharmaceutical therapies to combat cardiovascular conditions and prevent cardiac arrest in human populations across the world."
+        },
+        {
+          id: "q12",
+          type: "multiple_choice",
+          prompt: "What did field observations in Hudson Bay demonstrate about polar bears (Paragraph D)?",
+          options: [
+            "A. They are incapable of surviving in non-frozen marine environments.",
+            "B. They demonstrate exceptional cognitive problem-solving and intentional tool manipulation.",
+            "C. They avoid hunting ringed seals during daylight hours.",
+            "D. Their tactical patience decreases significantly in warmer months."
+          ],
+          correctAnswer: "B",
+          explanation: "Đoạn D chỉ ra việc gấu ném khối băng để phá vỡ lỗ thở và kiên nhẫn săn mồi chứng minh năng lực giải quyết vấn đề và thích nghi hành vi tinh vi (exceptional problem-solving and tactical acumen).",
+          paragraphRef: "D",
+          evidenceQuote: "polar bears have also fascinated cognitive biologists through their exceptional problem-solving and hunting acumen... demonstrating profound behavioral adaptability."
+        },
+        {
+          id: "q13",
+          type: "multiple_choice",
+          prompt: "What is identified in Paragraph E as the existential peril driving polar bears toward population collapse?",
+          options: [
+            "A. Unregulated commercial hunting vessels in coastal Arctic territories.",
+            "B. The shortening window of seasonal sea ice required for hunting seals.",
+            "C. Cross-species infections transmitted from migratory bird populations.",
+            "D. Industrial chemical contamination accumulating in mainland tundra soil."
+          ],
+          correctAnswer: "B",
+          explanation: "Đoạn E nêu rõ sự thu hẹp của thời gian đóng băng (diminishing ice window) khiến gấu mất sàn săn mồi, buộc phải nhịn ăn kéo dài trên đất liền dẫn tới suy dinh dưỡng và sụt giảm số lượng.",
+          paragraphRef: "E",
+          evidenceQuote: "This diminishing ice window forces bears to endure prolonged fasting periods on mainland tundra, leading to acute malnutrition, reduced cub survival rates, and an alarming trajectory toward population collapse."
         }
       ]
     },
@@ -527,47 +597,152 @@ const CURATED_PASSAGES = {
         {
           id: "q1",
           type: "tfng",
-          prompt: "The disaster of 1953 caused the Dutch parliament to pass the Delta Act.",
+          prompt: "More than half of the geographical territory of the Netherlands is located below mean sea level.",
           options: ["TRUE", "FALSE", "NOT GIVEN"],
-          correctAnswer: "TRUE",
-          explanation: "Đoạn B nêu rõ thảm họa bão năm 1953 đã thôi thúc công chúng và dẫn đến việc thông qua ngay lập tức đạo luật Delta Act.",
-          paragraphRef: "B",
-          evidenceQuote: "This national trauma galvanized public resolve and prompted the immediate passage of the Delta Act."
+          correctAnswer: "FALSE",
+          explanation: "Đoạn A nêu rõ: hơn một phần tư (more than a quarter - khoảng 26%) diện tích Hà Lan nằm dưới mực nước biển, chứ không phải hơn một nửa.",
+          paragraphRef: "A",
+          evidenceQuote: "More than a quarter of the Netherlands lies beneath mean sea level, and nearly two-thirds of its territory is vulnerable to catastrophic inundation."
         },
         {
           id: "q2",
           type: "tfng",
-          prompt: "The gates of the Oosterscheldekering remain permanently closed throughout the entire year.",
+          prompt: "The fatal North Sea storm surge of 1953 prompted the immediate passage of the Delta Act.",
+          options: ["TRUE", "FALSE", "NOT GIVEN"],
+          correctAnswer: "TRUE",
+          explanation: "Đoạn B khẳng định biến cố thảm khốc năm 1953 đã thức tỉnh công chúng và thúc đẩy quốc hội thông qua ngay lập tức đạo luật Delta Act.",
+          paragraphRef: "B",
+          evidenceQuote: "This national trauma galvanized public resolve and prompted the immediate passage of the Delta Act."
+        },
+        {
+          id: "q3",
+          type: "tfng",
+          prompt: "The Delta Works project was completed in its entirety within a single decade of construction.",
           options: ["TRUE", "FALSE", "NOT GIVEN"],
           correctAnswer: "FALSE",
-          explanation: "Đoạn C nêu rõ trong điều kiện bình thường các cổng trượt được nâng lên cho dòng hải lưu và nước mặn đi qua, chỉ khi có triều dâng bão trên 3m thì mới đóng lại.",
+          explanation: "Đoạn B nêu rõ Delta Works là một nỗ lực thế kỷ kéo dài suốt 4 thập kỷ ('spanning four decades'), không phải hoàn thành trong 1 thập kỷ.",
+          paragraphRef: "B",
+          evidenceQuote: "The resulting Delta Works engineering project was a monumental endeavor spanning four decades."
+        },
+        {
+          id: "q4",
+          type: "tfng",
+          prompt: "The steel sliding gates of the Oosterscheldekering remain permanently closed throughout the year.",
+          options: ["TRUE", "FALSE", "NOT GIVEN"],
+          correctAnswer: "FALSE",
+          explanation: "Đoạn C giải thích các cổng trượt bình thường vẫn được nâng cao để nước biển lưu thông nuôi dưỡng sinh thái, chỉ hạ xuống ngăn lũ khi có dự báo triều dâng bão trên 3 mét.",
           paragraphRef: "C",
           evidenceQuote: "In normal weather conditions, these gates remain elevated, permitting tidal currents and saline water to nourish sensitive oyster and mussel beds."
         },
         {
-          id: "q3",
-          type: "multiple_choice",
-          prompt: "What is the core principle of the 'Room for the River' initiative described in Paragraph E?",
-          options: [
-            "A. Building impermeable concrete walls alongside all major canal routes.",
-            "B. Relocating all human settlements away from the coastline to mountainous areas.",
-            "C. Allowing rivers room to expand naturally rather than solely raising defensive walls.",
-            "D. Exporting river water to neighboring countries suffering from droughts."
-          ],
-          correctAnswer: "C",
-          explanation: "Đoạn E giải thích thay vì cố xây đê cao hơn, chương trình 'Room for the River' hạ thấp vùng bãi bồi ven sông và di dời bờ bao vào sâu trong đất liền để nhường không gian cho nước sông mở rộng tự nhiên.",
+          id: "q5",
+          type: "tfng",
+          prompt: "The 'Room for the River' project received financial grants from neighboring European countries.",
+          options: ["TRUE", "FALSE", "NOT GIVEN"],
+          correctAnswer: "NOT GIVEN",
+          explanation: "Đoạn E giải thích triết lý và giải pháp của chương trình 'Room for the River', nhưng hoàn toàn không đề cập đến việc có nhận viện trợ tài chính từ các nước láng giềng hay không.",
           paragraphRef: "E",
-          evidenceQuote: "By accommodating seasonal water expansion rather than stubbornly resisting it, the Dutch demonstrate that true climate resilience requires working harmoniously with ecological hydrodynamics."
+          evidenceQuote: "the Netherlands has spearheaded a paradigm shift known as the 'Room for the River' (Ruimte voor de Rivier) program."
         },
         {
-          id: "q4",
+          id: "q6",
           type: "sentence_completion",
-          prompt: "The storm surge barrier known as the Oosterscheldekering incorporates 62 sliding ______ gates.",
+          prompt: "On the night of 31 January 1953, a lethal storm surge breached obsolete ______ across the Netherlands.",
+          correctAnswer: "dikes",
+          acceptableAnswers: ["dikes", "dykes"],
+          explanation: "Trong Đoạn B: 'a lethal North Sea storm surge breached obsolete dikes, inundating 150,000 hectares.'",
+          paragraphRef: "B",
+          evidenceQuote: "a lethal North Sea storm surge breached obsolete dikes, inundating 150,000 hectares"
+        },
+        {
+          id: "q7",
+          type: "sentence_completion",
+          prompt: "The Oosterscheldekering storm surge barrier incorporates 62 colossal sliding ______ gates.",
           correctAnswer: "steel",
           acceptableAnswers: ["steel", "sliding steel"],
           explanation: "Trong Đoạn C: 'the Oosterscheldekering features 62 colossal sliding steel gates.'",
           paragraphRef: "C",
           evidenceQuote: "the Oosterscheldekering features 62 colossal sliding steel gates."
+        },
+        {
+          id: "q8",
+          type: "sentence_completion",
+          prompt: "Elevated gates during normal weather permit saline water to sustain sensitive oyster and ______ beds.",
+          correctAnswer: "mussel",
+          acceptableAnswers: ["mussel", "mussel beds"],
+          explanation: "Trong Đoạn C: 'permitting tidal currents and saline water to nourish sensitive oyster and mussel beds.'",
+          paragraphRef: "C",
+          evidenceQuote: "nourish sensitive oyster and mussel beds"
+        },
+        {
+          id: "q9",
+          type: "sentence_completion",
+          prompt: "Modern hydraulic engineers consider continuously raising static dikes to be ecologically ______.",
+          correctAnswer: "counterproductive",
+          acceptableAnswers: ["counterproductive"],
+          explanation: "Trong Đoạn D: 'attempting to continuously elevate static dikes is economically unsustainable and ecologically counterproductive.'",
+          paragraphRef: "D",
+          evidenceQuote: "economically unsustainable and ecologically counterproductive."
+        },
+        {
+          id: "q10",
+          type: "multiple_choice",
+          prompt: "According to Paragraph A, what would happen to major Dutch urban centers without continuous protective intervention?",
+          options: [
+            "A. They would suffer from permanent groundwater desertification.",
+            "B. Major cities including Amsterdam and Rotterdam would be submerged under water.",
+            "C. Their agricultural polders would experience rapid toxic soil erosion.",
+            "D. They would be forced to ban all heavy maritime shipping vessels."
+          ],
+          correctAnswer: "B",
+          explanation: "Đoạn A nêu rõ: nếu không có can thiệp bảo vệ liên tục, Amsterdam, Rotterdam và các vùng đê quai nông nghiệp rộng lớn sẽ bị chìm hoàn toàn dưới nước.",
+          paragraphRef: "A",
+          evidenceQuote: "Without continuous protective intervention, Amsterdam, Rotterdam, and vast expanses of agricultural polder would be submerged."
+        },
+        {
+          id: "q11",
+          type: "multiple_choice",
+          prompt: "What environmental advantage does the Oosterscheldekering have over traditional dams (Paragraph C)?",
+          options: [
+            "A. It operates without requiring any electricity or computer networks.",
+            "B. It preserves estuary biospheres by allowing natural tidal flow during normal conditions.",
+            "C. It filters microplastics out of North Sea water before it reaches rivers.",
+            "D. It generates solar power along its entire nine-kilometre length."
+          ],
+          correctAnswer: "B",
+          explanation: "Đoạn C giải thích: khác với đập cố định bịt kín cửa sông và tiêu diệt sinh vật biển, Oosterscheldekering giữ cổng mở lúc bình thường để dòng triều nuôi dưỡng bãi nghêu hàu.",
+          paragraphRef: "C",
+          evidenceQuote: "Unlike traditional static dams that permanently seal estuaries and decimate marine biospheres, the Oosterscheldekering features 62 colossal sliding steel gates... permitting tidal currents and saline water to nourish sensitive oyster and mussel beds."
+        },
+        {
+          id: "q12",
+          type: "multiple_choice",
+          prompt: "Why are traditional static fortifications considered insufficient to combat modern climate change (Paragraph D)?",
+          options: [
+            "A. Sea-level rise and erratic torrents threaten to overwhelm drainage capacity, making static walls unsustainable.",
+            "B. Modern concrete structures dissolve when exposed to high-salinity seawater.",
+            "C. Dutch engineering companies no longer manufacture hydraulic pumps.",
+            "D. European environmental treaties have mandated the demolition of all coastal dykes."
+          ],
+          correctAnswer: "A",
+          explanation: "Đoạn D chỉ ra mực nước biển dâng kèm hạn hán mùa hè và dòng chảy thất thường từ tuyết tan dọa làm quá tải máy bơm thoát nước, khiến việc đắp đê cao mãi là không bền vững về kinh tế và sinh thái.",
+          paragraphRef: "D",
+          evidenceQuote: "Rising sea levels, combined with intensifying summer droughts and erratic winter torrents from alpine meltwater, threaten to overwhelm traditional drainage pumps."
+        },
+        {
+          id: "q13",
+          type: "multiple_choice",
+          prompt: "What is the core philosophy of the 'Room for the River' program described in Paragraph E?",
+          options: [
+            "A. Relocating all human inhabitants away from rivers to high-altitude mountainous areas.",
+            "B. Accommodating seasonal water expansion by lowering floodplains and moving embankments inland.",
+            "C. Erecting twice as many concrete sea barriers along the northern coastline.",
+            "D. Diverting all excess river water into underground aquifers for industrial bottling."
+          ],
+          correctAnswer: "B",
+          explanation: "Đoạn E giải thích thay vì cố ép nước sau những bờ đê cao hơn, chương trình 'Room for the River' hạ thấp bãi bồi ven sông, làm kênh phụ và dời bờ bao lùi vào trong để sông tự mở rộng hài hòa với thủy động lực học tự nhiên.",
+          paragraphRef: "E",
+          evidenceQuote: "By accommodating seasonal water expansion rather than stubbornly resisting it, the Dutch demonstrate that true climate resilience requires working harmoniously with ecological hydrodynamics."
         }
       ]
     }
@@ -743,6 +918,16 @@ const CURATED_PASSAGES = {
         {
           id: "q1",
           type: "tfng",
+          prompt: "Societal attitudes toward artificial intelligence are characterized by unanimous enthusiasm and optimism.",
+          options: ["TRUE", "FALSE", "NOT GIVEN"],
+          correctAnswer: "FALSE",
+          explanation: "Đoạn A khẳng định thái độ của xã hội đối với AI bị chia rẽ sâu sắc (deeply polarized), với những lo ngại lớn về nguy cơ mất việc làm và sự thiếu minh bạch thuật toán.",
+          paragraphRef: "A",
+          evidenceQuote: "societal attitudes toward automated intelligence remain deeply polarized... a substantial demographic of workers and scholars expresses acute apprehension."
+        },
+        {
+          id: "q2",
+          type: "tfng",
           prompt: "When human experts make mistakes, people generally forgive them more easily than when an algorithm makes a mistake.",
           options: ["TRUE", "FALSE", "NOT GIVEN"],
           correctAnswer: "TRUE",
@@ -751,24 +936,114 @@ const CURATED_PASSAGES = {
           evidenceQuote: "Humans appear remarkably willing to grant forgiveness to fellow humans for analytical lapses, but expect flawless omniscience from mathematical algorithms."
         },
         {
-          id: "q2",
+          id: "q3",
           type: "tfng",
           prompt: "Software creators can easily track and explain every step of decision-making in deep neural networks.",
           options: ["TRUE", "FALSE", "NOT GIVEN"],
           correctAnswer: "FALSE",
           explanation: "Đoạn C giải thích 'black box dilemma': các mạng neural sâu suy luận qua hàng tỷ tham số phi tuyến, khiến ngay cả những người tạo ra chúng cũng không thể giải thích chuỗi suy luận chi tiết.",
           paragraphRef: "C",
-          evidenceQuote: "rendering it mathematically infeasible even for their creators to elucidate the precise chain of reasoning."
+          evidenceQuote: "rendering it mathematically infeasible even for their creators to elucidate the precise chain of reasoning underlying a specific automated decision."
         },
         {
-          id: "q3",
+          id: "q4",
+          type: "tfng",
+          prompt: "Most commercial banks have voluntarily prohibited the use of automated algorithms in loan evaluation.",
+          options: ["TRUE", "FALSE", "NOT GIVEN"],
+          correctAnswer: "NOT GIVEN",
+          explanation: "Đoạn C đề cập đến ví dụ về quyết định từ chối khoản vay (financial loan rejected), nhưng không có thông tin nào cho biết các ngân hàng thương mại đã tự nguyện cấm dùng thuật toán.",
+          paragraphRef: "C",
+          evidenceQuote: "verify why a particular financial loan was rejected or a medical diagnosis was rendered."
+        },
+        {
+          id: "q5",
+          type: "tfng",
+          prompt: "Historical Industrial Revolution automation primarily targeted white-collar and creative professions.",
+          options: ["TRUE", "FALSE", "NOT GIVEN"],
+          correctAnswer: "FALSE",
+          explanation: "Đoạn D nêu rõ cách mạng công nghiệp thay thế lao động chân tay, thể lực lặp lại (manual, repetitive physical labor), trong khi AI hiện đại mới xâm lấn vào giới trí thức văn phòng (white-collar).",
+          paragraphRef: "D",
+          evidenceQuote: "Historical technological disruptions, such as the Industrial Revolution, primarily displaced manual, repetitive physical labor. In stark contrast, generative AI... directly encroaches upon white-collar, creative, and analytical professions."
+        },
+        {
+          id: "q6",
+          type: "sentence_completion",
+          prompt: "The psychological bias where individuals rapidly lose confidence in computers following an error is termed algorithm ______.",
+          correctAnswer: "aversion",
+          acceptableAnswers: ["aversion"],
+          explanation: "Trong Đoạn B: 'reveal a pervasive phenomenon dubbed algorithm aversion.'",
+          paragraphRef: "B",
+          evidenceQuote: "a pervasive phenomenon dubbed 'algorithm aversion'"
+        },
+        {
+          id: "q7",
+          type: "sentence_completion",
+          prompt: "Deep learning models generate statistical inferences across billions of non-linear ______ weights.",
+          correctAnswer: "parameter",
+          acceptableAnswers: ["parameter", "parameters"],
+          explanation: "Trong Đoạn C: 'generate inferences across billions of non-linear parameter weights.'",
+          paragraphRef: "C",
+          evidenceQuote: "generate inferences across billions of non-linear parameter weights"
+        },
+        {
+          id: "q8",
+          type: "sentence_completion",
+          prompt: "Unlike earlier machines, generative AI directly challenges ______ and intellectual professions.",
+          correctAnswer: "white-collar",
+          acceptableAnswers: ["white-collar", "creative"],
+          explanation: "Trong Đoạn D: 'generative AI directly encroaches upon white-collar, creative, and analytical professions.'",
+          paragraphRef: "D",
+          evidenceQuote: "generative AI and cognitive automation directly encroach upon white-collar, creative, and analytical professions"
+        },
+        {
+          id: "q9",
+          type: "sentence_completion",
+          prompt: "Progressive ethicists recommend deploying algorithmic tools as cognitive ______ that amplify human judgment.",
+          correctAnswer: "prosthetics",
+          acceptableAnswers: ["prosthetics"],
+          explanation: "Trong Đoạn E: 'deploy algorithms as cognitive prosthetics that augment human judgment rather than supplant it.'",
+          paragraphRef: "E",
+          evidenceQuote: "deploy algorithms as cognitive prosthetics that augment human judgment rather than supplant it"
+        },
+        {
+          id: "q10",
           type: "multiple_choice",
-          prompt: "How does the current wave of AI automation differ from historical Industrial Revolution automation according to Paragraph D?",
+          prompt: "According to Paragraph B, what unrealistic standard do humans typically expect from mathematical algorithms?",
           options: [
-            "A. It requires vastly higher electrical wattage to operate factory engines.",
-            "B. It targets cognitive, creative, and white-collar roles rather than manual factory tasks.",
-            "C. It has met no resistance whatsoever from trade union representatives.",
-            "D. It is strictly confined to agricultural and harvesting sectors."
+            "A. Continuous emotional empathy and interpersonal warmth.",
+            "B. Flawless omniscience without a single analytical error.",
+            "C. Infinite data processing speeds at zero cost.",
+            "D. Complete independence from electrical power sources."
+          ],
+          correctAnswer: "B",
+          explanation: "Đoạn B chỉ ra: con người sẵn sàng tha thứ cho sai sót của đồng loại, nhưng lại đòi hỏi sự toàn tri tuyệt đối không tì vết (flawless omniscience) từ các thuật toán.",
+          paragraphRef: "B",
+          evidenceQuote: "Humans appear remarkably willing to grant forgiveness to fellow humans for analytical lapses, but expect flawless omniscience from mathematical algorithms."
+        },
+        {
+          id: "q11",
+          type: "multiple_choice",
+          prompt: "What is the primary cause of the 'black box' dilemma described in Paragraph C?",
+          options: [
+            "A. Computer chips overheating during large data calculations.",
+            "B. Billions of non-linear parameters making it mathematically impossible to trace reasoning chains.",
+            "C. Software companies deleting their source code to evade taxes.",
+            "D. Copyright laws preventing programmers from reading database entries."
+          ],
+          correctAnswer: "B",
+          explanation: "Đoạn C giải thích: các kiến trúc học sâu tạo ra suy luận qua hàng tỷ tham số phi tuyến tính, khiến ngay cả người tạo ra chúng cũng không thể giải thích chuỗi suy luận chi tiết.",
+          paragraphRef: "C",
+          evidenceQuote: "multi-layered deep learning architectures generate inferences across billions of non-linear parameter weights, rendering it mathematically infeasible even for their creators to elucidate the precise chain of reasoning."
+        },
+        {
+          id: "q12",
+          type: "multiple_choice",
+          prompt: "How does the current wave of AI automation differ from historical Industrial Revolution automation (Paragraph D)?",
+          options: [
+            "A. It operates exclusively in developing agricultural economies.",
+            "B. It targets cognitive, analytical, and white-collar roles rather than manual factory tasks.",
+            "C. It requires less electricity than steam engines.",
+            "D. It has been immediately embraced by all labor trade unions."
           ],
           correctAnswer: "B",
           explanation: "Đoạn D phân biệt: Cách mạng công nghiệp thay thế lao động chân tay lặp lại, trong khi AI hiện đại trực tiếp xâm lấn vào các ngành lao động trí óc, phân tích và sáng tạo (white-collar, creative, and analytical professions).",
@@ -776,14 +1051,19 @@ const CURATED_PASSAGES = {
           evidenceQuote: "In stark contrast, generative AI and cognitive automation directly encroach upon white-collar, creative, and analytical professions."
         },
         {
-          id: "q4",
-          type: "sentence_completion",
-          prompt: "The cognitive bias where people lose trust in automated models after errors is called algorithm ______.",
-          correctAnswer: "aversion",
-          acceptableAnswers: ["aversion"],
-          explanation: "Trong Đoạn B: 'a pervasive phenomenon dubbed algorithm aversion.'",
-          paragraphRef: "B",
-          evidenceQuote: "a pervasive phenomenon dubbed 'algorithm aversion'"
+          id: "q13",
+          type: "multiple_choice",
+          prompt: "What governance model is recommended in Paragraph E to build public trust in artificial intelligence?",
+          options: [
+            "A. Complete cessation of all artificial intelligence research worldwide.",
+            "B. A 'human-in-the-loop' paradigm coupled with Explainable AI (XAI) and institutional auditing.",
+            "C. Fully autonomous algorithmic decision-making without human interference.",
+            "D. Allowing private corporations to deploy secret algorithms without government oversight."
+          ],
+          correctAnswer: "B",
+          explanation: "Đoạn E nêu rõ để thu hẹp khoảng cách niềm tin, cần áp dụng mô hình 'human-in-the-loop', triển khai AI có khả năng giải thích (XAI) và kiểm toán minh bạch.",
+          paragraphRef: "E",
+          evidenceQuote: "A resilient 'human-in-the-loop' paradigm... combining Explainable AI (XAI) with transparent institutional auditing."
         }
       ]
     }
@@ -948,37 +1228,152 @@ const CURATED_PASSAGES = {
         {
           id: "q1",
           type: "tfng",
-          prompt: "The amount of time children spend in unstructured play has increased over the last forty years.",
+          prompt: "The amount of time children spend engaging in spontaneous, child-directed play has declined sharply over the past forty years.",
           options: ["TRUE", "FALSE", "NOT GIVEN"],
-          correctAnswer: "FALSE",
-          explanation: "Đoạn A nêu rõ: trong suốt bốn thập kỷ qua, cơ hội để trẻ chơi đùa tự phát đã giảm sút nghiêm trọng ('have plummeted dramatically').",
+          correctAnswer: "TRUE",
+          explanation: "Đoạn A nêu rõ: trong suốt bốn thập kỷ qua, cơ hội để trẻ em tham gia vào các hoạt động chơi tự phát, tự điều khiển đã sụt giảm nghiêm trọng ('have plummeted dramatically').",
           paragraphRef: "A",
-          evidenceQuote: "opportunities for spontaneous, child-directed play have plummeted dramatically."
+          evidenceQuote: "over the past four decades, opportunities for spontaneous, child-directed play have plummeted dramatically."
         },
         {
           id: "q2",
+          type: "tfng",
+          prompt: "Modern neuroscientists regard children's play as an unproductive pause from formal cognitive development.",
+          options: ["TRUE", "FALSE", "NOT GIVEN"],
+          correctAnswer: "FALSE",
+          explanation: "Đoạn B khẳng định chơi đùa không hề là một sự giải trí phù phiếm hay quãng nghỉ vô ích, mà là một động cơ sinh học thần kinh quan trọng cho sự trưởng thành nhận thức.",
+          paragraphRef: "B",
+          evidenceQuote: "Far from being a frivolous diversion or an unproductive pause from formal learning, play serves as a vital neurobiological engine for cognitive maturation."
+        },
+        {
+          id: "q3",
+          type: "tfng",
+          prompt: "The prefrontal cortex is the brain region responsible for executive function, impulse control, and strategic planning.",
+          options: ["TRUE", "FALSE", "NOT GIVEN"],
+          correctAnswer: "TRUE",
+          explanation: "Đoạn B nêu rõ vỏ não trước trán (prefrontal cortex) là vùng não chịu trách nhiệm về chức năng điều hành, kiểm soát xung động và lập kế hoạch chiến lược dài hạn.",
+          paragraphRef: "B",
+          evidenceQuote: "the prefrontal cortex—the cerebral region responsible for executive function, impulse inhibition, and long-term strategic planning."
+        },
+        {
+          id: "q4",
+          type: "tfng",
+          prompt: "Finnish schools were the first in the world to officially ban standardized testing before 1980.",
+          options: ["TRUE", "FALSE", "NOT GIVEN"],
+          correctAnswer: "NOT GIVEN",
+          explanation: "Bài đọc đề cập đến việc áp lực thi cử chuẩn hóa làm giảm thời gian chơi của trẻ, nhưng hoàn toàn không nhắc tới các trường học Phần Lan hay mốc năm 1980.",
+          paragraphRef: "A",
+          evidenceQuote: "An escalating cultural emphasis on hyper-structured academic tutoring, standardized test preparation... has steadily marginalized unsupervised exploration."
+        },
+        {
+          id: "q5",
+          type: "tfng",
+          prompt: "Children subject to strictly scheduled routines tend to develop a resilient internal locus of control.",
+          options: ["TRUE", "FALSE", "NOT GIVEN"],
+          correctAnswer: "FALSE",
+          explanation: "Đoạn D khẳng định trẻ bị xếp lịch học cứng nhắc với ít quyền tự chủ có xu hướng phát triển 'external locus of control' (ảo tưởng bất lực, nghĩ rằng kết quả cuộc sống do yếu tố bên ngoài chi phối).",
+          paragraphRef: "D",
+          evidenceQuote: "Children subjected to strictly orchestrated schedules with minimal autonomy exhibit markedly elevated rates of generalized anxiety, clinical depression, and an external locus of control."
+        },
+        {
+          id: "q6",
+          type: "sentence_completion",
+          prompt: "Imaginative play triggers the biological release of a beneficial brain protein abbreviated as ______.",
+          correctAnswer: "BDNF",
+          acceptableAnswers: ["BDNF", "brain-derived neurotrophic factor"],
+          explanation: "Trong Đoạn B: 'imaginative play stimulates the release of brain-derived neurotrophic factor (BDNF).' ",
+          paragraphRef: "B",
+          evidenceQuote: "stimulates the release of brain-derived neurotrophic factor (BDNF), a crucial protein that facilitates synaptic plasticity"
+        },
+        {
+          id: "q7",
+          type: "sentence_completion",
+          prompt: "Socio-dramatic games act as an indispensable incubator for developing empathy and emotional ______.",
+          correctAnswer: "regulation",
+          acceptableAnswers: ["regulation"],
+          explanation: "Trong Đoạn C: 'functions as an indispensable incubator for emotional regulation and empathy.'",
+          paragraphRef: "C",
+          evidenceQuote: "functions as an indispensable incubator for emotional regulation and empathy"
+        },
+        {
+          id: "q8",
+          type: "sentence_completion",
+          prompt: "Children deprived of free play frequently suffer from anxiety and a debilitating ______ locus of control.",
+          correctAnswer: "external",
+          acceptableAnswers: ["external"],
+          explanation: "Trong Đoạn D: 'exhibit markedly elevated rates of generalized anxiety, clinical depression, and an external locus of control.'",
+          paragraphRef: "D",
+          evidenceQuote: "and an external locus of control—the debilitating perception that life outcomes are determined by external forces"
+        },
+        {
+          id: "q9",
+          type: "sentence_completion",
+          prompt: "Progressive educational models allow core scientific principles to be discovered ______ through experimentation.",
+          correctAnswer: "inductively",
+          acceptableAnswers: ["inductively"],
+          explanation: "Trong Đoạn E: 'fundamental scientific concepts, mathematical patterns, and linguistic skills are discovered inductively through curiosity-driven experimentation.'",
+          paragraphRef: "E",
+          evidenceQuote: "are discovered inductively through curiosity-driven experimentation."
+        },
+        {
+          id: "q10",
           type: "multiple_choice",
-          prompt: "According to Paragraph B, what is the role of the protein BDNF stimulated by imaginative play?",
+          prompt: "According to Paragraph A, what primary factors have caused the decline in children's free play?",
           options: [
-            "A. It suppresses children's appetite during long study sessions.",
-            "B. It enhances synaptic plasticity and neurogenesis in the prefrontal cortex.",
-            "C. It speeds up the healing process of physical playground injuries.",
-            "D. It replaces the need for restful sleep cycles in toddlers."
+            "A. A shortage of qualified nursery school educators across urban centers.",
+            "B. Heavy academic tutoring, standardized testing pressure, and digital screen entertainment.",
+            "C. Increases in the cost of outdoor sporting and playground apparatus.",
+            "D. Municipal laws restricting children from entering public neighborhood parks."
           ],
           correctAnswer: "B",
-          explanation: "Đoạn B nêu rõ chất BDNF kích thích độ mềm dẻo của synap thần kinh và quá trình sinh thần kinh ở vỏ não trước trán (prefrontal cortex).",
+          explanation: "Đoạn A nêu rõ áp lực phụ đạo học thêm căng thẳng, ôn luyện thi cử chuẩn hóa và sự xuất hiện tràn lan của màn hình kỹ thuật số đã gạt bỏ thời gian chơi tự do.",
+          paragraphRef: "A",
+          evidenceQuote: "An escalating cultural emphasis on hyper-structured academic tutoring, standardized test preparation, and ubiquitous digital screen entertainment has steadily marginalized unsupervised exploration."
+        },
+        {
+          id: "q11",
+          type: "multiple_choice",
+          prompt: "According to Paragraph B, what is the role of the BDNF protein stimulated by imaginative play?",
+          options: [
+            "A. It suppresses physical fatigue during intensive athletic drills.",
+            "B. It facilitates synaptic plasticity and neurogenesis in the prefrontal cortex.",
+            "C. It accelerates the physical growth plates of long skeletal bones.",
+            "D. It replaces the neurological necessity for nightly REM sleep cycles."
+          ],
+          correctAnswer: "B",
+          explanation: "Đoạn B nêu rõ chất BDNF kích thích độ mềm dẻo của synap thần kinh và quá trình sinh tế bào thần kinh mới ở vỏ não trước trán (prefrontal cortex).",
           paragraphRef: "B",
           evidenceQuote: "stimulates the release of brain-derived neurotrophic factor (BDNF), a crucial protein that facilitates synaptic plasticity and neurogenesis in the prefrontal cortex."
         },
         {
-          id: "q3",
-          type: "sentence_completion",
-          prompt: "Children lacking unstructured play are more prone to developing an ______ locus of control.",
-          correctAnswer: "external",
-          acceptableAnswers: ["external"],
-          explanation: "Đoạn D: 'exhibit markedly elevated rates of generalized anxiety, clinical depression, and an external locus of control.'",
-          paragraphRef: "D",
-          evidenceQuote: "and an external locus of control—the debilitating perception that life outcomes are determined by external forces"
+          id: "q12",
+          type: "multiple_choice",
+          prompt: "Why do disputes in socio-dramatic play help develop emotional maturity according to Paragraph C?",
+          options: [
+            "A. Children are rewarded financially for resolving arguments quietly.",
+            "B. A strong desire to keep playing compels children to negotiate, calibrate emotions, and empathize.",
+            "C. Adult supervisors instantly step in to punish the aggressive party.",
+            "D. Children quickly learn to abandon games whenever an obstacle appears."
+          ],
+          correctAnswer: "B",
+          explanation: "Đoạn C giải thích: vì trẻ có động lực bản năng mạnh mẽ muốn duy trì trò chơi, chúng buộc phải tự thỏa thuận luật chơi, điều tiết cảm xúc và nhìn nhận từ góc nhìn của bạn bè.",
+          paragraphRef: "C",
+          evidenceQuote: "Because children possess a powerful innate motivation to perpetuate the game, they are forced to negotiate, calibrate their emotional reactions, and perceive situations from peers' perspectives."
+        },
+        {
+          id: "q13",
+          type: "multiple_choice",
+          prompt: "What core philosophy is championed by progressive educators in Paragraph E?",
+          options: [
+            "A. Eliminating science and mathematics completely in favour of unstructured recess.",
+            "B. Integrating play-based pedagogy so foundational concepts are learned inductively through curiosity.",
+            "C. Extending formal classroom lecture hours into late weekend evenings.",
+            "D. Mandating that all childhood play be monitored and graded by school evaluators."
+          ],
+          correctAnswer: "B",
+          explanation: "Đoạn E nêu rõ các nhà giáo dục tiến bộ đề xuất tích hợp phương pháp sư phạm dựa trên vui chơi, giúp trẻ tiếp thu khái niệm khoa học theo lối quy nạp thông qua trải nghiệm thực tế.",
+          paragraphRef: "E",
+          evidenceQuote: "progressive schools structure environments where fundamental scientific concepts, mathematical patterns, and linguistic skills are discovered inductively through curiosity-driven experimentation."
         }
       ]
     }
@@ -1297,37 +1692,152 @@ const CURATED_PASSAGES = {
         {
           id: "q1",
           type: "tfng",
-          prompt: "Steam locomotives were banned from entering the historic City of London in the mid-19th century.",
+          prompt: "London's population remained largely constant throughout the first fifty years of the nineteenth century.",
           options: ["TRUE", "FALSE", "NOT GIVEN"],
-          correctAnswer: "TRUE",
-          explanation: "Đoạn B nêu rõ một ủy ban hoàng gia cấm đầu máy hơi nước đi vào trung tâm thành phố lịch sử để tránh rung chấn và khói làm hại công trình.",
-          paragraphRef: "B",
-          evidenceQuote: "prohibited locomotives from penetrating the historic City of London to prevent structural vibrations and smoke damage."
+          correctAnswer: "FALSE",
+          explanation: "Đoạn A nêu rõ dân số London bùng nổ với tốc độ chưa từng có, tăng gấp đôi từ dưới một triệu năm 1801 lên hơn hai triệu vào năm 1850.",
+          paragraphRef: "A",
+          evidenceQuote: "London's population exploded with unprecedented velocity, doubling from under one million in 1801 to over two million by 1850."
         },
         {
           id: "q2",
-          type: "multiple_choice",
-          prompt: "What method was used to build the original Metropolitan Railway in 1860?",
-          options: [
-            "A. Blasting mountains with dynamite explosions.",
-            "B. The cut-and-cover method involving trench excavation and brick arching.",
-            "C. Deep hydraulic underwater bore drills.",
-            "D. Repurposing abandoned medieval catacomb tunnels."
-          ],
-          correctAnswer: "B",
-          explanation: "Đoạn D giải thích kỹ thuật 'cut-and-cover': đào rãnh lớn dọc đại lộ, xây tường gạch rồi lợp mái vòm gạch trước khi hoàn trả mặt đường.",
-          paragraphRef: "D",
-          evidenceQuote: "The initial line utilized a construction technique known as 'cut-and-cover'. Workers excavated a colossal trench... and then spanned the top with an arched brick roof."
+          type: "tfng",
+          prompt: "A royal commission prohibited steam locomotives from entering the historic City of London.",
+          options: ["TRUE", "FALSE", "NOT GIVEN"],
+          correctAnswer: "TRUE",
+          explanation: "Đoạn B nêu rõ một ủy ban hoàng gia đã cấm đầu máy hơi nước đi vào trung tâm thành phố lịch sử để ngăn rung chấn và khói làm hại công trình kiến trúc.",
+          paragraphRef: "B",
+          evidenceQuote: "an official royal parliamentary commission prohibited locomotives from penetrating the historic City of London to prevent structural vibrations and smoke damage to historical landmarks."
         },
         {
           id: "q3",
-          type: "sentence_completion",
-          prompt: "The Metropolitan Railway officially opened between Paddington and ______ on 10 January 1863.",
-          correctAnswer: "Farringdon Street",
-          acceptableAnswers: ["Farringdon Street", "Farringdon"],
-          explanation: "Trong Đoạn D: 'Operating between Paddington and Farringdon Street, it hauled 40,000 passengers on its inaugural day.'",
+          type: "tfng",
+          prompt: "Charles Pearson's initial underground proposal was warmly welcomed by the British public and media.",
+          options: ["TRUE", "FALSE", "NOT GIVEN"],
+          correctAnswer: "FALSE",
+          explanation: "Đoạn C nêu rõ những người hoài nghi đã chế nhạo kịch liệt ý tưởng của Pearson, dự báo rằng đường hầm sẽ sập hoặc hành khách sẽ bị ngạt khói ngạt thở.",
+          paragraphRef: "C",
+          evidenceQuote: "Skeptics vehemently mocked the proposal, predicting that underground tunnels would collapse under the weight of surface buildings or that passengers would be asphyxiated by subterranean fumes."
+        },
+        {
+          id: "q4",
+          type: "tfng",
+          prompt: "Several passengers were fatally injured during the inaugural week of the Metropolitan Railway.",
+          options: ["TRUE", "FALSE", "NOT GIVEN"],
+          correctAnswer: "NOT GIVEN",
+          explanation: "Đoạn D mô tả các thách thức kỹ thuật như vỡ cống nước và lượng khách 40.000 người vào ngày khai trương, nhưng không hề đề cập đến việc có ai bị thương vong hay không.",
           paragraphRef: "D",
-          evidenceQuote: "Operating between Paddington and Farringdon Street"
+          evidenceQuote: "It hauled 40,000 passengers on its inaugural day alone, inaugurating the world's first underground transit system."
+        },
+        {
+          id: "q5",
+          type: "tfng",
+          prompt: "Early underground railway journeys were completely free of coal smoke and pollution.",
+          options: ["TRUE", "FALSE", "NOT GIVEN"],
+          correctAnswer: "FALSE",
+          explanation: "Đoạn E nêu rõ những chuyến đi ngầm ban đầu mù mịt khói do các đầu máy kéo bằng hơi nước đốt than đá (coal-fired locomotives).",
+          paragraphRef: "E",
+          evidenceQuote: "Although early subterranean journeys were smoky due to coal-fired locomotives, the economic impact was instantaneous."
+        },
+        {
+          id: "q6",
+          type: "sentence_completion",
+          prompt: "Because locomotives were banned from the city center, mainline railway terminals were constructed on the ______ of the urban core.",
+          correctAnswer: "periphery",
+          acceptableAnswers: ["periphery"],
+          explanation: "Trong Đoạn B: 'rail companies had constructed grand terminal stations on the periphery of the urban core.'",
+          paragraphRef: "B",
+          evidenceQuote: "constructed grand terminal stations on the periphery of the urban core"
+        },
+        {
+          id: "q7",
+          type: "sentence_completion",
+          prompt: "The solicitor of the City of London who tirelessly campaigned for the underground railway was Charles ______.",
+          correctAnswer: "Pearson",
+          acceptableAnswers: ["Pearson", "Charles Pearson"],
+          explanation: "Trong Đoạn C: 'The visionary solicitor of the City of London, Charles Pearson, campaigned tirelessly.'",
+          paragraphRef: "C",
+          evidenceQuote: "The visionary solicitor of the City of London, Charles Pearson, campaigned tirelessly"
+        },
+        {
+          id: "q8",
+          type: "sentence_completion",
+          prompt: "The initial line of the London Underground utilized a trench-based construction technique known as ______.",
+          correctAnswer: "cut-and-cover",
+          acceptableAnswers: ["cut-and-cover"],
+          explanation: "Trong Đoạn D: 'The initial line utilized a construction technique known as cut-and-cover.'",
+          paragraphRef: "D",
+          evidenceQuote: "The initial line utilized a construction technique known as 'cut-and-cover'."
+        },
+        {
+          id: "q9",
+          type: "sentence_completion",
+          prompt: "On its inaugural day on 10 January 1863, the Metropolitan Railway transported approximately ______ passengers.",
+          correctAnswer: "40,000",
+          acceptableAnswers: ["40,000", "40000", "forty thousand"],
+          explanation: "Trong Đoạn D: 'it hauled 40,000 passengers on its inaugural day alone.'",
+          paragraphRef: "D",
+          evidenceQuote: "it hauled 40,000 passengers on its inaugural day alone"
+        },
+        {
+          id: "q10",
+          type: "multiple_choice",
+          prompt: "According to Paragraph A, what was the primary source of London's surface traffic paralysis in 1850?",
+          options: [
+            "A. Frequent dock strikes along the River Thames preventing coal unloading.",
+            "B. Tens of thousands of horse-drawn omnibuses, cabs, and heavy freight wagons crowding medieval streets.",
+            "C. Flooding of low-lying roadways caused by poor storm drainage.",
+            "D. Construction blockages resulting from the demolition of city walls."
+          ],
+          correctAnswer: "B",
+          explanation: "Đoạn A nêu rõ hàng chục nghìn xe buýt ngựa kéo, xe hai bánh và toa xe hàng chen chúc trên các trục đường thời trung cổ chật hẹp gây ra cảnh tê liệt giao thông.",
+          paragraphRef: "A",
+          evidenceQuote: "Tens of thousands of horse-drawn omnibus carriages, private hansom cabs, and heavy freight wagons competed for space along narrow medieval thoroughfares."
+        },
+        {
+          id: "q11",
+          type: "multiple_choice",
+          prompt: "Why did railway companies construct terminal stations on the periphery of the urban core (Paragraph B)?",
+          options: [
+            "A. Land outside the city was too expensive to purchase in bulk.",
+            "B. Royal authorities prohibited steam locomotives from entering the historic core to prevent smoke and vibration damage.",
+            "C. The Thames bridges were unable to support the weight of iron tracks.",
+            "D. Commuters expressed a preference for walking the final miles to their offices."
+          ],
+          correctAnswer: "B",
+          explanation: "Đoạn B nêu rõ một ủy ban hoàng gia cấm đầu máy hơi nước đi vào khu phố cổ lịch sử để tránh rung lắc làm nứt công trình và khói muội làm hư hại di tích.",
+          paragraphRef: "B",
+          evidenceQuote: "an official royal parliamentary commission prohibited locomotives from penetrating the historic City of London to prevent structural vibrations and smoke damage to historical landmarks."
+        },
+        {
+          id: "q12",
+          type: "multiple_choice",
+          prompt: "What method was used during the cut-and-cover construction of the Metropolitan Railway (Paragraph D)?",
+          options: [
+            "A. Drilling deep circular holes hundreds of feet below the water table.",
+            "B. Excavating a massive trench along roads, building brick walls and arches, and recovering the surface.",
+            "C. Melting underground stone using high-temperature thermal lances.",
+            "D. Repurposing dry abandoned sewer pipes into passenger tunnels."
+          ],
+          correctAnswer: "B",
+          explanation: "Đoạn D giải thích phương pháp 'cut-and-cover': công nhân đào một rãnh hào khổng lồ dọc đại lộ, xây tường gạch rồi lợp vòm gạch trước khi hoàn trả lại mặt đường phía trên.",
+          paragraphRef: "D",
+          evidenceQuote: "Workers excavated a colossal trench along major avenues, laid brick retaining walls and trackwork, and then spanned the top with an arched brick roof before restoring the surface roadway above."
+        },
+        {
+          id: "q13",
+          type: "multiple_choice",
+          prompt: "According to Paragraph E, what major demographic change was facilitated by the underground railway?",
+          options: [
+            "A. It prompted an immediate mass exodus from London to rural farming estates.",
+            "B. It allowed working-class and clerical workers to live in healthier suburban districts while commuting to the center.",
+            "C. It forced all city businesses to operate exclusively within subterranean tunnels.",
+            "D. It caused suburban rail passenger numbers to drop to zero."
+          ],
+          correctAnswer: "B",
+          explanation: "Đoạn E nêu rõ tuyến đường sắt ngầm cho phép tầng lớp lao động và nhân viên văn phòng chuyển ra sinh sống tại các khu ngoại ô trong lành hơn trong khi vẫn đi làm nhanh chóng vào trung tâm tài chính.",
+          paragraphRef: "E",
+          evidenceQuote: "The underground network permitted working-class and clerical laborers to reside in healthier suburban districts while commuting rapidly into the financial district."
         }
       ]
     }
@@ -2096,87 +2606,160 @@ function generateAcademicTest(topicId, topicMeta, testNumber, catalogItem) {
     }
   ];
 
-  // Questions
+  // Standard Cambridge Academic 13-question format:
+  // Section 1: Questions 1-5: True / False / Not Given
+  // Section 2: Questions 6-9: Sentence Completion
+  // Section 3: Questions 10-13: Multiple Choice
   const questions = [
     {
       id: "q1",
       type: "tfng",
-      prompt: "Earlier research paradigms correctly accounted for non-linear feedback dynamics in the subject.",
+      prompt: "Traditional theoretical hypotheses successfully accounted for non-linear feedback dynamics in the subject.",
       options: ["TRUE", "FALSE", "NOT GIVEN"],
       correctAnswer: "FALSE",
-      explanation: "Đoạn B khẳng định các mô hình giả thuyết trước đây không giải thích được các động lực phản hồi phi tuyến tính (traditional hypotheses failed to account for non-linear feedback dynamics).",
+      explanation: "Đoạn B khẳng định các mô hình giả thuyết truyền thống không thể giải thích được các động lực phản hồi phi tuyến tính (traditional hypotheses failed to account for non-linear feedback dynamics).",
       paragraphRef: "B",
       evidenceQuote: "traditional hypotheses failed to account for non-linear feedback dynamics."
     },
     {
       id: "q2",
       type: "tfng",
-      prompt: "The economic cost of implementing comprehensive institutional adaptations is minimal.",
+      prompt: "Earlier theoretical paradigms assumed that observable patterns operated under static equilibrium conditions.",
       options: ["TRUE", "FALSE", "NOT GIVEN"],
-      correctAnswer: "FALSE",
-      explanation: "Đoạn D nêu rõ chi phí tài chính (economic expenditures) để triển khai các biện pháp thích ứng là rào cản nghiêm trọng đối với các khu vực hạn chế ngân sách (acute barrier).",
-      paragraphRef: "D",
-      evidenceQuote: "the economic expenditures required to implement comprehensive institutional adaptations remain an acute barrier."
+      correctAnswer: "TRUE",
+      explanation: "Đoạn B nêu rõ các mô hình lý thuyết trước đây đều đưa ra giả định rằng các mô hình quan sát hoạt động trong điều kiện cân bằng tĩnh (static equilibrium conditions).",
+      paragraphRef: "B",
+      evidenceQuote: "earlier theoretical paradigms assumed that observable patterns operated under static equilibrium conditions."
     },
     {
       id: "q3",
       type: "tfng",
-      prompt: "Most developing nations have completely rejected cross-disciplinary analytical methodologies.",
+      prompt: "The economic expenditures required to implement institutional adaptations are easily affordable for all jurisdictions.",
       options: ["TRUE", "FALSE", "NOT GIVEN"],
-      correctAnswer: "NOT GIVEN",
-      explanation: "Bài đọc nói về việc các nhà nghiên cứu tích hợp phương pháp phân tích liên ngành, nhưng không đưa thông tin nào nói rằng hầu hết các quốc gia đang phát triển đã bác bỏ hoàn toàn phương pháp này.",
-      paragraphRef: "A",
-      evidenceQuote: "By integrating advanced analytical methodologies and cross-disciplinary data, investigators have begun elucidating the complex interplay."
+      correctAnswer: "FALSE",
+      explanation: "Đoạn D nêu rõ chi phí kinh tế (economic expenditures) để triển khai các biện pháp thích ứng là một rào cản nghiêm trọng đối với các khu vực hạn chế ngân sách (acute barrier).",
+      paragraphRef: "D",
+      evidenceQuote: "the economic expenditures required to implement comprehensive institutional adaptations remain an acute barrier for resource-constrained jurisdictions."
     },
     {
       id: "q4",
-      type: "multiple_choice",
-      prompt: "According to Paragraph C, what determined whether interventions successfully mitigated adverse impacts?",
-      options: [
-        "A. The total quantity of international funding invested.",
-        "B. The localized baseline resilience and fortification of foundational infrastructure.",
-        "C. The season of the year during which protocols were officially launched.",
-        "D. The number of media press releases distributed to the general public."
-      ],
-      correctAnswer: "B",
-      explanation: "Đoạn C chỉ ra hiệu quả phụ thuộc vào khả năng phục hồi cục bộ và hạ tầng cơ sở có đủ kiên cố hay không (localized baseline resilience and sufficiently fortified infrastructure).",
-      paragraphRef: "C",
-      evidenceQuote: "interventions produce markedly disparate consequences depending on localized baseline resilience. In contexts where foundational infrastructure was sufficiently fortified..."
+      type: "tfng",
+      prompt: "Most international laboratories received independent government subsidies to fund their longitudinal trials.",
+      options: ["TRUE", "FALSE", "NOT GIVEN"],
+      correctAnswer: "NOT GIVEN",
+      explanation: "Đoạn B và C đề cập đến nghiên cứu then chốt tại nhiều phòng thí nghiệm quốc tế và tập dữ liệu dài hạn, nhưng bài đọc hoàn toàn không nhắc đến việc các phòng thí nghiệm này có nhận trợ cấp của chính phủ hay không.",
+      paragraphRef: "B",
+      evidenceQuote: "A pivotal investigation conducted across multiple international laboratories revealed that traditional hypotheses failed to account for non-linear feedback dynamics."
     },
     {
       id: "q5",
-      type: "multiple_choice",
-      prompt: "What do contemporary specialists advocate for in Paragraph E to bridge conflicting viewpoints?",
-      options: [
-        "A. Immediate abandonment of all empirical investigation protocols.",
-        "B. Strict top-down legislative mandates with zero local consultation.",
-        "C. An adaptive, evidence-based paradigm with iterative monitoring and knowledge exchange.",
-        "D. Imposing punitive financial sanctions on institutions reporting dissenting results."
-      ],
-      correctAnswer: "C",
-      explanation: "Đoạn E nêu rõ các chuyên gia hiện nay ủng hộ một mô hình thích ứng dựa trên bằng chứng, kết hợp giám sát lặp lại và trao đổi tri thức minh bạch.",
+      type: "tfng",
+      prompt: "Progressive stakeholders recommend enforcing rigid top-down prescriptions without localized adaptation.",
+      options: ["TRUE", "FALSE", "NOT GIVEN"],
+      correctAnswer: "FALSE",
+      explanation: "Đoạn E nêu rõ thay vì áp đặt các mệnh lệnh cứng nhắc từ trên xuống (rigid top-down prescriptions), các bên liên quan tiến bộ chú trọng việc giám sát lặp lại và trao đổi tri thức linh hoạt.",
       paragraphRef: "E",
-      evidenceQuote: "advocate for an adaptive, evidence-based paradigm... emphasize iterative monitoring, transparent accountability, and collaborative knowledge exchange."
+      evidenceQuote: "Rather than enforcing rigid top-down prescriptions, progressive stakeholders emphasize iterative monitoring, transparent accountability, and collaborative knowledge exchange."
     },
     {
       id: "q6",
       type: "sentence_completion",
-      prompt: "In Paragraph B, empirical measurements showed that external disturbances triggered ______ systemic fluctuations.",
-      correctAnswer: "cascading",
-      acceptableAnswers: ["cascading"],
-      explanation: "Đoạn B: 'external disturbances precipitated cascading systemic fluctuations.'",
-      paragraphRef: "B",
-      evidenceQuote: "precipitated cascading systemic fluctuations"
+      prompt: "Investigators combined advanced methodologies with cross-disciplinary data to elucidate the complex ______ between systemic variables.",
+      correctAnswer: "interplay",
+      acceptableAnswers: ["interplay", "complex interplay"],
+      explanation: "Trong Đoạn A: 'investigators have begun elucidating the complex interplay between systemic variables and tangible outcomes.'",
+      paragraphRef: "A",
+      evidenceQuote: "elucidating the complex interplay between systemic variables and tangible outcomes."
     },
     {
       id: "q7",
       type: "sentence_completion",
-      prompt: "Critics in Paragraph D argue that localized anomalies may produce a misleading impression of ______.",
+      prompt: "In Paragraph B, empirical measurements demonstrated that external disturbances precipitated ______ systemic fluctuations.",
+      correctAnswer: "cascading",
+      acceptableAnswers: ["cascading"],
+      explanation: "Trong Đoạn B: 'empirical measurements demonstrated that external disturbances precipitated cascading systemic fluctuations.'",
+      paragraphRef: "B",
+      evidenceQuote: "external disturbances precipitated cascading systemic fluctuations"
+    },
+    {
+      id: "q8",
+      type: "sentence_completion",
+      prompt: "Interventions effectively mitigated adverse impacts in environments where foundational infrastructure was sufficiently ______.",
+      correctAnswer: "fortified",
+      acceptableAnswers: ["fortified"],
+      explanation: "Trong Đoạn C: 'In contexts where foundational infrastructure was sufficiently fortified, interventions effectively mitigated severe adverse impacts.'",
+      paragraphRef: "C",
+      evidenceQuote: "In contexts where foundational infrastructure was sufficiently fortified, interventions effectively mitigated severe adverse impacts"
+    },
+    {
+      id: "q9",
+      type: "sentence_completion",
+      prompt: "Critics in Paragraph D argue that localized anomalies create a deceptive illusion of ______ where volatility dominates.",
       correctAnswer: "predictability",
       acceptableAnswers: ["predictability"],
-      explanation: "Đoạn D: 'creating an illusion of predictability where stochastic volatility dominates.'",
+      explanation: "Trong Đoạn D: 'creating an illusion of predictability where stochastic volatility dominates.'",
       paragraphRef: "D",
-      evidenceQuote: "creating an illusion of predictability"
+      evidenceQuote: "creating an illusion of predictability where stochastic volatility dominates."
+    },
+    {
+      id: "q10",
+      type: "multiple_choice",
+      prompt: "According to Paragraph A, how was the study of this subject historically viewed in scientific discourse?",
+      options: [
+        "A. It was heavily subsidized by private industrial foundations.",
+        "B. It was relegated to peripheral research with mechanisms previously opaque to researchers.",
+        "C. It was universally accepted as a primary theoretical doctrine.",
+        "D. It was prohibited by international research ethics committees."
+      ],
+      correctAnswer: "B",
+      explanation: "Đoạn A nêu rõ: trong lịch sử môn học này từng bị gạt ra nghiên cứu thứ yếu (relegated to peripheral research) với các cơ chế cấu trúc mờ mịt chưa thể thấu suốt.",
+      paragraphRef: "A",
+      evidenceQuote: "Historically relegated to peripheral research, recent empirical breakthroughs have illuminated fundamental structural mechanisms that were previously opaque to researchers."
+    },
+    {
+      id: "q11",
+      type: "multiple_choice",
+      prompt: "What did multi-decade longitudinal datasets indicate about strategic interventions in Paragraph C?",
+      options: [
+        "A. Strategic interventions produced identical outcomes across all geographic regions.",
+        "B. Interventions produced markedly disparate consequences depending on localized baseline resilience.",
+        "C. Natural systems recovered more rapidly without any intervention protocols.",
+        "D. Foundational infrastructure played no measurable role in mitigating adverse shocks."
+      ],
+      correctAnswer: "B",
+      explanation: "Đoạn C chỉ ra hiệu quả của các can thiệp chiến lược tạo ra kết quả rất khác nhau tùy thuộc vào sức chịu đựng và phục hồi cơ sở tại từng địa phương (localized baseline resilience).",
+      paragraphRef: "C",
+      evidenceQuote: "targeted strategic interventions produce markedly disparate consequences depending on localized baseline resilience."
+    },
+    {
+      id: "q12",
+      type: "multiple_choice",
+      prompt: "Why do conventional practitioners maintain skepticism regarding the findings according to Paragraph D?",
+      options: [
+        "A. They argue localized anomalies and demographic disparities may distort statistical correlations.",
+        "B. They believe computational technology has become too inexpensive.",
+        "C. They refuse to review any empirical experiments published after 2010.",
+        "D. They claim that stochastic volatility has been completely eliminated."
+      ],
+      correctAnswer: "A",
+      explanation: "Đoạn D giải thích giới phê bình lo ngại các dị thường cục bộ và sự chênh lệch nhân khẩu học có thể bóp méo tương quan thống kê, tạo ra ảo tưởng về tính dự đoán.",
+      paragraphRef: "D",
+      evidenceQuote: "Critics argue that localized anomalies and demographic disparities may distort statistical correlations, creating an illusion of predictability where stochastic volatility dominates."
+    },
+    {
+      id: "q13",
+      type: "multiple_choice",
+      prompt: "What progressive approach do contemporary specialists advocate for in Paragraph E?",
+      options: [
+        "A. Immediate termination of all cross-disciplinary research funding.",
+        "B. An adaptive, evidence-based paradigm emphasizing iterative monitoring and knowledge exchange.",
+        "C. Strict enforcement of centralized top-down bureaucratic mandates.",
+        "D. Relying exclusively on theoretical computer simulations without field testing."
+      ],
+      correctAnswer: "B",
+      explanation: "Đoạn E nêu rõ các chuyên gia đương đại ủng hộ một mô hình thích ứng dựa trên bằng chứng, kết hợp giám sát lặp lại và trao đổi tri thức minh bạch giữa các bên.",
+      paragraphRef: "E",
+      evidenceQuote: "contemporary specialists advocate for an adaptive, evidence-based paradigm. Rather than enforcing rigid top-down prescriptions, progressive stakeholders emphasize iterative monitoring, transparent accountability, and collaborative knowledge exchange."
     }
   ];
 
@@ -2208,11 +2791,35 @@ function generateAcademicTest(topicId, topicMeta, testNumber, catalogItem) {
  */
 export function calculateReadingBand(correctCount, totalCount) {
   if (!totalCount || totalCount <= 0 || correctCount <= 0) {
-    return { band: "4.0", percentage: 0, level: "Cần cải thiện" };
+    return { band: "4.0", percentage: 0, level: "Cần cải thiện", correctCount, totalCount };
   }
 
   const ratio = correctCount / totalCount;
   const percentage = Math.round(ratio * 100);
+
+  // Exact Cambridge scale for standard single-passage 13-question exam
+  if (totalCount === 13) {
+    const scale13 = {
+      13: { band: "9.0", level: "Expert User (Thông thạo xuất sắc)" },
+      12: { band: "8.5", level: "Very Good User (Rất tốt)" },
+      11: { band: "8.0", level: "Very Good User (Giỏi toàn diện)" },
+      10: { band: "7.5", level: "Good User (Khá giỏi)" },
+      9:  { band: "7.0", level: "Good User (Đạt chuẩn Target 7.0+)" },
+      8:  { band: "6.5", level: "Competent User (Khá)" },
+      7:  { band: "6.0", level: "Competent User (Trung bình khá)" },
+      6:  { band: "5.5", level: "Modest User (Trung bình)" },
+      5:  { band: "5.0", level: "Modest User (Cần trau dồi)" },
+      4:  { band: "4.5", level: "Limited User (Cần cải thiện)" }
+    };
+    const res = scale13[correctCount] || { band: "4.0", level: "Intermittent User (Cần ôn tập cơ bản)" };
+    return {
+      band: res.band,
+      percentage,
+      level: res.level,
+      correctCount,
+      totalCount
+    };
+  }
 
   let band = "4.5";
   let level = "Modest User";
