@@ -21,7 +21,8 @@ export default function VocabularyStudio({
   topic, 
   onGoWritingPractice, 
   onOpenFlashcard,
-  studentEmail 
+  studentEmail,
+  isMobileView = false
 }) {
   const [copiedKey, setCopiedKey] = useState(null);
   const [quizAnswer, setQuizAnswer] = useState(null);
@@ -78,7 +79,7 @@ export default function VocabularyStudio({
               </button>
             )}
 
-            {onGoWritingPractice && (
+            {!isMobileView && onGoWritingPractice && (
               <button
                 onClick={() => onGoWritingPractice(selectedVocab)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white text-xs font-medium transition cursor-pointer shadow-xs"
@@ -238,26 +239,49 @@ export default function VocabularyStudio({
       )}
 
       {/* Quick Interactive Reflex Card */}
-      <div className="p-4 rounded-2xl bg-[#EDF3EE] border border-[#3E4F42]/20 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
-        <div className="space-y-0.5 text-center sm:text-left">
-          <h4 className="text-xs font-semibold text-[#3E4F42] uppercase tracking-wide">
-            Áp dụng từ vựng vào bài viết
-          </h4>
-          <p className="text-xs text-[#7A7369]">
-            Hãy chuyển sang phần Luyện Viết để thực hành đặt câu ngay với từ <strong>"{selectedVocab.word}"</strong>.
-          </p>
-        </div>
+      {isMobileView ? (
+        <div className="p-4 rounded-2xl bg-[#EDF3EE] border border-[#3E4F42]/20 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
+          <div className="space-y-0.5 text-center sm:text-left">
+            <h4 className="text-xs font-semibold text-[#3E4F42] uppercase tracking-wide">
+              Luyện phản xạ thẻ nhớ Flashcards
+            </h4>
+            <p className="text-xs text-[#7A7369]">
+              Ôn luyện nhanh từ <strong>"{selectedVocab.word}"</strong> qua các mini game thẻ nhớ 3D, trắc nghiệm và nối từ.
+            </p>
+          </div>
 
-        {onGoWritingPractice && (
-          <button
-            onClick={() => onGoWritingPractice(selectedVocab)}
-            className="px-4 py-2 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white text-xs font-medium transition cursor-pointer shadow-xs flex items-center gap-1.5 shrink-0"
-          >
-            <span>Bắt Đầu Luyện Viết</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
-        )}
-      </div>
+          {onOpenFlashcard && (
+            <button
+              onClick={onOpenFlashcard}
+              className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white text-xs font-medium transition cursor-pointer shadow-xs flex items-center justify-center gap-1.5 shrink-0"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Mở Thẻ Flashcards</span>
+            </button>
+          )}
+        </div>
+      ) : (
+        <div className="p-4 rounded-2xl bg-[#EDF3EE] border border-[#3E4F42]/20 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
+          <div className="space-y-0.5 text-center sm:text-left">
+            <h4 className="text-xs font-semibold text-[#3E4F42] uppercase tracking-wide">
+              Áp dụng từ vựng vào bài viết
+            </h4>
+            <p className="text-xs text-[#7A7369]">
+              Hãy chuyển sang phần Luyện Viết để thực hành đặt câu ngay với từ <strong>"{selectedVocab.word}"</strong>.
+            </p>
+          </div>
+
+          {onGoWritingPractice && (
+            <button
+              onClick={() => onGoWritingPractice(selectedVocab)}
+              className="px-4 py-2 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white text-xs font-medium transition cursor-pointer shadow-xs flex items-center gap-1.5 shrink-0"
+            >
+              <span>Bắt Đầu Luyện Viết</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          )}
+        </div>
+      )}
 
     </div>
   );

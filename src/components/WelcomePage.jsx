@@ -27,7 +27,8 @@ export default function WelcomePage({
   studentEmail,
   targetBand = "7.0",
   selectedTask = "task2",
-  onSettingsChange
+  onSettingsChange,
+  isMobile = false
 }) {
   const [justSaved, setJustSaved] = useState(false);
   const lastActiveLocation = getLastActiveLocation(studentEmail);
@@ -275,74 +276,174 @@ export default function WelcomePage({
               </button>
             )}
 
-            <button
-              type="button"
-              onClick={() => {
-                if (!currentUser) {
-                  onOpenAuth();
-                  return;
-                }
-                onStartPractice();
-              }}
-              className={`w-full py-2.5 px-4 rounded-xl font-medium text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] ${
-                lastActiveLocation && lastActiveLocation.view
-                  ? "bg-white hover:bg-[#FAF8F5] text-[#24211E] border border-[#D1DDD3] shadow-2xs"
-                  : "bg-[#3E4F42] hover:bg-[#334237] text-white shadow-xs py-3 text-sm"
-              }`}
-            >
-              <span>📚 Học từ vựng (Luyện câu &amp; đoạn • Band {targetBand})</span>
-              <ArrowRight className={`w-4 h-4 ${lastActiveLocation && lastActiveLocation.view ? "text-[#3E4F42]" : ""}`} />
-            </button>
+            {isMobile ? (
+              /* GIAO DIỆN NÚT HỌC TRÊN ĐIỆN THOẠI: TẬP TRUNG TỪ VỰNG & FLASHCARDS */
+              <div className="space-y-2.5">
+                {/* 1. Học từ vựng trên điện thoại */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (!currentUser) {
+                      onOpenAuth();
+                      return;
+                    }
+                    onStartPractice();
+                  }}
+                  className="w-full py-3 px-4 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-sm transition shadow-sm flex items-center justify-between gap-2 cursor-pointer active:scale-[0.99] border border-[#2D3A30]"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-lg bg-white/15 flex items-center justify-center shrink-0">
+                      <BookOpen className="w-4 h-4 text-[#C2DDC8]" />
+                    </div>
+                    <div className="text-left">
+                      <div className="text-[10px] text-[#C2DDC8] uppercase font-bold tracking-wider leading-none mb-1">
+                        Trọng tâm Điện thoại
+                      </div>
+                      <div className="text-xs sm:text-sm font-semibold">
+                        📚 Học từ vựng (10 Chủ đề IELTS • Band {targetBand})
+                      </div>
+                    </div>
+                  </div>
+                  <ArrowRight className="w-4 h-4 shrink-0 text-[#C2DDC8]" />
+                </button>
 
-            {onStartFullEssay && (
-              <button
-                type="button"
-                onClick={() => {
-                  if (!currentUser) {
-                    onOpenAuth();
-                    return;
-                  }
-                  onStartFullEssay();
-                }}
-                className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-[#FAF8F5] text-[#24211E] border border-[#D1DDD3] font-medium text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] shadow-2xs"
-              >
-                <span>✍️ Luyện viết toàn bộ ({selectedTask === "task1" ? "Task 1 Report" : "Task 2 Essay"})</span>
-                <ArrowRight className="w-4 h-4 text-[#3E4F42]" />
-              </button>
-            )}
+                {/* 2. Flashcards trên điện thoại */}
+                {onStartFlashcard && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (!currentUser) {
+                        onOpenAuth();
+                        return;
+                      }
+                      onStartFlashcard();
+                    }}
+                    className="w-full py-3 px-4 rounded-xl bg-white hover:bg-[#FAF8F5] text-[#24211E] border border-[#D1DDD3] font-medium text-sm transition flex items-center justify-between gap-2 cursor-pointer active:scale-[0.99] shadow-2xs"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-lg bg-[#EDF3EE] flex items-center justify-center shrink-0 text-[#3E4F42]">
+                        <Layers className="w-4 h-4" />
+                      </div>
+                      <div className="text-left">
+                        <div className="text-[10px] text-[#7A7369] uppercase font-bold tracking-wider leading-none mb-1">
+                          Phản xạ thẻ nhớ
+                        </div>
+                        <div className="text-xs sm:text-sm font-semibold text-[#24211E]">
+                          🗂️ Ôn tập từ vựng qua Flashcards
+                        </div>
+                      </div>
+                    </div>
+                    <ArrowRight className="w-4 h-4 shrink-0 text-[#3E4F42]" />
+                  </button>
+                )}
 
-            {onStartReading && (
-              <button
-                type="button"
-                onClick={() => {
-                  if (!currentUser) {
-                    onOpenAuth();
-                    return;
-                  }
-                  onStartReading();
-                }}
-                className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-[#FAF8F5] text-[#24211E] border border-[#D1DDD3] font-medium text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] shadow-2xs"
-              >
-                <span>📖 Luyện đọc (IELTS Reading • Săn Paraphrase • Speed-Scan • X-Ray Cấu trúc)</span>
-                <ArrowRight className="w-4 h-4 text-[#3E4F42]" />
-              </button>
-            )}
+                {/* Ghi chú & Liên kết tính năng tối ưu trên máy tính */}
+                <div className="pt-2 border-t border-[#E6E2D8] text-center space-y-1.5">
+                  <div className="text-[11px] text-[#7A7369]">
+                    💻 Luyện Viết (1.2 - 1.4) &amp; Reading tối ưu cho Máy tính / Laptop
+                  </div>
+                  <div className="flex items-center justify-center gap-3 text-xs">
+                    {onStartFullEssay && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (!currentUser) { onOpenAuth(); return; }
+                          onStartFullEssay();
+                        }}
+                        className="text-[#7A7369] hover:text-[#3E4F42] underline cursor-pointer"
+                      >
+                        Luyện viết bài
+                      </button>
+                    )}
+                    <span className="text-[#D1DDD3]">•</span>
+                    {onStartReading && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (!currentUser) { onOpenAuth(); return; }
+                          onStartReading();
+                        }}
+                        className="text-[#7A7369] hover:text-[#3E4F42] underline cursor-pointer"
+                      >
+                        Luyện đọc Reading
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* GIAO DIỆN NÚT HỌC TRÊN MÁY TÍNH: ĐẦY ĐỦ CÁC MỤC */
+              <>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (!currentUser) {
+                      onOpenAuth();
+                      return;
+                    }
+                    onStartPractice();
+                  }}
+                  className={`w-full py-2.5 px-4 rounded-xl font-medium text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] ${
+                    lastActiveLocation && lastActiveLocation.view
+                      ? "bg-white hover:bg-[#FAF8F5] text-[#24211E] border border-[#D1DDD3] shadow-2xs"
+                      : "bg-[#3E4F42] hover:bg-[#334237] text-white shadow-xs py-3 text-sm"
+                  }`}
+                >
+                  <span>📚 Học từ vựng (Luyện câu &amp; đoạn • Band {targetBand})</span>
+                  <ArrowRight className={`w-4 h-4 ${lastActiveLocation && lastActiveLocation.view ? "text-[#3E4F42]" : ""}`} />
+                </button>
 
-            {onStartFlashcard && (
-              <button
-                type="button"
-                onClick={() => {
-                  if (!currentUser) {
-                    onOpenAuth();
-                    return;
-                  }
-                  onStartFlashcard();
-                }}
-                className="w-full py-2 px-4 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFEA] text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8] font-medium text-xs transition flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
-              >
-                <Layers className="w-3.5 h-3.5 text-[#3E4F42]" />
-                <span>🗂️ Ôn tập từ vựng qua Flashcard</span>
-              </button>
+                {onStartFullEssay && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (!currentUser) {
+                        onOpenAuth();
+                        return;
+                      }
+                      onStartFullEssay();
+                    }}
+                    className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-[#FAF8F5] text-[#24211E] border border-[#D1DDD3] font-medium text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] shadow-2xs"
+                  >
+                    <span>✍️ Luyện viết toàn bộ ({selectedTask === "task1" ? "Task 1 Report" : "Task 2 Essay"})</span>
+                    <ArrowRight className="w-4 h-4 text-[#3E4F42]" />
+                  </button>
+                )}
+
+                {onStartReading && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (!currentUser) {
+                        onOpenAuth();
+                        return;
+                      }
+                      onStartReading();
+                    }}
+                    className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-[#FAF8F5] text-[#24211E] border border-[#D1DDD3] font-medium text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] shadow-2xs"
+                  >
+                    <span>📖 Luyện đọc (IELTS Reading • Săn Paraphrase • Speed-Scan • X-Ray Cấu trúc)</span>
+                    <ArrowRight className="w-4 h-4 text-[#3E4F42]" />
+                  </button>
+                )}
+
+                {onStartFlashcard && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (!currentUser) {
+                        onOpenAuth();
+                        return;
+                      }
+                      onStartFlashcard();
+                    }}
+                    className="w-full py-2 px-4 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFEA] text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8] font-medium text-xs transition flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
+                  >
+                    <Layers className="w-3.5 h-3.5 text-[#3E4F42]" />
+                    <span>🗂️ Ôn tập từ vựng qua Flashcard</span>
+                  </button>
+                )}
+              </>
             )}
           </div>
 

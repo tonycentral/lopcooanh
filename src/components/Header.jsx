@@ -36,7 +36,8 @@ export default function Header({
   onToggleTask,
   currentView,
   activeWritingStep,
-  onSelectWritingStep
+  onSelectWritingStep,
+  isMobile = false
 }) {
   const [isFunctionDropdownOpen, setIsFunctionDropdownOpen] = useState(false);
   const [isTaskDropdownOpen, setIsTaskDropdownOpen] = useState(false);
@@ -68,103 +69,199 @@ export default function Header({
   const currentNum = current7DayScore !== null ? current7DayScore : 0;
   const progressPercent = Math.min(100, Math.round((currentNum / targetNum) * 100));
 
-  // Definition of unified progressive structure: 1. Học viết (1.1 -> 1.2 -> 1.3 -> 1.4) & 2. Flashcards
-  const UNIFIED_SECTIONS = [
-    {
-      group: "1. HỌC VIẾT",
-      items: [
+  // Definition of unified progressive structure: adapts when on mobile to emphasize Vocab & Flashcards
+  const UNIFIED_SECTIONS = useMemo(() => {
+    if (isMobile) {
+      return [
         {
-          id: '1.1',
-          title: '1.1 Học từ vựng',
-          subtitle: 'Nắm nghĩa & collocations theo 10 chủ đề',
-          icon: BookOpen,
-          action: () => {
-            setIsFunctionDropdownOpen(false);
-            if (onSelectWritingStep) onSelectWritingStep('1.1');
-            else if (onGoVocabPractice) onGoVocabPractice();
-            else if (onGoPractice) onGoPractice();
-          }
+          group: "📱 TẬP TRUNG TRÊN ĐIỆN THOẠI",
+          items: [
+            {
+              id: '1.1',
+              title: '1.1 Học từ vựng',
+              subtitle: '10 chủ đề, phát âm & collocations',
+              icon: BookOpen,
+              action: () => {
+                setIsFunctionDropdownOpen(false);
+                if (onSelectWritingStep) onSelectWritingStep('1.1');
+                else if (onGoVocabPractice) onGoVocabPractice();
+                else if (onGoPractice) onGoPractice();
+              }
+            },
+            {
+              id: '3.0',
+              title: '3. Flashcards',
+              subtitle: 'Phản xạ từ vựng học thuật qua thẻ ghi nhớ',
+              icon: Sparkles,
+              action: () => {
+                setIsFunctionDropdownOpen(false);
+                if (onOpenFlashcard) onOpenFlashcard();
+              }
+            }
+          ]
         },
         {
-          id: '1.2',
-          title: '1.2 Học viết 1 câu',
-          subtitle: 'Dịch & áp dụng từ vựng vào câu đơn',
-          icon: FileEdit,
-          action: () => {
-            setIsFunctionDropdownOpen(false);
-            if (onSelectWritingStep) onSelectWritingStep('1.2');
-            else if (onGoVocabPractice) onGoVocabPractice();
-            else if (onGoPractice) onGoPractice();
-          }
-        },
-        {
-          id: '1.3',
-          title: '1.3 Học viết một đoạn',
-          subtitle: 'Viết đoạn văn PEEL với liên từ mạch lạc',
-          icon: Layers,
-          action: () => {
-            setIsFunctionDropdownOpen(false);
-            if (onSelectWritingStep) onSelectWritingStep('1.3');
-            else if (onGoVocabPractice) onGoVocabPractice();
-            else if (onGoPractice) onGoPractice();
-          }
-        },
-        {
-          id: '1.4',
-          title: '1.4 Học viết một bài',
-          subtitle: 'Viết full bài luận Task 1 & Task 2 kèm bài mẫu',
-          icon: PenTool,
-          action: () => {
-            setIsFunctionDropdownOpen(false);
-            if (onSelectWritingStep) onSelectWritingStep('1.4');
-            else if (onGoFullEssay) onGoFullEssay();
-          }
+          group: "💻 DÀNH CHO MÁY TÍNH (MÀN HÌNH LỚN)",
+          items: [
+            {
+              id: '1.2',
+              title: '1.2 Học viết 1 câu',
+              subtitle: 'Dịch & áp dụng từ vựng vào câu đơn',
+              icon: FileEdit,
+              action: () => {
+                setIsFunctionDropdownOpen(false);
+                if (onSelectWritingStep) onSelectWritingStep('1.2');
+                else if (onGoVocabPractice) onGoVocabPractice();
+                else if (onGoPractice) onGoPractice();
+              }
+            },
+            {
+              id: '1.3',
+              title: '1.3 Học viết một đoạn',
+              subtitle: 'Viết đoạn văn PEEL với liên từ mạch lạc',
+              icon: Layers,
+              action: () => {
+                setIsFunctionDropdownOpen(false);
+                if (onSelectWritingStep) onSelectWritingStep('1.3');
+                else if (onGoVocabPractice) onGoVocabPractice();
+                else if (onGoPractice) onGoPractice();
+              }
+            },
+            {
+              id: '1.4',
+              title: '1.4 Học viết một bài',
+              subtitle: 'Viết full bài luận Task 1 & Task 2 kèm bài mẫu',
+              icon: PenTool,
+              action: () => {
+                setIsFunctionDropdownOpen(false);
+                if (onSelectWritingStep) onSelectWritingStep('1.4');
+                else if (onGoFullEssay) onGoFullEssay();
+              }
+            },
+            {
+              id: '2.1',
+              title: '2.1 Luyện đọc & Tra từ vựng',
+              subtitle: 'Vừa đọc vừa click tra từ trên bài theo 10 chủ đề',
+              icon: BookOpen,
+              action: () => {
+                setIsFunctionDropdownOpen(false);
+                if (onGoReading) onGoReading('practice');
+                else if (onSelectWritingStep) onSelectWritingStep('2.1');
+              }
+            },
+            {
+              id: '2.2',
+              title: '2.2 Thi thử Reading bấm giờ',
+              subtitle: 'Đề thi reading tính giờ 50 đề / chủ đề',
+              icon: FileText,
+              action: () => {
+                setIsFunctionDropdownOpen(false);
+                if (onGoReading) onGoReading('test');
+                else if (onSelectWritingStep) onSelectWritingStep('2.2');
+              }
+            }
+          ]
         }
-      ]
-    },
-    {
-      group: "2. LUYỆN ĐỌC (IELTS READING)",
-      items: [
-        {
-          id: '2.1',
-          title: '2.1 Luyện đọc & Tra từ vựng',
-          subtitle: 'Vừa đọc vừa click tra từ trên bài theo 10 chủ đề',
-          icon: BookOpen,
-          action: () => {
-            setIsFunctionDropdownOpen(false);
-            if (onGoReading) onGoReading('practice');
-            else if (onSelectWritingStep) onSelectWritingStep('2.1');
-          }
-        },
-        {
-          id: '2.2',
-          title: '2.2 Thi thử Reading bấm giờ',
-          subtitle: 'Đề thi reading tính giờ 50 đề / chủ đề',
-          icon: FileText,
-          action: () => {
-            setIsFunctionDropdownOpen(false);
-            if (onGoReading) onGoReading('test');
-            else if (onSelectWritingStep) onSelectWritingStep('2.2');
-          }
-        }
-      ]
-    },
-    {
-      group: "3. FLASHCARDS",
-      items: [
-        {
-          id: '3.0',
-          title: '3. Flashcards',
-          subtitle: 'Phản xạ từ vựng học thuật qua thẻ ghi nhớ',
-          icon: Sparkles,
-          action: () => {
-            setIsFunctionDropdownOpen(false);
-            if (onOpenFlashcard) onOpenFlashcard();
-          }
-        }
-      ]
+      ];
     }
-  ];
+
+    return [
+      {
+        group: "1. HỌC VIẾT",
+        items: [
+          {
+            id: '1.1',
+            title: '1.1 Học từ vựng',
+            subtitle: 'Nắm nghĩa & collocations theo 10 chủ đề',
+            icon: BookOpen,
+            action: () => {
+              setIsFunctionDropdownOpen(false);
+              if (onSelectWritingStep) onSelectWritingStep('1.1');
+              else if (onGoVocabPractice) onGoVocabPractice();
+              else if (onGoPractice) onGoPractice();
+            }
+          },
+          {
+            id: '1.2',
+            title: '1.2 Học viết 1 câu',
+            subtitle: 'Dịch & áp dụng từ vựng vào câu đơn',
+            icon: FileEdit,
+            action: () => {
+              setIsFunctionDropdownOpen(false);
+              if (onSelectWritingStep) onSelectWritingStep('1.2');
+              else if (onGoVocabPractice) onGoVocabPractice();
+              else if (onGoPractice) onGoPractice();
+            }
+          },
+          {
+            id: '1.3',
+            title: '1.3 Học viết một đoạn',
+            subtitle: 'Viết đoạn văn PEEL với liên từ mạch lạc',
+            icon: Layers,
+            action: () => {
+              setIsFunctionDropdownOpen(false);
+              if (onSelectWritingStep) onSelectWritingStep('1.3');
+              else if (onGoVocabPractice) onGoVocabPractice();
+              else if (onGoPractice) onGoPractice();
+            }
+          },
+          {
+            id: '1.4',
+            title: '1.4 Học viết một bài',
+            subtitle: 'Viết full bài luận Task 1 & Task 2 kèm bài mẫu',
+            icon: PenTool,
+            action: () => {
+              setIsFunctionDropdownOpen(false);
+              if (onSelectWritingStep) onSelectWritingStep('1.4');
+              else if (onGoFullEssay) onGoFullEssay();
+            }
+          }
+        ]
+      },
+      {
+        group: "2. LUYỆN ĐỌC (IELTS READING)",
+        items: [
+          {
+            id: '2.1',
+            title: '2.1 Luyện đọc & Tra từ vựng',
+            subtitle: 'Vừa đọc vừa click tra từ trên bài theo 10 chủ đề',
+            icon: BookOpen,
+            action: () => {
+              setIsFunctionDropdownOpen(false);
+              if (onGoReading) onGoReading('practice');
+              else if (onSelectWritingStep) onSelectWritingStep('2.1');
+            }
+          },
+          {
+            id: '2.2',
+            title: '2.2 Thi thử Reading bấm giờ',
+            subtitle: 'Đề thi reading tính giờ 50 đề / chủ đề',
+            icon: FileText,
+            action: () => {
+              setIsFunctionDropdownOpen(false);
+              if (onGoReading) onGoReading('test');
+              else if (onSelectWritingStep) onSelectWritingStep('2.2');
+            }
+          }
+        ]
+      },
+      {
+        group: "3. FLASHCARDS",
+        items: [
+          {
+            id: '3.0',
+            title: '3. Flashcards',
+            subtitle: 'Phản xạ từ vựng học thuật qua thẻ ghi nhớ',
+            icon: Sparkles,
+            action: () => {
+              setIsFunctionDropdownOpen(false);
+              if (onOpenFlashcard) onOpenFlashcard();
+            }
+          }
+        ]
+      }
+    ];
+  }, [isMobile, onSelectWritingStep, onGoVocabPractice, onGoPractice, onGoFullEssay, onGoReading, onOpenFlashcard]);
 
   // Determine current active step ID (1.1, 1.2, 1.3, 1.4, 2.1, 2.2, 3.0)
   const currentStepId = useMemo(() => {
@@ -180,17 +277,17 @@ export default function Header({
       const found = group.items.find(it => it.id === currentStepId);
       if (found) return found;
     }
-    return UNIFIED_SECTIONS[0].items[0];
-  }, [currentStepId]);
+    return UNIFIED_SECTIONS[0]?.items[0];
+  }, [UNIFIED_SECTIONS, currentStepId]);
 
   return (
     <header className="sticky top-0 z-40 bg-[#F8F6F1]/95 backdrop-blur-md border-b border-[#E6E2D8] shadow-[0_1px_3px_rgba(0,0,0,0.03)] shrink-0">
-      <div className="w-full px-3 sm:px-5 h-14 flex items-center justify-between gap-2.5">
+      <div className="w-full px-2.5 sm:px-5 h-14 flex items-center justify-between gap-1.5 sm:gap-2.5">
         
         {/* Logo & Brand title only - No extra badges or subtitles */}
         <div 
           onClick={onGoWelcome}
-          className="flex items-center gap-2.5 cursor-pointer group select-none shrink-0"
+          className="flex items-center gap-2 sm:gap-2.5 cursor-pointer group select-none shrink-0"
           title="Trang chủ Lớp Cô Oanh"
         >
           <div className="w-8 h-8 rounded-xl bg-white border border-[#E6E2D8] p-0.5 flex items-center justify-center shadow-2xs group-hover:scale-105 transition-transform shrink-0 overflow-hidden">
@@ -200,13 +297,13 @@ export default function Header({
               className="w-full h-full object-contain" 
             />
           </div>
-          <span className="font-title font-bold text-base sm:text-lg text-[#24211E] group-hover:text-[#3E4F42] transition leading-none">
+          <span className="font-title font-bold text-sm sm:text-lg text-[#24211E] group-hover:text-[#3E4F42] transition leading-none">
             Lớp cô Oanh
           </span>
         </div>
 
-        {/* Center: Dropdown 1 (Cơ cấu học thống nhất 1.1 - 1.4 & 2. Flashcards), Dropdown 2 (Chỉ hiện Task 1/2 khi ở 1.4) */}
-        <div className="flex items-center gap-2">
+        {/* Center: Dropdown 1 (Cơ cấu mục học), Dropdown 2 (Chỉ hiện khi 1.4 trên máy tính), Progress Band */}
+        <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
           
           {/* Home button */}
           {(currentView === 'practice' || currentView === 'vocab_practice' || currentView === 'full_essay' || currentView === 'flashcard' || currentView === 'reading') && (
@@ -221,22 +318,22 @@ export default function Header({
           )}
 
           {/* ================= DROPDOWN 1: CƠ CẤU MỤC HỌC THỐNG NHẤT ================= */}
-          <div className="relative" ref={functionDropdownRef}>
+          <div className="relative min-w-0" ref={functionDropdownRef}>
             <button
               onClick={() => {
                 setIsFunctionDropdownOpen(prev => !prev);
                 setIsTaskDropdownOpen(false);
               }}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#3E4F42]/30 text-xs font-semibold text-[#24211E] transition cursor-pointer shadow-2xs select-none"
-              title="Chọn mục học tập (1.1 Từ vựng, 1.2 Viết câu, 1.3 Viết đoạn, 1.4 Viết một bài, 2. Flashcards)"
+              className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#3E4F42]/30 text-xs font-semibold text-[#24211E] transition cursor-pointer shadow-2xs select-none max-w-[140px] sm:max-w-none"
+              title="Chọn mục học tập"
             >
-              {currentItem && <currentItem.icon className="w-3.5 h-3.5 text-[#3E4F42]" />}
-              <span>{currentItem ? currentItem.title : "1. Học viết"}</span>
-              <ChevronDown className={`w-3 h-3 text-[#7A7369] transition-transform duration-200 ${isFunctionDropdownOpen ? "rotate-180" : ""}`} />
+              {currentItem && <currentItem.icon className="w-3.5 h-3.5 text-[#3E4F42] shrink-0" />}
+              <span className="truncate">{currentItem ? currentItem.title : "1. Học viết"}</span>
+              <ChevronDown className={`w-3 h-3 text-[#7A7369] shrink-0 transition-transform duration-200 ${isFunctionDropdownOpen ? "rotate-180" : ""}`} />
             </button>
 
             {isFunctionDropdownOpen && (
-              <div className="absolute top-full left-0 mt-1.5 w-64 bg-white border border-[#E6E2D8] rounded-2xl shadow-xl p-2 z-50 animate-in fade-in-50 duration-150">
+              <div className="absolute top-full left-0 mt-1.5 w-68 bg-white border border-[#E6E2D8] rounded-2xl shadow-xl p-2 z-50 animate-in fade-in-50 duration-150 max-h-[85vh] overflow-y-auto">
                 {UNIFIED_SECTIONS.map((section, sIdx) => (
                   <div key={section.group} className={sIdx > 0 ? "pt-2 mt-1 border-t border-[#E6E2D8]" : ""}>
                     <div className="px-2.5 py-1 text-[10px] font-bold text-[#A67C52] uppercase tracking-wider">
@@ -279,9 +376,9 @@ export default function Header({
             )}
           </div>
 
-          {/* ================= DROPDOWN 2: CHỈ HIỂN THỊ KHI Ở 1.4 HỌC VIẾT MỘT BÀI ================= */}
-          {currentView === 'full_essay' && onToggleTask && (
-            <div className="relative" ref={taskDropdownRef}>
+          {/* ================= DROPDOWN 2: CHỈ HIỂN THỊ KHI Ở 1.4 HỌC VIẾT MỘT BÀI VÀ TRÊN MÁY TÍNH ================= */}
+          {currentView === 'full_essay' && onToggleTask && !isMobile && (
+            <div className="relative hidden md:block" ref={taskDropdownRef}>
               <button
                 onClick={() => {
                   setIsTaskDropdownOpen(prev => !prev);
@@ -349,21 +446,21 @@ export default function Header({
           {/* ================= MERGED PROGRESS WIDGET: MỤC TIÊU & HIỆN TRẠNG ================= */}
           <div 
             onClick={onOpenBandModal}
-            className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#3E4F42]/30 transition cursor-pointer select-none text-xs shadow-2xs group"
+            className="flex items-center gap-1.5 sm:gap-2.5 px-2 sm:px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#3E4F42]/30 transition cursor-pointer select-none text-xs shadow-2xs group shrink-0"
             title={`Tiến độ Band: Hiện tại ${current7DayScore !== null ? current7DayScore.toFixed(1) : '--'} / Mục tiêu ${targetBand}. Nhấn để đổi Band mục tiêu.`}
           >
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1 sm:gap-1.5">
               <Target className="w-3.5 h-3.5 text-[#3E4F42] shrink-0 group-hover:scale-105 transition-transform" />
-              <span className="text-[#7A7369] hidden sm:inline">Tiến độ:</span>
+              <span className="text-[#7A7369] hidden md:inline">Tiến độ:</span>
               <span className="font-semibold text-[#24211E]">
-                {current7DayScore !== null ? current7DayScore.toFixed(1) : '--'}
-                <span className="text-[#7A7369] font-normal mx-0.5">/</span>
-                {targetBand}
+                <span className="hidden sm:inline">{current7DayScore !== null ? current7DayScore.toFixed(1) : '--'}</span>
+                <span className="text-[#7A7369] font-normal mx-0.5 hidden sm:inline">/</span>
+                <span>{targetBand}</span>
               </span>
             </div>
 
             {/* Mini Progress Bar */}
-            <div className="w-12 sm:w-16 h-1.5 bg-[#F4EFEA] rounded-full overflow-hidden border border-[#E6E2D8]">
+            <div className="hidden sm:block w-12 sm:w-16 h-1.5 bg-[#F4EFEA] rounded-full overflow-hidden border border-[#E6E2D8]">
               <div 
                 className="h-full bg-[#3E4F42] rounded-full transition-all duration-500"
                 style={{ width: `${progressPercent}%` }}
@@ -371,7 +468,7 @@ export default function Header({
             </div>
 
             {current7DayScore !== null && (
-              <span className="text-[10px] font-mono text-[#7A7369] hidden md:inline">
+              <span className="text-[10px] font-mono text-[#7A7369] hidden lg:inline">
                 {progressPercent}%
               </span>
             )}
@@ -380,19 +477,19 @@ export default function Header({
         </div>
 
         {/* Right Area: User Account Only */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           {currentUser ? (
             <div className="relative" ref={accountMenuRef}>
               <button
                 type="button"
                 onClick={() => setIsAccountMenuOpen(prev => !prev)}
-                className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#3E4F42]/30 text-xs text-[#24211E] transition cursor-pointer shadow-2xs select-none"
+                className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#3E4F42]/30 text-xs text-[#24211E] transition cursor-pointer shadow-2xs select-none"
                 title="Tài khoản & Cài đặt"
               >
                 <div className="w-5 h-5 rounded-lg bg-[#3E4F42] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
                   {(currentUser?.user_metadata?.full_name || studentEmail || "H").charAt(0).toUpperCase()}
                 </div>
-                <span className="font-semibold text-[#24211E] max-w-[110px] sm:max-w-[150px] truncate">
+                <span className="font-semibold text-[#24211E] hidden sm:inline max-w-[110px] sm:max-w-[150px] truncate">
                   {currentUser?.user_metadata?.full_name || currentUser?.email}
                 </span>
                 <ChevronDown className={`w-3 h-3 text-[#7A7369] transition-transform duration-200 ${isAccountMenuOpen ? "rotate-180" : ""}`} />

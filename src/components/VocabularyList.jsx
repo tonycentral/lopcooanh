@@ -12,7 +12,8 @@ import {
   PlusCircle,
   FileEdit,
   Tag,
-  Search
+  Search,
+  Volume2
 } from 'lucide-react';
 import { getKnownWords, toggleKnownWord, resetKnownWordsForTopic } from '../services/userService';
 import { getSynonymVocab, findVocabInList } from '../services/synonymService';
@@ -26,7 +27,8 @@ export default function VocabularyList({
   onOpenFlashcard,
   onGoFullEssay,
   onNextTopic,
-  onOpenSourcesModal
+  onOpenSourcesModal,
+  isMobileView = false
 }) {
   const [knownWordIds, setKnownWordIds] = useState(() => getKnownWords(studentEmail));
   const [pageIndex, setPageIndex] = useState(0);
@@ -517,8 +519,17 @@ export default function VocabularyList({
                         : "bg-[#3E4F42] hover:bg-[#334237] text-white"
                     }`}
                   >
-                    <PenTool className="w-3 h-3" />
-                    <span>Luyện tập</span>
+                    {isMobileView ? (
+                      <>
+                        <Volume2 className="w-3 h-3" />
+                        <span>Chi tiết</span>
+                      </>
+                    ) : (
+                      <>
+                        <PenTool className="w-3 h-3" />
+                        <span>Luyện tập</span>
+                      </>
+                    )}
                   </button>
                 </div>
               </div>

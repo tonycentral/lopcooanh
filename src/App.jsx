@@ -18,6 +18,10 @@ import AuthModal from './components/AuthModal';
 import SettingsModal from './components/SettingsModal';
 import FullEssayWorkspace from './components/FullEssayWorkspace';
 import ReadingWorkspace from './components/reading/ReadingWorkspace';
+import MobileBottomNav from './components/MobileBottomNav';
+import MobileDesktopNotice from './components/MobileDesktopNotice';
+import MobileVocabWorkspace from './components/MobileVocabWorkspace';
+import { useIsMobile } from './hooks/useIsMobile';
 
 
 import { 
@@ -83,6 +87,10 @@ export default function App() {
     }
     return 'vocab_practice';
   });
+
+  // Phát hiện giao diện điện thoại (< 768px) để phân chia trải nghiệm chuyên biệt
+  const isMobile = useIsMobile();
+  const [bypassMobileNotice, setBypassMobileNotice] = useState(false);
 
   // Lắng nghe link ẩn bí mật vào Admin Dashboard (URL #admin, #admin-cooanh, ?admin=true) hoặc Ctrl+Shift+A
   useEffect(() => {
@@ -528,6 +536,7 @@ export default function App() {
           targetBand={targetBand}
           selectedTask={activeTask}
           onSettingsChange={handleSettingsChange}
+          isMobile={isMobile}
           onResumeLastLocation={(loc) => {
             if (!currentUser) {
               setIsAuthModalOpen(true);
@@ -617,21 +626,43 @@ export default function App() {
             currentView={currentView}
             activeWritingStep={activeWritingStep}
             onSelectWritingStep={handleSelectWritingStep}
+            isMobile={isMobile}
           />
 
-          <div className="flex-1 min-h-0 overflow-y-auto p-3 sm:p-4">
-            <FullEssayWorkspace
-              topics={currentTopics}
-              selectedTopic={selectedTopic}
-              onSelectTopic={handleSelectTopic}
-              activeTask={activeTask}
-              onToggleTask={handleToggleTask}
-              targetBand={targetBand}
-              studentEmail={studentEmail}
-              onOpenChartModal={() => setIsChartModalOpen(true)}
-              onEssayGraded={handleRefreshStats}
-            />
-          </div>
+          {isMobile && !bypassMobileNotice ? (
+            <div className="flex-1 min-h-0 overflow-y-auto">
+              <MobileDesktopNotice
+                targetModule="writing"
+                onGoVocab={() => {
+                  setBypassMobileNotice(false);
+                  setCurrentView('vocab_practice');
+                }}
+                onGoFlashcard={() => {
+                  setBypassMobileNotice(false);
+                  if (!currentUser) {
+                    setIsAuthModalOpen(true);
+                    return;
+                  }
+                  setCurrentView('flashcard');
+                }}
+                onBypass={() => setBypassMobileNotice(true)}
+              />
+            </div>
+          ) : (
+            <div className="flex-1 min-h-0 overflow-y-auto p-3 sm:p-4">
+              <FullEssayWorkspace
+                topics={currentTopics}
+                selectedTopic={selectedTopic}
+                onSelectTopic={handleSelectTopic}
+                activeTask={activeTask}
+                onToggleTask={handleToggleTask}
+                targetBand={targetBand}
+                studentEmail={studentEmail}
+                onOpenChartModal={() => setIsChartModalOpen(true)}
+                onEssayGraded={handleRefreshStats}
+              />
+            </div>
+          )}
         </div>
       ) : currentView === 'reading' ? (
         /* MODE 3: LUYỆN ĐỌC (IELTS READING WORKSPACE - 10 CHỦ ĐỀ • 50 ĐỀ / CHỦ ĐỀ) */
@@ -677,18 +708,40 @@ export default function App() {
             currentView={currentView}
             activeWritingStep={activeWritingStep}
             onSelectWritingStep={handleSelectWritingStep}
+            isMobile={isMobile}
           />
 
-          <div className="flex-1 min-h-0 overflow-hidden">
-            <ReadingWorkspace
-              studentEmail={studentEmail}
-              targetBand={targetBand}
-              initialMode={readingInitialMode}
-              onReadingGraded={handleRefreshStats}
-              onGoWelcome={() => setCurrentView('welcome')}
-              onOpenFlashcard={() => setCurrentView('flashcard')}
-            />
-          </div>
+          {isMobile && !bypassMobileNotice ? (
+            <div className="flex-1 min-h-0 overflow-y-auto">
+              <MobileDesktopNotice
+                targetModule="reading"
+                onGoVocab={() => {
+                  setBypassMobileNotice(false);
+                  setCurrentView('vocab_practice');
+                }}
+                onGoFlashcard={() => {
+                  setBypassMobileNotice(false);
+                  if (!currentUser) {
+                    setIsAuthModalOpen(true);
+                    return;
+                  }
+                  setCurrentView('flashcard');
+                }}
+                onBypass={() => setBypassMobileNotice(true)}
+              />
+            </div>
+          ) : (
+            <div className="flex-1 min-h-0 overflow-hidden">
+              <ReadingWorkspace
+                studentEmail={studentEmail}
+                targetBand={targetBand}
+                initialMode={readingInitialMode}
+                onReadingGraded={handleRefreshStats}
+                onGoWelcome={() => setCurrentView('welcome')}
+                onOpenFlashcard={() => setCurrentView('flashcard')}
+              />
+            </div>
+          )}
         </div>
       ) : (
         /* MODE 1: HỌC TỪ VỰNG (CHỌN TOPIC -> LUYỆN TỪ VỰNG -> LUYỆN CÂU & ĐOẠN) */
@@ -734,38 +787,148 @@ export default function App() {
             currentView={currentView}
             activeWritingStep={activeWritingStep}
             onSelectWritingStep={handleSelectWritingStep}
+            isMobile={isMobile}
           />
 
-          {/* Section 1: Thanh chọn nhóm chủ đề & topic */}
-          <section className="px-3 sm:px-4 pt-2 shrink-0">
-            <TopicTabBar
-              topics={currentTopics}
-              selectedTopic={selectedTopic}
-              onSelectTopic={handleSelectTopic}
-              onRandomTopic={handleRandomTopic}
-              activeTask={activeTask}
-              onOpenChartModal={() => setIsChartModalOpen(true)}
-              task1Layout={task1Layout}
-              onToggleTask1Layout={handleToggleTask1Layout}
-              hidePromptCard={true}
-            />
-          </section>
+          {isMobile ? (
+            /* TRÊN ĐIỆN THOẠI: KHÔNG GIAN HỌC TỪ VỰNG CHUYÊN BIỆT (KHÔNG CÓ KHUNG VIẾT CÂU/ĐOẠN) */
+            <div className="flex-1 min-h-0 overflow-hidden">
+              <MobileVocabWorkspace
+                topics={currentTopics}
+                selectedTopic={selectedTopic}
+                onSelectTopic={handleSelectTopic}
+                onRandomTopic={handleRandomTopic}
+                activeTask={activeTask}
+                selectedVocab={selectedVocab}
+                onSelectVocab={setSelectedVocab}
+                studentEmail={studentEmail}
+                onOpenFlashcard={() => {
+                  if (!currentUser) {
+                    setIsAuthModalOpen(true);
+                    return;
+                  }
+                  setCurrentView('flashcard');
+                }}
+                onOpenSourcesModal={() => setIsSourcesModalOpen(true)}
+                onNextTopic={handleNextTopic}
+              />
+            </div>
+          ) : (
+            <>
+              {/* Section 1: Thanh chọn nhóm chủ đề & topic */}
+              <section className="px-3 sm:px-4 pt-2 shrink-0">
+                <TopicTabBar
+                  topics={currentTopics}
+                  selectedTopic={selectedTopic}
+                  onSelectTopic={handleSelectTopic}
+                  onRandomTopic={handleRandomTopic}
+                  activeTask={activeTask}
+                  onOpenChartModal={() => setIsChartModalOpen(true)}
+                  task1Layout={task1Layout}
+                  onToggleTask1Layout={handleToggleTask1Layout}
+                  hidePromptCard={true}
+                />
+              </section>
 
-          {/* Section 2: Main Workspace */}
-          <main className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-12 gap-3 p-3 sm:p-4 overflow-hidden">
-            {activeTask === 'task1' ? (
-              task1Layout === 'stacked' ? (
-                <>
-                  {/* Cột 1: Gộp 2 tầng (Tầng trên: Biểu đồ Task 1, Tầng dưới: Danh sách từ vựng) (5 cols) */}
-                  <div className="md:col-span-5 h-full flex flex-col gap-3 overflow-hidden">
-                    <div className="h-1/2 bg-white border border-[#E6E2D8] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
-                      <Task1Visualizer 
-                        topic={selectedTopic} 
-                        isCompact={true}
-                        onExpandChart={() => setIsChartModalOpen(true)}
-                      />
-                    </div>
-                    <div className="h-1/2 bg-white border border-[#E6E2D8] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
+              {/* Section 2: Main Workspace */}
+              <main className="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-12 gap-3 p-3 sm:p-4 overflow-hidden">
+                {activeTask === 'task1' ? (
+                  task1Layout === 'stacked' ? (
+                    <>
+                      {/* Cột 1: Gộp 2 tầng (Tầng trên: Biểu đồ Task 1, Tầng dưới: Danh sách từ vựng) (5 cols) */}
+                      <div className="md:col-span-5 h-full flex flex-col gap-3 overflow-hidden">
+                        <div className="h-1/2 bg-white border border-[#E6E2D8] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
+                          <Task1Visualizer 
+                            topic={selectedTopic} 
+                            isCompact={true}
+                            onExpandChart={() => setIsChartModalOpen(true)}
+                          />
+                        </div>
+                        <div className="h-1/2 bg-white border border-[#E6E2D8] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
+                          <VocabularyList
+                            vocabularies={selectedTopic?.vocabularies || []}
+                            selectedVocab={selectedVocab}
+                            onSelectVocab={setSelectedVocab}
+                            studentEmail={studentEmail}
+                            onStartPractice={(vocab) => setSelectedVocab(vocab)}
+                            onOpenFlashcard={() => setCurrentView('flashcard')}
+                            onGoFullEssay={() => setCurrentView('full_essay')}
+                            onNextTopic={handleNextTopic}
+                            onOpenSourcesModal={() => setIsSourcesModalOpen(true)}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Cột 2: Luyện viết 3 phần (7 cols) */}
+                      <div className="md:col-span-7 h-full bg-white border border-[#E6E2D8] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
+                        <div className="flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-thin">
+                          <SentencePractice
+                            topic={selectedTopic}
+                            targetBand={targetBand}
+                            selectedVocab={selectedVocab}
+                            onSelectVocab={setSelectedVocab}
+                            apiKey={apiKey}
+                            studentEmail={studentEmail}
+                            activeTask={activeTask}
+                            onOpenChartModal={() => setIsChartModalOpen(true)}
+                            onSentenceGraded={handleRefreshStats}
+                            activePart={practiceActivePart}
+                            onPartChange={setPracticeActivePart}
+                            onGoFullEssay={() => setCurrentView('full_essay')}
+                          />
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {/* Cột 1: Biểu đồ Task 1 & Đề bài (4 cols) */}
+                      <div className="md:col-span-4 h-full bg-white border border-[#E6E2D8] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
+                        <Task1Visualizer 
+                          topic={selectedTopic} 
+                          onExpandChart={() => setIsChartModalOpen(true)}
+                        />
+                      </div>
+
+                      {/* Cột 2: Danh sách từ vựng theo biểu đồ (3 cols) */}
+                      <div className="md:col-span-3 h-full bg-white border border-[#E6E2D8] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
+                        <VocabularyList
+                          vocabularies={selectedTopic?.vocabularies || []}
+                          selectedVocab={selectedVocab}
+                          onSelectVocab={setSelectedVocab}
+                          studentEmail={studentEmail}
+                          onStartPractice={(vocab) => setSelectedVocab(vocab)}
+                          onOpenFlashcard={() => setCurrentView('flashcard')}
+                          onGoFullEssay={() => setCurrentView('full_essay')}
+                          onNextTopic={handleNextTopic}
+                          onOpenSourcesModal={() => setIsSourcesModalOpen(true)}
+                        />
+                      </div>
+
+                      {/* Cột 3: Luyện viết câu & đoạn (5 cols) */}
+                      <div className="md:col-span-5 h-full bg-white border border-[#E6E2D8] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
+                        <div className="flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-thin">
+                          <SentencePractice
+                            topic={selectedTopic}
+                            targetBand={targetBand}
+                            selectedVocab={selectedVocab}
+                            onSelectVocab={setSelectedVocab}
+                            apiKey={apiKey}
+                            studentEmail={studentEmail}
+                            activeTask={activeTask}
+                            onOpenChartModal={() => setIsChartModalOpen(true)}
+                            onSentenceGraded={handleRefreshStats}
+                            activePart={practiceActivePart}
+                            onPartChange={setPracticeActivePart}
+                            onGoFullEssay={() => setCurrentView('full_essay')}
+                          />
+                        </div>
+                      </div>
+                    </>
+                  )
+                ) : (
+                  <>
+                    {/* Cột 1: Danh sách từ vựng theo chủ đề (5 cols) */}
+                    <div className="md:col-span-5 h-full bg-white border border-[#E6E2D8] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
                       <VocabularyList
                         vocabularies={selectedTopic?.vocabularies || []}
                         selectedVocab={selectedVocab}
@@ -778,113 +941,31 @@ export default function App() {
                         onOpenSourcesModal={() => setIsSourcesModalOpen(true)}
                       />
                     </div>
-                  </div>
 
-                  {/* Cột 2: Luyện viết 3 phần (7 cols) */}
-                  <div className="md:col-span-7 h-full bg-white border border-[#E6E2D8] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
-                    <div className="flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-thin">
-                      <SentencePractice
-                        topic={selectedTopic}
-                        targetBand={targetBand}
-                        selectedVocab={selectedVocab}
-                        onSelectVocab={setSelectedVocab}
-                        apiKey={apiKey}
-                        studentEmail={studentEmail}
-                        activeTask={activeTask}
-                        onOpenChartModal={() => setIsChartModalOpen(true)}
-                        onSentenceGraded={handleRefreshStats}
-                        activePart={practiceActivePart}
-                        onPartChange={setPracticeActivePart}
-                        onGoFullEssay={() => setCurrentView('full_essay')}
-                      />
+                    {/* Cột 2: Luyện viết 3 phần (Hiểu từ -> Luyện viết câu -> Luyện viết đoạn văn) (7 cols) */}
+                    <div className="md:col-span-7 h-full bg-white border border-[#E6E2D8] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
+                      <div className="flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-thin">
+                        <SentencePractice
+                          topic={selectedTopic}
+                          targetBand={targetBand}
+                          selectedVocab={selectedVocab}
+                          onSelectVocab={setSelectedVocab}
+                          apiKey={apiKey}
+                          studentEmail={studentEmail}
+                          activeTask={activeTask}
+                          onOpenChartModal={() => setIsChartModalOpen(true)}
+                          onSentenceGraded={handleRefreshStats}
+                          activePart={practiceActivePart}
+                          onPartChange={setPracticeActivePart}
+                          onGoFullEssay={() => setCurrentView('full_essay')}
+                        />
+                      </div>
                     </div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  {/* Cột 1: Biểu đồ Task 1 & Đề bài (4 cols) */}
-                  <div className="md:col-span-4 h-full bg-white border border-[#E6E2D8] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
-                    <Task1Visualizer 
-                      topic={selectedTopic} 
-                      onExpandChart={() => setIsChartModalOpen(true)}
-                    />
-                  </div>
-
-                  {/* Cột 2: Danh sách từ vựng theo biểu đồ (3 cols) */}
-                  <div className="md:col-span-3 h-full bg-white border border-[#E6E2D8] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
-                    <VocabularyList
-                      vocabularies={selectedTopic?.vocabularies || []}
-                      selectedVocab={selectedVocab}
-                      onSelectVocab={setSelectedVocab}
-                      studentEmail={studentEmail}
-                      onStartPractice={(vocab) => setSelectedVocab(vocab)}
-                      onOpenFlashcard={() => setCurrentView('flashcard')}
-                      onGoFullEssay={() => setCurrentView('full_essay')}
-                      onNextTopic={handleNextTopic}
-                      onOpenSourcesModal={() => setIsSourcesModalOpen(true)}
-                    />
-                  </div>
-
-                  {/* Cột 3: Luyện viết câu & đoạn (5 cols) */}
-                  <div className="md:col-span-5 h-full bg-white border border-[#E6E2D8] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
-                    <div className="flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-thin">
-                      <SentencePractice
-                        topic={selectedTopic}
-                        targetBand={targetBand}
-                        selectedVocab={selectedVocab}
-                        onSelectVocab={setSelectedVocab}
-                        apiKey={apiKey}
-                        studentEmail={studentEmail}
-                        activeTask={activeTask}
-                        onOpenChartModal={() => setIsChartModalOpen(true)}
-                        onSentenceGraded={handleRefreshStats}
-                        activePart={practiceActivePart}
-                        onPartChange={setPracticeActivePart}
-                        onGoFullEssay={() => setCurrentView('full_essay')}
-                      />
-                    </div>
-                  </div>
-                </>
-              )
-            ) : (
-              <>
-                {/* Cột 1: Danh sách từ vựng theo chủ đề (5 cols) */}
-                <div className="md:col-span-5 h-full bg-white border border-[#E6E2D8] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
-                  <VocabularyList
-                    vocabularies={selectedTopic?.vocabularies || []}
-                    selectedVocab={selectedVocab}
-                    onSelectVocab={setSelectedVocab}
-                    studentEmail={studentEmail}
-                    onStartPractice={(vocab) => setSelectedVocab(vocab)}
-                    onOpenFlashcard={() => setCurrentView('flashcard')}
-                    onGoFullEssay={() => setCurrentView('full_essay')}
-                    onNextTopic={handleNextTopic}
-                    onOpenSourcesModal={() => setIsSourcesModalOpen(true)}
-                  />
-                </div>
-
-                {/* Cột 2: Luyện viết 3 phần (Hiểu từ -> Luyện viết câu -> Luyện viết đoạn văn) (7 cols) */}
-                <div className="md:col-span-7 h-full bg-white border border-[#E6E2D8] rounded-2xl p-3 flex flex-col overflow-hidden shadow-xs">
-                  <div className="flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-thin">
-                    <SentencePractice
-                      topic={selectedTopic}
-                      targetBand={targetBand}
-                      selectedVocab={selectedVocab}
-                      onSelectVocab={setSelectedVocab}
-                      apiKey={apiKey}
-                      studentEmail={studentEmail}
-                      activeTask={activeTask}
-                      onOpenChartModal={() => setIsChartModalOpen(true)}
-                      onSentenceGraded={handleRefreshStats}
-                      activePart={practiceActivePart}
-                      onPartChange={setPracticeActivePart}
-                      onGoFullEssay={() => setCurrentView('full_essay')}
-                    />
-                  </div>
-                </div>
-              </>
-            )}
-          </main>
+                  </>
+                )}
+              </main>
+            </>
+          )}
         </div>
       )}
 
@@ -980,6 +1061,30 @@ export default function App() {
           }
         }}
       />
+
+      {/* Thanh điều hướng chân trang cố định trên điện thoại */}
+      {isMobile && currentView !== 'admin' && (
+        <MobileBottomNav
+          currentView={currentView}
+          onGoVocab={() => {
+            setBypassMobileNotice(false);
+            if (!currentUser) {
+              setIsAuthModalOpen(true);
+              return;
+            }
+            setCurrentView('vocab_practice');
+          }}
+          onGoFlashcard={() => {
+            setBypassMobileNotice(false);
+            if (!currentUser) {
+              setIsAuthModalOpen(true);
+              return;
+            }
+            setCurrentView('flashcard');
+          }}
+          onGoWelcome={() => setCurrentView('welcome')}
+        />
+      )}
 
     </div>
   );
