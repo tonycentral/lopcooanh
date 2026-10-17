@@ -235,7 +235,7 @@ export default function FlashcardPage({
   };
 
   return (
-    <div className="h-screen w-full flex flex-col bg-[#F8F6F1] text-[#24211E] overflow-hidden select-none">
+    <div className="h-[100dvh] max-h-[100dvh] w-full flex flex-col bg-[#F8F6F1] text-[#24211E] overflow-hidden select-none">
       
       {/* Top Gamification Bar */}
       <FlashcardTopBar
@@ -260,14 +260,14 @@ export default function FlashcardPage({
         needsReviewCount={needsReviewCount}
       />
 
-      {/* Mode Switcher Tabs & Filters */}
-      <div className="w-full bg-white border-b border-[#E6E2D8] px-3 sm:px-6 py-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 shrink-0">
+      {/* Mode Switcher Tabs & Filters (Single-line Compact on Mobile) */}
+      <div className="w-full bg-white border-b border-[#E6E2D8] px-2.5 sm:px-6 py-1.5 sm:py-2 flex items-center justify-between gap-2 overflow-x-auto scrollbar-none shrink-0 whitespace-nowrap">
         
         {/* 4 Interactive Study Modes */}
-        <div className="flex items-center p-0.5 rounded-2xl bg-[#F4EFEA] border border-[#E6E2D8] text-xs overflow-x-auto scrollbar-none">
+        <div className="flex items-center p-0.5 rounded-xl bg-[#F4EFEA] border border-[#E6E2D8] text-xs shrink-0">
           <button
             onClick={() => setActiveMode('card')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-medium transition whitespace-nowrap cursor-pointer ${
+            className={`px-2.5 py-1 rounded-lg font-medium transition cursor-pointer ${
               activeMode === 'card'
                 ? "bg-[#3E4F42] text-white shadow-xs"
                 : "text-[#7A7369] hover:text-[#24211E]"
@@ -278,7 +278,7 @@ export default function FlashcardPage({
 
           <button
             onClick={() => setActiveMode('quiz')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-medium transition whitespace-nowrap cursor-pointer ${
+            className={`px-2.5 py-1 rounded-lg font-medium transition cursor-pointer ${
               activeMode === 'quiz'
                 ? "bg-[#3E4F42] text-white shadow-xs"
                 : "text-[#7A7369] hover:text-[#24211E]"
@@ -289,7 +289,7 @@ export default function FlashcardPage({
 
           <button
             onClick={() => setActiveMode('match')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-medium transition whitespace-nowrap cursor-pointer ${
+            className={`px-2.5 py-1 rounded-lg font-medium transition cursor-pointer ${
               activeMode === 'match'
                 ? "bg-[#3E4F42] text-white shadow-xs"
                 : "text-[#7A7369] hover:text-[#24211E]"
@@ -300,7 +300,7 @@ export default function FlashcardPage({
 
           <button
             onClick={() => setActiveMode('fill')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-medium transition whitespace-nowrap cursor-pointer ${
+            className={`px-2.5 py-1 rounded-lg font-medium transition cursor-pointer ${
               activeMode === 'fill'
                 ? "bg-[#3E4F42] text-white shadow-xs"
                 : "text-[#7A7369] hover:text-[#24211E]"
@@ -311,25 +311,21 @@ export default function FlashcardPage({
         </div>
 
         {/* Filter Pills */}
-        <div className="flex items-center gap-1.5 text-xs overflow-x-auto scrollbar-none flex-wrap">
-          <span className="text-[#7A7369] font-medium hidden md:inline flex items-center gap-1">
-            <Filter className="w-3 h-3" /> Lọc:
-          </span>
-
+        <div className="flex items-center gap-1.5 text-xs shrink-0">
           <button
             onClick={() => setFilterMode('current')}
-            className={`px-2.5 py-1 rounded-xl font-medium transition cursor-pointer whitespace-nowrap ${
+            className={`px-2 py-1 rounded-xl font-medium transition cursor-pointer ${
               filterMode === 'current'
                 ? "bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3] font-bold"
                 : "bg-white text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
             }`}
           >
-            Chủ đề ({currentTopic?.vietnameseName || currentTopic?.name || "Hiện tại"})
+            Chủ đề
           </button>
 
           <button
             onClick={() => setFilterMode('all')}
-            className={`px-2.5 py-1 rounded-xl font-medium transition cursor-pointer whitespace-nowrap ${
+            className={`px-2 py-1 rounded-xl font-medium transition cursor-pointer ${
               filterMode === 'all'
                 ? "bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3] font-bold"
                 : "bg-white text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
@@ -340,7 +336,7 @@ export default function FlashcardPage({
 
           <button
             onClick={() => setFilterMode('weak')}
-            className={`px-2.5 py-1 rounded-xl font-medium transition cursor-pointer whitespace-nowrap ${
+            className={`px-2 py-1 rounded-xl font-medium transition cursor-pointer ${
               filterMode === 'weak'
                 ? "bg-amber-100 text-amber-900 border border-amber-300 font-bold"
                 : "bg-white text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
@@ -351,24 +347,13 @@ export default function FlashcardPage({
 
           <button
             onClick={() => setFilterMode('mastered')}
-            className={`px-2.5 py-1 rounded-xl font-medium transition cursor-pointer whitespace-nowrap ${
+            className={`px-2 py-1 rounded-xl font-medium transition cursor-pointer ${
               filterMode === 'mastered'
                 ? "bg-emerald-100 text-emerald-900 border border-emerald-300 font-bold"
                 : "bg-white text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
             }`}
           >
             Đã thuộc ({masteredCount})
-          </button>
-
-          <button
-            onClick={() => setFilterMode('daily10')}
-            className={`px-2.5 py-1 rounded-xl font-medium transition cursor-pointer whitespace-nowrap ${
-              filterMode === 'daily10'
-                ? "bg-[#EDF3EE] text-[#3E4F42] border border-[#D1DDD3] font-bold"
-                : "bg-white text-[#7A7369] hover:text-[#24211E] border border-[#E6E2D8]"
-            }`}
-          >
-            Ngẫu nhiên 10 từ
           </button>
 
           {/* Toggle Bỏ qua từ đã thuộc */}
@@ -378,15 +363,15 @@ export default function FlashcardPage({
                 setHideMastered(prev => !prev);
                 setCurrentIndex(0);
               }}
-              className={`px-2.5 py-1 rounded-xl text-[11px] font-medium transition cursor-pointer flex items-center gap-1 border ${
+              className={`px-2 py-1 rounded-xl text-[11px] font-medium transition cursor-pointer flex items-center gap-1 border ${
                 hideMastered
                   ? "bg-emerald-600 text-white border-emerald-600 font-bold shadow-2xs"
                   : "bg-[#FAF8F5] text-[#7A7369] border-[#E6E2D8] hover:text-[#24211E]"
               }`}
-              title="Ẩn những từ đã thuộc để tập trung học các từ còn lại"
+              title="Ẩn từ đã thuộc"
             >
               <CheckCircle2 className="w-3 h-3" />
-              <span>{hideMastered ? "Đang ẩn từ đã thuộc" : "Ẩn từ đã thuộc"}</span>
+              <span>{hideMastered ? "Ẩn đã thuộc" : "Hiện tất cả"}</span>
             </button>
           )}
 
@@ -394,8 +379,8 @@ export default function FlashcardPage({
 
       </div>
 
-      {/* Main Flashcard Practice Area */}
-      <main className="flex-1 min-h-0 flex flex-col justify-center items-center px-4 py-3 pb-24 md:pb-3 overflow-y-auto scrollbar-thin">
+      {/* Main Flashcard Practice Area - Zero scroll on mobile */}
+      <main className="flex-1 min-h-0 flex flex-col justify-center items-center px-3 py-1 pb-20 md:pb-3 overflow-hidden select-none">
         
         {/* Out of Hearts Notice */}
         {hearts === 0 && (

@@ -80,12 +80,12 @@ export default function ClassicCardView({
   if (!card) return null;
 
   return (
-    <div className="w-full max-w-2xl mx-auto flex flex-col items-center justify-center gap-4 sm:gap-6 py-2">
+    <div className="w-full max-w-2xl mx-auto flex flex-col items-center justify-center gap-2 sm:gap-6 py-1 sm:py-2 select-none">
       
       {/* 3D Flip Card Container */}
       <div 
         onClick={handleFlip}
-        className="w-full h-[360px] sm:h-[420px] cursor-pointer perspective-1000 select-none group"
+        className="w-full h-[40vh] max-h-[340px] min-h-[230px] sm:h-[420px] cursor-pointer perspective-1000 select-none group"
       >
         <div 
           className={`relative w-full h-full rounded-3xl transition-transform duration-500 transform-style-3d shadow-sm border ${
@@ -99,7 +99,7 @@ export default function ClassicCardView({
           }`}
         >
           {/* ================= CARD FRONT ================= */}
-          <div className="absolute inset-0 w-full h-full p-6 sm:p-8 flex flex-col justify-between backface-hidden rounded-3xl bg-white">
+          <div className="absolute inset-0 w-full h-full p-4 sm:p-8 flex flex-col justify-between backface-hidden rounded-3xl bg-white">
             
             {/* Top Badge Row */}
             <div className="flex items-center justify-between gap-2 flex-wrap">
@@ -174,7 +174,7 @@ export default function ClassicCardView({
           </div>
 
           {/* ================= CARD BACK ================= */}
-          <div className="absolute inset-0 w-full h-full p-6 sm:p-8 flex flex-col justify-between backface-hidden rotate-y-180 rounded-3xl overflow-y-auto scrollbar-thin bg-[#FAF8F5]">
+          <div className="absolute inset-0 w-full h-full p-4 sm:p-8 flex flex-col justify-between backface-hidden rotate-y-180 rounded-3xl overflow-y-auto scrollbar-thin bg-[#FAF8F5]">
             
             {/* Top Back Row */}
             <div className="flex items-center justify-between pb-2 border-b border-[#E6E2D8]">

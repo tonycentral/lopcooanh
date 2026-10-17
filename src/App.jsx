@@ -510,7 +510,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F6F1] text-[#24211E] selection:bg-[#C2DDC8] selection:text-[#17221A]">
+    <div className={`bg-[#F8F6F1] text-[#24211E] selection:bg-[#C2DDC8] selection:text-[#17221A] ${
+      isMobile ? "h-[100dvh] max-h-[100dvh] overflow-hidden flex flex-col" : "min-h-screen"
+    }`}>
       
       {/* If view is 'admin', render AdminDashboard (Truy cập qua link ẩn) */}
       {currentView === 'admin' ? (
@@ -584,7 +586,7 @@ export default function App() {
         />
       ) : currentView === 'full_essay' ? (
         /* MODE 2: HỌC VIẾT TOÀN BỘ TASK (FULL ESSAY WORKSPACE) */
-        <div className="h-screen flex flex-col overflow-hidden bg-[#F8F6F1] text-[#24211E]">
+        <div className={`${isMobile ? "h-full max-h-[100dvh]" : "h-screen"} flex flex-col overflow-hidden bg-[#F8F6F1] text-[#24211E]`}>
           <Header
             targetBand={targetBand}
             current7DayScore={current7DayScore}
@@ -666,7 +668,7 @@ export default function App() {
         </div>
       ) : currentView === 'reading' ? (
         /* MODE 3: LUYỆN ĐỌC (IELTS READING WORKSPACE - 10 CHỦ ĐỀ • 50 ĐỀ / CHỦ ĐỀ) */
-        <div className="h-screen flex flex-col overflow-hidden bg-[#F8F6F1] text-[#24211E]">
+        <div className={`${isMobile ? "h-full max-h-[100dvh]" : "h-screen"} flex flex-col overflow-hidden bg-[#F8F6F1] text-[#24211E]`}>
           <Header
             targetBand={targetBand}
             current7DayScore={current7DayScore}
@@ -745,7 +747,7 @@ export default function App() {
         </div>
       ) : (
         /* MODE 1: HỌC TỪ VỰNG (CHỌN TOPIC -> LUYỆN TỪ VỰNG -> LUYỆN CÂU & ĐOẠN) */
-        <div className="h-screen flex flex-col overflow-hidden bg-[#F8F6F1] text-[#24211E]">
+        <div className={`${isMobile ? "h-full max-h-[100dvh]" : "h-screen"} flex flex-col overflow-hidden bg-[#F8F6F1] text-[#24211E]`}>
           <Header
             targetBand={targetBand}
             current7DayScore={current7DayScore}

@@ -51,6 +51,149 @@ export default function WelcomePage({
 
   const formattedPhone = "0899.488.299";
 
+  // GIAO DIỆN ĐIỆN THOẠI: 100% KHÔNG CUỘN TRANG (SINGLE-SCREEN NO-SCROLL)
+  if (isMobile) {
+    return (
+      <div className="h-[100dvh] max-h-[100dvh] flex flex-col justify-between p-3.5 bg-[#F8F6F1] text-[#24211E] overflow-hidden select-none">
+        {/* Top Header */}
+        <header className="flex items-center justify-between shrink-0">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-white border border-[#E6E2D8] p-0.5 flex items-center justify-center shrink-0 overflow-hidden shadow-2xs">
+              <img src="./logo.png" alt="Logo Lớp cô Oanh" className="w-full h-full object-contain" />
+            </div>
+            <span className="font-title font-bold text-base text-[#24211E]">Lớp cô Oanh</span>
+          </div>
+
+          {currentUser ? (
+            <button
+              onClick={onOpenSettings || onOpenAuth}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white border border-[#E6E2D8] text-xs font-semibold text-[#3E4F42] shadow-2xs cursor-pointer"
+            >
+              <div className="w-4 h-4 rounded-full bg-[#3E4F42] text-white flex items-center justify-center text-[9px] font-bold">
+                {(currentUser?.user_metadata?.full_name || studentEmail || "H").charAt(0).toUpperCase()}
+              </div>
+              <span className="max-w-[110px] truncate">{currentUser?.user_metadata?.full_name || currentUser?.email}</span>
+            </button>
+          ) : (
+            <button
+              onClick={onOpenAuth}
+              className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#3E4F42] text-white text-xs font-semibold shadow-xs cursor-pointer active:scale-95"
+            >
+              <User className="w-3.5 h-3.5" />
+              <span>Đăng nhập</span>
+            </button>
+          )}
+        </header>
+
+        {/* Center Main Stage (Fits completely on screen without scroll) */}
+        <main className="flex-1 min-h-0 flex flex-col justify-center gap-2.5 my-auto max-w-sm mx-auto w-full">
+          {/* Logo & Slogan */}
+          <div className="text-center space-y-1">
+            <div className="w-14 h-14 rounded-2xl bg-white border border-[#E6E2D8] p-1.5 shadow-xs mx-auto flex items-center justify-center">
+              <img src="./logo.png" alt="Logo Mascot" className="w-full h-full object-contain" />
+            </div>
+            <h1 className="text-xl font-title font-bold text-[#24211E]">Lớp cô Oanh</h1>
+            <p className="text-xs text-[#7A7369]">Luyện từ vựng IELTS &amp; Flashcards phản xạ</p>
+          </div>
+
+          {/* Target Band Pill */}
+          <div className="flex items-center justify-center gap-2">
+            <span className="text-xs text-[#7A7369]">Mục tiêu:</span>
+            <span className="px-2.5 py-0.5 rounded-full bg-[#EDF3EE] text-[#3E4F42] border border-[#3E4F42]/30 text-xs font-bold font-mono">
+              Band {targetBand}
+            </span>
+          </div>
+
+          {/* Resume Last Session (if any) */}
+          {lastActiveLocation && lastActiveLocation.view && (
+            <button
+              type="button"
+              onClick={() => {
+                if (!currentUser) { onOpenAuth(); return; }
+                if (onResumeLastLocation) onResumeLastLocation(lastActiveLocation);
+                else onStartPractice();
+              }}
+              className="w-full py-2.5 px-3.5 rounded-2xl bg-[#3E4F42] text-white text-xs font-semibold shadow-sm flex items-center justify-between gap-2 border border-[#2D3A30] active:scale-[0.99] cursor-pointer"
+            >
+              <div className="flex items-center gap-2 truncate">
+                <RotateCcw className="w-4 h-4 text-[#C2DDC8] shrink-0" />
+                <span className="truncate">Tiếp tục: {formatLocationLabel(lastActiveLocation)}</span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-[#C2DDC8] shrink-0" />
+            </button>
+          )}
+
+          {/* TWO PRIMARY MOBILE ACTION CARDS */}
+          <div className="space-y-2">
+            {/* 1. Luyện Từ Vựng */}
+            <button
+              type="button"
+              onClick={() => {
+                if (!currentUser) { onOpenAuth(); return; }
+                onStartPractice();
+              }}
+              className="w-full p-3 rounded-2xl bg-white hover:bg-[#FAF8F5] border border-[#D1DDD3] text-left shadow-xs transition active:scale-[0.99] flex items-center justify-between gap-3 cursor-pointer group"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#EDF3EE] text-[#3E4F42] flex items-center justify-center shrink-0">
+                  <BookOpen className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-sm font-bold text-[#24211E] group-hover:text-[#3E4F42] transition">
+                    📚 Luyện Từ Vựng
+                  </div>
+                  <div className="text-[11px] text-[#7A7369]">
+                    10 chủ đề, collocations &amp; phát âm C1-C2
+                  </div>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-[#3E4F42] shrink-0" />
+            </button>
+
+            {/* 2. Flashcards */}
+            {onStartFlashcard && (
+              <button
+                type="button"
+                onClick={() => {
+                  if (!currentUser) { onOpenAuth(); return; }
+                  onStartFlashcard();
+                }}
+                className="w-full p-3 rounded-2xl bg-white hover:bg-[#FAF8F5] border border-[#D1DDD3] text-left shadow-xs transition active:scale-[0.99] flex items-center justify-between gap-3 cursor-pointer group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#FAF5EE] text-[#A67C52] flex items-center justify-center shrink-0">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-[#24211E] group-hover:text-[#3E4F42] transition">
+                      🗂️ Flashcards Phản Xạ
+                    </div>
+                    <div className="text-[11px] text-[#7A7369]">
+                      Lật thẻ nhớ, trắc nghiệm phản xạ, nối từ
+                    </div>
+                  </div>
+                </div>
+                <ArrowRight className="w-4 h-4 text-[#A67C52] shrink-0" />
+              </button>
+            )}
+          </div>
+
+          {/* Desktop note */}
+          <div className="text-center pt-0.5">
+            <p className="text-[10px] text-[#7A7369]">
+              💻 Luyện Viết bài (1.2-1.4) &amp; Đề Reading tối ưu trên Máy tính
+            </p>
+          </div>
+        </main>
+
+        {/* Footer */}
+        <footer className="text-center text-[11px] text-[#7A7369] shrink-0 pt-0.5">
+          Hotline/Zalo: <a href="tel:0899488299" className="font-semibold text-[#3E4F42] underline">0899.488.299</a>
+        </footer>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#F8F6F1] text-[#24211E] flex flex-col justify-between p-4 sm:p-6 font-sans">
       

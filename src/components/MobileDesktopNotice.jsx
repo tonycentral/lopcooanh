@@ -10,8 +10,8 @@ export default function MobileDesktopNotice({
   const isWriting = targetModule === 'writing';
 
   return (
-    <div className="min-h-[82vh] flex flex-col items-center justify-center p-4 text-center select-none animate-fadeIn pb-24">
-      <div className="w-full max-w-sm bg-white border border-[#E6E2D8] rounded-3xl p-6 shadow-sm space-y-4">
+    <div className="h-full max-h-[100dvh] flex flex-col items-center justify-center p-3 text-center select-none animate-fadeIn pb-20 overflow-hidden">
+      <div className="w-full max-w-xs bg-white border border-[#E6E2D8] rounded-3xl p-4 sm:p-5 shadow-sm space-y-3">
         
         {/* Laptop Icon Badge */}
         <div className="w-16 h-16 rounded-2xl bg-[#EDF3EE] border border-[#3E4F42]/20 text-[#3E4F42] flex items-center justify-center mx-auto shadow-2xs">
