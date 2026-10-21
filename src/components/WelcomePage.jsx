@@ -28,7 +28,8 @@ export default function WelcomePage({
   targetBand = "7.0",
   selectedTask = "task2",
   onSettingsChange,
-  isMobile = false
+  isMobile = false,
+  hasSidebar = false
 }) {
   const [justSaved, setJustSaved] = useState(false);
   const lastActiveLocation = getLastActiveLocation(studentEmail);
@@ -195,51 +196,53 @@ export default function WelcomePage({
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F6F1] text-[#24211E] flex flex-col justify-between p-4 sm:p-6 font-sans">
+    <div className={`${hasSidebar ? "h-full overflow-y-auto" : "min-h-screen"} bg-[#F8F6F1] text-[#24211E] flex flex-col justify-between p-4 sm:p-6 font-sans`}>
       
-      {/* Top Header */}
-      <header className="max-w-2xl w-full mx-auto flex items-center justify-between py-4">
-        <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-white border border-[#E6E2D8] p-0.5 flex items-center justify-center shrink-0 overflow-hidden shadow-xs">
-            <img src="./logo.png" alt="Logo Lớp cô Oanh" className="w-full h-full object-contain" />
+      {/* Top Header (Chỉ hiện khi chưa có Sidebar bên trái để tránh trùng lặp) */}
+      {!hasSidebar && (
+        <header className="max-w-2xl w-full mx-auto flex items-center justify-between py-4">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-white border border-[#E6E2D8] p-0.5 flex items-center justify-center shrink-0 overflow-hidden shadow-xs">
+              <img src="./logo.png" alt="Logo Lớp cô Oanh" className="w-full h-full object-contain" />
+            </div>
+            <div>
+              <div className="font-bold text-sm sm:text-base text-[#24211E] leading-tight">Lớp cô Oanh</div>
+            </div>
           </div>
-          <div>
-            <div className="font-bold text-sm sm:text-base text-[#24211E] leading-tight">Lớp cô Oanh</div>
-          </div>
-        </div>
 
-        {/* Student Email / Login Button */}
-        {currentUser ? (
-          <div className="flex items-center gap-2">
-            <button
-              onClick={onOpenSettings || onOpenAuth}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-xs text-[#24211E] transition cursor-pointer max-w-[220px] shadow-xs"
-              title="Cài đặt tài khoản & AI"
-            >
-              <Cloud className="w-3.5 h-3.5 text-[#3E4F42] shrink-0" />
-              <span className="font-medium text-[#3E4F42] truncate">{currentUser?.user_metadata?.full_name || currentUser?.email}</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#3E4F42]" />
-            </button>
-            {onSignOut && (
+          {/* Student Email / Login Button */}
+          {currentUser ? (
+            <div className="flex items-center gap-2">
               <button
-                onClick={onSignOut}
-                className="p-1.5 rounded-xl text-[#7A7369] hover:text-[#A67C52] hover:bg-[#F4EFEA] transition cursor-pointer"
-                title="Đăng xuất"
+                onClick={onOpenSettings || onOpenAuth}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-xs text-[#24211E] transition cursor-pointer max-w-[220px] shadow-xs"
+                title="Cài đặt tài khoản & AI"
               >
-                <LogOut className="w-3.5 h-3.5" />
+                <Cloud className="w-3.5 h-3.5 text-[#3E4F42] shrink-0" />
+                <span className="font-medium text-[#3E4F42] truncate">{currentUser?.user_metadata?.full_name || currentUser?.email}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#3E4F42]" />
               </button>
-            )}
-          </div>
-        ) : (
-          <button
-            onClick={onOpenAuth}
-            className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-xs transition shadow-xs cursor-pointer active:scale-95"
-          >
-            <User className="w-3.5 h-3.5" />
-            <span>Đăng Nhập</span>
-          </button>
-        )}
-      </header>
+              {onSignOut && (
+                <button
+                  onClick={onSignOut}
+                  className="p-1.5 rounded-xl text-[#7A7369] hover:text-[#A67C52] hover:bg-[#F4EFEA] transition cursor-pointer"
+                  title="Đăng xuất"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+          ) : (
+            <button
+              onClick={onOpenAuth}
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white font-medium text-xs transition shadow-xs cursor-pointer active:scale-95"
+            >
+              <User className="w-3.5 h-3.5" />
+              <span>Đăng Nhập</span>
+            </button>
+          )}
+        </header>
+      )}
 
       {/* Main Minimalist Center Container */}
       <main className="max-w-xl w-full mx-auto my-auto py-6 sm:py-8 space-y-6">

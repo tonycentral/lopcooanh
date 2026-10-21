@@ -226,20 +226,8 @@ export default function VocabularyList({
           </div>
         </div>
 
-        {/* Actions: Flashcard shortcut + Nút chọn 5 từ vựng tiếp theo */}
+        {/* Actions: Nút chọn 5 từ vựng tiếp theo & lùi */}
         <div className="flex items-center gap-1.5">
-          {onOpenFlashcard && (
-            <button
-              type="button"
-              onClick={onOpenFlashcard}
-              className="flex items-center gap-1 px-2 py-1 rounded-xl bg-[#EDF3EE] hover:bg-[#EDF3EE] text-[#334237] border border-[#D1DDD3] text-xs font-bold transition cursor-pointer shadow-sm"
-              title="Học bộ từ này theo dạng Flashcard tương tác"
-            >
-              <Layers className="w-3 h-3" />
-              <span className="hidden sm:inline">Flashcard</span>
-            </button>
-          )}
-
           {totalPages > 1 && (
             <button
               type="button"

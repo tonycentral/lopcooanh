@@ -11,10 +11,13 @@ import {
   User, 
   Cloud, 
   LogOut,
-  Check,
-  Settings,
-  Sparkles,
-  FileEdit
+  Settings, 
+  Sparkles, 
+  FileEdit,
+  PanelLeft,
+  PanelLeftClose,
+  Menu,
+  ChevronRight
 } from 'lucide-react';
 
 export default function Header({ 
@@ -22,11 +25,6 @@ export default function Header({
   current7DayScore,
   onOpenBandModal, 
   onGoWelcome,
-  onOpenFlashcard,
-  onGoVocabPractice,
-  onGoFullEssay,
-  onGoPractice,
-  onGoReading,
   currentUser,
   onOpenAuth,
   onOpenSettings,
@@ -36,26 +34,19 @@ export default function Header({
   onToggleTask,
   currentView,
   activeWritingStep,
-  onSelectWritingStep,
-  isMobile = false
+  practiceActivePart = 1,
+  readingMode = 'practice',
+  isMobile = false,
+  isSidebarCollapsed = false,
+  onToggleSidebar,
+  onOpenMobileDrawer
 }) {
-  const [isFunctionDropdownOpen, setIsFunctionDropdownOpen] = useState(false);
-  const [isTaskDropdownOpen, setIsTaskDropdownOpen] = useState(false);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
-
-  const functionDropdownRef = useRef(null);
-  const taskDropdownRef = useRef(null);
   const accountMenuRef = useRef(null);
 
-  // Close dropdowns on click outside
+  // Close account menu on click outside
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (functionDropdownRef.current && !functionDropdownRef.current.contains(e.target)) {
-        setIsFunctionDropdownOpen(false);
-      }
-      if (taskDropdownRef.current && !taskDropdownRef.current.contains(e.target)) {
-        setIsTaskDropdownOpen(false);
-      }
       if (accountMenuRef.current && !accountMenuRef.current.contains(e.target)) {
         setIsAccountMenuOpen(false);
       }
@@ -69,384 +60,139 @@ export default function Header({
   const currentNum = current7DayScore !== null ? current7DayScore : 0;
   const progressPercent = Math.min(100, Math.round((currentNum / targetNum) * 100));
 
-  // Definition of unified progressive structure: adapts when on mobile to emphasize Vocab & Flashcards
-  const UNIFIED_SECTIONS = useMemo(() => {
-    if (isMobile) {
-      return [
-        {
-          group: "📱 TẬP TRUNG TRÊN ĐIỆN THOẠI",
-          items: [
-            {
-              id: '1.1',
-              title: '1.1 Học từ vựng',
-              subtitle: '10 chủ đề, phát âm & collocations',
-              icon: BookOpen,
-              action: () => {
-                setIsFunctionDropdownOpen(false);
-                if (onSelectWritingStep) onSelectWritingStep('1.1');
-                else if (onGoVocabPractice) onGoVocabPractice();
-                else if (onGoPractice) onGoPractice();
-              }
-            },
-            {
-              id: '3.0',
-              title: '3. Flashcards',
-              subtitle: 'Phản xạ từ vựng học thuật qua thẻ ghi nhớ',
-              icon: Sparkles,
-              action: () => {
-                setIsFunctionDropdownOpen(false);
-                if (onOpenFlashcard) onOpenFlashcard();
-              }
-            }
-          ]
-        },
-        {
-          group: "💻 DÀNH CHO MÁY TÍNH (MÀN HÌNH LỚN)",
-          items: [
-            {
-              id: '1.2',
-              title: '1.2 Học viết 1 câu',
-              subtitle: 'Dịch & áp dụng từ vựng vào câu đơn',
-              icon: FileEdit,
-              action: () => {
-                setIsFunctionDropdownOpen(false);
-                if (onSelectWritingStep) onSelectWritingStep('1.2');
-                else if (onGoVocabPractice) onGoVocabPractice();
-                else if (onGoPractice) onGoPractice();
-              }
-            },
-            {
-              id: '1.3',
-              title: '1.3 Học viết một đoạn',
-              subtitle: 'Viết đoạn văn PEEL với liên từ mạch lạc',
-              icon: Layers,
-              action: () => {
-                setIsFunctionDropdownOpen(false);
-                if (onSelectWritingStep) onSelectWritingStep('1.3');
-                else if (onGoVocabPractice) onGoVocabPractice();
-                else if (onGoPractice) onGoPractice();
-              }
-            },
-            {
-              id: '1.4',
-              title: '1.4 Học viết một bài',
-              subtitle: 'Viết full bài luận Task 1 & Task 2 kèm bài mẫu',
-              icon: PenTool,
-              action: () => {
-                setIsFunctionDropdownOpen(false);
-                if (onSelectWritingStep) onSelectWritingStep('1.4');
-                else if (onGoFullEssay) onGoFullEssay();
-              }
-            },
-            {
-              id: '2.1',
-              title: '2.1 Luyện đọc & Tra từ vựng',
-              subtitle: 'Vừa đọc vừa click tra từ trên bài theo 10 chủ đề',
-              icon: BookOpen,
-              action: () => {
-                setIsFunctionDropdownOpen(false);
-                if (onGoReading) onGoReading('practice');
-                else if (onSelectWritingStep) onSelectWritingStep('2.1');
-              }
-            },
-            {
-              id: '2.2',
-              title: '2.2 Thi thử Reading bấm giờ',
-              subtitle: 'Đề thi reading tính giờ 50 đề / chủ đề',
-              icon: FileText,
-              action: () => {
-                setIsFunctionDropdownOpen(false);
-                if (onGoReading) onGoReading('test');
-                else if (onSelectWritingStep) onSelectWritingStep('2.2');
-              }
-            }
-          ]
-        }
-      ];
+  // Determine current active breadcrumb / section badge
+  const breadcrumb = useMemo(() => {
+    if (currentView === 'welcome') {
+      return { parent: null, current: 'Trang chủ', icon: Home };
     }
-
-    return [
-      {
-        group: "1. HỌC VIẾT",
-        items: [
-          {
-            id: '1.1',
-            title: '1.1 Học từ vựng',
-            subtitle: 'Nắm nghĩa & collocations theo 10 chủ đề',
-            icon: BookOpen,
-            action: () => {
-              setIsFunctionDropdownOpen(false);
-              if (onSelectWritingStep) onSelectWritingStep('1.1');
-              else if (onGoVocabPractice) onGoVocabPractice();
-              else if (onGoPractice) onGoPractice();
-            }
-          },
-          {
-            id: '1.2',
-            title: '1.2 Học viết 1 câu',
-            subtitle: 'Dịch & áp dụng từ vựng vào câu đơn',
-            icon: FileEdit,
-            action: () => {
-              setIsFunctionDropdownOpen(false);
-              if (onSelectWritingStep) onSelectWritingStep('1.2');
-              else if (onGoVocabPractice) onGoVocabPractice();
-              else if (onGoPractice) onGoPractice();
-            }
-          },
-          {
-            id: '1.3',
-            title: '1.3 Học viết một đoạn',
-            subtitle: 'Viết đoạn văn PEEL với liên từ mạch lạc',
-            icon: Layers,
-            action: () => {
-              setIsFunctionDropdownOpen(false);
-              if (onSelectWritingStep) onSelectWritingStep('1.3');
-              else if (onGoVocabPractice) onGoVocabPractice();
-              else if (onGoPractice) onGoPractice();
-            }
-          },
-          {
-            id: '1.4',
-            title: '1.4 Học viết một bài',
-            subtitle: 'Viết full bài luận Task 1 & Task 2 kèm bài mẫu',
-            icon: PenTool,
-            action: () => {
-              setIsFunctionDropdownOpen(false);
-              if (onSelectWritingStep) onSelectWritingStep('1.4');
-              else if (onGoFullEssay) onGoFullEssay();
-            }
-          }
-        ]
-      },
-      {
-        group: "2. LUYỆN ĐỌC (IELTS READING)",
-        items: [
-          {
-            id: '2.1',
-            title: '2.1 Luyện đọc & Tra từ vựng',
-            subtitle: 'Vừa đọc vừa click tra từ trên bài theo 10 chủ đề',
-            icon: BookOpen,
-            action: () => {
-              setIsFunctionDropdownOpen(false);
-              if (onGoReading) onGoReading('practice');
-              else if (onSelectWritingStep) onSelectWritingStep('2.1');
-            }
-          },
-          {
-            id: '2.2',
-            title: '2.2 Thi thử Reading bấm giờ',
-            subtitle: 'Đề thi reading tính giờ 50 đề / chủ đề',
-            icon: FileText,
-            action: () => {
-              setIsFunctionDropdownOpen(false);
-              if (onGoReading) onGoReading('test');
-              else if (onSelectWritingStep) onSelectWritingStep('2.2');
-            }
-          }
-        ]
-      },
-      {
-        group: "3. FLASHCARDS",
-        items: [
-          {
-            id: '3.0',
-            title: '3. Flashcards',
-            subtitle: 'Phản xạ từ vựng học thuật qua thẻ ghi nhớ',
-            icon: Sparkles,
-            action: () => {
-              setIsFunctionDropdownOpen(false);
-              if (onOpenFlashcard) onOpenFlashcard();
-            }
-          }
-        ]
-      }
-    ];
-  }, [isMobile, onSelectWritingStep, onGoVocabPractice, onGoPractice, onGoFullEssay, onGoReading, onOpenFlashcard]);
-
-  // Determine current active step ID (1.1, 1.2, 1.3, 1.4, 2.1, 2.2, 3.0)
-  const currentStepId = useMemo(() => {
-    if (currentView === 'reading') return '2.1';
-    if (currentView === 'flashcard') return '3.0';
-    if (currentView === 'full_essay') return '1.4';
-    if (activeWritingStep) return activeWritingStep;
-    return '1.1';
-  }, [currentView, activeWritingStep]);
-
-  const currentItem = useMemo(() => {
-    for (const group of UNIFIED_SECTIONS) {
-      const found = group.items.find(it => it.id === currentStepId);
-      if (found) return found;
+    if (currentView === 'reading') {
+      return {
+        parent: '2. Luyện đọc',
+        current: readingMode === 'test' ? '2.2 Thi thử Reading' : '2.1 Luyện đọc & Tra từ',
+        icon: readingMode === 'test' ? FileText : BookOpen
+      };
     }
-    return UNIFIED_SECTIONS[0]?.items[0];
-  }, [UNIFIED_SECTIONS, currentStepId]);
+    if (currentView === 'flashcard') {
+      return { parent: null, current: '3. Flashcards phản xạ', icon: Sparkles };
+    }
+    if (currentView === 'full_essay') {
+      return { parent: '1. Học viết', current: '1.4 Học viết một bài', icon: PenTool };
+    }
+    if (practiceActivePart === 2 || activeWritingStep === '1.2') {
+      return { parent: '1. Học viết', current: '1.2 Học viết 1 câu', icon: FileEdit };
+    }
+    if (practiceActivePart === 3 || activeWritingStep === '1.3') {
+      return { parent: '1. Học viết', current: '1.3 Học viết một đoạn', icon: Layers };
+    }
+    return { parent: '1. Học viết', current: '1.1 Học từ vựng', icon: BookOpen };
+  }, [currentView, readingMode, practiceActivePart, activeWritingStep]);
+
+  const BreadcrumbIcon = breadcrumb.icon;
 
   return (
     <header className="sticky top-0 z-40 bg-[#F8F6F1]/95 backdrop-blur-md border-b border-[#E6E2D8] shadow-[0_1px_3px_rgba(0,0,0,0.03)] shrink-0">
-      <div className="w-full px-2.5 sm:px-5 h-14 flex items-center justify-between gap-1.5 sm:gap-2.5">
+      <div className="w-full px-2.5 sm:px-5 h-14 flex items-center justify-between gap-2">
         
-        {/* Logo & Brand title only - No extra badges or subtitles */}
-        <div 
-          onClick={onGoWelcome}
-          className="flex items-center gap-2 sm:gap-2.5 cursor-pointer group select-none shrink-0"
-          title="Trang chủ Lớp Cô Oanh"
-        >
-          <div className="w-8 h-8 rounded-xl bg-white border border-[#E6E2D8] p-0.5 flex items-center justify-center shadow-2xs group-hover:scale-105 transition-transform shrink-0 overflow-hidden">
-            <img 
-              src="./logo.png" 
-              alt="Logo Lớp cô Oanh" 
-              className="w-full h-full object-contain" 
-            />
-          </div>
-          <span className="font-title font-bold text-sm sm:text-lg text-[#24211E] group-hover:text-[#3E4F42] transition leading-none">
-            Lớp cô Oanh
-          </span>
-        </div>
-
-        {/* Center: Dropdown 1 (Cơ cấu mục học), Dropdown 2 (Chỉ hiện khi 1.4 trên máy tính), Progress Band */}
-        <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-          
-          {/* Home button */}
-          {(currentView === 'practice' || currentView === 'vocab_practice' || currentView === 'full_essay' || currentView === 'flashcard' || currentView === 'reading') && (
+        {/* Left Section: Sidebar Toggle + Current Section Breadcrumb */}
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          {/* Mobile Drawer Trigger */}
+          {isMobile ? (
             <button
-              onClick={onGoWelcome}
-              className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] text-xs font-medium text-[#7A7369] hover:text-[#24211E] transition cursor-pointer"
-              title="Quay lại Trang Chào Mừng"
+              type="button"
+              onClick={onOpenMobileDrawer}
+              className="p-1.5 rounded-xl bg-white border border-[#E6E2D8] text-[#3E4F42] hover:bg-[#FAF8F5] transition cursor-pointer shadow-2xs shrink-0"
+              title="Mở danh mục menu"
             >
-              <Home className="w-3.5 h-3.5 text-[#3E4F42]" />
-              <span>Trang chủ</span>
+              <Menu className="w-5 h-5" />
             </button>
-          )}
-
-          {/* ================= DROPDOWN 1: CƠ CẤU MỤC HỌC THỐNG NHẤT ================= */}
-          <div className="relative min-w-0" ref={functionDropdownRef}>
+          ) : onToggleSidebar ? (
+            /* Desktop Sidebar Toggle */
             <button
-              onClick={() => {
-                setIsFunctionDropdownOpen(prev => !prev);
-                setIsTaskDropdownOpen(false);
-              }}
-              className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#3E4F42]/30 text-xs font-semibold text-[#24211E] transition cursor-pointer shadow-2xs select-none max-w-[140px] sm:max-w-none"
-              title="Chọn mục học tập"
+              type="button"
+              onClick={onToggleSidebar}
+              className="p-1.5 rounded-xl bg-white border border-[#E6E2D8] text-[#7A7369] hover:text-[#24211E] hover:bg-[#FAF8F5] transition cursor-pointer shadow-2xs shrink-0"
+              title={isSidebarCollapsed ? "Mở rộng thanh menu bên trái" : "Thu gọn thanh menu bên trái"}
             >
-              {currentItem && <currentItem.icon className="w-3.5 h-3.5 text-[#3E4F42] shrink-0" />}
-              <span className="truncate">{currentItem ? currentItem.title : "1. Học viết"}</span>
-              <ChevronDown className={`w-3 h-3 text-[#7A7369] shrink-0 transition-transform duration-200 ${isFunctionDropdownOpen ? "rotate-180" : ""}`} />
-            </button>
-
-            {isFunctionDropdownOpen && (
-              <div className="absolute top-full left-0 mt-1.5 w-68 bg-white border border-[#E6E2D8] rounded-2xl shadow-xl p-2 z-50 animate-in fade-in-50 duration-150 max-h-[85vh] overflow-y-auto">
-                {UNIFIED_SECTIONS.map((section, sIdx) => (
-                  <div key={section.group} className={sIdx > 0 ? "pt-2 mt-1 border-t border-[#E6E2D8]" : ""}>
-                    <div className="px-2.5 py-1 text-[10px] font-bold text-[#A67C52] uppercase tracking-wider">
-                      {section.group}
-                    </div>
-                    <div className="space-y-0.5 mt-0.5">
-                      {section.items.map((item) => {
-                        const isActive = item.id === currentStepId;
-                        const Icon = item.icon;
-                        return (
-                          <button
-                            key={item.id}
-                            type="button"
-                            onClick={item.action}
-                            className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-left text-xs transition cursor-pointer ${
-                              isActive 
-                                ? "bg-[#EDF3EE] text-[#3E4F42] font-bold" 
-                                : "text-[#24211E] hover:bg-[#FAF8F5]"
-                            }`}
-                          >
-                            <div className="flex items-center gap-2.5 min-w-0">
-                              <div className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 ${
-                                isActive ? "bg-[#3E4F42] text-white" : "bg-[#F4EFEA] text-[#7A7369]"
-                              }`}>
-                                <Icon className="w-3.5 h-3.5" />
-                              </div>
-                              <div className="min-w-0">
-                                <div className="leading-tight truncate">{item.title}</div>
-                                <div className="text-[10px] text-[#7A7369] leading-tight truncate mt-0.5">{item.subtitle}</div>
-                              </div>
-                            </div>
-                            {isActive && <Check className="w-3.5 h-3.5 text-[#3E4F42] shrink-0 ml-1.5" />}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* ================= DROPDOWN 2: CHỈ HIỂN THỊ KHI Ở 1.4 HỌC VIẾT MỘT BÀI VÀ TRÊN MÁY TÍNH ================= */}
-          {currentView === 'full_essay' && onToggleTask && !isMobile && (
-            <div className="relative hidden md:block" ref={taskDropdownRef}>
-              <button
-                onClick={() => {
-                  setIsTaskDropdownOpen(prev => !prev);
-                  setIsFunctionDropdownOpen(false);
-                }}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#3E4F42]/30 text-xs font-semibold text-[#3E4F42] transition cursor-pointer shadow-2xs select-none"
-                title="Chọn dạng đề thi (Task 1 hoặc Task 2)"
-              >
-                {activeTask === 'task1' ? <BarChart3 className="w-3.5 h-3.5" /> : <FileText className="w-3.5 h-3.5" />}
-                <span>{activeTask === 'task1' ? "Task 1 (Biểu đồ)" : "Task 2 (Bài luận)"}</span>
-                <ChevronDown className={`w-3 h-3 text-[#7A7369] transition-transform duration-200 ${isTaskDropdownOpen ? "rotate-180" : ""}`} />
-              </button>
-
-              {isTaskDropdownOpen && (
-                <div className="absolute top-full left-0 mt-1.5 w-60 bg-white border border-[#E6E2D8] rounded-2xl shadow-xl p-1.5 z-50 animate-in fade-in-50 duration-150">
-                  <div className="px-2.5 py-1 text-[10px] font-bold text-[#A67C52] uppercase tracking-wider">
-                    Dạng bài luận IELTS
-                  </div>
-                  <div className="space-y-0.5">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsTaskDropdownOpen(false);
-                        onToggleTask('task1');
-                      }}
-                      className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-left text-xs transition cursor-pointer ${
-                        activeTask === 'task1' ? "bg-[#EDF3EE] text-[#3E4F42] font-bold" : "text-[#24211E] hover:bg-[#FAF8F5]"
-                      }`}
-                    >
-                      <div className="flex items-center gap-2">
-                        <BarChart3 className="w-3.5 h-3.5 text-[#3E4F42]" />
-                        <div>
-                          <div>Task 1 (Report)</div>
-                          <div className="text-[10px] text-[#7A7369]">Biểu đồ, Bản đồ & Quy trình</div>
-                        </div>
-                      </div>
-                      {activeTask === 'task1' && <Check className="w-3.5 h-3.5 text-[#3E4F42]" />}
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsTaskDropdownOpen(false);
-                        onToggleTask('task2');
-                      }}
-                      className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-left text-xs transition cursor-pointer ${
-                        activeTask === 'task2' ? "bg-[#EDF3EE] text-[#3E4F42] font-bold" : "text-[#24211E] hover:bg-[#FAF8F5]"
-                      }`}
-                    >
-                      <div className="flex items-center gap-2">
-                        <FileText className="w-3.5 h-3.5 text-[#3E4F42]" />
-                        <div>
-                          <div>Task 2 (Essay)</div>
-                          <div className="text-[10px] text-[#7A7369]">Bài luận nghị luận học thuật</div>
-                        </div>
-                      </div>
-                      {activeTask === 'task2' && <Check className="w-3.5 h-3.5 text-[#3E4F42]" />}
-                    </button>
-                  </div>
-                </div>
+              {isSidebarCollapsed ? (
+                <PanelLeft className="w-4 h-4 text-[#3E4F42]" />
+              ) : (
+                <PanelLeftClose className="w-4 h-4" />
               )}
+            </button>
+          ) : null}
+
+          {/* Logo only shown on mobile when sidebar is off-screen */}
+          {isMobile && (
+            <div 
+              onClick={onGoWelcome}
+              className="flex items-center gap-1.5 cursor-pointer group select-none shrink-0"
+              title="Trang chủ Lớp Cô Oanh"
+            >
+              <div className="w-7 h-7 rounded-lg bg-white border border-[#E6E2D8] p-0.5 flex items-center justify-center shrink-0 overflow-hidden shadow-2xs">
+                <img 
+                  src="./logo.png" 
+                  alt="Logo Lớp cô Oanh" 
+                  className="w-full h-full object-contain" 
+                />
+              </div>
+              <span className="font-title font-bold text-sm text-[#24211E] leading-none">
+                Lớp cô Oanh
+              </span>
             </div>
           )}
 
-          {/* ================= MERGED PROGRESS WIDGET: MỤC TIÊU & HIỆN TRẠNG ================= */}
+          {/* Breadcrumb Indicator (Non-interactive clean badge, no duplicate dropdown) */}
+          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white/80 border border-[#E6E2D8] text-xs select-none shadow-2xs min-w-0">
+            <BreadcrumbIcon className="w-3.5 h-3.5 text-[#3E4F42] shrink-0" />
+            {breadcrumb.parent && (
+              <>
+                <span className="text-[#7A7369] truncate font-medium">{breadcrumb.parent}</span>
+                <ChevronRight className="w-3 h-3 text-[#A67C52] shrink-0" />
+              </>
+            )}
+            <span className="font-bold text-[#3E4F42] truncate">{breadcrumb.current}</span>
+          </div>
+        </div>
+
+        {/* Center: Contextual Controls (e.g. Task 1 / Task 2 Pill when in 1.4 Full Essay) */}
+        <div className="flex items-center gap-2 min-w-0">
+          {currentView === 'full_essay' && onToggleTask && (
+            <div className="flex items-center p-0.5 rounded-xl bg-white border border-[#E6E2D8] text-xs shadow-2xs">
+              <button
+                type="button"
+                onClick={() => onToggleTask('task1')}
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
+                  activeTask === 'task1'
+                    ? "bg-[#3E4F42] text-white shadow-2xs"
+                    : "text-[#7A7369] hover:text-[#24211E]"
+                }`}
+                title="Dạng đề Task 1: Báo cáo số liệu biểu đồ"
+              >
+                <BarChart3 className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Task 1 (Biểu đồ)</span>
+                <span className="sm:hidden">Task 1</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => onToggleTask('task2')}
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
+                  activeTask === 'task2'
+                    ? "bg-[#3E4F42] text-white shadow-2xs"
+                    : "text-[#7A7369] hover:text-[#24211E]"
+                }`}
+                title="Dạng đề Task 2: Bài luận nghị luận"
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Task 2 (Bài luận)</span>
+                <span className="sm:hidden">Task 2</span>
+              </button>
+            </div>
+          )}
+
+          {/* Progress Band Widget */}
           <div 
             onClick={onOpenBandModal}
-            className="flex items-center gap-1.5 sm:gap-2.5 px-2 sm:px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#3E4F42]/30 transition cursor-pointer select-none text-xs shadow-2xs group shrink-0"
+            className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#3E4F42]/30 transition cursor-pointer select-none text-xs shadow-2xs group shrink-0"
             title={`Tiến độ Band: Hiện tại ${current7DayScore !== null ? current7DayScore.toFixed(1) : '--'} / Mục tiêu ${targetBand}. Nhấn để đổi Band mục tiêu.`}
           >
             <div className="flex items-center gap-1 sm:gap-1.5">
@@ -473,10 +219,9 @@ export default function Header({
               </span>
             )}
           </div>
-
         </div>
 
-        {/* Right Area: User Account Only */}
+        {/* Right Area: User Account Menu */}
         <div className="flex items-center gap-2 shrink-0">
           {currentUser ? (
             <div className="relative" ref={accountMenuRef}>
@@ -489,7 +234,7 @@ export default function Header({
                 <div className="w-5 h-5 rounded-lg bg-[#3E4F42] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
                   {(currentUser?.user_metadata?.full_name || studentEmail || "H").charAt(0).toUpperCase()}
                 </div>
-                <span className="font-semibold text-[#24211E] hidden sm:inline max-w-[110px] sm:max-w-[150px] truncate">
+                <span className="font-semibold text-[#24211E] hidden sm:inline max-w-[110px] sm:max-w-[140px] truncate">
                   {currentUser?.user_metadata?.full_name || currentUser?.email}
                 </span>
                 <ChevronDown className={`w-3 h-3 text-[#7A7369] transition-transform duration-200 ${isAccountMenuOpen ? "rotate-180" : ""}`} />
