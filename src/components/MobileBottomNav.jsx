@@ -1,14 +1,14 @@
 import React from 'react';
-import { BookOpen, Layers, Home, Sparkles } from 'lucide-react';
+import { BookOpen, PenTool, Home } from 'lucide-react';
 
 export default function MobileBottomNav({
   currentView,
   onGoVocab,
-  onGoFlashcard,
+  onGoWriting,
   onGoWelcome
 }) {
-  const isVocab = currentView === 'vocab_practice' || currentView === 'practice';
-  const isFlashcard = currentView === 'flashcard';
+  const isVocab = currentView === 'vocab_practice' || currentView === 'practice' || currentView === 'flashcard';
+  const isWriting = currentView === 'full_essay';
   const isWelcome = currentView === 'welcome';
 
   return (
@@ -34,20 +34,20 @@ export default function MobileBottomNav({
           <span className="text-[11px] leading-tight mt-0.5">Luyện từ vựng</span>
         </button>
 
-        {/* Tab 2: Flashcards */}
+        {/* Tab 2: Luyện Viết */}
         <button
           type="button"
-          onClick={onGoFlashcard}
+          onClick={onGoWriting}
           className={`flex flex-col items-center justify-center py-1.5 px-2 rounded-xl transition cursor-pointer select-none active:scale-95 ${
-            isFlashcard 
+            isWriting 
               ? "text-[#3E4F42] font-bold" 
               : "text-[#7A7369] hover:text-[#24211E]"
           }`}
         >
-          <div className={`p-1 rounded-lg transition relative ${isFlashcard ? "bg-[#EDF3EE] text-[#3E4F42]" : ""}`}>
-            <Sparkles className="w-5 h-5" />
+          <div className={`p-1 rounded-lg transition ${isWriting ? "bg-[#EDF3EE] text-[#3E4F42]" : ""}`}>
+            <PenTool className="w-5 h-5" />
           </div>
-          <span className="text-[11px] leading-tight mt-0.5">Flashcards</span>
+          <span className="text-[11px] leading-tight mt-0.5">Luyện viết</span>
         </button>
 
         {/* Tab 3: Trang Chủ */}

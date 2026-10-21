@@ -11,9 +11,7 @@ import {
   PenTool, 
   Brain, 
   Shield, 
-  Database, 
-  History, 
-  FileSpreadsheet, 
+  ShieldCheck,
   Settings, 
   Target, 
   PanelLeftClose, 
@@ -40,13 +38,14 @@ export default function Sidebar({
   onSelectWritingStep,
   onSelectReadingMode,
   onOpenFlashcard,
-  onOpenSourcesModal,
-  onOpenHistoryDrawer,
-  onOpenCohesiveGuide,
   onOpenBandModal,
   onOpenSettings,
   onOpenAuth
 }) {
+  const ADMIN_EMAIL = 'ngudnguyen@gmail.com';
+  const userEmailClean = (currentUser?.email || studentEmail || '').trim().toLowerCase();
+  const isAdmin = userEmailClean === ADMIN_EMAIL;
+
   // Navigation Sections Definition (Web Desktop IELTS Master Platform - Clean, No subtitles)
   const NAV_SECTIONS = [
     {
@@ -70,10 +69,9 @@ export default function Sidebar({
           id: 'vocab',
           title: 'Luyện từ vựng',
           icon: BookOpen,
-          isActive: (currentView === 'vocab_practice' || currentView === 'practice') && practiceActivePart === 1,
+          isActive: currentView === 'vocab_practice' || currentView === 'flashcard',
           action: () => {
-            if (onSelectWritingStep) onSelectWritingStep('1.1');
-            else if (onGoView) onGoView('vocab_practice');
+            if (onGoView) onGoView('vocab_practice');
           }
         },
         {
@@ -92,15 +90,6 @@ export default function Sidebar({
           isActive: currentView === 'pronunciation',
           action: () => {
             if (onGoView) onGoView('pronunciation');
-          }
-        },
-        {
-          id: 'flashcard',
-          title: 'Flashcards phản xạ',
-          icon: Sparkles,
-          isActive: currentView === 'flashcard',
-          action: () => {
-            if (onOpenFlashcard) onOpenFlashcard();
           }
         }
       ]
@@ -173,35 +162,22 @@ export default function Sidebar({
         }
       ]
     },
-    {
-      group: 'TIỆN ÍCH & NGUỒN HỌC',
-      items: [
-        {
-          id: 'sources',
-          title: 'Kho đề & Nguồn bổ sung',
-          icon: Database,
-          action: () => {
-            if (onOpenSourcesModal) onOpenSourcesModal();
+    ...(isAdmin ? [
+      {
+        group: 'QUẢN TRỊ VIÊN',
+        items: [
+          {
+            id: 'admin',
+            title: 'Admin Dashboard',
+            icon: ShieldCheck,
+            isActive: currentView === 'admin',
+            action: () => {
+              if (onGoView) onGoView('admin');
+            }
           }
-        },
-        {
-          id: 'history',
-          title: 'Lịch sử làm bài',
-          icon: History,
-          action: () => {
-            if (onOpenHistoryDrawer) onOpenHistoryDrawer();
-          }
-        },
-        {
-          id: 'cohesive',
-          title: 'Hướng dẫn liên kết câu',
-          icon: FileSpreadsheet,
-          action: () => {
-            if (onOpenCohesiveGuide) onOpenCohesiveGuide();
-          }
-        }
-      ]
-    }
+        ]
+      }
+    ] : [])
   ];
 
   // Helper render item (Clean, single-line without sub-descriptions)

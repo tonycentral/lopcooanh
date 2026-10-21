@@ -9,8 +9,6 @@ import VocabularyWorkspace from './components/VocabularyWorkspace';
 import VocabularyList from './components/VocabularyList';
 import VocabularyStudio from './components/VocabularyStudio';
 import SentencePractice from './components/SentencePractice';
-import HistoryDrawer from './components/HistoryDrawer';
-import CohesiveGuideModal from './components/CohesiveGuideModal';
 import Task1Visualizer from './components/Task1Visualizer';
 import Task1ChartModal from './components/Task1ChartModal';
 import AdminDashboard from './components/AdminDashboard';
@@ -440,8 +438,6 @@ export default function App() {
 
   // Modal States
   const [isBandModalOpen, setIsBandModalOpen] = useState(false);
-  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
-  const [isCohesiveGuideOpen, setIsCohesiveGuideOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isChartModalOpen, setIsChartModalOpen] = useState(false);
   const [isSourcesModalOpen, setIsSourcesModalOpen] = useState(false);
@@ -567,96 +563,52 @@ export default function App() {
       isMobile ? "h-[100dvh] max-h-[100dvh] overflow-hidden flex flex-col" : "h-screen max-h-screen overflow-hidden flex flex-row"
     }`}>
       
-      {/* If view is 'admin', render AdminDashboard (Truy cập qua link ẩn) */}
-      {currentView === 'admin' ? (
-        <AdminDashboard onExitAdmin={handleExitAdmin} />
-      ) : (
-        <>
-          {/* Desktop Left Sidebar (Persistent Navigation) */}
-          {!isMobile && (
-            <Sidebar
-              isCollapsed={isSidebarCollapsed}
-              onToggleCollapse={handleToggleSidebar}
-              currentView={currentView}
-              activeWritingStep={activeWritingStep}
-              practiceActivePart={practiceActivePart}
-              readingMode={readingInitialMode}
-              activeTask={activeTask}
-              onToggleTask={handleToggleTask}
-              targetBand={targetBand}
+      {/* Desktop Left Sidebar (Persistent Navigation) */}
+      {!isMobile && (
+        <Sidebar
+          isCollapsed={isSidebarCollapsed}
+          onToggleCollapse={handleToggleSidebar}
+          currentView={currentView}
+          activeWritingStep={activeWritingStep}
+          practiceActivePart={practiceActivePart}
+          readingMode={readingInitialMode}
+          activeTask={activeTask}
+          onToggleTask={handleToggleTask}
+          targetBand={targetBand}
+          currentUser={currentUser}
+          studentEmail={studentEmail}
+          onGoWelcome={() => setCurrentView('welcome')}
+          onGoView={(view) => setCurrentView(view)}
+          onSelectWritingStep={handleSelectWritingStep}
+          onSelectReadingMode={(mode) => {
+            setReadingInitialMode(mode);
+            setCurrentView('reading');
+          }}
+          onOpenFlashcard={() => {
+            if (!currentUser) {
+              setIsAuthModalOpen(true);
+              return;
+            }
+            setCurrentView('vocab_practice');
+          }}
+          onOpenBandModal={() => setIsBandModalOpen(true)}
+          onOpenSettings={() => setIsSettingsModalOpen(true)}
+          onOpenAuth={() => setIsAuthModalOpen(true)}
+          onSignOut={handleSignOut}
+        />
+      )}
+
+      {/* Main Content Workspace Area */}
+      <div className="flex-1 min-w-0 flex flex-col h-full overflow-hidden">
+        {currentView === 'admin' ? (
+          <div className="h-full flex flex-col overflow-hidden bg-[#FAF8F5]">
+            <AdminDashboard 
+              onExitAdmin={handleExitAdmin} 
               currentUser={currentUser}
               studentEmail={studentEmail}
-              onGoWelcome={() => setCurrentView('welcome')}
-              onGoView={(view) => setCurrentView(view)}
-              onSelectWritingStep={handleSelectWritingStep}
-              onSelectReadingMode={(mode) => {
-                setReadingInitialMode(mode);
-                setCurrentView('reading');
-              }}
-              onOpenFlashcard={() => {
-                if (!currentUser) {
-                  setIsAuthModalOpen(true);
-                  return;
-                }
-                setCurrentView('flashcard');
-              }}
-              onOpenSourcesModal={() => setIsSourcesModalOpen(true)}
-              onOpenHistoryDrawer={() => setIsHistoryOpen(true)}
-              onOpenCohesiveGuide={() => setIsCohesiveGuideOpen(true)}
-              onOpenBandModal={() => setIsBandModalOpen(true)}
-              onOpenSettings={() => setIsSettingsModalOpen(true)}
-              onOpenAuth={() => setIsAuthModalOpen(true)}
-              onSignOut={handleSignOut}
             />
-          )}
-
-          {/* Main Content Workspace Area */}
-          <div className="flex-1 min-w-0 flex flex-col h-full overflow-hidden">
-            {currentView === 'flashcard' ? (
-              <div className="h-full flex flex-col overflow-hidden bg-[#F8F6F1] text-[#24211E]">
-                <Header
-                  targetBand={targetBand}
-                  current7DayScore={current7DayScore}
-                  onOpenBandModal={() => setIsBandModalOpen(true)}
-                  onGoWelcome={() => setCurrentView('welcome')}
-                  currentUser={currentUser}
-                  onOpenAuth={() => setIsAuthModalOpen(true)}
-                  onOpenSettings={() => setIsSettingsModalOpen(true)}
-                  onSignOut={handleSignOut}
-                  studentEmail={studentEmail}
-                  activeTask={activeTask}
-                  onToggleTask={handleToggleTask}
-                  currentView={currentView}
-                  activeWritingStep={activeWritingStep}
-                  practiceActivePart={practiceActivePart}
-                  readingMode={readingInitialMode}
-                  isMobile={isMobile}
-                  isSidebarCollapsed={isSidebarCollapsed}
-                  onToggleSidebar={handleToggleSidebar}
-                />
-                <div className="flex-1 min-h-0 overflow-hidden">
-                  <VocabularyWorkspace
-                    topics={allVocabTopics}
-                    selectedTopic={selectedTopic}
-                    onSelectTopic={handleSelectTopic}
-                    onRandomTopic={handleRandomTopic}
-                    activeTask={activeTask}
-                    onToggleTask={handleToggleTask}
-                    selectedVocab={selectedVocab}
-                    onSelectVocab={setSelectedVocab}
-                    studentEmail={studentEmail}
-                    targetBand={targetBand}
-                    apiKey={apiKey}
-                    onRefreshStats={handleRefreshStats}
-                    onOpenSourcesModal={() => setIsSourcesModalOpen(true)}
-                    onOpenChartModal={() => setIsChartModalOpen(true)}
-                    onGoFullEssay={() => setCurrentView('full_essay')}
-                    isMobile={isMobile}
-                    initialMode="card"
-                  />
-                </div>
-              </div>
-            ) : currentView === 'welcome' ? (
+          </div>
+        ) : currentView === 'welcome' ? (
               <WelcomePage
                 studentEmail={studentEmail}
                 currentUser={currentUser}
@@ -706,7 +658,7 @@ export default function App() {
                     setIsAuthModalOpen(true);
                     return;
                   }
-                  setCurrentView('flashcard');
+                  setCurrentView('vocab_practice');
                 }}
                 onOpenContactModal={() => setIsContactModalOpen(true)}
               />
@@ -748,7 +700,7 @@ export default function App() {
                           setIsAuthModalOpen(true);
                           return;
                         }
-                        setCurrentView('flashcard');
+                        setCurrentView('vocab_practice');
                       }}
                       onBypass={() => setBypassMobileNotice(true)}
                     />
@@ -807,7 +759,7 @@ export default function App() {
                           setIsAuthModalOpen(true);
                           return;
                         }
-                        setCurrentView('flashcard');
+                        setCurrentView('vocab_practice');
                       }}
                       onBypass={() => setBypassMobileNotice(true)}
                     />
@@ -820,7 +772,7 @@ export default function App() {
                       initialMode={readingInitialMode}
                       onReadingGraded={handleRefreshStats}
                       onGoWelcome={() => setCurrentView('welcome')}
-                      onOpenFlashcard={() => setCurrentView('flashcard')}
+                      onOpenFlashcard={() => setCurrentView('vocab_practice')}
                     />
                   </div>
                 )}
@@ -1035,8 +987,6 @@ export default function App() {
               </div>
             )}
           </div>
-        </>
-      )}
 
       {/* Modals */}
       <ContactModal
@@ -1049,17 +999,6 @@ export default function App() {
         onClose={() => setIsBandModalOpen(false)}
         currentBand={targetBand}
         onSelectBand={handleUpdateTargetBand}
-      />
-
-      <HistoryDrawer
-        isOpen={isHistoryOpen}
-        onClose={() => setIsHistoryOpen(false)}
-        onRefreshStats={handleRefreshStats}
-      />
-
-      <CohesiveGuideModal
-        isOpen={isCohesiveGuideOpen}
-        onClose={() => setIsCohesiveGuideOpen(false)}
       />
 
       {/* Full-Screen / Expanded Task 1 Bar Chart & Visual Modal */}
@@ -1078,7 +1017,7 @@ export default function App() {
         totalVocabCount={currentTopics.reduce((acc, t) => acc + (t.vocabularies?.length || 0), 0)}
       />
 
-      {/* Cài đặt tài khoản & AI (Gemini Key, hồ sơ học viên, target band) */}
+      {/* Cài đặt tài khoản & AI (Gemini Key, hồ sơ học viên, target band, lịch sử thi & phân tích lỗi) */}
       <SettingsModal
         isOpen={isSettingsModalOpen}
         onClose={() => setIsSettingsModalOpen(false)}
@@ -1092,6 +1031,10 @@ export default function App() {
         onSaveApiKey={handleSaveApiKey}
         onResetData={handleRefreshStats}
         onSignOut={handleSignOut}
+        onGoView={(view) => {
+          setIsSettingsModalOpen(false);
+          setCurrentView(view);
+        }}
       />
 
       {/* Tài Khoản & Đồng Bộ Đám Mây Supabase Auth Modal (Không cho phép Guest Mode) */}
@@ -1143,13 +1086,13 @@ export default function App() {
             }
             setCurrentView('vocab_practice');
           }}
-          onGoFlashcard={() => {
+          onGoWriting={() => {
             setBypassMobileNotice(false);
             if (!currentUser) {
               setIsAuthModalOpen(true);
               return;
             }
-            setCurrentView('flashcard');
+            setCurrentView('full_essay');
           }}
           onGoWelcome={() => setCurrentView('welcome')}
         />

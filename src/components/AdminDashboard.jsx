@@ -37,12 +37,23 @@ async function computePinHash(pin) {
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-export default function AdminDashboard({ onExitAdmin }) {
+export default function AdminDashboard({ onExitAdmin, currentUser, studentEmail }) {
+  const ADMIN_EMAIL = 'ngudnguyen@gmail.com';
+  const currentEmailClean = (currentUser?.email || studentEmail || '').trim().toLowerCase();
+  const isAuthorizedEmail = currentEmailClean === ADMIN_EMAIL;
+
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    if (isAuthorizedEmail) return true;
     return sessionStorage.getItem('admin_auth_hash') === ADMIN_HASH_TARGET;
   });
   const [pinInput, setPinInput] = useState('');
   const [pinError, setPinError] = useState(false);
+
+  useEffect(() => {
+    if (isAuthorizedEmail) {
+      setIsAuthenticated(true);
+    }
+  }, [isAuthorizedEmail]);
 
   const [activeTab, setActiveTab] = useState('overview');
   const [searchQuery, setSearchQuery] = useState('');
@@ -97,7 +108,7 @@ export default function AdminDashboard({ onExitAdmin }) {
     });
   }, [vocabularies, searchQuery, filterTopic]);
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated && !isAuthorizedEmail) {
     return (
       <div className="fixed inset-0 z-50 bg-[#24211E]/40 backdrop-blur-xs flex items-center justify-center p-4">
         <div className="w-full max-w-sm bg-[#FAF8F5] border border-[#E6E2D8] rounded-2xl p-6 shadow-2xl text-center space-y-4 text-[#24211E]">
@@ -105,42 +116,23 @@ export default function AdminDashboard({ onExitAdmin }) {
             <Lock className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-base font-title font-bold text-[#24211E]">Quản Trị Databank</h2>
-            <p className="text-xs text-[#7A7369] mt-1">Dành cho quản trị viên Lớp cô Oanh</p>
+            <h2 className="text-base font-title font-bold text-[#24211E]">Quyền Quản Trị Hệ Thống</h2>
+            <p className="text-xs text-[#7A7369] mt-1">
+              Bảng điều khiển này chỉ dành riêng cho tài khoản <strong>ngudnguyen@gmail.com</strong>.
+            </p>
           </div>
 
-          <form onSubmit={handleUnlock} className="space-y-3">
-            <input
-              type="password"
-              maxLength={6}
-              value={pinInput}
-              onChange={(e) => {
-                setPinInput(e.target.value);
-                setPinError(false);
-              }}
-              placeholder="Nhập mã PIN"
-              className="w-full py-2.5 px-3 bg-white border border-[#E6E2D8] focus:border-[#3E4F42] rounded-xl text-center text-sm font-mono text-[#24211E] tracking-widest outline-none transition"
-              autoFocus
-            />
-            {pinError && (
-              <p className="text-xs text-[#A67C52]">Mã PIN chưa chính xác.</p>
-            )}
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={onExitAdmin}
-                className="flex-1 py-2 rounded-xl bg-white text-[#7A7369] border border-[#E6E2D8] text-xs font-medium hover:bg-[#F4EFEA] transition cursor-pointer"
-              >
-                Quay lại
-              </button>
-              <button
-                type="submit"
-                className="flex-1 py-2 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white text-xs font-medium transition cursor-pointer"
-              >
-                Mở khóa
-              </button>
-            </div>
-          </form>
+          <div className="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-800">
+            Tài khoản hiện tại của bạn ({currentEmailClean || 'Chưa đăng nhập'}) không có quyền quản trị viên.
+          </div>
+
+          <button
+            type="button"
+            onClick={onExitAdmin}
+            className="w-full py-2.5 rounded-xl bg-[#3E4F42] hover:bg-[#334237] text-white text-xs font-medium transition cursor-pointer"
+          >
+            Quay lại trang học tập
+          </button>
         </div>
       </div>
     );
