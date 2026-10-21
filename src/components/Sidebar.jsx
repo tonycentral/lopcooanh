@@ -47,7 +47,7 @@ export default function Sidebar({
   onOpenSettings,
   onOpenAuth
 }) {
-  // Navigation Sections Definition (Web Desktop IELTS Master Platform)
+  // Navigation Sections Definition (Web Desktop IELTS Master Platform - Clean, No subtitles)
   const NAV_SECTIONS = [
     {
       group: null,
@@ -55,7 +55,6 @@ export default function Sidebar({
         {
           id: 'welcome',
           title: 'Trang chủ',
-          subtitle: 'Màn hình chính & Lộ trình',
           icon: Home,
           isActive: currentView === 'welcome',
           action: () => {
@@ -70,7 +69,6 @@ export default function Sidebar({
         {
           id: 'vocab',
           title: '1. Luyện từ vựng',
-          subtitle: '10 chủ đề học thuật Cambridge & AWL',
           icon: BookOpen,
           isActive: (currentView === 'vocab_practice' || currentView === 'practice') && practiceActivePart === 1,
           action: () => {
@@ -81,7 +79,6 @@ export default function Sidebar({
         {
           id: 'grammar',
           title: '2. Luyện ngữ pháp (Band 7+)',
-          subtitle: 'Đảo ngữ, câu chẻ, danh từ hoá',
           icon: CheckCircle2,
           isActive: currentView === 'grammar',
           action: () => {
@@ -91,7 +88,6 @@ export default function Sidebar({
         {
           id: 'pronunciation',
           title: '3. Luyện phát âm & IPA',
-          subtitle: '44 âm IPA, trọng âm & Shadowing',
           icon: Volume2,
           isActive: currentView === 'pronunciation',
           action: () => {
@@ -101,7 +97,6 @@ export default function Sidebar({
         {
           id: 'flashcard',
           title: '4. Flashcards phản xạ',
-          subtitle: 'Luyện nhớ từ qua thẻ & minigame',
           icon: Sparkles,
           isActive: currentView === 'flashcard',
           action: () => {
@@ -116,7 +111,6 @@ export default function Sidebar({
         {
           id: 'listening',
           title: '5. Luyện Nghe (Listening)',
-          subtitle: 'Section 1-4 Cambridge, audio & script',
           icon: Headphones,
           isActive: currentView === 'listening',
           action: () => {
@@ -126,7 +120,6 @@ export default function Sidebar({
         {
           id: 'speaking',
           title: '6. Luyện Nói (Speaking)',
-          subtitle: 'Phòng thi Part 1-2-3 & mẫu Band 8.5',
           icon: Mic,
           isActive: currentView === 'speaking',
           action: () => {
@@ -136,7 +129,6 @@ export default function Sidebar({
         {
           id: 'reading',
           title: '7. Luyện Đọc (Reading)',
-          subtitle: '50 đề thi thử, tra từ & bấm giờ',
           icon: BookOpenCheck,
           isActive: currentView === 'reading',
           isReadingGroup: true,
@@ -148,7 +140,6 @@ export default function Sidebar({
         {
           id: 'writing',
           title: '8. Luyện Viết (Writing)',
-          subtitle: 'Viết câu, đoạn PEEL, Task 1 & 2',
           icon: PenTool,
           isActive: currentView === 'full_essay' || ((currentView === 'vocab_practice' || currentView === 'practice') && (practiceActivePart === 2 || practiceActivePart === 3)),
           isWritingGroup: true,
@@ -165,7 +156,6 @@ export default function Sidebar({
         {
           id: 'thinking',
           title: '9. Tư duy phản biện & Ý tưởng',
-          subtitle: 'Đa góc nhìn kinh tế, xã hội, đạo đức',
           icon: Brain,
           isActive: currentView === 'thinking',
           action: () => {
@@ -175,7 +165,6 @@ export default function Sidebar({
         {
           id: 'tactics',
           title: '10. Chiến thuật phòng thi',
-          subtitle: 'Bẫy T/F/NG, phân bổ giờ & bí quyết',
           icon: Shield,
           isActive: currentView === 'tactics',
           action: () => {
@@ -190,7 +179,6 @@ export default function Sidebar({
         {
           id: 'sources',
           title: 'Kho đề & Nguồn bổ sung',
-          subtitle: 'Cambridge, Simon & AWL',
           icon: Database,
           action: () => {
             if (onOpenSourcesModal) onOpenSourcesModal();
@@ -199,7 +187,6 @@ export default function Sidebar({
         {
           id: 'history',
           title: 'Lịch sử làm bài',
-          subtitle: 'Xem lại điểm số & câu đã chấm',
           icon: History,
           action: () => {
             if (onOpenHistoryDrawer) onOpenHistoryDrawer();
@@ -208,7 +195,6 @@ export default function Sidebar({
         {
           id: 'cohesive',
           title: 'Hướng dẫn liên kết câu',
-          subtitle: 'Kho liên từ & cấu trúc 7.0-8.5',
           icon: FileSpreadsheet,
           action: () => {
             if (onOpenCohesiveGuide) onOpenCohesiveGuide();
@@ -218,36 +204,33 @@ export default function Sidebar({
     }
   ];
 
-  // Helper render item
+  // Helper render item (Clean, single-line without sub-descriptions)
   const renderItem = (item) => {
     const Icon = item.icon;
     const isActive = item.isActive;
 
     if (isCollapsed) {
       return (
-        <div key={item.id} className="relative group flex justify-center py-1">
+        <div key={item.id} className="relative group flex justify-center py-0.5">
           <button
             type="button"
             onClick={item.action}
-            className={`w-11 h-11 rounded-xl flex items-center justify-center transition cursor-pointer relative ${
+            className={`w-10 h-10 rounded-xl flex items-center justify-center transition cursor-pointer relative ${
               isActive 
                 ? "bg-[#3E4F42] text-white shadow-xs font-bold" 
                 : "text-[#7A7369] hover:bg-white hover:text-[#24211E] border border-transparent hover:border-[#E6E2D8]"
             }`}
-            title={`${item.title}${item.subtitle ? ` - ${item.subtitle}` : ''}`}
+            title={item.title}
           >
-            <Icon className="w-5 h-5 shrink-0" />
+            <Icon className="w-4.5 h-4.5 shrink-0" />
             {isActive && (
-              <span className="absolute -left-2 top-2.5 bottom-2.5 w-1 bg-[#3E4F42] rounded-r-full" />
+              <span className="absolute -left-2 top-2 bottom-2 w-1 bg-[#3E4F42] rounded-r-full" />
             )}
           </button>
 
           {/* Tooltip on hover for collapsed mode */}
-          <div className="absolute left-full ml-2.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-[#24211E] text-white text-xs rounded-xl shadow-xl whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity z-50">
+          <div className="absolute left-full ml-2.5 top-1/2 -translate-y-1/2 px-2.5 py-1.5 bg-[#24211E] text-white text-xs rounded-xl shadow-xl whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity z-50">
             <div className="font-semibold">{item.title}</div>
-            {item.subtitle && (
-              <div className="text-[10px] text-gray-300 font-normal">{item.subtitle}</div>
-            )}
           </div>
         </div>
       );
@@ -258,7 +241,7 @@ export default function Sidebar({
         <button
           type="button"
           onClick={item.action}
-          className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs transition cursor-pointer group relative ${
+          className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-left text-xs transition cursor-pointer group relative ${
             isActive
               ? "bg-[#EDF3EE] text-[#3E4F42] font-bold shadow-2xs"
               : "text-[#24211E] hover:bg-white hover:shadow-2xs"
@@ -276,14 +259,9 @@ export default function Sidebar({
             }`}>
               <Icon className="w-4 h-4" />
             </div>
-            <div className="min-w-0">
-              <div className="truncate leading-tight">{item.title}</div>
-              {item.subtitle && (
-                <div className="text-[10px] text-[#7A7369] group-hover:text-[#24211E] leading-tight truncate mt-0.5 font-normal">
-                  {item.subtitle}
-                </div>
-              )}
-            </div>
+            <span className="truncate leading-tight font-medium group-hover:text-[#3E4F42] transition-colors">
+              {item.title}
+            </span>
           </div>
 
           {isActive && (
@@ -340,7 +318,6 @@ export default function Sidebar({
                     ? "bg-[#3E4F42] text-white shadow-2xs"
                     : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
                 }`}
-                title="Luyện viết 1 câu đơn với từ vựng"
               >
                 Viết câu
               </button>
@@ -355,7 +332,6 @@ export default function Sidebar({
                     ? "bg-[#3E4F42] text-white shadow-2xs"
                     : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
                 }`}
-                title="Luyện viết 1 đoạn văn chuẩn PEEL"
               >
                 Viết đoạn
               </button>
@@ -370,7 +346,6 @@ export default function Sidebar({
                     ? "bg-[#3E4F42] text-white shadow-2xs"
                     : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
                 }`}
-                title="Luyện viết toàn bộ bài Task 1 & Task 2"
               >
                 Toàn bài
               </button>
@@ -440,14 +415,9 @@ export default function Sidebar({
             />
           </div>
           {!isCollapsed && (
-            <div className="min-w-0">
-              <span className="font-title font-bold text-sm sm:text-base text-[#24211E] group-hover:text-[#3E4F42] transition leading-none truncate block">
-                Lớp cô Oanh
-              </span>
-              <span className="text-[10px] text-[#7A7369] font-medium leading-tight truncate block mt-0.5">
-                Hệ thống luyện thi IELTS toàn diện
-              </span>
-            </div>
+            <span className="font-title font-bold text-base text-[#24211E] group-hover:text-[#3E4F42] transition leading-none truncate block">
+              Lớp cô Oanh
+            </span>
           )}
         </div>
 
@@ -479,18 +449,18 @@ export default function Sidebar({
       )}
 
       {/* Navigation Menu Items (Scrollable) */}
-      <div className="flex-1 min-h-0 overflow-y-auto px-2 py-3 space-y-3.5 scrollbar-thin">
+      <div className="flex-1 min-h-0 overflow-y-auto px-2 py-2.5 space-y-3 scrollbar-thin">
         {NAV_SECTIONS.map((section, sIdx) => (
-          <div key={section.group || `sec_${sIdx}`} className="space-y-1">
+          <div key={section.group || `sec_${sIdx}`} className="space-y-0.5">
             {section.group && !isCollapsed && (
-              <div className="px-3 py-1 text-[10px] font-bold text-[#A67C52] uppercase tracking-wider">
+              <div className="px-2.5 pt-1.5 pb-1 text-[10px] font-bold text-[#A67C52] uppercase tracking-wider">
                 {section.group}
               </div>
             )}
             {section.group && isCollapsed && (
-              <div className="h-px bg-[#E6E2D8] my-2 mx-2" />
+              <div className="h-px bg-[#E6E2D8] my-1.5 mx-2" />
             )}
-            <div className="space-y-1">
+            <div className="space-y-0.5">
               {section.items.map(renderItem)}
             </div>
           </div>
@@ -511,9 +481,8 @@ export default function Sidebar({
               <div className="w-6 h-6 rounded-lg bg-[#FAF5EE] text-[#A67C52] flex items-center justify-center shrink-0">
                 <Target className="w-3.5 h-3.5" />
               </div>
-              <div className="text-left">
-                <div className="text-[10px] text-[#7A7369] leading-tight">Mục tiêu</div>
-                <div className="font-bold text-[#3E4F42] leading-tight">Band {targetBand}</div>
+              <div className="font-semibold text-[#24211E] leading-tight">
+                Mục tiêu: <span className="font-bold text-[#3E4F42]">Band {targetBand}</span>
               </div>
             </div>
             <ChevronRight className="w-3.5 h-3.5 text-[#7A7369] group-hover:translate-x-0.5 transition-transform" />
@@ -543,13 +512,8 @@ export default function Sidebar({
               <div className="w-6 h-6 rounded-lg bg-[#3E4F42] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
                 {(currentUser?.user_metadata?.full_name || studentEmail || "H").charAt(0).toUpperCase()}
               </div>
-              <div className="min-w-0 text-left">
-                <div className="font-semibold text-[#24211E] truncate leading-tight">
-                  {currentUser?.user_metadata?.full_name || currentUser?.email || "Học viên"}
-                </div>
-                <div className="text-[10px] text-[#7A7369] truncate leading-tight mt-0.5">
-                  {currentUser ? "Cài đặt & Đồng bộ Cloud" : "Chưa đăng nhập"}
-                </div>
+              <div className="font-semibold text-[#24211E] truncate leading-tight">
+                {currentUser?.user_metadata?.full_name || currentUser?.email || "Chưa đăng nhập"}
               </div>
             </div>
             <Settings className="w-3.5 h-3.5 text-[#7A7369]" />
