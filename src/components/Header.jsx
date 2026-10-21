@@ -16,7 +16,6 @@ import {
   FileEdit,
   PanelLeft,
   PanelLeftClose,
-  Menu,
   ChevronRight
 } from 'lucide-react';
 
@@ -38,8 +37,7 @@ export default function Header({
   readingMode = 'practice',
   isMobile = false,
   isSidebarCollapsed = false,
-  onToggleSidebar,
-  onOpenMobileDrawer
+  onToggleSidebar
 }) {
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const accountMenuRef = useRef(null);
@@ -93,19 +91,9 @@ export default function Header({
     <header className="sticky top-0 z-40 bg-[#F8F6F1]/95 backdrop-blur-md border-b border-[#E6E2D8] shadow-[0_1px_3px_rgba(0,0,0,0.03)] shrink-0">
       <div className="w-full px-2.5 sm:px-5 h-14 flex items-center justify-between gap-2">
         
-        {/* Left Section: Sidebar Toggle + Current Section Breadcrumb */}
+        {/* Left Section: Sidebar Toggle + Current Section Breadcrumb (Desktop) / Logo (Mobile) */}
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-          {/* Mobile Drawer Trigger */}
-          {isMobile ? (
-            <button
-              type="button"
-              onClick={onOpenMobileDrawer}
-              className="p-1.5 rounded-xl bg-white border border-[#E6E2D8] text-[#3E4F42] hover:bg-[#FAF8F5] transition cursor-pointer shadow-2xs shrink-0"
-              title="Mở danh mục menu"
-            >
-              <Menu className="w-5 h-5" />
-            </button>
-          ) : onToggleSidebar ? (
+          {!isMobile && onToggleSidebar && (
             /* Desktop Sidebar Toggle */
             <button
               type="button"
@@ -119,9 +107,9 @@ export default function Header({
                 <PanelLeftClose className="w-4 h-4" />
               )}
             </button>
-          ) : null}
+          )}
 
-          {/* Logo only shown on mobile when sidebar is off-screen */}
+          {/* Logo on mobile */}
           {isMobile && (
             <div 
               onClick={onGoWelcome}
@@ -141,7 +129,7 @@ export default function Header({
             </div>
           )}
 
-          {/* Breadcrumb Indicator (Non-interactive clean badge, no duplicate dropdown) */}
+          {/* Breadcrumb Indicator (Desktop only) */}
           <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white/80 border border-[#E6E2D8] text-xs select-none shadow-2xs min-w-0">
             <BreadcrumbIcon className="w-3.5 h-3.5 text-[#3E4F42] shrink-0" />
             {breadcrumb.parent && (

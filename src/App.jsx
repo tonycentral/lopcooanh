@@ -99,7 +99,6 @@ export default function App() {
       return false;
     }
   });
-  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
 
   const handleToggleSidebar = () => {
     setIsSidebarCollapsed(prev => {
@@ -571,39 +570,6 @@ export default function App() {
             />
           )}
 
-          {/* Mobile Drawer (Only when opened via menu button) */}
-          {isMobile && (
-            <Sidebar
-              isMobileDrawerOpen={isMobileDrawerOpen}
-              onCloseMobileDrawer={() => setIsMobileDrawerOpen(false)}
-              currentView={currentView}
-              activeWritingStep={activeWritingStep}
-              practiceActivePart={practiceActivePart}
-              readingMode={readingInitialMode}
-              activeTask={activeTask}
-              onToggleTask={handleToggleTask}
-              targetBand={targetBand}
-              currentUser={currentUser}
-              studentEmail={studentEmail}
-              onGoWelcome={() => setCurrentView('welcome')}
-              onSelectWritingStep={handleSelectWritingStep}
-              onOpenFlashcard={() => {
-                if (!currentUser) {
-                  setIsAuthModalOpen(true);
-                  return;
-                }
-                setCurrentView('flashcard');
-              }}
-              onOpenSourcesModal={() => setIsSourcesModalOpen(true)}
-              onOpenHistoryDrawer={() => setIsHistoryOpen(true)}
-              onOpenCohesiveGuide={() => setIsCohesiveGuideOpen(true)}
-              onOpenBandModal={() => setIsBandModalOpen(true)}
-              onOpenSettings={() => setIsSettingsModalOpen(true)}
-              onOpenAuth={() => setIsAuthModalOpen(true)}
-              onSignOut={handleSignOut}
-            />
-          )}
-
           {/* Main Content Workspace Area */}
           <div className="flex-1 min-w-0 flex flex-col h-full overflow-hidden">
             {currentView === 'flashcard' ? (
@@ -696,7 +662,6 @@ export default function App() {
                   isMobile={isMobile}
                   isSidebarCollapsed={isSidebarCollapsed}
                   onToggleSidebar={handleToggleSidebar}
-                  onOpenMobileDrawer={() => setIsMobileDrawerOpen(true)}
                 />
 
                 {isMobile && !bypassMobileNotice ? (
@@ -756,7 +721,6 @@ export default function App() {
                   isMobile={isMobile}
                   isSidebarCollapsed={isSidebarCollapsed}
                   onToggleSidebar={handleToggleSidebar}
-                  onOpenMobileDrawer={() => setIsMobileDrawerOpen(true)}
                 />
 
                 {isMobile && !bypassMobileNotice ? (
@@ -813,7 +777,6 @@ export default function App() {
                   isMobile={isMobile}
                   isSidebarCollapsed={isSidebarCollapsed}
                   onToggleSidebar={handleToggleSidebar}
-                  onOpenMobileDrawer={() => setIsMobileDrawerOpen(true)}
                 />
 
                 {isMobile ? (

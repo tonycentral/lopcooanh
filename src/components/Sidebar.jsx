@@ -18,8 +18,6 @@ import {
   BarChart3, 
   FileText, 
   Check, 
-  User, 
-  X,
   ChevronRight
 } from 'lucide-react';
 
@@ -42,11 +40,9 @@ export default function Sidebar({
   onOpenCohesiveGuide,
   onOpenBandModal,
   onOpenSettings,
-  onOpenAuth,
-  isMobileDrawerOpen = false,
-  onCloseMobileDrawer
+  onOpenAuth
 }) {
-  // Navigation Sections Definition
+  // Navigation Sections Definition (Web Desktop Only)
   const NAV_SECTIONS = [
     {
       group: null,
@@ -58,7 +54,6 @@ export default function Sidebar({
           icon: Home,
           isActive: currentView === 'welcome',
           action: () => {
-            if (onCloseMobileDrawer) onCloseMobileDrawer();
             if (onGoWelcome) onGoWelcome();
           }
         }
@@ -74,7 +69,6 @@ export default function Sidebar({
           icon: BookOpen,
           isActive: (currentView === 'vocab_practice' || currentView === 'practice') && practiceActivePart === 1,
           action: () => {
-            if (onCloseMobileDrawer) onCloseMobileDrawer();
             if (onSelectWritingStep) onSelectWritingStep('1.1');
           }
         },
@@ -85,7 +79,6 @@ export default function Sidebar({
           icon: FileEdit,
           isActive: (currentView === 'vocab_practice' || currentView === 'practice') && practiceActivePart === 2,
           action: () => {
-            if (onCloseMobileDrawer) onCloseMobileDrawer();
             if (onSelectWritingStep) onSelectWritingStep('1.2');
           }
         },
@@ -96,7 +89,6 @@ export default function Sidebar({
           icon: Layers,
           isActive: (currentView === 'vocab_practice' || currentView === 'practice') && practiceActivePart === 3,
           action: () => {
-            if (onCloseMobileDrawer) onCloseMobileDrawer();
             if (onSelectWritingStep) onSelectWritingStep('1.3');
           }
         },
@@ -107,7 +99,6 @@ export default function Sidebar({
           icon: PenTool,
           isActive: currentView === 'full_essay',
           action: () => {
-            if (onCloseMobileDrawer) onCloseMobileDrawer();
             if (onSelectWritingStep) onSelectWritingStep('1.4');
           },
           isFullEssay: true
@@ -124,7 +115,6 @@ export default function Sidebar({
           icon: BookOpenCheck,
           isActive: currentView === 'reading' && readingMode === 'practice',
           action: () => {
-            if (onCloseMobileDrawer) onCloseMobileDrawer();
             if (onSelectWritingStep) onSelectWritingStep('2.1');
           }
         },
@@ -135,7 +125,6 @@ export default function Sidebar({
           icon: Timer,
           isActive: currentView === 'reading' && readingMode === 'test',
           action: () => {
-            if (onCloseMobileDrawer) onCloseMobileDrawer();
             if (onSelectWritingStep) onSelectWritingStep('2.2');
           }
         }
@@ -151,7 +140,6 @@ export default function Sidebar({
           icon: Sparkles,
           isActive: currentView === 'flashcard',
           action: () => {
-            if (onCloseMobileDrawer) onCloseMobileDrawer();
             if (onOpenFlashcard) onOpenFlashcard();
           }
         }
@@ -166,7 +154,6 @@ export default function Sidebar({
           subtitle: 'Cambridge, Simon & AWL',
           icon: Database,
           action: () => {
-            if (onCloseMobileDrawer) onCloseMobileDrawer();
             if (onOpenSourcesModal) onOpenSourcesModal();
           }
         },
@@ -176,7 +163,6 @@ export default function Sidebar({
           subtitle: 'Xem lại điểm số & câu đã chấm',
           icon: History,
           action: () => {
-            if (onCloseMobileDrawer) onCloseMobileDrawer();
             if (onOpenHistoryDrawer) onOpenHistoryDrawer();
           }
         },
@@ -186,7 +172,6 @@ export default function Sidebar({
           subtitle: 'Kho liên từ & cấu trúc 7.0-8.5',
           icon: FileSpreadsheet,
           action: () => {
-            if (onCloseMobileDrawer) onCloseMobileDrawer();
             if (onOpenCohesiveGuide) onOpenCohesiveGuide();
           }
         }
@@ -199,7 +184,7 @@ export default function Sidebar({
     const Icon = item.icon;
     const isActive = item.isActive;
 
-    if (isCollapsed && !isMobileDrawerOpen) {
+    if (isCollapsed) {
       return (
         <div key={item.id} className="relative group flex justify-center py-1">
           <button
@@ -306,18 +291,14 @@ export default function Sidebar({
     );
   };
 
-  const sidebarContent = (
-    <aside className={`h-full flex flex-col bg-[#F8F6F1] border-r border-[#E6E2D8] select-none transition-all duration-200 ease-in-out ${
-      isMobileDrawerOpen 
-        ? "w-72" 
-        : isCollapsed 
-        ? "w-18" 
-        : "w-64"
+  return (
+    <aside className={`h-full flex flex-col bg-[#F8F6F1] border-r border-[#E6E2D8] select-none transition-all duration-200 ease-in-out shrink-0 ${
+      isCollapsed ? "w-18" : "w-64"
     }`}>
       
       {/* Top Brand & Header */}
       <div className={`h-14 border-b border-[#E6E2D8] flex items-center px-3 shrink-0 ${
-        isCollapsed && !isMobileDrawerOpen ? "justify-center" : "justify-between"
+        isCollapsed ? "justify-center" : "justify-between"
       }`}>
         {/* Brand Logo & Title */}
         <div 
@@ -332,7 +313,7 @@ export default function Sidebar({
               className="w-full h-full object-contain" 
             />
           </div>
-          {(!isCollapsed || isMobileDrawerOpen) && (
+          {!isCollapsed && (
             <div className="min-w-0">
               <span className="font-title font-bold text-sm sm:text-base text-[#24211E] group-hover:text-[#3E4F42] transition leading-none truncate block">
                 Lớp cô Oanh
@@ -344,17 +325,8 @@ export default function Sidebar({
           )}
         </div>
 
-        {/* Toggle Collapse Button (Desktop) or Close Button (Mobile Drawer) */}
-        {isMobileDrawerOpen ? (
-          <button
-            type="button"
-            onClick={onCloseMobileDrawer}
-            className="p-1.5 rounded-xl text-[#7A7369] hover:text-[#24211E] hover:bg-white transition cursor-pointer"
-            title="Đóng thanh menu"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        ) : onToggleCollapse && !isCollapsed ? (
+        {/* Toggle Collapse Button (Desktop) */}
+        {onToggleCollapse && !isCollapsed && (
           <button
             type="button"
             onClick={onToggleCollapse}
@@ -363,11 +335,11 @@ export default function Sidebar({
           >
             <PanelLeftClose className="w-4 h-4" />
           </button>
-        ) : null}
+        )}
       </div>
 
       {/* If collapsed on desktop: show expand button right below header */}
-      {isCollapsed && !isMobileDrawerOpen && onToggleCollapse && (
+      {isCollapsed && onToggleCollapse && (
         <div className="py-2 flex justify-center border-b border-[#E6E2D8] shrink-0">
           <button
             type="button"
@@ -384,12 +356,12 @@ export default function Sidebar({
       <div className="flex-1 min-h-0 overflow-y-auto px-2 py-3 space-y-3.5 scrollbar-thin">
         {NAV_SECTIONS.map((section, sIdx) => (
           <div key={section.group || `sec_${sIdx}`} className="space-y-1">
-            {section.group && (!isCollapsed || isMobileDrawerOpen) && (
+            {section.group && !isCollapsed && (
               <div className="px-3 py-1 text-[10px] font-bold text-[#A67C52] uppercase tracking-wider">
                 {section.group}
               </div>
             )}
-            {section.group && isCollapsed && !isMobileDrawerOpen && (
+            {section.group && isCollapsed && (
               <div className="h-px bg-[#E6E2D8] my-2 mx-2" />
             )}
             <div className="space-y-1">
@@ -402,7 +374,7 @@ export default function Sidebar({
       {/* Bottom Footer Section: Target Band & Settings / Account */}
       <div className="p-2 border-t border-[#E6E2D8] bg-[#FAF8F5] shrink-0 space-y-1">
         {/* Target Band Mini Card */}
-        {(!isCollapsed || isMobileDrawerOpen) ? (
+        {!isCollapsed ? (
           <button
             type="button"
             onClick={onOpenBandModal}
@@ -434,7 +406,7 @@ export default function Sidebar({
         )}
 
         {/* User Account / Settings */}
-        {(!isCollapsed || isMobileDrawerOpen) ? (
+        {!isCollapsed ? (
           <button
             type="button"
             onClick={currentUser ? onOpenSettings : onOpenAuth}
@@ -472,24 +444,4 @@ export default function Sidebar({
 
     </aside>
   );
-
-  // If rendered as a mobile slide-out drawer
-  if (isMobileDrawerOpen) {
-    return (
-      <div className="fixed inset-0 z-50 flex">
-        {/* Backdrop overlay */}
-        <div 
-          onClick={onCloseMobileDrawer}
-          className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity animate-in fade-in duration-200"
-        />
-        {/* Drawer slide-in */}
-        <div className="relative z-50 h-full animate-in slide-in-from-left duration-200 shadow-2xl">
-          {sidebarContent}
-        </div>
-      </div>
-    );
-  }
-
-  // Normal desktop sidebar
-  return sidebarContent;
 }
