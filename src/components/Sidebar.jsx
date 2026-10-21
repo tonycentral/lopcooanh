@@ -64,11 +64,11 @@ export default function Sidebar({
       ]
     },
     {
-      group: 'I. NỀN TẢNG NGÔN NGỮ',
+      group: 'NỀN TẢNG NGÔN NGỮ',
       items: [
         {
           id: 'vocab',
-          title: '1. Luyện từ vựng',
+          title: 'Luyện từ vựng',
           icon: BookOpen,
           isActive: (currentView === 'vocab_practice' || currentView === 'practice') && practiceActivePart === 1,
           action: () => {
@@ -78,7 +78,7 @@ export default function Sidebar({
         },
         {
           id: 'grammar',
-          title: '2. Luyện ngữ pháp (Band 7+)',
+          title: 'Luyện ngữ pháp (Band 7+)',
           icon: CheckCircle2,
           isActive: currentView === 'grammar',
           action: () => {
@@ -87,7 +87,7 @@ export default function Sidebar({
         },
         {
           id: 'pronunciation',
-          title: '3. Luyện phát âm & IPA',
+          title: 'Luyện phát âm & IPA',
           icon: Volume2,
           isActive: currentView === 'pronunciation',
           action: () => {
@@ -96,7 +96,7 @@ export default function Sidebar({
         },
         {
           id: 'flashcard',
-          title: '4. Flashcards phản xạ',
+          title: 'Flashcards phản xạ',
           icon: Sparkles,
           isActive: currentView === 'flashcard',
           action: () => {
@@ -106,11 +106,11 @@ export default function Sidebar({
       ]
     },
     {
-      group: 'II. 4 KỸ NĂNG IELTS',
+      group: 'KỸ NĂNG IELTS',
       items: [
         {
           id: 'listening',
-          title: '5. Luyện Nghe (Listening)',
+          title: 'Luyện Nghe (Listening)',
           icon: Headphones,
           isActive: currentView === 'listening',
           action: () => {
@@ -119,7 +119,7 @@ export default function Sidebar({
         },
         {
           id: 'speaking',
-          title: '6. Luyện Nói (Speaking)',
+          title: 'Luyện Nói (Speaking)',
           icon: Mic,
           isActive: currentView === 'speaking',
           action: () => {
@@ -128,7 +128,7 @@ export default function Sidebar({
         },
         {
           id: 'reading',
-          title: '7. Luyện Đọc (Reading)',
+          title: 'Luyện Đọc (Reading)',
           icon: BookOpenCheck,
           isActive: currentView === 'reading',
           isReadingGroup: true,
@@ -139,7 +139,7 @@ export default function Sidebar({
         },
         {
           id: 'writing',
-          title: '8. Luyện Viết (Writing)',
+          title: 'Luyện Viết (Writing)',
           icon: PenTool,
           isActive: currentView === 'full_essay' || ((currentView === 'vocab_practice' || currentView === 'practice') && (practiceActivePart === 2 || practiceActivePart === 3)),
           isWritingGroup: true,
@@ -151,11 +151,11 @@ export default function Sidebar({
       ]
     },
     {
-      group: 'III. TƯ DUY & CHIẾN THUẬT',
+      group: 'TƯ DUY & CHIẾN THUẬT',
       items: [
         {
           id: 'thinking',
-          title: '9. Tư duy phản biện & Ý tưởng',
+          title: 'Tư duy phản biện & Ý tưởng',
           icon: Brain,
           isActive: currentView === 'thinking',
           action: () => {
@@ -164,7 +164,7 @@ export default function Sidebar({
         },
         {
           id: 'tactics',
-          title: '10. Chiến thuật phòng thi',
+          title: 'Chiến thuật phòng thi',
           icon: Shield,
           isActive: currentView === 'tactics',
           action: () => {
@@ -304,88 +304,38 @@ export default function Sidebar({
         )}
 
         {/* Sub-selector for Writing when Writing is active */}
-        {item.isWritingGroup && isActive && !isCollapsed && (
-          <div className="ml-9 mr-1 p-1 bg-[#FAF8F5] rounded-xl border border-[#E6E2D8] flex flex-col gap-1">
-            <div className="flex gap-1">
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (onSelectWritingStep) onSelectWritingStep('1.2');
-                }}
-                className={`flex-1 py-1 px-1 rounded-lg text-[10px] font-bold text-center transition cursor-pointer ${
-                  currentView === 'vocab_practice' && practiceActivePart === 2
-                    ? "bg-[#3E4F42] text-white shadow-2xs"
-                    : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
-                }`}
-              >
-                Viết câu
-              </button>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (onSelectWritingStep) onSelectWritingStep('1.3');
-                }}
-                className={`flex-1 py-1 px-1 rounded-lg text-[10px] font-bold text-center transition cursor-pointer ${
-                  currentView === 'vocab_practice' && practiceActivePart === 3
-                    ? "bg-[#3E4F42] text-white shadow-2xs"
-                    : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
-                }`}
-              >
-                Viết đoạn
-              </button>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (onSelectWritingStep) onSelectWritingStep('1.4');
-                }}
-                className={`flex-1 py-1 px-1 rounded-lg text-[10px] font-bold text-center transition cursor-pointer ${
-                  currentView === 'full_essay'
-                    ? "bg-[#3E4F42] text-white shadow-2xs"
-                    : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
-                }`}
-              >
-                Toàn bài
-              </button>
-            </div>
-
-            {/* Task 1 / Task 2 toggle when inside Full Essay */}
-            {currentView === 'full_essay' && onToggleTask && (
-              <div className="flex gap-1 pt-1 border-t border-[#E6E2D8]/80">
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onToggleTask('task1');
-                  }}
-                  className={`flex-1 flex items-center justify-center gap-1 py-0.5 rounded-md text-[9px] font-bold transition cursor-pointer ${
-                    activeTask === 'task1'
-                      ? "bg-[#3E4F42] text-white shadow-2xs"
-                      : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
-                  }`}
-                >
-                  <BarChart3 className="w-3 h-3" />
-                  <span>Task 1</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onToggleTask('task2');
-                  }}
-                  className={`flex-1 flex items-center justify-center gap-1 py-0.5 rounded-md text-[9px] font-bold transition cursor-pointer ${
-                    activeTask === 'task2'
-                      ? "bg-[#3E4F42] text-white shadow-2xs"
-                      : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
-                  }`}
-                >
-                  <FileText className="w-3 h-3" />
-                  <span>Task 2</span>
-                </button>
-              </div>
-            )}
+        {item.isWritingGroup && isActive && !isCollapsed && onToggleTask && (
+          <div className="ml-9 mr-1 p-1 bg-[#FAF8F5] rounded-xl border border-[#E6E2D8] flex gap-1">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleTask('task1');
+              }}
+              className={`flex-1 flex items-center justify-center gap-1 py-1 rounded-lg text-[10px] font-bold transition cursor-pointer ${
+                activeTask === 'task1'
+                  ? "bg-[#3E4F42] text-white shadow-2xs"
+                  : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
+              }`}
+            >
+              <BarChart3 className="w-3 h-3" />
+              <span>Task 1</span>
+            </button>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleTask('task2');
+              }}
+              className={`flex-1 flex items-center justify-center gap-1 py-1 rounded-lg text-[10px] font-bold transition cursor-pointer ${
+                activeTask === 'task2'
+                  ? "bg-[#3E4F42] text-white shadow-2xs"
+                  : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
+              }`}
+            >
+              <FileText className="w-3 h-3" />
+              <span>Task 2</span>
+            </button>
           </div>
         )}
       </div>

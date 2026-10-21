@@ -352,3 +352,51 @@ export function getMasterCategoryMeta(item) {
   const catId = getMasterCategoryId(item);
   return MASTER_TOPIC_CATEGORIES.find(c => c.id === catId) || MASTER_TOPIC_CATEGORIES[8]; // society_family fallback
 }
+
+/**
+ * Aggregates all vocabularies strictly by the 10 Master Categories
+ * (Khng chia theo t?ng d? m ch? theo 10 ch? d? l?n)
+ */
+export function get10MasterVocabTopics(allTopics = []) {
+  const master10 = MASTER_TOPIC_CATEGORIES.filter(cat => cat.id !== 'ALL');
+  
+  return master10.map(cat => {
+    const matchingTopics = (allTopics || []).filter(t => {
+      const catId = t.topicCategory || getMasterCategoryId(t);
+      return catId === cat.id || t.id === cat.id;
+    });
+
+    const seen = new Set();
+    const vocabularies = [];
+
+    matchingTopics.forEach(t => {
+      if (Array.isArray(t.vocabularies)) {
+        t.vocabularies.forEach(v => {
+          if (!v || !v.word) return;
+          const clean = v.word.toLowerCase().trim();
+          if (clean && !seen.has(clean)) {
+            seen.add(clean);
+            vocabularies.push({
+              ...v,
+              topicCategory: cat.id,
+              categoryName: cat.name,
+              categoryVietnameseName: cat.vietnameseName
+            });
+          }
+        });
+      }
+    });
+
+    return {
+      id: cat.id,
+      name: cat.name,
+      vietnameseName: cat.vietnameseName,
+      shortName: cat.shortName,
+      icon: cat.icon,
+      color: cat.color,
+      description: cat.description,
+      topicCategory: cat.id,
+      vocabularies
+    };
+  });
+}
