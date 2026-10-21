@@ -19,6 +19,12 @@ import AuthModal from './components/AuthModal';
 import SettingsModal from './components/SettingsModal';
 import FullEssayWorkspace from './components/FullEssayWorkspace';
 import ReadingWorkspace from './components/reading/ReadingWorkspace';
+import GrammarWorkspace from './components/grammar/GrammarWorkspace';
+import PronunciationWorkspace from './components/pronunciation/PronunciationWorkspace';
+import ListeningWorkspace from './components/listening/ListeningWorkspace';
+import SpeakingWorkspace from './components/speaking/SpeakingWorkspace';
+import CriticalThinkingWorkspace from './components/thinking/CriticalThinkingWorkspace';
+import TacticsWorkspace from './components/tactics/TacticsWorkspace';
 import MobileBottomNav from './components/MobileBottomNav';
 import MobileDesktopNotice from './components/MobileDesktopNotice';
 import MobileVocabWorkspace from './components/MobileVocabWorkspace';
@@ -83,7 +89,19 @@ export default function App() {
       return 'welcome';
     }
     const lastLoc = getLastActiveLocation();
-    if (lastLoc?.view && ['reading', 'full_essay', 'vocab_practice', 'flashcard'].includes(lastLoc.view)) {
+    const validViews = [
+      'reading', 
+      'full_essay', 
+      'vocab_practice', 
+      'flashcard',
+      'grammar',
+      'pronunciation',
+      'listening',
+      'speaking',
+      'thinking',
+      'tactics'
+    ];
+    if (lastLoc?.view && validViews.includes(lastLoc.view)) {
       return lastLoc.view;
     }
     return 'vocab_practice';
@@ -369,7 +387,19 @@ export default function App() {
 
   // Tự động lưu vị trí học tập gần nhất khi người dùng chuyển view, step, hoặc topic
   useEffect(() => {
-    if (currentView && ['reading', 'full_essay', 'vocab_practice', 'flashcard'].includes(currentView)) {
+    const validViews = [
+      'reading', 
+      'full_essay', 
+      'vocab_practice', 
+      'flashcard',
+      'grammar',
+      'pronunciation',
+      'listening',
+      'speaking',
+      'thinking',
+      'tactics'
+    ];
+    if (currentView && validViews.includes(currentView)) {
       const existing = getLastActiveLocation(studentEmail) || {};
       saveLastActiveLocation(studentEmail, {
         ...existing,
@@ -552,7 +582,12 @@ export default function App() {
               currentUser={currentUser}
               studentEmail={studentEmail}
               onGoWelcome={() => setCurrentView('welcome')}
+              onGoView={(view) => setCurrentView(view)}
               onSelectWritingStep={handleSelectWritingStep}
+              onSelectReadingMode={(mode) => {
+                setReadingInitialMode(mode);
+                setCurrentView('reading');
+              }}
               onOpenFlashcard={() => {
                 if (!currentUser) {
                   setIsAuthModalOpen(true);
@@ -754,6 +789,168 @@ export default function App() {
                     />
                   </div>
                 )}
+              </div>
+            ) : currentView === 'grammar' ? (
+              /* NỀN TẢNG: LUYỆN NGỮ PHÁP (GRAMMAR WORKSPACE BAND 7.0+) */
+              <div className="h-full flex flex-col overflow-hidden bg-[#F8F6F1] text-[#24211E]">
+                <Header
+                  targetBand={targetBand}
+                  current7DayScore={current7DayScore}
+                  onOpenBandModal={() => setIsBandModalOpen(true)}
+                  onGoWelcome={() => setCurrentView('welcome')}
+                  currentUser={currentUser}
+                  onOpenAuth={() => setIsAuthModalOpen(true)}
+                  onOpenSettings={() => setIsSettingsModalOpen(true)}
+                  onSignOut={handleSignOut}
+                  studentEmail={studentEmail}
+                  activeTask={activeTask}
+                  onToggleTask={handleToggleTask}
+                  currentView={currentView}
+                  activeWritingStep={activeWritingStep}
+                  practiceActivePart={practiceActivePart}
+                  readingMode={readingInitialMode}
+                  isMobile={isMobile}
+                  isSidebarCollapsed={isSidebarCollapsed}
+                  onToggleSidebar={handleToggleSidebar}
+                />
+                <div className="flex-1 min-h-0 overflow-hidden">
+                  <GrammarWorkspace />
+                </div>
+              </div>
+            ) : currentView === 'pronunciation' ? (
+              /* NỀN TẢNG: LUYỆN PHÁT ÂM & IPA (PRONUNCIATION WORKSPACE) */
+              <div className="h-full flex flex-col overflow-hidden bg-[#F8F6F1] text-[#24211E]">
+                <Header
+                  targetBand={targetBand}
+                  current7DayScore={current7DayScore}
+                  onOpenBandModal={() => setIsBandModalOpen(true)}
+                  onGoWelcome={() => setCurrentView('welcome')}
+                  currentUser={currentUser}
+                  onOpenAuth={() => setIsAuthModalOpen(true)}
+                  onOpenSettings={() => setIsSettingsModalOpen(true)}
+                  onSignOut={handleSignOut}
+                  studentEmail={studentEmail}
+                  activeTask={activeTask}
+                  onToggleTask={handleToggleTask}
+                  currentView={currentView}
+                  activeWritingStep={activeWritingStep}
+                  practiceActivePart={practiceActivePart}
+                  readingMode={readingInitialMode}
+                  isMobile={isMobile}
+                  isSidebarCollapsed={isSidebarCollapsed}
+                  onToggleSidebar={handleToggleSidebar}
+                />
+                <div className="flex-1 min-h-0 overflow-hidden">
+                  <PronunciationWorkspace />
+                </div>
+              </div>
+            ) : currentView === 'listening' ? (
+              /* 4 KỸ NĂNG: LUYỆN NGHE (LISTENING WORKSPACE) */
+              <div className="h-full flex flex-col overflow-hidden bg-[#F8F6F1] text-[#24211E]">
+                <Header
+                  targetBand={targetBand}
+                  current7DayScore={current7DayScore}
+                  onOpenBandModal={() => setIsBandModalOpen(true)}
+                  onGoWelcome={() => setCurrentView('welcome')}
+                  currentUser={currentUser}
+                  onOpenAuth={() => setIsAuthModalOpen(true)}
+                  onOpenSettings={() => setIsSettingsModalOpen(true)}
+                  onSignOut={handleSignOut}
+                  studentEmail={studentEmail}
+                  activeTask={activeTask}
+                  onToggleTask={handleToggleTask}
+                  currentView={currentView}
+                  activeWritingStep={activeWritingStep}
+                  practiceActivePart={practiceActivePart}
+                  readingMode={readingInitialMode}
+                  isMobile={isMobile}
+                  isSidebarCollapsed={isSidebarCollapsed}
+                  onToggleSidebar={handleToggleSidebar}
+                />
+                <div className="flex-1 min-h-0 overflow-hidden">
+                  <ListeningWorkspace />
+                </div>
+              </div>
+            ) : currentView === 'speaking' ? (
+              /* 4 KỸ NĂNG: LUYỆN NÓI (SPEAKING WORKSPACE) */
+              <div className="h-full flex flex-col overflow-hidden bg-[#F8F6F1] text-[#24211E]">
+                <Header
+                  targetBand={targetBand}
+                  current7DayScore={current7DayScore}
+                  onOpenBandModal={() => setIsBandModalOpen(true)}
+                  onGoWelcome={() => setCurrentView('welcome')}
+                  currentUser={currentUser}
+                  onOpenAuth={() => setIsAuthModalOpen(true)}
+                  onOpenSettings={() => setIsSettingsModalOpen(true)}
+                  onSignOut={handleSignOut}
+                  studentEmail={studentEmail}
+                  activeTask={activeTask}
+                  onToggleTask={handleToggleTask}
+                  currentView={currentView}
+                  activeWritingStep={activeWritingStep}
+                  practiceActivePart={practiceActivePart}
+                  readingMode={readingInitialMode}
+                  isMobile={isMobile}
+                  isSidebarCollapsed={isSidebarCollapsed}
+                  onToggleSidebar={handleToggleSidebar}
+                />
+                <div className="flex-1 min-h-0 overflow-hidden">
+                  <SpeakingWorkspace />
+                </div>
+              </div>
+            ) : currentView === 'thinking' ? (
+              /* TƯ DUY: CRITICAL THINKING & Ý TƯỞNG LÀM BÀI */
+              <div className="h-full flex flex-col overflow-hidden bg-[#F8F6F1] text-[#24211E]">
+                <Header
+                  targetBand={targetBand}
+                  current7DayScore={current7DayScore}
+                  onOpenBandModal={() => setIsBandModalOpen(true)}
+                  onGoWelcome={() => setCurrentView('welcome')}
+                  currentUser={currentUser}
+                  onOpenAuth={() => setIsAuthModalOpen(true)}
+                  onOpenSettings={() => setIsSettingsModalOpen(true)}
+                  onSignOut={handleSignOut}
+                  studentEmail={studentEmail}
+                  activeTask={activeTask}
+                  onToggleTask={handleToggleTask}
+                  currentView={currentView}
+                  activeWritingStep={activeWritingStep}
+                  practiceActivePart={practiceActivePart}
+                  readingMode={readingInitialMode}
+                  isMobile={isMobile}
+                  isSidebarCollapsed={isSidebarCollapsed}
+                  onToggleSidebar={handleToggleSidebar}
+                />
+                <div className="flex-1 min-h-0 overflow-hidden">
+                  <CriticalThinkingWorkspace />
+                </div>
+              </div>
+            ) : currentView === 'tactics' ? (
+              /* CHIẾN THUẬT: CHIẾN THUẬT PHÒNG THI (EXAM TACTICS & TRAP BUSTING) */
+              <div className="h-full flex flex-col overflow-hidden bg-[#F8F6F1] text-[#24211E]">
+                <Header
+                  targetBand={targetBand}
+                  current7DayScore={current7DayScore}
+                  onOpenBandModal={() => setIsBandModalOpen(true)}
+                  onGoWelcome={() => setCurrentView('welcome')}
+                  currentUser={currentUser}
+                  onOpenAuth={() => setIsAuthModalOpen(true)}
+                  onOpenSettings={() => setIsSettingsModalOpen(true)}
+                  onSignOut={handleSignOut}
+                  studentEmail={studentEmail}
+                  activeTask={activeTask}
+                  onToggleTask={handleToggleTask}
+                  currentView={currentView}
+                  activeWritingStep={activeWritingStep}
+                  practiceActivePart={practiceActivePart}
+                  readingMode={readingInitialMode}
+                  isMobile={isMobile}
+                  isSidebarCollapsed={isSidebarCollapsed}
+                  onToggleSidebar={handleToggleSidebar}
+                />
+                <div className="flex-1 min-h-0 overflow-hidden">
+                  <TacticsWorkspace />
+                </div>
               </div>
             ) : (
               /* MODE 1: HỌC TỪ VỰNG (CHỌN TOPIC -> LUYỆN TỪ VỰNG -> LUYỆN CÂU & ĐOẠN) */

@@ -2,12 +2,15 @@ import React from 'react';
 import { 
   Home, 
   BookOpen, 
-  BookOpenCheck, 
-  FileEdit, 
-  Layers, 
-  PenTool, 
-  Timer, 
+  CheckCircle2, 
+  Volume2, 
   Sparkles, 
+  Headphones, 
+  Mic, 
+  BookOpenCheck, 
+  PenTool, 
+  Brain, 
+  Shield, 
   Database, 
   History, 
   FileSpreadsheet, 
@@ -33,7 +36,9 @@ export default function Sidebar({
   currentUser,
   studentEmail,
   onGoWelcome,
+  onGoView,
   onSelectWritingStep,
+  onSelectReadingMode,
   onOpenFlashcard,
   onOpenSourcesModal,
   onOpenHistoryDrawer,
@@ -42,7 +47,7 @@ export default function Sidebar({
   onOpenSettings,
   onOpenAuth
 }) {
-  // Navigation Sections Definition (Web Desktop Only)
+  // Navigation Sections Definition (Web Desktop IELTS Master Platform)
   const NAV_SECTIONS = [
     {
       group: null,
@@ -60,87 +65,121 @@ export default function Sidebar({
       ]
     },
     {
-      group: '1. HỌC VIẾT',
+      group: 'I. NỀN TẢNG NGÔN NGỮ',
       items: [
         {
-          id: '1.1',
-          title: '1.1 Học từ vựng',
-          subtitle: '10 chủ đề, phát âm & collocations',
+          id: 'vocab',
+          title: '1. Luyện từ vựng',
+          subtitle: '10 chủ đề học thuật Cambridge & AWL',
           icon: BookOpen,
           isActive: (currentView === 'vocab_practice' || currentView === 'practice') && practiceActivePart === 1,
           action: () => {
             if (onSelectWritingStep) onSelectWritingStep('1.1');
+            else if (onGoView) onGoView('vocab_practice');
           }
         },
         {
-          id: '1.2',
-          title: '1.2 Học viết 1 câu',
-          subtitle: 'Dịch & áp dụng từ vào câu đơn',
-          icon: FileEdit,
-          isActive: (currentView === 'vocab_practice' || currentView === 'practice') && practiceActivePart === 2,
+          id: 'grammar',
+          title: '2. Luyện ngữ pháp (Band 7+)',
+          subtitle: 'Đảo ngữ, câu chẻ, danh từ hoá',
+          icon: CheckCircle2,
+          isActive: currentView === 'grammar',
           action: () => {
-            if (onSelectWritingStep) onSelectWritingStep('1.2');
+            if (onGoView) onGoView('grammar');
           }
         },
         {
-          id: '1.3',
-          title: '1.3 Học viết một đoạn',
-          subtitle: 'Đoạn văn PEEL & liên từ mạch lạc',
-          icon: Layers,
-          isActive: (currentView === 'vocab_practice' || currentView === 'practice') && practiceActivePart === 3,
+          id: 'pronunciation',
+          title: '3. Luyện phát âm & IPA',
+          subtitle: '44 âm IPA, trọng âm & Shadowing',
+          icon: Volume2,
+          isActive: currentView === 'pronunciation',
           action: () => {
-            if (onSelectWritingStep) onSelectWritingStep('1.3');
+            if (onGoView) onGoView('pronunciation');
           }
         },
         {
-          id: '1.4',
-          title: '1.4 Học viết một bài',
-          subtitle: 'Task 1 & Task 2 kèm bài mẫu',
-          icon: PenTool,
-          isActive: currentView === 'full_essay',
-          action: () => {
-            if (onSelectWritingStep) onSelectWritingStep('1.4');
-          },
-          isFullEssay: true
-        }
-      ]
-    },
-    {
-      group: '2. LUYỆN ĐỌC',
-      items: [
-        {
-          id: '2.1',
-          title: '2.1 Luyện đọc & Tra từ',
-          subtitle: 'Đọc & tra từ bấm trên bài',
-          icon: BookOpenCheck,
-          isActive: currentView === 'reading' && readingMode === 'practice',
-          action: () => {
-            if (onSelectWritingStep) onSelectWritingStep('2.1');
-          }
-        },
-        {
-          id: '2.2',
-          title: '2.2 Thi thử Reading',
-          subtitle: '50 đề thi bấm giờ & tính điểm',
-          icon: Timer,
-          isActive: currentView === 'reading' && readingMode === 'test',
-          action: () => {
-            if (onSelectWritingStep) onSelectWritingStep('2.2');
-          }
-        }
-      ]
-    },
-    {
-      group: '3. FLASHCARDS',
-      items: [
-        {
-          id: '3.0',
-          title: '3. Flashcards phản xạ',
+          id: 'flashcard',
+          title: '4. Flashcards phản xạ',
           subtitle: 'Luyện nhớ từ qua thẻ & minigame',
           icon: Sparkles,
           isActive: currentView === 'flashcard',
           action: () => {
             if (onOpenFlashcard) onOpenFlashcard();
+          }
+        }
+      ]
+    },
+    {
+      group: 'II. 4 KỸ NĂNG IELTS',
+      items: [
+        {
+          id: 'listening',
+          title: '5. Luyện Nghe (Listening)',
+          subtitle: 'Section 1-4 Cambridge, audio & script',
+          icon: Headphones,
+          isActive: currentView === 'listening',
+          action: () => {
+            if (onGoView) onGoView('listening');
+          }
+        },
+        {
+          id: 'speaking',
+          title: '6. Luyện Nói (Speaking)',
+          subtitle: 'Phòng thi Part 1-2-3 & mẫu Band 8.5',
+          icon: Mic,
+          isActive: currentView === 'speaking',
+          action: () => {
+            if (onGoView) onGoView('speaking');
+          }
+        },
+        {
+          id: 'reading',
+          title: '7. Luyện Đọc (Reading)',
+          subtitle: '50 đề thi thử, tra từ & bấm giờ',
+          icon: BookOpenCheck,
+          isActive: currentView === 'reading',
+          isReadingGroup: true,
+          action: () => {
+            if (onSelectReadingMode) onSelectReadingMode(readingMode || 'practice');
+            else if (onGoView) onGoView('reading');
+          }
+        },
+        {
+          id: 'writing',
+          title: '8. Luyện Viết (Writing)',
+          subtitle: 'Viết câu, đoạn PEEL, Task 1 & 2',
+          icon: PenTool,
+          isActive: currentView === 'full_essay' || ((currentView === 'vocab_practice' || currentView === 'practice') && (practiceActivePart === 2 || practiceActivePart === 3)),
+          isWritingGroup: true,
+          action: () => {
+            if (onSelectWritingStep) onSelectWritingStep('1.4');
+            else if (onGoView) onGoView('full_essay');
+          }
+        }
+      ]
+    },
+    {
+      group: 'III. TƯ DUY & CHIẾN THUẬT',
+      items: [
+        {
+          id: 'thinking',
+          title: '9. Tư duy phản biện & Ý tưởng',
+          subtitle: 'Đa góc nhìn kinh tế, xã hội, đạo đức',
+          icon: Brain,
+          isActive: currentView === 'thinking',
+          action: () => {
+            if (onGoView) onGoView('thinking');
+          }
+        },
+        {
+          id: 'tactics',
+          title: '10. Chiến thuật phòng thi',
+          subtitle: 'Bẫy T/F/NG, phân bổ giờ & bí quyết',
+          icon: Shield,
+          isActive: currentView === 'tactics',
+          action: () => {
+            if (onGoView) onGoView('tactics');
           }
         }
       ]
@@ -252,39 +291,126 @@ export default function Sidebar({
           )}
         </button>
 
-        {/* Sub-selector for Task 1 / Task 2 when 1.4 is active */}
-        {item.isFullEssay && isActive && onToggleTask && (
+        {/* Sub-selector for Reading when Reading is active */}
+        {item.isReadingGroup && isActive && !isCollapsed && (
           <div className="ml-9 mr-1 p-1 bg-[#FAF8F5] rounded-xl border border-[#E6E2D8] flex gap-1">
             <button
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
-                onToggleTask('task1');
+                if (onSelectReadingMode) onSelectReadingMode('practice');
               }}
-              className={`flex-1 flex items-center justify-center gap-1 py-1 rounded-lg text-[10px] font-bold transition cursor-pointer ${
-                activeTask === 'task1'
+              className={`flex-1 py-1 px-1 rounded-lg text-[10px] font-bold text-center transition cursor-pointer ${
+                readingMode === 'practice'
                   ? "bg-[#3E4F42] text-white shadow-2xs"
                   : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
               }`}
             >
-              <BarChart3 className="w-3 h-3" />
-              <span>Task 1</span>
+              Đọc tra từ
             </button>
             <button
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
-                onToggleTask('task2');
+                if (onSelectReadingMode) onSelectReadingMode('test');
               }}
-              className={`flex-1 flex items-center justify-center gap-1 py-1 rounded-lg text-[10px] font-bold transition cursor-pointer ${
-                activeTask === 'task2'
+              className={`flex-1 py-1 px-1 rounded-lg text-[10px] font-bold text-center transition cursor-pointer ${
+                readingMode === 'test'
                   ? "bg-[#3E4F42] text-white shadow-2xs"
                   : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
               }`}
             >
-              <FileText className="w-3 h-3" />
-              <span>Task 2</span>
+              Thi thử 50 đề
             </button>
+          </div>
+        )}
+
+        {/* Sub-selector for Writing when Writing is active */}
+        {item.isWritingGroup && isActive && !isCollapsed && (
+          <div className="ml-9 mr-1 p-1 bg-[#FAF8F5] rounded-xl border border-[#E6E2D8] flex flex-col gap-1">
+            <div className="flex gap-1">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (onSelectWritingStep) onSelectWritingStep('1.2');
+                }}
+                className={`flex-1 py-1 px-1 rounded-lg text-[10px] font-bold text-center transition cursor-pointer ${
+                  currentView === 'vocab_practice' && practiceActivePart === 2
+                    ? "bg-[#3E4F42] text-white shadow-2xs"
+                    : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
+                }`}
+                title="Luyện viết 1 câu đơn với từ vựng"
+              >
+                Viết câu
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (onSelectWritingStep) onSelectWritingStep('1.3');
+                }}
+                className={`flex-1 py-1 px-1 rounded-lg text-[10px] font-bold text-center transition cursor-pointer ${
+                  currentView === 'vocab_practice' && practiceActivePart === 3
+                    ? "bg-[#3E4F42] text-white shadow-2xs"
+                    : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
+                }`}
+                title="Luyện viết 1 đoạn văn chuẩn PEEL"
+              >
+                Viết đoạn
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (onSelectWritingStep) onSelectWritingStep('1.4');
+                }}
+                className={`flex-1 py-1 px-1 rounded-lg text-[10px] font-bold text-center transition cursor-pointer ${
+                  currentView === 'full_essay'
+                    ? "bg-[#3E4F42] text-white shadow-2xs"
+                    : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
+                }`}
+                title="Luyện viết toàn bộ bài Task 1 & Task 2"
+              >
+                Toàn bài
+              </button>
+            </div>
+
+            {/* Task 1 / Task 2 toggle when inside Full Essay */}
+            {currentView === 'full_essay' && onToggleTask && (
+              <div className="flex gap-1 pt-1 border-t border-[#E6E2D8]/80">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onToggleTask('task1');
+                  }}
+                  className={`flex-1 flex items-center justify-center gap-1 py-0.5 rounded-md text-[9px] font-bold transition cursor-pointer ${
+                    activeTask === 'task1'
+                      ? "bg-[#3E4F42] text-white shadow-2xs"
+                      : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
+                  }`}
+                >
+                  <BarChart3 className="w-3 h-3" />
+                  <span>Task 1</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onToggleTask('task2');
+                  }}
+                  className={`flex-1 flex items-center justify-center gap-1 py-0.5 rounded-md text-[9px] font-bold transition cursor-pointer ${
+                    activeTask === 'task2'
+                      ? "bg-[#3E4F42] text-white shadow-2xs"
+                      : "text-[#7A7369] hover:text-[#24211E] hover:bg-white"
+                  }`}
+                >
+                  <FileText className="w-3 h-3" />
+                  <span>Task 2</span>
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -319,7 +445,7 @@ export default function Sidebar({
                 Lớp cô Oanh
               </span>
               <span className="text-[10px] text-[#7A7369] font-medium leading-tight truncate block mt-0.5">
-                IELTS Writing &amp; Reading
+                Hệ thống luyện thi IELTS toàn diện
               </span>
             </div>
           )}

@@ -339,6 +339,24 @@ export function formatLocationLabel(loc) {
     if (loc.practiceActivePart === 3) return 'Luyện viết đoạn văn (Paragraph)';
     return 'Luyện từ vựng học thuật (1.1)';
   }
+  if (loc.view === 'grammar') {
+    return 'Luyện ngữ pháp Band 7.0+';
+  }
+  if (loc.view === 'pronunciation') {
+    return 'Luyện phát âm & IPA 44 âm';
+  }
+  if (loc.view === 'listening') {
+    return 'Luyện nghe IELTS Listening (Cambridge)';
+  }
+  if (loc.view === 'speaking') {
+    return 'Luyện nói IELTS Speaking Simulator';
+  }
+  if (loc.view === 'thinking') {
+    return 'Tư duy phản biện & Ý tưởng (Critical Thinking)';
+  }
+  if (loc.view === 'tactics') {
+    return 'Chiến thuật phòng thi (Exam Tactics)';
+  }
   return null;
 }
 
