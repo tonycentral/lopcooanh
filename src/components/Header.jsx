@@ -1,22 +1,15 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   Target, 
-  Home, 
   FileText, 
   BarChart3, 
-  Layers, 
-  PenTool, 
-  BookOpen,
   ChevronDown, 
   User, 
   Cloud, 
   LogOut,
   Settings, 
-  Sparkles, 
-  FileEdit,
   PanelLeft,
-  PanelLeftClose,
-  ChevronRight
+  PanelLeftClose
 } from 'lucide-react';
 
 export default function Header({ 
@@ -32,9 +25,6 @@ export default function Header({
   activeTask,
   onToggleTask,
   currentView,
-  activeWritingStep,
-  practiceActivePart = 1,
-  readingMode = 'practice',
   isMobile = false,
   isSidebarCollapsed = false,
   onToggleSidebar
@@ -58,43 +48,13 @@ export default function Header({
   const currentNum = current7DayScore !== null ? current7DayScore : 0;
   const progressPercent = Math.min(100, Math.round((currentNum / targetNum) * 100));
 
-  // Determine current active breadcrumb / section badge
-  const breadcrumb = useMemo(() => {
-    if (currentView === 'welcome') {
-      return { parent: null, current: 'Trang chủ', icon: Home };
-    }
-    if (currentView === 'reading') {
-      return {
-        parent: '2. Luyện đọc',
-        current: readingMode === 'test' ? '2.2 Thi thử Reading' : '2.1 Luyện đọc & Tra từ',
-        icon: readingMode === 'test' ? FileText : BookOpen
-      };
-    }
-    if (currentView === 'flashcard') {
-      return { parent: null, current: '3. Flashcards phản xạ', icon: Sparkles };
-    }
-    if (currentView === 'full_essay') {
-      return { parent: '1. Học viết', current: '1.4 Học viết một bài', icon: PenTool };
-    }
-    if (practiceActivePart === 2 || activeWritingStep === '1.2') {
-      return { parent: '1. Học viết', current: '1.2 Học viết 1 câu', icon: FileEdit };
-    }
-    if (practiceActivePart === 3 || activeWritingStep === '1.3') {
-      return { parent: '1. Học viết', current: '1.3 Học viết một đoạn', icon: Layers };
-    }
-    return { parent: '1. Học viết', current: '1.1 Học từ vựng', icon: BookOpen };
-  }, [currentView, readingMode, practiceActivePart, activeWritingStep]);
-
-  const BreadcrumbIcon = breadcrumb.icon;
-
   return (
     <header className="sticky top-0 z-40 bg-[#F8F6F1]/95 backdrop-blur-md border-b border-[#E6E2D8] shadow-[0_1px_3px_rgba(0,0,0,0.03)] shrink-0">
       <div className="w-full px-2.5 sm:px-5 h-14 flex items-center justify-between gap-2">
         
-        {/* Left Section: Sidebar Toggle + Current Section Breadcrumb (Desktop) / Logo (Mobile) */}
+        {/* Left Section: Sidebar Toggle (Desktop) / Brand Logo (Mobile) */}
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           {!isMobile && onToggleSidebar && (
-            /* Desktop Sidebar Toggle */
             <button
               type="button"
               onClick={onToggleSidebar}
@@ -128,18 +88,6 @@ export default function Header({
               </span>
             </div>
           )}
-
-          {/* Breadcrumb Indicator (Desktop only) */}
-          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white/80 border border-[#E6E2D8] text-xs select-none shadow-2xs min-w-0">
-            <BreadcrumbIcon className="w-3.5 h-3.5 text-[#3E4F42] shrink-0" />
-            {breadcrumb.parent && (
-              <>
-                <span className="text-[#7A7369] truncate font-medium">{breadcrumb.parent}</span>
-                <ChevronRight className="w-3 h-3 text-[#A67C52] shrink-0" />
-              </>
-            )}
-            <span className="font-bold text-[#3E4F42] truncate">{breadcrumb.current}</span>
-          </div>
         </div>
 
         {/* Center: Contextual Controls (e.g. Task 1 / Task 2 Pill when in 1.4 Full Essay) */}
