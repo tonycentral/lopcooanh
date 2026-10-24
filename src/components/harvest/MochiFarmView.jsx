@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import HarvestHUD from './HarvestHUD';
+import FarmAreaNavSidebar from './FarmAreaNavSidebar';
 import HarvestAreaWorld from './HarvestAreaWorld';
 import AreaTopicPracticeModal from './AreaTopicPracticeModal';
 import DailyAlmanacModal from './DailyAlmanacModal';
@@ -62,37 +63,55 @@ export default function MochiFarmView({
   const currentArea = FARM_AREAS.find(a => a.id === activeAreaId) || FARM_AREAS[0];
   const activeEntities = harvestState.areaEntities?.[currentArea.id] || [];
 
+  // Unified User Display Name (Sáp nhập học viên mochi vào tài khoản)
+  const userDisplayName = 
+    currentUser?.user_metadata?.full_name || 
+    (currentUser?.email ? currentUser.email.split('@')[0] : null) || 
+    (studentEmail ? studentEmail.split('@')[0] : null) || 
+    harvestState.farmerName || 
+    'Tony Nguyen';
+
   return (
     <div className="h-full w-full max-h-screen overflow-hidden flex flex-col relative select-none font-sans text-[#FFF8E7] bg-[#140B05]">
       
-      {/* 1. RETRO HUD (Top Fixed Bar: Profile, 2 Currencies [Tiền 🪙 & Mana 🔮], 5-Area Navigation Menu) */}
+      {/* 1. RETRO HUD (Top Fixed Bar: Merged User Account + 2 Currencies [Tiền 🪙 & Mana 🔮] + Streak + Date + Sound) */}
       <HarvestHUD
         state={harvestState}
-        activeAreaId={activeAreaId}
-        onSelectArea={handleSelectArea}
         onOpenTargetBandModal={onOpenTargetBandModal}
         onOpenStore={() => setIsStoreOpen(true)}
         onOpenAlmanac={() => setIsAlmanacOpen(true)}
         currentUser={currentUser}
+        studentEmail={studentEmail}
         onOpenAuthModal={onOpenAuthModal}
         onOpenSettingsModal={onOpenSettingsModal}
         onSignOut={onSignOut}
       />
 
-      {/* 2. LIVING 2D RETRO GAME WORLD (Fixed Viewport, Single Area, 10 Topics with Real Sprites, Playable Farmer) */}
-      <main className="flex-1 min-h-0 w-full relative overflow-hidden">
-        <HarvestAreaWorld
-          activeArea={currentArea}
-          entities={activeEntities}
-          onSelectEntity={(entity) => setSelectedEntityForPractice(entity)}
-          onOpenStore={() => setIsStoreOpen(true)}
-          onOpenAlmanac={() => setIsAlmanacOpen(true)}
-          farmerName={harvestState.farmerName}
-          farmerLevel={harvestState.level}
-          mana={harvestState.mana}
-          gold={harvestState.gold}
+      {/* 2. LIVING 2D RETRO GAME WORLD WITH LEFT AREA NAVIGATION DOCK */}
+      <div className="flex-1 min-h-0 w-full relative overflow-hidden flex flex-row">
+        
+        {/* LEFT SIDEBAR: 5 Farm Areas Navigation Menu */}
+        <FarmAreaNavSidebar
+          activeAreaId={activeAreaId}
+          onSelectArea={handleSelectArea}
         />
-      </main>
+
+        {/* CENTER VIEWPORT: Active Farm Area Viewport */}
+        <main className="flex-1 min-h-0 h-full relative overflow-hidden">
+          <HarvestAreaWorld
+            activeArea={currentArea}
+            entities={activeEntities}
+            onSelectEntity={(entity) => setSelectedEntityForPractice(entity)}
+            onOpenStore={() => setIsStoreOpen(true)}
+            onOpenAlmanac={() => setIsAlmanacOpen(true)}
+            farmerName={userDisplayName}
+            farmerLevel={harvestState.level}
+            mana={harvestState.mana}
+            gold={harvestState.gold}
+          />
+        </main>
+
+      </div>
 
       {/* =========================================================================
           INTERACTIVE IELTS PRACTICE MODAL FOR THE 10 TOPIC ENTITIES
