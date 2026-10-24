@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import HarvestHUD from './HarvestHUD';
 import FarmAreaNavSidebar from './FarmAreaNavSidebar';
 import HarvestAreaWorld from './HarvestAreaWorld';
 import AreaTopicPracticeModal from './AreaTopicPracticeModal';
@@ -63,7 +62,7 @@ export default function MochiFarmView({
   const currentArea = FARM_AREAS.find(a => a.id === activeAreaId) || FARM_AREAS[0];
   const activeEntities = harvestState.areaEntities?.[currentArea.id] || [];
 
-  // Unified User Display Name (Sáp nhập học viên mochi vào tài khoản)
+  // Unified User Display Name
   const userDisplayName = 
     currentUser?.user_metadata?.full_name || 
     (currentUser?.email ? currentUser.email.split('@')[0] : null) || 
@@ -72,11 +71,16 @@ export default function MochiFarmView({
     'Tony Nguyen';
 
   return (
-    <div className="h-full w-full max-h-screen overflow-hidden flex flex-col relative select-none font-sans text-[#FFF8E7] bg-[#140B05]">
+    <div className="h-full w-full max-h-screen overflow-hidden flex flex-row relative select-none font-sans text-[#FFF8E7] bg-[#140B05]">
       
-      {/* 1. RETRO HUD (Top Fixed Bar: Merged User Account + 2 Currencies [Tiền 🪙 & Mana 🔮] + Streak + Date + Sound) */}
-      <HarvestHUD
+      {/* =========================================================================
+          LEFT SIDEBAR: COMPLETE CONTROLS, PROFILE, 2 CURRENCIES & 5 FARM AREAS
+          (Đã loại bỏ hoàn toàn thanh Top Bar, sáp nhập mọi điều khiển vào Sidebar trái)
+          ========================================================================= */}
+      <FarmAreaNavSidebar
         state={harvestState}
+        activeAreaId={activeAreaId}
+        onSelectArea={handleSelectArea}
         onOpenTargetBandModal={onOpenTargetBandModal}
         onOpenStore={() => setIsStoreOpen(true)}
         onOpenAlmanac={() => setIsAlmanacOpen(true)}
@@ -87,31 +91,22 @@ export default function MochiFarmView({
         onSignOut={onSignOut}
       />
 
-      {/* 2. LIVING 2D RETRO GAME WORLD WITH LEFT AREA NAVIGATION DOCK */}
-      <div className="flex-1 min-h-0 w-full relative overflow-hidden flex flex-row">
-        
-        {/* LEFT SIDEBAR: 5 Farm Areas Navigation Menu */}
-        <FarmAreaNavSidebar
-          activeAreaId={activeAreaId}
-          onSelectArea={handleSelectArea}
+      {/* =========================================================================
+          FULL-SCREEN GAME VIEWPORT: LIVING 2D RETRO GAME WORLD
+          ========================================================================= */}
+      <main className="flex-1 min-h-0 h-full relative overflow-hidden">
+        <HarvestAreaWorld
+          activeArea={currentArea}
+          entities={activeEntities}
+          onSelectEntity={(entity) => setSelectedEntityForPractice(entity)}
+          onOpenStore={() => setIsStoreOpen(true)}
+          onOpenAlmanac={() => setIsAlmanacOpen(true)}
+          farmerName={userDisplayName}
+          farmerLevel={harvestState.level}
+          mana={harvestState.mana}
+          gold={harvestState.gold}
         />
-
-        {/* CENTER VIEWPORT: Active Farm Area Viewport */}
-        <main className="flex-1 min-h-0 h-full relative overflow-hidden">
-          <HarvestAreaWorld
-            activeArea={currentArea}
-            entities={activeEntities}
-            onSelectEntity={(entity) => setSelectedEntityForPractice(entity)}
-            onOpenStore={() => setIsStoreOpen(true)}
-            onOpenAlmanac={() => setIsAlmanacOpen(true)}
-            farmerName={userDisplayName}
-            farmerLevel={harvestState.level}
-            mana={harvestState.mana}
-            gold={harvestState.gold}
-          />
-        </main>
-
-      </div>
+      </main>
 
       {/* =========================================================================
           INTERACTIVE IELTS PRACTICE MODAL FOR THE 10 TOPIC ENTITIES
