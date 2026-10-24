@@ -511,3 +511,14 @@
 .animate-heirloom {
   animation: heirloomShine 2s infinite ease-in-out;
 }
+
+/* =========================================================================
+   STRICT VIEWPORT LOCK (ZERO SCROLLBARS / NO RUBBER-BANDING)
+   ========================================================================= */
+html, body, #root {
+  height: 100% !important;
+  max-height: 100% !important;
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  touch-action: manipulation;
+}

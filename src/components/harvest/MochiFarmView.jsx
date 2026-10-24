@@ -154,9 +154,9 @@ export default function MochiFarmView({
   const unclaimedCommissionsCount = harvestState.dailyCommissions?.filter(c => c.done && !c.claimed).length || 0;
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-[#254520] overflow-y-auto pb-24 relative select-none font-sans text-[#FFF8E7]">
+    <div className="h-full w-full max-h-screen overflow-hidden flex flex-col relative select-none font-sans text-[#FFF8E7] bg-[#1E381A]">
       
-      {/* 1. RETRO PIXEL HUD (Top Bar) */}
+      {/* 1. RETRO PIXEL HUD (Top Bar - Fixed at top) */}
       <HarvestHUD
         state={harvestState}
         onOpenTargetBandModal={onOpenTargetBandModal}
@@ -173,29 +173,31 @@ export default function MochiFarmView({
         onSignOut={onSignOut}
       />
 
-      {/* 2. MAIN HARVEST TOWN FARM MAP */}
-      <HarvestTownMap
-        state={harvestState}
-        onHarvestPlot={handleHarvest}
-        onPlantPlot={handlePlant}
-        onWaterPlotWithPractice={handleWaterWithPractice}
-        onOpenSeedPouch={(plotId) => {
-          setSelectedPlotForSeed(plotId);
-          setIsSeedPouchOpen(true);
-        }}
-        onOpenShippingBin={() => setIsBackpackOpen(true)}
-        onOpenBulletin={() => setIsBulletinOpen(true)}
-        onOpenCoOanhManor={() => setIsCoOanhOpen(true)}
-        onOpenStore={() => setIsStoreOpen(true)}
-        onOpenMines={() => handleWaterWithPractice('reading')}
-        onOpenFishing={() => handleWaterWithPractice('pronunciation')}
-        onOpenAlmanac={() => setIsAlmanacOpen(true)}
-        onOpenPasture={() => setIsPastureOpen(true)}
-        onOpenKitchen={() => setIsKitchenOpen(true)}
-        onOpenSeedVault={() => setIsSeedVaultOpen(true)}
-        onOpenPestChallenge={(plot) => setSelectedPestPlot(plot)}
-        onClearWeeds={() => setIsRevivalOpen(true)}
-      />
+      {/* 2. LIVING 2D RETRO GAME WORLD (Fixed Viewport, Interactive Playable Character) */}
+      <div className="flex-1 min-h-0 w-full relative overflow-hidden">
+        <HarvestTownMap
+          state={harvestState}
+          onHarvestPlot={handleHarvest}
+          onPlantPlot={handlePlant}
+          onWaterPlotWithPractice={handleWaterWithPractice}
+          onOpenSeedPouch={(plotId) => {
+            setSelectedPlotForSeed(plotId);
+            setIsSeedPouchOpen(true);
+          }}
+          onOpenShippingBin={() => setIsBackpackOpen(true)}
+          onOpenBulletin={() => setIsBulletinOpen(true)}
+          onOpenCoOanhManor={() => setIsCoOanhOpen(true)}
+          onOpenStore={() => setIsStoreOpen(true)}
+          onOpenMines={() => handleWaterWithPractice('reading')}
+          onOpenFishing={() => handleWaterWithPractice('pronunciation')}
+          onOpenAlmanac={() => setIsAlmanacOpen(true)}
+          onOpenPasture={() => setIsPastureOpen(true)}
+          onOpenKitchen={() => setIsKitchenOpen(true)}
+          onOpenSeedVault={() => setIsSeedVaultOpen(true)}
+          onOpenPestChallenge={(plot) => setSelectedPestPlot(plot)}
+          onClearWeeds={() => setIsRevivalOpen(true)}
+        />
+      </div>
 
       {/* 3. RETRO BOTTOM HOTBAR (Toolbelt) */}
       <HarvestToolbar
