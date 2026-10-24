@@ -291,9 +291,9 @@ export default function FarmDashboard({
           {/* Subtle farm decor elements */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[#4A5D4E]">
-              <span>🏡 Điền Trang Tri Thức — Lớp Cô Oanh</span>
+              <span>🏡 Điền Trang Tri Thức — MochiFarm</span>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#4A5D4E]/10 text-[#4A5D4E] font-bold">
-                IELTS Harvest Farm
+                IELTS MochiFarm
               </span>
             </div>
             
@@ -433,7 +433,7 @@ export default function FarmDashboard({
             </div>
             <div className="min-w-0">
               <div className="text-xs sm:text-sm font-extrabold text-[#2B2826] flex items-center gap-2">
-                <span>Chuyến Tàu Nông Sản Hợp Tác Xã Lớp Cô Oanh</span>
+                <span>Chuyến Tàu Nông Sản Hợp Tác Xã MochiFarm</span>
                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-50 text-blue-800 font-bold border border-blue-200">
                   {farmState.coopTrain?.deadline || 'Chủ Nhật'}
                 </span>

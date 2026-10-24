@@ -74,17 +74,17 @@ export default function Header({
             <div 
               onClick={onGoWelcome}
               className="flex items-center gap-1.5 cursor-pointer group select-none shrink-0"
-              title="Trang chủ Lớp Cô Oanh"
+              title="Trang chủ MochiFarm"
             >
               <div className="w-7 h-7 rounded-lg bg-white border border-[#E6E2D8] p-0.5 flex items-center justify-center shrink-0 overflow-hidden shadow-2xs">
                 <img 
                   src="./logo.png" 
-                  alt="Logo Lớp cô Oanh" 
+                  alt="Logo MochiFarm" 
                   className="w-full h-full object-contain" 
                 />
               </div>
               <span className="font-title font-bold text-sm text-[#24211E] leading-none">
-                Lớp cô Oanh
+                MochiFarm
               </span>
             </div>
           )}

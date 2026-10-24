@@ -342,18 +342,18 @@ export default function Sidebar({
         <div 
           onClick={onGoWelcome}
           className="flex items-center gap-2.5 cursor-pointer group min-w-0"
-          title="Trang chủ Lớp Cô Oanh"
+          title="Trang chủ MochiFarm"
         >
           <div className="w-8 h-8 rounded-xl bg-white border border-[#E6E2D8] p-0.5 flex items-center justify-center shadow-2xs group-hover:scale-105 transition-transform shrink-0 overflow-hidden">
             <img 
               src="./logo.png" 
-              alt="Logo Lớp cô Oanh" 
+              alt="Logo MochiFarm" 
               className="w-full h-full object-contain" 
             />
           </div>
           {!isCollapsed && (
             <span className="font-title font-bold text-base text-[#24211E] group-hover:text-[#3E4F42] transition leading-none truncate block">
-              Lớp cô Oanh
+              MochiFarm
             </span>
           )}
         </div>

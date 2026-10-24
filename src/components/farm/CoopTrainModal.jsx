@@ -57,7 +57,7 @@ export default function CoopTrainModal({
             </div>
             <div>
               <h3 className="font-extrabold text-base text-[#2B2826] flex items-center gap-2">
-                <span>Chuyến Tàu Nông Sản Lớp Cô Oanh</span>
+                <span>Chuyến Tàu Nông Sản MochiFarm</span>
                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-800 font-bold border border-blue-500/30">
                   Hợp Tác Xã
                 </span>

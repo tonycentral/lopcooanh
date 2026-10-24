@@ -61,9 +61,9 @@ export default function WelcomePage({
         <header className="flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-xl bg-white border border-[#E6E2D8] p-0.5 flex items-center justify-center shrink-0 overflow-hidden shadow-2xs">
-              <img src="./logo.png" alt="Logo Lớp cô Oanh" className="w-full h-full object-contain" />
+              <img src="./logo.png" alt="Logo MochiFarm" className="w-full h-full object-contain" />
             </div>
-            <span className="font-title font-bold text-base text-[#24211E]">Lớp cô Oanh</span>
+            <span className="font-title font-bold text-base text-[#24211E]">MochiFarm</span>
           </div>
 
           {currentUser ? (
@@ -94,7 +94,7 @@ export default function WelcomePage({
             <div className="w-14 h-14 rounded-2xl bg-white border border-[#E6E2D8] p-1.5 shadow-xs mx-auto flex items-center justify-center">
               <img src="./logo.png" alt="Logo Mascot" className="w-full h-full object-contain" />
             </div>
-            <h1 className="text-xl font-title font-bold text-[#24211E]">Lớp cô Oanh</h1>
+            <h1 className="text-xl font-title font-bold text-[#24211E]">MochiFarm</h1>
             <p className="text-xs text-[#7A7369]">Luyện từ vựng IELTS &amp; Flashcards phản xạ</p>
           </div>
 
@@ -204,10 +204,10 @@ export default function WelcomePage({
         <header className="max-w-2xl w-full mx-auto flex items-center justify-between py-4">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-white border border-[#E6E2D8] p-0.5 flex items-center justify-center shrink-0 overflow-hidden shadow-xs">
-              <img src="./logo.png" alt="Logo Lớp cô Oanh" className="w-full h-full object-contain" />
+              <img src="./logo.png" alt="Logo MochiFarm" className="w-full h-full object-contain" />
             </div>
             <div>
-              <div className="font-bold text-sm sm:text-base text-[#24211E] leading-tight">Lớp cô Oanh</div>
+              <div className="font-bold text-sm sm:text-base text-[#24211E] leading-tight">MochiFarm</div>
             </div>
           </div>
 
@@ -261,7 +261,7 @@ export default function WelcomePage({
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-title font-bold text-[#24211E] tracking-tight">
-            Lớp cô Oanh
+            MochiFarm
           </h1>
           {justSaved && (
             <p className="text-xs text-[#3E4F42] font-medium">
@@ -641,7 +641,7 @@ export default function WelcomePage({
 
       {/* Minimal Footer */}
       <footer className="py-4 text-center text-xs text-[#7A7369]">
-        Lớp cô Oanh • Hotline/Zalo: {formattedPhone}
+        MochiFarm • Hotline/Zalo kèm học cùng cô Oanh: {formattedPhone}
       </footer>
 
     </div>
