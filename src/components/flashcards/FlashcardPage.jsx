@@ -5,6 +5,9 @@ import ClassicCardView from './ClassicCardView';
 import QuizGameView from './QuizGameView';
 import MatchPairsView from './MatchPairsView';
 import FillBlankView from './FillBlankView';
+import WriteRecallView from './WriteRecallView';
+import DictationView from './DictationView';
+import PronunciationPracticeView from './PronunciationPracticeView';
 import SessionCompletionModal from './SessionCompletionModal';
 
 import { 
@@ -229,6 +232,9 @@ export default function FlashcardPage({
 
   const MODE_TITLES = {
     card: "🃏 Lật Thẻ Thông Minh",
+    write: "⌨️ Gõ Từ (Recall)",
+    dictation: "🎧 Nghe Chép Chính Tả",
+    speech: "🎙️ Chấm Phát Âm AI",
     quiz: "🎯 Trắc Nghiệm Phản Xạ",
     match: "⚡ Ghép Cặp Thần Tốc",
     fill: "✍️ Điền Từ Vào Câu"
@@ -263,7 +269,7 @@ export default function FlashcardPage({
       {/* Mode Switcher Tabs & Filters (Single-line Compact on Mobile) */}
       <div className="w-full bg-white border-b border-[#E6E2D8] px-2.5 sm:px-6 py-1.5 sm:py-2 flex items-center justify-between gap-2 overflow-x-auto scrollbar-none shrink-0 whitespace-nowrap">
         
-        {/* 4 Interactive Study Modes */}
+        {/* Interactive Study Modes */}
         <div className="flex items-center p-0.5 rounded-xl bg-[#F4EFEA] border border-[#E6E2D8] text-xs shrink-0">
           <button
             onClick={() => setActiveMode('card')}
@@ -274,6 +280,39 @@ export default function FlashcardPage({
             }`}
           >
             <span>🃏 Lật Thẻ</span>
+          </button>
+
+          <button
+            onClick={() => setActiveMode('write')}
+            className={`px-2.5 py-1 rounded-lg font-medium transition cursor-pointer ${
+              activeMode === 'write'
+                ? "bg-[#3E4F42] text-white shadow-xs"
+                : "text-[#7A7369] hover:text-[#24211E]"
+            }`}
+          >
+            <span>⌨️ Gõ Từ</span>
+          </button>
+
+          <button
+            onClick={() => setActiveMode('dictation')}
+            className={`px-2.5 py-1 rounded-lg font-medium transition cursor-pointer ${
+              activeMode === 'dictation'
+                ? "bg-[#3E4F42] text-white shadow-xs"
+                : "text-[#7A7369] hover:text-[#24211E]"
+            }`}
+          >
+            <span>🎧 Chép Từ</span>
+          </button>
+
+          <button
+            onClick={() => setActiveMode('speech')}
+            className={`px-2.5 py-1 rounded-lg font-medium transition cursor-pointer ${
+              activeMode === 'speech'
+                ? "bg-[#3E4F42] text-white shadow-xs"
+                : "text-[#7A7369] hover:text-[#24211E]"
+            }`}
+          >
+            <span>🎙️ Phát Âm</span>
           </button>
 
           <button
@@ -409,6 +448,30 @@ export default function FlashcardPage({
             soundEnabled={soundEnabled}
             onSelectSynonym={handleSelectSynonymCard}
             isMastered={isWordMastered(currentCard, progress)}
+          />
+        )}
+
+        {activeMode === 'write' && (
+          <WriteRecallView
+            card={currentCard}
+            onAnswer={handleQuizAnswer}
+            soundEnabled={soundEnabled}
+          />
+        )}
+
+        {activeMode === 'dictation' && (
+          <DictationView
+            card={currentCard}
+            onAnswer={handleQuizAnswer}
+            soundEnabled={soundEnabled}
+          />
+        )}
+
+        {activeMode === 'speech' && (
+          <PronunciationPracticeView
+            card={currentCard}
+            onNextWord={goToNextCard}
+            soundEnabled={soundEnabled}
           />
         )}
 

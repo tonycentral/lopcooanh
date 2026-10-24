@@ -340,7 +340,7 @@ export function formatLocationLabel(loc) {
     return 'Luyện từ vựng học thuật (1.1)';
   }
   if (loc.view === 'grammar') {
-    return 'Luyện ngữ pháp Band 7.0+';
+    return 'Luyện ngữ pháp';
   }
   if (loc.view === 'pronunciation') {
     return 'Luyện phát âm & IPA 44 âm';

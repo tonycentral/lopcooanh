@@ -5,6 +5,10 @@ import QuizGameView from './flashcards/QuizGameView';
 import MatchPairsView from './flashcards/MatchPairsView';
 import FillBlankView from './flashcards/FillBlankView';
 import SentencePracticeView from './flashcards/SentencePracticeView';
+import WriteRecallView from './flashcards/WriteRecallView';
+import DictationView from './flashcards/DictationView';
+import PronunciationPracticeView from './flashcards/PronunciationPracticeView';
+import ActiveWritingChallengeView from './flashcards/ActiveWritingChallengeView';
 
 import { 
   getFlashcardProgress, 
@@ -280,6 +284,10 @@ export default function VocabularyWorkspace({
 
   const PRACTICE_MODES = [
     { id: 'card', label: '🃏 Thẻ Flashcard', shortLabel: '🃏 Flashcard', desc: 'Lật thẻ 3D ghi nhớ từ, IPA, collocations & ví dụ' },
+    { id: 'write', label: '⌨️ Gõ từ (Recall)', shortLabel: '⌨️ Gõ từ', desc: 'Gõ từ vựng Band 8.5 dựa trên nghĩa và ngữ cảnh khuyết từ' },
+    { id: 'dictation', label: '🎧 Chép chính tả', shortLabel: '🎧 Chép từ', desc: 'Nghe máy phát âm chuẩn bản xứ và chép chính tả' },
+    { id: 'speech', label: '🎙️ Chấm phát âm AI', shortLabel: '🎙️ Phát âm', desc: 'Luyện nói và chấm điểm PronScore 0-100 qua Web Speech API' },
+    { id: 'challenge', label: '💡 Thử thách viết', shortLabel: '💡 Thử thách', desc: 'Viết câu học thuật chứa từ chỉ định, phát hiện lỗi ngữ pháp tức thì' },
     { id: 'quiz', label: '🎯 Trắc nghiệm', shortLabel: '🎯 Trắc nghiệm', desc: 'Chọn nghĩa đúng phản xạ nhanh' },
     { id: 'fill', label: '✍️ Điền từ', shortLabel: '✍️ Điền từ', desc: 'Điền từ vào câu học thuật ngữ cảnh' },
     { id: 'match', label: '⚡ Ghép cặp', shortLabel: '⚡ Ghép cặp', desc: 'Minigame ghép từ và nghĩa' },
@@ -667,6 +675,43 @@ export default function VocabularyWorkspace({
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
+              </div>
+            ) : activeMode === 'write' ? (
+              /* ================= ĐỀ XUẤT 1: GÕ TỪ (WRITE & RECALL) ================= */
+              <div className="h-full flex flex-col justify-center">
+                <WriteRecallView
+                  card={currentWord}
+                  onAnswer={handleQuizAnswer}
+                  soundEnabled={soundEnabled}
+                />
+              </div>
+            ) : activeMode === 'dictation' ? (
+              /* ================= ĐỀ XUẤT 1: NGHE CHÉP CHÍNH TẢ (DICTATION) ================= */
+              <div className="h-full flex flex-col justify-center">
+                <DictationView
+                  card={currentWord}
+                  onAnswer={handleQuizAnswer}
+                  soundEnabled={soundEnabled}
+                />
+              </div>
+            ) : activeMode === 'speech' ? (
+              /* ================= ĐỀ XUẤT 3: CHẤM ĐIỂM PHÁT ÂM AI ================= */
+              <div className="h-full flex flex-col justify-center">
+                <PronunciationPracticeView
+                  card={currentWord}
+                  onNextWord={handleNextWord}
+                  soundEnabled={soundEnabled}
+                />
+              </div>
+            ) : activeMode === 'challenge' ? (
+              /* ================= ĐỀ XUẤT 2: ACTIVE WRITING CHALLENGE ================= */
+              <div className="h-full flex flex-col justify-center">
+                <ActiveWritingChallengeView
+                  card={currentWord}
+                  topic={currentMasterTopic}
+                  onNextWord={handleNextWord}
+                  soundEnabled={soundEnabled}
+                />
               </div>
             ) : activeMode === 'quiz' ? (
               /* ================= KIỂU 2: TRẮC NGHIỆM PHẢN XẠ ================= */

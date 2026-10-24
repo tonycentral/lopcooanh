@@ -92,6 +92,13 @@ export default function Header({
 
         {/* Center: Contextual Controls (e.g. Task 1 / Task 2 Pill when in 1.4 Full Essay) */}
         <div className="flex items-center gap-2 min-w-0">
+          {currentView === 'farm' && (
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-900 text-xs font-bold shadow-2xs">
+              <span>🌾</span>
+              <span>Nông Trại Tri Thức</span>
+            </div>
+          )}
+
           {currentView === 'full_essay' && onToggleTask && (
             <div className="flex items-center p-0.5 rounded-xl bg-white border border-[#E6E2D8] text-xs shadow-2xs">
               <button

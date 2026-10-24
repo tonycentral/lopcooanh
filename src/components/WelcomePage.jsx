@@ -13,6 +13,7 @@ import { BAND_OPTIONS } from '../data/bandDescriptors';
 import { getLastActiveLocation, formatLocationLabel } from '../services/userService';
 
 export default function WelcomePage({ 
+  onStartFarm,
   onStartPractice, 
   onStartFullEssay,
   onStartFlashcard,
@@ -387,6 +388,35 @@ export default function WelcomePage({
 
           {/* Nút Bắt Đầu Luyện Tập & Học Nhanh Flashcard */}
           <div className="space-y-2.5 pt-1">
+            
+            {/* Nút Vào Nông Trại Tri Thức (Gamification) */}
+            <button
+              type="button"
+              onClick={() => {
+                if (!currentUser) {
+                  onOpenAuth();
+                  return;
+                }
+                if (onStartFarm) onStartFarm();
+                else onStartPractice();
+              }}
+              className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#4A5D4E] to-[#364539] hover:from-[#3D4E41] hover:to-[#2B372E] text-white font-bold text-sm transition shadow-md flex items-center justify-between gap-2 cursor-pointer active:scale-[0.99] border border-[#2D3A30]"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center text-xl shrink-0">
+                  🌾
+                </div>
+                <div className="text-left">
+                  <div className="text-[10px] text-emerald-200 uppercase font-black tracking-wider leading-none mb-0.5">
+                    Mô hình Gamification Mới
+                  </div>
+                  <div className="text-xs sm:text-sm font-extrabold text-white">
+                    Vào Nông Trại Tri Thức (IELTS Harvest Farm)
+                  </div>
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-emerald-200 shrink-0" />
+            </button>
             
             {/* Nút Tiếp Tục Bài Học Dở Dang (Nếu có phiên học trước đó) */}
             {lastActiveLocation && lastActiveLocation.view && (

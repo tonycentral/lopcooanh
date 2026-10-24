@@ -27,6 +27,8 @@ import TacticsWorkspace from './components/tactics/TacticsWorkspace';
 import MobileBottomNav from './components/MobileBottomNav';
 import MobileDesktopNotice from './components/MobileDesktopNotice';
 import MobileVocabWorkspace from './components/MobileVocabWorkspace';
+import FarmDashboard from './components/farm/FarmDashboard';
+import { getFarmState, tendCropWithLearning } from './services/farmService';
 import { useIsMobile } from './hooks/useIsMobile';
 
 
@@ -89,6 +91,7 @@ export default function App() {
     }
     const lastLoc = getLastActiveLocation();
     const validViews = [
+      'farm',
       'reading', 
       'full_essay', 
       'vocab_practice', 
@@ -103,7 +106,7 @@ export default function App() {
     if (lastLoc?.view && validViews.includes(lastLoc.view)) {
       return lastLoc.view;
     }
-    return 'vocab_practice';
+    return 'farm';
   });
 
   // Phát hiện giao diện điện thoại (< 768px) để phân chia trải nghiệm chuyên biệt
@@ -391,6 +394,7 @@ export default function App() {
   // Tự động lưu vị trí học tập gần nhất khi người dùng chuyển view, step, hoặc topic
   useEffect(() => {
     const validViews = [
+      'farm',
       'reading', 
       'full_essay', 
       'vocab_practice', 
@@ -552,10 +556,20 @@ export default function App() {
     setPracticeActivePart(1);
   };
 
-  // Refresh stats & 7-day average after sentence grading
+  // Farm Gamification State
+  const [farmState, setFarmState] = useState(() => getFarmState(studentEmail));
+
+  useEffect(() => {
+    setFarmState(getFarmState(studentEmail));
+  }, [studentEmail]);
+
+  // Refresh stats & 7-day average after sentence grading + tưới nước cho nông trại
   const handleRefreshStats = () => {
     setStats(getStoredStats());
     setCurrent7DayScore(getAverageScoreLast7Days(studentEmail));
+    const targetCrop = activeTask === 'task1' ? 'task1' : 'task2';
+    tendCropWithLearning(targetCrop, 1, studentEmail);
+    setFarmState(getFarmState(studentEmail));
   };
 
   return (
@@ -608,6 +622,45 @@ export default function App() {
               studentEmail={studentEmail}
             />
           </div>
+        ) : currentView === 'farm' ? (
+          <div className="h-full flex flex-col overflow-hidden bg-[#F8F6F1] text-[#24211E]">
+            <Header
+              targetBand={targetBand}
+              current7DayScore={current7DayScore}
+              onOpenBandModal={() => setIsBandModalOpen(true)}
+              onGoWelcome={() => setCurrentView('welcome')}
+              currentUser={currentUser}
+              onOpenAuth={() => setIsAuthModalOpen(true)}
+              onOpenSettings={() => setIsSettingsModalOpen(true)}
+              onSignOut={handleSignOut}
+              studentEmail={studentEmail}
+              activeTask={activeTask}
+              onToggleTask={handleToggleTask}
+              currentView={currentView}
+              activeWritingStep={activeWritingStep}
+              practiceActivePart={practiceActivePart}
+              readingMode={readingInitialMode}
+              isMobile={isMobile}
+              isSidebarCollapsed={isSidebarCollapsed}
+              onToggleSidebar={handleToggleSidebar}
+            />
+            <FarmDashboard
+              farmState={farmState}
+              onUpdateFarmState={(newState) => setFarmState(newState)}
+              onGoWritingPractice={(task) => {
+                if (task) setActiveTask(task);
+                setCurrentView('vocab_practice');
+                setPracticeActivePart(1);
+              }}
+              onGoFullEssay={() => setCurrentView('full_essay')}
+              onGoVocabulary={() => setCurrentView('vocab_practice')}
+              onGoFlashcard={() => setCurrentView('flashcard')}
+              onGoGrammar={() => setCurrentView('grammar')}
+              onGoReading={() => setCurrentView('reading')}
+              currentUser={currentUser}
+              studentEmail={studentEmail}
+            />
+          </div>
         ) : currentView === 'welcome' ? (
               <WelcomePage
                 studentEmail={studentEmail}
@@ -617,6 +670,14 @@ export default function App() {
                 onSettingsChange={handleSettingsChange}
                 isMobile={isMobile}
                 hasSidebar={!isMobile}
+                onStartFarm={() => {
+                  if (!currentUser) {
+                    setIsAuthModalOpen(true);
+                    return;
+                  }
+                  recordUserVisit();
+                  setCurrentView('farm');
+                }}
                 onResumeLastLocation={(loc) => {
                   if (!currentUser) {
                     setIsAuthModalOpen(true);
@@ -778,7 +839,7 @@ export default function App() {
                 )}
               </div>
             ) : currentView === 'grammar' ? (
-              /* NỀN TẢNG: LUYỆN NGỮ PHÁP (GRAMMAR WORKSPACE BAND 7.0+) */
+              /* NỀN TẢNG: LUYỆN NGỮ PHÁP (GRAMMAR WORKSPACE) */
               <div className="h-full flex flex-col overflow-hidden bg-[#F8F6F1] text-[#24211E]">
                 <Header
                   targetBand={targetBand}
@@ -801,7 +862,7 @@ export default function App() {
                   onToggleSidebar={handleToggleSidebar}
                 />
                 <div className="flex-1 min-h-0 overflow-hidden">
-                  <GrammarWorkspace />
+                  <GrammarWorkspace targetBand={targetBand} onOpenBandModal={() => setIsBandModalOpen(true)} />
                 </div>
               </div>
             ) : currentView === 'pronunciation' ? (
@@ -1078,6 +1139,10 @@ export default function App() {
       {isMobile && currentView !== 'admin' && (
         <MobileBottomNav
           currentView={currentView}
+          onGoFarm={() => {
+            setBypassMobileNotice(false);
+            setCurrentView('farm');
+          }}
           onGoVocab={() => {
             setBypassMobileNotice(false);
             if (!currentUser) {

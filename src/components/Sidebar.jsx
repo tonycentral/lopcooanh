@@ -19,7 +19,8 @@ import {
   BarChart3, 
   FileText, 
   Check, 
-  ChevronRight
+  ChevronRight,
+  Sprout
 } from 'lucide-react';
 
 export default function Sidebar({
@@ -52,6 +53,16 @@ export default function Sidebar({
       group: null,
       items: [
         {
+          id: 'farm',
+          title: 'Nông trại tri thức',
+          icon: Sprout,
+          badge: 'Gamification',
+          isActive: currentView === 'farm',
+          action: () => {
+            if (onGoView) onGoView('farm');
+          }
+        },
+        {
           id: 'welcome',
           title: 'Trang chủ',
           icon: Home,
@@ -76,7 +87,7 @@ export default function Sidebar({
         },
         {
           id: 'grammar',
-          title: 'Luyện ngữ pháp (Band 7+)',
+          title: 'Luyện ngữ pháp',
           icon: CheckCircle2,
           isActive: currentView === 'grammar',
           action: () => {

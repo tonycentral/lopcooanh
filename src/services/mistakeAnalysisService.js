@@ -147,18 +147,18 @@ export function analyzeRecurrentMistakes(studentEmail) {
     });
   }
 
-  // Lỗi 3: Ngữ pháp câu đơn giản, thiếu cấu trúc đảo ngữ hoặc câu phức
+  // Lỗi 3: Ngữ pháp câu đơn giản, thiếu cấu trúc đa dạng
   recurrentMistakes.push({
     id: 'grammar_complexity',
-    title: 'Lạm dụng câu đơn & thiếu cấu trúc nâng cao (Band 7.0+)',
+    title: 'Lạm dụng câu đơn & thiếu cấu trúc đa dạng (Grammar Range)',
     skill: 'Writing',
     category: 'Ngữ pháp',
     frequency: 'Thường xuyên',
     severity: 'High',
-    evidence: 'Các câu viết còn theo trật tự quen thuộc S + V + O, thiếu sự xuất hiện của Inversion (Đảo ngữ), Cleft sentences (Câu chẻ) hoặc Danh từ hóa.',
-    remedy: 'Tập biến đổi ít nhất 2 câu trong mỗi đoạn văn sang dạng Đảo ngữ với "Not only... but also..." hoặc dùng Mệnh đề phân từ (Participle clause).',
+    evidence: 'Các câu viết còn theo trật tự quen thuộc S + V + O, thiếu sự xuất hiện của Inversion (Đảo ngữ), Cleft sentences (Câu chẻ) hoặc Mệnh đề phân từ.',
+    remedy: 'Tập biến đổi các câu trong đoạn văn sang dạng Đảo ngữ, Mệnh đề phân từ (Participle clause) hoặc Câu phức có mệnh đề nhượng bộ.',
     recommendedModule: 'grammar',
-    recommendedLabel: 'Luyện Ngữ pháp Band 7+'
+    recommendedLabel: 'Luyện Ngữ pháp'
   });
 
   // Lỗi 4: Lỗi dùng từ nối (Cohesive Devices) máy móc
