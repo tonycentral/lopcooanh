@@ -236,18 +236,17 @@ export default function AreaEnvironmentDecor({ areaId = 'orchard' }) {
             <path d="M 40 44 Q 60 40 78 48 Q 66 62 42 60 Z" fill="#8D6E63" stroke="#3E2723" strokeWidth="2" />
             <line x1="68" y1="32" x2="64" y2="44" stroke="#FFF59D" strokeWidth="1.5" />
           </svg>
-          <span className="font-pixel text-[8px] text-cyan-200 -mt-2 bg-black/70 px-1.5 rounded">Cầu Tàu Câu Cá 🎣</span>
+          <span className="font-pixel text-[7.5px] text-[#2c1b18] -mt-2 border-2 border-[#45283c] bg-[#e8cfa6] px-1 font-bold">Cầu Tàu 🎣</span>
         </div>
 
         {/* Blooming Pink Lotus Patch (Top-Left) */}
         <div className="absolute top-10 left-8 flex flex-col items-center">
           <svg className="w-16 h-12 filter drop-shadow" viewBox="0 0 64 48">
             {/* Giant Lotus Lilypad */}
-            <ellipse cx="28" cy="28" rx="20" ry="12" fill="#2E7D32" stroke="#1B5E20" strokeWidth="1.5" />
-            <polygon points="28,28 38,20 38,28" fill="#1B5E20" />
+            <ellipse cx="28" cy="28" rx="20" ry="12" fill="#354d1f" stroke="#45283c" strokeWidth="1.5" />
             {/* Pink Lotus Blossom */}
-            <circle cx="28" cy="22" r="6" fill="#F06292" />
-            <circle cx="28" cy="22" r="3" fill="#FFF59D" />
+            <circle cx="28" cy="22" r="6" fill="#e8cfa6" stroke="#b93b2a" strokeWidth="1" />
+            <circle cx="28" cy="22" r="3" fill="#d9911e" />
           </svg>
         </div>
 
@@ -261,41 +260,41 @@ export default function AreaEnvironmentDecor({ areaId = 'orchard' }) {
       <div className="absolute inset-0 pointer-events-none select-none z-5">
         
         {/* Red Timber Barn Facade (Top-Right) */}
-        <div className="absolute top-6 right-6 flex flex-col items-center">
-          <svg className="w-22 h-20 filter drop-shadow-xl" viewBox="0 0 88 80">
+        <div className="absolute top-4 right-4 flex flex-col items-center">
+          <svg className="w-20 h-18 filter drop-shadow-xl" viewBox="0 0 88 80">
             {/* Barn Gambrel Roof */}
-            <polygon points="44,4 12,24 76,24" fill="#B71C1C" stroke="#7F0000" strokeWidth="2" />
-            <polygon points="44,6 14,24 74,24" fill="#D32F2F" />
+            <polygon points="44,4 12,24 76,24" fill="#8f563b" stroke="#45283c" strokeWidth="2" />
+            <polygon points="44,6 14,24 74,24" fill="#663931" />
             {/* Barn Front Wall with White Trim */}
-            <rect x="14" y="24" width="60" height="48" fill="#C62828" stroke="#7F0000" strokeWidth="2" />
-            {/* White Barn Cross Braces */}
-            <line x1="14" y1="24" x2="74" y2="72" stroke="#FFFFFF" strokeWidth="2.5" />
-            <line x1="74" y1="24" x2="14" y2="72" stroke="#FFFFFF" strokeWidth="2.5" />
+            <rect x="14" y="24" width="60" height="48" fill="#8f563b" stroke="#45283c" strokeWidth="2" />
+            {/* Barn Cross Braces */}
+            <line x1="14" y1="24" x2="74" y2="72" stroke="#e8cfa6" strokeWidth="2.5" />
+            <line x1="74" y1="24" x2="14" y2="72" stroke="#e8cfa6" strokeWidth="2.5" />
             {/* Hay Loft Window */}
-            <rect x="36" y="30" width="16" height="14" fill="#212121" stroke="#FFFFFF" strokeWidth="1.5" rx="1" />
-            <polygon points="36,44 44,40 52,44" fill="#FDD835" />
+            <rect x="36" y="30" width="16" height="14" fill="#2c1b18" stroke="#e8cfa6" strokeWidth="1.5" />
+            <polygon points="36,44 44,40 52,44" fill="#d9911e" />
           </svg>
-          <span className="font-pixel text-[8px] text-amber-200/90 -mt-1 bg-black/70 px-1.5 rounded">Chuồng Trại Oxford</span>
+          <span className="font-pixel text-[7.5px] text-[#2c1b18] -mt-1 border-2 border-[#45283c] bg-[#e8cfa6] px-1 font-bold">Khu Chăn Nuôi</span>
         </div>
 
         {/* Stack of Golden Hay Bales (Bottom-Left) */}
-        <div className="absolute bottom-10 left-8 flex flex-col items-center">
+        <div className="absolute bottom-8 left-6 flex flex-col items-center">
           <svg className="w-16 h-14 filter drop-shadow-md" viewBox="0 0 64 56">
             {/* Bottom 2 Bales */}
-            <rect x="4" y="28" width="26" height="18" fill="#FDD835" stroke="#F57F17" strokeWidth="2" rx="3" />
-            <line x1="10" y1="28" x2="10" y2="46" stroke="#E65100" strokeWidth="1" />
-            <line x1="22" y1="28" x2="22" y2="46" stroke="#E65100" strokeWidth="1" />
+            <rect x="4" y="28" width="26" height="18" fill="#d9911e" stroke="#45283c" strokeWidth="2" />
+            <line x1="10" y1="28" x2="10" y2="46" stroke="#663931" strokeWidth="1" />
+            <line x1="22" y1="28" x2="22" y2="46" stroke="#663931" strokeWidth="1" />
             
-            <rect x="32" y="28" width="26" height="18" fill="#FDD835" stroke="#F57F17" strokeWidth="2" rx="3" />
-            <line x1="38" y1="28" x2="38" y2="46" stroke="#E65100" strokeWidth="1" />
-            <line x1="50" y1="28" x2="50" y2="46" stroke="#E65100" strokeWidth="1" />
+            <rect x="32" y="28" width="26" height="18" fill="#d9911e" stroke="#45283c" strokeWidth="2" />
+            <line x1="38" y1="28" x2="38" y2="46" stroke="#663931" strokeWidth="1" />
+            <line x1="50" y1="28" x2="50" y2="46" stroke="#663931" strokeWidth="1" />
 
             {/* Top Bale */}
-            <rect x="18" y="12" width="26" height="18" fill="#FFEE58" stroke="#F57F17" strokeWidth="2" rx="3" />
-            <line x1="24" y1="12" x2="24" y2="30" stroke="#E65100" strokeWidth="1" />
-            <line x1="36" y1="12" x2="36" y2="30" stroke="#E65100" strokeWidth="1" />
+            <rect x="18" y="12" width="26" height="18" fill="#e8cfa6" stroke="#45283c" strokeWidth="2" />
+            <line x1="24" y1="12" x2="24" y2="30" stroke="#663931" strokeWidth="1" />
+            <line x1="36" y1="12" x2="36" y2="30" stroke="#663931" strokeWidth="1" />
           </svg>
-          <span className="font-pixel text-[8px] text-amber-200/90 -mt-1 bg-black/60 px-1 rounded">Rơm Vàng</span>
+          <span className="font-pixel text-[7.5px] text-[#2c1b18] -mt-1 border-2 border-[#45283c] bg-[#e8cfa6] px-1 font-bold">Rơm Vàng</span>
         </div>
 
       </div>
