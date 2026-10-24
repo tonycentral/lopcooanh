@@ -522,3 +522,174 @@ html, body, #root {
   overscroll-behavior: none !important;
   touch-action: manipulation;
 }
+
+
+/* =========================================================================
+   HARVEST TOWN AMBIENT WILDLIFE & WEATHER ANIMATIONS
+   ========================================================================= */
+
+@keyframes birdFlight1 {
+  0% {
+    transform: translate(-5vw, 12vh) scale(0.9);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(105vw, 42vh) scale(1.1);
+    opacity: 0;
+  }
+}
+
+@keyframes birdFlight2 {
+  0% {
+    transform: translate(105vw, 8vh) scaleX(-1) scale(0.85);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.95;
+  }
+  92% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate(-5vw, 30vh) scaleX(-1) scale(1.05);
+    opacity: 0;
+  }
+}
+
+@keyframes birdWing {
+  0% { transform: scaleY(1); }
+  50% { transform: scaleY(0.35); }
+  100% { transform: scaleY(1); }
+}
+
+@keyframes birdWingFast {
+  0% { transform: scaleY(1); }
+  50% { transform: scaleY(0.25); }
+  100% { transform: scaleY(1); }
+}
+
+@keyframes butterflyFloat1 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(18px, -14px) rotate(8deg); }
+  50% { transform: translate(32px, 8px) rotate(-6deg); }
+  75% { transform: translate(12px, 20px) rotate(10deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes butterflyFloat2 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  30% { transform: translate(-20px, -18px) rotate(-10deg); }
+  60% { transform: translate(-36px, 12px) rotate(8deg); }
+  85% { transform: translate(-10px, 16px) rotate(-5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes butterflyWing {
+  0% { transform: scaleX(1); }
+  50% { transform: scaleX(0.2); }
+  100% { transform: scaleX(1); }
+}
+
+@keyframes dragonflyDart {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(35px, -20px) rotate(15deg); }
+  25% { transform: translate(35px, -20px) rotate(15deg); }
+  45% { transform: translate(-25px, 25px) rotate(-20deg); }
+  55% { transform: translate(-25px, 25px) rotate(-20deg); }
+  75% { transform: translate(15px, 35px) rotate(10deg); }
+}
+
+@keyframes leafDrift1 {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  15% { opacity: 0.85; }
+  85% { opacity: 0.85; }
+  100% {
+    transform: translate(45vw, 85vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes leafDrift2 {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  15% { opacity: 0.8; }
+  85% { opacity: 0.8; }
+  100% {
+    transform: translate(35vw, 80vh) rotate(-320deg);
+    opacity: 0;
+  }
+}
+
+@keyframes leafDrift3 {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  15% { opacity: 0.8; }
+  85% { opacity: 0.8; }
+  100% {
+    transform: translate(25vw, 75vh) rotate(280deg);
+    opacity: 0;
+  }
+}
+
+.animate-bird-flight-1 {
+  animation: birdFlight1 15s linear infinite;
+}
+
+.animate-bird-flight-2 {
+  animation: birdFlight2 19s linear infinite;
+  animation-delay: 5s;
+}
+
+.animate-bird-wing {
+  animation: birdWing 0.28s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animate-bird-wing-fast {
+  animation: birdWingFast 0.22s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animate-butterfly-float-1 {
+  animation: butterflyFloat1 7s ease-in-out infinite;
+}
+
+.animate-butterfly-float-2 {
+  animation: butterflyFloat2 8.5s ease-in-out infinite;
+}
+
+.animate-butterfly-wing {
+  animation: butterflyWing 0.16s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animate-dragonfly-dart {
+  animation: dragonflyDart 8s ease-in-out infinite;
+}
+
+.animate-leaf-drift-1 {
+  animation: leafDrift1 12s linear infinite;
+}
+
+.animate-leaf-drift-2 {
+  animation: leafDrift2 15s linear infinite;
+  animation-delay: 4s;
+}
+
+.animate-leaf-drift-3 {
+  animation: leafDrift3 14s linear infinite;
+  animation-delay: 7s;
+}

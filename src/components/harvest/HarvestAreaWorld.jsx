@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import AreaEntitySprite from './AreaEntitySprite';
 import FarmerCharacter from './FarmerCharacter';
+import AmbientWildlife from './AmbientWildlife';
+import AreaEnvironmentDecor from './AreaEnvironmentDecor';
+import WateringSplashEffect from './WateringSplashEffect';
 import { sounds } from '../../services/soundEffects';
 import { 
   ChevronUp, 
@@ -8,7 +11,7 @@ import {
   ChevronLeft, 
   ChevronRight, 
   Sparkles, 
-  BookOpen,
+  BookOpen, 
   ShoppingBag,
   Info
 } from 'lucide-react';
@@ -32,6 +35,9 @@ export default function HarvestAreaWorld({
   const [isMoving, setIsMoving] = useState(false);
   const [walkFrame, setWalkFrame] = useState(0);
   const [playerAction, setPlayerAction] = useState(null);
+
+  // Interactive Watering Spray Animation State
+  const [wateringTarget, setWateringTarget] = useState({ x: 50, y: 50, active: false });
 
   // Click-to-Move Target
   const [targetDestination, setTargetDestination] = useState(null);
@@ -163,14 +169,18 @@ export default function HarvestAreaWorld({
 
   const nearestEntity = getNearestEntity();
 
+  // Interactive Watering & Tending
   const interactWithEntity = (entity) => {
     if (!entity) return;
     setPlayerAction('watering');
+    setWateringTarget({ x: entity.x, y: entity.y, active: true });
     sounds.playWater();
+
     setTimeout(() => {
       setPlayerAction(null);
+      setWateringTarget(prev => ({ ...prev, active: false }));
       if (onSelectEntity) onSelectEntity(entity);
-    }, 380);
+    }, 600);
   };
 
   const triggerNearbyAction = () => {
@@ -200,8 +210,18 @@ export default function HarvestAreaWorld({
     if (dir === 'right') delete keysPressed.current['d'];
   };
 
-  // Custom environment style per area
+  // Distinct environment styling per area
   const isOrchard = activeArea.id === 'orchard';
+  const isPaddy = activeArea.id === 'paddy';
+  const isGreenhouse = activeArea.id === 'greenhouse';
+  const isPond = activeArea.id === 'pond';
+  const isPasture = activeArea.id === 'pasture';
+
+  let bgMainColor = '#2E6930';
+  if (isPaddy) bgMainColor = '#3A4D20';
+  if (isGreenhouse) bgMainColor = '#1B3D2F';
+  if (isPond) bgMainColor = '#0F384C';
+  if (isPasture) bgMainColor = '#422817';
 
   return (
     <div 
@@ -209,7 +229,7 @@ export default function HarvestAreaWorld({
       onClick={handleGroundClick}
       className="relative w-full h-full flex-1 min-h-0 overflow-hidden cursor-crosshair select-none font-sans"
       style={{
-        backgroundColor: isOrchard ? '#2E6930' : '#1A331A',
+        backgroundColor: bgMainColor,
         backgroundImage: isOrchard
           ? `radial-gradient(#3B7A3D 15%, transparent 16%), radial-gradient(#336E35 15%, transparent 16%)`
           : undefined,
@@ -219,11 +239,12 @@ export default function HarvestAreaWorld({
       }}
     >
       {/* =========================================================================
-          1. HARVEST TOWN RICH FARM ENVIRONMENT
+          1. ENVIRONMENT DECORATIONS PER AREA (Fences, Water Wells, Crates, Barns)
           ========================================================================= */}
-      
+      <AreaEnvironmentDecor areaId={activeArea.id} />
+
       {/* Sunlit Mowing Lines / Lush Grass Checkerboard */}
-      <div className="absolute inset-0 pointer-events-none opacity-25 bg-[linear-gradient(90deg,rgba(255,255,255,0.06)_50%,transparent_50%)] [background-size:60px_100%]" />
+      <div className="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(90deg,rgba(255,255,255,0.06)_50%,transparent_50%)] [background-size:60px_100%]" />
 
       {/* Rustic Earthen & Cobblestone Farm Pathways */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
@@ -264,16 +285,16 @@ export default function HarvestAreaWorld({
       </svg>
 
       {/* Decorative Wildflower Patches */}
-      <div className="absolute top-10 left-6 pointer-events-none text-xs opacity-80 filter drop-shadow">
+      <div className="absolute top-10 left-10 pointer-events-none text-xs opacity-80 filter drop-shadow">
         🌼🌸🌼
       </div>
-      <div className="absolute top-12 right-12 pointer-events-none text-xs opacity-80 filter drop-shadow">
+      <div className="absolute top-12 right-16 pointer-events-none text-xs opacity-80 filter drop-shadow">
         🌷🌼
       </div>
-      <div className="absolute bottom-6 left-16 pointer-events-none text-xs opacity-75 filter drop-shadow">
+      <div className="absolute bottom-10 left-20 pointer-events-none text-xs opacity-75 filter drop-shadow">
         🌸🌼🌷
       </div>
-      <div className="absolute bottom-8 right-8 pointer-events-none text-xs opacity-80 filter drop-shadow">
+      <div className="absolute bottom-12 right-12 pointer-events-none text-xs opacity-80 filter drop-shadow">
         🌼🌸
       </div>
 
@@ -337,7 +358,16 @@ export default function HarvestAreaWorld({
       })}
 
       {/* =========================================================================
-          3. PLAYABLE FARMER CHARACTER (16-BIT RETRO SPRITE)
+          3. INTERACTIVE WATERING SPRAY & SPLASH ANIMATION EFFECT
+          ========================================================================= */}
+      <WateringSplashEffect 
+        x={wateringTarget.x} 
+        y={wateringTarget.y} 
+        isActive={wateringTarget.active} 
+      />
+
+      {/* =========================================================================
+          4. PLAYABLE FARMER CHARACTER (16-BIT RETRO SPRITE)
           ========================================================================= */}
       <div 
         className="absolute -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none transition-all duration-75"
@@ -375,14 +405,19 @@ export default function HarvestAreaWorld({
       {nearestEntity && (
         <aside className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 animate-bounce pointer-events-none">
           <div className="px-4 py-1.5 rounded-xl bg-[#2D160A]/95 border-2 border-amber-400 text-amber-100 font-pixel text-xs font-bold shadow-2xl flex items-center gap-2">
-            <span className="text-sm">✨</span>
-            <span>Nhấn <kbd className="px-1.5 py-0.5 bg-amber-500 text-[#201007] rounded text-[10px] font-black border border-yellow-200">E</kbd> hoặc Click để Chăm Sóc [{nearestEntity.name}]</span>
+            <span className="text-sm">💧</span>
+            <span>Nhấn <kbd className="px-1.5 py-0.5 bg-amber-500 text-[#201007] rounded text-[10px] font-black border border-yellow-200">E</kbd> hoặc Click để Tưới / Chăm Sóc [{nearestEntity.name}]</span>
           </div>
         </aside>
       )}
 
       {/* =========================================================================
-          4. MOBILE VIRTUAL CONTROLS (D-PAD & ACTION BUTTON)
+          5. AMBIENT LIVING WILDLIFE (Birds Flying, Butterflies, Petals Floating)
+          ========================================================================= */}
+      <AmbientWildlife areaId={activeArea.id} />
+
+      {/* =========================================================================
+          6. MOBILE VIRTUAL CONTROLS (D-PAD & ACTION BUTTON)
           ========================================================================= */}
       <div className="sm:hidden absolute bottom-3 left-3 z-30 flex items-center gap-1 select-none pointer-events-auto">
         <div className="relative w-24 h-24 bg-black/60 backdrop-blur-sm rounded-full border border-amber-500/40 p-1">
