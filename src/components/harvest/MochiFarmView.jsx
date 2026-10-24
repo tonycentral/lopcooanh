@@ -59,7 +59,7 @@ export default function MochiFarmView({
   };
 
   // Active Area Info
-  const activeAreaId = harvestState.activeArea || 'orchard';
+  const activeAreaId = harvestState.activeArea || 'paddy';
   const currentArea = FARM_AREAS.find(a => a.id === activeAreaId) || FARM_AREAS[0];
   const activeEntities = harvestState.areaEntities?.[currentArea.id] || [];
 

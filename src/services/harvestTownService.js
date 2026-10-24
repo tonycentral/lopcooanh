@@ -17,18 +17,8 @@ const TWO_DAYS_MS = 2 * 24 * 60 * 60 * 1000;
 const FOUR_DAYS_MS = 4 * 24 * 60 * 60 * 1000;
 
 // 1. Definition of 5 Farm Areas corresponding to 5 IELTS Skills
+// Ordered exactly by: Ruộng lúa -> Vườn cây -> Chăn nuôi -> Ao hồ -> Nhà kính
 export const FARM_AREAS = [
-  {
-    id: 'orchard',
-    name: 'Vườn Cây',
-    skill: 'reading',
-    skillName: 'Reading',
-    skillTitle: 'Kỹ Năng Đọc Hiểu',
-    icon: '🌳',
-    themeColor: '#2E7D32',
-    bgGradient: 'from-[#1B3B1E] via-[#244A28] to-[#1B3B1E]',
-    description: 'Nuôi dưỡng 10 cây tri thức Đọc Hiểu theo 10 chủ đề IELTS'
-  },
   {
     id: 'paddy',
     name: 'Ruộng Lúa',
@@ -41,15 +31,26 @@ export const FARM_AREAS = [
     description: 'Canh tác 10 thửa ruộng Từ Vựng học thuật C1/C2 theo chủ đề'
   },
   {
-    id: 'greenhouse',
-    name: 'Nhà Kính',
-    skill: 'writing',
-    skillName: 'Writing',
-    skillTitle: 'Kỹ Năng Viết Luận',
-    icon: '🏡',
-    themeColor: '#059669',
-    bgGradient: 'from-[#14352D] via-[#1D4A3F] to-[#14352D]',
-    description: 'Ươm mầm 10 loài hoa quý cho kỹ năng Viết Task 1 & Task 2'
+    id: 'orchard',
+    name: 'Vườn Cây',
+    skill: 'reading',
+    skillName: 'Reading',
+    skillTitle: 'Kỹ Năng Đọc Hiểu',
+    icon: '🌳',
+    themeColor: '#2E7D32',
+    bgGradient: 'from-[#1B3B1E] via-[#244A28] to-[#1B3B1E]',
+    description: 'Nuôi dưỡng 10 cây tri thức Đọc Hiểu theo 10 chủ đề IELTS'
+  },
+  {
+    id: 'pasture',
+    name: 'Chăn Nuôi',
+    skill: 'listening',
+    skillName: 'Listening',
+    skillTitle: 'Kỹ Năng Nghe',
+    icon: '🐮',
+    themeColor: '#D97706',
+    bgGradient: 'from-[#331C13] via-[#4A2A1E] to-[#331C13]',
+    description: 'Chăm sóc 10 bầy vật nuôi nhạy bén cho kỹ năng Nghe IELTS'
   },
   {
     id: 'pond',
@@ -63,15 +64,15 @@ export const FARM_AREAS = [
     description: 'Nuôi dưỡng 10 đàn cá năng động cho phản xạ Nói và Phát Âm chuẩn'
   },
   {
-    id: 'pasture',
-    name: 'Chăn Nuôi',
-    skill: 'listening',
-    skillName: 'Listening',
-    skillTitle: 'Kỹ Năng Nghe',
-    icon: '🐮',
-    themeColor: '#D97706',
-    bgGradient: 'from-[#331C13] via-[#4A2A1E] to-[#331C13]',
-    description: 'Chăm sóc 10 bầy vật nuôi nhạy bén cho kỹ năng Nghe IELTS'
+    id: 'greenhouse',
+    name: 'Nhà Kính',
+    skill: 'writing',
+    skillName: 'Writing',
+    skillTitle: 'Kỹ Năng Viết Luận',
+    icon: '🏡',
+    themeColor: '#059669',
+    bgGradient: 'from-[#14352D] via-[#1D4A3F] to-[#14352D]',
+    description: 'Ươm mầm 10 loài hoa quý cho kỹ năng Viết Task 1 & Task 2'
   }
 ];
 
@@ -246,7 +247,7 @@ export function getDefaultHarvestTownState() {
     mana: 85,  // Mana để học tập & nuôi dưỡng (0 - 100)
     maxMana: 100,
 
-    activeArea: 'orchard', // 'orchard' (Reading) | 'paddy' (Vocab) | 'greenhouse' (Writing) | 'pond' (Speaking) | 'pasture' (Listening)
+    activeArea: 'paddy', // 'paddy' (Vocab) | 'orchard' (Reading) | 'pasture' (Listening) | 'pond' (Speaking) | 'greenhouse' (Writing)
     day: 14,
     season: 'spring',
     streak: 3,
@@ -288,7 +289,7 @@ export function getHarvestTownState(email = null) {
     if (state.mana === undefined) state.mana = 85;
     if (state.maxMana === undefined) state.maxMana = 100;
     if (state.gold === undefined) state.gold = 200;
-    if (!state.activeArea) state.activeArea = 'orchard';
+    if (!state.activeArea) state.activeArea = 'paddy';
 
     // Check Inactivity & Update Wilting Status for all 10 topics across 5 areas
     const now = Date.now();
