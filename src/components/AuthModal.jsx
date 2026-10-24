@@ -150,7 +150,7 @@ export default function AuthModal({
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-serif font-semibold text-base text-[#24211E]">
-                  Tài Khoản Lớp Cô Oanh
+                  🌾 Tài Khoản MochiFarm
                 </h3>
                 {isRequired && (
                   <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#3E4F42]/10 text-[#3E4F42] border border-[#3E4F42]/20 font-sans">
@@ -160,8 +160,8 @@ export default function AuthModal({
               </div>
               <p className="text-[11px] text-[#7A7369]">
                 {isRequired 
-                  ? "Vui lòng đăng nhập hoặc tạo tài khoản để vào học" 
-                  : "Đồng bộ đám mây Supabase • Học mọi lúc mọi nơi"}
+                  ? "Vui lòng đăng nhập hoặc tạo tài khoản để vào nông trại MochiFarm" 
+                  : "Đồng bộ đám mây Supabase • Nuôi trồng tri thức & luyện thi IELTS"}
               </p>
             </div>
           </div>

@@ -9,6 +9,7 @@ import CoOanhManorModal from './CoOanhManorModal';
 import GeneralStoreModal from './GeneralStoreModal';
 import BackpackModal from './BackpackModal';
 import RevivalQuestModal from '../farm/RevivalQuestModal';
+import FieldPracticeModal from './FieldPracticeModal';
 import { 
   getHarvestTownState, 
   saveHarvestTownState,
@@ -18,20 +19,18 @@ import {
   settleShippingBin, 
   claimCommissionReward, 
   buyGeneralStoreItem, 
-  clearWeedsWithRevival 
+  clearWeedsWithRevival,
+  recordLearningToFarm 
 } from '../../services/harvestTownService';
 import { sounds } from '../../services/soundEffects';
 
 export default function MochiFarmView({
   studentEmail,
   onOpenTargetBandModal,
-  onGoWritingPractice,
-  onGoFullEssay,
-  onGoVocabulary,
-  onGoFlashcard,
-  onGoGrammar,
-  onGoReading,
-  onGoListening
+  onOpenAuthModal,
+  onOpenSettingsModal,
+  currentUser,
+  onSignOut
 }) {
   const [harvestState, setHarvestState] = useState(() => getHarvestTownState(studentEmail));
   const [activeTool, setActiveTool] = useState('hoe');
@@ -46,6 +45,11 @@ export default function MochiFarmView({
   const [isStoreOpen, setIsStoreOpen] = useState(false);
   const [isBackpackOpen, setIsBackpackOpen] = useState(false);
   const [isRevivalOpen, setIsRevivalOpen] = useState(false);
+
+  // Field Practice Modal
+  const [isFieldPracticeOpen, setIsFieldPracticeOpen] = useState(false);
+  const [practiceSkill, setPracticeSkill] = useState('vocab');
+  const [practicePlotId, setPracticePlotId] = useState(null);
 
   // 1. Gieo Hạt
   const handlePlant = (cropKey, plotId) => {
@@ -67,15 +71,18 @@ export default function MochiFarmView({
     }
   };
 
-  // 3. Tưới nước bằng luyện tập
-  const handleWaterWithPractice = (skillType) => {
-    if (skillType === 'vocab' && onGoVocabulary) onGoVocabulary();
-    else if (skillType === 'grammar' && onGoGrammar) onGoGrammar();
-    else if (skillType === 'task1' && onGoWritingPractice) onGoWritingPractice('task1');
-    else if (skillType === 'task2' && onGoFullEssay) onGoFullEssay();
-    else if (skillType === 'reading' && onGoReading) onGoReading();
-    else if (skillType === 'pronunciation' && onGoFlashcard) onGoFlashcard();
-    else if (onGoVocabulary) onGoVocabulary();
+  // 3. Tưới nước bằng bài tập luyện tập trong game
+  const handleWaterWithPractice = (skillType, plotId = null) => {
+    setPracticeSkill(skillType || 'vocab');
+    setPracticePlotId(plotId);
+    setIsFieldPracticeOpen(true);
+  };
+
+  const handleCompleteFieldPractice = (skillType, score) => {
+    const res = recordLearningToFarm(skillType, score, studentEmail);
+    if (res.success) {
+      setHarvestState(res.state);
+    }
   };
 
   // 4. Bỏ hàng vào thùng xuất khẩu
@@ -139,6 +146,10 @@ export default function MochiFarmView({
         onOpenBackpack={() => setIsBackpackOpen(true)}
         onOpenStore={() => setIsStoreOpen(true)}
         onOpenBulletin={() => setIsBulletinOpen(true)}
+        currentUser={currentUser}
+        onOpenAuthModal={onOpenAuthModal}
+        onOpenSettingsModal={onOpenSettingsModal}
+        onSignOut={onSignOut}
       />
 
       {/* 2. MAIN HARVEST TOWN FARM MAP */}
@@ -155,8 +166,8 @@ export default function MochiFarmView({
         onOpenBulletin={() => setIsBulletinOpen(true)}
         onOpenCoOanhManor={() => setIsCoOanhOpen(true)}
         onOpenStore={() => setIsStoreOpen(true)}
-        onOpenMines={() => onGoReading ? onGoReading() : null}
-        onOpenFishing={() => onGoFlashcard ? onGoFlashcard() : null}
+        onOpenMines={() => handleWaterWithPractice('reading')}
+        onOpenFishing={() => handleWaterWithPractice('pronunciation')}
         onClearWeeds={() => setIsRevivalOpen(true)}
       />
 
@@ -170,13 +181,20 @@ export default function MochiFarmView({
         }}
         onOpenBackpack={() => setIsBackpackOpen(true)}
         onOpenBulletin={() => setIsBulletinOpen(true)}
-        onOpenFishing={() => onGoFlashcard ? onGoFlashcard() : null}
-        onOpenMines={() => onGoReading ? onGoReading() : null}
+        onOpenFishing={() => handleWaterWithPractice('pronunciation')}
+        onOpenMines={() => handleWaterWithPractice('reading')}
         unclaimedQuestsCount={unclaimedCommissionsCount}
         shippingCount={harvestState.shippingBin?.length || 0}
       />
 
       {/* MODALS */}
+      <FieldPracticeModal
+        isOpen={isFieldPracticeOpen}
+        onClose={() => setIsFieldPracticeOpen(false)}
+        skillType={practiceSkill}
+        plotId={practicePlotId}
+        onCompletePractice={handleCompleteFieldPractice}
+      />
       <SeedPouchModal
         isOpen={isSeedPouchOpen}
         onClose={() => {
