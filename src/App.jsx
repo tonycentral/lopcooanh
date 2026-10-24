@@ -27,8 +27,8 @@ import TacticsWorkspace from './components/tactics/TacticsWorkspace';
 import MobileBottomNav from './components/MobileBottomNav';
 import MobileDesktopNotice from './components/MobileDesktopNotice';
 import MobileVocabWorkspace from './components/MobileVocabWorkspace';
-import FarmDashboard from './components/farm/FarmDashboard';
-import { getFarmState, tendCropWithLearning } from './services/farmService';
+import MochiFarmView from './components/harvest/MochiFarmView';
+import { recordLearningToFarm } from './services/harvestTownService';
 import { useIsMobile } from './hooks/useIsMobile';
 
 
@@ -556,20 +556,12 @@ export default function App() {
     setPracticeActivePart(1);
   };
 
-  // Farm Gamification State
-  const [farmState, setFarmState] = useState(() => getFarmState(studentEmail));
-
-  useEffect(() => {
-    setFarmState(getFarmState(studentEmail));
-  }, [studentEmail]);
-
-  // Refresh stats & 7-day average after sentence grading + tưới nước cho nông trại
-  const handleRefreshStats = () => {
+  // Refresh stats & 7-day average after sentence grading + tưới nước cho MochiFarm Harvest Town
+  const handleRefreshStats = (score = 80) => {
     setStats(getStoredStats());
     setCurrent7DayScore(getAverageScoreLast7Days(studentEmail));
-    const targetCrop = activeTask === 'task1' ? 'task1' : 'task2';
-    tendCropWithLearning(targetCrop, 1, studentEmail);
-    setFarmState(getFarmState(studentEmail));
+    const targetSkill = activeTask === 'task1' ? 'task1' : 'task2';
+    recordLearningToFarm(targetSkill, typeof score === 'number' ? score : 80, studentEmail);
   };
 
   return (
@@ -644,9 +636,9 @@ export default function App() {
               isSidebarCollapsed={isSidebarCollapsed}
               onToggleSidebar={handleToggleSidebar}
             />
-            <FarmDashboard
-              farmState={farmState}
-              onUpdateFarmState={(newState) => setFarmState(newState)}
+            <MochiFarmView
+              studentEmail={studentEmail}
+              onOpenTargetBandModal={() => setIsBandModalOpen(true)}
               onGoWritingPractice={(task) => {
                 if (task) setActiveTask(task);
                 setCurrentView('vocab_practice');
@@ -657,8 +649,7 @@ export default function App() {
               onGoFlashcard={() => setCurrentView('flashcard')}
               onGoGrammar={() => setCurrentView('grammar')}
               onGoReading={() => setCurrentView('reading')}
-              currentUser={currentUser}
-              studentEmail={studentEmail}
+              onGoListening={() => setCurrentView('flashcard')}
             />
           </div>
         ) : currentView === 'welcome' ? (

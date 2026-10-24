@@ -407,11 +407,11 @@ export default function WelcomePage({
                   🌾
                 </div>
                 <div className="text-left">
-                  <div className="text-[10px] text-emerald-200 uppercase font-black tracking-wider leading-none mb-0.5">
-                    Mô hình Gamification Mới
+                  <div className="text-[10px] text-amber-200 uppercase font-black tracking-wider leading-none mb-0.5">
+                    Harvest Town IELTS RPG
                   </div>
                   <div className="text-xs sm:text-sm font-extrabold text-white">
-                    Vào Nông Trại Tri Thức (IELTS Harvest Farm)
+                    Vào MochiFarm — Nông Trại Harvest Town
                   </div>
                 </div>
               </div>

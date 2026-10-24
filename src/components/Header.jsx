@@ -93,9 +93,9 @@ export default function Header({
         {/* Center: Contextual Controls (e.g. Task 1 / Task 2 Pill when in 1.4 Full Essay) */}
         <div className="flex items-center gap-2 min-w-0">
           {currentView === 'farm' && (
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-900 text-xs font-bold shadow-2xs">
-              <span>🌾</span>
-              <span>Nông Trại Tri Thức</span>
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-amber-100/90 border-2 border-amber-800 text-[#3E2723] text-xs font-black shadow-xs">
+              <span>🏡</span>
+              <span>MochiFarm • Harvest Town</span>
             </div>
           )}
 

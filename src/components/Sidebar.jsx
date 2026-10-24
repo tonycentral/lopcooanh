@@ -54,9 +54,9 @@ export default function Sidebar({
       items: [
         {
           id: 'farm',
-          title: 'Nông trại tri thức',
+          title: 'Nông trại Harvest Town',
           icon: Sprout,
-          badge: 'Gamification',
+          badge: 'RPG Farm',
           isActive: currentView === 'farm',
           action: () => {
             if (onGoView) onGoView('farm');
