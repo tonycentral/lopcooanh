@@ -73,6 +73,28 @@ export const FARM_AREAS = [
     themeColor: '#059669',
     bgGradient: 'from-[#14352D] via-[#1D4A3F] to-[#14352D]',
     description: 'Ươm mầm 10 loài hoa quý cho kỹ năng Viết Task 1 & Task 2'
+  },
+  {
+    id: 'workshop',
+    name: 'Xưởng Cơ Khí',
+    skill: 'math',
+    skillName: 'Toán Tư Duy',
+    skillTitle: 'Toán & Logic Suy Luận',
+    icon: '⚙️',
+    themeColor: '#D97706',
+    bgGradient: 'from-[#2B1B10] via-[#4A321E] to-[#2B1B10]',
+    description: 'Vận hành 10 cỗ máy bánh răng logic, tính toán quy luật & bài toán tối ưu'
+  },
+  {
+    id: 'library',
+    name: 'Thư Viện Cổ',
+    skill: 'grammar',
+    skillName: 'Ngữ Pháp',
+    skillTitle: 'Ngữ Pháp Chuyên Sâu',
+    icon: '📜',
+    themeColor: '#7C3AED',
+    bgGradient: 'from-[#1E132B] via-[#331C4A] to-[#1E132B]',
+    description: 'Nghiên cứu 10 cuốn văn khế cổ, làm chủ thì, mệnh đề và đảo ngữ Band 8+'
   }
 ];
 
@@ -151,6 +173,30 @@ export const AREA_TOPIC_NAMES = {
     transport: { name: 'Lạc Đà Chuyên Chở Đô Thị', type: 'llama_transport', english: 'Urban Llama', fruit: 'Túi Hàng Vận Chuyển' },
     crime_law: { name: 'Đàn Ngỗng Canh Gác Kỷ Cương', type: 'geese_guard', english: 'Watchful Geese', fruit: 'Lông Ngỗng Trật Tự' },
     culture_arts: { name: 'Chim Trĩ Di Sản Cung Đình', type: 'pheasant_royal', english: 'Imperial Pheasant', fruit: 'Lông Trĩ Cung Đình' }
+  },
+  workshop: {
+    environment: { name: 'Tua-bin Năng Lượng Xanh', type: 'gear_solar', english: 'Green Energy Turbine', fruit: 'Bánh Răng Xanh' },
+    technology: { name: 'Siêu Máy Tính Lượng Tử', type: 'gear_quantum', english: 'Quantum Computing Rig', fruit: 'Vi Chip Tư Duy' },
+    education: { name: 'Bàn Tính Số Học Py-ta-go', type: 'gear_abacus', english: 'Pythagorean Abacus', fruit: 'Hạt Tính Logic' },
+    society_family: { name: 'Đồng Hồ Cân Bằng Xã Hội', type: 'gear_clockwork', english: 'Demographic Clockwork', fruit: 'Con Lắc Cân Bằng' },
+    business: { name: 'Cân Đĩa Tài Chính Tối Ưu', type: 'gear_balance', english: 'Financial Balance Scale', fruit: 'Quả Cân Tỷ Lệ' },
+    health: { name: 'Máy Đo Nhịp Sinh Học', type: 'gear_biometer', english: 'Biorhythm Analyzer', fruit: 'Chỉ Số Sức Khỏe' },
+    work_career: { name: 'Bộ Truyền Động Năng Suất', type: 'gear_dynamo', english: 'Career Power Dynamo', fruit: 'Momen Lực Thành Công' },
+    transport: { name: 'Bản Đồ Mê Cung Vận Tải', type: 'gear_transit', english: 'Transit Network Maze', fruit: 'Lộ Trình Tối Ưu' },
+    crime_law: { name: 'Mật Mã Kỷ Cương Enigma', type: 'gear_cipher', english: 'Enigma Logic Cipher', fruit: 'Chìa Khóa Mật Mã' },
+    culture_arts: { name: 'Thước Thiên Văn Tỷ Lệ Vàng', type: 'gear_astrolabe', english: 'Golden Ratio Astrolabe', fruit: 'Thước Tỷ Lệ Vàng' }
+  },
+  library: {
+    environment: { name: 'Cuốn Văn Khế Sinh Thái', type: 'scroll_eco', english: 'Eco Treatise Scroll', fruit: 'Mực Thảo Mộc' },
+    technology: { name: 'Bản Đồ Cú Pháp Vi Mạch', type: 'scroll_cyber', english: 'Cyber Syntax Map', fruit: 'Mã Cú Pháp' },
+    education: { name: 'Đại Từ Điển Ngữ Pháp', type: 'scroll_lexicon', english: 'Academic Grammar Tome', fruit: 'Dấu Câu Hoàn Hảo' },
+    society_family: { name: 'Hồ Sơ Mệnh Đề Xã Hội', type: 'scroll_society', english: 'Social Clause Archive', fruit: 'Mệnh Đề Gắn Kết' },
+    business: { name: 'Hợp Đồng Cấu Trúc Song Hành', type: 'scroll_commerce', english: 'Parallel Contract Codex', fruit: 'Cấu Trúc Song Hành' },
+    health: { name: 'Dược Thư Mệnh Đề Điều Kiện', type: 'scroll_conditional', english: 'Conditional Remedy Book', fruit: 'Công Thức If/Unless' },
+    work_career: { name: 'Chiếu Thư Bị Động Khách Quan', type: 'scroll_passive', english: 'Objective Passive Edict', fruit: 'Thể Bị Động C2' },
+    transport: { name: 'Sổ Lộ Trình Đảo Ngữ', type: 'scroll_inversion', english: 'Inversion Route Ledger', fruit: 'Cấu Trúc Đảo Ngữ' },
+    crime_law: { name: 'Bộ Luật Câu Chẻ Cleft Sentence', type: 'scroll_cleft', english: 'Cleft Sentence Law Codex', fruit: 'Điểm Nhấn Cú Pháp' },
+    culture_arts: { name: 'Trường Ca Danh Từ Hóa', type: 'scroll_nominal', english: 'Nominalization Epic Poem', fruit: 'Thơ Ca Học Thuật' }
   }
 };
 
@@ -280,9 +326,17 @@ export function getHarvestTownState(email = null) {
     }
     const state = JSON.parse(raw);
 
-    // Make sure areaEntities exists
-    if (!state.areaEntities || Object.keys(state.areaEntities).length < 5) {
+    // Make sure areaEntities exists for ALL 7 farm areas
+    if (!state.areaEntities) {
       state.areaEntities = generateInitialAreaEntities();
+    } else {
+      // Ensure missing areas (workshop, library) are seamlessly initialized
+      const allInitial = generateInitialAreaEntities();
+      FARM_AREAS.forEach(area => {
+        if (!state.areaEntities[area.id] || state.areaEntities[area.id].length === 0) {
+          state.areaEntities[area.id] = allInitial[area.id];
+        }
+      });
     }
 
     // Ensure ONLY 2 currencies exist

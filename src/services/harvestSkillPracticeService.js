@@ -463,6 +463,202 @@ export const PRACTICE_SKILL_BANKS = {
         explanation: "'Consequently' và 'As a direct corollary' tạo liên kết logic chặt chẽ, tối ưu hóa điểm số Coherence & Cohesion trong IELTS Writing."
       }
     ]
+  },
+
+  // =========================================================================
+  // 6. TOÁN TƯ DUY & LOGIC SUY LUẬN (XƯỞNG CƠ KHÍ - WORKSHOP)
+  // Format: Logic Board + Mathematical Clue + Step-by-Step Analytical Solver
+  // =========================================================================
+  math: {
+    environment: [
+      {
+        id: 'mt_env_1',
+        skill: 'math',
+        topicCategory: 'Bài Toán Tối Ưu Năng Lượng Tái Tạo',
+        clue: "Diện tích mái pin: 20 m² | Bức xạ mặt trời: 1.000 W/m² | Hiệu suất pin: 20% | Thời gian chiếu sáng đỉnh: 5 giờ/ngày.",
+        mathFormula: "Điện năng (kWh) = Diện tích (m²) × Bức xạ (kW/m²) × Hiệu suất × Thời gian (h)",
+        question: "Một nông trại xanh lắp 20 m² pin mặt trời với hiệu suất 20%. Nếu mỗi ngày có 5 giờ nắng đỉnh (1.000 W/m² = 1 kW/m²), hệ thống sản sinh được bao nhiêu kWh điện năng mỗi ngày?",
+        options: [
+          "20 kWh (20 m² × 1 kW/m² × 0.20 × 5h = 20 kWh)",
+          "100 kWh (Chưa nhân hiệu suất chuyển đổi 20%)",
+          "40 kWh (Tính thừa gấp đôi thời gian chiếu sáng)",
+          "15 kWh (Tính sai hệ số suy hao)"
+        ],
+        correctIndex: 0,
+        explanation: "Công thức: Công suất tức thời = 20 m² × 1 kW/m² × 0.2 = 4 kW. Sản lượng trong 5 giờ nắng = 4 kW × 5h = 20 kWh/ngày."
+      },
+      {
+        id: 'mt_env_2',
+        skill: 'math',
+        topicCategory: 'Tỷ Lệ Giảm Thiểu Khí Thải Carbon',
+        clue: "Lượng phát thải ban đầu: 500 tấn CO₂/năm. Mỗi năm áp dụng công nghệ lọc giúp giảm 20% lượng phát thải của năm trước đó.",
+        mathFormula: "Lượng phát thải sau 2 năm = 500 × (1 - 0.20)²",
+        question: "Sau đúng 2 năm liên tiếp áp dụng giải pháp giảm 20%/năm, lượng phát thải khí nhà kính còn lại là bao nhiêu tấn?",
+        options: [
+          "320 tấn CO₂ (500 × 0.8 × 0.8 = 320 tấn)",
+          "300 tấn CO₂ (Bẫy trừ thẳng 20% + 20% = 40% của 500)",
+          "400 tấn CO₂ (Chỉ mới tính giảm sau 1 năm)",
+          "250 tấn CO₂ (Bẫy chia đôi 50%)"
+        ],
+        correctIndex: 0,
+        explanation: "Năm 1 còn: 500 × 0.8 = 400 tấn. Năm 2 còn: 400 × 0.8 = 320 tấn. Không được cộng gộp 20% + 20% vì đây là lãi kép / suy giảm lũy kế."
+      }
+    ],
+
+    technology: [
+      {
+        id: 'mt_tech_1',
+        skill: 'math',
+        topicCategory: 'Thuật Toán Nhị Phân & Độ Phức Tạp Tính Toán',
+        clue: "Danh sách 1.024 hồ sơ học viên đã được sắp xếp thứ tự A-Z. Sử dụng thuật toán Tìm kiếm Nhị phân (Binary Search).",
+        mathFormula: "Số bước so sánh tối đa = log₂(N)",
+        question: "Trong một danh sách gồm 1.024 phần tử đã sắp xếp, thuật toán tìm kiếm nhị phân cần tối đa bao nhiêu lần so sánh để tìm ra phần tử mục tiêu (hoặc khẳng định không có)?",
+        options: [
+          "10 lần (Vì 2¹⁰ = 1.024)",
+          "512 lần (Bẫy chia đôi danh sách 1 lần)",
+          "1.024 lần (Bẫy tìm kiếm tuyến tính tuần tự)",
+          "32 lần (Bẫy lấy căn bậc hai √1.024)"
+        ],
+        correctIndex: 0,
+        explanation: "Mỗi bước tìm kiếm nhị phân chia đôi không gian tìm kiếm: 1024 -> 512 -> 256 -> 128 -> 64 -> 32 -> 16 -> 8 -> 4 -> 2 -> 1 (đúng 10 bước, log₂(1024) = 10)."
+      }
+    ],
+
+    education: [
+      {
+        id: 'mt_edu_1',
+        skill: 'math',
+        topicCategory: 'Dãy Số Quy Luật & Tư Duy Logic Toán Học',
+        clue: "Dãy số: 2, 6, 12, 20, 30, X, ...",
+        mathFormula: "Quy luật số hạng: Uₙ = n × (n + 1)",
+        question: "Quan sát dãy số: 2, 6, 12, 20, 30, X. Số X tiếp theo là số nào theo quy luật tư duy logic?",
+        options: [
+          "42 (Quy luật n × (n + 1): 1×2=2, 2×3=6, 3×4=12, 4×5=20, 5×6=30 -> 6×7=42)",
+          "40 (Cộng thêm 10 đơn thuần)",
+          "36 (Bình phương số 6)",
+          "48 (Nhân bội số)"
+        ],
+        correctIndex: 0,
+        explanation: "Khoảng cách giữa các số liên tiếp tăng đều: +4, +6, +8, +10 -> bước tiếp theo là +12: 30 + 12 = 42 (hoặc công thức n × (n+1) với n=6 là 6 × 7 = 42)."
+      }
+    ],
+
+    default: [
+      {
+        id: 'mt_def_1',
+        skill: 'math',
+        topicCategory: 'Bài Toán Cân Đĩa & Tư Duy Phân Nhóm',
+        clue: "Có 8 đồng xu vàng bề ngoài giống hệt nhau, trong đó có 1 đồng xu giả nhẹ hơn 7 đồng xu còn lại. Có 1 chiếc cân đĩa 2 bên.",
+        mathFormula: "Chia 8 đồng xu thành 3 nhóm: 3 - 3 - 2",
+        question: "Cần tối thiểu bao nhiêu lần cân để CHẮC CHẮN tìm ra đồng xu nhẹ hơn?",
+        options: [
+          "2 lần cân (Lần 1: cân 3 vs 3. Lần 2: cân 1 vs 1 trong nhóm nghi vấn)",
+          "3 lần cân (Chia đôi 4 - 4 rồi tiếp tục)",
+          "4 lần cân (Cân từng cặp một)",
+          "1 lần cân (Không thể đảm bảo chắc chắn)"
+        ],
+        correctIndex: 0,
+        explanation: "Lần 1: Đặt 3 đồng lên đĩa trái, 3 đồng lên đĩa phải. Nếu cân thăng bằng -> đồng nhẹ nằm ở 2 đồng còn lại (cân 1 vs 1 lần thứ hai là ra). Nếu cân lệch -> lấy 3 đồng bên nhẹ cân 1 vs 1 lần 2. Tối đa chỉ cần đúng 2 lần cân."
+      }
+    ]
+  },
+
+  // =========================================================================
+  // 7. NGỮ PHÁP CHUYÊN SÂU (THƯ VIỆN CỔ - LIBRARY)
+  // Format: Grammar Syntax Formula + Advanced Inversion / Conditionals / Cleft
+  // =========================================================================
+  grammar: {
+    environment: [
+      {
+        id: 'gm_env_1',
+        skill: 'grammar',
+        topicCategory: 'Mixed Conditionals (Câu Điều Kiện Trộn 3 & 2)',
+        grammarRule: "Công thức: If + S + had + V3/ed (Quá khứ), S + would/could + V-bare (Hiện tại)",
+        targetClause: "Quá khứ: không ban hành luật sớm -> Hiện tại: chịu hậu quả nặng nề.",
+        question: "Câu điều kiện trộn (Mixed Conditional) nào thể hiện mối quan hệ 'nếu quá khứ đã hành động thì hiện tại không phải gánh chịu hậu quả' chuẩn xác nhất?",
+        options: [
+          "If international treaties had been ratified two decades ago, our planetary biomes would not be facing existential collapse today.",
+          "If international treaties were ratified two decades ago, our planetary biomes will not face collapse today.",
+          "If international treaties had been ratified two decades ago, our planetary biomes would have not be facing collapse today.",
+          "Had international treaties been ratified two decades ago, our planetary biomes will not be facing collapse today."
+        ],
+        correctIndex: 0,
+        explanation: "Mệnh đề If chỉ quá khứ dùng 'had been ratified' (Loại 3), mệnh đề chính chỉ kết quả ở hiện tại 'today' dùng 'would not be facing' (Loại 2). Đây là cấu trúc Mixed Conditional Band 8.5+."
+      },
+      {
+        id: 'gm_env_2',
+        skill: 'grammar',
+        topicCategory: 'Inversion with Negative Adverbials (Đảo Ngữ Học Thuật)',
+        grammarRule: "Công thức: Under no circumstances / Seldom / Rarely + Trợ động từ + S + V...",
+        targetClause: "Tuyệt đối không nên hy sinh đa dạng sinh học vì lợi ích kinh tế ngắn hạn.",
+        question: "Cấu trúc đảo ngữ nào nhấn mạnh sự cấm đoán học thuật chuẩn xác ngữ pháp?",
+        options: [
+          "Under no circumstances should corporate profit be prioritized over ecological preservation.",
+          "Under no circumstances corporate profit should be prioritized over ecological preservation.",
+          "Under no circumstances does corporate profit must be prioritized over ecological preservation.",
+          "No circumstances should corporate profit be prioritized over ecological preservation."
+        ],
+        correctIndex: 0,
+        explanation: "'Under no circumstances' đứng đầu câu bắt buộc phải đảo trợ động từ 'should' lên trước chủ ngữ 'corporate profit'."
+      }
+    ],
+
+    technology: [
+      {
+        id: 'gm_tech_1',
+        skill: 'grammar',
+        topicCategory: 'Inversion with Not Only... But Also',
+        grammarRule: "Công thức: Not only + Trợ động từ + S + V, but S + also + V...",
+        targetClause: "AI không chỉ tăng tốc độ xử lý dữ liệu mà nó còn tối ưu hóa bảo mật.",
+        question: "Chọn câu đảo ngữ 'Not only' chuẩn cấu trúc ngữ pháp Band 8.0+:",
+        options: [
+          "Not only does quantum computing accelerate cryptographic decryption, but it also fundamentally reshapes cybersecurity architectures.",
+          "Not only quantum computing accelerates cryptographic decryption, but it also fundamentally reshapes cybersecurity.",
+          "Not only is quantum computing accelerate cryptographic decryption, but also it fundamentally reshapes cybersecurity.",
+          "Not only does quantum computing accelerates cryptographic decryption, but also it fundamentally reshapes."
+        ],
+        correctIndex: 0,
+        explanation: "Sau 'Not only' dùng trợ động từ 'does' + chủ ngữ số ít + động từ nguyên thể 'accelerate'. Mệnh đề thứ hai giữ nguyên trật tự thông thường 'but it also reshapes'."
+      }
+    ],
+
+    education: [
+      {
+        id: 'gm_edu_1',
+        skill: 'grammar',
+        topicCategory: 'Cleft Sentence (Câu Chẻ Nhấn Mạnh It is / It was... that)',
+        grammarRule: "Công thức: It is/was + Thành phần cần nhấn mạnh + that + Mệnh đề",
+        targetClause: "Chính thói quen tự học có kỷ luật chứ không phải trường lớp danh giá quyết định thành công.",
+        question: "Câu chẻ (Cleft sentence) nào dưới đây nhấn mạnh chủ ngữ chính xác tuyệt đối?",
+        options: [
+          "It is disciplined self-directed inquiry, rather than prestigious institutional pedigree, that underpins scholarly excellence.",
+          "It is disciplined self-directed inquiry, rather than prestigious institutional pedigree, which underpins scholarly excellence.",
+          "It is disciplined self-directed inquiry that rather than prestigious institutional pedigree underpins scholarly excellence.",
+          "It was disciplined self-directed inquiry, rather than prestigious institutional pedigree, what underpins scholarly excellence."
+        ],
+        correctIndex: 0,
+        explanation: "Cấu trúc câu chẻ chuẩn mực: 'It is [Thành phần nhấn mạnh] that [Mệnh đề còn lại]'. Không dùng 'which' hay 'what' thay cho 'that' trong câu chẻ học thuật trang trọng."
+      }
+    ],
+
+    default: [
+      {
+        id: 'gm_def_1',
+        skill: 'grammar',
+        topicCategory: 'Reduced Relative Clause (Rút Gọn Mệnh Đề Quan Hệ)',
+        grammarRule: "Bị động rút gọn còn V3/ed; Chủ động rút gọn còn V-ing",
+        targetClause: "The empirical survey which was conducted by Oxford scholars revealed...",
+        question: "Rút gọn mệnh đề quan hệ bị động nào sau đây là chuẩn xác nhất?",
+        options: [
+          "The empirical survey conducted by Oxford scholars revealed conclusive data.",
+          "The empirical survey conducting by Oxford scholars revealed conclusive data.",
+          "The empirical survey being conduct by Oxford scholars revealed conclusive data.",
+          "The empirical survey to conduct by Oxford scholars revealed conclusive data."
+        ],
+        correctIndex: 0,
+        explanation: "Mệnh đề bị động 'which was conducted' được rút gọn bằng cách lược bỏ đại từ quan hệ và to be, chỉ giữ lại quá khứ phân từ 'conducted'."
+      }
+    ]
   }
 };
 
@@ -473,3 +669,4 @@ export function getSkillExercises(skillKey = 'vocab', topicKey = 'environment') 
   const bank = PRACTICE_SKILL_BANKS[skillKey] || PRACTICE_SKILL_BANKS.vocab;
   return bank[topicKey] || bank.default || PRACTICE_SKILL_BANKS.vocab.default;
 }
+

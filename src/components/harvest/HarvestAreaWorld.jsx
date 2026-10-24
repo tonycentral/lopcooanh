@@ -216,12 +216,16 @@ export default function HarvestAreaWorld({
   const isGreenhouse = activeArea.id === 'greenhouse';
   const isPond = activeArea.id === 'pond';
   const isPasture = activeArea.id === 'pasture';
+  const isWorkshop = activeArea.id === 'workshop';
+  const isLibrary = activeArea.id === 'library';
 
   let bgMainColor = '#4b692f'; // Strict Accent Green
   if (isPaddy) bgMainColor = '#4b692f';
   if (isGreenhouse) bgMainColor = '#354d1f';
   if (isPond) bgMainColor = '#243b35';
   if (isPasture) bgMainColor = '#663931';
+  if (isWorkshop) bgMainColor = '#573822';
+  if (isLibrary) bgMainColor = '#45283c';
 
   return (
     <div 
@@ -232,6 +236,10 @@ export default function HarvestAreaWorld({
         backgroundColor: bgMainColor,
         backgroundImage: isOrchard
           ? `radial-gradient(#354d1f 15%, transparent 16%), radial-gradient(#4b692f 15%, transparent 16%)`
+          : isWorkshop
+          ? `radial-gradient(#45283c 20%, transparent 21%), radial-gradient(#663931 20%, transparent 21%)`
+          : isLibrary
+          ? `radial-gradient(#663931 15%, transparent 16%), radial-gradient(#8f563b 15%, transparent 16%)`
           : undefined,
         backgroundSize: '40px 40px',
         backgroundPosition: '0 0, 20px 20px',

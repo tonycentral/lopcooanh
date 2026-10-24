@@ -127,7 +127,9 @@ export default function AreaTopicPracticeModal({
     reading: { title: '🌳 BÀI TẬP ĐỌC HIỂU HỌC THUẬT (CAMBRIDGE READING)', color: '#8f563b' },
     listening: { title: '🐮 BÀI TẬP NGHE HIỂU & BẪY DISTRACTOR (IELTS LISTENING)', color: '#663931' },
     speaking: { title: '🐟 BÀI TẬP PHẢN XẠ NÓI & PHÁT ÂM (IELTS SPEAKING 8.5)', color: '#243b35' },
-    writing: { title: '🏡 BÀI TẬP NÂNG CẤP CÂU & LIÊN KẾT (IELTS WRITING T1/T2)', color: '#45283c' }
+    writing: { title: '🏡 BÀI TẬP NÂNG CẤP CÂU & LIÊN KẾT (IELTS WRITING T1/T2)', color: '#45283c' },
+    math: { title: '⚙️ BÀI TẬP TOÁN TƯ DUY & LOGIC SUY LUẬN', color: '#d9911e' },
+    grammar: { title: '📜 BÀI TẬP NGỮ PHÁP CHUYÊN SÂU & ĐẢO NGỮ (BAND 8.0+)', color: '#663931' }
   };
   const currentSkillBadge = skillTitles[skillKey] || skillTitles.vocab;
 
@@ -400,6 +402,64 @@ export default function AreaTopicPracticeModal({
                     <div className="p-1.5 border-2 border-[#45283c] bg-[#e8cfa6] text-[8px] text-[#663931] font-sans">
                       <span className="font-bold text-[#45283c] font-pixel text-[7px] block">CÂU GỐC (BAND 5.5 - 6.0 DRAFT):</span>
                       <span className="italic">{currentQ.originalDraft}</span>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* -----------------------------------------------------------------
+                  6. SKILL: MATH (XƯỞNG CƠ KHÍ)
+                  Logic Thinking + Clue & Math Formula
+                  ----------------------------------------------------------------- */}
+              {skillKey === 'math' && (
+                <div className="p-2.5 border-4 border-[#45283c] bg-[#d7b594] space-y-2">
+                  {currentQ.topicCategory && (
+                    <div className="flex items-center justify-between pb-1 border-b-2 border-[#8f563b]/30">
+                      <span className="text-[7.5px] font-bold text-[#663931] uppercase">CHUYÊN ĐỀ LOGIC:</span>
+                      <span className="text-[7.5px] font-bold text-[#d9911e] bg-[#45283c] px-1.5 py-0.5">{currentQ.topicCategory}</span>
+                    </div>
+                  )}
+
+                  {currentQ.clue && (
+                    <div className="p-2 border-2 border-[#45283c] bg-[#e8cfa6] text-[8.5px] text-[#2c1b18] font-sans">
+                      <span className="text-[7px] text-[#8f563b] font-pixel font-bold block mb-0.5">DỮ KIỆN BÀI TOÁN:</span>
+                      <span>{currentQ.clue}</span>
+                    </div>
+                  )}
+
+                  {currentQ.mathFormula && (
+                    <div className="p-1.5 border-2 border-[#45283c] bg-[#f6e6cd] text-[8px] text-[#45283c] font-sans flex items-center gap-1.5">
+                      <span className="text-[9px]">⚙️</span>
+                      <span className="font-bold font-mono">{currentQ.mathFormula}</span>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* -----------------------------------------------------------------
+                  7. SKILL: GRAMMAR (THƯ VIỆN CỔ)
+                  Advanced Syntax Rules + Target Clause Breakdown
+                  ----------------------------------------------------------------- */}
+              {skillKey === 'grammar' && (
+                <div className="p-2.5 border-4 border-[#45283c] bg-[#d7b594] space-y-2">
+                  {currentQ.topicCategory && (
+                    <div className="flex items-center justify-between pb-1 border-b-2 border-[#8f563b]/30">
+                      <span className="text-[7.5px] font-bold text-[#663931] uppercase">CẤU TRÚC NGỮ PHÁP:</span>
+                      <span className="text-[7.5px] font-bold text-[#e8cfa6] bg-[#45283c] px-1.5 py-0.5">{currentQ.topicCategory}</span>
+                    </div>
+                  )}
+
+                  {currentQ.grammarRule && (
+                    <div className="p-1.5 border-2 border-[#45283c] bg-[#e8cfa6] text-[8px] text-[#45283c] font-sans">
+                      <span className="font-bold text-[#8f563b] font-pixel text-[7px] block mb-0.5">CÔNG THỨC CHUẨN XÁC:</span>
+                      <span className="font-mono font-bold text-[#663931]">{currentQ.grammarRule}</span>
+                    </div>
+                  )}
+
+                  {currentQ.targetClause && (
+                    <div className="p-1.5 border-2 border-[#45283c] bg-[#f6e6cd] text-[8px] text-[#2c1b18] font-sans">
+                      <span className="font-bold text-[#45283c] font-pixel text-[7px] block mb-0.5">Ý NGHĨA BIỂU ĐẠT:</span>
+                      <span className="italic">"{currentQ.targetClause}"</span>
                     </div>
                   )}
                 </div>

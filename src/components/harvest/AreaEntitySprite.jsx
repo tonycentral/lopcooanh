@@ -2,14 +2,18 @@ import React from 'react';
 import HarvestTownTree from './HarvestTownTree';
 import PastureAnimalPen from './PastureAnimalPen';
 import PondAquaticEnclosure from './PondAquaticEnclosure';
+import WorkshopMachinery from './WorkshopMachinery';
+import GrammarLibraryTome from './GrammarLibraryTome';
 
 /**
- * Authentic Graphical Sprites for All 5 IELTS Farm Areas:
+ * Authentic Graphical Sprites for All 7 IELTS Farm Areas:
  * 1. Orchard: 10 Harvest Town Tree Species (Apples, Pine, Oak, Maple, Willow, etc.)
  * 2. Pasture: 10 Dedicated Animal Enclosures with Autonomous Living Pixel Art Animals
  * 3. Pond: 10 Dedicated Aquatic Basins with Autonomous Swimming Pixel Art Fish
  * 4. Paddy: 5-Stage Terraced Golden Rice Fields with Irrigation
  * 5. Greenhouse: 5-Stage Ornate Botanical Planters with Exotic Blooms
+ * 6. Workshop: 10 Steampunk Clockwork Machines with Rotating Cogwheels (Toán Tư Duy)
+ * 7. Library: 10 Ancient Grammar Codices with Blinking Scholar Owl (Ngữ Pháp)
  */
 export default function AreaEntitySprite({
   areaId,
@@ -191,6 +195,28 @@ export default function AreaEntitySprite({
             ===================================================================== */}
         {areaId === 'pasture' && (
           <PastureAnimalPen
+            entity={entity}
+            isNearby={isNearby}
+          />
+        )}
+
+        {/* =====================================================================
+            AREA 6: XƯỞNG CƠ KHÍ (CLOCKWORK WORKSHOP - TOÁN TƯ DUY)
+            ROTATING BRASS GEARS, ABACUS & BALANCE SCALES
+            ===================================================================== */}
+        {areaId === 'workshop' && (
+          <WorkshopMachinery
+            entity={entity}
+            isNearby={isNearby}
+          />
+        )}
+
+        {/* =====================================================================
+            AREA 7: THƯ VIỆN CỔ (ANCIENT LIBRARY - NGỮ PHÁP)
+            ANCIENT TOMES, GLOWING RUNES & BLINKING SCHOLAR OWL
+            ===================================================================== */}
+        {areaId === 'library' && (
+          <GrammarLibraryTome
             entity={entity}
             isNearby={isNearby}
           />

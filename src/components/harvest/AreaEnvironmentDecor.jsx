@@ -301,5 +301,106 @@ export default function AreaEnvironmentDecor({ areaId = 'orchard' }) {
     );
   }
 
+  // 6. WORKSHOP: WINDMILL TOWER, BLUEPRINT BENCH & STEAM PIPES (TOÁN TƯ DUY)
+  if (areaId === 'workshop') {
+    return (
+      <div className="absolute inset-0 pointer-events-none select-none z-5">
+        
+        {/* Windmill Tower (Top-Right) */}
+        <div className="absolute top-4 right-6 flex flex-col items-center">
+          <svg className="w-22 h-24 filter drop-shadow-xl" viewBox="0 0 88 96">
+            {/* Stone Windmill Body */}
+            <polygon points="34,28 54,28 62,84 26,84" fill="#663931" stroke="#45283c" strokeWidth="2.5" />
+            <polygon points="37,30 51,30 58,80 30,80" fill="#8f563b" />
+            {/* Conical Roof */}
+            <polygon points="44,8 28,28 60,28" fill="#d9911e" stroke="#45283c" strokeWidth="2" />
+            {/* Center Hub */}
+            <circle cx="44" cy="38" r="4" fill="#d9911e" stroke="#45283c" strokeWidth="1.5" />
+            {/* 4 Rotating Windmill Blades */}
+            <g className="animate-spin-slow" style={{ transformOrigin: '44px 38px' }}>
+              <rect x="42" y="14" width="4" height="24" fill="#e8cfa6" stroke="#45283c" strokeWidth="1" />
+              <rect x="42" y="38" width="4" height="24" fill="#e8cfa6" stroke="#45283c" strokeWidth="1" />
+              <rect x="20" y="36" width="24" height="4" fill="#e8cfa6" stroke="#45283c" strokeWidth="1" />
+              <rect x="44" y="36" width="24" height="4" fill="#e8cfa6" stroke="#45283c" strokeWidth="1" />
+            </g>
+          </svg>
+          <span className="font-pixel text-[7.5px] text-[#2c1b18] -mt-1 border-2 border-[#45283c] bg-[#e8cfa6] px-1 font-bold">Cối Xay Gió ⚙️</span>
+        </div>
+
+        {/* Blueprint Workbench (Bottom-Left) */}
+        <div className="absolute bottom-8 left-6 flex flex-col items-center">
+          <svg className="w-18 h-14 filter drop-shadow-md" viewBox="0 0 72 56">
+            {/* Heavy Workbench Table */}
+            <rect x="6" y="24" width="60" height="12" fill="#8f563b" stroke="#45283c" strokeWidth="2" />
+            <rect x="12" y="36" width="6" height="16" fill="#663931" />
+            <rect x="54" y="36" width="6" height="16" fill="#663931" />
+            {/* Blue Blueprint Scroll unrolled */}
+            <rect x="14" y="20" width="34" height="10" fill="#243b35" stroke="#45283c" strokeWidth="1" />
+            <line x1="18" y1="24" x2="42" y2="24" stroke="#e8cfa6" strokeWidth="1" strokeDasharray="2 1" />
+            <line x1="18" y1="27" x2="38" y2="27" stroke="#e8cfa6" strokeWidth="1" strokeDasharray="3 1" />
+            {/* Brass Caliper on desk */}
+            <polygon points="52,22 58,16 62,22" fill="#d9911e" stroke="#45283c" strokeWidth="0.8" />
+          </svg>
+          <span className="font-pixel text-[7.5px] text-[#2c1b18] -mt-1 border-2 border-[#45283c] bg-[#e8cfa6] px-1 font-bold">Bản Vẽ Cơ Khí</span>
+        </div>
+
+      </div>
+    );
+  }
+
+  // 7. LIBRARY: GRAND BOOKSHELVES, PARCHMENT ARCHIVE & ANTIQUE GLOBE (NGỮ PHÁP)
+  if (areaId === 'library') {
+    return (
+      <div className="absolute inset-0 pointer-events-none select-none z-5">
+        
+        {/* Grand Mahogany Bookshelf (Top-Right) */}
+        <div className="absolute top-4 right-6 flex flex-col items-center">
+          <svg className="w-22 h-24 filter drop-shadow-xl" viewBox="0 0 88 96">
+            {/* Bookshelf Carved Frame */}
+            <rect x="8" y="12" width="72" height="76" fill="#45283c" stroke="#2c1b18" strokeWidth="3" />
+            <rect x="12" y="16" width="64" height="68" fill="#663931" />
+            {/* 3 Shelves */}
+            <line x1="8" y1="36" x2="80" y2="36" stroke="#8f563b" strokeWidth="3" />
+            <line x1="8" y1="58" x2="80" y2="58" stroke="#8f563b" strokeWidth="3" />
+            {/* Colorful Book Spines on Shelf 1 */}
+            {[16, 23, 31, 38, 46, 54, 62].map((bx, i) => (
+              <rect key={i} x={bx} y="20" width="5.5" height="16" fill={i % 3 === 0 ? '#b93b2a' : i % 3 === 1 ? '#4b692f' : '#d9911e'} stroke="#2c1b18" strokeWidth="1" />
+            ))}
+            {/* Books on Shelf 2 */}
+            {[16, 25, 33, 41, 52, 60].map((bx, i) => (
+              <rect key={i} x={bx} y="42" width="6.5" height="16" fill={i % 2 === 0 ? '#e8cfa6' : '#8f563b'} stroke="#2c1b18" strokeWidth="1" />
+            ))}
+            {/* Books on Shelf 3 */}
+            {[18, 28, 38, 48, 58].map((bx, i) => (
+              <rect key={i} x={bx} y="64" width="8" height="14" fill={i % 2 === 0 ? '#45283c' : '#d9911e'} stroke="#2c1b18" strokeWidth="1" />
+            ))}
+          </svg>
+          <span className="font-pixel text-[7.5px] text-[#2c1b18] -mt-1 border-2 border-[#45283c] bg-[#e8cfa6] px-1 font-bold">Thư Viện Oxford 📜</span>
+        </div>
+
+        {/* Antique Globe & Scroll Stacks (Bottom-Left) */}
+        <div className="absolute bottom-8 left-6 flex flex-col items-center">
+          <svg className="w-18 h-16 filter drop-shadow-md" viewBox="0 0 72 64">
+            {/* Wooden Pedestal */}
+            <rect x="22" y="44" width="28" height="14" fill="#8f563b" stroke="#45283c" strokeWidth="2" />
+            <rect x="32" y="32" width="8" height="14" fill="#663931" />
+            {/* Brass Globe Arc */}
+            <circle cx="36" cy="24" r="14" fill="none" stroke="#d9911e" strokeWidth="2" />
+            {/* Celestial World Globe */}
+            <circle cx="36" cy="24" r="11" fill="#243b35" stroke="#45283c" strokeWidth="1.5" />
+            <path d="M 28 20 Q 36 28 44 22" stroke="#4b692f" strokeWidth="2.5" fill="none" />
+            
+            {/* Stack of Parchment Scrolls (Right) */}
+            <ellipse cx="58" cy="50" rx="8" ry="4" fill="#e8cfa6" stroke="#45283c" strokeWidth="1.2" />
+            <ellipse cx="58" cy="44" rx="8" ry="4" fill="#e8cfa6" stroke="#45283c" strokeWidth="1.2" />
+            <circle cx="62" cy="44" r="1.5" fill="#b93b2a" /> {/* Wax seal */}
+          </svg>
+          <span className="font-pixel text-[7.5px] text-[#2c1b18] -mt-1 border-2 border-[#45283c] bg-[#e8cfa6] px-1 font-bold">Văn Khế Cổ</span>
+        </div>
+
+      </div>
+    );
+  }
+
   return null;
 }
