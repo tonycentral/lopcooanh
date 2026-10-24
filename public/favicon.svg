@@ -1,3 +1,80 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <image href="data:image/png;base64,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" width="64" height="64" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" shape-rendering="crispEdges">
+  <defs>
+    <filter id="pixelShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="1" stdDeviation="0" flood-color="#2D1708" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <!-- 1. Retro Pixel Rounded Squircle Badge -->
+  <rect x="1" y="1" width="30" height="30" rx="7" fill="#F59E0B" />
+  <rect x="2" y="2" width="28" height="28" rx="6" fill="#FFF8E7" stroke="#3E200C" stroke-width="1.5" />
+  
+  <!-- Subtle warm ground shadow for chicken -->
+  <ellipse cx="16" cy="26" rx="9" ry="2.5" fill="#E2D4BC" shape-rendering="auto" />
+
+  <!-- 2. PIXEL ART CHICKEN (HARVEST TOWN / STARDEW STYLE) -->
+  
+  <!-- Red Comb (Mào Gà Đỏ) -->
+  <rect x="13" y="5" width="2" height="3" fill="#D32F2F" />
+  <rect x="15" y="4" width="3" height="4" fill="#E53935" />
+  <rect x="18" y="5" width="2" height="3" fill="#EF5350" />
+  <rect x="15" y="4" width="1" height="1" fill="#FFCDD2" /> <!-- highlight -->
+
+  <!-- Chicken Head & Body Outline (Dark Charcoal/Brown Pixel Border) -->
+  <!-- Tail Outline -->
+  <rect x="6" y="11" width="2" height="3" fill="#2E180A" />
+  <rect x="5" y="13" width="2" height="4" fill="#2E180A" />
+  <rect x="7" y="10" width="3" height="2" fill="#2E180A" />
+  <rect x="6" y="17" width="2" height="4" fill="#2E180A" />
+
+  <!-- Head Outline -->
+  <rect x="12" y="7" width="7" height="2" fill="#2E180A" />
+  <rect x="19" y="8" width="2" height="4" fill="#2E180A" />
+  <rect x="11" y="8" width="2" height="6" fill="#2E180A" />
+
+  <!-- Beak & Wattle Outline -->
+  <rect x="20" y="10" width="4" height="3" fill="#2E180A" />
+  <rect x="19" y="13" width="2" height="3" fill="#2E180A" />
+
+  <!-- Body Bottom Outline -->
+  <rect x="8" y="21" width="13" height="2" fill="#2E180A" />
+
+  <!-- Feet (Chân Gà) -->
+  <rect x="11" y="23" width="2" height="3" fill="#E65100" />
+  <rect x="10" y="25" width="4" height="1.5" fill="#FFA000" />
+  <rect x="17" y="23" width="2" height="3" fill="#E65100" />
+  <rect x="16" y="25" width="4" height="1.5" fill="#FFA000" />
+
+  <!-- Main Body Fill (White & Cream Plump Feathers) -->
+  <rect x="13" y="8" width="6" height="5" fill="#FFFFFF" />
+  <rect x="8" y="12" width="12" height="9" fill="#FFFFFF" />
+  <rect x="7" y="13" width="2" height="4" fill="#FFFFFF" />
+
+  <!-- Feather Shadow / Depth (Cream & Warm Gray) -->
+  <rect x="8" y="18" width="12" height="3" fill="#EFEBE9" />
+  <rect x="9" y="20" width="11" height="1" fill="#D7CCC8" />
+  <rect x="6" y="14" width="1" height="2" fill="#EFEBE9" />
+
+  <!-- Wing (Cánh Gà) -->
+  <rect x="10" y="14" width="6" height="4" fill="#FAFAFA" stroke="#D7CCC8" stroke-width="1" />
+  <rect x="9" y="15" width="2" height="3" fill="#E0E0E0" />
+  <rect x="12" y="16" width="3" height="1" fill="#BDBDBD" />
+
+  <!-- Eye (Mắt Tròn Long Lanh) -->
+  <rect x="16" y="9" width="2" height="2" fill="#212121" />
+  <rect x="16" y="9" width="1" height="1" fill="#FFFFFF" /> <!-- eye gleam -->
+
+  <!-- Cute Rosy Cheek (Má Hồng Dễ Thương) -->
+  <rect x="14" y="11" width="2" height="1.5" fill="#FF8A80" opacity="0.8" />
+
+  <!-- Yellow Beak Fill (Mỏ Vàng) -->
+  <rect x="20" y="11" width="3" height="1.5" fill="#FFB300" />
+  <rect x="20" y="12" width="2" height="1" fill="#FF8F00" />
+
+  <!-- Red Wattle Fill (Yếm Đỏ) -->
+  <rect x="18" y="13" width="2" height="2" fill="#E53935" />
+  <rect x="18" y="14" width="1" height="1" fill="#C62828" />
+
+  <!-- Little Sparkle (Lấp Lánh) -->
+  <polygon points="26,5 27,7 29,7 27.5,8.5 28,10.5 26,9 24,10.5 24.5,8.5 23,7 25,7" fill="#FFD54F" />
 </svg>
