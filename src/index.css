@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "nes.css/css/nes.min.css";
+@import "pixelarticons/fonts/pixelart-icons-font.css";
 
 /* 1. Font CapheVietnam (Dành riêng cho Title lớn, Brand, Logo) */
 @font-face {
@@ -312,179 +314,343 @@
 
 /* =========================================================================
    HARVEST TOWN RETRO PIXEL ART SYSTEM (AUTHENTIC 16-BIT RPG AESTHETIC)
+   STRICT TECHNICAL RULES:
+   1. Typography: 'Press Start 2P', monospace
+   2. CSS Rendering: image-rendering: pixelated on all images, sprites, borders
+   3. Uniform Retro Warm Palette:
+      - Wood: #8f563b, #663931, #45283c
+      - Paper/UI Background: #d7b594, #e8cfa6
+      - Text: #2c1b18
+      - Accent Green: #4b692f
+   4. Pixel Scale Grid: 2px/4px solid borders, fixed 48x48px / 64x64px slots
    ========================================================================= */
 
-.font-pixel {
-  font-family: 'Pixelify Sans', 'Silkscreen', monospace;
+/* Global Strict Pixel Rendering & Font */
+*, img, svg, canvas, .pixelated {
+  image-rendering: pixelated !important;
+  image-rendering: -moz-crisp-edges !important;
+  image-rendering: crisp-edges !important;
+}
+
+body, html, .font-pixel {
+  font-family: 'Press Start 2P', monospace !important;
   letter-spacing: 0.02em;
 }
 
-.font-pixel-alt {
-  font-family: 'Silkscreen', monospace;
-  letter-spacing: 0.05em;
-}
-
-/* 1. Authentic Retro Pixel Panel (Wood & Gold Trim) */
-.pixel-panel {
-  background: #3B2314;
-  color: #FFF8E7;
-  border: 4px solid #1E0F07;
-  box-shadow: 
-    inset 4px 4px 0 #7A4B27,
-    inset -4px -4px 0 #211208,
-    0 8px 0 rgba(0, 0, 0, 0.4),
-    0 12px 20px rgba(0, 0, 0, 0.5);
-  image-rendering: pixelated;
-  position: relative;
-}
-
-/* 2. Cozy Harvest Almanac Parchment Book */
-.pixel-parchment {
-  background: #FFF5DD;
-  color: #2D1A0D;
-  border: 4px solid #4A2B11;
-  box-shadow: 
-    inset 4px 4px 0 #FFFDF5,
-    inset -4px -4px 0 #DFC99F,
-    0 6px 0 rgba(40, 20, 5, 0.35);
-  image-rendering: pixelated;
-}
-
-/* 3. Lush Emerald Town Garden Panel */
-.pixel-panel-emerald {
-  background: #1B4D27;
-  color: #E8F5E9;
-  border: 4px solid #0B2411;
-  box-shadow: 
-    inset 4px 4px 0 #2E7D32,
-    inset -4px -4px 0 #0E3016,
-    0 6px 0 rgba(0, 0, 0, 0.35);
-}
-
-/* 4. Pixel Buttons (3D Bevel with Push-Down Feedback) */
-.pixel-btn {
+i[class*="pixelart-icons-font-"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Pixelify Sans', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 8px 16px;
-  background: #8D5B32;
-  color: #FFF8E7;
-  border: 3px solid #231206;
+  line-height: 1;
+  font-size: inherit;
+  vertical-align: middle;
+}
+
+/* 1. Retro Warm Panels */
+/* Paper Panel: Parchment / Card / Modal Background */
+.rpg-panel-paper,
+.pixel-parchment {
+  background-color: #e8cfa6 !important;
+  color: #2c1b18 !important;
+  border: 4px solid #45283c !important;
   box-shadow: 
-    inset 3px 3px 0 #B98150,
-    inset -3px -3px 0 #573318,
-    0 4px 0 #180C04;
+    inset -4px -4px 0 #d7b594,
+    inset 4px 4px 0 #f6e6cd,
+    0 4px 0 #2c1b18 !important;
+  image-rendering: pixelated;
+}
+
+/* Wood Panel: Sidebar / Outer Frames */
+.rpg-panel-wood,
+.pixel-panel {
+  background-color: #663931 !important;
+  color: #e8cfa6 !important;
+  border: 4px solid #45283c !important;
+  box-shadow: 
+    inset -4px -4px 0 #45283c,
+    inset 4px 4px 0 #8f563b,
+    0 4px 0 #2c1b18 !important;
+  image-rendering: pixelated;
+}
+
+/* Wood Dark Container */
+.rpg-panel-wood-dark {
+  background-color: #45283c !important;
+  color: #e8cfa6 !important;
+  border: 4px solid #2c1b18 !important;
+  box-shadow: 
+    inset -4px -4px 0 #2c1b18,
+    inset 4px 4px 0 #663931 !important;
+  image-rendering: pixelated;
+}
+
+/* 2. Standardized Fixed Slots (48x48px & 64x64px) */
+.pixel-slot-48 {
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
+  background-color: #d7b594;
+  color: #2c1b18;
+  border: 4px solid #45283c;
+  box-shadow: 
+    inset -4px -4px 0 #a88365,
+    inset 4px 4px 0 #e8cfa6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  image-rendering: pixelated;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.pixel-slot-64 {
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px !important;
+  min-height: 64px !important;
+  max-width: 64px !important;
+  max-height: 64px !important;
+  background-color: #d7b594;
+  color: #2c1b18;
+  border: 4px solid #45283c;
+  box-shadow: 
+    inset -4px -4px 0 #a88365,
+    inset 4px 4px 0 #e8cfa6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  image-rendering: pixelated;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.pixel-slot-48.active,
+.pixel-slot-64.active {
+  background-color: #e8cfa6;
+  box-shadow: 
+    inset -4px -4px 0 #e8cfa6,
+    inset 4px 4px 0 #8f563b,
+    0 0 0 2px #4b692f;
+}
+
+/* Legacy .pixel-slot mapping to 48px */
+.pixel-slot {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  background-color: #d7b594;
+  border: 4px solid #45283c;
+  box-shadow: 
+    inset -4px -4px 0 #a88365,
+    inset 4px 4px 0 #e8cfa6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  image-rendering: pixelated;
+}
+
+.pixel-slot.active {
+  background-color: #e8cfa6;
+  box-shadow: 
+    inset -4px -4px 0 #e8cfa6,
+    inset 4px 4px 0 #8f563b,
+    0 0 0 2px #4b692f;
+}
+
+/* 3. Chunky Pixel RPG Buttons (4px solid #45283c & 4px/8px multiples) */
+.rpg-btn,
+.pixel-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  line-height: 1.4;
+  background-color: #8f563b;
+  color: #e8cfa6;
+  border: 4px solid #45283c;
+  box-shadow: 
+    inset -4px -4px 0 #663931,
+    inset 4px 4px 0 #ab6e4f,
+    0 4px 0 #2c1b18;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   cursor: pointer;
   user-select: none;
   transition: transform 0.05s ease, box-shadow 0.05s ease;
   image-rendering: pixelated;
+  box-sizing: border-box;
 }
 
+.rpg-btn:hover,
 .pixel-btn:hover {
-  filter: brightness(1.1);
+  background-color: #9d6043;
 }
 
+.rpg-btn:active,
 .pixel-btn:active {
   transform: translateY(4px);
   box-shadow: 
-    inset 3px 3px 0 #573318,
-    inset -3px -3px 0 #B98150,
-    0 0 0 #180C04;
+    inset 4px 4px 0 #663931,
+    inset -4px -4px 0 #ab6e4f,
+    0 0 0 #2c1b18;
 }
 
-.pixel-btn-gold {
-  background: #FFB300;
-  color: #2D1900;
-  border-color: #5D3700;
+/* Wood Dark Button */
+.rpg-btn-wood-dark {
+  background-color: #663931;
+  color: #e8cfa6;
+  border: 4px solid #45283c;
   box-shadow: 
-    inset 3px 3px 0 #FFE082,
-    inset -3px -3px 0 #C67C00,
-    0 4px 0 #3E2400;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+    inset -4px -4px 0 #45283c,
+    inset 4px 4px 0 #8f563b,
+    0 4px 0 #2c1b18;
 }
 
-.pixel-btn-gold:active {
+.rpg-btn-wood-dark:hover {
+  background-color: #754239;
+}
+
+.rpg-btn-wood-dark:active {
+  transform: translateY(4px);
   box-shadow: 
-    inset 3px 3px 0 #C67C00,
-    inset -3px -3px 0 #FFE082,
-    0 0 0 #3E2400;
+    inset 4px 4px 0 #45283c,
+    inset -4px -4px 0 #8f563b,
+    0 0 0 #2c1b18;
 }
 
+/* Green Action Button */
+.rpg-btn-green,
 .pixel-btn-green {
-  background: #4CAF50;
-  color: #FFFFFF;
-  border-color: #1B5E20;
+  background-color: #4b692f;
+  color: #ffffff;
+  border: 4px solid #45283c;
   box-shadow: 
-    inset 3px 3px 0 #81C784,
-    inset -3px -3px 0 #2E7D32,
-    0 4px 0 #0D3811;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    inset -4px -4px 0 #354d1f,
+    inset 4px 4px 0 #678f41,
+    0 4px 0 #2c1b18;
 }
 
+.rpg-btn-green:hover,
+.pixel-btn-green:hover {
+  background-color: #557735;
+}
+
+.rpg-btn-green:active,
 .pixel-btn-green:active {
+  transform: translateY(4px);
   box-shadow: 
-    inset 3px 3px 0 #2E7D32,
-    inset -3px -3px 0 #81C784,
-    0 0 0 #0D3811;
+    inset 4px 4px 0 #354d1f,
+    inset -4px -4px 0 #678f41,
+    0 0 0 #2c1b18;
 }
 
-.pixel-btn-blue {
-  background: #0288D1;
-  color: #FFFFFF;
-  border-color: #014165;
+/* Paper Button (Light UI) */
+.rpg-btn-paper {
+  background-color: #e8cfa6;
+  color: #2c1b18;
+  border: 4px solid #45283c;
   box-shadow: 
-    inset 3px 3px 0 #4FC3F7,
-    inset -3px -3px 0 #025785,
-    0 4px 0 #012940;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    inset -4px -4px 0 #d7b594,
+    inset 4px 4px 0 #f5e4cb,
+    0 4px 0 #2c1b18;
 }
 
-/* 5. Inventory & Tool Slots */
-.pixel-slot {
-  background: #D7CCC8;
-  border: 3px solid #3E2723;
-  box-shadow: 
-    inset 3px 3px 0 #8D6E63,
-    inset -3px -3px 0 #EFEBE9;
-  image-rendering: pixelated;
-  transition: all 0.1s ease;
+.rpg-btn-paper:hover {
+  background-color: #f1ddbd;
 }
 
-.pixel-slot.active {
-  background: #FFF9C4;
-  border-color: #FF6F00;
+.rpg-btn-paper:active {
+  transform: translateY(4px);
   box-shadow: 
-    inset 3px 3px 0 #FFD54F,
-    inset -3px -3px 0 #FF8F00,
-    0 0 8px rgba(255, 179, 0, 0.8);
+    inset 4px 4px 0 #d7b594,
+    inset -4px -4px 0 #f5e4cb,
+    0 0 0 #2c1b18;
 }
 
-/* 6. Farm Soil States */
+/* Gold Currency / Accent Button */
+.rpg-btn-gold,
+.pixel-btn-gold {
+  background-color: #d9911e;
+  color: #2c1b18;
+  border: 4px solid #45283c;
+  box-shadow: 
+    inset -4px -4px 0 #9e640b,
+    inset 4px 4px 0 #f5b958,
+    0 4px 0 #2c1b18;
+}
+
+.rpg-btn-gold:hover,
+.pixel-btn-gold:hover {
+  background-color: #e59f2e;
+}
+
+.rpg-btn-gold:active,
+.pixel-btn-gold:active {
+  transform: translateY(4px);
+  box-shadow: 
+    inset 4px 4px 0 #9e640b,
+    inset -4px -4px 0 #f5b958,
+    0 0 0 #2c1b18;
+}
+
+/* 4. NES.css Custom Skin (Strict Retro Warm Palette) */
+.nes-container.is-rounded,
+.nes-container {
+  background-color: #e8cfa6 !important;
+  color: #2c1b18 !important;
+  border-color: #45283c !important;
+  border-image-source: none !important;
+  border: 4px solid #45283c !important;
+  image-rendering: pixelated !important;
+}
+
+.nes-dialog {
+  background-color: #e8cfa6 !important;
+  color: #2c1b18 !important;
+  border: 4px solid #45283c !important;
+  image-rendering: pixelated !important;
+}
+
+.nes-badge span.is-primary {
+  background-color: #8f563b !important;
+  color: #e8cfa6 !important;
+}
+
+.nes-badge span.is-success {
+  background-color: #4b692f !important;
+  color: #ffffff !important;
+}
+
+/* 5. Farm Soil States (Multiples of 2px/4px) */
 .pixel-soil-healthy {
-  background: radial-gradient(circle at 40% 40%, #5D4037 30%, #3E2723 90%);
-  border: 3px solid #2B160C;
+  background: radial-gradient(circle at 40% 40%, #8f563b 30%, #663931 90%);
+  border: 4px solid #45283c;
   box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.08), inset -2px -2px 0 rgba(0, 0, 0, 0.4);
 }
 
 .pixel-soil-wet {
-  background: radial-gradient(circle at 40% 40%, #3E2723 30%, #21130D 90%);
-  border: 3px solid #140A06;
-  box-shadow: inset 3px 3px 0 rgba(79, 195, 247, 0.3), inset -2px -2px 0 rgba(0, 0, 0, 0.6);
+  background: radial-gradient(circle at 40% 40%, #663931 30%, #45283c 90%);
+  border: 4px solid #2c1b18;
+  box-shadow: inset 4px 4px 0 rgba(75, 105, 47, 0.35), inset -2px -2px 0 rgba(0, 0, 0, 0.6);
 }
 
 .pixel-soil-thirsty {
-  background: radial-gradient(circle at 40% 40%, #8D6E63 30%, #6D4C41 90%);
-  border: 3px solid #4E342E;
+  background: radial-gradient(circle at 40% 40%, #d7b594 30%, #8f563b 90%);
+  border: 4px solid #663931;
   box-shadow: inset 2px 2px 0 rgba(255, 235, 238, 0.15), inset -2px -2px 0 rgba(0, 0, 0, 0.3);
 }
 
 .pixel-soil-wilted {
-  background: radial-gradient(circle at 40% 40%, #795548 30%, #4E342E 90%);
-  border: 3px dashed #B71C1C;
-  box-shadow: inset 0 0 10px rgba(183, 28, 28, 0.4);
+  background: radial-gradient(circle at 40% 40%, #663931 30%, #45283c 90%);
+  border: 4px dashed #663931;
+  box-shadow: inset 0 0 10px rgba(69, 40, 60, 0.6);
 }
 
 /* 7. Pixel Animations */

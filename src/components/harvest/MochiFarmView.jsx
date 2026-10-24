@@ -71,7 +71,7 @@ export default function MochiFarmView({
     'Tony Nguyen';
 
   return (
-    <div className="h-full w-full max-h-screen overflow-hidden flex flex-row relative select-none font-sans text-[#FFF8E7] bg-[#140B05]">
+    <div className="h-full w-full max-h-screen overflow-hidden flex flex-row relative select-none font-pixel text-[#2c1b18] bg-[#45283c]">
       
       {/* =========================================================================
           LEFT SIDEBAR: COMPLETE CONTROLS, PROFILE, 2 CURRENCIES & 5 FARM AREAS

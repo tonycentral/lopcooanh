@@ -217,21 +217,21 @@ export default function HarvestAreaWorld({
   const isPond = activeArea.id === 'pond';
   const isPasture = activeArea.id === 'pasture';
 
-  let bgMainColor = '#2E6930';
-  if (isPaddy) bgMainColor = '#3A4D20';
-  if (isGreenhouse) bgMainColor = '#1B3D2F';
-  if (isPond) bgMainColor = '#0F384C';
-  if (isPasture) bgMainColor = '#422817';
+  let bgMainColor = '#4b692f'; // Strict Accent Green
+  if (isPaddy) bgMainColor = '#4b692f';
+  if (isGreenhouse) bgMainColor = '#354d1f';
+  if (isPond) bgMainColor = '#243b35';
+  if (isPasture) bgMainColor = '#663931';
 
   return (
     <div 
       ref={mapRef}
       onClick={handleGroundClick}
-      className="relative w-full h-full flex-1 min-h-0 overflow-hidden cursor-crosshair select-none font-sans"
+      className="relative w-full h-full flex-1 min-h-0 overflow-hidden cursor-crosshair select-none font-pixel"
       style={{
         backgroundColor: bgMainColor,
         backgroundImage: isOrchard
-          ? `radial-gradient(#3B7A3D 15%, transparent 16%), radial-gradient(#336E35 15%, transparent 16%)`
+          ? `radial-gradient(#354d1f 15%, transparent 16%), radial-gradient(#4b692f 15%, transparent 16%)`
           : undefined,
         backgroundSize: '40px 40px',
         backgroundPosition: '0 0, 20px 20px',
@@ -246,42 +246,42 @@ export default function HarvestAreaWorld({
       {/* Sunlit Mowing Lines / Lush Grass Checkerboard */}
       <div className="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(90deg,rgba(255,255,255,0.06)_50%,transparent_50%)] [background-size:60px_100%]" />
 
-      {/* Rustic Earthen & Cobblestone Farm Pathways */}
+      {/* Rustic Wood & Cobblestone Farm Pathways (Strict Retro Warm Palette) */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
         <defs>
           <linearGradient id="pathGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#795548" />
-            <stop offset="50%" stopColor="#8D6E63" />
-            <stop offset="100%" stopColor="#6D4C41" />
+            <stop offset="0%" stopColor="#8f563b" />
+            <stop offset="50%" stopColor="#a86e4e" />
+            <stop offset="100%" stopColor="#663931" />
           </linearGradient>
         </defs>
 
         {/* Row 1 Pathway */}
-        <path d="M 8 36 L 92 36" stroke="#4E342E" strokeWidth="6" strokeLinecap="round" />
-        <path d="M 8 36 L 92 36" stroke="url(#pathGrad)" strokeWidth="4.5" strokeLinecap="round" />
+        <path d="M 8 36 L 92 36" stroke="#45283c" strokeWidth="6" strokeLinecap="square" />
+        <path d="M 8 36 L 92 36" stroke="url(#pathGrad)" strokeWidth="4" strokeLinecap="square" />
         
         {/* Row 2 Pathway */}
-        <path d="M 8 70 L 92 70" stroke="#4E342E" strokeWidth="6" strokeLinecap="round" />
-        <path d="M 8 70 L 92 70" stroke="url(#pathGrad)" strokeWidth="4.5" strokeLinecap="round" />
+        <path d="M 8 70 L 92 70" stroke="#45283c" strokeWidth="6" strokeLinecap="square" />
+        <path d="M 8 70 L 92 70" stroke="url(#pathGrad)" strokeWidth="4" strokeLinecap="square" />
 
         {/* Center Connecting Avenue */}
-        <path d="M 48 24 L 48 82" stroke="#4E342E" strokeWidth="7" strokeLinecap="round" />
-        <path d="M 48 24 L 48 82" stroke="url(#pathGrad)" strokeWidth="5.5" strokeLinecap="round" />
+        <path d="M 48 24 L 48 82" stroke="#45283c" strokeWidth="7" strokeLinecap="square" />
+        <path d="M 48 24 L 48 82" stroke="url(#pathGrad)" strokeWidth="5" strokeLinecap="square" />
 
         {/* Left & Right Cross Paths */}
-        <path d="M 12 36 L 12 70" stroke="#6D4C41" strokeWidth="3" strokeLinecap="round" strokeDasharray="1 2" />
-        <path d="M 84 36 L 84 70" stroke="#6D4C41" strokeWidth="3" strokeLinecap="round" strokeDasharray="1 2" />
+        <path d="M 12 36 L 12 70" stroke="#663931" strokeWidth="3" strokeLinecap="square" strokeDasharray="2 2" />
+        <path d="M 84 36 L 84 70" stroke="#663931" strokeWidth="3" strokeLinecap="square" strokeDasharray="2 2" />
 
         {/* Cobblestone Stepping Stones along the path */}
-        <ellipse cx="21" cy="36" rx="1.5" ry="1" fill="#BCAAA4" opacity="0.8" />
-        <ellipse cx="39" cy="36" rx="1.8" ry="1.2" fill="#D7CCC8" opacity="0.9" />
-        <ellipse cx="57" cy="36" rx="1.6" ry="1" fill="#BCAAA4" opacity="0.8" />
-        <ellipse cx="75" cy="36" rx="1.5" ry="1.1" fill="#D7CCC8" opacity="0.8" />
+        <ellipse cx="21" cy="36" rx="1.5" ry="1" fill="#d7b594" opacity="0.9" />
+        <ellipse cx="39" cy="36" rx="1.8" ry="1.2" fill="#e8cfa6" opacity="0.9" />
+        <ellipse cx="57" cy="36" rx="1.6" ry="1" fill="#d7b594" opacity="0.9" />
+        <ellipse cx="75" cy="36" rx="1.5" ry="1.1" fill="#e8cfa6" opacity="0.9" />
         
-        <ellipse cx="21" cy="70" rx="1.5" ry="1.1" fill="#D7CCC8" opacity="0.8" />
-        <ellipse cx="39" cy="70" rx="1.6" ry="1" fill="#BCAAA4" opacity="0.8" />
-        <ellipse cx="57" cy="70" rx="1.7" ry="1.2" fill="#D7CCC8" opacity="0.9" />
-        <ellipse cx="75" cy="70" rx="1.5" ry="1" fill="#BCAAA4" opacity="0.8" />
+        <ellipse cx="21" cy="70" rx="1.5" ry="1.1" fill="#e8cfa6" opacity="0.9" />
+        <ellipse cx="39" cy="70" rx="1.6" ry="1" fill="#d7b594" opacity="0.9" />
+        <ellipse cx="57" cy="70" rx="1.7" ry="1.2" fill="#e8cfa6" opacity="0.9" />
+        <ellipse cx="75" cy="70" rx="1.5" ry="1" fill="#d7b594" opacity="0.9" />
       </svg>
 
       {/* Decorative Wildflower Patches */}
@@ -300,10 +300,10 @@ export default function HarvestAreaWorld({
 
       {/* Area Landmark Wood Sign (Top Center) */}
       <div className="absolute top-2 left-1/2 -translate-x-1/2 z-10 pointer-events-none text-center">
-        <div className="px-4 py-1.5 rounded-xl bg-[#2D160A]/95 border-2 border-amber-400 text-amber-100 font-pixel text-xs sm:text-sm font-bold shadow-2xl flex items-center gap-2">
-          <span className="text-xl filter drop-shadow">{activeArea.icon}</span>
-          <span className="tracking-wide text-amber-200">{activeArea.name}</span>
-          <span className="text-[10px] text-amber-300 px-2 py-0.2 rounded-md bg-[#1B0D06] border border-amber-500/60 uppercase">
+        <div className="rpg-panel-paper px-3 py-1 flex items-center gap-2">
+          <span className="text-base">{activeArea.icon}</span>
+          <span className="text-[10px] font-bold text-[#2c1b18]">{activeArea.name}</span>
+          <span className="text-[8px] font-bold px-1.5 py-0.5 border-2 border-[#45283c] bg-[#8f563b] text-[#e8cfa6] uppercase">
             {activeArea.skillTitle}
           </span>
         </div>
@@ -314,21 +314,21 @@ export default function HarvestAreaWorld({
         <button
           type="button"
           onClick={(e) => { e.stopPropagation(); sounds.playClick(); onOpenAlmanac(); }}
-          className="pixel-btn pixel-btn-gold font-pixel text-[10px] py-1 px-2.5 flex items-center gap-1 shadow-md cursor-pointer"
+          className="rpg-btn text-[9px] py-1 px-2 flex items-center gap-1 cursor-pointer"
           title="Mở Cuốn Niên Giám Học Sáng"
         >
-          <BookOpen className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">Almanac</span>
+          <i className="pixelart-icons-font-book-open text-xs"></i>
+          <span className="hidden sm:inline">ALMANAC</span>
         </button>
 
         <button
           type="button"
           onClick={(e) => { e.stopPropagation(); sounds.playClick(); onOpenStore(); }}
-          className="pixel-btn pixel-btn-wood font-pixel text-[10px] py-1 px-2.5 flex items-center gap-1 shadow-md cursor-pointer"
+          className="rpg-btn text-[9px] py-1 px-2 flex items-center gap-1 cursor-pointer"
           title="Tiệm Nông Cụ & Hồi Mana"
         >
-          <ShoppingBag className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">Cửa Hàng</span>
+          <i className="pixelart-icons-font-shopping-bag text-xs"></i>
+          <span className="hidden sm:inline">TIỆM</span>
         </button>
       </div>
 
@@ -404,9 +404,9 @@ export default function HarvestAreaWorld({
       {/* Proximity Action Banner (Floating at Bottom Center) */}
       {nearestEntity && (
         <aside className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 animate-bounce pointer-events-none">
-          <div className="px-4 py-1.5 rounded-xl bg-[#2D160A]/95 border-2 border-amber-400 text-amber-100 font-pixel text-xs font-bold shadow-2xl flex items-center gap-2">
-            <span className="text-sm">💧</span>
-            <span>Nhấn <kbd className="px-1.5 py-0.5 bg-amber-500 text-[#201007] rounded text-[10px] font-black border border-yellow-200">E</kbd> hoặc Click để Tưới / Chăm Sóc [{nearestEntity.name}]</span>
+          <div className="rpg-panel-paper px-3 py-1.5 text-[8.5px] font-bold flex items-center gap-2">
+            <span>💧</span>
+            <span>Nhấn <kbd className="px-1.5 py-0.5 border-2 border-[#45283c] bg-[#4b692f] text-white text-[8px] font-bold">E</kbd> hoặc Chạm để Chăm Sóc [{nearestEntity.name}]</span>
           </div>
         </aside>
       )}
@@ -420,42 +420,42 @@ export default function HarvestAreaWorld({
           6. MOBILE VIRTUAL CONTROLS (D-PAD & ACTION BUTTON)
           ========================================================================= */}
       <div className="sm:hidden absolute bottom-3 left-3 z-30 flex items-center gap-1 select-none pointer-events-auto">
-        <div className="relative w-24 h-24 bg-black/60 backdrop-blur-sm rounded-full border border-amber-500/40 p-1">
+        <div className="relative w-24 h-24 bg-[#45283c] border-4 border-[#2c1b18] p-1 shadow-lg">
           {/* UP */}
           <button
             type="button"
             onPointerDown={() => handleDpadDown('up')}
             onPointerUp={() => handleDpadUp('up')}
-            className="absolute top-1 left-1/2 -translate-x-1/2 w-7 h-7 bg-[#4A2610] active:bg-amber-500 rounded text-amber-200 flex items-center justify-center font-bold"
+            className="absolute top-1 left-1/2 -translate-x-1/2 w-7 h-7 bg-[#8f563b] active:bg-[#4b692f] border-2 border-[#45283c] text-[#e8cfa6] flex items-center justify-center font-bold text-xs"
           >
-            <ChevronUp className="w-4 h-4" />
+            ▲
           </button>
           {/* DOWN */}
           <button
             type="button"
             onPointerDown={() => handleDpadDown('down')}
             onPointerUp={() => handleDpadUp('down')}
-            className="absolute bottom-1 left-1/2 -translate-x-1/2 w-7 h-7 bg-[#4A2610] active:bg-amber-500 rounded text-amber-200 flex items-center justify-center font-bold"
+            className="absolute bottom-1 left-1/2 -translate-x-1/2 w-7 h-7 bg-[#8f563b] active:bg-[#4b692f] border-2 border-[#45283c] text-[#e8cfa6] flex items-center justify-center font-bold text-xs"
           >
-            <ChevronDown className="w-4 h-4" />
+            ▼
           </button>
           {/* LEFT */}
           <button
             type="button"
             onPointerDown={() => handleDpadDown('left')}
             onPointerUp={() => handleDpadUp('left')}
-            className="absolute left-1 top-1/2 -translate-y-1/2 w-7 h-7 bg-[#4A2610] active:bg-amber-500 rounded text-amber-200 flex items-center justify-center font-bold"
+            className="absolute left-1 top-1/2 -translate-y-1/2 w-7 h-7 bg-[#8f563b] active:bg-[#4b692f] border-2 border-[#45283c] text-[#e8cfa6] flex items-center justify-center font-bold text-xs"
           >
-            <ChevronLeft className="w-4 h-4" />
+            ◀
           </button>
           {/* RIGHT */}
           <button
             type="button"
             onPointerDown={() => handleDpadDown('right')}
             onPointerUp={() => handleDpadUp('right')}
-            className="absolute right-1 top-1/2 -translate-y-1/2 w-7 h-7 bg-[#4A2610] active:bg-amber-500 rounded text-amber-200 flex items-center justify-center font-bold"
+            className="absolute right-1 top-1/2 -translate-y-1/2 w-7 h-7 bg-[#8f563b] active:bg-[#4b692f] border-2 border-[#45283c] text-[#e8cfa6] flex items-center justify-center font-bold text-xs"
           >
-            <ChevronRight className="w-4 h-4" />
+            ▶
           </button>
         </div>
       </div>
@@ -465,9 +465,9 @@ export default function HarvestAreaWorld({
         <button
           type="button"
           onClick={triggerNearbyAction}
-          className="w-14 h-14 rounded-full pixel-btn-gold text-[#201007] font-pixel text-xs font-black shadow-2xl flex flex-col items-center justify-center active:scale-90"
+          className="w-14 h-14 rpg-btn-green text-[9px] font-bold flex flex-col items-center justify-center active:scale-95"
         >
-          <Sparkles className="w-5 h-5" />
+          <span className="text-sm">💧</span>
           <span>TƯỚI</span>
         </button>
       </div>

@@ -53,15 +53,15 @@ export default function AreaEntitySprite({
         <div className="absolute -inset-2 rounded-full border-2 border-amber-400 bg-amber-400/20 animate-ping pointer-events-none" />
       )}
 
-      {/* Health Status Alerts */}
+      {/* Health Status Alerts (Strict Retro Warm Palette) */}
       {isWilting && (
-        <div className="absolute -top-4 px-2 py-0.5 rounded-full bg-rose-950 border border-rose-500 text-rose-200 font-pixel text-[8px] animate-bounce z-20 shadow-lg flex items-center gap-1">
+        <div className="absolute -top-4 px-2 py-0.5 border-2 border-[#45283c] bg-[#663931] text-[#e8cfa6] font-pixel text-[8px] animate-bounce z-20 shadow-md flex items-center gap-1">
           <span>🥀</span>
           <span>HÉO ÚA</span>
         </div>
       )}
       {isThirsty && (
-        <div className="absolute -top-4 px-2 py-0.5 rounded-full bg-amber-950 border border-amber-400 text-amber-200 font-pixel text-[8px] animate-bounce z-20 shadow-lg flex items-center gap-1">
+        <div className="absolute -top-4 px-2 py-0.5 border-2 border-[#45283c] bg-[#8f563b] text-[#e8cfa6] font-pixel text-[8px] animate-bounce z-20 shadow-md flex items-center gap-1">
           <span>💧</span>
           <span>KHÁT NƯỚC</span>
         </div>
@@ -269,20 +269,20 @@ export default function AreaEntitySprite({
         )}
       </div>
 
-      {/* Rustic Wooden Garden Plaque */}
+      {/* Rustic Paper Garden Plaque (Strict Retro Warm Palette) */}
       <div className="mt-1 text-center pointer-events-none z-10">
-        <div className="px-2 py-0.5 rounded-md bg-[#2D160A]/95 border border-[#5E3219] shadow-md flex flex-col items-center">
-          <div className="font-pixel text-[8.5px] sm:text-[9.5px] text-amber-200 font-bold tracking-wide truncate max-w-[105px]">
+        <div className="px-2 py-0.5 border-2 border-[#45283c] bg-[#e8cfa6] text-[#2c1b18] shadow-md flex flex-col items-center">
+          <div className="font-pixel text-[8px] sm:text-[9px] font-bold tracking-wide truncate max-w-[105px]">
             {name}
           </div>
-          <div className="flex items-center gap-1 text-[7.5px] font-pixel leading-none mt-0.5">
-            <span className="text-amber-400 font-black">
+          <div className="flex items-center gap-1 text-[7px] font-pixel leading-none mt-0.5">
+            <span className="text-[#d9911e] font-bold">
               {'★'.repeat(level)}{'☆'.repeat(5 - level)}
             </span>
-            <span className={`text-[7px] font-bold ${
-              isWilting ? 'text-rose-400' : isThirsty ? 'text-amber-400' : 'text-emerald-400'
+            <span className={`font-bold ${
+              isWilting ? 'text-[#663931]' : isThirsty ? 'text-[#8f563b]' : 'text-[#4b692f]'
             }`}>
-              {isWilting ? 'Héo úa' : isThirsty ? 'Khát' : 'Tươi tốt'}
+              {isWilting ? 'Héo' : isThirsty ? 'Khát' : 'Tươi'}
             </span>
           </div>
         </div>

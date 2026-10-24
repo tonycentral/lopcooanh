@@ -364,26 +364,32 @@ export default function AreaTopicPracticeModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm animate-fade-in font-sans">
-      <div className="pixel-panel max-w-xl w-full bg-[#2A160A] text-[#FFF8E7] border-4 border-[#140804] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-xs animate-fade-in font-pixel select-none">
+      <div 
+        className="rpg-panel-paper max-w-xl w-full flex flex-col max-h-[92vh] overflow-hidden"
+        style={{
+          boxShadow: 'inset -4px -4px 0 #d7b594, inset 4px 4px 0 #f6e6cd, 0 8px 0 #2c1b18'
+        }}
+      >
         
-        {/* Header Bar */}
-        <div className="bg-[#1A0B04] px-4 py-3 border-b-2 border-[#4A2610] flex items-center justify-between shrink-0">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#3E1F0C] border-2 border-amber-500/80 flex items-center justify-center text-xl shadow-inner">
-              {entity.topicIcon || '🌱'}
+        {/* Header Bar (Wood Frame) */}
+        <div className="bg-[#663931] text-[#e8cfa6] px-3 py-2 border-b-4 border-[#45283c] flex items-center justify-between shrink-0">
+          <div className="flex items-center gap-2.5">
+            {/* Standardized 48x48px Slot */}
+            <div className="pixel-slot-48 shrink-0">
+              <span className="text-xl">{entity.topicIcon || '🌱'}</span>
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-pixel text-xs sm:text-sm font-bold text-amber-300">
+                <span className="text-[11px] sm:text-xs font-bold text-[#e8cfa6]">
                   {entity.name}
                 </span>
-                <span className="px-1.5 py-0.2 rounded bg-amber-500/20 border border-amber-500/60 text-amber-200 text-[10px] font-pixel">
-                  Cấp {entity.level}/5
+                <span className="px-1 py-0.5 border-2 border-[#45283c] bg-[#45283c] text-[#e8cfa6] text-[7px] font-bold">
+                  CẤP {entity.level}/5
                 </span>
               </div>
-              <p className="text-[11px] text-amber-200/70">
-                {activeArea?.name} • Kỹ Năng {activeArea?.skillName} ({activeArea?.skillTitle})
+              <p className="text-[8px] text-[#d7b594] mt-0.5">
+                {activeArea?.name} • KỸ NĂNG {activeArea?.skillName.toUpperCase()}
               </p>
             </div>
           </div>
@@ -391,86 +397,87 @@ export default function AreaTopicPracticeModal({
           <button
             type="button"
             onClick={handleClose}
-            className="p-1.5 rounded-lg bg-[#3E1F0C] hover:bg-[#5D2E12] border border-[#6E3716] text-amber-300 transition cursor-pointer"
+            className="rpg-btn-wood-dark p-1 text-[8px] cursor-pointer"
+            title="Đóng"
           >
-            <X className="w-4 h-4" />
+            <i className="pixelart-icons-font-close text-sm"></i>
           </button>
         </div>
 
         {/* Modal Body */}
-        <div className="p-4 sm:p-6 overflow-y-auto space-y-4">
+        <div className="p-3 sm:p-4 overflow-y-auto space-y-3">
           
           {/* SUCCESS SCREEN */}
           {isFinished && rewardResult ? (
-            <div className="text-center py-4 space-y-4 animate-fade-in">
-              <div className="inline-block p-4 rounded-full bg-emerald-950/80 border-2 border-emerald-400 text-emerald-300 animate-bounce shadow-lg">
-                <Sparkles className="w-10 h-10" />
+            <div className="text-center py-2 space-y-3 animate-fade-in">
+              <div className="inline-block p-3 border-4 border-[#45283c] bg-[#4b692f] text-white animate-bounce shadow-md">
+                <i className="pixelart-icons-font-check text-2xl"></i>
               </div>
 
               <div>
-                <h3 className="font-pixel text-lg sm:text-xl font-bold text-amber-300">
+                <h3 className="text-xs sm:text-sm font-bold text-[#2c1b18]">
                   {rewardResult.leveledUp ? '🎉 NÂNG CẤP THÀNH CÔNG!' : '🌿 CHĂM SÓC THÀNH CÔNG!'}
                 </h3>
-                <p className="text-xs sm:text-sm text-amber-100/80 mt-1">
+                <p className="text-[8px] sm:text-[9px] text-[#663931] mt-1 leading-relaxed">
                   {entity.name} đã được hấp thụ dinh dưỡng tri thức và phục hồi trạng thái xanh tốt!
                 </p>
               </div>
 
               {/* Reward Cards (Strict 2 Currencies: Tiền 🪙 & Mana 🔮) */}
               <div className="grid grid-cols-3 gap-2 max-w-sm mx-auto">
-                <div className="bg-[#1B0D05] border-2 border-amber-500/70 rounded-xl p-2.5 flex flex-col items-center">
-                  <span className="text-xl">🪙</span>
-                  <span className="font-pixel text-sm font-bold text-amber-300">+{rewardResult.goldGain || 35}</span>
-                  <span className="text-[10px] text-amber-200/60 font-medium">Tiền Vàng</span>
+                <div className="border-4 border-[#45283c] bg-[#d7b594] p-2 flex flex-col items-center">
+                  <i className="pixelart-icons-font-coins text-lg text-[#d9911e]"></i>
+                  <span className="text-[10px] font-bold text-[#2c1b18] mt-0.5">+{rewardResult.goldGain || 35}</span>
+                  <span className="text-[7px] text-[#663931] font-bold">TIỀN</span>
                 </div>
 
-                <div className="bg-[#1B0D05] border-2 border-purple-500/70 rounded-xl p-2.5 flex flex-col items-center">
-                  <span className="text-xl">🔮</span>
-                  <span className="font-pixel text-sm font-bold text-purple-300">+{rewardResult.manaRestored || 25}</span>
-                  <span className="text-[10px] text-purple-200/60 font-medium">Mana</span>
+                <div className="border-4 border-[#45283c] bg-[#d7b594] p-2 flex flex-col items-center">
+                  <i className="pixelart-icons-font-zap text-lg text-[#663931]"></i>
+                  <span className="text-[10px] font-bold text-[#2c1b18] mt-0.5">+{rewardResult.manaRestored || 25}</span>
+                  <span className="text-[7px] text-[#663931] font-bold">MANA</span>
                 </div>
 
-                <div className="bg-[#1B0D05] border-2 border-emerald-500/70 rounded-xl p-2.5 flex flex-col items-center">
-                  <span className="text-xl">⭐</span>
-                  <span className="font-pixel text-sm font-bold text-emerald-300">+{rewardResult.expGain || 40}</span>
-                  <span className="text-[10px] text-emerald-200/60 font-medium">Kinh Nghiệm</span>
+                <div className="border-4 border-[#45283c] bg-[#d7b594] p-2 flex flex-col items-center">
+                  <span className="text-lg">⭐</span>
+                  <span className="text-[10px] font-bold text-[#2c1b18] mt-0.5">+{rewardResult.expGain || 40}</span>
+                  <span className="text-[7px] text-[#663931] font-bold">EXP</span>
                 </div>
               </div>
 
               {/* Status Update Banner */}
-              <div className="p-3 bg-emerald-900/40 border border-emerald-500/50 rounded-xl text-left flex items-center gap-3">
-                <div className="text-2xl">🌱</div>
-                <div className="text-xs text-emerald-200">
-                  <div className="font-bold text-emerald-300">Trạng Thái: Khỏe Mạnh & Xanh Tốt</div>
-                  <div className="text-[11px] text-emerald-200/80">Luyện tập đều đặn giúp cây không bị héo úa và sản sinh tài nguyên liên tục!</div>
+              <div className="p-2 border-2 border-[#45283c] bg-[#d7b594] text-left flex items-center gap-2">
+                <div className="text-xl">🌱</div>
+                <div className="text-[8px] text-[#2c1b18] leading-tight">
+                  <div className="font-bold text-[#4b692f]">Trạng Thái: Khỏe Mạnh & Xanh Tốt</div>
+                  <div className="text-[7.5px] text-[#663931] mt-0.5">Luyện tập đều đặn giúp cây không bị héo úa và sản sinh tài nguyên liên tục!</div>
                 </div>
               </div>
 
               <button
                 type="button"
                 onClick={handleClose}
-                className="pixel-btn-gold w-full py-3 text-sm font-pixel font-bold text-[#2A160A] rounded-xl shadow-lg cursor-pointer transition active:scale-95"
+                className="rpg-btn-gold w-full py-2.5 text-[9px] font-bold cursor-pointer"
               >
-                Tiếp Tục Canh Tác MochiFarm
+                TIẾP TỤC CANH TÁC MOCHIFARM
               </button>
             </div>
           ) : (
             /* ACTIVE QUESTION VIEW */
-            <div className="space-y-4">
+            <div className="space-y-3">
               
               {/* Progress Tracker */}
-              <div className="flex items-center justify-between text-xs font-pixel text-amber-200/80 border-b border-[#4A2610] pb-2">
-                <span>Câu {currentIndex + 1} / {questionsList.length}</span>
-                <span className="flex items-center gap-1 text-emerald-400">
-                  <Check className="w-3.5 h-3.5" /> Đúng: {correctCount}
+              <div className="flex items-center justify-between text-[8px] text-[#663931] border-b-2 border-[#45283c] pb-1.5 font-bold">
+                <span>CÂU {currentIndex + 1} / {questionsList.length}</span>
+                <span className="flex items-center gap-1 text-[#4b692f]">
+                  <i className="pixelart-icons-font-check text-xs"></i> ĐÚNG: {correctCount}
                 </span>
               </div>
 
               {/* Reading Passage (if Reading skill) */}
               {currentQ.passage && (
-                <div className="p-3.5 rounded-xl bg-[#1A0B04] border border-amber-600/30 text-amber-100/90 text-xs sm:text-sm leading-relaxed max-h-36 overflow-y-auto">
-                  <div className="flex items-center gap-1.5 text-amber-400 font-bold mb-1 text-[11px] font-pixel">
-                    <BookOpen className="w-3.5 h-3.5" /> Đoạn Trích Học Thuật (Reading Passage):
+                <div className="p-2.5 border-2 border-[#45283c] bg-[#d7b594] text-[#2c1b18] text-[8px] sm:text-[9px] leading-relaxed max-h-32 overflow-y-auto font-sans">
+                  <div className="flex items-center gap-1 text-[#663931] font-bold mb-1 text-[8px] font-pixel">
+                    <i className="pixelart-icons-font-book-open text-xs"></i> ĐOẠN TRÍCH (READING):
                   </div>
                   {currentQ.passage}
                 </div>
@@ -478,39 +485,39 @@ export default function AreaTopicPracticeModal({
 
               {/* Vocabulary Word Highlight (if Vocab skill) */}
               {currentQ.word && (
-                <div className="p-3 rounded-xl bg-[#1A0B04] border border-amber-500/40 flex items-center justify-between">
+                <div className="p-2 border-2 border-[#45283c] bg-[#d7b594] flex items-center justify-between">
                   <div>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-lg font-bold text-amber-300 font-pixel">{currentQ.word}</span>
-                      <span className="text-xs text-amber-200/70 font-mono">{currentQ.ipa}</span>
+                      <span className="text-xs sm:text-sm font-bold text-[#2c1b18]">{currentQ.word}</span>
+                      <span className="text-[9px] text-[#663931] font-mono">{currentQ.ipa}</span>
                     </div>
-                    <span className="text-[10px] uppercase font-bold text-amber-400/80">{currentQ.partOfSpeech}</span>
+                    <span className="text-[7px] uppercase font-bold text-[#8f563b]">{currentQ.partOfSpeech}</span>
                   </div>
-                  <div className="p-2 rounded-lg bg-amber-500/20 text-amber-300 text-sm">
-                    🌾 Band 7.5+
+                  <div className="p-1 border-2 border-[#45283c] bg-[#4b692f] text-white text-[7.5px] font-bold">
+                    BAND 7.5+
                   </div>
                 </div>
               )}
 
               {/* Question Prompt */}
-              <div className="text-sm sm:text-base font-bold text-amber-100">
+              <div className="text-[9px] sm:text-[10px] font-bold text-[#2c1b18] leading-normal font-sans">
                 {currentQ.question}
               </div>
 
               {/* Options List */}
-              <div className="space-y-2">
+              <div className="space-y-1.5 font-sans">
                 {currentQ.options.map((opt, idx) => {
                   const isSelected = selectedOption === idx;
                   const isAnswerCorrect = idx === currentQ.correctIndex;
 
-                  let btnStyle = 'bg-[#1C0D05] hover:bg-[#381B0C] text-amber-100 border-[#4A2610]';
+                  let optionClass = 'rpg-btn-paper text-[#2c1b18]';
                   if (isAnswered) {
                     if (isAnswerCorrect) {
-                      btnStyle = 'bg-emerald-900/80 text-emerald-100 border-emerald-400 ring-2 ring-emerald-400/40';
+                      optionClass = 'rpg-btn-green text-white font-bold';
                     } else if (isSelected) {
-                      btnStyle = 'bg-rose-900/80 text-rose-100 border-rose-400 ring-2 ring-rose-400/40';
+                      optionClass = 'rpg-btn-wood-dark text-[#e8cfa6]';
                     } else {
-                      btnStyle = 'bg-[#140803] text-stone-500 border-[#2A160A] opacity-60';
+                      optionClass = 'rpg-btn-paper opacity-50 cursor-not-allowed';
                     }
                   }
 
@@ -520,14 +527,14 @@ export default function AreaTopicPracticeModal({
                       type="button"
                       disabled={isAnswered}
                       onClick={() => handleSelectOption(idx)}
-                      className={`w-full p-3 rounded-xl border-2 text-left text-xs sm:text-sm font-medium transition flex items-center justify-between gap-3 cursor-pointer ${btnStyle}`}
+                      className={`w-full p-2 border-4 border-[#45283c] text-left text-[9px] sm:text-[10px] transition flex items-center justify-between gap-2 cursor-pointer ${optionClass}`}
                     >
-                      <span>{opt}</span>
+                      <span className="flex-1">{opt}</span>
                       {isAnswered && isAnswerCorrect && (
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                        <i className="pixelart-icons-font-check text-sm text-[#ffffff] shrink-0"></i>
                       )}
                       {isAnswered && isSelected && !isAnswerCorrect && (
-                        <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
+                        <i className="pixelart-icons-font-close text-sm text-[#e8cfa6] shrink-0"></i>
                       )}
                     </button>
                   );
@@ -536,13 +543,13 @@ export default function AreaTopicPracticeModal({
 
               {/* Explanation & Next Step */}
               {isAnswered && (
-                <div className="space-y-3 pt-2 animate-fade-in">
-                  <div className={`p-3 rounded-xl border text-xs leading-relaxed ${
+                <div className="space-y-2 pt-1 animate-fade-in">
+                  <div className={`p-2 border-2 border-[#45283c] text-[8px] sm:text-[9px] leading-relaxed font-sans ${
                     isCorrect 
-                      ? 'bg-emerald-950/70 border-emerald-500/50 text-emerald-200' 
-                      : 'bg-rose-950/70 border-rose-500/50 text-rose-200'
+                      ? 'bg-[#4b692f]/20 text-[#2c1b18]' 
+                      : 'bg-[#663931]/20 text-[#2c1b18]'
                   }`}>
-                    <div className="font-bold flex items-center gap-1.5 mb-1 font-pixel text-[11px]">
+                    <div className="font-bold flex items-center gap-1 mb-0.5 font-pixel text-[8px]">
                       {isCorrect ? '✓ CHÍNH XÁC!' : '✕ CHƯA ĐÚNG!'}
                     </div>
                     {currentQ.explanation}
@@ -551,10 +558,10 @@ export default function AreaTopicPracticeModal({
                   <button
                     type="button"
                     onClick={handleNextQuestion}
-                    className="pixel-btn-gold w-full py-2.5 font-pixel text-xs sm:text-sm font-bold text-[#2A160A] rounded-xl flex items-center justify-center gap-2 shadow-md cursor-pointer transition active:scale-95"
+                    className="rpg-btn-gold w-full py-2 text-[9px] font-bold flex items-center justify-center gap-1 cursor-pointer"
                   >
-                    <span>{currentIndex + 1 < questionsList.length ? 'Câu Kế Tiếp' : 'Hoàn Tất & Nhận Thưởng'}</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <span>{currentIndex + 1 < questionsList.length ? 'CÂU KẾ TIẾP' : 'HOÀN TẤT & NHẬN THƯỞNG'}</span>
+                    <i className="pixelart-icons-font-arrow-right text-xs"></i>
                   </button>
                 </div>
               )}
