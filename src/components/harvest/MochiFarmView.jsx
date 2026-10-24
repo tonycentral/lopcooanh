@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import HarvestHUD from './HarvestHUD';
 import HarvestTownMap from './HarvestTownMap';
 import HarvestToolbar from './HarvestToolbar';
+import DailyAlmanacModal from './DailyAlmanacModal';
+import GrammarPastureModal from './GrammarPastureModal';
+import KitchenModal from './KitchenModal';
+import SeedVaultModal from './SeedVaultModal';
+import PestChallengeModal from './PestChallengeModal';
 import SeedPouchModal from './SeedPouchModal';
 import ShippingSettlementModal from './ShippingSettlementModal';
 import TownBulletinModal from './TownBulletinModal';
@@ -10,6 +15,7 @@ import GeneralStoreModal from './GeneralStoreModal';
 import BackpackModal from './BackpackModal';
 import RevivalQuestModal from '../farm/RevivalQuestModal';
 import FieldPracticeModal from './FieldPracticeModal';
+
 import { 
   getHarvestTownState, 
   saveHarvestTownState,
@@ -35,7 +41,14 @@ export default function MochiFarmView({
   const [harvestState, setHarvestState] = useState(() => getHarvestTownState(studentEmail));
   const [activeTool, setActiveTool] = useState('hoe');
 
-  // Modals state
+  // Modals state for Core Mechanics
+  const [isAlmanacOpen, setIsAlmanacOpen] = useState(false);
+  const [isPastureOpen, setIsPastureOpen] = useState(false);
+  const [isKitchenOpen, setIsKitchenOpen] = useState(false);
+  const [isSeedVaultOpen, setIsSeedVaultOpen] = useState(false);
+  const [selectedPestPlot, setSelectedPestPlot] = useState(null);
+
+  // Standard Farm Modals
   const [isSeedPouchOpen, setIsSeedPouchOpen] = useState(false);
   const [selectedPlotForSeed, setSelectedPlotForSeed] = useState(null);
   const [isShippingModalOpen, setIsShippingModalOpen] = useState(false);
@@ -54,7 +67,7 @@ export default function MochiFarmView({
   // 1. Gieo Hạt
   const handlePlant = (cropKey, plotId) => {
     if (!plotId) return;
-    const res = plantSeed(plotId, cropKey, studentEmail);
+    const res = plantSeed(plotId, cropKey, null, studentEmail);
     if (res.success) {
       sounds.playWater();
       setHarvestState(res.state);
@@ -68,6 +81,10 @@ export default function MochiFarmView({
     const res = harvestCrop(plotId, studentEmail);
     if (res.success) {
       setHarvestState(res.state);
+      if (res.isHeirloomMastered) {
+        sounds.playFanfare();
+        alert(`🌟 KỲ TÍCH HỌC THUẬT! Từ vựng trên cây đã đạt mốc Mastered (Heirloom) và được chuyển vào Hầm Hạt Giống (Seed Vault) để sinh lãi Gold mỗi sáng!`);
+      }
     }
   };
 
@@ -137,15 +154,19 @@ export default function MochiFarmView({
   const unclaimedCommissionsCount = harvestState.dailyCommissions?.filter(c => c.done && !c.claimed).length || 0;
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-[#E8F5E9]/50 overflow-y-auto pb-24 relative select-none font-sans">
+    <div className="flex-1 flex flex-col min-h-0 bg-[#254520] overflow-y-auto pb-24 relative select-none font-sans text-[#FFF8E7]">
       
-      {/* 1. RETRO HUD (Top Bar) */}
+      {/* 1. RETRO PIXEL HUD (Top Bar) */}
       <HarvestHUD
         state={harvestState}
         onOpenTargetBandModal={onOpenTargetBandModal}
         onOpenBackpack={() => setIsBackpackOpen(true)}
         onOpenStore={() => setIsStoreOpen(true)}
         onOpenBulletin={() => setIsBulletinOpen(true)}
+        onOpenAlmanac={() => setIsAlmanacOpen(true)}
+        onOpenPasture={() => setIsPastureOpen(true)}
+        onOpenKitchen={() => setIsKitchenOpen(true)}
+        onOpenSeedVault={() => setIsSeedVaultOpen(true)}
         currentUser={currentUser}
         onOpenAuthModal={onOpenAuthModal}
         onOpenSettingsModal={onOpenSettingsModal}
@@ -168,6 +189,11 @@ export default function MochiFarmView({
         onOpenStore={() => setIsStoreOpen(true)}
         onOpenMines={() => handleWaterWithPractice('reading')}
         onOpenFishing={() => handleWaterWithPractice('pronunciation')}
+        onOpenAlmanac={() => setIsAlmanacOpen(true)}
+        onOpenPasture={() => setIsPastureOpen(true)}
+        onOpenKitchen={() => setIsKitchenOpen(true)}
+        onOpenSeedVault={() => setIsSeedVaultOpen(true)}
+        onOpenPestChallenge={(plot) => setSelectedPestPlot(plot)}
         onClearWeeds={() => setIsRevivalOpen(true)}
       />
 
@@ -175,19 +201,72 @@ export default function MochiFarmView({
       <HarvestToolbar
         activeTool={activeTool}
         onSelectTool={setActiveTool}
+        onOpenAlmanac={() => setIsAlmanacOpen(true)}
+        onOpenKitchen={() => setIsKitchenOpen(true)}
+        onOpenPasture={() => setIsPastureOpen(true)}
         onOpenSeedPouch={() => {
           setSelectedPlotForSeed(null);
           setIsSeedPouchOpen(true);
         }}
         onOpenBackpack={() => setIsBackpackOpen(true)}
         onOpenBulletin={() => setIsBulletinOpen(true)}
-        onOpenFishing={() => handleWaterWithPractice('pronunciation')}
-        onOpenMines={() => handleWaterWithPractice('reading')}
         unclaimedQuestsCount={unclaimedCommissionsCount}
         shippingCount={harvestState.shippingBin?.length || 0}
       />
 
-      {/* MODALS */}
+      {/* =========================================================================
+          MODALS FOR CORE LEARNING SIMULATION MECHANICS
+          ========================================================================= */}
+
+      {/* Mechanic 1: Morning Almanac (The Study Gate) */}
+      <DailyAlmanacModal
+        isOpen={isAlmanacOpen}
+        onClose={() => setIsAlmanacOpen(false)}
+        almanacState={harvestState.almanac}
+        onAlmanacUpdated={(newState) => setHarvestState(newState)}
+        studentEmail={studentEmail}
+      />
+
+      {/* Mechanic 4: Animals as Grammar (Livestock Pasture) */}
+      <GrammarPastureModal
+        isOpen={isPastureOpen}
+        onClose={() => setIsPastureOpen(false)}
+        livestockState={harvestState.livestock}
+        onCareCompleted={(newState) => setHarvestState(newState)}
+        studentEmail={studentEmail}
+      />
+
+      {/* Mechanic 5: The Kitchen (Collocations & Chunks) */}
+      <KitchenModal
+        isOpen={isKitchenOpen}
+        onClose={() => setIsKitchenOpen(false)}
+        pantryState={harvestState.kitchenPantry}
+        onCookCompleted={(newState) => setHarvestState(newState)}
+        studentEmail={studentEmail}
+      />
+
+      {/* Mechanic 2: Permanent Seed Vault (Mastered Heirlooms) */}
+      <SeedVaultModal
+        isOpen={isSeedVaultOpen}
+        onClose={() => setIsSeedVaultOpen(false)}
+        seedVault={harvestState.seedVault}
+      />
+
+      {/* Mechanic 3: Pest Challenge (Targeted Error Remediation) */}
+      {selectedPestPlot && (
+        <PestChallengeModal
+          isOpen={!!selectedPestPlot}
+          onClose={() => setSelectedPestPlot(null)}
+          plot={selectedPestPlot}
+          onPestDefeated={(newState) => {
+            setHarvestState(newState);
+            setSelectedPestPlot(null);
+          }}
+          studentEmail={studentEmail}
+        />
+      )}
+
+      {/* Standard Modals */}
       <FieldPracticeModal
         isOpen={isFieldPracticeOpen}
         onClose={() => setIsFieldPracticeOpen(false)}
@@ -195,6 +274,7 @@ export default function MochiFarmView({
         plotId={practicePlotId}
         onCompletePractice={handleCompleteFieldPractice}
       />
+
       <SeedPouchModal
         isOpen={isSeedPouchOpen}
         onClose={() => {

@@ -191,22 +191,22 @@ export default function FieldPracticeModal({
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/65 backdrop-blur-xs animate-in fade-in select-none"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/75 backdrop-blur-xs animate-in fade-in select-none font-sans"
       onClick={onClose}
     >
       <div 
-        className="w-full max-w-lg harvest-panel p-5 sm:p-6 text-[#3E2723] space-y-4 border-4 border-[#795548] shadow-2xl"
+        className="w-full max-w-lg pixel-panel p-5 sm:p-6 text-[#FFE8B8] space-y-4 shadow-2xl"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b-2 border-[#8D6E63] pb-3">
+        <div className="flex items-center justify-between border-b-2 border-[#1E0F07] pb-3">
           <div className="flex items-center gap-2.5">
             <span className="text-2xl animate-bounce">💧</span>
             <div>
-              <h3 className="font-black text-sm sm:text-base text-[#2B2826] tracking-tight">
+              <h3 className="font-pixel text-sm sm:text-base text-amber-200 tracking-tight">
                 {titles[skillType] || '🌾 Thử Thách Chăm Sóc Nông Trại'}
               </h3>
-              <p className="text-xs text-[#5D4037]">
+              <p className="text-xs text-amber-100/70">
                 Hoàn thành bài tập để tưới nước, cộng Gold và giúp cây chín rộ!
               </p>
             </div>
@@ -215,7 +215,7 @@ export default function FieldPracticeModal({
           <button 
             type="button"
             onClick={onClose}
-            className="p-1 rounded-lg text-[#8D6E63] hover:text-[#3E2723] cursor-pointer"
+            className="p-1.5 rounded-lg bg-[#140804] text-amber-200 hover:text-white border border-[#4A2B11] cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -224,28 +224,28 @@ export default function FieldPracticeModal({
         {/* Finished Screen */}
         {isFinished ? (
           <div className="py-6 text-center space-y-4">
-            <div className="w-16 h-16 rounded-3xl bg-amber-100 border-2 border-amber-500 mx-auto flex items-center justify-center text-3xl shadow-sm">
+            <div className="w-16 h-16 rounded-2xl bg-amber-500/20 border-2 border-amber-400 mx-auto flex items-center justify-center text-3xl shadow-sm">
               ✨
             </div>
             <div>
-              <h4 className="text-lg font-black text-[#2B2826]">
-                Tưới Nước Cho Cây Trồng Thành Công!
+              <h4 className="text-base font-pixel font-bold text-amber-200">
+                TƯỚI NƯỚC CHO CÂY TRỒNG THÀNH CÔNG!
               </h4>
-              <p className="text-xs text-[#5D4037] mt-1">
-                Cây đã lớn thêm một giai đoạn, nhận ngay <b>Gold</b>, <b>EXP</b> và hồi phục <b>Thể lực</b>!
+              <p className="text-xs text-stone-300 mt-1">
+                Cây đã lớn thêm một nấc SRS, nhận ngay <b>Gold</b>, <b>EXP</b> và hồi phục <b>Thể lực</b>!
               </p>
             </div>
 
-            <div className="bg-amber-50 border-2 border-amber-300 rounded-2xl p-3 flex items-center justify-around text-xs font-black">
-              <span className="text-amber-900">🪙 +30 Gold</span>
-              <span className="text-emerald-800">✨ +60 EXP</span>
-              <span className="text-blue-800">⚡ +20 Stamina</span>
+            <div className="bg-[#24130A] border-2 border-[#5D3A1F] rounded-xl p-3 flex items-center justify-around text-xs font-pixel font-bold">
+              <span className="text-amber-300">🪙 +30 Gold</span>
+              <span className="text-cyan-300">✨ +60 EXP</span>
+              <span className="text-emerald-400">⚡ +20 Stamina</span>
             </div>
 
             <button
               type="button"
               onClick={onClose}
-              className="w-full py-3 harvest-btn-gold text-xs font-black tracking-wider cursor-pointer"
+              className="pixel-btn pixel-btn-gold font-pixel text-xs w-full py-2.5"
             >
               Về Nông Trại Thu Hoạch Nào! 🌾
             </button>
@@ -255,22 +255,22 @@ export default function FieldPracticeModal({
           <div className="space-y-4">
             
             {/* Step count */}
-            <div className="flex items-center justify-between text-xs font-black text-[#6D4C41]">
+            <div className="flex items-center justify-between text-xs font-pixel text-amber-300">
               <span>CÂU HỎI {currentStep + 1} / {questions.length}</span>
-              <span className="text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full font-bold">
+              <span className="text-cyan-300 bg-cyan-950/80 px-2 py-0.5 rounded font-bold border border-cyan-500/50">
                 Tưới nước +35% tiến độ
               </span>
             </div>
 
             {/* Prompt Card */}
-            <div className="bg-white/90 border-2 border-[#8D6E63] rounded-2xl p-4 shadow-sm space-y-2">
+            <div className="bg-[#24130A] border-2 border-[#5D3A1F] rounded-xl p-4 shadow-sm space-y-2">
               {currentQ.word && (
                 <div className="flex items-center gap-2">
-                  <span className="text-lg font-black text-amber-900">{currentQ.word}</span>
-                  {currentQ.ipa && <span className="text-xs text-stone-500 font-mono">[{currentQ.ipa}]</span>}
+                  <span className="text-lg font-pixel font-bold text-amber-200">{currentQ.word}</span>
+                  {currentQ.ipa && <span className="text-xs text-amber-300/70 font-mono">[{currentQ.ipa}]</span>}
                 </div>
               )}
-              <p className="text-xs sm:text-sm font-bold text-[#2B2826] leading-relaxed">
+              <p className="text-xs sm:text-sm font-semibold text-stone-200 leading-relaxed">
                 {currentQ.prompt}
               </p>
             </div>
@@ -291,17 +291,17 @@ export default function FieldPracticeModal({
                       onClick={() => handleSelectOption(idx)}
                       className={`w-full text-left p-3 rounded-xl border-2 text-xs sm:text-sm font-medium transition cursor-pointer flex items-center justify-between gap-2 ${
                         isTarget 
-                          ? 'bg-emerald-100 border-emerald-600 text-emerald-950 font-bold' 
+                          ? 'bg-emerald-950 border-emerald-500 text-emerald-200 font-bold' 
                           : isWrong 
-                            ? 'bg-red-100 border-red-500 text-red-950' 
+                            ? 'bg-rose-950 border-rose-500 text-rose-300 line-through' 
                             : isChosen 
-                              ? 'bg-amber-100 border-amber-600' 
-                              : 'bg-white/80 hover:bg-amber-50/80 border-[#A1887F] text-[#2B2826]'
+                              ? 'bg-[#4A2B11] border-amber-500' 
+                              : 'bg-[#24130A] hover:bg-[#3B2314] border-[#4A2B11] text-stone-200'
                       }`}
                     >
                       <span className="leading-snug">{opt}</span>
-                      {isTarget && <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />}
-                      {isWrong && <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />}
+                      {isTarget && <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />}
+                      {isWrong && <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />}
                     </button>
                   );
                 })}
@@ -310,7 +310,7 @@ export default function FieldPracticeModal({
               /* Text Input Mode for Grammar / Writing */
               <div className="space-y-2">
                 {currentQ.hint && (
-                  <p className="text-[11px] text-amber-900 bg-amber-100/70 p-2 rounded-lg border border-amber-300">
+                  <p className="text-[11px] text-amber-200 bg-amber-950/80 p-2 rounded-lg border border-amber-600/50">
                     💡 Gợi ý: {currentQ.hint}
                   </p>
                 )}
@@ -320,14 +320,14 @@ export default function FieldPracticeModal({
                   onChange={e => setTextInput(e.target.value)}
                   placeholder="Gõ câu trả lời hoặc câu sửa lỗi của bạn..."
                   rows={3}
-                  className="w-full p-3 rounded-xl border-2 border-[#8D6E63] bg-white text-xs sm:text-sm text-[#2B2826] focus:outline-none focus:border-amber-600"
+                  className="w-full p-3 rounded-xl border-2 border-[#5D3A1F] bg-[#24130A] text-xs sm:text-sm text-stone-200 focus:outline-none focus:border-amber-500"
                 />
                 {!isAnswered && (
                   <button
                     type="button"
                     onClick={handleTextSubmit}
                     disabled={!textInput.trim()}
-                    className="w-full py-2.5 harvest-btn-gold text-xs font-black cursor-pointer"
+                    className="pixel-btn pixel-btn-gold font-pixel text-xs w-full py-2"
                   >
                     Kiểm Tra Câu Này ✨
                   </button>
@@ -337,8 +337,8 @@ export default function FieldPracticeModal({
 
             {/* Explanation after answer */}
             {isAnswered && (
-              <div className="p-3 rounded-xl bg-amber-50 border border-amber-300 text-xs text-[#5D4037] leading-relaxed">
-                <span className="font-bold text-amber-950">Giải thích chi tiết: </span>
+              <div className="p-3 rounded-xl bg-[#24130A] border border-[#5D3A1F] text-xs text-stone-300 leading-relaxed">
+                <span className="font-bold text-amber-300">Giải thích chi tiết: </span>
                 {currentQ.explanation || currentQ.expected || 'Làm tốt lắm!'}
               </div>
             )}
@@ -348,7 +348,7 @@ export default function FieldPracticeModal({
               <button
                 type="button"
                 onClick={handleNext}
-                className="w-full py-3 harvest-btn-gold text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
+                className="pixel-btn pixel-btn-green font-pixel text-xs w-full py-2.5 flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
               >
                 <span>{currentStep < questions.length - 1 ? 'Câu Tiếp Theo' : 'Hoàn Tất & Tưới Nước Cho Cây'}</span>
                 <ArrowRight className="w-4 h-4" />

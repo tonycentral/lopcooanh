@@ -4,18 +4,21 @@ import {
   Volume2, 
   VolumeX, 
   Flame, 
+  Sun, 
+  CloudRain, 
+  Wind, 
+  Zap, 
+  Target, 
+  User, 
+  LogOut, 
+  Settings,
+  BookOpen,
+  Utensils,
   Award,
-  Sun,
-  CloudRain,
-  Wind,
-  Zap,
-  Target,
-  User,
-  LogOut,
-  Settings
+  Shield
 } from 'lucide-react';
 import { sounds } from '../../services/soundEffects';
-import { FARM_LEVELS_CONFIG } from '../../services/harvestTownService';
+import { FARM_LEVELS_CONFIG, FARM_TIERS } from '../../services/harvestTownService';
 
 export default function HarvestHUD({
   state,
@@ -23,6 +26,10 @@ export default function HarvestHUD({
   onOpenBackpack,
   onOpenStore,
   onOpenBulletin,
+  onOpenAlmanac,
+  onOpenPasture,
+  onOpenKitchen,
+  onOpenSeedVault,
   currentUser,
   onOpenAuthModal,
   onOpenSettingsModal,
@@ -55,33 +62,41 @@ export default function HarvestHUD({
   const currentSeason = seasonLabels[state.season] || seasonLabels.spring;
   const WeatherComp = currentSeason.weatherIcon;
 
-  // Stamina percentage & color
+  // Focus Points (FP: 0-100)
+  const fp = state.focusPoints ?? 80;
+  const maxFp = state.maxFocusPoints || 100;
+  const fpPercent = Math.min(100, Math.round((fp / maxFp) * 100));
+
+  // Stamina (0-100)
   const staminaPercent = Math.min(100, Math.round((state.stamina / state.maxStamina) * 100));
   const staminaColor = staminaPercent > 50 ? 'bg-emerald-500' : staminaPercent > 20 ? 'bg-amber-500' : 'bg-red-500';
 
+  const isAlmanacCompleted = state.almanac?.completedToday;
+  const currentTierInfo = FARM_TIERS.find(t => t.tier === state.farmTier) || FARM_TIERS[0];
+
   return (
-    <div className="w-full bg-[#3E2723] text-[#FFF8E1] border-b-4 border-[#271406] shadow-md select-none px-2 sm:px-4 py-2 shrink-0 z-30">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4 flex-wrap sm:flex-nowrap">
+    <div className="w-full bg-[#2D1A0D] text-[#FFF8E7] border-b-4 border-[#140804] shadow-xl select-none px-2 sm:px-4 py-2 shrink-0 z-30 font-sans">
+      <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4 flex-wrap lg:flex-nowrap">
         
-        {/* Left: Player Badge & Level Plate */}
+        {/* Left: Player Profile & Level Plate */}
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Farmer Pixel Avatar Frame */}
-          <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#5D4037] border-2 border-[#8D6E63] p-1 flex items-center justify-center shadow-inner shrink-0 group cursor-pointer hover:border-amber-400 transition">
+          <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#5D3A1F] border-2 border-amber-400 p-1 flex items-center justify-center shadow-inner shrink-0 group cursor-pointer hover:border-amber-300 transition">
             <span className="text-2xl filter drop-shadow">👨‍🌾</span>
-            <span className="absolute -bottom-1 -right-1 px-1.5 py-0.2 bg-amber-500 text-[#3E2723] text-[10px] font-black rounded-md border border-[#3E2723]">
+            <span className="absolute -bottom-1 -right-1 px-1.5 py-0.2 bg-amber-500 text-[#2D1A0D] text-[10px] font-pixel font-black rounded border border-[#140804]">
               L{state.level}
             </span>
           </div>
 
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <span className="font-extrabold text-xs sm:text-sm tracking-tight text-amber-200 truncate">
+              <span className="font-pixel text-xs sm:text-sm font-bold text-amber-200 truncate">
                 {state.farmerName || 'Mochi Farmer'}
               </span>
               <button
                 type="button"
                 onClick={onOpenTargetBandModal}
-                className="px-2 py-0.5 rounded-md bg-[#5D4037] hover:bg-[#6D4C41] border border-[#8D6E63] text-[10px] font-black text-amber-300 flex items-center gap-1 cursor-pointer transition"
+                className="px-2 py-0.5 rounded bg-[#4A2B11] hover:bg-[#6D421D] border border-amber-500/70 text-[10px] font-pixel font-bold text-amber-300 flex items-center gap-1 cursor-pointer transition shadow-xs"
                 title="Đổi Target Band IELTS"
               >
                 <Target className="w-2.5 h-2.5 text-amber-400" />
@@ -91,11 +106,11 @@ export default function HarvestHUD({
 
             {/* EXP Bar */}
             <div className="w-28 sm:w-36 mt-1">
-              <div className="flex justify-between items-center text-[9px] text-amber-100/80 mb-0.5 font-bold">
+              <div className="flex justify-between items-center text-[9px] text-amber-200/80 mb-0.5 font-bold">
                 <span className="truncate">{levelInfo.title}</span>
-                <span>{xpPercent}%</span>
+                <span className="font-pixel">{xpPercent}%</span>
               </div>
-              <div className="h-1.5 w-full bg-[#271406] rounded-full overflow-hidden border border-[#5D4037]">
+              <div className="h-1.5 w-full bg-[#140804] rounded-full overflow-hidden border border-[#5D3A1F]">
                 <div 
                   className="h-full bg-gradient-to-r from-amber-500 to-yellow-300 transition-all duration-300" 
                   style={{ width: `${xpPercent}%` }}
@@ -105,17 +120,42 @@ export default function HarvestHUD({
           </div>
         </div>
 
-        {/* Center: Stamina & Currencies (Gold & Gems) */}
-        <div className="flex items-center gap-2 sm:gap-4 order-3 sm:order-2 w-full sm:w-auto justify-between sm:justify-center border-t sm:border-t-0 pt-1.5 sm:pt-0 border-[#5D4037]">
-          {/* Stamina Energy Bar */}
-          <div className="flex items-center gap-1.5 bg-[#2A1810] px-2.5 py-1 rounded-xl border border-[#5D4037]" title="Thể lực: Tiêu hao khi làm vườn, hồi phục khi hoàn thành bài tập IELTS!">
-            <Zap className="w-3.5 h-3.5 text-amber-400 animate-pulse shrink-0" />
+        {/* Center: Dual Energy Meters (Focus Points FP + Stamina) & Quick Shortcuts */}
+        <div className="flex items-center gap-2 sm:gap-3 order-3 lg:order-2 w-full lg:w-auto justify-between lg:justify-center border-t lg:border-t-0 pt-1.5 lg:pt-0 border-[#3D2312] flex-wrap sm:flex-nowrap">
+          
+          {/* 1. Focus Points (FP) Bar - Generated by Daily Almanac! */}
+          <div 
+            onClick={onOpenAlmanac}
+            className="flex items-center gap-1.5 bg-[#1B2A38] px-2.5 py-1 rounded-xl border border-cyan-500/50 cursor-pointer hover:border-cyan-400 transition"
+            title="Focus Points (FP): Năng lượng tập trung tạo ra từ Morning Almanac để canh tác và nghiên cứu!"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-pulse shrink-0" />
             <div className="flex flex-col">
-              <div className="flex justify-between text-[9px] font-black text-amber-200 gap-2">
+              <div className="flex justify-between text-[9px] font-pixel font-bold text-cyan-200 gap-2">
+                <span>FOCUS (FP)</span>
+                <span>{fp}/{maxFp}</span>
+              </div>
+              <div className="w-16 sm:w-20 h-2 bg-[#0E1720] rounded-full overflow-hidden border border-cyan-800">
+                <div 
+                  className="h-full bg-gradient-to-r from-cyan-500 to-blue-400 transition-all duration-300"
+                  style={{ width: `${fpPercent}%` }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* 2. Stamina Bar */}
+          <div 
+            className="flex items-center gap-1.5 bg-[#1C2618] px-2.5 py-1 rounded-xl border border-emerald-500/50"
+            title="Thể lực (Stamina): Tiêu hao khi làm việc đồng áng, hồi phục qua giấc ngủ hoặc ăn món Collocation!"
+          >
+            <Zap className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <div className="flex flex-col">
+              <div className="flex justify-between text-[9px] font-pixel font-bold text-emerald-200 gap-2">
                 <span>STAMINA</span>
                 <span>{state.stamina}/{state.maxStamina}</span>
               </div>
-              <div className="w-20 sm:w-24 h-2 bg-[#1A0D08] rounded-full overflow-hidden border border-[#4E342E]">
+              <div className="w-16 sm:w-20 h-2 bg-[#0D150B] rounded-full overflow-hidden border border-emerald-800">
                 <div 
                   className={`h-full ${staminaColor} transition-all duration-300`}
                   style={{ width: `${staminaPercent}%` }}
@@ -124,62 +164,66 @@ export default function HarvestHUD({
             </div>
           </div>
 
-          {/* Gold (G) */}
-          <button 
-            type="button"
-            onClick={onOpenStore}
-            className="flex items-center gap-1.5 bg-[#2A1810] hover:bg-[#3E2723] px-2.5 py-1 rounded-xl border border-amber-600/60 shadow-inner cursor-pointer transition active:scale-95"
-            title="Gold (Vàng Nông Trại) - Kiếm từ thu hoạch & làm bài tập. Nhấn để mở Cửa hàng!"
-          >
-            <span className="text-base">🪙</span>
-            <span className="font-mono font-black text-xs sm:text-sm text-yellow-300 tracking-tight">
-              {state.gold?.toLocaleString() || 0} <span className="text-[10px] text-yellow-500 font-sans">G</span>
-            </span>
-          </button>
+          {/* 3. Gold & Gems */}
+          <div className="flex items-center gap-2">
+            <button 
+              type="button"
+              onClick={onOpenStore}
+              className="flex items-center gap-1 bg-[#1E0F07] hover:bg-[#331A0C] px-2.5 py-1 rounded-xl border border-amber-500/60 shadow-inner transition cursor-pointer"
+              title="Cửa Hàng Hạt Giống & Nông Cụ"
+            >
+              <span className="text-sm">🪙</span>
+              <span className="font-pixel text-xs font-bold text-amber-300">{state.gold}</span>
+            </button>
 
-          {/* Mochi Gems */}
-          <div 
-            className="flex items-center gap-1.5 bg-[#2A1810] px-2.5 py-1 rounded-xl border border-purple-500/50 shadow-inner"
-            title="Mochi Gems (Ngọc Tri Thức) - Nhận được khi viết bài luận Task 1/Task 2 hoàn chỉnh!"
-          >
-            <span className="text-sm">💎</span>
-            <span className="font-mono font-black text-xs sm:text-sm text-purple-300">
-              {state.gems || 0}
-            </span>
+            <button 
+              type="button"
+              onClick={onOpenSeedVault}
+              className="flex items-center gap-1 bg-[#1E0F07] hover:bg-[#331A0C] px-2 py-1 rounded-xl border border-purple-500/60 shadow-inner transition cursor-pointer"
+              title="Hầm Hạt Giống Bảo Vật Gia Truyền (Heirlooms)"
+            >
+              <span className="text-sm animate-heirloom">👑</span>
+              <span className="font-pixel text-xs font-bold text-purple-300">{state.seedVault?.length || 0}</span>
+            </button>
           </div>
 
-          {/* Sound Toggle */}
+          {/* 4. Morning Almanac Quick Button */}
           <button
             type="button"
-            onClick={handleToggleSound}
-            className={`p-1.5 rounded-lg border cursor-pointer transition ${
-              isMuted 
-                ? 'bg-[#2A1810] text-stone-400 border-[#5D4037]' 
-                : 'bg-amber-600/30 text-amber-300 border-amber-500/60'
+            onClick={onOpenAlmanac}
+            className={`px-2.5 py-1 rounded-xl font-pixel text-xs flex items-center gap-1.5 transition cursor-pointer shadow ${
+              isAlmanacCompleted
+                ? 'bg-emerald-800 text-white border-2 border-emerald-400'
+                : 'pixel-btn-gold text-[#2D1A0D] animate-bounce'
             }`}
-            title={isMuted ? 'Bật âm thanh retro' : 'Tắt âm thanh'}
+            title="Mở Cuốn Niên Giám Nông Trại (Daily Almanac)"
           >
-            {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+            <BookOpen className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">{isAlmanacCompleted ? 'Almanac ✓' : 'Học Almanac!'}</span>
           </button>
         </div>
 
-        {/* Right: Harvest Town Day & Season Clock Widget */}
-        <div className="flex items-center gap-2 sm:gap-3 order-2 sm:order-3">
-          {/* Streak Flame */}
+        {/* Right: Date, Weather, Streak, Sound & Account */}
+        <div className="flex items-center gap-2 sm:gap-3 order-2 lg:order-3">
+          
+          {/* Streak Flame & Scarecrow Protection */}
           <div 
-            className="flex items-center gap-1 px-2 py-1 rounded-xl bg-orange-950/60 border border-orange-500/60 text-orange-300 text-xs font-black shadow-inner"
-            title={`Chuỗi ${state.streak} ngày luyện tập liên tiếp!`}
+            className="flex items-center gap-1 px-2 py-1 rounded-xl bg-orange-950/80 border border-orange-500/60 text-orange-300 text-xs font-pixel font-bold shadow-inner"
+            title={`Chuỗi ${state.streak} ngày luyện tập! (Kỷ lục: ${state.longestStreak || 12} ngày). Bù nhìn Oxford bảo vệ: ${state.scarecrows || 0}`}
           >
-            <Flame className="w-3.5 h-3.5 text-orange-400 animate-bounce" />
+            <Flame className="w-3.5 h-3.5 text-orange-400 animate-pulse" />
             <span>{state.streak}D</span>
+            {(state.scarecrows || 0) > 0 && (
+              <span className="text-[10px] ml-0.5 text-cyan-300" title="Bù nhìn Oxford bảo vệ chuỗi nếu quên 1 ngày">🛡️</span>
+            )}
           </div>
 
           {/* Date Clock Plate */}
-          <div className="bg-[#2A1810] border-2 border-[#5D4037] px-2.5 sm:px-3 py-1 rounded-xl flex items-center gap-2 text-right shadow-inner">
+          <div className="bg-[#1E0F07] border-2 border-[#5D3A1F] px-2.5 sm:px-3 py-1 rounded-xl flex items-center gap-2 text-right shadow-inner">
             <div className="text-xl">{currentSeason.icon}</div>
             <div className="flex flex-col text-left">
-              <div className="text-[11px] font-black text-amber-200 leading-tight">
-                {currentSeason.name}, Ngày {state.day}
+              <div className="text-[10px] font-pixel font-bold text-amber-200 leading-tight">
+                {currentSeason.name}, N.{state.day}
               </div>
               <div className="text-[9px] text-amber-100/70 font-semibold flex items-center gap-1">
                 <WeatherComp className="w-2.5 h-2.5 text-amber-400" />
@@ -188,19 +232,33 @@ export default function HarvestHUD({
             </div>
           </div>
 
+          {/* Sound Toggle */}
+          <button
+            type="button"
+            onClick={handleToggleSound}
+            className={`p-1.5 rounded-lg border cursor-pointer transition ${
+              isMuted 
+                ? 'bg-[#1E0F07] text-stone-500 border-[#4A2B11]' 
+                : 'bg-amber-600/30 text-amber-300 border-amber-500/60'
+            }`}
+            title={isMuted ? 'Bật âm thanh retro' : 'Tắt âm thanh'}
+          >
+            {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+          </button>
+
           {/* User Account / Auth Actions */}
           {currentUser ? (
-            <div className="flex items-center gap-1 bg-[#2A1810] px-2 py-1 rounded-xl border border-[#5D4037]">
+            <div className="flex items-center gap-1 bg-[#1E0F07] px-2 py-1 rounded-xl border border-[#5D3A1F]">
               <button
                 type="button"
                 onClick={onOpenSettingsModal}
-                className="text-xs font-bold text-amber-200 hover:text-white transition flex items-center gap-1.5 cursor-pointer max-w-[110px] truncate"
+                className="text-xs font-bold text-amber-200 hover:text-white transition flex items-center gap-1.5 cursor-pointer max-w-[100px] truncate"
                 title="Cài đặt tài khoản & AI"
               >
-                <div className="w-5 h-5 rounded-full bg-amber-500 text-[#3E2723] flex items-center justify-center text-[10px] font-black shrink-0">
+                <div className="w-5 h-5 rounded-full bg-amber-500 text-[#2D1A0D] flex items-center justify-center text-[10px] font-black shrink-0">
                   {(currentUser?.user_metadata?.full_name || currentUser?.email || 'M').charAt(0).toUpperCase()}
                 </div>
-                <span className="truncate hidden md:inline">{currentUser?.user_metadata?.full_name || currentUser?.email}</span>
+                <span className="truncate hidden xl:inline">{currentUser?.user_metadata?.full_name || currentUser?.email}</span>
               </button>
               {onSignOut && (
                 <button
@@ -217,12 +275,13 @@ export default function HarvestHUD({
             <button
               type="button"
               onClick={onOpenAuthModal}
-              className="px-2.5 py-1 rounded-xl harvest-btn-gold text-[11px] font-black flex items-center gap-1 cursor-pointer shadow"
+              className="px-2.5 py-1 rounded-xl pixel-btn-gold font-pixel text-[11px] font-bold flex items-center gap-1 cursor-pointer shadow"
             >
               <User className="w-3 h-3" />
               <span>Đăng Nhập</span>
             </button>
           )}
+
         </div>
 
       </div>

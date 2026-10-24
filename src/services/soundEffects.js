@@ -352,6 +352,85 @@ class SoundEngine {
     osc.start(t);
     osc.stop(t + 0.05);
   }
+
+  playCook() {
+    if (this.muted) return;
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const t = ctx.currentTime;
+    // Sizzling bubbling chord
+    [587.33, 739.99, 880.00].forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, t + idx * 0.08);
+      gain.gain.setValueAtTime(0.18, t + idx * 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + idx * 0.08 + 0.25);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(t + idx * 0.08);
+      osc.stop(t + idx * 0.08 + 0.26);
+    });
+  }
+
+  playAnimalCare() {
+    if (this.muted) return;
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const t = ctx.currentTime;
+    // Cheerful chime: cluck/moo sparkle
+    [659.25, 783.99, 987.77].forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, t + idx * 0.07);
+      gain.gain.setValueAtTime(0.2, t + idx * 0.07);
+      gain.gain.exponentialRampToValueAtTime(0.01, t + idx * 0.07 + 0.2);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(t + idx * 0.07);
+      osc.stop(t + idx * 0.07 + 0.22);
+    });
+  }
+
+  playPestSquish() {
+    if (this.muted) return;
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const t = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(320, t);
+    osc.frequency.exponentialRampToValueAtTime(90, t + 0.15);
+    gain.gain.setValueAtTime(0.25, t);
+    gain.gain.exponentialRampToValueAtTime(0.01, t + 0.15);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(t);
+    osc.stop(t + 0.16);
+  }
+
+  playBloomBonus() {
+    if (this.muted) return;
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const t = ctx.currentTime;
+    const notes = [440, 554.37, 659.25, 880, 1108.73, 1318.51];
+    notes.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      const st = t + idx * 0.06;
+      osc.frequency.setValueAtTime(freq, st);
+      gain.gain.setValueAtTime(0.22, st);
+      gain.gain.exponentialRampToValueAtTime(0.01, st + 0.35);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(st);
+      osc.stop(st + 0.36);
+    });
+  }
 }
 
 export const sounds = new SoundEngine();

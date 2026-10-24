@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 import { 
   Sparkles, 
   Droplet, 
-  ArrowRight, 
   Package, 
-  Zap, 
-  Check, 
-  HelpCircle,
   AlertTriangle,
-  Heart
+  Heart,
+  BookOpen,
+  Utensils,
+  ShieldAlert,
+  Flame,
+  Award
 } from 'lucide-react';
 import { sounds } from '../../services/soundEffects';
 import confetti from 'canvas-confetti';
-import { CROPS_CONFIG, QUALITY_TIERS } from '../../services/harvestTownService';
+import { CROPS_CONFIG, QUALITY_TIERS, SRS_STAGES } from '../../services/harvestTownService';
 
 export default function HarvestTownMap({
   state,
@@ -26,16 +27,30 @@ export default function HarvestTownMap({
   onOpenStore,
   onOpenMines,
   onOpenFishing,
+  onOpenAlmanac,
+  onOpenPasture,
+  onOpenKitchen,
+  onOpenSeedVault,
+  onOpenPestChallenge,
   onClearWeeds
 }) {
   const [hoveredPlot, setHoveredPlot] = useState(null);
 
   const handlePlotClick = (plot) => {
+    // If plot has pest, prioritize clearing pest!
+    if (plot.pest) {
+      sounds.playClick();
+      if (onOpenPestChallenge) {
+        onOpenPestChallenge(plot);
+      }
+      return;
+    }
+
     if (plot.state === 'ripe') {
       sounds.playHarvest();
       confetti({
-        particleCount: 35,
-        spread: 50,
+        particleCount: 40,
+        spread: 60,
         origin: { y: 0.7 }
       });
       onHarvestPlot(plot.id);
@@ -46,7 +61,7 @@ export default function HarvestTownMap({
       sounds.playClick();
       const crop = CROPS_CONFIG[plot.cropType];
       if (crop && onWaterPlotWithPractice) {
-        onWaterPlotWithPractice(crop.skill, plot.id);
+        onWaterPlotWithPractice(crop.skill || 'vocab', plot.id);
       }
     } else if (plot.state === 'weeds') {
       sounds.playClick();
@@ -55,130 +70,160 @@ export default function HarvestTownMap({
   };
 
   return (
-    <div className="relative w-full max-w-5xl mx-auto my-2 sm:my-4 px-2 sm:px-4 select-none">
+    <div className="relative w-full max-w-6xl mx-auto my-2 sm:my-3 px-2 sm:px-4 select-none font-sans">
       
-      {/* MAP TERRAIN CONTAINER: Warm Countryside RPG Ground */}
-      <div className="relative rounded-3xl overflow-hidden bg-gradient-to-b from-[#81C784]/40 via-[#A5D6A7]/30 to-[#81C784]/50 border-4 border-[#5D4037] p-3 sm:p-6 shadow-xl">
+      {/* 16-BIT RETRO PIXEL TERRAIN CONTAINER */}
+      <div className="relative rounded-2xl overflow-hidden bg-[#2D5A27] border-4 border-[#1B3817] p-2.5 sm:p-5 shadow-2xl">
         
-        {/* Subtle decorative grass & stone pattern */}
-        <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#2E7D32_1px,transparent_1px)] [background-size:16px_16px]" />
+        {/* Pixel Grass Grid Texture */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#81C784_2px,transparent_2px)] [background-size:24px_24px]" />
 
-        {/* TOP ROW: Landmarks & Buildings */}
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-6">
+        {/* TOP ROW: Farmhouse (Almanac), Kitchen & Pasture */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-3 sm:mb-5">
           
-          {/* 1. Farmer Cottage (Nhà Gỗ) */}
+          {/* 1. Farmhouse with glowing Almanac Book on Porch */}
           <div 
-            onClick={() => { sounds.playClick(); }}
-            className="harvest-panel p-2.5 sm:p-3 flex items-center gap-2 sm:gap-3 cursor-pointer hover:border-amber-600 transition group shadow-sm"
-            title="Nhà Gỗ Nông Dân - Phòng của bạn & Mục tiêu Band IELTS"
+            onClick={() => { sounds.playClick(); if (onOpenAlmanac) onOpenAlmanac(); }}
+            className="pixel-panel p-2.5 flex items-center gap-2.5 cursor-pointer hover:border-amber-400 transition group shadow"
+            title="Nhà Gỗ Nông Dân - Mở Cuốn Niên Giám Morning Almanac trên bàn gỗ"
           >
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-amber-100 border-2 border-amber-800 flex items-center justify-center text-2xl group-hover:scale-105 transition shrink-0">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-[#5D3A1F] border-2 border-amber-500/80 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition shadow-inner">
               🏡
             </div>
             <div className="min-w-0">
-              <div className="text-[10px] sm:text-xs font-black text-[#5D4037] uppercase tracking-wider">
-                NHÀ GỖ CỦA BẠN
+              <div className="font-pixel text-[10px] text-amber-300 uppercase tracking-wide truncate">
+                NHÀ GỖ & ALMANAC
               </div>
-              <div className="text-xs sm:text-sm font-bold text-[#2B2826] truncate">
-                Mục Tiêu: Band {state.bandTarget}
+              <div className="text-[11px] font-bold text-amber-100 truncate flex items-center gap-1">
+                <BookOpen className="w-3 h-3 text-cyan-400" />
+                <span>{state.almanac?.completedToday ? 'Đã học ✓' : 'Cần học sáng!'}</span>
               </div>
             </div>
           </div>
 
-          {/* 2. Town Bulletin Board (Bảng Tin Thị Trấn) */}
+          {/* 2. The Kitchen (Collocations) */}
+          <div 
+            onClick={() => { sounds.playClick(); if (onOpenKitchen) onOpenKitchen(); }}
+            className="pixel-panel p-2.5 flex items-center gap-2.5 cursor-pointer hover:border-amber-400 transition group shadow"
+            title="Nhà Bếp Collocations - Nấu các món ăn học thuật để hồi phục Focus Points!"
+          >
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-[#5D3A1F] border-2 border-amber-500/80 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition shadow-inner">
+              🍳
+            </div>
+            <div className="min-w-0">
+              <div className="font-pixel text-[10px] text-amber-300 uppercase tracking-wide truncate">
+                BẾP COLLOCATIONS
+              </div>
+              <div className="text-[11px] font-bold text-amber-100 truncate flex items-center gap-1">
+                <Utensils className="w-3 h-3 text-amber-400" />
+                <span>Nấu Món Ăn C1</span>
+              </div>
+            </div>
+          </div>
+
+          {/* 3. Grammar Livestock Pasture */}
+          <div 
+            onClick={() => { sounds.playClick(); if (onOpenPasture) onOpenPasture(); }}
+            className="pixel-panel p-2.5 flex items-center gap-2.5 cursor-pointer hover:border-amber-400 transition group shadow"
+            title="Chuồng Vật Nuôi Ngữ Pháp - Chăm bón Đàn Gà SVO, Bò Thời Gian, Cừu Mạo Từ"
+          >
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-[#5D3A1F] border-2 border-amber-500/80 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition shadow-inner">
+              🐔
+            </div>
+            <div className="min-w-0">
+              <div className="font-pixel text-[10px] text-amber-300 uppercase tracking-wide truncate">
+                CHUỒNG NGỮ PHÁP
+              </div>
+              <div className="text-[11px] font-bold text-amber-100 truncate flex items-center gap-1">
+                <Heart className="w-3 h-3 text-rose-400" />
+                <span>Gà • Bò • Cừu • Ong</span>
+              </div>
+            </div>
+          </div>
+
+          {/* 4. Town Bulletin Board */}
           <div 
             onClick={() => { sounds.playClick(); onOpenBulletin(); }}
-            className="harvest-panel p-2.5 sm:p-3 flex items-center gap-2 sm:gap-3 cursor-pointer hover:border-amber-600 transition group shadow-sm relative"
-            title="Bảng Tin Nhiệm Vụ Hàng Ngày từ Cô Oanh & Cư Dân Thị Trấn"
+            className="pixel-panel p-2.5 flex items-center gap-2.5 cursor-pointer hover:border-amber-400 transition group shadow relative"
+            title="Bảng Tin Nhiệm Vụ Hàng Ngày từ Cô Oanh & Thị Trấn"
           >
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-yellow-100 border-2 border-amber-800 flex items-center justify-center text-2xl group-hover:scale-105 transition shrink-0">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-[#5D3A1F] border-2 border-amber-500/80 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition shadow-inner">
               📜
             </div>
             <div className="min-w-0">
-              <div className="text-[10px] sm:text-xs font-black text-[#5D4037] uppercase tracking-wider">
+              <div className="font-pixel text-[10px] text-amber-300 uppercase tracking-wide truncate">
                 BẢNG TIN THỊ TRẤN
               </div>
-              <div className="text-xs sm:text-sm font-bold text-[#2B2826] truncate flex items-center gap-1">
-                <span>3 Nhiệm Vụ Mới</span>
+              <div className="text-[11px] font-bold text-amber-100 truncate">
+                3 Nhiệm Vụ Ngày
               </div>
             </div>
-            <span className="absolute -top-1.5 -right-1.5 px-1.5 py-0.5 rounded-full bg-red-500 text-white text-[9px] font-black animate-bounce shadow">
-              HOT
+            <span className="absolute -top-1.5 -right-1.5 px-1.5 py-0.2 rounded bg-rose-600 text-white font-pixel text-[9px] animate-bounce">
+              NEW
             </span>
-          </div>
-
-          {/* 3. Cô Oanh's Manor (Dinh Thự Cố Vấn) */}
-          <div 
-            onClick={() => { sounds.playClick(); onOpenCoOanhManor(); }}
-            className="harvest-panel p-2.5 sm:p-3 flex items-center gap-2 sm:gap-3 cursor-pointer hover:border-rose-400 transition group shadow-sm"
-            title="Dinh Thự Cô Oanh - Gặp gỡ cố vấn, nhận lời khuyên IELTS & mở khóa bí kíp"
-          >
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-rose-100 border-2 border-rose-800 flex items-center justify-center text-2xl group-hover:scale-105 transition shrink-0">
-              👩‍🏫
-            </div>
-            <div className="min-w-0">
-              <div className="text-[10px] sm:text-xs font-black text-rose-800 uppercase tracking-wider flex items-center gap-1">
-                <span>CÔ OANH MENTOR</span>
-                <span className="text-rose-500 font-normal">❤️{state.coOanhFriendship?.hearts || 2}</span>
-              </div>
-              <div className="text-xs sm:text-sm font-bold text-[#2B2826] truncate">
-                Bí Kíp &amp; Lời Khuyên
-              </div>
-            </div>
           </div>
 
         </div>
 
-        {/* WEEDS COMEBACK ALERT BANNER (Only shows when inactive for >= 3 days) */}
+        {/* WEEDS COMEBACK ALERT */}
         {state.hasWeeds && (
-          <div className="mb-4 p-3 rounded-2xl bg-amber-900/90 border-2 border-amber-400 text-amber-100 flex items-center justify-between gap-3 shadow-lg animate-in slide-in-from-top-2">
+          <div className="mb-4 p-3 rounded-xl bg-[#4A1515] border-3 border-rose-500 text-rose-100 flex items-center justify-between gap-3 shadow-lg">
             <div className="flex items-center gap-2.5">
               <span className="text-2xl animate-spin-slow">🌿</span>
               <div>
-                <h4 className="font-black text-xs sm:text-sm text-yellow-300">
-                  Cỏ Dại Xuất Hiện Do Bạn Nghỉ Học Vài Ngày!
+                <h4 className="font-pixel text-xs text-rose-300">
+                  CỎ DẠI XUẤT HIỆN DO NGHỈ HỌC VÀI NGÀY!
                 </h4>
-                <p className="text-[11px] text-amber-100/90 leading-tight">
-                  Cây trồng không bị mất! Hãy làm bài test 2 phút để dọn cỏ và nhận ngay <b className="text-yellow-300">Buff x2 EXP trong 3 ngày</b> + 150 G!
+                <p className="text-[11px] text-rose-200/90 leading-tight">
+                  Tiến độ không bị mất! Hãy làm bài kiểm tra hồi sinh để nhận <b className="text-amber-300">Buff x2 EXP trong 3 ngày</b> + 150 G!
                 </p>
               </div>
             </div>
             <button
               type="button"
               onClick={onClearWeeds}
-              className="px-3.5 py-1.5 text-xs harvest-btn-gold shrink-0 cursor-pointer shadow-md"
+              className="pixel-btn pixel-btn-gold font-pixel text-xs py-1.5 px-3 shrink-0"
             >
-              Dọn Cỏ Hồi Sinh Ngay ✨
+              Dọn Cỏ Ngay ✨
             </button>
           </div>
         )}
 
-        {/* CENTER MAIN STAGE: The 12-Plot Farm Field + Shipping Bin on Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 items-start">
+        {/* CENTER MAIN FIELD: 12-Plot Farmstead + Shipping Bin */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-3 sm:gap-4 items-start">
           
-          {/* Left 3 Cols: The 12-Plot Farmstead Grid (3 rows x 4 cols) */}
-          <div className="lg:col-span-3 harvest-panel-dark p-3 sm:p-5 border-4 border-[#6D4C41]">
-            <div className="flex items-center justify-between mb-3 border-b border-[#5D4037] pb-2 text-amber-200">
+          {/* Left 3 Cols: The 12-Plot Farmstead (Words as Seeds SRS Grid) */}
+          <div className="lg:col-span-3 pixel-panel p-3 sm:p-4">
+            
+            <div className="flex items-center justify-between mb-3 border-b-2 border-[#1E0F07] pb-2 text-amber-200">
               <div className="flex items-center gap-2">
                 <span className="text-base">🌾</span>
-                <span className="font-black text-xs uppercase tracking-wider">
-                  CÁNH ĐỒNG TRI THỨC (12 Ô ĐẤT)
+                <span className="font-pixel text-xs uppercase tracking-wider text-amber-300">
+                  CÁNH ĐỒNG TỪ VỰNG SRS (WORDS AS SEEDS)
                 </span>
               </div>
-              <span className="text-[10px] text-amber-300/80 font-bold hidden sm:inline">
-                💡 Nhấn ô trống để gieo hạt • Nhấn cây đang lớn để tưới nước bằng bài tập
+              <span className="text-[10px] text-amber-200/80 font-pixel hidden sm:inline">
+                💡 Cây lớn qua 5 nấc SRS • Nhấn để tưới nước / ôn bài
               </span>
             </div>
 
-            {/* 3x4 Grid */}
+            {/* 3x4 Soil Grid */}
             <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-3">
               {state.plots.map(plot => {
                 const isRipe = plot.state === 'ripe';
                 const isGrowing = plot.state === 'growing';
                 const isEmpty = plot.state === 'empty_tilled';
                 const isWeeded = plot.state === 'weeds';
+                const isThirsty = plot.healthState === 'thirsty';
+                const hasPest = !!plot.pest;
                 const crop = CROPS_CONFIG[plot.cropType];
                 const tier = QUALITY_TIERS[plot.quality] || QUALITY_TIERS.normal;
+                const srsInfo = SRS_STAGES.find(s => s.stage === (plot.srsStage || 0)) || SRS_STAGES[0];
+
+                let soilClass = 'pixel-soil-healthy';
+                if (plot.wateredToday) soilClass = 'pixel-soil-wet';
+                if (isThirsty) soilClass = 'pixel-soil-thirsty';
+                if (plot.healthState === 'wilting') soilClass = 'pixel-soil-wilted';
 
                 return (
                   <div
@@ -186,76 +231,93 @@ export default function HarvestTownMap({
                     onClick={() => handlePlotClick(plot)}
                     onMouseEnter={() => setHoveredPlot(plot)}
                     onMouseLeave={() => setHoveredPlot(null)}
-                    className={`relative aspect-square rounded-2xl p-2 flex flex-col items-center justify-between cursor-pointer transition select-none group border-2 ${
-                      plot.wateredToday ? 'harvest-soil-wet border-[#4E342E]' : 'harvest-soil border-[#6D4C41]'
-                    } ${
-                      isRipe 
-                        ? 'animate-harvest-ready border-amber-400 bg-amber-950/40' 
-                        : 'hover:scale-[1.03] active:scale-95'
+                    className={`relative aspect-square rounded-xl p-2 flex flex-col items-center justify-between cursor-pointer transition select-none group ${soilClass} ${
+                      isRipe ? 'animate-harvest-ready border-amber-400' : 'hover:scale-[1.03] active:scale-95'
                     }`}
                   >
-                    {/* Top Plot Badge */}
-                    <div className="w-full flex items-center justify-between text-[9px] font-bold z-10 pointer-events-none">
-                      <span className="text-amber-200/60 font-mono">#{plot.id}</span>
-                      
-                      {isRipe && (
-                        <span className={`px-1.5 py-0.2 rounded-md bg-black/60 font-mono ${tier.color} border border-amber-400/40 font-black`}>
-                          {tier.stars}
+                    {/* Plot Header: ID & Indicators */}
+                    <div className="w-full flex items-center justify-between text-[9px] font-pixel z-10 pointer-events-none">
+                      <span className="text-amber-300/80">#{plot.id}</span>
+
+                      {/* Pest Alert Badge */}
+                      {hasPest && (
+                        <span className="px-1.5 py-0.2 rounded bg-rose-600 text-white text-[8px] font-bold animate-pest flex items-center gap-0.5">
+                          <span>🐛</span>
+                          <span className="hidden sm:inline">SÂU</span>
                         </span>
                       )}
 
-                      {isGrowing && (
-                        <span className="text-[9px] text-blue-300 flex items-center gap-0.5">
-                          <Droplet className="w-2.5 h-2.5 fill-blue-400" />
+                      {/* Thirsty Warning */}
+                      {isThirsty && !hasPest && (
+                        <span className="px-1 rounded bg-amber-600 text-[#2D1A0D] text-[8px] font-bold">
+                          KHÁT NƯỚC
+                        </span>
+                      )}
+
+                      {isGrowing && !hasPest && !isThirsty && (
+                        <span className="text-[9px] text-cyan-300 flex items-center gap-0.5">
+                          <Droplet className="w-2.5 h-2.5 fill-cyan-400" />
                           <span>{plot.progress}%</span>
                         </span>
                       )}
+
+                      {isRipe && (
+                        <span className="px-1.5 py-0.2 rounded bg-black/70 font-mono text-amber-300 font-bold border border-amber-400">
+                          {tier.stars}
+                        </span>
+                      )}
                     </div>
 
-                    {/* Central Crop Visual / Soil Representation */}
-                    <div className="my-auto flex flex-col items-center justify-center">
+                    {/* Central Crop Visual */}
+                    <div className="my-auto flex flex-col items-center justify-center text-center">
+                      
+                      {/* 1. Ripe Crop */}
                       {isRipe && (
                         <div className="flex flex-col items-center animate-bounce">
-                          <span className="text-3xl sm:text-4xl filter drop-shadow-[0_4px_8px_rgba(255,215,0,0.6)]">
+                          <span className="text-3xl sm:text-4xl filter drop-shadow-[0_4px_8px_rgba(255,215,0,0.8)]">
                             {crop?.icon || '🌾'}
                           </span>
-                          <span className="text-[9px] px-1.5 py-0.5 mt-0.5 rounded-full bg-amber-400 text-[#3E2723] font-black shadow border border-[#271406]">
-                            GẶT NGAY!
+                          <span className="text-[9px] px-1.5 py-0.2 mt-0.5 rounded bg-amber-400 text-[#2D1A0D] font-pixel font-bold shadow">
+                            GẶT!
                           </span>
                         </div>
                       )}
 
+                      {/* 2. Growing Crop with real vocab word */}
                       {isGrowing && (
-                        <div className="flex flex-col items-center">
+                        <div className={`flex flex-col items-center ${isThirsty ? 'opacity-80 rotate-6' : ''}`}>
                           <span className="text-2xl sm:text-3xl filter drop-shadow">
-                            {plot.growthStage === 0 ? '🌱' : plot.growthStage === 1 ? '🌿' : crop?.icon || '🌾'}
+                            {plot.srsStage === 0 ? '🌱' : plot.srsStage === 1 ? '🌿' : plot.srsStage === 2 ? '🪴' : crop?.icon || '🌾'}
                           </span>
-                          <span className="text-[9px] text-amber-200/90 font-bold truncate max-w-[70px] mt-0.5">
-                            {crop?.name?.split(' ')[0] || 'Cây non'}
+                          <span className="font-pixel text-[9px] text-amber-200 truncate max-w-[76px] mt-0.5 font-bold">
+                            {plot.word || crop?.name?.split(' ')[0]}
                           </span>
                         </div>
                       )}
 
+                      {/* 3. Empty Tilled Soil */}
                       {isEmpty && (
-                        <div className="flex flex-col items-center text-amber-200/40 group-hover:text-amber-300 transition">
+                        <div className="flex flex-col items-center text-amber-300/40 group-hover:text-amber-300 transition">
                           <span className="text-2xl font-black">+</span>
-                          <span className="text-[9px] font-bold mt-0.5">Gieo hạt</span>
+                          <span className="text-[9px] font-pixel mt-0.5">Gieo hạt</span>
                         </div>
                       )}
 
+                      {/* 4. Weeds */}
                       {isWeeded && (
                         <div className="flex flex-col items-center">
-                          <span className="text-2xl">🌿</span>
-                          <span className="text-[9px] text-amber-300 font-bold">Cỏ dại</span>
+                          <span className="text-2xl animate-pulse">🌿</span>
+                          <span className="text-[9px] font-pixel text-rose-300">Cỏ dại</span>
                         </div>
                       )}
+
                     </div>
 
-                    {/* Bottom Progress Bar for Growing plots */}
+                    {/* Bottom Progress Bar */}
                     {isGrowing && (
-                      <div className="w-full h-1 bg-[#271406] rounded-full overflow-hidden border border-[#5D4037]/60">
+                      <div className="w-full h-1.5 bg-[#140804] rounded-full overflow-hidden border border-[#5D3A1F]">
                         <div 
-                          className="h-full bg-emerald-400 transition-all"
+                          className="h-full bg-gradient-to-r from-emerald-500 to-cyan-400 transition-all"
                           style={{ width: `${plot.progress}%` }}
                         />
                       </div>
@@ -269,95 +331,116 @@ export default function HarvestTownMap({
             </div>
           </div>
 
-          {/* Right 1 Col: The Shipping Bin (Thùng Xuất Khẩu Gỗ) */}
-          <div className="harvest-panel p-4 flex flex-col justify-between h-full border-4 border-[#795548] shadow-md">
-            <div>
-              <div className="text-center pb-2 border-b-2 border-[#8D6E63]">
-                <div className="text-3xl sm:text-4xl filter drop-shadow mb-1">
-                  📦
+          {/* Right 1 Col: Shipping Bin & Seed Vault */}
+          <div className="space-y-3">
+            
+            {/* The Shipping Bin */}
+            <div className="pixel-panel p-3.5 flex flex-col justify-between">
+              <div>
+                <div className="text-center pb-2 border-b-2 border-[#1E0F07]">
+                  <div className="text-3xl filter drop-shadow mb-1 animate-bounce">
+                    📦
+                  </div>
+                  <h3 className="font-pixel text-xs text-amber-200 uppercase tracking-wide">
+                    THÙNG XUẤT KHẨU
+                  </h3>
+                  <p className="text-[10px] text-stone-300 mt-0.5">
+                    Xuất khẩu nông sản &amp; thu hoạch Gold mỗi tối!
+                  </p>
                 </div>
-                <h3 className="font-black text-sm text-[#3E2723] uppercase tracking-wide">
-                  THÙNG XUẤT KHẨU
-                </h3>
-                <p className="text-[11px] text-[#5D4037] mt-0.5">
-                  Bỏ nông sản &amp; bài viết vào thùng để bán lấy Gold mỗi tối!
-                </p>
+
+                <div className="mt-3 space-y-2 text-xs">
+                  <div className="p-2 rounded-lg bg-[#24130A] border border-[#5D3A1F] flex items-center justify-between text-stone-300">
+                    <span>Chờ bán:</span>
+                    <span className="font-pixel text-amber-300 font-bold">
+                      {state.shippingBin?.length || 0} món
+                    </span>
+                  </div>
+
+                  <div className="p-2 rounded-lg bg-[#24130A] border border-[#5D3A1F] flex items-center justify-between text-stone-300">
+                    <span>Dự kiến:</span>
+                    <span className="font-pixel text-amber-300 font-bold">
+                      🪙 ~{state.shippingBin?.reduce((acc, c) => acc + (c.subtotal || 0), 0) || 0} G
+                    </span>
+                  </div>
+                </div>
               </div>
 
-              {/* Status info */}
-              <div className="mt-4 space-y-2">
-                <div className="p-2.5 rounded-xl bg-amber-50 border border-[#D7CCC8] flex items-center justify-between text-xs font-bold text-[#5D4037]">
-                  <span>Vật phẩm chờ bán:</span>
-                  <span className="font-mono text-amber-900 bg-amber-200/60 px-2 py-0.5 rounded font-black">
-                    {state.shippingBin?.length || 0} món
-                  </span>
-                </div>
+              <div className="mt-3 pt-2 border-t-2 border-[#1E0F07]">
+                <button
+                  type="button"
+                  onClick={() => { sounds.playClick(); onOpenShippingBin(); }}
+                  className="pixel-btn pixel-btn-gold font-pixel text-xs w-full py-2 shadow"
+                >
+                  Mở Thùng Xuất Khẩu 📦
+                </button>
+              </div>
+            </div>
 
-                <div className="p-2.5 rounded-xl bg-amber-50 border border-[#D7CCC8] flex items-center justify-between text-xs font-bold text-[#5D4037]">
-                  <span>Dự kiến nhận:</span>
-                  <span className="font-mono text-yellow-700 font-black">
-                    🪙 ~{state.shippingBin?.reduce((acc, c) => acc + (c.subtotal || 0), 0) || 0} G
-                  </span>
+            {/* Seed Vault Shortcut Card */}
+            <div 
+              onClick={() => { sounds.playClick(); if (onOpenSeedVault) onOpenSeedVault(); }}
+              className="pixel-panel p-3 flex items-center gap-2.5 cursor-pointer hover:border-purple-400 transition"
+              title="Hầm Hạt Giống Bảo Vật Gia Truyền"
+            >
+              <span className="text-2xl animate-heirloom">👑</span>
+              <div className="min-w-0">
+                <div className="font-pixel text-[10px] text-purple-300 uppercase">HẦM BẢO VẬT SEED VAULT</div>
+                <div className="text-[11px] font-bold text-amber-100 truncate">
+                  {state.seedVault?.length || 0} Từ Mastered (Sinh lãi Gold)
                 </div>
               </div>
             </div>
 
-            {/* Open Bin / Settle Button */}
-            <div className="mt-4 pt-3 border-t border-[#D7CCC8]">
-              <button
-                type="button"
-                onClick={() => { sounds.playClick(); onOpenShippingBin(); }}
-                className="w-full py-2.5 text-xs font-black harvest-btn-gold shadow-md cursor-pointer tracking-wider"
-              >
-                Mở Thùng &amp; Bán Hàng 📦
-              </button>
-            </div>
           </div>
 
         </div>
 
-        {/* BOTTOM ROW: The 3 Adventure Zones */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4 sm:mt-6">
+        {/* BOTTOM ROW: The 3 Town Exploration Areas */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 mt-3 sm:mt-5">
           
-          {/* 1. Pierre's General Store (Tiệm Nông Cụ & Hạt Giống) */}
+          {/* 1. Pierre's General Store */}
           <div 
             onClick={() => { sounds.playClick(); onOpenStore(); }}
-            className="harvest-panel p-3 flex items-center gap-3 cursor-pointer hover:border-amber-600 transition group shadow-sm"
+            className="pixel-panel p-2.5 flex items-center gap-2.5 cursor-pointer hover:border-amber-400 transition group shadow"
           >
-            <div className="w-10 h-10 rounded-xl bg-amber-100 border-2 border-amber-800 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition">
+            <div className="w-10 h-10 rounded-lg bg-[#5D3A1F] border border-amber-500/60 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition">
               🏪
             </div>
             <div className="min-w-0">
-              <div className="text-[10px] font-black text-[#5D4037] uppercase">TIỆM NÔNG CỤ PIERRE</div>
-              <div className="text-xs font-bold text-[#2B2826] truncate">Mua Hạt Giống &amp; Phân Bón</div>
+              <div className="font-pixel text-[10px] text-amber-300 uppercase">TIỆM NÔNG CỤ PIERRE</div>
+              <div className="text-[11px] font-bold text-stone-200 truncate">Mua Hạt Giống &amp; Phân Bón</div>
             </div>
           </div>
 
-          {/* 2. The Ancient Mines (Hầm Mỏ Đọc Hiểu & Tư Duy) */}
+          {/* 2. Cô Oanh's Manor */}
+          <div 
+            onClick={() => { sounds.playClick(); onOpenCoOanhManor(); }}
+            className="pixel-panel p-2.5 flex items-center gap-2.5 cursor-pointer hover:border-rose-400 transition group shadow"
+          >
+            <div className="w-10 h-10 rounded-lg bg-[#5D3A1F] border border-rose-500/60 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition">
+              👩‍🏫
+            </div>
+            <div className="min-w-0">
+              <div className="font-pixel text-[10px] text-rose-300 uppercase flex items-center gap-1">
+                <span>DINH THỰ CÔ OANH</span>
+                <span className="text-rose-400">❤️{state.coOanhFriendship?.hearts || 2}</span>
+              </div>
+              <div className="text-[11px] font-bold text-stone-200 truncate">Bí Kíp 5 Tim &amp; Lời Khuyên</div>
+            </div>
+          </div>
+
+          {/* 3. The Ancient Mines */}
           <div 
             onClick={() => { sounds.playClick(); onOpenMines(); }}
-            className="harvest-panel p-3 flex items-center gap-3 cursor-pointer hover:border-purple-600 transition group shadow-sm"
+            className="pixel-panel p-2.5 flex items-center gap-2.5 cursor-pointer hover:border-cyan-400 transition group shadow"
           >
-            <div className="w-10 h-10 rounded-xl bg-purple-100 border-2 border-purple-800 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition">
+            <div className="w-10 h-10 rounded-lg bg-[#5D3A1F] border border-cyan-500/60 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition">
               ⛏️
             </div>
             <div className="min-w-0">
-              <div className="text-[10px] font-black text-purple-900 uppercase">HẦM MỎ TRI THỨC</div>
-              <div className="text-xs font-bold text-[#2B2826] truncate">Đọc Hiểu &amp; Phản Biện (+Gems)</div>
-            </div>
-          </div>
-
-          {/* 3. River Pier (Bến Sông Câu Cá & Nghe Chép) */}
-          <div 
-            onClick={() => { sounds.playClick(); onOpenFishing(); }}
-            className="harvest-panel p-3 flex items-center gap-3 cursor-pointer hover:border-blue-600 transition group shadow-sm"
-          >
-            <div className="w-10 h-10 rounded-xl bg-blue-100 border-2 border-blue-800 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition">
-              🎣
-            </div>
-            <div className="min-w-0">
-              <div className="text-[10px] font-black text-blue-900 uppercase">BẾN SÔNG MOCHI</div>
-              <div className="text-xs font-bold text-[#2B2826] truncate">Nghe Chép &amp; Bắt Cá Từ Vựng</div>
+              <div className="font-pixel text-[10px] text-cyan-300 uppercase">HẦM MỎ READING MINES</div>
+              <div className="text-[11px] font-bold text-stone-200 truncate">Khai Thác Đá Quý &amp; Đọc Hiểu</div>
             </div>
           </div>
 

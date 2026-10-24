@@ -19,28 +19,28 @@ export default function GeneralStoreModal({
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/60 backdrop-blur-xs animate-in fade-in select-none"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/75 backdrop-blur-xs animate-in fade-in select-none font-sans"
       onClick={onClose}
     >
       <div 
-        className="w-full max-w-lg harvest-panel p-5 text-[#3E2723] space-y-4 border-4 border-[#795548] shadow-2xl"
+        className="w-full max-w-lg pixel-panel p-5 text-[#FFE8B8] space-y-4"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b-2 border-[#8D6E63] pb-3">
+        <div className="flex items-center justify-between border-b-2 border-[#1E0F07] pb-3">
           <div className="flex items-center gap-2.5">
             <span className="text-2xl">🏪</span>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-black text-base text-[#2B2826] tracking-tight">
-                  Tiệm Nông Cụ &amp; Hạt Giống Pierre
+                <h3 className="font-pixel text-base text-amber-200 tracking-tight">
+                  TIỆM NÔNG CỤ &amp; HẠT GIỐNG PIERRE
                 </h3>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 font-black">
+                <span className="font-pixel text-[10px] px-2 py-0.5 rounded bg-amber-500 text-[#2D1A0D] font-bold">
                   🪙 {userGold?.toLocaleString()} G
                 </span>
               </div>
-              <p className="text-xs text-[#5D4037]">
-                Dùng Gold từ bài tập để mua hạt giống và nâng cấp trang trại
+              <p className="text-xs text-amber-100/70">
+                Dùng Gold từ việc học tập để mua hạt giống và trang trí trang trại
               </p>
             </div>
           </div>
@@ -48,7 +48,7 @@ export default function GeneralStoreModal({
           <button 
             type="button"
             onClick={onClose}
-            className="p-1 rounded-lg text-[#8D6E63] hover:text-[#3E2723] cursor-pointer"
+            className="p-1.5 rounded-lg bg-[#140804] text-amber-200 hover:text-white border border-[#4A2B11] cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -63,40 +63,40 @@ export default function GeneralStoreModal({
             return (
               <div 
                 key={item.id}
-                className="bg-white/80 hover:bg-amber-50/80 border-2 border-[#8D6E63] rounded-2xl p-3 flex items-center justify-between gap-3 shadow-xs transition"
+                className="bg-[#24130A] hover:bg-[#3B2314] border-2 border-[#5D3A1F] rounded-xl p-3 flex items-center justify-between gap-3 shadow-xs transition"
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-10 h-10 rounded-xl bg-amber-100/70 border border-amber-300 flex items-center justify-center text-xl shrink-0">
+                  <div className="w-10 h-10 rounded-lg bg-[#5D3A1F] border border-amber-500/70 flex items-center justify-center text-xl shrink-0">
                     {item.icon}
                   </div>
                   <div className="min-w-0">
-                    <div className="font-black text-xs sm:text-sm text-[#2B2826] truncate">
+                    <div className="font-pixel text-xs text-amber-200 truncate font-bold">
                       {item.name}
                     </div>
-                    <div className="text-[10px] text-[#6D4C41] mt-0.5 leading-snug">
-                      {item.description || (item.type === 'seed' ? 'Gieo vào ô đất trống và chăm bón bằng bài tập.' : '')}
-                    </div>
+                    {item.description && (
+                      <div className="text-[10px] text-stone-300 line-clamp-1">
+                        {item.description}
+                      </div>
+                    )}
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="font-mono font-black text-xs text-amber-900 bg-amber-100 px-2 py-1 rounded-lg border border-amber-300">
+                  <span className="font-pixel text-xs text-amber-300 font-bold">
                     🪙 {item.price} G
                   </span>
 
                   {isOwned ? (
-                    <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-300">
-                      ✓ Đã sở hữu
+                    <span className="px-2.5 py-1 rounded bg-[#140804] border border-[#5D3A1F] text-stone-400 font-pixel text-[10px]">
+                      Đã sở hữu
                     </span>
                   ) : (
                     <button
                       type="button"
-                      disabled={!canAfford}
                       onClick={() => handleBuy(item)}
-                      className={`px-3 py-1.5 text-xs rounded-xl font-bold transition cursor-pointer ${
-                        canAfford 
-                          ? 'harvest-btn-gold' 
-                          : 'bg-stone-300 text-stone-500 cursor-not-allowed border border-stone-400'
+                      disabled={!canAfford}
+                      className={`pixel-btn pixel-btn-gold font-pixel text-[10px] py-1.5 px-3 ${
+                        !canAfford ? 'opacity-40 cursor-not-allowed' : ''
                       }`}
                     >
                       Mua

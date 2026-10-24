@@ -45,26 +45,26 @@ export default function CoOanhManorModal({
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/60 backdrop-blur-xs animate-in fade-in select-none"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/75 backdrop-blur-xs animate-in fade-in select-none font-sans"
       onClick={onClose}
     >
       <div 
-        className="w-full max-w-lg harvest-panel p-5 sm:p-6 text-[#3E2723] space-y-4 border-4 border-[#795548] shadow-2xl"
+        className="w-full max-w-lg pixel-panel p-5 sm:p-6 text-[#FFE8B8] space-y-4"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b-2 border-[#8D6E63] pb-3">
+        <div className="flex items-center justify-between border-b-2 border-[#1E0F07] pb-3">
           <div className="flex items-center gap-3">
             {/* NPC Avatar */}
-            <div className="w-12 h-12 rounded-2xl bg-[#EFEBE9] border-2 border-[#8D6E63] p-1 flex items-center justify-center shadow-inner shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-[#5D3A1F] border-2 border-amber-400 p-1 flex items-center justify-center shadow-inner shrink-0">
               <span className="text-3xl filter drop-shadow">👩‍🏫</span>
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-black text-base text-[#2B2826] tracking-tight">
-                  Cô Oanh (Cố Vấn Thị Trấn)
+                <h3 className="font-pixel text-base text-amber-200 tracking-tight">
+                  CÔ OANH • MENTOR THỊ TRẤN
                 </h3>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-300 font-bold">
+                <span className="text-[10px] px-2 py-0.5 rounded bg-rose-900/80 text-rose-200 border border-rose-500/70 font-pixel font-bold">
                   Mentor
                 </span>
               </div>
@@ -77,12 +77,12 @@ export default function CoOanhManorModal({
                     className={`w-3.5 h-3.5 ${
                       h <= hearts 
                         ? 'text-rose-500 fill-rose-500 animate-pulse' 
-                        : 'text-stone-300 fill-stone-200'
+                        : 'text-stone-500 fill-stone-700'
                     }`}
                   />
                 ))}
-                <span className="text-[10px] text-[#6D4C41] font-bold ml-1.5 font-mono">
-                  {points}/1000 Điểm Thân Thiết
+                <span className="text-[10px] text-amber-300 font-pixel font-bold ml-1.5 font-mono">
+                  {points}/1000 Tim
                 </span>
               </div>
             </div>
@@ -91,61 +91,52 @@ export default function CoOanhManorModal({
           <button 
             type="button"
             onClick={onClose}
-            className="p-1 rounded-lg text-[#8D6E63] hover:text-[#3E2723] cursor-pointer"
+            className="p-1 rounded-lg bg-[#140804] text-amber-200 hover:text-white border border-[#4A2B11] cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Dialogue Box (Retro RPG Style with typing effect) */}
-        <div className="relative bg-[#FFFDE7] border-2 border-[#8D6E63] rounded-2xl p-4 shadow-inner min-h-[90px] flex items-start gap-3">
-          <div className="text-xl shrink-0 mt-0.5">💬</div>
-          <p className="text-xs sm:text-sm text-[#3E2723] leading-relaxed font-medium">
-            {displayedText}
+        <div className="p-4 rounded-xl bg-[#24130A] border-2 border-[#5D3A1F] shadow-inner relative">
+          <div className="absolute -top-2.5 left-4 px-2 py-0.2 rounded bg-amber-500 text-[#2D1A0D] text-[9px] font-pixel font-bold uppercase tracking-wider">
+            Lời Khuyên Từ Cô Oanh
+          </div>
+          <p className="text-xs sm:text-sm text-amber-100 leading-relaxed font-serif pt-1 min-h-[60px]">
+            "{displayedText}"
+            <span className="inline-block w-1.5 h-3.5 bg-amber-400 ml-1 animate-pulse" />
           </p>
         </div>
 
-        {/* Unlocked Master Secrets & Perks */}
+        {/* 5-Heart Milestone Perks */}
         <div className="space-y-2">
-          <div className="text-[11px] font-black uppercase text-[#5D4037] tracking-wider flex items-center gap-1.5">
-            <Sparkles className="w-3 h-3 text-amber-600" />
-            <span>Mốc Thân Thiết &amp; Bí Kíp Giảng Dạy Của Cô Oanh:</span>
+          <div className="font-pixel text-xs text-amber-300 flex items-center justify-between">
+            <span>ĐẶC QUYỀN HỮU NGHỊ (5 MỐC TIM):</span>
+            <span className="text-[10px] text-stone-400">Luyện tập để tăng tim</span>
           </div>
 
-          <div className="space-y-1.5 max-h-[28vh] overflow-y-auto pr-1">
+          <div className="space-y-1.5">
             {perks.map(p => (
               <div 
                 key={p.heart}
-                className={`p-2 rounded-xl border text-xs flex items-center justify-between transition ${
+                className={`p-2 rounded-lg border flex items-center justify-between text-xs transition ${
                   p.unlocked 
-                    ? 'bg-amber-50 border-amber-300 text-amber-950 font-bold' 
-                    : 'bg-stone-100 border-stone-200 text-stone-400'
+                    ? 'bg-amber-950/60 border-amber-500/80 text-amber-200' 
+                    : 'bg-[#1E0F07] border-[#3B2314] text-stone-500 opacity-60'
                 }`}
               >
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-white/80 border border-[#D7CCC8]">
-                    {p.heart} ❤️
+                  <span className="font-pixel text-[11px] text-rose-400">
+                    {'❤️'.repeat(p.heart)}
                   </span>
-                  <span className="leading-snug">{p.title}</span>
+                  <span className="font-medium">{p.title}</span>
                 </div>
-                <span>{p.unlocked ? '🔓 Đã mở' : '🔒 Khóa'}</span>
+                <span className="font-pixel text-[10px]">
+                  {p.unlocked ? 'ĐÃ MỞ ✓' : 'KHÓA'}
+                </span>
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Action Button */}
-        <div className="pt-2">
-          <button
-            type="button"
-            onClick={() => {
-              sounds.playCoin();
-              onClose();
-            }}
-            className="w-full py-2.5 harvest-btn-gold text-xs font-black shadow-md cursor-pointer"
-          >
-            Cảm Ơn Cô Oanh! Em Sẽ Luyện Tập Ngay ✨
-          </button>
         </div>
 
       </div>

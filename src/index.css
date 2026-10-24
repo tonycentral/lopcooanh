@@ -309,3 +309,205 @@
 .animate-harvest-ready {
   animation: pulseGlow 1.8s infinite ease-in-out;
 }
+
+/* =========================================================================
+   HARVEST TOWN RETRO PIXEL ART SYSTEM (AUTHENTIC 16-BIT RPG AESTHETIC)
+   ========================================================================= */
+
+.font-pixel {
+  font-family: 'Pixelify Sans', 'Silkscreen', monospace;
+  letter-spacing: 0.02em;
+}
+
+.font-pixel-alt {
+  font-family: 'Silkscreen', monospace;
+  letter-spacing: 0.05em;
+}
+
+/* 1. Authentic Retro Pixel Panel (Wood & Gold Trim) */
+.pixel-panel {
+  background: #3B2314;
+  color: #FFF8E7;
+  border: 4px solid #1E0F07;
+  box-shadow: 
+    inset 4px 4px 0 #7A4B27,
+    inset -4px -4px 0 #211208,
+    0 8px 0 rgba(0, 0, 0, 0.4),
+    0 12px 20px rgba(0, 0, 0, 0.5);
+  image-rendering: pixelated;
+  position: relative;
+}
+
+/* 2. Cozy Harvest Almanac Parchment Book */
+.pixel-parchment {
+  background: #FFF5DD;
+  color: #2D1A0D;
+  border: 4px solid #4A2B11;
+  box-shadow: 
+    inset 4px 4px 0 #FFFDF5,
+    inset -4px -4px 0 #DFC99F,
+    0 6px 0 rgba(40, 20, 5, 0.35);
+  image-rendering: pixelated;
+}
+
+/* 3. Lush Emerald Town Garden Panel */
+.pixel-panel-emerald {
+  background: #1B4D27;
+  color: #E8F5E9;
+  border: 4px solid #0B2411;
+  box-shadow: 
+    inset 4px 4px 0 #2E7D32,
+    inset -4px -4px 0 #0E3016,
+    0 6px 0 rgba(0, 0, 0, 0.35);
+}
+
+/* 4. Pixel Buttons (3D Bevel with Push-Down Feedback) */
+.pixel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  background: #8D5B32;
+  color: #FFF8E7;
+  border: 3px solid #231206;
+  box-shadow: 
+    inset 3px 3px 0 #B98150,
+    inset -3px -3px 0 #573318,
+    0 4px 0 #180C04;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.05s ease, box-shadow 0.05s ease;
+  image-rendering: pixelated;
+}
+
+.pixel-btn:hover {
+  filter: brightness(1.1);
+}
+
+.pixel-btn:active {
+  transform: translateY(4px);
+  box-shadow: 
+    inset 3px 3px 0 #573318,
+    inset -3px -3px 0 #B98150,
+    0 0 0 #180C04;
+}
+
+.pixel-btn-gold {
+  background: #FFB300;
+  color: #2D1900;
+  border-color: #5D3700;
+  box-shadow: 
+    inset 3px 3px 0 #FFE082,
+    inset -3px -3px 0 #C67C00,
+    0 4px 0 #3E2400;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.pixel-btn-gold:active {
+  box-shadow: 
+    inset 3px 3px 0 #C67C00,
+    inset -3px -3px 0 #FFE082,
+    0 0 0 #3E2400;
+}
+
+.pixel-btn-green {
+  background: #4CAF50;
+  color: #FFFFFF;
+  border-color: #1B5E20;
+  box-shadow: 
+    inset 3px 3px 0 #81C784,
+    inset -3px -3px 0 #2E7D32,
+    0 4px 0 #0D3811;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.pixel-btn-green:active {
+  box-shadow: 
+    inset 3px 3px 0 #2E7D32,
+    inset -3px -3px 0 #81C784,
+    0 0 0 #0D3811;
+}
+
+.pixel-btn-blue {
+  background: #0288D1;
+  color: #FFFFFF;
+  border-color: #014165;
+  box-shadow: 
+    inset 3px 3px 0 #4FC3F7,
+    inset -3px -3px 0 #025785,
+    0 4px 0 #012940;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* 5. Inventory & Tool Slots */
+.pixel-slot {
+  background: #D7CCC8;
+  border: 3px solid #3E2723;
+  box-shadow: 
+    inset 3px 3px 0 #8D6E63,
+    inset -3px -3px 0 #EFEBE9;
+  image-rendering: pixelated;
+  transition: all 0.1s ease;
+}
+
+.pixel-slot.active {
+  background: #FFF9C4;
+  border-color: #FF6F00;
+  box-shadow: 
+    inset 3px 3px 0 #FFD54F,
+    inset -3px -3px 0 #FF8F00,
+    0 0 8px rgba(255, 179, 0, 0.8);
+}
+
+/* 6. Farm Soil States */
+.pixel-soil-healthy {
+  background: radial-gradient(circle at 40% 40%, #5D4037 30%, #3E2723 90%);
+  border: 3px solid #2B160C;
+  box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.08), inset -2px -2px 0 rgba(0, 0, 0, 0.4);
+}
+
+.pixel-soil-wet {
+  background: radial-gradient(circle at 40% 40%, #3E2723 30%, #21130D 90%);
+  border: 3px solid #140A06;
+  box-shadow: inset 3px 3px 0 rgba(79, 195, 247, 0.3), inset -2px -2px 0 rgba(0, 0, 0, 0.6);
+}
+
+.pixel-soil-thirsty {
+  background: radial-gradient(circle at 40% 40%, #8D6E63 30%, #6D4C41 90%);
+  border: 3px solid #4E342E;
+  box-shadow: inset 2px 2px 0 rgba(255, 235, 238, 0.15), inset -2px -2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.pixel-soil-wilted {
+  background: radial-gradient(circle at 40% 40%, #795548 30%, #4E342E 90%);
+  border: 3px dashed #B71C1C;
+  box-shadow: inset 0 0 10px rgba(183, 28, 28, 0.4);
+}
+
+/* 7. Pixel Animations */
+@keyframes pestFlutter {
+  0%, 100% { transform: translateY(0px) rotate(-3deg); }
+  50% { transform: translateY(-4px) rotate(4deg); }
+}
+
+.animate-pest {
+  animation: pestFlutter 1.4s ease-in-out infinite;
+}
+
+@keyframes heirloomShine {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.7));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgba(255, 235, 59, 1));
+    transform: scale(1.05);
+  }
+}
+
+.animate-heirloom {
+  animation: heirloomShine 2s infinite ease-in-out;
+}
