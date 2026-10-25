@@ -9,20 +9,15 @@ import ChestModal from './ChestModal';
 import { 
   Coins, 
   Zap, 
-  HelpCircle, 
-  Cloud, 
-  CloudCheck, 
   RefreshCw, 
   AlertCircle, 
   CheckCircle2, 
   AlertTriangle,
   Info,
-  Package,
   User,
   LogOut,
   LogIn,
   ShoppingBag,
-  Moon,
   Hammer
 } from 'lucide-react';
 
@@ -35,11 +30,11 @@ interface GameContainerProps {
 export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut }: GameContainerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const gameRef = useRef<Phaser.Game | null>(null);
+  const profileRef = useRef<HTMLDivElement>(null);
 
   const gold = useGameStore((state) => state.gold);
   const energy = useGameStore((state) => state.energy);
   const maxEnergy = useGameStore((state) => state.maxEnergy);
-  const day = useGameStore((state) => state.day);
   const hotbar = useGameStore((state) => state.hotbar);
   const inventory = useGameStore((state) => state.inventory);
   const activeTool = useGameStore((state) => state.activeTool);
@@ -48,12 +43,11 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
   const selectTool = useGameStore((state) => state.selectTool);
   const initSync = useGameStore((state) => state.initSync);
   const clearNotification = useGameStore((state) => state.clearNotification);
-  const sleepNextDay = useGameStore((state) => state.sleepNextDay);
 
   const [isShopOpen, setIsShopOpen] = useState(false);
   const [shopTab, setShopTab] = useState<'buy' | 'sell' | 'craft'>('buy');
   const [currentChestKey, setCurrentChestKey] = useState<string | null>(null);
-  const [isSleeping, setIsSleeping] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   // Auto-dismiss notification after 3.5 seconds
   useEffect(() => {
@@ -63,6 +57,29 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     }, 3500);
     return () => clearTimeout(timer);
   }, [lastNotification, clearNotification]);
+
+  // Energy auto-regeneration over time: +1 energy every 4 seconds if below maxEnergy
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const s = useGameStore.getState();
+      if (s.energy < s.maxEnergy) {
+        useGameStore.setState({ energy: Math.min(s.maxEnergy, s.energy + 1) });
+      }
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Close profile dropdown when clicking outside
+  useEffect(() => {
+    if (!isProfileOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
+        setIsProfileOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isProfileOpen]);
 
   // Initialize Cloud Sync on startup
   useEffect(() => {
@@ -97,8 +114,8 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
         return;
       }
 
-      // If modal or sleeping transition is active, ignore hotbar tool changes
-      if (isShopOpen || Boolean(currentChestKey) || isSleeping) return;
+      // If modal is active, ignore hotbar tool changes
+      if (isShopOpen || Boolean(currentChestKey) || isProfileOpen) return;
 
       const keyNum = parseInt(e.key, 10);
       if (keyNum >= 1 && keyNum <= hotbar.length) {
@@ -107,16 +124,7 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [hotbar, selectTool, isShopOpen, shopTab, currentChestKey, isSleeping]);
-
-  const handleSleep = () => {
-    if (isSleeping) return;
-    setIsSleeping(true);
-    setTimeout(() => {
-      sleepNextDay();
-      setIsSleeping(false);
-    }, 600);
-  };
+  }, [hotbar, selectTool, isShopOpen, shopTab, currentChestKey, isProfileOpen]);
 
   // Synchronize modal state with Phaser input context (disable WASD/mouse raycast when modal is open)
   useEffect(() => {
@@ -124,12 +132,12 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     try {
       const scene = gameRef.current.scene.getScene('FarmScene') as { setModalOpen?: (open: boolean) => void } | null;
       if (scene && typeof scene.setModalOpen === 'function') {
-        scene.setModalOpen(isShopOpen || Boolean(currentChestKey) || isSleeping);
+        scene.setModalOpen(isShopOpen || Boolean(currentChestKey) || isProfileOpen);
       }
     } catch {
       // Scene might not be initialized yet
     }
-  }, [isShopOpen, currentChestKey, isSleeping]);
+  }, [isShopOpen, currentChestKey, isProfileOpen]);
 
   // Phaser Game instance lifecycle management (React 19 strict-mode safe)
   useEffect(() => {
@@ -158,6 +166,12 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     flushPendingFarmSync();
   };
 
+  // Resources and crops summary
+  const woodCount = inventory.find((i) => i.id === 'resource_wood')?.count ?? 0;
+  const stoneCount = inventory.find((i) => i.id === 'resource_stone')?.count ?? 0;
+  const fiberCount = inventory.find((i) => i.id === 'resource_fiber')?.count ?? 0;
+  const cropItems = inventory.filter((i) => i.type === 'crop' && (i.count ?? 0) > 0);
+
   return (
     <div className="w-screen h-screen overflow-hidden bg-slate-950 flex flex-col items-center justify-center relative p-2 sm:p-4 select-none font-sans">
       
@@ -170,172 +184,235 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
         {/* 1. Canvas Viewport for Phaser 3 */}
         <div ref={containerRef} className="w-full h-full" />
 
-        {/* 2. TOP HUD: Stats, Energy, Gold, Inventory & Cloud Status */}
+        {/* 2. REFACTORED TOP HUD: Streamlined Glassmorphism Stats & Icon Action Buttons */}
         <div className="absolute top-3 left-3 right-3 z-20 flex items-center justify-between pointer-events-none gap-2">
           
-          {/* Top-Left: Player Stats Bar */}
-          <div className="pointer-events-auto flex items-center gap-2 sm:gap-3 bg-slate-900/90 backdrop-blur-md px-3 sm:px-4 py-2 rounded-2xl border border-slate-800 shadow-xl">
-            {/* Day & Season & Sleep */}
-            <div className="flex items-center gap-1.5 pr-2 sm:pr-3 border-r border-slate-700">
-              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[11px] sm:text-xs font-semibold text-slate-200">Ngày {day} (Xuân)</span>
-              <button
-                onClick={handleSleep}
-                disabled={isSleeping}
-                title="Nghỉ ngơi qua ngày mới (Hồi phục thể lực)"
-                className="flex items-center gap-1 ml-1 px-1.5 py-0.5 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 text-[10px] font-semibold border border-indigo-500/30 transition-colors pointer-events-auto cursor-pointer disabled:opacity-50"
-              >
-                <Moon className="w-3 h-3" />
-                <span className="hidden sm:inline">Ngủ</span>
-              </button>
-            </div>
-
-            {/* Energy Meter */}
-            <div className="flex items-center gap-1.5 pr-2 sm:pr-3 border-r border-slate-700">
+          {/* Top-Left: Glassmorphism Stats Bar */}
+          <div className="pointer-events-auto flex items-center gap-2.5 sm:gap-3 bg-slate-900/80 backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl border border-slate-700/60 shadow-xl">
+            {/* Energy Meter with Tooltip */}
+            <div className="group relative flex items-center gap-1.5 cursor-help">
               <Zap className="w-3.5 h-3.5 text-amber-400 fill-amber-400 shrink-0" />
-              <div className="w-16 sm:w-20 h-2 bg-slate-800 rounded-full overflow-hidden border border-slate-700">
+              <div className="w-14 sm:w-16 h-2 bg-slate-800 rounded-full overflow-hidden border border-slate-700">
                 <div 
                   className="h-full bg-gradient-to-r from-amber-500 to-yellow-400 transition-all duration-300"
                   style={{ width: `${Math.round((energy / maxEnergy) * 100)}%` }}
                 />
               </div>
-              <span className="text-[10px] sm:text-[11px] font-mono text-slate-300">{energy}</span>
-            </div>
-
-            {/* Gold Counter */}
-            <div className="flex items-center gap-1 text-amber-300 font-semibold text-[11px] sm:text-xs">
-              <Coins className="w-3.5 h-3.5" />
-              <span>{gold}</span>
-            </div>
-
-            {/* Resources Counter (Wood & Stone) */}
-            <div className="hidden sm:flex items-center gap-2 pl-2 border-l border-slate-700 text-xs">
-              <span className="flex items-center gap-0.5 text-amber-200" title="Gỗ đã khai thác (Dùng Rìu chặt)">
-                <span className="text-xs sm:text-sm">🪵</span>
-                <span className="font-mono font-bold text-amber-300 text-[11px] sm:text-xs">
-                  {inventory.find((i) => i.id === 'resource_wood')?.count ?? 0}
-                </span>
-              </span>
-              <span className="flex items-center gap-0.5 text-slate-300" title="Đá đã khai thác (Dùng Cuốc chim đập)">
-                <span className="text-xs sm:text-sm">🪨</span>
-                <span className="font-mono font-bold text-slate-200 text-[11px] sm:text-xs">
-                  {inventory.find((i) => i.id === 'resource_stone')?.count ?? 0}
-                </span>
-              </span>
-            </div>
-
-            {/* Harvested Goods Summary */}
-            <div className="hidden md:flex items-center gap-1.5 pl-2 border-l border-slate-700">
-              <Package className="w-3.5 h-3.5 text-slate-400" />
-              <div className="flex items-center gap-1.5 text-xs">
-                {inventory.filter(i => i.type === 'crop' && (i.count ?? 0) > 0).map(item => (
-                  <span key={item.id} className="text-slate-300 flex items-center gap-0.5">
-                    <span>{item.icon}</span>
-                    <span className="font-mono text-emerald-400 font-bold text-[11px]">{item.count}</span>
-                  </span>
-                ))}
+              <span className="text-[10px] sm:text-[11px] font-mono text-slate-200 font-semibold">{energy}/{maxEnergy}</span>
+              
+              {/* Tooltip */}
+              <div className="pointer-events-none absolute left-0 top-full mt-2 hidden group-hover:flex flex-col items-center z-50">
+                <div className="bg-slate-950/95 text-slate-200 text-[10px] px-2 py-1 rounded-md border border-slate-700 shadow-xl whitespace-nowrap">
+                  Năng lượng: {energy}/{maxEnergy} (Tự hồi phục)
+                </div>
               </div>
             </div>
+
+            {/* Gold Counter with Tooltip */}
+            <div className="group relative flex items-center gap-1 text-amber-300 font-semibold text-[11px] sm:text-xs cursor-help">
+              <Coins className="w-3.5 h-3.5 text-amber-400" />
+              <span className="font-mono font-bold">{gold}</span>
+              
+              {/* Tooltip */}
+              <div className="pointer-events-none absolute left-0 top-full mt-2 hidden group-hover:flex flex-col items-center z-50">
+                <div className="bg-slate-950/95 text-slate-200 text-[10px] px-2 py-1 rounded-md border border-slate-700 shadow-xl whitespace-nowrap">
+                  Vàng tích lũy: {gold} Gold
+                </div>
+              </div>
+            </div>
+
+            {/* Inline Resource & Crops Counter with Separator */}
+            {(woodCount > 0 || stoneCount > 0 || fiberCount > 0 || cropItems.length > 0) && (
+              <div className="flex items-center gap-2 pl-2 border-l border-slate-700/70 text-xs">
+                {woodCount > 0 && (
+                  <div className="group relative flex items-center gap-0.5 cursor-help">
+                    <span className="text-xs">🪵</span>
+                    <span className="font-mono font-bold text-amber-300 text-[11px]">{woodCount}</span>
+                    <div className="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 hidden group-hover:flex z-50">
+                      <span className="bg-slate-950/95 text-slate-200 text-[10px] px-1.5 py-0.5 rounded border border-slate-700 shadow whitespace-nowrap">
+                        Gỗ: {woodCount}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {stoneCount > 0 && (
+                  <div className="group relative flex items-center gap-0.5 cursor-help">
+                    <span className="text-xs">🪨</span>
+                    <span className="font-mono font-bold text-slate-200 text-[11px]">{stoneCount}</span>
+                    <div className="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 hidden group-hover:flex z-50">
+                      <span className="bg-slate-950/95 text-slate-200 text-[10px] px-1.5 py-0.5 rounded border border-slate-700 shadow whitespace-nowrap">
+                        Đá: {stoneCount}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {fiberCount > 0 && (
+                  <div className="group relative flex items-center gap-0.5 cursor-help">
+                    <span className="text-xs">🌾</span>
+                    <span className="font-mono font-bold text-emerald-300 text-[11px]">{fiberCount}</span>
+                    <div className="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 hidden group-hover:flex z-50">
+                      <span className="bg-slate-950/95 text-slate-200 text-[10px] px-1.5 py-0.5 rounded border border-slate-700 shadow whitespace-nowrap">
+                        Sợi cỏ: {fiberCount}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {cropItems.map((item) => (
+                  <div key={item.id} className="group relative flex items-center gap-0.5 cursor-help">
+                    <span className="text-xs">{item.icon}</span>
+                    <span className="font-mono font-bold text-emerald-400 text-[11px]">{item.count}</span>
+                    <div className="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 hidden group-hover:flex z-50">
+                      <span className="bg-slate-950/95 text-slate-200 text-[10px] px-1.5 py-0.5 rounded border border-slate-700 shadow whitespace-nowrap">
+                        {item.name}: {item.count}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* Top-Right: Cloud Sync Status & User Profile */}
+          {/* Top-Right: Interactive Icon Buttons with Tooltips */}
           <div className="pointer-events-auto flex items-center gap-2">
             
             {/* Shop Button */}
-            <button
-              onClick={() => {
-                setShopTab('buy');
-                setIsShopOpen(true);
-              }}
-              title="Mở Cửa Hàng (Phím B)"
-              className="flex items-center gap-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all shadow-md shadow-amber-950 cursor-pointer"
-            >
-              <ShoppingBag className="w-3.5 h-3.5" />
-              <span>Cửa Hàng (B)</span>
-            </button>
+            <div className="group relative flex items-center justify-center">
+              <button
+                onClick={() => {
+                  setShopTab('buy');
+                  setIsShopOpen(true);
+                }}
+                className="w-9 h-9 rounded-xl bg-slate-900/80 hover:bg-amber-500/20 text-amber-300 border border-slate-700/60 hover:border-amber-500/50 flex items-center justify-center transition-all shadow-lg shadow-black/40 cursor-pointer relative"
+              >
+                <ShoppingBag className="w-4 h-4 text-amber-300" />
+                <span className="absolute -bottom-1 -right-1 text-[8px] font-mono font-bold bg-amber-500/30 text-amber-200 border border-amber-500/40 px-1 rounded-sm leading-tight">
+                  B
+                </span>
+              </button>
+              {/* Tooltip */}
+              <div className="pointer-events-none absolute top-full mt-2 hidden group-hover:flex flex-col items-center z-50">
+                <div className="bg-slate-950/95 text-slate-200 text-[10px] px-2 py-1 rounded-md border border-slate-700 shadow-xl whitespace-nowrap">
+                  Cửa Hàng (Phím B)
+                </div>
+              </div>
+            </div>
 
             {/* Crafting Button */}
-            <button
-              onClick={() => {
-                setShopTab('craft');
-                setIsShopOpen(true);
-              }}
-              title="Mở Bảng Chế Tạo (Phím C)"
-              className="flex items-center gap-1.5 bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 border border-indigo-500/30 px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all shadow-md shadow-indigo-950 cursor-pointer"
-            >
-              <Hammer className="w-3.5 h-3.5" />
-              <span>Chế Tạo (C)</span>
-            </button>
-
-            {/* Cloud Sync Status Indicator */}
-            <button
-              onClick={handleManualSync}
-              title="Nhấn để ép đồng bộ ngay lập tức lên Supabase"
-              className="flex items-center gap-1.5 bg-slate-900/90 backdrop-blur-md px-2.5 sm:px-3 py-1.5 rounded-xl border border-slate-800 text-[11px] hover:border-slate-700 transition-colors shadow-lg"
-            >
-              {syncStatus === 'saving' && (
-                <>
-                  <RefreshCw className="w-3.5 h-3.5 text-amber-400 animate-spin" />
-                  <span className="hidden sm:inline text-amber-300 font-medium">Đang lưu...</span>
-                </>
-              )}
-              {syncStatus === 'pending' && (
-                <>
-                  <Cloud className="w-3.5 h-3.5 text-sky-400 animate-pulse" />
-                  <span className="hidden sm:inline text-slate-300">Chờ lưu</span>
-                </>
-              )}
-              {syncStatus === 'synced' && (
-                <>
-                  <CloudCheck className="w-3.5 h-3.5 text-emerald-400" />
-                  <span className="hidden sm:inline text-emerald-300 font-medium">Đã lưu</span>
-                </>
-              )}
-              {syncStatus === 'error' && (
-                <>
-                  <AlertCircle className="w-3.5 h-3.5 text-rose-400" />
-                  <span className="hidden sm:inline text-rose-300 font-medium">Offline</span>
-                </>
-              )}
-              {syncStatus === 'idle' && (
-                <>
-                  <Cloud className="w-3.5 h-3.5 text-slate-400" />
-                  <span className="hidden sm:inline text-slate-400">Offline</span>
-                </>
-              )}
-            </button>
-
-            {/* Auth / User Pill */}
-            {currentUser ? (
-              <div className="flex items-center gap-1.5 bg-slate-900/90 backdrop-blur-md px-2.5 py-1.5 rounded-xl border border-slate-800 text-[11px] text-slate-300">
-                <User className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="hidden md:inline max-w-[90px] truncate">{currentUser.email?.split('@')[0]}</span>
-                {onSignOut && (
-                  <button 
-                    onClick={onSignOut} 
-                    title="Đăng xuất" 
-                    className="text-slate-400 hover:text-rose-400 transition-colors ml-1"
-                  >
-                    <LogOut className="w-3 h-3" />
-                  </button>
-                )}
+            <div className="group relative flex items-center justify-center">
+              <button
+                onClick={() => {
+                  setShopTab('craft');
+                  setIsShopOpen(true);
+                }}
+                className="w-9 h-9 rounded-xl bg-slate-900/80 hover:bg-indigo-500/20 text-indigo-300 border border-slate-700/60 hover:border-indigo-500/50 flex items-center justify-center transition-all shadow-lg shadow-black/40 cursor-pointer relative"
+              >
+                <Hammer className="w-4 h-4 text-indigo-300" />
+                <span className="absolute -bottom-1 -right-1 text-[8px] font-mono font-bold bg-indigo-500/30 text-indigo-200 border border-indigo-500/40 px-1 rounded-sm leading-tight">
+                  C
+                </span>
+              </button>
+              {/* Tooltip */}
+              <div className="pointer-events-none absolute top-full mt-2 hidden group-hover:flex flex-col items-center z-50">
+                <div className="bg-slate-950/95 text-slate-200 text-[10px] px-2 py-1 rounded-md border border-slate-700 shadow-xl whitespace-nowrap">
+                  Chế Tạo (Phím C)
+                </div>
               </div>
-            ) : (
-              onOpenAuthModal && (
-                <button
-                  onClick={onOpenAuthModal}
-                  className="flex items-center gap-1 bg-emerald-600 hover:bg-emerald-500 text-white px-2.5 py-1.5 rounded-xl text-[11px] font-semibold transition-all shadow-md shadow-emerald-950"
-                >
-                  <LogIn className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Đăng nhập</span>
-                </button>
-              )
-            )}
+            </div>
 
-            {/* Quick Controls Hint */}
-            <div className="hidden lg:flex items-center gap-1.5 bg-slate-900/80 backdrop-blur-md px-2.5 py-1.5 rounded-xl border border-slate-800 text-[11px] text-slate-400">
-              <HelpCircle className="w-3.5 h-3.5" />
-              <span>WASD | Chuột</span>
+            {/* Profile Avatar Button with 6px Sync Status Dot */}
+            <div ref={profileRef} className="relative flex items-center justify-center">
+              <button
+                onClick={() => setIsProfileOpen((prev) => !prev)}
+                className="w-9 h-9 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-700/60 hover:border-slate-600 flex items-center justify-center transition-all shadow-lg shadow-black/40 cursor-pointer relative"
+                title="Hồ sơ & Trạng thái đồng bộ"
+              >
+                <User className="w-4 h-4 text-emerald-400" />
+                {/* 6px Sync Dot */}
+                <span 
+                  className={`absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border-2 border-slate-900 ${
+                    syncStatus === 'synced'
+                      ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]'
+                      : syncStatus === 'saving' || syncStatus === 'pending'
+                      ? 'bg-amber-400 animate-pulse shadow-[0_0_8px_rgba(251,191,36,0.9)]'
+                      : syncStatus === 'error'
+                      ? 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.9)]'
+                      : 'bg-slate-400'
+                  }`} 
+                />
+              </button>
+
+              {/* Profile & Sync Popover Dropdown */}
+              {isProfileOpen && (
+                <div 
+                  className="absolute right-0 top-full mt-2 w-56 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl p-3 text-slate-200 z-50 flex flex-col gap-2.5 animate-in fade-in zoom-in-95 duration-150"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div className="flex items-center gap-2 pb-2 border-b border-slate-800">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                      <User className="w-4 h-4" />
+                    </div>
+                    <div className="overflow-hidden">
+                      <div className="text-[11px] font-bold text-white truncate">
+                        {currentUser?.email || 'Người chơi Khách'}
+                      </div>
+                      <div className="text-[10px] text-slate-400 flex items-center gap-1">
+                        <span className={`w-1.5 h-1.5 rounded-full ${syncStatus === 'synced' ? 'bg-emerald-400' : 'bg-amber-400'}`} />
+                        <span>
+                          {syncStatus === 'synced' && 'Đã lưu đám mây'}
+                          {syncStatus === 'saving' && 'Đang đồng bộ...'}
+                          {syncStatus === 'pending' && 'Chờ đồng bộ...'}
+                          {syncStatus === 'error' && 'Chế độ offline'}
+                          {syncStatus === 'idle' && 'Offline'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      handleManualSync();
+                      setIsProfileOpen(false);
+                    }}
+                    className="w-full py-1.5 px-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-200 flex items-center justify-between transition-colors cursor-pointer"
+                  >
+                    <span className="flex items-center gap-1.5">
+                      <RefreshCw className="w-3.5 h-3.5 text-sky-400" />
+                      <span>Lưu đám mây ngay</span>
+                    </span>
+                  </button>
+
+                  {currentUser ? (
+                    onSignOut && (
+                      <button
+                        onClick={() => {
+                          onSignOut();
+                          setIsProfileOpen(false);
+                        }}
+                        className="w-full py-1.5 px-2.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer"
+                      >
+                        <span>Đăng xuất</span>
+                        <LogOut className="w-3.5 h-3.5" />
+                      </button>
+                    )
+                  ) : (
+                    onOpenAuthModal && (
+                      <button
+                        onClick={() => {
+                          onOpenAuthModal();
+                          setIsProfileOpen(false);
+                        }}
+                        className="w-full py-1.5 px-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center justify-between transition-colors cursor-pointer shadow-md shadow-emerald-950"
+                      >
+                        <span>Đăng nhập</span>
+                        <LogIn className="w-3.5 h-3.5" />
+                      </button>
+                    )
+                  )}
+                </div>
+              )}
             </div>
 
           </div>
@@ -391,23 +468,15 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
           })}
         </div>
 
-        {/* 5. Sleep Transition Overlay */}
-        {isSleeping && (
-          <div className="absolute inset-0 z-40 bg-slate-950/90 backdrop-blur-sm flex flex-col items-center justify-center text-slate-100 animate-in fade-in duration-300">
-            <Moon className="w-10 h-10 text-indigo-400 animate-pulse mb-3" />
-            <div className="text-base font-bold tracking-wide">Màn đêm buông xuống...</div>
-            <div className="text-xs text-slate-400 mt-1">Đang hồi phục thể lực &amp; chuyển sang ngày mới</div>
-          </div>
-        )}
-
       </div>
 
-      {/* 6. Shop & Crafting Modal */}
+      {/* 5. Shop & Crafting Modal */}
       <ShopModal isOpen={isShopOpen} initialTab={shopTab} onClose={() => setIsShopOpen(false)} />
 
-      {/* 7. Chest Storage Modal */}
+      {/* 6. Chest Storage Modal */}
       <ChestModal isOpen={Boolean(currentChestKey)} chestKey={currentChestKey} onClose={() => setCurrentChestKey(null)} />
 
     </div>
   );
 }
+
