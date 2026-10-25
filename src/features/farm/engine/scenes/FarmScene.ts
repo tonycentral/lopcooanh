@@ -2,6 +2,7 @@
 import Phaser from 'phaser';
 import { useGameStore, getCropGrowthStage } from '../../state/useGameStore';
 import type { TileData } from '../../types';
+import { findAStarPath, findBestAdjacentPath } from '../systems/Pathfinding';
 
 interface TileSpriteEntry {
   soilSprite: Phaser.GameObjects.Image | null;
@@ -10,11 +11,16 @@ interface TileSpriteEntry {
   placeableSprite?: Phaser.GameObjects.GameObject | null;
 }
 
-interface PendingAction {
-  gridX: number;
-  gridY: number;
-  targetX: number;
-  targetY: number;
+interface PathWaypoint {
+  gx: number;
+  gy: number;
+  wx: number;
+  wy: number;
+}
+
+interface QueuedAction {
+  targetGridX: number;
+  targetGridY: number;
 }
 
 export default class FarmScene extends Phaser.Scene {
@@ -28,7 +34,9 @@ export default class FarmScene extends Phaser.Scene {
   private readonly BBQ_GRID_Y = 3;
   private playerSpeed = 160;
 
-  private pendingAction: PendingAction | null = null;
+  private currentPath: PathWaypoint[] | null = null;
+  private currentWaypointIndex = 0;
+  private queuedAction: QueuedAction | null = null;
   private isPerformingAction = false;
   private currentToolSprite: Phaser.GameObjects.Sprite | Phaser.GameObjects.Image | null = null;
   private currentActionTween: Phaser.Tweens.Tween | null = null;
@@ -115,7 +123,7 @@ export default class FarmScene extends Phaser.Scene {
       if (dist <= this.INTERACTION_RANGE) {
         this.openSanctuaryQuiz();
       } else {
-        this.startAutoApproach(this.SANCTUARY_GRID_X, this.SANCTUARY_GRID_Y, this.sanctuarySprite.x, this.sanctuarySprite.y + 28);
+        this.handleTileClick(this.SANCTUARY_GRID_X, this.SANCTUARY_GRID_Y);
       }
     });
 
@@ -175,7 +183,7 @@ export default class FarmScene extends Phaser.Scene {
       if (dist <= this.INTERACTION_RANGE) {
         this.openBBQStand();
       } else {
-        this.startAutoApproach(this.BBQ_GRID_X, this.BBQ_GRID_Y, this.bbqSprite.x, this.bbqSprite.y + 28);
+        this.handleTileClick(this.BBQ_GRID_X, this.BBQ_GRID_Y);
       }
     });
 
@@ -349,7 +357,9 @@ export default class FarmScene extends Phaser.Scene {
   }
 
   public stopMovement() {
-    this.pendingAction = null;
+    this.currentPath = null;
+    this.currentWaypointIndex = 0;
+    this.queuedAction = null;
     if (this.player && this.player.body) {
       this.player.setVelocity(0, 0);
       this.updatePlayerIdleAnimation();
@@ -432,9 +442,11 @@ export default class FarmScene extends Phaser.Scene {
       if (this.cursors.down.isDown || this.wasd.down.isDown) manualVy += this.playerSpeed;
     }
 
-    // 1. Player Override: Manual keyboard control immediately cancels any automated approach
+    // 1. Player Override: Manual keyboard control immediately cancels any automated pathfinding
     if (manualVx !== 0 || manualVy !== 0) {
-      this.pendingAction = null;
+      this.currentPath = null;
+      this.currentWaypointIndex = 0;
+      this.queuedAction = null;
 
       if (manualVx !== 0 && manualVy !== 0) {
         manualVx *= 0.7071;
@@ -462,51 +474,76 @@ export default class FarmScene extends Phaser.Scene {
       return;
     }
 
-    // 2. Auto-Approach Navigation to Target Tile
-    if (this.pendingAction) {
-      const targetCenterX = this.pendingAction.gridX * this.TILE_SIZE + 16;
-      const targetCenterY = this.pendingAction.gridY * this.TILE_SIZE + 16;
-      const distToTarget = Phaser.Math.Distance.Between(this.player.x, this.player.y, targetCenterX, targetCenterY);
-      const distToDest = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.pendingAction.targetX, this.pendingAction.targetY);
+    // 2. Tile-by-Tile A* Waypoint Traversal Loop
+    if (this.currentPath && this.currentPath.length > 0) {
+      const wp = this.currentPath[this.currentWaypointIndex];
+      const dx = wp.wx - this.player.x;
+      const dy = wp.wy - this.player.y;
+      const dist = Math.hypot(dx, dy);
 
-      // Check if player has arrived within interaction range
-      if (distToTarget <= this.INTERACTION_RANGE || distToDest <= 8) {
-        const { gridX, gridY } = this.pendingAction;
-        this.pendingAction = null;
-        this.player.setVelocity(0, 0);
-        this.updateFacingDirection(targetCenterX, targetCenterY);
+      // Reached current waypoint center (tolerance <= 3px)
+      if (dist <= 3) {
+        this.player.setPosition(wp.wx, wp.wy);
+        this.currentWaypointIndex++;
 
-        if (gridX === this.SANCTUARY_GRID_X && gridY === this.SANCTUARY_GRID_Y) {
-          this.openSanctuaryQuiz();
-        } else if (gridX === this.BBQ_GRID_X && gridY === this.BBQ_GRID_Y) {
-          this.openBBQStand();
+        // Reached final destination of path
+        if (this.currentWaypointIndex >= this.currentPath.length) {
+          const action = this.queuedAction;
+          this.currentPath = null;
+          this.currentWaypointIndex = 0;
+          this.queuedAction = null;
+          this.player.setVelocity(0, 0);
+
+          if (action) {
+            const targetCenterX = action.targetGridX * this.TILE_SIZE + 16;
+            const targetCenterY = action.targetGridY * this.TILE_SIZE + 16;
+            this.updateFacingDirection(targetCenterX, targetCenterY);
+
+            if (action.targetGridX === this.SANCTUARY_GRID_X && action.targetGridY === this.SANCTUARY_GRID_Y) {
+              this.openSanctuaryQuiz();
+            } else if (action.targetGridX === this.BBQ_GRID_X && action.targetGridY === this.BBQ_GRID_Y) {
+              this.openBBQStand();
+            } else {
+              this.triggerTileInteraction(action.targetGridX, action.targetGridY);
+            }
+          } else {
+            this.updatePlayerIdleAnimation();
+          }
+          return;
+        }
+      } else {
+        // Move strictly along dominant cardinal direction to prevent diagonal obstacle clipping
+        let vx = 0;
+        let vy = 0;
+
+        if (Math.abs(dx) > Math.abs(dy)) {
+          vx = Math.sign(dx) * this.playerSpeed;
+          // Align cross axis if close to avoid collider edge scraping
+          if (Math.abs(dy) <= 6) {
+            this.player.y = wp.wy;
+          }
         } else {
-          this.triggerTileInteraction(gridX, gridY);
+          vy = Math.sign(dy) * this.playerSpeed;
+          // Align cross axis if close to avoid collider edge scraping
+          if (Math.abs(dx) <= 6) {
+            this.player.x = wp.wx;
+          }
+        }
+
+        this.player.setVelocity(vx, vy);
+
+        if (vx < 0) this.lastDirection = 'left';
+        else if (vx > 0) this.lastDirection = 'right';
+        else if (vy < 0) this.lastDirection = 'up';
+        else if (vy > 0) this.lastDirection = 'down';
+
+        this.player.setDepth(10 + (this.player.y / 1000));
+        const walkAnim = `walk_${this.lastDirection}`;
+        if (this.anims.exists(walkAnim)) {
+          this.player.anims.play(walkAnim, true);
         }
         return;
       }
-
-      // Move player towards destination point
-      this.physics.moveTo(this.player, this.pendingAction.targetX, this.pendingAction.targetY, this.playerSpeed);
-
-      // Track facing direction from current physics velocity
-      const body = this.player.body as Phaser.Physics.Arcade.Body;
-      const vx = body.velocity.x;
-      const vy = body.velocity.y;
-
-      if (Math.abs(vx) > Math.abs(vy)) {
-        this.lastDirection = vx > 0 ? 'right' : 'left';
-      } else if (Math.abs(vy) > 0) {
-        this.lastDirection = vy > 0 ? 'down' : 'up';
-      }
-
-      this.player.setDepth(10 + (this.player.y / 1000));
-
-      const walkAnim = `walk_${this.lastDirection}`;
-      if (this.anims.exists(walkAnim)) {
-        this.player.anims.play(walkAnim, true);
-      }
-      return;
     }
 
     // 3. Complete Idle State
@@ -681,116 +718,165 @@ export default class FarmScene extends Phaser.Scene {
     return sprite;
   }
 
+  public isTileWalkable(gx: number, gy: number): boolean {
+    if (gx < 0 || gx >= this.GRID_WIDTH || gy < 0 || gy >= this.GRID_HEIGHT) {
+      return false;
+    }
+
+    // Permanent rest stations are solid
+    if ((gx === this.SANCTUARY_GRID_X && gy === this.SANCTUARY_GRID_Y) ||
+        (gx === this.BBQ_GRID_X && gy === this.BBQ_GRID_Y)) {
+      return false;
+    }
+
+    const store = useGameStore.getState();
+    const tile = store.tiles[`${gx},${gy}`];
+    if (!tile) return true;
+
+    if (tile.station) return false;
+
+    // Solid obstacles (Rock, Wood) - Weeds are walkable
+    if (tile.obstacle) {
+      if (tile.obstacle.type === 'rock' || tile.obstacle.type === 'wood' || tile.obstacle.isDestructible === false) {
+        return false;
+      }
+    }
+
+    // Solid structures (Fence, Chest)
+    if (tile.placeable) {
+      if (tile.placeable.type === 'fence' || tile.placeable.type === 'chest') {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  private startPathNavigation(waypoints: { x: number; y: number }[], targetGridX: number, targetGridY: number) {
+    this.currentPath = waypoints.map((pt) => ({
+      gx: pt.x,
+      gy: pt.y,
+      wx: pt.x * this.TILE_SIZE + 16,
+      wy: pt.y * this.TILE_SIZE + 16
+    }));
+    this.currentWaypointIndex = 0;
+    this.queuedAction = { targetGridX, targetGridY };
+  }
+
+  private showFloatingNotice(text: string, x?: number, y?: number) {
+    const posX = x ?? this.player.x;
+    const posY = y ?? (this.player.y - 20);
+
+    const notice = this.add.text(posX, posY, text, {
+      fontSize: '11px',
+      fontStyle: 'bold',
+      color: '#f87171',
+      stroke: '#0f172a',
+      strokeThickness: 3,
+      fontFamily: 'sans-serif'
+    }).setOrigin(0.5).setDepth(40);
+
+    this.tweens.add({
+      targets: notice,
+      y: posY - 22,
+      alpha: 0,
+      duration: 1200,
+      ease: 'Power1',
+      onComplete: () => notice.destroy()
+    });
+  }
+
   private handleTileClick(x: number, y: number) {
-    // Click directly on Campfire / Sanctuary tile
+    // 1. Direct Click on Campfire Sanctuary
     if (x === this.SANCTUARY_GRID_X && y === this.SANCTUARY_GRID_Y) {
       const distToCamp = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.sanctuarySprite.x, this.sanctuarySprite.y);
       if (distToCamp <= this.INTERACTION_RANGE) {
         this.openSanctuaryQuiz();
-      } else {
-        this.startAutoApproach(this.SANCTUARY_GRID_X, this.SANCTUARY_GRID_Y, this.sanctuarySprite.x, this.sanctuarySprite.y + 28);
+        return;
       }
-      return;
     }
 
-    // Click directly on BBQ Stand tile
+    // 2. Direct Click on BBQ Stand
     if (x === this.BBQ_GRID_X && y === this.BBQ_GRID_Y) {
       const distToBBQ = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.bbqSprite.x, this.bbqSprite.y);
       if (distToBBQ <= this.INTERACTION_RANGE) {
         this.openBBQStand();
-      } else {
-        this.startAutoApproach(this.BBQ_GRID_X, this.BBQ_GRID_Y, this.bbqSprite.x, this.bbqSprite.y + 28);
+        return;
       }
-      return;
     }
 
     const targetCenterX = x * this.TILE_SIZE + 16;
     const targetCenterY = y * this.TILE_SIZE + 16;
     const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, targetCenterX, targetCenterY);
 
-    // Case 1: Within interaction range (dist <= INTERACTION_RANGE) -> trigger interaction
+    // Case 1: Within interaction range (dist <= INTERACTION_RANGE) -> trigger interaction immediately
     if (dist <= this.INTERACTION_RANGE) {
-      this.pendingAction = null;
-      this.player.setVelocity(0, 0);
+      this.stopMovement();
       this.updateFacingDirection(targetCenterX, targetCenterY);
       this.triggerTileInteraction(x, y);
       return;
     }
 
-    // Case 2: Out of range -> Calculate approach destination and auto-walk
-    const store = useGameStore.getState();
-    const currentTile = store.tiles[`${x},${y}`];
-    const isSolid = currentTile?.station ||
-                    currentTile?.obstacle?.type === 'rock' ||
-                    currentTile?.obstacle?.type === 'wood' ||
-                    currentTile?.placeable?.type === 'fence' ||
-                    currentTile?.placeable?.type === 'chest' ||
-                    (x === this.SANCTUARY_GRID_X && y === this.SANCTUARY_GRID_Y) ||
-                    (x === this.BBQ_GRID_X && y === this.BBQ_GRID_Y);
+    // Case 2: Out of range -> Calculate tile-by-tile A* path
+    const startGx = Phaser.Math.Clamp(Math.floor(this.player.x / this.TILE_SIZE), 0, this.GRID_WIDTH - 1);
+    const startGy = Phaser.Math.Clamp(Math.floor(this.player.y / this.TILE_SIZE), 0, this.GRID_HEIGHT - 1);
 
-    let destX = targetCenterX;
-    let destY = targetCenterY;
+    const isSolid = !this.isTileWalkable(x, y);
 
     if (isSolid) {
-      // Find the closest walkable adjacent tile (North, South, West, East)
-      const candidates = [
-        { gx: x, gy: y - 1 },
-        { gx: x, gy: y + 1 },
-        { gx: x - 1, gy: y },
-        { gx: x + 1, gy: y }
-      ];
+      // Find shortest valid path to any walkable adjacent neighbor of solid entity/station
+      const result = findBestAdjacentPath(
+        { x: startGx, y: startGy },
+        { x, y },
+        (gx, gy) => this.isTileWalkable(gx, gy),
+        this.GRID_WIDTH,
+        this.GRID_HEIGHT
+      );
 
-      let bestDist = Infinity;
-      let foundSpot = false;
+      if (!result) {
+        this.showFloatingNotice('Không có đường đi tới đó!', targetCenterX, targetCenterY);
+        return;
+      }
 
-      for (const cand of candidates) {
-        if (!this.isValidTile(cand.gx, cand.gy)) continue;
-        const candTile = store.tiles[`${cand.gx},${cand.gy}`];
-        const candSolid = candTile?.station ||
-                          candTile?.obstacle?.type === 'rock' ||
-                          candTile?.obstacle?.type === 'wood' ||
-                          candTile?.placeable?.type === 'fence' ||
-                          candTile?.placeable?.type === 'chest' ||
-                          (cand.gx === this.SANCTUARY_GRID_X && cand.gy === this.SANCTUARY_GRID_Y) ||
-                          (cand.gx === this.BBQ_GRID_X && cand.gy === this.BBQ_GRID_Y);
-        if (!candSolid) {
-          const cx = cand.gx * this.TILE_SIZE + 16;
-          const cy = cand.gy * this.TILE_SIZE + 16;
-          const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, cx, cy);
-          if (d < bestDist) {
-            bestDist = d;
-            destX = cx;
-            destY = cy;
-            foundSpot = true;
-          }
+      if (result.path.length === 0) {
+        // Player is already standing on an adjacent tile
+        this.stopMovement();
+        this.updateFacingDirection(targetCenterX, targetCenterY);
+        if (x === this.SANCTUARY_GRID_X && y === this.SANCTUARY_GRID_Y) {
+          this.openSanctuaryQuiz();
+        } else if (x === this.BBQ_GRID_X && y === this.BBQ_GRID_Y) {
+          this.openBBQStand();
+        } else {
+          this.triggerTileInteraction(x, y);
         }
+        return;
       }
 
-      if (!foundSpot) {
-        // Fallback: point 32px away along line from target to player
-        const angle = Phaser.Math.Angle.Between(targetCenterX, targetCenterY, this.player.x, this.player.y);
-        destX = targetCenterX + Math.cos(angle) * 32;
-        destY = targetCenterY + Math.sin(angle) * 32;
-      }
+      this.startPathNavigation(result.path, x, y);
     } else {
-      // Walkable target: aim near tile center
-      const angle = Phaser.Math.Angle.Between(targetCenterX, targetCenterY, this.player.x, this.player.y);
-      destX = targetCenterX + Math.cos(angle) * 16;
-      destY = targetCenterY + Math.sin(angle) * 16;
+      // Walkable target: find direct A* path
+      const path = findAStarPath(
+        { x: startGx, y: startGy },
+        { x, y },
+        (gx, gy) => this.isTileWalkable(gx, gy),
+        this.GRID_WIDTH,
+        this.GRID_HEIGHT
+      );
+
+      if (!path) {
+        this.showFloatingNotice('Không có đường đi tới đó!', targetCenterX, targetCenterY);
+        return;
+      }
+
+      if (path.length === 0) {
+        this.stopMovement();
+        this.updateFacingDirection(targetCenterX, targetCenterY);
+        this.triggerTileInteraction(x, y);
+        return;
+      }
+
+      this.startPathNavigation(path, x, y);
     }
-
-    this.startAutoApproach(x, y, destX, destY);
-  }
-
-  private startAutoApproach(gridX: number, gridY: number, destX: number, destY: number) {
-    this.pendingAction = {
-      gridX,
-      gridY,
-      targetX: destX,
-      targetY: destY
-    };
-    this.physics.moveTo(this.player, destX, destY, this.playerSpeed);
-    this.updateFacingDirection(destX, destY);
   }
 
   /**
