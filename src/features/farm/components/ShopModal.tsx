@@ -10,7 +10,7 @@ import {
   Package, 
   Sparkles
 } from 'lucide-react';
-import { useGameStore, SHOP_SEEDS, SHOP_CROPS } from '../state/useGameStore';
+import { useGameStore, SHOP_SEEDS, ALL_SELLABLE_ITEMS } from '../state/useGameStore';
 
 interface ShopModalProps {
   isOpen: boolean;
@@ -41,8 +41,8 @@ export default function ShopModal({ isOpen, onClose }: ShopModalProps) {
 
   if (!isOpen) return null;
 
-  const harvestedCrops = inventory.filter((item) => item.type === 'crop' && (item.count ?? 0) > 0);
-  const totalCropsCount = harvestedCrops.reduce((acc, item) => acc + (item.count ?? 0), 0);
+  const sellableItemsInInv = inventory.filter((item) => (item.type === 'crop' || item.type === 'resource') && (item.count ?? 0) > 0);
+  const totalSellableCount = sellableItemsInInv.reduce((acc, item) => acc + (item.count ?? 0), 0);
 
   return (
     <div 
@@ -106,10 +106,10 @@ export default function ShopModal({ isOpen, onClose }: ShopModalProps) {
             }`}
           >
             <Package className="w-4 h-4" />
-            <span>Bán Nông Sản (Sell)</span>
-            {totalCropsCount > 0 && (
+            <span>Bán Sản Phẩm &amp; Tài Nguyên</span>
+            {totalSellableCount > 0 && (
               <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-300 font-mono">
-                {totalCropsCount}
+                {totalSellableCount}
               </span>
             )}
           </button>
@@ -170,15 +170,15 @@ export default function ShopModal({ isOpen, onClose }: ShopModalProps) {
           </div>
         )}
 
-        {/* Tab 2: Bán Nông Sản (Sell Crops) */}
+        {/* Tab 2: Bán Hàng (Sell Crops & Resources) */}
         {tab === 'sell' && (
           <div className="p-5 space-y-4 max-h-[60vh] overflow-y-auto">
             {/* Quick Sell All Banner */}
-            {totalCropsCount > 0 ? (
+            {totalSellableCount > 0 ? (
               <div className="p-3.5 rounded-xl bg-amber-950/30 border border-amber-800/40 flex items-center justify-between">
                 <div>
                   <div className="text-xs font-semibold text-amber-300">
-                    Kho hiện có {totalCropsCount} sản phẩm thu hoạch
+                    Kho hiện có {totalSellableCount} sản phẩm thu hoạch &amp; tài nguyên
                   </div>
                   <div className="text-[11px] text-slate-400">
                     Bán nhanh tất cả vào chợ để nhận vàng ngay lập tức.
@@ -194,37 +194,37 @@ export default function ShopModal({ isOpen, onClose }: ShopModalProps) {
               </div>
             ) : (
               <div className="text-center py-6 text-slate-400 text-xs">
-                Kho chưa có nông sản thành phẩm. Hãy gieo hạt, tưới nước và thu hoạch khi cây chín!
+                Kho chưa có nông sản hoặc tài nguyên. Hãy trồng trọt hoặc dùng Rìu/Cuốc chim khai thác đá và gỗ!
               </div>
             )}
 
             {/* List of Sellable Items */}
             <div className="space-y-3">
-              {SHOP_CROPS.map((crop) => {
-                const invItem = inventory.find((i) => i.id === crop.id);
+              {ALL_SELLABLE_ITEMS.map((item) => {
+                const invItem = inventory.find((i) => i.id === item.id);
                 const count = invItem?.count ?? 0;
                 const canSell = count > 0;
 
                 return (
                   <div 
-                    key={crop.id}
+                    key={item.id}
                     className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center justify-between gap-4 hover:border-slate-700 transition-colors"
                   >
                     <div className="flex items-center gap-3">
                       <div className="text-3xl w-10 h-10 flex items-center justify-center bg-slate-800/80 rounded-xl">
-                        {crop.icon}
+                        {item.icon}
                       </div>
                       <div>
                         <div className="text-sm font-semibold text-white flex items-center gap-2">
-                          {crop.name}
+                          {item.name}
                           <span className="text-[11px] font-normal text-slate-400">
                             (Trong kho: <span className="font-mono text-amber-400 font-bold">{count}</span>)
                           </span>
                         </div>
-                        <div className="text-xs text-slate-400 mt-0.5">{crop.desc}</div>
+                        <div className="text-xs text-slate-400 mt-0.5">{item.desc}</div>
                         <div className="text-xs font-bold text-emerald-400 mt-1 flex items-center gap-1">
                           <Coins className="w-3.5 h-3.5" />
-                          <span>Thu mua: {crop.price} Gold / đơn vị</span>
+                          <span>Thu mua: {item.price} Gold / đơn vị</span>
                         </div>
                       </div>
                     </div>
@@ -232,18 +232,18 @@ export default function ShopModal({ isOpen, onClose }: ShopModalProps) {
                     {/* Sell Buttons */}
                     <div className="flex items-center gap-2 shrink-0">
                       <button
-                        onClick={() => sellCrop(crop.id, 1)}
+                        onClick={() => sellCrop(item.id, 1)}
                         disabled={!canSell}
                         className="px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 disabled:opacity-30 disabled:hover:bg-amber-600 text-white text-xs font-semibold transition-all shadow-md shadow-amber-950"
                       >
-                        Bán x1 (+{crop.price}g)
+                        Bán x1 (+{item.price}g)
                       </button>
                       {count >= 5 && (
                         <button
-                          onClick={() => sellCrop(crop.id, 5)}
+                          onClick={() => sellCrop(item.id, 5)}
                           className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-all"
                         >
-                          Bán x5 (+{crop.price * 5}g)
+                          Bán x5 (+{item.price * 5}g)
                         </button>
                       )}
                     </div>

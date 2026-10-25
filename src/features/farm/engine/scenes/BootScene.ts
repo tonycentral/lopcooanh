@@ -207,5 +207,78 @@ export default class BootScene extends Phaser.Scene {
       g.generateTexture('tile_marker', 32, 32);
       g.destroy();
     }
+
+    // 8. Obstacle: Rock (32x32)
+    if (!this.textures.exists('obstacle_rock')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Drop shadow
+      g.fillStyle(0x0f172a, 0.35);
+      g.fillEllipse(16, 25, 22, 8);
+      // Main rock body
+      g.fillStyle(0x64748b, 1);
+      g.fillRoundedRect(5, 8, 22, 17, 6);
+      // Dark shadow side
+      g.fillStyle(0x475569, 1);
+      g.fillRoundedRect(13, 13, 14, 12, 4);
+      // Highlight facet
+      g.fillStyle(0x94a3b8, 1);
+      g.fillRoundedRect(7, 9, 8, 8, 3);
+      g.fillStyle(0xcfd8dc, 1);
+      g.fillRect(8, 10, 3, 3);
+      // Crack lines
+      g.fillStyle(0x334155, 1);
+      g.fillRect(15, 11, 2, 6);
+      g.fillRect(17, 16, 3, 2);
+      g.generateTexture('obstacle_rock', 32, 32);
+      g.destroy();
+    }
+
+    // 9. Obstacle: Wood Log (32x32)
+    if (!this.textures.exists('obstacle_wood')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Drop shadow
+      g.fillStyle(0x0f172a, 0.35);
+      g.fillEllipse(16, 25, 24, 8);
+      // Log bark (cylinder)
+      g.fillStyle(0x5c3a21, 1);
+      g.fillRoundedRect(4, 11, 24, 14, 4);
+      g.fillStyle(0x452b19, 1);
+      g.fillRect(6, 17, 20, 3);
+      g.fillRect(8, 21, 16, 2);
+      // Log cut end (annual rings)
+      g.fillStyle(0xdeb887, 1);
+      g.fillEllipse(9, 18, 10, 12);
+      g.fillStyle(0xc49a6c, 1);
+      g.fillEllipse(9, 18, 6, 8);
+      g.fillStyle(0x8b5a2b, 1);
+      g.fillRect(9, 18, 2, 2);
+      // Small moss / twig
+      g.fillStyle(0x4caf50, 1);
+      g.fillRect(18, 9, 3, 3);
+      g.fillRect(20, 8, 2, 2);
+      g.generateTexture('obstacle_wood', 32, 32);
+      g.destroy();
+    }
+
+    // 10. Obstacle: Weeds (32x32)
+    if (!this.textures.exists('obstacle_weed')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Clump of overgrown weeds
+      g.fillStyle(0x2d6a4f, 1);
+      g.fillTriangle(6, 28, 10, 8, 14, 28);
+      g.fillTriangle(12, 28, 17, 5, 21, 28);
+      g.fillTriangle(18, 28, 23, 10, 27, 28);
+      // Secondary lighter blades
+      g.fillStyle(0x52b788, 1);
+      g.fillTriangle(9, 28, 13, 11, 16, 28);
+      g.fillTriangle(16, 28, 20, 9, 24, 28);
+      // Little wildflower / thistle
+      g.fillStyle(0xfbbf24, 1);
+      g.fillCircle(17, 7, 2.5);
+      g.fillStyle(0xf59e0b, 1);
+      g.fillCircle(17, 7, 1.2);
+      g.generateTexture('obstacle_weed', 32, 32);
+      g.destroy();
+    }
   }
 }

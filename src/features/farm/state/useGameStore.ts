@@ -49,6 +49,14 @@ export const SHOP_CROPS = [
   { id: 'crop_herb', name: 'Nhánh Thảo Mộc', icon: '🌿', price: 35, desc: 'Dược liệu cao cấp từ thảo mộc.' }
 ];
 
+export const SHOP_RESOURCES = [
+  { id: 'resource_wood', name: 'Gỗ Tự Nhiên', icon: '🪵', price: 4, desc: 'Khai thác từ các khúc gỗ mục bằng Rìu.' },
+  { id: 'resource_stone', name: 'Đá Cuội', icon: '🪨', price: 4, desc: 'Thu thập từ các tảng đá bằng Cuốc chim.' },
+  { id: 'resource_fiber', name: 'Sợi Cỏ Dại', icon: '🌾', price: 1, desc: 'Cắt dọn từ các bụi cỏ dại bằng Liềm.' }
+];
+
+export const ALL_SELLABLE_ITEMS = [...SHOP_CROPS, ...SHOP_RESOURCES];
+
 
 /**
  * Timestamp Delta & Watering Growth Calculation Engine (Decision 5C)
@@ -101,27 +109,20 @@ export function getCropGrowthStage(
   };
 }
 
-// 5 Main Hotbar Slots (Mapped to keys 1 - 5)
-const defaultHotbar: InventoryItem[] = [
+// 8 Expanded Hotbar Slots (Mapped to keys 1 - 8)
+export const defaultHotbar: InventoryItem[] = [
   { id: 'hoe', name: 'Cuốc Đất (Hoe)', icon: '⛏️', type: 'tool' },
   { id: 'water_can', name: 'Bình Tưới (Water Can)', icon: '💧', type: 'tool' },
-  { id: 'seed_wheat', name: 'Hạt Lúa Mì (Wheat Seeds)', icon: '🌱', type: 'seed', count: 15, cropId: 'wheat' },
+  { id: 'axe', name: 'Rìu Chặt Gỗ (Axe)', icon: '🪓', type: 'tool' },
+  { id: 'pickaxe', name: 'Cuốc Chim Đập Đá (Pickaxe)', icon: '⛏', type: 'tool' },
+  { id: 'scythe', name: 'Liềm Cắt Cỏ (Scythe)', icon: '🗡️', type: 'tool' },
   { id: 'hand', name: 'Thu Hoạch (Hand/Harvest)', icon: '✋', type: 'tool' },
+  { id: 'seed_wheat', name: 'Hạt Lúa Mì (Wheat Seeds)', icon: '🌱', type: 'seed', count: 15, cropId: 'wheat' },
   { id: 'seed_herb', name: 'Hạt Thảo Mộc (Herb Seeds)', icon: '🌿', type: 'seed', count: 8, cropId: 'herb' }
 ];
 
-const defaultInitialState: PlayerFarmState = {
-  gold: 250,
-  energy: 100,
-  maxEnergy: 100,
-  day: 1,
-  activeTool: 'hoe',
-  hotbar: defaultHotbar,
-  inventory: [
-    { id: 'crop_wheat', name: 'Bông Lúa Mì', icon: '🌾', type: 'crop', count: 2, price: 15 },
-    { id: 'crop_herb', name: 'Nhánh Thảo Mộc', icon: '🌿', type: 'crop', count: 1, price: 35 }
-  ],
-  tiles: {
+export function createInitialTiles(): Record<string, TileData> {
+  const tiles: Record<string, TileData> = {
     '12,8': {
       isTilled: true,
       isWatered: true,
@@ -132,12 +133,14 @@ const defaultInitialState: PlayerFarmState = {
         totalStages: 4,
         growthSecondsAcc: 20,
         wateredAt: Date.now() - 15000
-      }
+      },
+      obstacle: null
     },
     '13,8': {
       isTilled: true,
       isWatered: false,
-      crop: null
+      crop: null,
+      obstacle: null
     },
     '14,8': {
       isTilled: true,
@@ -149,9 +152,80 @@ const defaultInitialState: PlayerFarmState = {
         totalStages: 4,
         growthSecondsAcc: 60,
         wateredAt: Date.now() - 35000
-      }
+      },
+      obstacle: null
     }
-  },
+  };
+
+  // Pre-configured natural obstacle positions (Rocks, Wood logs, Weeds)
+  const obstaclePositions: Array<{ x: number; y: number; type: 'rock' | 'wood' | 'weed'; hp: number }> = [
+    // Rocks (hp: 2)
+    { x: 5, y: 4, type: 'rock', hp: 2 },
+    { x: 6, y: 15, type: 'rock', hp: 2 },
+    { x: 8, y: 11, type: 'rock', hp: 2 },
+    { x: 20, y: 5, type: 'rock', hp: 2 },
+    { x: 22, y: 14, type: 'rock', hp: 2 },
+    { x: 25, y: 8, type: 'rock', hp: 2 },
+    { x: 24, y: 17, type: 'rock', hp: 2 },
+    { x: 9, y: 18, type: 'rock', hp: 2 },
+
+    // Wood Logs (hp: 2)
+    { x: 4, y: 9, type: 'wood', hp: 2 },
+    { x: 7, y: 6, type: 'wood', hp: 2 },
+    { x: 18, y: 12, type: 'wood', hp: 2 },
+    { x: 21, y: 8, type: 'wood', hp: 2 },
+    { x: 26, y: 12, type: 'wood', hp: 2 },
+    { x: 11, y: 16, type: 'wood', hp: 2 },
+    { x: 17, y: 16, type: 'wood', hp: 2 },
+    { x: 3, y: 14, type: 'wood', hp: 2 },
+
+    // Weeds (hp: 1)
+    { x: 6, y: 8, type: 'weed', hp: 1 },
+    { x: 10, y: 5, type: 'weed', hp: 1 },
+    { x: 11, y: 10, type: 'weed', hp: 1 },
+    { x: 16, y: 6, type: 'weed', hp: 1 },
+    { x: 19, y: 9, type: 'weed', hp: 1 },
+    { x: 23, y: 6, type: 'weed', hp: 1 },
+    { x: 25, y: 15, type: 'weed', hp: 1 },
+    { x: 8, y: 14, type: 'weed', hp: 1 },
+    { x: 15, y: 15, type: 'weed', hp: 1 },
+    { x: 20, y: 16, type: 'weed', hp: 1 },
+    { x: 7, y: 17, type: 'weed', hp: 1 },
+    { x: 27, y: 5, type: 'weed', hp: 1 }
+  ];
+
+  for (const obs of obstaclePositions) {
+    const key = `${obs.x},${obs.y}`;
+    tiles[key] = {
+      isTilled: false,
+      isWatered: false,
+      crop: null,
+      obstacle: {
+        type: obs.type,
+        hp: obs.hp,
+        maxHp: obs.hp
+      },
+      lastUpdated: Date.now()
+    };
+  }
+
+  return tiles;
+}
+
+const defaultInitialState: PlayerFarmState = {
+  gold: 250,
+  energy: 100,
+  maxEnergy: 100,
+  day: 1,
+  activeTool: 'hoe',
+  hotbar: defaultHotbar,
+  inventory: [
+    { id: 'crop_wheat', name: 'Bông Lúa Mì', icon: '🌾', type: 'crop', count: 2, price: 15 },
+    { id: 'crop_herb', name: 'Nhánh Thảo Mộc', icon: '🌿', type: 'crop', count: 1, price: 35 },
+    { id: 'resource_wood', name: 'Gỗ Tự Nhiên', icon: '🪵', type: 'resource', count: 4, price: 4 },
+    { id: 'resource_stone', name: 'Đá Cuội', icon: '🪨', type: 'resource', count: 2, price: 4 }
+  ],
+  tiles: createInitialTiles(),
   updatedAt: Date.now()
 };
 
@@ -174,6 +248,15 @@ export interface GameStoreState extends PlayerFarmState {
     goldReward?: number; 
     vocabReward?: string; 
     reason?: string 
+  };
+  gatherResource: (x: number, y: number) => {
+    success: boolean;
+    destroyed?: boolean;
+    remainingHp?: number;
+    resourceName?: string;
+    resourceCount?: number;
+    icon?: string;
+    reason?: string;
   };
   addGold: (amount: number) => void;
   sleepNextDay: () => void;
@@ -220,6 +303,13 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         return { success: false, reason: msg };
       }
 
+      if (currentTile?.obstacle) {
+        const obsName = currentTile.obstacle.type === 'rock' ? 'Đá cuội' : currentTile.obstacle.type === 'wood' ? 'Khúc gỗ' : 'Cỏ dại';
+        const msg = `Ô đất đang có ${obsName}! Cần dùng công cụ khai thác để dọn dẹp trước.`;
+        get().notify(msg, 'warning');
+        return { success: false, reason: `Vướng ${obsName}!` };
+      }
+
       if (currentTile?.isTilled) {
         const msg = 'Đất này đã được cuốc sẵn rồi!';
         get().notify(msg, 'info');
@@ -239,6 +329,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
           isTilled: true,
           isWatered: false,
           crop: null,
+          obstacle: null,
           lastUpdated: Date.now()
         }
       };
@@ -259,6 +350,12 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       const key = `${x},${y}`;
       const state = get();
       const currentTile = state.tiles[key];
+
+      if (currentTile?.obstacle) {
+        const msg = 'Không thể tưới nước lên chướng ngại vật!';
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
 
       if (!currentTile?.isTilled) {
         const msg = 'Cần cuốc đất trước khi tưới nước!';
@@ -320,6 +417,12 @@ export const useGameStore = create<GameStoreState>((set, get) => {
 
       if (!currentTile?.isTilled) {
         const msg = 'Cần cuốc đất trước khi gieo hạt!';
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      if (currentTile?.obstacle) {
+        const msg = 'Không thể gieo hạt lên ô đang có chướng ngại vật!';
         get().notify(msg, 'warning');
         return { success: false, reason: msg };
       }
@@ -470,6 +573,121 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       };
     },
 
+    // Resource Gathering (Axe -> Wood, Pickaxe -> Rock, Scythe -> Weed)
+    gatherResource: (x, y) => {
+      const key = `${x},${y}`;
+      const state = get();
+      const currentTile = state.tiles[key];
+
+      if (!currentTile?.obstacle) {
+        return { success: false, reason: 'Không có chướng ngại vật ở ô này!' };
+      }
+
+      const obstacle = currentTile.obstacle;
+      const tool = state.activeTool;
+
+      // 1. Tool Matching Validation
+      if (obstacle.type === 'wood' && tool !== 'axe') {
+        const msg = 'Cần dùng Rìu (Phím 3) để chặt khúc gỗ!';
+        get().notify(msg, 'warning');
+        return { success: false, reason: 'Cần dùng Rìu!' };
+      }
+      if (obstacle.type === 'rock' && tool !== 'pickaxe') {
+        const msg = 'Cần dùng Cuốc chim (Phím 4) để đập tảng đá!';
+        get().notify(msg, 'warning');
+        return { success: false, reason: 'Cần dùng Cuốc chim!' };
+      }
+      if (obstacle.type === 'weed' && tool !== 'scythe') {
+        const msg = 'Cần dùng Liềm (Phím 5) để cắt dọn bụi cỏ dại!';
+        get().notify(msg, 'warning');
+        return { success: false, reason: 'Cần dùng Liềm!' };
+      }
+
+      // 2. Energy Consumption
+      const energyCost = obstacle.type === 'weed' ? 1 : 3;
+      if (state.energy < energyCost) {
+        const msg = `Kiệt sức! Cần ${energyCost} Năng lượng để thao tác.`;
+        get().notify(msg, 'warning');
+        return { success: false, reason: 'Không đủ năng lượng!' };
+      }
+
+      const newHp = obstacle.hp - 1;
+      const isDestroyed = newHp <= 0;
+      const now = Date.now();
+
+      let resourceReward: { id: string; name: string; icon: string; count: number; price: number } | null = null;
+      if (isDestroyed) {
+        if (obstacle.type === 'wood') {
+          resourceReward = { id: 'resource_wood', name: 'Gỗ Tự Nhiên', icon: '🪵', count: 2, price: 4 };
+        } else if (obstacle.type === 'rock') {
+          resourceReward = { id: 'resource_stone', name: 'Đá Cuội', icon: '🪨', count: 2, price: 4 };
+        } else if (obstacle.type === 'weed') {
+          resourceReward = { id: 'resource_fiber', name: 'Sợi Cỏ Dại', icon: '🌾', count: 1, price: 1 };
+        }
+      }
+
+      // Update Inventory if resource yielded
+      let newInventory = [...(state.inventory || [])];
+      if (resourceReward) {
+        const existingIdx = newInventory.findIndex((i) => i.id === resourceReward.id);
+        if (existingIdx >= 0) {
+          newInventory[existingIdx] = {
+            ...newInventory[existingIdx],
+            count: (newInventory[existingIdx].count ?? 0) + resourceReward.count
+          };
+        } else {
+          newInventory.push({
+            id: resourceReward.id,
+            name: resourceReward.name,
+            icon: resourceReward.icon,
+            type: 'resource',
+            count: resourceReward.count,
+            price: resourceReward.price
+          });
+        }
+      }
+
+      // Update Tile Data
+      const updatedTile: TileData = {
+        ...currentTile,
+        obstacle: isDestroyed ? null : { ...obstacle, hp: newHp },
+        lastUpdated: now
+      };
+
+      const newTiles = {
+        ...state.tiles,
+        [key]: updatedTile
+      };
+
+      const updated = {
+        tiles: newTiles,
+        inventory: newInventory,
+        energy: Math.max(0, state.energy - energyCost),
+        updatedAt: now
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+
+      if (isDestroyed && resourceReward) {
+        get().notify(`Thu hoạch +${resourceReward.count} ${resourceReward.name} ${resourceReward.icon} (-${energyCost} Năng lượng)!`, 'success');
+        return {
+          success: true,
+          destroyed: true,
+          resourceName: resourceReward.name,
+          resourceCount: resourceReward.count,
+          icon: resourceReward.icon
+        };
+      } else {
+        get().notify(`Đã đánh trúng (-${energyCost} Năng lượng, còn ${newHp} HP)!`, 'info');
+        return {
+          success: true,
+          destroyed: false,
+          remainingHp: newHp
+        };
+      }
+    },
+
     addGold: (amount) => {
       set((s) => ({ gold: s.gold + amount, updatedAt: Date.now() }));
     },
@@ -598,30 +816,30 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       return { success: true };
     },
 
-    // 3. Core Economy: Sell Crop Harvests to Shop
-    sellCrop: (cropId: string, quantity = 1) => {
+    // 3. Core Economy: Sell Crop Harvests & Gathered Resources to Shop
+    sellCrop: (itemId: string, quantity = 1) => {
       const state = get();
-      const cropDef = SHOP_CROPS.find((c) => c.id === cropId);
-      if (!cropDef) {
-        get().notify('Mặt hàng nông sản không hợp lệ!', 'error');
-        return { success: false, reason: 'Nông sản không hợp lệ' };
+      const itemDef = ALL_SELLABLE_ITEMS.find((c) => c.id === itemId);
+      if (!itemDef) {
+        get().notify('Mặt hàng không hợp lệ!', 'error');
+        return { success: false, reason: 'Mặt hàng không hợp lệ' };
       }
 
-      const invItem = (state.inventory || []).find((i) => i.id === cropId);
+      const invItem = (state.inventory || []).find((i) => i.id === itemId);
       const availableCount = invItem?.count ?? 0;
       if (availableCount < quantity) {
-        const msg = `Không đủ nông sản trong kho! Bạn có ${availableCount} đơn vị.`;
+        const msg = `Không đủ hàng trong kho! Bạn có ${availableCount} đơn vị.`;
         get().notify(msg, 'warning');
         return { success: false, reason: msg };
       }
 
-      const totalEarned = cropDef.price * quantity;
+      const totalEarned = itemDef.price * quantity;
       const newInventory = (state.inventory || []).map((item) => {
-        if (item.id === cropId) {
+        if (item.id === itemId) {
           return { ...item, count: Math.max(0, (item.count ?? 0) - quantity) };
         }
         return item;
-      }).filter((item) => item.type !== 'crop' || (item.count ?? 0) > 0);
+      }).filter((item) => (item.type !== 'crop' && item.type !== 'resource') || (item.count ?? 0) > 0);
 
       const updated = {
         gold: state.gold + totalEarned,
@@ -631,32 +849,32 @@ export const useGameStore = create<GameStoreState>((set, get) => {
 
       set(updated);
       queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
-      get().notify(`Đã bán ${quantity}x ${cropDef.name} (+${totalEarned} Gold)!`, 'success');
+      get().notify(`Đã bán ${quantity}x ${itemDef.name} (+${totalEarned} Gold)!`, 'success');
       return { success: true };
     },
 
-    // 4. Core Economy: Sell All Crops at once
+    // 4. Core Economy: Sell All Crops & Resources at once
     sellAllCrops: () => {
       const state = get();
-      const cropsToSell = (state.inventory || []).filter((i) => i.type === 'crop' && (i.count ?? 0) > 0);
+      const itemsToSell = (state.inventory || []).filter((i) => (i.type === 'crop' || i.type === 'resource') && (i.count ?? 0) > 0);
 
-      if (cropsToSell.length === 0) {
-        get().notify('Không có nông sản nào trong kho để bán!', 'info');
+      if (itemsToSell.length === 0) {
+        get().notify('Không có nông sản hay tài nguyên nào trong kho để bán!', 'info');
         return { success: false, totalGold: 0, totalSold: 0 };
       }
 
       let totalGold = 0;
       let totalSold = 0;
 
-      for (const item of cropsToSell) {
-        const cropDef = SHOP_CROPS.find((c) => c.id === item.id);
-        const unitPrice = cropDef?.price ?? item.price ?? 15;
+      for (const item of itemsToSell) {
+        const itemDef = ALL_SELLABLE_ITEMS.find((c) => c.id === item.id);
+        const unitPrice = itemDef?.price ?? item.price ?? 2;
         const count = item.count ?? 0;
         totalGold += unitPrice * count;
         totalSold += count;
       }
 
-      const newInventory = (state.inventory || []).filter((i) => i.type !== 'crop');
+      const newInventory = (state.inventory || []).filter((i) => i.type !== 'crop' && i.type !== 'resource');
       const updated = {
         gold: state.gold + totalGold,
         inventory: newInventory,
@@ -665,18 +883,28 @@ export const useGameStore = create<GameStoreState>((set, get) => {
 
       set(updated);
       queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
-      get().notify(`Bán sạch nông sản! Thu về +${totalGold} Gold từ ${totalSold} sản phẩm.`, 'success');
+      get().notify(`Bán sạch hàng hóa! Thu về +${totalGold} Gold từ ${totalSold} sản phẩm & tài nguyên.`, 'success');
       return { success: true, totalGold, totalSold };
     },
 
     hydrateFromCloud: (cloudState) => {
-      set((prev) => ({
-        ...prev,
-        ...cloudState,
-        tiles: cloudState.tiles ? { ...prev.tiles, ...cloudState.tiles } : prev.tiles,
-        hotbar: cloudState.hotbar && cloudState.hotbar.length > 0 ? cloudState.hotbar : prev.hotbar,
-        inventory: cloudState.inventory && cloudState.inventory.length > 0 ? cloudState.inventory : prev.inventory
-      }));
+      set((prev) => {
+        // Ensure all default permanent tools are retained in hotbar even from old saves
+        let mergedHotbar = prev.hotbar;
+        if (cloudState.hotbar && cloudState.hotbar.length > 0) {
+          const loadedIds = new Set(cloudState.hotbar.map((i) => i.id));
+          const missingTools = defaultHotbar.filter((t) => t.type === 'tool' && !loadedIds.has(t.id));
+          mergedHotbar = [...cloudState.hotbar, ...missingTools];
+        }
+
+        return {
+          ...prev,
+          ...cloudState,
+          tiles: cloudState.tiles ? { ...prev.tiles, ...cloudState.tiles } : prev.tiles,
+          hotbar: mergedHotbar,
+          inventory: cloudState.inventory && cloudState.inventory.length > 0 ? cloudState.inventory : prev.inventory
+        };
+      });
     },
 
     initSync: async (userId) => {

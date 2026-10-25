@@ -21,7 +21,12 @@ Mỗi ô/sprite có kích thước cơ bản **$32 \times 32\text{px}$** (nhân 
 - `tile_soil_wet`: Ô đất đã cuốc và đã được tưới nước ẩm ($32 \times 32\text{px}$).
 - `tile_marker`: Viền highlight ô đất đang rê chuột ($32 \times 32\text{px}$, tùy chọn, có fallback viền trắng).
 
-### B. Cây Trồng (Crops - 4 Giai Đoạn Mỗi Loại):
+### B. Chướng Ngại Vật Tự Nhiên (Obstacles):
+- `obstacle_rock`: Hòn đá cuội tự nhiên ($32 \times 32\text{px}$, đập bằng Cuốc chim).
+- `obstacle_wood`: Khúc gỗ mục ($32 \times 32\text{px}$, chặt bằng Rìu).
+- `obstacle_weed`: Bụi cỏ dại ($32 \times 32\text{px}$, cắt bằng Liềm).
+
+### C. Cây Trồng (Crops - 4 Giai Đoạn Mỗi Loại):
 - **Lúa Mì (Wheat):**
   - `crop_wheat_0`: Mầm non vừa gieo xuống đất
   - `crop_wheat_1`: Cây non mọc lá xanh nhỏ

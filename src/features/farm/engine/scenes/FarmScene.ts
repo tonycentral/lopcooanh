@@ -6,6 +6,7 @@ import type { TileData } from '../../types';
 interface TileSpriteEntry {
   soilSprite: Phaser.GameObjects.Image | null;
   cropSprite: Phaser.GameObjects.Image | null;
+  obstacleSprite?: Phaser.GameObjects.Image | null;
 }
 
 export default class FarmScene extends Phaser.Scene {
@@ -283,6 +284,43 @@ export default class FarmScene extends Phaser.Scene {
   private handleTileClick(x: number, y: number) {
     const store = useGameStore.getState();
     const activeTool = store.activeTool;
+    const currentTile = store.tiles[`${x},${y}`];
+
+    // Priority 1: Obstacle Interaction
+    if (currentTile?.obstacle) {
+      if (activeTool === 'axe' || activeTool === 'pickaxe' || activeTool === 'scythe') {
+        const res = store.gatherResource(x, y);
+        if (res.success) {
+          if (res.destroyed) {
+            this.showFloatingText(x, y, `+${res.resourceCount} ${res.resourceName} ${res.icon}`, '#38bdf8');
+          } else {
+            this.showFloatingText(x, y, `Trúng đích! (Còn ${res.remainingHp} HP)`, '#facc15');
+            // Shake visual feedback
+            const entry = this.tileSprites.get(`${x},${y}`);
+            if (entry?.obstacleSprite) {
+              this.tweens.add({
+                targets: entry.obstacleSprite,
+                x: x * this.TILE_SIZE + (Math.random() > 0.5 ? 3 : -3),
+                yoyo: true,
+                duration: 50,
+                repeat: 3,
+                onComplete: () => {
+                  entry.obstacleSprite?.setPosition(x * this.TILE_SIZE, y * this.TILE_SIZE);
+                }
+              });
+            }
+          }
+        } else {
+          this.showFloatingText(x, y, res.reason || 'Không thể khai thác!', '#fb7185', true);
+        }
+      } else {
+        const obsName = currentTile.obstacle.type === 'rock' ? 'Đá cuội (Cần Cuốc chim)' 
+          : currentTile.obstacle.type === 'wood' ? 'Khúc gỗ (Cần Rìu)' 
+          : 'Cỏ dại (Cần Liềm)';
+        this.showFloatingText(x, y, `Vướng ${obsName}!`, '#fb7185', true);
+      }
+      return;
+    }
 
     if (activeTool === 'hoe') {
       const res = store.tillTile(x, y);
@@ -364,6 +402,7 @@ export default class FarmScene extends Phaser.Scene {
       if (!currentKeys.has(key)) {
         entry.soilSprite?.destroy();
         entry.cropSprite?.destroy();
+        entry.obstacleSprite?.destroy();
         this.tileSprites.delete(key);
       }
     }
@@ -377,11 +416,11 @@ export default class FarmScene extends Phaser.Scene {
 
       let entry = this.tileSprites.get(key);
       if (!entry) {
-        entry = { soilSprite: null, cropSprite: null };
+        entry = { soilSprite: null, cropSprite: null, obstacleSprite: null };
         this.tileSprites.set(key, entry);
       }
 
-      // Soil texture update
+      // 1. Soil texture update
       if (tile.isTilled) {
         const soilTexture = tile.isWatered ? 'tile_soil_wet' : 'tile_soil_dry';
         if (!entry.soilSprite) {
@@ -394,7 +433,7 @@ export default class FarmScene extends Phaser.Scene {
         entry.soilSprite = null;
       }
 
-      // Crop texture update
+      // 2. Crop texture update
       if (tile.crop) {
         const growth = getCropGrowthStage(tile.crop, tile.isWatered);
         const cropTexture = `crop_${tile.crop.id}_${growth.currentStage}`;
@@ -407,6 +446,19 @@ export default class FarmScene extends Phaser.Scene {
       } else if (entry.cropSprite) {
         entry.cropSprite.destroy();
         entry.cropSprite = null;
+      }
+
+      // 3. Obstacle texture update
+      if (tile.obstacle) {
+        const obsTexture = `obstacle_${tile.obstacle.type}`;
+        if (!entry.obstacleSprite) {
+          entry.obstacleSprite = this.createImage(px, py, obsTexture).setOrigin(0, 0).setDepth(6);
+        } else {
+          this.applyTexture(entry.obstacleSprite, obsTexture);
+        }
+      } else if (entry.obstacleSprite) {
+        entry.obstacleSprite.destroy();
+        entry.obstacleSprite = null;
       }
     }
   }

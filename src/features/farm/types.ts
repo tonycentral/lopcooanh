@@ -1,7 +1,15 @@
 // src/features/farm/types.ts
 // Strict TypeScript interfaces for the 2D Farm Engine & State
 
-export type ToolType = 'hoe' | 'water_can' | 'hand' | 'seed';
+export type ToolType = 'hoe' | 'water_can' | 'axe' | 'pickaxe' | 'scythe' | 'hand' | 'seed';
+
+export type ObstacleType = 'rock' | 'wood' | 'weed';
+
+export interface ObstacleData {
+  type: ObstacleType;
+  hp: number;
+  maxHp: number;
+}
 
 export interface CropData {
   id: string;                  // e.g. 'wheat', 'herb'
@@ -16,6 +24,7 @@ export interface TileData {
   isTilled: boolean;
   isWatered: boolean;
   crop: CropData | null;
+  obstacle?: ObstacleData | null;
   lastUpdated?: number;
 }
 

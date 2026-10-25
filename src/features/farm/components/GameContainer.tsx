@@ -183,11 +183,27 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
               <span>{gold}</span>
             </div>
 
+            {/* Resources Counter (Wood & Stone) */}
+            <div className="hidden sm:flex items-center gap-2 pl-2 border-l border-slate-700 text-xs">
+              <span className="flex items-center gap-0.5 text-amber-200" title="Gỗ đã khai thác (Dùng Rìu chặt)">
+                <span className="text-xs sm:text-sm">🪵</span>
+                <span className="font-mono font-bold text-amber-300 text-[11px] sm:text-xs">
+                  {inventory.find((i) => i.id === 'resource_wood')?.count ?? 0}
+                </span>
+              </span>
+              <span className="flex items-center gap-0.5 text-slate-300" title="Đá đã khai thác (Dùng Cuốc chim đập)">
+                <span className="text-xs sm:text-sm">🪨</span>
+                <span className="font-mono font-bold text-slate-200 text-[11px] sm:text-xs">
+                  {inventory.find((i) => i.id === 'resource_stone')?.count ?? 0}
+                </span>
+              </span>
+            </div>
+
             {/* Harvested Goods Summary */}
-            <div className="hidden sm:flex items-center gap-1.5 pl-2 border-l border-slate-700">
+            <div className="hidden md:flex items-center gap-1.5 pl-2 border-l border-slate-700">
               <Package className="w-3.5 h-3.5 text-slate-400" />
               <div className="flex items-center gap-1.5 text-xs">
-                {inventory.filter(i => (i.count ?? 0) > 0).map(item => (
+                {inventory.filter(i => i.type === 'crop' && (i.count ?? 0) > 0).map(item => (
                   <span key={item.id} className="text-slate-300 flex items-center gap-0.5">
                     <span>{item.icon}</span>
                     <span className="font-mono text-emerald-400 font-bold text-[11px]">{item.count}</span>
@@ -307,25 +323,25 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
         )}
 
         {/* 4. BOTTOM HOTBAR: Pinned directly at the bottom edge of the Game Frame */}
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 sm:gap-2 bg-slate-900/90 backdrop-blur-md p-1.5 rounded-2xl border border-slate-800 shadow-2xl">
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1 sm:gap-1.5 bg-slate-900/90 backdrop-blur-md p-1 sm:p-1.5 rounded-2xl border border-slate-800 shadow-2xl">
           {hotbar.map((item, idx) => {
             const isActive = activeTool === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => selectTool(item.id)}
-                className={`relative flex flex-col items-center justify-center w-11 h-11 sm:w-13 sm:h-13 rounded-xl transition-all ${
+                className={`relative flex flex-col items-center justify-center w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-xl transition-all ${
                   isActive 
                     ? 'bg-emerald-600/30 border-2 border-emerald-400 shadow-lg shadow-emerald-950 scale-105' 
                     : 'bg-slate-800/80 border border-slate-700 hover:bg-slate-700 hover:border-slate-600'
                 }`}
               >
-                <span className="absolute top-0.5 left-1 text-[9px] font-mono text-slate-400 font-bold">
+                <span className="absolute top-0.5 left-1 text-[8px] sm:text-[9px] font-mono text-slate-400 font-bold">
                   {idx + 1}
                 </span>
-                <span className="text-lg sm:text-xl">{item.icon}</span>
+                <span className="text-sm sm:text-base md:text-lg">{item.icon}</span>
                 {item.type === 'seed' && (
-                  <span className="absolute bottom-0.5 right-1 text-[9px] font-mono font-bold bg-slate-950/80 px-1 rounded text-emerald-300">
+                  <span className="absolute bottom-0.5 right-0.5 sm:right-1 text-[8px] sm:text-[9px] font-mono font-bold bg-slate-950/80 px-0.5 sm:px-1 rounded text-emerald-300">
                     x{item.count ?? 0}
                   </span>
                 )}
