@@ -1,9 +1,10 @@
 // src/features/farm/components/GameContainer.tsx
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Phaser from 'phaser';
 import { createGameConfig } from '../engine/config';
 import { useGameStore } from '../state/useGameStore';
 import { flushPendingFarmSync, initVisibilitySyncListener } from '../services/supabaseSync';
+import ShopModal from './ShopModal';
 import { 
   Coins, 
   Zap, 
@@ -18,7 +19,9 @@ import {
   Package,
   User,
   LogOut,
-  LogIn
+  LogIn,
+  ShoppingBag,
+  Moon
 } from 'lucide-react';
 
 interface GameContainerProps {
@@ -43,6 +46,10 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
   const selectTool = useGameStore((state) => state.selectTool);
   const initSync = useGameStore((state) => state.initSync);
   const clearNotification = useGameStore((state) => state.clearNotification);
+  const sleepNextDay = useGameStore((state) => state.sleepNextDay);
+
+  const [isShopOpen, setIsShopOpen] = useState(false);
+  const [isSleeping, setIsSleeping] = useState(false);
 
   // Auto-dismiss notification after 3.5 seconds
   useEffect(() => {
@@ -63,9 +70,14 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     };
   }, [currentUser?.id, initSync]);
 
-  // Keyboard shortcut listener for Hotbar slots 1-5
+  // Keyboard shortcut listener for Hotbar slots 1-5 & Shop modal (B)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Toggle shop
+      if (e.key === 'b' || e.key === 'B') {
+        setIsShopOpen((prev) => !prev);
+        return;
+      }
       const keyNum = parseInt(e.key, 10);
       if (keyNum >= 1 && keyNum <= hotbar.length) {
         selectTool(hotbar[keyNum - 1].id);
@@ -74,6 +86,15 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [hotbar, selectTool]);
+
+  const handleSleep = () => {
+    if (isSleeping) return;
+    setIsSleeping(true);
+    setTimeout(() => {
+      sleepNextDay();
+      setIsSleeping(false);
+    }, 600);
+  };
 
   // Phaser Game instance lifecycle management (React 19 strict-mode safe)
   useEffect(() => {
@@ -112,10 +133,19 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
           
           {/* Top-Left: Player Stats Bar */}
           <div className="pointer-events-auto flex items-center gap-2 sm:gap-3 bg-slate-900/90 backdrop-blur-md px-3 sm:px-4 py-2 rounded-2xl border border-slate-800 shadow-xl">
-            {/* Day & Season */}
+            {/* Day & Season & Sleep */}
             <div className="flex items-center gap-1.5 pr-2 sm:pr-3 border-r border-slate-700">
               <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-[11px] sm:text-xs font-semibold text-slate-200">Ngày {day} (Xuân)</span>
+              <button
+                onClick={handleSleep}
+                disabled={isSleeping}
+                title="Nghỉ ngơi qua ngày mới (Hồi phục thể lực)"
+                className="flex items-center gap-1 ml-1 px-1.5 py-0.5 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 text-[10px] font-semibold border border-indigo-500/30 transition-colors pointer-events-auto cursor-pointer disabled:opacity-50"
+              >
+                <Moon className="w-3 h-3" />
+                <span className="hidden sm:inline">Ngủ</span>
+              </button>
             </div>
 
             {/* Energy Meter */}
@@ -153,6 +183,16 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
           {/* Top-Right: Cloud Sync Status & User Profile */}
           <div className="pointer-events-auto flex items-center gap-2">
             
+            {/* Shop Button */}
+            <button
+              onClick={() => setIsShopOpen(true)}
+              title="Mở Cửa Hàng (Phím B)"
+              className="flex items-center gap-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all shadow-md shadow-amber-950"
+            >
+              <ShoppingBag className="w-3.5 h-3.5" />
+              <span>Cửa Hàng (B)</span>
+            </button>
+
             {/* Cloud Sync Status Indicator */}
             <button
               onClick={handleManualSync}
@@ -277,7 +317,19 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
           })}
         </div>
 
+        {/* 5. Sleep Transition Overlay */}
+        {isSleeping && (
+          <div className="absolute inset-0 z-40 bg-slate-950/90 backdrop-blur-sm flex flex-col items-center justify-center text-slate-100 animate-in fade-in duration-300">
+            <Moon className="w-10 h-10 text-indigo-400 animate-pulse mb-3" />
+            <div className="text-base font-bold tracking-wide">Màn đêm buông xuống...</div>
+            <div className="text-xs text-slate-400 mt-1">Đang hồi phục thể lực &amp; chuyển sang ngày mới</div>
+          </div>
+        )}
+
       </div>
+
+      {/* 6. Shop Modal */}
+      <ShopModal isOpen={isShopOpen} onClose={() => setIsShopOpen(false)} />
 
     </div>
   );

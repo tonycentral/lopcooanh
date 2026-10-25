@@ -21,7 +21,7 @@ import {
 export const CROP_DEFINITIONS: Record<string, CropDefinition> = {
   wheat: {
     id: 'wheat',
-    name: 'Lúa Mì Học Thuật (Academic Wheat)',
+    name: 'Lúa Mì (Wheat)',
     seedId: 'seed_wheat',
     growthSeconds: 60, // 60s for demo & fast testing
     stages: 4,
@@ -30,7 +30,7 @@ export const CROP_DEFINITIONS: Record<string, CropDefinition> = {
   },
   herb: {
     id: 'herb',
-    name: 'Thảo Mộc Tri Thức (Wisdom Herb)',
+    name: 'Thảo Mộc (Herb)',
     seedId: 'seed_herb',
     growthSeconds: 120, // 2 minutes
     stages: 4,
@@ -38,6 +38,17 @@ export const CROP_DEFINITIONS: Record<string, CropDefinition> = {
     vocabReward: 'indigenous'
   }
 };
+
+export const SHOP_SEEDS = [
+  { id: 'seed_wheat', name: 'Hạt Lúa Mì (Wheat)', icon: '🌱', cropId: 'wheat', price: 5, desc: 'Thời gian chín: 60s. Thu hoạch bán được 15 Gold.' },
+  { id: 'seed_herb', name: 'Hạt Thảo Mộc (Herb)', icon: '🌿', cropId: 'herb', price: 12, desc: 'Thời gian chín: 120s. Thu hoạch bán được 35 Gold.' }
+];
+
+export const SHOP_CROPS = [
+  { id: 'crop_wheat', name: 'Bông Lúa Mì', icon: '🌾', price: 15, desc: 'Nông sản thu hoạch từ lúa mì.' },
+  { id: 'crop_herb', name: 'Nhánh Thảo Mộc', icon: '🌿', price: 35, desc: 'Dược liệu cao cấp từ thảo mộc.' }
+];
+
 
 /**
  * Timestamp Delta Calculation Engine (Decision 5C)
@@ -135,6 +146,10 @@ export interface GameStoreState extends PlayerFarmState {
     reason?: string 
   };
   addGold: (amount: number) => void;
+  sleepNextDay: () => void;
+  buySeed: (seedId: string, quantity?: number) => { success: boolean; reason?: string };
+  sellCrop: (cropId: string, quantity?: number) => { success: boolean; reason?: string };
+  sellAllCrops: () => { success: boolean; totalGold: number; totalSold: number };
   hydrateFromCloud: (cloudState: Partial<PlayerFarmState>) => void;
   initSync: (userId?: string | null) => Promise<void>;
 }
@@ -402,6 +417,165 @@ export const useGameStore = create<GameStoreState>((set, get) => {
 
     addGold: (amount) => {
       set((s) => ({ gold: s.gold + amount, updatedAt: Date.now() }));
+    },
+
+    // 1. Core Simulation: Sleep & Advance to Next Day
+    sleepNextDay: () => {
+      const state = get();
+      const nextDay = state.day + 1;
+
+      // Dry up all watered tiles overnight
+      const updatedTiles: Record<string, TileData> = {};
+      for (const [key, tile] of Object.entries(state.tiles)) {
+        updatedTiles[key] = {
+          ...tile,
+          isWatered: false, // Dries overnight
+          lastUpdated: Date.now()
+        };
+      }
+
+      const updated = {
+        day: nextDay,
+        energy: state.maxEnergy, // 100% recovered
+        tiles: updatedTiles,
+        updatedAt: Date.now()
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify(`🌅 Bình minh Ngày ${nextDay}! Thể lực hồi phục (${state.maxEnergy}/${state.maxEnergy}). Đất đã khô ráo qua đêm.`, 'success');
+    },
+
+    // 2. Core Economy: Buy Seeds from Shop
+    buySeed: (seedId: string, quantity = 1) => {
+      const state = get();
+      const seedDef = SHOP_SEEDS.find((s) => s.id === seedId);
+      if (!seedDef) {
+        get().notify('Loại hạt giống không hợp lệ!', 'error');
+        return { success: false, reason: 'Hạt giống không hợp lệ' };
+      }
+
+      const totalCost = seedDef.price * quantity;
+      if (state.gold < totalCost) {
+        const msg = `Không đủ tiền vàng! Cần ${totalCost} Gold nhưng chỉ có ${state.gold} Gold.`;
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      // Add to hotbar if slot exists
+      let inHotbar = false;
+      const newHotbar = state.hotbar.map((item) => {
+        if (item.id === seedId) {
+          inHotbar = true;
+          return { ...item, count: (item.count ?? 0) + quantity };
+        }
+        return item;
+      });
+
+      // If not in hotbar, add to inventory
+      let newInventory = [...(state.inventory || [])];
+      if (!inHotbar) {
+        const invIdx = newInventory.findIndex((i) => i.id === seedId);
+        if (invIdx >= 0) {
+          newInventory[invIdx] = {
+            ...newInventory[invIdx],
+            count: (newInventory[invIdx].count ?? 0) + quantity
+          };
+        } else {
+          newInventory.push({
+            id: seedDef.id,
+            name: seedDef.name,
+            icon: seedDef.icon,
+            type: 'seed',
+            count: quantity,
+            cropId: seedDef.cropId,
+            price: seedDef.price
+          });
+        }
+      }
+
+      const updated = {
+        gold: state.gold - totalCost,
+        hotbar: newHotbar,
+        inventory: newInventory,
+        updatedAt: Date.now()
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify(`Đã mua ${quantity}x ${seedDef.name} (-${totalCost} Gold)!`, 'success');
+      return { success: true };
+    },
+
+    // 3. Core Economy: Sell Crop Harvests to Shop
+    sellCrop: (cropId: string, quantity = 1) => {
+      const state = get();
+      const cropDef = SHOP_CROPS.find((c) => c.id === cropId);
+      if (!cropDef) {
+        get().notify('Mặt hàng nông sản không hợp lệ!', 'error');
+        return { success: false, reason: 'Nông sản không hợp lệ' };
+      }
+
+      const invItem = (state.inventory || []).find((i) => i.id === cropId);
+      const availableCount = invItem?.count ?? 0;
+      if (availableCount < quantity) {
+        const msg = `Không đủ nông sản trong kho! Bạn có ${availableCount} đơn vị.`;
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      const totalEarned = cropDef.price * quantity;
+      const newInventory = (state.inventory || []).map((item) => {
+        if (item.id === cropId) {
+          return { ...item, count: Math.max(0, (item.count ?? 0) - quantity) };
+        }
+        return item;
+      }).filter((item) => item.type !== 'crop' || (item.count ?? 0) > 0);
+
+      const updated = {
+        gold: state.gold + totalEarned,
+        inventory: newInventory,
+        updatedAt: Date.now()
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify(`Đã bán ${quantity}x ${cropDef.name} (+${totalEarned} Gold)!`, 'success');
+      return { success: true };
+    },
+
+    // 4. Core Economy: Sell All Crops at once
+    sellAllCrops: () => {
+      const state = get();
+      const cropsToSell = (state.inventory || []).filter((i) => i.type === 'crop' && (i.count ?? 0) > 0);
+
+      if (cropsToSell.length === 0) {
+        get().notify('Không có nông sản nào trong kho để bán!', 'info');
+        return { success: false, totalGold: 0, totalSold: 0 };
+      }
+
+      let totalGold = 0;
+      let totalSold = 0;
+
+      for (const item of cropsToSell) {
+        const cropDef = SHOP_CROPS.find((c) => c.id === item.id);
+        const unitPrice = cropDef?.price ?? item.price ?? 15;
+        const count = item.count ?? 0;
+        totalGold += unitPrice * count;
+        totalSold += count;
+      }
+
+      const newInventory = (state.inventory || []).filter((i) => i.type !== 'crop');
+      const updated = {
+        gold: state.gold + totalGold,
+        inventory: newInventory,
+        updatedAt: Date.now()
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify(`Bán sạch nông sản! Thu về +${totalGold} Gold từ ${totalSold} sản phẩm.`, 'success');
+      return { success: true, totalGold, totalSold };
     },
 
     hydrateFromCloud: (cloudState) => {

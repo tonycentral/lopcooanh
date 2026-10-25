@@ -274,15 +274,36 @@ export default class FarmScene extends Phaser.Scene {
 
   private updateCropVisuals() {
     const tiles = useGameStore.getState().tiles;
+    const now = Date.now();
+
     for (const [key, tile] of Object.entries(tiles)) {
       if (tile.crop) {
-        const entry = this.tileSprites.get(key);
+        let entry = this.tileSprites.get(key);
+        const growth = getCropGrowthStage(tile.crop, now);
+        const cropTexture = `crop_${tile.crop.id}_${growth.currentStage}`;
+
         if (entry?.cropSprite) {
-          const growth = getCropGrowthStage(tile.crop);
-          const cropTexture = `crop_${tile.crop.id}_${growth.currentStage}`;
           if (entry.cropSprite.texture.key !== cropTexture) {
             entry.cropSprite.setTexture(cropTexture);
+            // Gentle bounce pop when crop advances to next stage
+            this.tweens.add({
+              targets: entry.cropSprite,
+              scaleX: { from: 1.25, to: 1 },
+              scaleY: { from: 1.25, to: 1 },
+              duration: 350,
+              ease: 'Back.easeOut'
+            });
           }
+
+          // Subtle ripe visual tint indicator when ready for harvest
+          if (growth.isRipe && entry.cropSprite.tintTopLeft === 0xffffff) {
+            entry.cropSprite.setTint(0xfff7cc);
+          }
+        } else if (entry && tile.isTilled) {
+          const [xStr, yStr] = key.split(',');
+          const px = parseInt(xStr, 10) * this.TILE_SIZE;
+          const py = parseInt(yStr, 10) * this.TILE_SIZE;
+          entry.cropSprite = this.add.image(px, py, cropTexture).setOrigin(0, 0).setDepth(5);
         }
       }
     }
