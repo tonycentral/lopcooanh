@@ -3,8 +3,7 @@ import AdminDashboard from './components/AdminDashboard';
 import BandSelectorModal from './components/BandSelectorModal';
 import AuthModal from './components/AuthModal';
 import SettingsModal from './components/SettingsModal';
-import MochiFarmView from './components/harvest/MochiFarmView';
-import { recordLearningToFarm } from './services/harvestTownService';
+import HarvestWorldView from './components/world/HarvestWorldView';
 import { useIsMobile } from './hooks/useIsMobile';
 
 import { 
@@ -198,21 +197,20 @@ export default function App() {
     setIsBandModalOpen(false);
   };
 
-  // Refresh stats sau khi làm bài tập tưới cây
-  const handleRefreshStats = (score = 80) => {
+  // Refresh stats
+  const handleRefreshStats = () => {
     setStats(getStoredStats());
     setCurrent7DayScore(getAverageScoreLast7Days(studentEmail));
-    recordLearningToFarm('vocab', typeof score === 'number' ? score : 80, studentEmail);
   };
 
   return (
-    <div className={`bg-[#2D1B13] text-[#FFF8E1] selection:bg-amber-400 selection:text-[#3E2723] ${
+    <div className={`bg-slate-950 text-slate-100 ${
       isMobile ? "h-[100dvh] max-h-[100dvh] overflow-hidden flex flex-col" : "h-screen max-h-screen overflow-hidden flex flex-col"
     }`}>
       
-      {/* Khung hiển thị chính: Admin hoặc Game Nông Trại MochiFarm duy nhất */}
+      {/* Khung hiển thị chính: Admin hoặc Game Nông Trại Harvest SLA */}
       {currentView === 'admin' ? (
-        <div className="h-full flex flex-col overflow-hidden bg-[#FAF8F5]">
+        <div className="h-full flex flex-col overflow-hidden bg-white text-slate-900">
           <AdminDashboard 
             onExitAdmin={handleExitAdmin} 
             currentUser={currentUser}
@@ -220,8 +218,8 @@ export default function App() {
           />
         </div>
       ) : (
-        <div className="h-full flex flex-col overflow-hidden bg-[#E8F5E9]/20">
-          <MochiFarmView
+        <div className="h-full flex flex-col overflow-hidden">
+          <HarvestWorldView
             studentEmail={studentEmail}
             currentUser={currentUser}
             onOpenTargetBandModal={() => setIsBandModalOpen(true)}

@@ -26,7 +26,20 @@ import {
 } from 'lucide-react';
 import { BAND_OPTIONS } from '../data/bandDescriptors';
 import { clearHistory } from '../services/storage';
-import { analyzeRecurrentMistakes, getUserTestHistory } from '../services/mistakeAnalysisService';
+
+const defaultAnalysisData = {
+  totalAttempts: 0,
+  readingCount: 0,
+  writingCount: 0,
+  averageBand: "--",
+  recurrentMistakes: [],
+  attempts: []
+};
+
+function analyzeRecurrentMistakes() {
+  return defaultAnalysisData;
+}
+
 
 export default function SettingsModal({ 
   isOpen, 

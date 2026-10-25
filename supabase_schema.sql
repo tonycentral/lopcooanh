@@ -98,3 +98,33 @@ DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created
     AFTER INSERT ON auth.users
     FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
+
+
+-- 5. Bảng trạng thái nông trại mô phỏng (player_farms) - Option 4B JSONB Blob
+CREATE TABLE IF NOT EXISTS public.player_farms (
+    user_id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+    gold INTEGER DEFAULT 250,
+    energy INTEGER DEFAULT 100,
+    max_energy INTEGER DEFAULT 100,
+    day INTEGER DEFAULT 1,
+    hotbar JSONB DEFAULT '[]'::jsonb,
+    tiles JSONB DEFAULT '{}'::jsonb,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+ALTER TABLE public.player_farms ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can view their own farm" 
+ON public.player_farms FOR SELECT 
+USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can update their own farm" 
+ON public.player_farms FOR UPDATE 
+USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can insert their own farm" 
+ON public.player_farms FOR INSERT 
+WITH CHECK (auth.uid() = user_id);
+
+-- Cột dự phòng farm_state trong profiles nếu không muốn tạo bảng mới
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS farm_state JSONB DEFAULT '{}'::jsonb;
