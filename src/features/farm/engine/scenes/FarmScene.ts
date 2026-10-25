@@ -25,6 +25,11 @@ export default class FarmScene extends Phaser.Scene {
   private playerSpeed = 160;
 
   private pendingAction: PendingAction | null = null;
+  private isPerformingAction = false;
+  private currentToolSprite: Phaser.GameObjects.Sprite | Phaser.GameObjects.Image | null = null;
+  private currentActionTween: Phaser.Tweens.Tween | null = null;
+  private actionImpactTimer: Phaser.Time.TimerEvent | null = null;
+
   private tileSprites = new Map<string, TileSpriteEntry>();
   private marker!: Phaser.GameObjects.Sprite;
   private player!: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
@@ -120,7 +125,7 @@ export default class FarmScene extends Phaser.Scene {
     });
 
     this.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
-      if (this.isInputBlocked || pointer.button !== 0) return; // Ignore if modal open or non-left-click
+      if (this.isPerformingAction || this.isInputBlocked || pointer.button !== 0) return; // Ignore if acting or modal open
 
       const worldPoint = pointer.positionToCamera(this.cameras.main) as Phaser.Math.Vector2;
       const tileX = Math.floor(worldPoint.x / this.TILE_SIZE);
@@ -160,9 +165,30 @@ export default class FarmScene extends Phaser.Scene {
       this.input.keyboard.enabled = !isOpen;
     }
     if (isOpen) {
+      this.cancelCurrentAction();
       this.stopMovement();
       if (this.marker) this.marker.setVisible(false);
     }
+  }
+
+  public cancelCurrentAction() {
+    if (this.currentToolSprite) {
+      this.currentToolSprite.destroy();
+      this.currentToolSprite = null;
+    }
+    if (this.currentActionTween) {
+      this.currentActionTween.stop();
+      this.currentActionTween = null;
+    }
+    if (this.actionImpactTimer) {
+      this.actionImpactTimer.remove();
+      this.actionImpactTimer = null;
+    }
+    if (this.player) {
+      this.player.setRotation(0);
+      this.player.setScale(1);
+    }
+    this.isPerformingAction = false;
   }
 
   public stopMovement() {
@@ -189,6 +215,13 @@ export default class FarmScene extends Phaser.Scene {
   }
 
   update() {
+    if (this.isPerformingAction) {
+      if (this.player && this.player.body) {
+        this.player.setVelocity(0, 0);
+      }
+      return;
+    }
+
     if (this.isInputBlocked || (this.input.keyboard && !this.input.keyboard.enabled)) {
       this.stopMovement();
       return;
@@ -247,7 +280,7 @@ export default class FarmScene extends Phaser.Scene {
         this.pendingAction = null;
         this.player.setVelocity(0, 0);
         this.updateFacingDirection(targetCenterX, targetCenterY);
-        this.executeTileAction(gridX, gridY);
+        this.triggerTileInteraction(gridX, gridY);
         return;
       }
 
@@ -321,6 +354,39 @@ export default class FarmScene extends Phaser.Scene {
           frames: [{ key: 'farm_atlas', frame: idle }],
           frameRate: 1
         });
+      }
+    }
+
+    // Register 5 action tool animations across 4 directions
+    const actions: Array<'hoe' | 'water' | 'axe' | 'pickaxe' | 'scythe'> = ['hoe', 'water', 'axe', 'pickaxe', 'scythe'];
+    for (const act of actions) {
+      for (const dir of directions) {
+        const animKey = `anim_${act}_${dir}`;
+        if (!this.anims.exists(animKey)) {
+          const frame0 = `player_${act}_${dir}_0`;
+          const frame1 = `player_${act}_${dir}_1`;
+          if (atlas.has(frame0) && atlas.has(frame1)) {
+            this.anims.create({
+              key: animKey,
+              frames: [
+                { key: 'farm_atlas', frame: frame0 },
+                { key: 'farm_atlas', frame: frame1 }
+              ],
+              frameRate: 6,
+              repeat: 0
+            });
+          } else if (atlas.has(`player_walk_${dir}_0`) && atlas.has(`player_walk_${dir}_1`)) {
+            this.anims.create({
+              key: animKey,
+              frames: [
+                { key: 'farm_atlas', frame: `player_walk_${dir}_0` },
+                { key: 'farm_atlas', frame: `player_walk_${dir}_1` }
+              ],
+              frameRate: 6,
+              repeat: 0
+            });
+          }
+        }
       }
     }
   }
@@ -418,12 +484,12 @@ export default class FarmScene extends Phaser.Scene {
     const targetCenterY = y * this.TILE_SIZE + 16;
     const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, targetCenterX, targetCenterY);
 
-    // Case 1: Within interaction range (dist <= INTERACTION_RANGE) -> execute immediately
+    // Case 1: Within interaction range (dist <= INTERACTION_RANGE) -> trigger interaction
     if (dist <= this.INTERACTION_RANGE) {
       this.pendingAction = null;
       this.player.setVelocity(0, 0);
       this.updateFacingDirection(targetCenterX, targetCenterY);
-      this.executeTileAction(x, y);
+      this.triggerTileInteraction(x, y);
       return;
     }
 
@@ -492,6 +558,191 @@ export default class FarmScene extends Phaser.Scene {
 
     this.physics.moveTo(this.player, destX, destY, this.playerSpeed);
     this.updateFacingDirection(destX, destY);
+  }
+
+  /**
+   * Evaluates the tile target and triggers appropriate animation or immediate action
+   */
+  private triggerTileInteraction(x: number, y: number) {
+    const store = useGameStore.getState();
+    const activeTool = store.activeTool;
+    const currentTile = store.tiles[`${x},${y}`];
+
+    // Opening a chest (not using pickaxe) opens immediately without weapon swing
+    if (currentTile?.placeable?.type === 'chest' && activeTool !== 'pickaxe') {
+      this.executeTileAction(x, y);
+      return;
+    }
+
+    // Determine animation tool type
+    let actionType: 'hoe' | 'water' | 'axe' | 'pickaxe' | 'scythe' | null = null;
+    if (activeTool === 'axe') actionType = 'axe';
+    else if (activeTool === 'pickaxe') actionType = 'pickaxe';
+    else if (activeTool === 'hoe') actionType = 'hoe';
+    else if (activeTool === 'water_can') actionType = 'water';
+    else if (activeTool === 'scythe') actionType = 'scythe';
+    else if (activeTool === 'hand') actionType = 'scythe'; // harvesting reach
+
+    if (actionType) {
+      this.playActionAnimation(actionType, x, y, () => {
+        this.executeTileAction(x, y);
+      });
+    } else {
+      // Direct action for placing items, fertilizer, etc.
+      this.executeTileAction(x, y);
+    }
+  }
+
+  /**
+   * Action Animation State Machine:
+   * Locks player movement, plays directional swing tween & tool overlay,
+   * synchronizes gameplay mutation at impact frame (~200ms), and returns to idle (~360ms).
+   */
+  private playActionAnimation(
+    actionType: 'hoe' | 'water' | 'axe' | 'pickaxe' | 'scythe',
+    gridX: number,
+    gridY: number,
+    onImpact: () => void
+  ) {
+    this.cancelCurrentAction();
+    this.isPerformingAction = true;
+    this.player.setVelocity(0, 0);
+
+    const targetCenterX = gridX * this.TILE_SIZE + 16;
+    const targetCenterY = gridY * this.TILE_SIZE + 16;
+    this.updateFacingDirection(targetCenterX, targetCenterY);
+
+    // 1. Play matching character animation if registered
+    const animKey = `anim_${actionType}_${this.lastDirection}`;
+    if (this.anims.exists(animKey)) {
+      this.player.anims.play(animKey, true);
+    }
+
+    // 2. Procedural Player Body Swing / Recoil Tween
+    const swingAngle = this.lastDirection === 'left' ? -0.22 : this.lastDirection === 'right' ? 0.22 : 0;
+    this.currentActionTween = this.tweens.add({
+      targets: this.player,
+      rotation: swingAngle,
+      scaleY: 0.9,
+      scaleX: 1.08,
+      duration: 170,
+      yoyo: true,
+      ease: 'Back.easeIn',
+      onComplete: () => {
+        this.player.setRotation(0);
+        this.player.setScale(1);
+        this.currentActionTween = null;
+      }
+    });
+
+    // 3. Procedural Tool Overlay Sprite & Swing
+    const toolOverlayKey = `tool_overlay_${actionType}`;
+    if (this.textures.exists(toolOverlayKey)) {
+      let offsetX = 0;
+      let offsetY = 0;
+      let startRot = -0.7;
+      let endRot = 0.7;
+      let flipX = false;
+
+      if (this.lastDirection === 'right') {
+        offsetX = 10;
+        offsetY = -2;
+        startRot = -0.8;
+        endRot = 0.8;
+      } else if (this.lastDirection === 'left') {
+        offsetX = -10;
+        offsetY = -2;
+        startRot = 0.8;
+        endRot = -0.8;
+        flipX = true;
+      } else if (this.lastDirection === 'down') {
+        offsetX = 8;
+        offsetY = 4;
+        startRot = -0.6;
+        endRot = 0.7;
+      } else if (this.lastDirection === 'up') {
+        offsetX = -8;
+        offsetY = -8;
+        startRot = 0.6;
+        endRot = -0.7;
+      }
+
+      const toolSprite = this.add.sprite(this.player.x + offsetX, this.player.y + offsetY, toolOverlayKey);
+      toolSprite.setOrigin(0.5, 0.9);
+      toolSprite.setRotation(startRot);
+      toolSprite.setFlipX(flipX);
+      toolSprite.setDepth(this.player.depth + 1);
+      this.currentToolSprite = toolSprite;
+
+      this.tweens.add({
+        targets: toolSprite,
+        rotation: endRot,
+        duration: 320,
+        ease: 'Cubic.easeIn',
+        onComplete: () => {
+          toolSprite.destroy();
+          if (this.currentToolSprite === toolSprite) {
+            this.currentToolSprite = null;
+          }
+        }
+      });
+    }
+
+    // 4. Synchronization at Impact Frame (at ~200ms / 60% of animation)
+    this.actionImpactTimer = this.time.delayedCall(200, () => {
+      if (!this.isPerformingAction) return;
+
+      // Spawn visual impact particles & camera punch
+      if (actionType === 'axe' || actionType === 'pickaxe') {
+        this.spawnImpactParticles(targetCenterX, targetCenterY, 'fx_spark');
+        this.cameras.main.shake(70, 0.003);
+      } else if (actionType === 'hoe') {
+        this.spawnImpactParticles(targetCenterX, targetCenterY, 'fx_dust');
+      } else if (actionType === 'water') {
+        this.spawnImpactParticles(targetCenterX, targetCenterY, 'fx_water_splash');
+      } else if (actionType === 'scythe') {
+        this.spawnImpactParticles(targetCenterX, targetCenterY, 'fx_spark');
+      }
+
+      // Execute gameplay mutation at exact impact
+      onImpact();
+    });
+
+    // 5. Complete Action Cycle (at ~360ms) -> return to idle and unlock controls
+    this.time.delayedCall(360, () => {
+      if (this.currentToolSprite) {
+        this.currentToolSprite.destroy();
+        this.currentToolSprite = null;
+      }
+      this.player.setRotation(0);
+      this.player.setScale(1);
+      this.isPerformingAction = false;
+      this.updatePlayerIdleAnimation();
+    });
+  }
+
+  /**
+   * Spawns burst particles that drift and fade on impact
+   */
+  private spawnImpactParticles(x: number, y: number, textureKey: string) {
+    if (!this.textures.exists(textureKey)) return;
+    for (let i = 0; i < 3; i++) {
+      const p = this.add.image(x + (Math.random() - 0.5) * 12, y + (Math.random() - 0.5) * 12, textureKey);
+      p.setDepth(25);
+      p.setScale(0.8);
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 25 + Math.random() * 30;
+      this.tweens.add({
+        targets: p,
+        x: p.x + Math.cos(angle) * speed,
+        y: p.y + Math.sin(angle) * speed - 6,
+        alpha: 0,
+        scale: 0.3,
+        duration: 350 + Math.random() * 150,
+        ease: 'Cubic.easeOut',
+        onComplete: () => p.destroy()
+      });
+    }
   }
 
   private executeTileAction(x: number, y: number) {
@@ -811,6 +1062,8 @@ export default class FarmScene extends Phaser.Scene {
   }
 
   shutdown() {
+    this.cancelCurrentAction();
+    this.stopMovement();
     if (this.unsubscribeStore) {
       this.unsubscribeStore();
       this.unsubscribeStore = null;

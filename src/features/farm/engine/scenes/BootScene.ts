@@ -348,5 +348,115 @@ export default class BootScene extends Phaser.Scene {
       g.generateTexture('item_fertilizer', 32, 32);
       g.destroy();
     }
+
+    // 14. Action Tool Overlays (24x24) for Swing Animations
+    // Hoe
+    if (!this.textures.exists('tool_overlay_hoe')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x78350f, 1); // Wood handle
+      g.fillRect(10, 8, 4, 14);
+      g.fillStyle(0x94a3b8, 1); // Steel hoe blade
+      g.fillRect(4, 5, 16, 4);
+      g.fillStyle(0xf1f5f9, 1); // Edge highlight
+      g.fillRect(4, 5, 16, 1);
+      g.generateTexture('tool_overlay_hoe', 24, 24);
+      g.destroy();
+    }
+
+    // Water Can
+    if (!this.textures.exists('tool_overlay_water')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x0284c7, 1); // Blue body
+      g.fillRoundedRect(4, 8, 12, 12, 3);
+      g.fillStyle(0x38bdf8, 1); // Spout & handle
+      g.fillRect(15, 9, 6, 3);
+      g.fillRect(18, 12, 3, 4);
+      g.fillRect(2, 6, 3, 8);
+      g.fillStyle(0xbae6fd, 1); // Water droplets
+      g.fillCircle(20, 18, 1.5);
+      g.fillCircle(22, 21, 1.5);
+      g.generateTexture('tool_overlay_water', 24, 24);
+      g.destroy();
+    }
+
+    // Axe
+    if (!this.textures.exists('tool_overlay_axe')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x78350f, 1); // Haft
+      g.fillRect(10, 6, 4, 16);
+      g.fillStyle(0x64748b, 1); // Axe head
+      g.fillRoundedRect(12, 3, 10, 9, 2);
+      g.fillStyle(0xe2e8f0, 1); // Sharp curved blade edge
+      g.fillRect(21, 3, 2, 9);
+      g.generateTexture('tool_overlay_axe', 24, 24);
+      g.destroy();
+    }
+
+    // Pickaxe
+    if (!this.textures.exists('tool_overlay_pickaxe')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x78350f, 1); // Haft
+      g.fillRect(10, 7, 4, 15);
+      g.fillStyle(0x64748b, 1); // Curved double-pick head
+      g.fillRect(2, 4, 20, 4);
+      g.fillRect(1, 6, 2, 3);
+      g.fillRect(21, 6, 2, 3);
+      g.fillStyle(0xf1f5f9, 1); // Point tips
+      g.fillRect(1, 8, 1, 1);
+      g.fillRect(22, 8, 1, 1);
+      g.generateTexture('tool_overlay_pickaxe', 24, 24);
+      g.destroy();
+    }
+
+    // Scythe
+    if (!this.textures.exists('tool_overlay_scythe')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x5c2b09, 1); // Long staff
+      g.fillRect(8, 4, 3, 18);
+      g.fillStyle(0x94a3b8, 1); // Curved scythe blade
+      g.fillRect(10, 2, 12, 4);
+      g.fillRect(18, 5, 4, 5);
+      g.fillStyle(0xf8fafc, 1); // Gleaming blade edge
+      g.fillRect(10, 2, 12, 1);
+      g.generateTexture('tool_overlay_scythe', 24, 24);
+      g.destroy();
+    }
+
+    // Impact FX: Sparks & Dust
+    if (!this.textures.exists('fx_spark')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0xfef08a, 1);
+      g.fillRect(6, 2, 4, 12);
+      g.fillRect(2, 6, 12, 4);
+      g.fillStyle(0xffffff, 1);
+      g.fillRect(6, 6, 4, 4);
+      g.generateTexture('fx_spark', 16, 16);
+      g.destroy();
+    }
+
+    if (!this.textures.exists('fx_dust')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0xd97706, 0.7);
+      g.fillCircle(8, 8, 5);
+      g.fillStyle(0xb45309, 0.9);
+      g.fillCircle(6, 7, 3);
+      g.fillStyle(0xfde68a, 0.8);
+      g.fillCircle(9, 6, 2);
+      g.generateTexture('fx_dust', 16, 16);
+      g.destroy();
+    }
+
+    if (!this.textures.exists('fx_water_splash')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x38bdf8, 0.8);
+      g.fillCircle(4, 5, 2.5);
+      g.fillCircle(11, 4, 2);
+      g.fillCircle(8, 10, 3);
+      g.fillStyle(0xe0f2fe, 1);
+      g.fillRect(4, 4, 1, 1);
+      g.fillRect(8, 9, 1, 1);
+      g.generateTexture('fx_water_splash', 16, 16);
+      g.destroy();
+    }
   }
 }
