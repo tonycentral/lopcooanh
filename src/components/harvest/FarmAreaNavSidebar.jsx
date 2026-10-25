@@ -237,12 +237,12 @@ export default function FarmAreaNavSidebar({
       <div className="my-2 flex-1 flex flex-col justify-center space-y-1.5">
         
         {/* Section Header */}
-        <div className="hidden sm:flex items-center gap-1.5 px-1 text-[8px] font-bold text-[#e8cfa6] uppercase">
+        <div className="hidden sm:flex items-center gap-1.5 px-1 text-[8.5px] font-bold text-[#e8cfa6] uppercase tracking-wider">
           <i className="pixelart-icons-font-compass text-sm"></i>
-          <span>5 KHU VỰC TRẠI</span>
+          <span>7 PHÂN KHU TRẠI</span>
         </div>
 
-        {/* 5 Area Navigation Buttons */}
+        {/* 7 Area Navigation Buttons */}
         <nav className="flex flex-col gap-1.5">
           {FARM_AREAS.map(area => {
             const isActive = activeAreaId === area.id;
@@ -280,7 +280,7 @@ export default function FarmAreaNavSidebar({
 
                 {/* Name & Skill Badge (Desktop) */}
                 <div className="hidden sm:flex flex-col min-w-0 flex-1">
-                  <span className={`text-[9px] truncate font-bold leading-tight ${
+                  <span className={`text-[10px] truncate font-bold leading-tight ${
                     isActive ? 'text-[#ffffff]' : 'text-[#e8cfa6]'
                   }`}>
                     {area.name}
@@ -288,7 +288,7 @@ export default function FarmAreaNavSidebar({
 
                   <div className="flex items-center gap-1 mt-0.5">
                     <span 
-                      className="text-[7px] px-1 py-0.5 border border-[#45283c] uppercase font-bold leading-none"
+                      className="text-[7.5px] px-1 py-0.5 border border-[#45283c] uppercase font-bold leading-none"
                       style={{
                         backgroundColor: isActive ? '#354d1f' : '#45283c',
                         color: '#e8cfa6'
@@ -300,7 +300,7 @@ export default function FarmAreaNavSidebar({
                 </div>
 
                 {/* Mobile Short Label */}
-                <span className="sm:hidden text-[6px] text-center block w-full truncate font-bold">
+                <span className="sm:hidden text-[7px] text-center block w-full truncate font-bold">
                   {area.skillName.slice(0, 3)}
                 </span>
               </button>

@@ -466,7 +466,7 @@ export default function AreaTopicPracticeModal({
               )}
 
               {/* Question Prompt */}
-              <div className="text-[9px] sm:text-[10px] font-bold text-[#2c1b18] leading-normal font-sans">
+              <div className="text-[10px] sm:text-[11.5px] font-bold text-[#2c1b18] leading-relaxed font-sans">
                 {currentQ.question}
               </div>
 
@@ -493,7 +493,7 @@ export default function AreaTopicPracticeModal({
                       type="button"
                       disabled={isAnswered}
                       onClick={() => handleSelectOption(idx)}
-                      className={`w-full p-2 border-4 border-[#45283c] text-left text-[9px] sm:text-[10px] transition flex items-center justify-between gap-2 cursor-pointer ${optionClass}`}
+                      className={`w-full p-2 sm:p-2.5 border-4 border-[#45283c] text-left text-[9.5px] sm:text-[10.5px] leading-snug transition flex items-center justify-between gap-2 cursor-pointer ${optionClass}`}
                     >
                       <span className="flex-1">{opt}</span>
                       {isAnswered && isAnswerCorrect && (
