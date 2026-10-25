@@ -10,12 +10,21 @@ interface TileSpriteEntry {
   placeableSprite?: Phaser.GameObjects.GameObject | null;
 }
 
+interface PendingAction {
+  gridX: number;
+  gridY: number;
+  targetX: number;
+  targetY: number;
+}
+
 export default class FarmScene extends Phaser.Scene {
   private readonly TILE_SIZE = 32;
   private readonly GRID_WIDTH = 30;  // 960px
   private readonly GRID_HEIGHT = 20; // 640px
+  private readonly INTERACTION_RANGE = 48; // Max distance in px (~1.5 tiles)
   private playerSpeed = 160;
 
+  private pendingAction: PendingAction | null = null;
   private tileSprites = new Map<string, TileSpriteEntry>();
   private marker!: Phaser.GameObjects.Sprite;
   private player!: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
@@ -157,10 +166,26 @@ export default class FarmScene extends Phaser.Scene {
   }
 
   public stopMovement() {
+    this.pendingAction = null;
     if (this.player && this.player.body) {
       this.player.setVelocity(0, 0);
       this.updatePlayerIdleAnimation();
     }
+  }
+
+  /**
+   * Faces the player character towards target coordinates
+   */
+  private updateFacingDirection(targetX: number, targetY: number) {
+    const dx = targetX - this.player.x;
+    const dy = targetY - this.player.y;
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+      this.lastDirection = dx > 0 ? 'right' : 'left';
+    } else {
+      this.lastDirection = dy > 0 ? 'down' : 'up';
+    }
+    this.updatePlayerIdleAnimation();
   }
 
   update() {
@@ -169,44 +194,89 @@ export default class FarmScene extends Phaser.Scene {
       return;
     }
 
-    let vx = 0;
-    let vy = 0;
+    let manualVx = 0;
+    let manualVy = 0;
 
     if (this.cursors && this.wasd) {
-      if (this.cursors.left.isDown || this.wasd.left.isDown) vx -= this.playerSpeed;
-      if (this.cursors.right.isDown || this.wasd.right.isDown) vx += this.playerSpeed;
-      if (this.cursors.up.isDown || this.wasd.up.isDown) vy -= this.playerSpeed;
-      if (this.cursors.down.isDown || this.wasd.down.isDown) vy += this.playerSpeed;
+      if (this.cursors.left.isDown || this.wasd.left.isDown) manualVx -= this.playerSpeed;
+      if (this.cursors.right.isDown || this.wasd.right.isDown) manualVx += this.playerSpeed;
+      if (this.cursors.up.isDown || this.wasd.up.isDown) manualVy -= this.playerSpeed;
+      if (this.cursors.down.isDown || this.wasd.down.isDown) manualVy += this.playerSpeed;
     }
 
-    if (vx !== 0 && vy !== 0) {
-      vx *= 0.7071;
-      vy *= 0.7071;
-    }
+    // 1. Player Override: Manual keyboard control immediately cancels any automated approach
+    if (manualVx !== 0 || manualVy !== 0) {
+      this.pendingAction = null;
 
-    // Direction tracking
-    if (vx < 0) {
-      this.lastDirection = 'left';
-    } else if (vx > 0) {
-      this.lastDirection = 'right';
-    } else if (vy < 0) {
-      this.lastDirection = 'up';
-    } else if (vy > 0) {
-      this.lastDirection = 'down';
-    }
+      if (manualVx !== 0 && manualVy !== 0) {
+        manualVx *= 0.7071;
+        manualVy *= 0.7071;
+      }
 
-    this.player.setVelocity(vx, vy);
-    this.player.setDepth(10 + (this.player.y / 1000));
+      // Direction tracking
+      if (manualVx < 0) {
+        this.lastDirection = 'left';
+      } else if (manualVx > 0) {
+        this.lastDirection = 'right';
+      } else if (manualVy < 0) {
+        this.lastDirection = 'up';
+      } else if (manualVy > 0) {
+        this.lastDirection = 'down';
+      }
 
-    // Player walking/idle animation control
-    if (vx !== 0 || vy !== 0) {
+      this.player.setVelocity(manualVx, manualVy);
+      this.player.setDepth(10 + (this.player.y / 1000));
+
       const walkAnim = `walk_${this.lastDirection}`;
       if (this.anims.exists(walkAnim)) {
         this.player.anims.play(walkAnim, true);
       }
-    } else {
-      this.updatePlayerIdleAnimation();
+      return;
     }
+
+    // 2. Auto-Approach Navigation to Target Tile
+    if (this.pendingAction) {
+      const targetCenterX = this.pendingAction.gridX * this.TILE_SIZE + 16;
+      const targetCenterY = this.pendingAction.gridY * this.TILE_SIZE + 16;
+      const distToTarget = Phaser.Math.Distance.Between(this.player.x, this.player.y, targetCenterX, targetCenterY);
+      const distToDest = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.pendingAction.targetX, this.pendingAction.targetY);
+
+      // Check if player has arrived within interaction range
+      if (distToTarget <= this.INTERACTION_RANGE || distToDest <= 8) {
+        const { gridX, gridY } = this.pendingAction;
+        this.pendingAction = null;
+        this.player.setVelocity(0, 0);
+        this.updateFacingDirection(targetCenterX, targetCenterY);
+        this.executeTileAction(gridX, gridY);
+        return;
+      }
+
+      // Move player towards destination point
+      this.physics.moveTo(this.player, this.pendingAction.targetX, this.pendingAction.targetY, this.playerSpeed);
+
+      // Track facing direction from current physics velocity
+      const body = this.player.body as Phaser.Physics.Arcade.Body;
+      const vx = body.velocity.x;
+      const vy = body.velocity.y;
+
+      if (Math.abs(vx) > Math.abs(vy)) {
+        this.lastDirection = vx > 0 ? 'right' : 'left';
+      } else if (Math.abs(vy) > 0) {
+        this.lastDirection = vy > 0 ? 'down' : 'up';
+      }
+
+      this.player.setDepth(10 + (this.player.y / 1000));
+
+      const walkAnim = `walk_${this.lastDirection}`;
+      if (this.anims.exists(walkAnim)) {
+        this.player.anims.play(walkAnim, true);
+      }
+      return;
+    }
+
+    // 3. Complete Idle State
+    this.player.setVelocity(0, 0);
+    this.updatePlayerIdleAnimation();
   }
 
   private updatePlayerIdleAnimation() {
@@ -344,6 +414,87 @@ export default class FarmScene extends Phaser.Scene {
   }
 
   private handleTileClick(x: number, y: number) {
+    const targetCenterX = x * this.TILE_SIZE + 16;
+    const targetCenterY = y * this.TILE_SIZE + 16;
+    const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, targetCenterX, targetCenterY);
+
+    // Case 1: Within interaction range (dist <= INTERACTION_RANGE) -> execute immediately
+    if (dist <= this.INTERACTION_RANGE) {
+      this.pendingAction = null;
+      this.player.setVelocity(0, 0);
+      this.updateFacingDirection(targetCenterX, targetCenterY);
+      this.executeTileAction(x, y);
+      return;
+    }
+
+    // Case 2: Out of range -> Calculate approach destination and auto-walk
+    const store = useGameStore.getState();
+    const currentTile = store.tiles[`${x},${y}`];
+    const isSolid = currentTile?.obstacle?.type === 'rock' ||
+                    currentTile?.obstacle?.type === 'wood' ||
+                    currentTile?.placeable?.type === 'fence' ||
+                    currentTile?.placeable?.type === 'chest';
+
+    let destX = targetCenterX;
+    let destY = targetCenterY;
+
+    if (isSolid) {
+      // Find the closest walkable adjacent tile (North, South, West, East)
+      const candidates = [
+        { gx: x, gy: y - 1 },
+        { gx: x, gy: y + 1 },
+        { gx: x - 1, gy: y },
+        { gx: x + 1, gy: y }
+      ];
+
+      let bestDist = Infinity;
+      let foundSpot = false;
+
+      for (const cand of candidates) {
+        if (!this.isValidTile(cand.gx, cand.gy)) continue;
+        const candTile = store.tiles[`${cand.gx},${cand.gy}`];
+        const candSolid = candTile?.obstacle?.type === 'rock' ||
+                          candTile?.obstacle?.type === 'wood' ||
+                          candTile?.placeable?.type === 'fence' ||
+                          candTile?.placeable?.type === 'chest';
+        if (!candSolid) {
+          const cx = cand.gx * this.TILE_SIZE + 16;
+          const cy = cand.gy * this.TILE_SIZE + 16;
+          const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, cx, cy);
+          if (d < bestDist) {
+            bestDist = d;
+            destX = cx;
+            destY = cy;
+            foundSpot = true;
+          }
+        }
+      }
+
+      if (!foundSpot) {
+        // Fallback: point 32px away along line from target to player
+        const angle = Phaser.Math.Angle.Between(targetCenterX, targetCenterY, this.player.x, this.player.y);
+        destX = targetCenterX + Math.cos(angle) * 32;
+        destY = targetCenterY + Math.sin(angle) * 32;
+      }
+    } else {
+      // Walkable target: aim near tile center
+      const angle = Phaser.Math.Angle.Between(targetCenterX, targetCenterY, this.player.x, this.player.y);
+      destX = targetCenterX + Math.cos(angle) * 16;
+      destY = targetCenterY + Math.sin(angle) * 16;
+    }
+
+    this.pendingAction = {
+      gridX: x,
+      gridY: y,
+      targetX: destX,
+      targetY: destY
+    };
+
+    this.physics.moveTo(this.player, destX, destY, this.playerSpeed);
+    this.updateFacingDirection(destX, destY);
+  }
+
+  private executeTileAction(x: number, y: number) {
     const store = useGameStore.getState();
     const activeTool = store.activeTool;
     const currentTile = store.tiles[`${x},${y}`];
