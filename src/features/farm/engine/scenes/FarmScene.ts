@@ -6,7 +6,7 @@ import type { TileData } from '../../types';
 interface TileSpriteEntry {
   soilSprite: Phaser.GameObjects.Image | null;
   cropSprite: Phaser.GameObjects.Image | null;
-  obstacleSprite?: Phaser.GameObjects.Image | null;
+  obstacleSprite?: Phaser.GameObjects.GameObject | null;
 }
 
 export default class FarmScene extends Phaser.Scene {
@@ -18,6 +18,7 @@ export default class FarmScene extends Phaser.Scene {
   private tileSprites = new Map<string, TileSpriteEntry>();
   private marker!: Phaser.GameObjects.Sprite;
   private player!: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+  private solidObstacleGroup!: Phaser.Physics.Arcade.StaticGroup;
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
   private wasd!: {
     up: Phaser.Input.Keyboard.Key;
@@ -57,7 +58,10 @@ export default class FarmScene extends Phaser.Scene {
     // 3. Register Player Animations (if atlas provides directional frames)
     this.createPlayerAnimations();
 
-    // 4. Player Character
+    // 4. Static Physics Group for Solid Obstacles (Rocks & Logs)
+    this.solidObstacleGroup = this.physics.add.staticGroup();
+
+    // 5. Player Character
     const initialFrame = this.hasCustomAtlas && this.textures.exists('farm_atlas') && this.textures.get('farm_atlas').has('player_idle_down')
       ? 'player_idle_down'
       : undefined;
@@ -69,8 +73,13 @@ export default class FarmScene extends Phaser.Scene {
     }
     this.player.setCollideWorldBounds(true);
     this.player.setDepth(15);
+    // Tinh chỉnh hitbox va chạm phần chân (16x12px, offset 8, 20) cho chiều sâu 2.5D
+    this.player.body.setSize(16, 12).setOffset(8, 20);
 
-    // 5. Keyboard Controls
+    // 6. Set Collider between Player and Solid Obstacles
+    this.physics.add.collider(this.player, this.solidObstacleGroup);
+
+    // 7. Keyboard Controls
     if (this.input.keyboard) {
       this.cursors = this.input.keyboard.createCursorKeys();
       this.wasd = {
@@ -281,6 +290,36 @@ export default class FarmScene extends Phaser.Scene {
     }
   }
 
+  /**
+   * Helper: Creates obstacle sprites with Arcade Physics static body for rock/wood
+   * or a non-solid image for weeds so the player can walk through.
+   */
+  private createObstacleSprite(x: number, y: number, type: 'rock' | 'wood' | 'weed'): Phaser.GameObjects.GameObject {
+    const obsTexture = `obstacle_${type}`;
+    const hasAtlas = this.hasCustomAtlas && this.textures.exists('farm_atlas') && this.textures.get('farm_atlas').has(obsTexture);
+    const tex = hasAtlas ? 'farm_atlas' : obsTexture;
+    const frame = hasAtlas ? obsTexture : undefined;
+
+    const px = x * this.TILE_SIZE;
+    const py = y * this.TILE_SIZE;
+    const depth = 10 + (py + 16) / 1000;
+
+    if (type === 'rock' || type === 'wood') {
+      // Solid obstacle: Static Arcade Physics body centered on tile
+      const sprite = this.solidObstacleGroup.create(px + 16, py + 16, tex, frame) as Phaser.Physics.Arcade.Sprite;
+      sprite.setOrigin(0.5, 0.5);
+      sprite.setDepth(depth);
+      // Inset body (26x20) for smooth corner sliding
+      sprite.body.setSize(26, 20).setOffset(3, 6);
+      sprite.refreshBody();
+      return sprite;
+    } else {
+      // Non-solid obstacle: Weeds (player can walk through)
+      const image = this.createImage(px, py, obsTexture).setOrigin(0, 0).setDepth(depth);
+      return image;
+    }
+  }
+
   private handleTileClick(x: number, y: number) {
     const store = useGameStore.getState();
     const activeTool = store.activeTool;
@@ -298,14 +337,21 @@ export default class FarmScene extends Phaser.Scene {
             // Shake visual feedback
             const entry = this.tileSprites.get(`${x},${y}`);
             if (entry?.obstacleSprite) {
+              const isSolid = currentTile.obstacle.type === 'rock' || currentTile.obstacle.type === 'wood';
+              const targetSprite = entry.obstacleSprite as Phaser.GameObjects.Sprite | Phaser.GameObjects.Image;
+              const baseX = isSolid ? x * this.TILE_SIZE + 16 : x * this.TILE_SIZE;
+              const baseY = isSolid ? y * this.TILE_SIZE + 16 : y * this.TILE_SIZE;
               this.tweens.add({
-                targets: entry.obstacleSprite,
-                x: x * this.TILE_SIZE + (Math.random() > 0.5 ? 3 : -3),
+                targets: targetSprite,
+                x: baseX + (Math.random() > 0.5 ? 3 : -3),
                 yoyo: true,
                 duration: 50,
                 repeat: 3,
                 onComplete: () => {
-                  entry.obstacleSprite?.setPosition(x * this.TILE_SIZE, y * this.TILE_SIZE);
+                  targetSprite.setPosition(baseX, baseY);
+                  if (isSolid) {
+                    (targetSprite as Phaser.Physics.Arcade.Sprite).refreshBody?.();
+                  }
                 }
               });
             }
@@ -402,7 +448,13 @@ export default class FarmScene extends Phaser.Scene {
       if (!currentKeys.has(key)) {
         entry.soilSprite?.destroy();
         entry.cropSprite?.destroy();
-        entry.obstacleSprite?.destroy();
+        if (entry.obstacleSprite) {
+          if (this.solidObstacleGroup.contains(entry.obstacleSprite)) {
+            this.solidObstacleGroup.remove(entry.obstacleSprite, true, true);
+          } else {
+            (entry.obstacleSprite as Phaser.GameObjects.GameObject).destroy();
+          }
+        }
         this.tileSprites.delete(key);
       }
     }
@@ -448,16 +500,30 @@ export default class FarmScene extends Phaser.Scene {
         entry.cropSprite = null;
       }
 
-      // 3. Obstacle texture update
+      // 3. Obstacle texture & physics update
       if (tile.obstacle) {
-        const obsTexture = `obstacle_${tile.obstacle.type}`;
         if (!entry.obstacleSprite) {
-          entry.obstacleSprite = this.createImage(px, py, obsTexture).setOrigin(0, 0).setDepth(6);
+          entry.obstacleSprite = this.createObstacleSprite(x, y, tile.obstacle.type);
         } else {
-          this.applyTexture(entry.obstacleSprite, obsTexture);
+          // If obstacle type changed between solid (rock/wood) and non-solid (weed)
+          const isCurrentlySolid = this.solidObstacleGroup.contains(entry.obstacleSprite);
+          const shouldBeSolid = tile.obstacle.type === 'rock' || tile.obstacle.type === 'wood';
+
+          if (isCurrentlySolid !== shouldBeSolid) {
+            if (isCurrentlySolid) {
+              this.solidObstacleGroup.remove(entry.obstacleSprite, true, true);
+            } else {
+              (entry.obstacleSprite as Phaser.GameObjects.GameObject).destroy();
+            }
+            entry.obstacleSprite = this.createObstacleSprite(x, y, tile.obstacle.type);
+          }
         }
       } else if (entry.obstacleSprite) {
-        entry.obstacleSprite.destroy();
+        if (this.solidObstacleGroup.contains(entry.obstacleSprite)) {
+          this.solidObstacleGroup.remove(entry.obstacleSprite, true, true);
+        } else {
+          (entry.obstacleSprite as Phaser.GameObjects.GameObject).destroy();
+        }
         entry.obstacleSprite = null;
       }
     }
