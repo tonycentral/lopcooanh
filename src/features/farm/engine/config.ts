@@ -7,8 +7,8 @@ export function createGameConfig(parentContainer: HTMLElement): Phaser.Types.Cor
   return {
     type: Phaser.AUTO,
     parent: parentContainer,
-    width: '100%',
-    height: '100%',
+    width: 960,
+    height: 640,
     pixelArt: true,
     roundPixels: true,
     antialias: false,
@@ -21,7 +21,7 @@ export function createGameConfig(parentContainer: HTMLElement): Phaser.Types.Cor
       }
     },
     scale: {
-      mode: Phaser.Scale.RESIZE,
+      mode: Phaser.Scale.FIT,
       autoCenter: Phaser.Scale.CENTER_BOTH
     },
     scene: [BootScene, FarmScene]
