@@ -24,6 +24,8 @@ export default class FarmScene extends Phaser.Scene {
   private readonly INTERACTION_RANGE = 48; // Max distance in px (~1.5 tiles)
   private readonly SANCTUARY_GRID_X = 15;
   private readonly SANCTUARY_GRID_Y = 3;
+  private readonly BBQ_GRID_X = 18;
+  private readonly BBQ_GRID_Y = 3;
   private playerSpeed = 160;
 
   private pendingAction: PendingAction | null = null;
@@ -34,6 +36,8 @@ export default class FarmScene extends Phaser.Scene {
 
   private sanctuarySprite!: Phaser.Physics.Arcade.Sprite;
   private sanctuaryTooltip!: Phaser.GameObjects.Container;
+  private bbqSprite!: Phaser.Physics.Arcade.Sprite;
+  private bbqTooltip!: Phaser.GameObjects.Container;
   private interactKey!: Phaser.Input.Keyboard.Key;
 
   private tileSprites = new Map<string, TileSpriteEntry>();
@@ -142,6 +146,66 @@ export default class FarmScene extends Phaser.Scene {
       ease: 'Sine.easeInOut'
     });
 
+    // 4c. Barbecue Stand Structure (BBQ Stand)
+    const bbqX = this.BBQ_GRID_X * this.TILE_SIZE + 16;
+    const bbqY = this.BBQ_GRID_Y * this.TILE_SIZE + 16;
+    this.bbqSprite = this.physics.add.sprite(bbqX, bbqY, 'structure_bbq_stand');
+    this.bbqSprite.setDepth(11);
+    this.bbqSprite.setImmovable(true);
+    (this.bbqSprite.body as Phaser.Physics.Arcade.Body).moves = false;
+    this.bbqSprite.body.setSize(26, 20).setOffset(3, 10);
+    this.solidObstacleGroup.add(this.bbqSprite);
+
+    // Sizzling grill pulse animation
+    this.tweens.add({
+      targets: this.bbqSprite,
+      scaleY: { from: 1, to: 1.05 },
+      scaleX: { from: 1, to: 0.97 },
+      duration: 320,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut'
+    });
+
+    // Click on BBQ Stand
+    this.bbqSprite.setInteractive({ useHandCursor: true });
+    this.bbqSprite.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
+      if (this.isInputBlocked || pointer.rightButtonDown()) return;
+      const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.bbqSprite.x, this.bbqSprite.y);
+      if (dist <= this.INTERACTION_RANGE) {
+        this.openBBQStand();
+      } else {
+        this.startAutoApproach(this.BBQ_GRID_X, this.BBQ_GRID_Y, this.bbqSprite.x, this.bbqSprite.y + 28);
+      }
+    });
+
+    // Floating tooltip container above BBQ Stand
+    const bbqTooltipBg = this.add.graphics();
+    bbqTooltipBg.fillStyle(0x0f172a, 0.9);
+    bbqTooltipBg.lineStyle(1.5, 0xf97316, 0.85);
+    bbqTooltipBg.fillRoundedRect(-110, -13, 220, 26, 8);
+    bbqTooltipBg.strokeRoundedRect(-110, -13, 220, 26, 8);
+
+    const bbqTooltipText = this.add.text(0, 0, '🍖 Bấm E hoặc Click để Thưởng Thức BBQ', {
+      fontSize: '11px',
+      color: '#ffedd5',
+      fontStyle: 'bold',
+      fontFamily: 'sans-serif'
+    }).setOrigin(0.5);
+
+    this.bbqTooltip = this.add.container(bbqX, bbqY - 30, [bbqTooltipBg, bbqTooltipText]);
+    this.bbqTooltip.setDepth(26);
+    this.bbqTooltip.setVisible(false);
+
+    this.tweens.add({
+      targets: this.bbqTooltip,
+      y: bbqY - 34,
+      duration: 720,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut'
+    });
+
     // 5. Player Character
     const initialFrame = this.hasCustomAtlas && this.textures.exists('farm_atlas') && this.textures.get('farm_atlas').has('player_idle_down')
       ? 'player_idle_down'
@@ -236,6 +300,7 @@ export default class FarmScene extends Phaser.Scene {
       this.stopMovement();
       if (this.marker) this.marker.setVisible(false);
       if (this.sanctuaryTooltip) this.sanctuaryTooltip.setVisible(false);
+      if (this.bbqTooltip) this.bbqTooltip.setVisible(false);
     } else {
       this.isPerformingAction = false;
     }
@@ -250,6 +315,17 @@ export default class FarmScene extends Phaser.Scene {
     this.isPerformingAction = true;
     this.updateFacingDirection(this.sanctuarySprite.x, this.sanctuarySprite.y);
     this.game.events.emit('open-vocab-quiz');
+  }
+
+  public openBBQStand() {
+    this.cancelCurrentAction();
+    this.stopMovement();
+    if (this.player && this.player.body) {
+      this.player.setVelocity(0, 0);
+    }
+    this.isPerformingAction = true;
+    this.updateFacingDirection(this.bbqSprite.x, this.bbqSprite.y);
+    this.game.events.emit('open-bbq-stand');
   }
 
   public cancelCurrentAction() {
@@ -327,6 +403,25 @@ export default class FarmScene extends Phaser.Scene {
       }
     }
 
+    // Proximity check for BBQ Stand & 'E' key interaction
+    if (this.bbqSprite && this.bbqTooltip) {
+      const distToBBQ = Phaser.Math.Distance.Between(
+        this.player.x,
+        this.player.y,
+        this.bbqSprite.x,
+        this.bbqSprite.y
+      );
+      const isNearBBQ = distToBBQ <= this.INTERACTION_RANGE;
+      this.bbqTooltip.setVisible(isNearBBQ && !this.isInputBlocked);
+
+      if (isNearBBQ && !this.isInputBlocked && !this.isPerformingAction && this.interactKey) {
+        if (Phaser.Input.Keyboard.JustDown(this.interactKey)) {
+          this.openBBQStand();
+          return;
+        }
+      }
+    }
+
     let manualVx = 0;
     let manualVy = 0;
 
@@ -383,6 +478,8 @@ export default class FarmScene extends Phaser.Scene {
 
         if (gridX === this.SANCTUARY_GRID_X && gridY === this.SANCTUARY_GRID_Y) {
           this.openSanctuaryQuiz();
+        } else if (gridX === this.BBQ_GRID_X && gridY === this.BBQ_GRID_Y) {
+          this.openBBQStand();
         } else {
           this.triggerTileInteraction(gridX, gridY);
         }
@@ -592,6 +689,17 @@ export default class FarmScene extends Phaser.Scene {
         this.openSanctuaryQuiz();
       } else {
         this.startAutoApproach(this.SANCTUARY_GRID_X, this.SANCTUARY_GRID_Y, this.sanctuarySprite.x, this.sanctuarySprite.y + 28);
+      }
+      return;
+    }
+
+    // Click directly on BBQ Stand tile
+    if (x === this.BBQ_GRID_X && y === this.BBQ_GRID_Y) {
+      const distToBBQ = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.bbqSprite.x, this.bbqSprite.y);
+      if (distToBBQ <= this.INTERACTION_RANGE) {
+        this.openBBQStand();
+      } else {
+        this.startAutoApproach(this.BBQ_GRID_X, this.BBQ_GRID_Y, this.bbqSprite.x, this.bbqSprite.y + 28);
       }
       return;
     }

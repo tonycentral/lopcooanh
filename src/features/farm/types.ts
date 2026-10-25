@@ -96,6 +96,7 @@ export interface NotificationMessage {
 }
 
 export * from './types/vocab';
+export * from './types/reading';
 
 export interface PlayerFarmState {
   gold: number;

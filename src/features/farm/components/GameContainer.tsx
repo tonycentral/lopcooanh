@@ -7,6 +7,7 @@ import { flushPendingFarmSync, initVisibilitySyncListener } from '../services/su
 import ShopModal from './ShopModal';
 import ChestModal from './ChestModal';
 import VocabQuizModal from './VocabQuizModal';
+import BBQStandModal from './BBQStandModal';
 import { 
   Coins, 
   Zap, 
@@ -53,6 +54,7 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
   const [currentChestKey, setCurrentChestKey] = useState<string | null>(null);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isQuizOpen, setIsQuizOpen] = useState(false);
+  const [isBBQOpen, setIsBBQOpen] = useState(false);
 
   // Auto-dismiss notification after 3.5 seconds
   useEffect(() => {
@@ -120,7 +122,7 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
       }
 
       // If modal is active, ignore hotbar tool changes
-      if (isShopOpen || Boolean(currentChestKey) || isProfileOpen || isQuizOpen) return;
+      if (isShopOpen || Boolean(currentChestKey) || isProfileOpen || isQuizOpen || isBBQOpen) return;
 
       const keyNum = parseInt(e.key, 10);
       if (keyNum >= 1 && keyNum <= hotbar.length) {
@@ -129,7 +131,7 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [hotbar, selectTool, isShopOpen, shopTab, currentChestKey, isProfileOpen, isQuizOpen]);
+  }, [hotbar, selectTool, isShopOpen, shopTab, currentChestKey, isProfileOpen, isQuizOpen, isBBQOpen]);
 
   // Synchronize modal state with Phaser input context (disable WASD/mouse raycast when modal is open)
   useEffect(() => {
@@ -137,12 +139,12 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     try {
       const scene = gameRef.current.scene.getScene('FarmScene') as { setModalOpen?: (open: boolean) => void } | null;
       if (scene && typeof scene.setModalOpen === 'function') {
-        scene.setModalOpen(isShopOpen || Boolean(currentChestKey) || isProfileOpen || isQuizOpen);
+        scene.setModalOpen(isShopOpen || Boolean(currentChestKey) || isProfileOpen || isQuizOpen || isBBQOpen);
       }
     } catch {
       // Scene might not be initialized yet
     }
-  }, [isShopOpen, currentChestKey, isProfileOpen, isQuizOpen]);
+  }, [isShopOpen, currentChestKey, isProfileOpen, isQuizOpen, isBBQOpen]);
 
   // Phaser Game instance lifecycle management (React 19 strict-mode safe)
   useEffect(() => {
@@ -164,9 +166,16 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     };
     game.events.on('open-vocab-quiz', handleOpenQuiz);
 
+    // Listen to BBQ stand interaction events emitted from FarmScene
+    const handleOpenBBQ = () => {
+      setIsBBQOpen(true);
+    };
+    game.events.on('open-bbq-stand', handleOpenBBQ);
+
     return () => {
       game.events.off('open-chest', handleOpenChest);
       game.events.off('open-vocab-quiz', handleOpenQuiz);
+      game.events.off('open-bbq-stand', handleOpenBBQ);
       if (gameRef.current) {
         gameRef.current.destroy(true);
         gameRef.current = null;
@@ -511,6 +520,9 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
 
       {/* 7. Vocabulary Quiz Modal (Campfire Sanctuary) */}
       <VocabQuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} />
+
+      {/* 8. BBQ Stand Modal & Reading Comprehension Challenge */}
+      <BBQStandModal isOpen={isBBQOpen} onClose={() => setIsBBQOpen(false)} />
 
     </div>
   );

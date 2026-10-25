@@ -1,0 +1,194 @@
+[
+  {
+    "id": "bbq_01",
+    "title": "The Art of Slow Roasting",
+    "passage": "Barbecue is more than just grilling meat over an open flame; it is a time-honored culinary tradition. The secret lies in slow roasting ingredients over fragrant wood charcoal. As the smoke gently envelopes the vegetables and herbs, it locks in rich moisture and creates a deeply savory aroma. Farmers often share these hearty meals at dusk after a productive harvest.",
+    "question": "What is the key secret to traditional slow-roast barbecue mentioned in the passage?",
+    "options": [
+      "Cooking rapidly over an extremely high electric flame",
+      "Roasting slowly over fragrant wood charcoal",
+      "Boiling ingredients in salted water before serving",
+      "Using artificial smoke flavors in an indoor kitchen"
+    ],
+    "correctIndex": 1,
+    "explanation": "Đoạn văn nhấn mạnh: 'The secret lies in slow roasting ingredients over fragrant wood charcoal.' (Bí quyết nằm ở việc nướng chậm nguyên liệu trên than củi thơm).",
+    "xpReward": 40,
+    "energyReward": 50
+  },
+  {
+    "id": "bbq_02",
+    "title": "Fresh Garden Herbs for Grilling",
+    "passage": "Fresh herbs play an essential role in seasoning grilled garden vegetables. Rosemary, thyme, and wild oregano release essential aromatic oils when exposed to mild heat. Instead of relying solely on heavy bottled sauces, natural cooks brush olive oil infused with crushed herbs onto zucchini and sweet corn. This technique highlights the natural sweetness of fresh farm produce.",
+    "question": "Why do cooks prefer brushing herb-infused olive oil rather than using heavy sauces?",
+    "options": [
+      "It completely conceals the natural taste of the crops",
+      "It is much quicker than using bottled sauces",
+      "It accentuates the inherent sweetness of fresh harvest produce",
+      "It prevents the fire from burning the charcoal"
+    ],
+    "correctIndex": 2,
+    "explanation": "Đoạn văn kết luận: 'This technique highlights the natural sweetness of fresh farm produce.' ('highlight' đồng nghĩa với 'accentuate' - làm nổi bật vị ngọt tự nhiên).",
+    "xpReward": 40,
+    "energyReward": 50
+  },
+  {
+    "id": "bbq_03",
+    "title": "The Science of Caramelization",
+    "passage": "When sweet corn and sliced onions are placed over hot barbecue grates, heat triggers a chemical reaction known as caramelization. Natural sugars inside the plants undergo thermal breakdown, producing complex nutty flavors and golden-brown grill marks. Careful timing is critical, as excessive direct heat can turn sweet caramel into bitter charred carbon in mere seconds.",
+    "question": "What happens when vegetable sugars undergo caramelization during grilling?",
+    "options": [
+      "They transform into sour and watery liquids",
+      "They produce nutty flavors and rich golden-brown markings",
+      "They lose all nutritional value and dissolve instantly",
+      "They prevent heat from penetrating the vegetable core"
+    ],
+    "correctIndex": 1,
+    "explanation": "Câu thứ hai nêu rõ: 'producing complex nutty flavors and golden-brown grill marks.' (tạo ra hương vị bùi ngậy và vết nướng màu vàng nâu).",
+    "xpReward": 40,
+    "energyReward": 50
+  },
+  {
+    "id": "bbq_04",
+    "title": "Community Feasts Across Cultures",
+    "passage": "Outdoor barbecue has universally symbolized community unity across diverse cultures for centuries. From South American asados to village gatherings in the Mediterranean, people gather around smoke and embers to share stories. Everyone contributes fresh homegrown ingredients, turning a simple dinner into a communal celebration of friendship and fruitful labor.",
+    "question": "According to the author, what does outdoor barbecue universally represent?",
+    "options": [
+      "A solitary meditation technique for lone campers",
+      "A competitive cooking tournament among rival farmers",
+      "A symbol of fellowship, community unity, and sharing",
+      "A commercial method for mass food preservation"
+    ],
+    "correctIndex": 2,
+    "explanation": "Câu đầu tiên khẳng định: 'Outdoor barbecue has universally symbolized community unity across diverse cultures' (tượng trưng cho sự đoàn kết cộng đồng và sẻ chia).",
+    "xpReward": 40,
+    "energyReward": 50
+  },
+  {
+    "id": "bbq_05",
+    "title": "Selecting the Right Firewood",
+    "passage": "Experienced pitmasters know that the choice of firewood determines the soul of the barbecue. Hardwoods like oak, applewood, and hickory burn slowly and produce a clean, aromatic smoke. In contrast, soft resinous woods such as pine should always be avoided because their sap produces harsh black smoke that ruins the delicate flavor of food.",
+    "question": "Why should resinous woods like pine never be used for cooking on a barbecue?",
+    "options": [
+      "They are far too expensive to harvest in nature",
+      "Their sap creates pungent soot and acrid smoke that spoils the food",
+      "They burn too cold to cook any food thoroughly",
+      "They attract unwanted insects toward the campfire"
+    ],
+    "correctIndex": 1,
+    "explanation": "Đoạn văn giải thích: 'soft resinous woods such as pine should always be avoided because their sap produces harsh black smoke that ruins the delicate flavor of food.'",
+    "xpReward": 40,
+    "energyReward": 50
+  },
+  {
+    "id": "bbq_06",
+    "title": "The Golden Skewer Tradition",
+    "passage": "Vegetable skewers, often called kebabs, offer both nutritional balance and visual vibrancy to any grill. Chefs alternate chunks of colorful bell peppers, button mushrooms, and cherry tomatoes along soaked wooden skewers. Soaking the wooden sticks in cool water for thirty minutes beforehand is a crucial safety step to prevent them from catching fire over open coals.",
+    "question": "Why is it important to soak wooden skewers in water prior to grilling?",
+    "options": [
+      "To wash away pesticide residue from the wood",
+      "To stop the skewers from burning when exposed to open coals",
+      "To soften the wood so the vegetables cook faster",
+      "To infuse a salty flavor into the cherry tomatoes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Câu cuối nêu: 'Soaking the wooden sticks in cool water for thirty minutes beforehand is a crucial safety step to prevent them from catching fire over open coals.' (tránh xiên gỗ bị bắt lửa).",
+    "xpReward": 40,
+    "energyReward": 50
+  },
+  {
+    "id": "bbq_07",
+    "title": "Sustainable Camping and Fire Safety",
+    "passage": "Cooking outdoors requires a high degree of environmental responsibility and situational awareness. Campers must always clear a circular perimeter of dry grass and leaves around the fire pit to prevent accidental wildfires. Furthermore, once cooking is complete, embers must be thoroughly extinguished with water and stirred into cool soil until completely cold to the touch.",
+    "question": "What must campers do to verify that the cooking fire is completely extinguished?",
+    "options": [
+      "Cover the glowing hot coals with dry pine needles",
+      "Leave the embers to burn out naturally overnight",
+      "Douse the embers with water and mix them with soil until cool",
+      "Fan the smoke away until no flame is visible"
+    ],
+    "correctIndex": 2,
+    "explanation": "Đoạn văn kết: 'embers must be thoroughly extinguished with water and stirred into cool soil until completely cold to the touch.'",
+    "xpReward": 40,
+    "energyReward": 50
+  },
+  {
+    "id": "bbq_08",
+    "title": "Rustic Wheat Bread on the Hearth",
+    "passage": "Nothing complements roasted vegetables better than freshly toasted rustic wheat flatbread. Prepared from stone-ground wheat flour, the dough is quickly stretched and placed directly on the hot perimeter griddle. Within minutes, the bread puffs up with golden blisters, offering a crisp crust and a fragrant, chewy interior that absorbs savory barbecue juices.",
+    "question": "How is the rustic wheat flatbread described in the passage?",
+    "options": [
+      "Crisp on the exterior with a fragrant, chewy interior",
+      "Completely soft with a sweet chocolate topping",
+      "Steamed inside a closed metal pot with herbal tea",
+      "Deep-fried in boiling vegetable oil until crunchy"
+    ],
+    "correctIndex": 0,
+    "explanation": "Câu cuối mô tả: 'offering a crisp crust and a fragrant, chewy interior that absorbs savory barbecue juices.' (vỏ giòn bên ngoài, bên trong dẻo dai thơm lừng).",
+    "xpReward": 40,
+    "energyReward": 50
+  },
+  {
+    "id": "bbq_09",
+    "title": "Foraging Wild Mushrooms for the Grill",
+    "passage": "Autumn rains awaken dormant mycelium beneath old forest logs, producing prized wild mushrooms. Edible varieties such as chanterelles and portobellos are carefully brushed clean of soil before being seasoned with sea salt and garlic butter. When placed on medium-low grill heat, their spongy texture absorbs smoky essence, yielding an intensely savory, meat-like bite.",
+    "question": "What unique culinary quality do grilled mushrooms develop on the grates?",
+    "options": [
+      "A dry, powdery mouthfeel with bitter undertones",
+      "A sweet candy-like syrup that crystallizes on top",
+      "A spongy, juicy texture with an intensely savory, meat-like bite",
+      "A rigid, crunchy crust similar to roasted stone nuts"
+    ],
+    "correctIndex": 2,
+    "explanation": "Đoạn văn nêu: 'their spongy texture absorbs smoky essence, yielding an intensely savory, meat-like bite.'",
+    "xpReward": 40,
+    "energyReward": 50
+  },
+  {
+    "id": "bbq_10",
+    "title": "Restoring Energy Through Mindful Eating",
+    "passage": "After hours of strenuous farming tasks like tilling land and chopping logs, the body craves dense replenishment. Sitting down at a warm barbecue stand allows adventurers to rest their tired muscles while nourishing their spirits. Mindful eating—savoring every bite of warm food and smelling the smoky pine air—speeds up physical recovery and restores vital energy.",
+    "question": "According to the passage, what benefits does mindful eating at the barbecue provide?",
+    "options": [
+      "It hastens physical recuperation and replenishes vital energy",
+      "It eliminates the need to sleep for several continuous weeks",
+      "It allows farmers to harvest crops without needing tools",
+      "It replaces the need to drink water during summer days"
+    ],
+    "correctIndex": 0,
+    "explanation": "Câu kết luận: 'speeds up physical recovery and restores vital energy.' ('recuperation' đồng nghĩa với 'recovery' - hồi phục thể lực và năng lượng).",
+    "xpReward": 40,
+    "energyReward": 50
+  },
+  {
+    "id": "bbq_11",
+    "title": "The Role of Smoke in Food Preservation",
+    "passage": "Long before modern refrigeration existed, early human settlements relied on smoke curing to preserve their surplus food supplies. The microscopic antimicrobial compounds present in natural wood smoke inhibit bacteria while gently dehydrating the food. Today, while we primarily enjoy smoked barbecue for its unmatched flavor, this ancient technique remains a testament to human survival ingenuity.",
+    "question": "Historically, why did early settlements smoke their food?",
+    "options": [
+      "To color their cooking tools with decorative dark soot",
+      "To preserve surplus food by inhibiting bacterial growth",
+      "To attract wild animals into their hunting traps",
+      "To cool food down rapidly before winter freezes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Đoạn văn nêu rõ: 'compounds present in natural wood smoke inhibit bacteria while gently dehydrating the food' nhằm bảo quản lượng thực phẩm dư thừa.",
+    "xpReward": 40,
+    "energyReward": 50
+  },
+  {
+    "id": "bbq_12",
+    "title": "The Harmony of Farm-to-Table Dining",
+    "passage": "Farm-to-table dining embodies the direct link between organic agriculture and culinary pleasure. By grilling vegetables within hours of harvesting them from fertile farm soil, the natural sugars and crispness remain at their peak. Eating locally grown food not only reduces environmental transportation footprints but also rewards hard-working farmers who care for the earth.",
+    "question": "What is an environmental advantage of eating locally grown farm produce?",
+    "options": [
+      "It allows vegetables to grow without needing rainwater",
+      "It decreases the carbon footprint associated with long-distance transportation",
+      "It eliminates the necessity of natural sunlight for photosynthesis",
+      "It guarantees that crops ripen within a few minutes of planting"
+    ],
+    "correctIndex": 1,
+    "explanation": "Câu cuối giải thích: 'reduces environmental transportation footprints' (giảm thiểu dấu chân carbon từ việc vận chuyển đường dài).",
+    "xpReward": 40,
+    "energyReward": 50
+  }
+]

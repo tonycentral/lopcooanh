@@ -392,6 +392,60 @@ export default class BootScene extends Phaser.Scene {
       g.destroy();
     }
 
+    // 15. Structure: BBQ Stand / Barbecue Grill (32x32)
+    if (!this.textures.exists('structure_bbq_stand')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Ground shadow
+      g.fillStyle(0x0f172a, 0.4);
+      g.fillEllipse(16, 26, 26, 10);
+      // Sturdy metal legs / stand base
+      g.fillStyle(0x1e293b, 1);
+      g.fillRect(5, 20, 3, 9);
+      g.fillRect(24, 20, 3, 9);
+      g.fillRect(14, 23, 4, 6);
+      g.fillRect(6, 26, 20, 2);
+      // Grill drum / firebox
+      g.fillStyle(0x334155, 1);
+      g.fillRoundedRect(3, 11, 26, 12, 4);
+      g.fillStyle(0x475569, 1);
+      g.fillRect(4, 11, 24, 2);
+      // Charcoal glowing bed
+      g.fillStyle(0xdc2626, 1);
+      g.fillRect(6, 13, 20, 4);
+      g.fillStyle(0xf97316, 1);
+      g.fillRect(8, 14, 16, 2);
+      g.fillStyle(0xfde047, 1);
+      g.fillRect(10, 14, 4, 1);
+      g.fillRect(18, 14, 4, 1);
+      // Metal grill rack grid
+      g.fillStyle(0x94a3b8, 1);
+      g.fillRect(5, 12, 22, 1);
+      g.fillRect(7, 10, 1, 4);
+      g.fillRect(11, 10, 1, 4);
+      g.fillRect(15, 10, 1, 4);
+      g.fillRect(19, 10, 1, 4);
+      g.fillRect(23, 10, 1, 4);
+      // Skewers / food on grill
+      g.fillStyle(0xb45309, 1); // Skewer sticks
+      g.fillRect(6, 9, 8, 1);
+      g.fillRect(17, 9, 8, 1);
+      g.fillStyle(0x16a34a, 1); // Herb / zucchini chunk
+      g.fillRect(8, 8, 2, 3);
+      g.fillStyle(0xe11d48, 1); // Red pepper / tomato
+      g.fillRect(11, 8, 2, 3);
+      g.fillStyle(0xf59e0b, 1); // Corn chunk
+      g.fillRect(19, 8, 3, 3);
+      g.fillStyle(0x78350f, 1); // Roasted mushroom
+      g.fillRect(23, 8, 2, 3);
+      // Smoke pipe chimney on right
+      g.fillStyle(0x1e293b, 1);
+      g.fillRect(22, 2, 3, 9);
+      g.fillStyle(0x475569, 1);
+      g.fillRect(21, 1, 5, 2);
+      g.generateTexture('structure_bbq_stand', 32, 32);
+      g.destroy();
+    }
+
     // 14. Action Tool Overlays (24x24) for Swing Animations
     // Hoe
     if (!this.textures.exists('tool_overlay_hoe')) {

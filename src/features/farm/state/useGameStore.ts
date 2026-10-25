@@ -314,6 +314,7 @@ export interface GameStoreState extends PlayerFarmState {
   depositToChest: (chestKey: string, itemId: string, count?: number) => { success: boolean; reason?: string };
   withdrawFromChest: (chestKey: string, itemId: string, count?: number) => { success: boolean; reason?: string };
   completeQuizReward: (energyReward: number, xpReward: number) => void;
+  orderBBQMeal: (food: import('../types').BBQFoodItem) => { success: boolean; reason?: string };
   hydrateFromCloud: (cloudState: Partial<PlayerFarmState>) => void;
   initSync: (userId?: string | null) => Promise<void>;
 }
@@ -344,9 +345,9 @@ export const useGameStore = create<GameStoreState>((set, get) => {
 
     // Slot 1: Cuốc đất (Hoe)
     tillTile: (x, y) => {
-      if (x === 15 && y === 3) {
-        get().notify('Đây là Khu Nghỉ Chân Tri Thức, không thể cuốc đất!', 'warning');
-        return { success: false, reason: 'Khu Nghỉ Chân!' };
+      if ((x === 15 && y === 3) || (x === 18 && y === 3)) {
+        get().notify('Khu vực Công Trình Đặc Biệt, không thể cuốc đất!', 'warning');
+        return { success: false, reason: 'Khu Công Trình!' };
       }
       const key = `${x},${y}`;
       const state = get();
@@ -1072,9 +1073,9 @@ export const useGameStore = create<GameStoreState>((set, get) => {
 
     // 6. Place Entities (Fence & Chest)
     placeEntity: (x: number, y: number, placeableType: PlaceableType) => {
-      if (x === 15 && y === 3) {
-        get().notify('Không thể đặt vật phẩm đè lên Khu Nghỉ Chân!', 'warning');
-        return { success: false, reason: 'Khu Nghỉ Chân!' };
+      if ((x === 15 && y === 3) || (x === 18 && y === 3)) {
+        get().notify('Không thể đặt vật phẩm đè lên Công Trình Đặc Biệt!', 'warning');
+        return { success: false, reason: 'Khu Công Trình!' };
       }
       const key = `${x},${y}`;
       const state = get();
@@ -1514,6 +1515,70 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       } else {
         get().notify(`✨ Tuyệt vời! +${energyReward} Thể Lực, +${xpReward} XP!`, 'success');
       }
+    },
+
+    orderBBQMeal: (food) => {
+      const state = get();
+      let hasIngredients = true;
+
+      if (food.requiredIngredients && food.requiredIngredients.length > 0) {
+        for (const req of food.requiredIngredients) {
+          const inHotbar = state.hotbar.find((i) => i.id === req.id)?.count ?? 0;
+          const inInv = state.inventory.find((i) => i.id === req.id)?.count ?? 0;
+          if (inHotbar + inInv < req.count) {
+            hasIngredients = false;
+            break;
+          }
+        }
+      }
+
+      if (food.requiredIngredients && food.requiredIngredients.length > 0 && hasIngredients) {
+        let newHotbar = [...state.hotbar];
+        let newInventory = [...state.inventory];
+
+        for (const req of food.requiredIngredients) {
+          let needed = req.count;
+          newHotbar = newHotbar.map((item) => {
+            if (item.id === req.id && needed > 0) {
+              const deduct = Math.min(item.count ?? 0, needed);
+              needed -= deduct;
+              return { ...item, count: (item.count ?? 0) - deduct };
+            }
+            return item;
+          }).filter((i) => (i.count ?? 0) > 0 || i.type === 'tool');
+
+          if (needed > 0) {
+            newInventory = newInventory.map((item) => {
+              if (item.id === req.id && needed > 0) {
+                const deduct = Math.min(item.count ?? 0, needed);
+                needed -= deduct;
+                return { ...item, count: (item.count ?? 0) - deduct };
+              }
+              return item;
+            }).filter((i) => (i.count ?? 0) > 0);
+          }
+        }
+
+        const updated = { hotbar: newHotbar, inventory: newInventory, updatedAt: Date.now() };
+        set(updated);
+        queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+        return { success: true };
+      }
+
+      const cost = food.costGold ?? 0;
+      if (cost > 0) {
+        if (state.gold < cost) {
+          const msg = `Không đủ ${cost} Gold hoặc nguyên liệu cho món ${food.name}!`;
+          get().notify(msg, 'warning');
+          return { success: false, reason: msg };
+        }
+        const updated = { gold: state.gold - cost, updatedAt: Date.now() };
+        set(updated);
+        queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+        return { success: true };
+      }
+
+      return { success: true };
     },
 
     hydrateFromCloud: (cloudState) => {
