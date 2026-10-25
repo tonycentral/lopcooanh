@@ -26,6 +26,8 @@ export default class FarmScene extends Phaser.Scene {
   };
   private unsubscribeStore: (() => void) | null = null;
   private hasCustomAtlas = false;
+  private isInputBlocked = false;
+  private lastDirection: 'down' | 'up' | 'left' | 'right' = 'down';
 
   constructor() {
     super('FarmScene');
@@ -51,12 +53,23 @@ export default class FarmScene extends Phaser.Scene {
       repeat: -1
     });
 
-    // 3. Player Character
-    this.player = this.physics.add.sprite(15 * 32 + 16, 10 * 32 + 16, 'farmer_sprite');
+    // 3. Register Player Animations (if atlas provides directional frames)
+    this.createPlayerAnimations();
+
+    // 4. Player Character
+    const initialFrame = this.hasCustomAtlas && this.textures.exists('farm_atlas') && this.textures.get('farm_atlas').has('player_idle_down')
+      ? 'player_idle_down'
+      : undefined;
+
+    if (initialFrame) {
+      this.player = this.physics.add.sprite(15 * 32 + 16, 10 * 32 + 16, 'farm_atlas', initialFrame);
+    } else {
+      this.player = this.physics.add.sprite(15 * 32 + 16, 10 * 32 + 16, 'farmer_sprite');
+    }
     this.player.setCollideWorldBounds(true);
     this.player.setDepth(15);
 
-    // 4. Keyboard Controls
+    // 5. Keyboard Controls
     if (this.input.keyboard) {
       this.cursors = this.input.keyboard.createCursorKeys();
       this.wasd = {
@@ -67,8 +80,13 @@ export default class FarmScene extends Phaser.Scene {
       };
     }
 
-    // 5. Mouse Interaction Listeners
+    // 6. Mouse Interaction Listeners
     this.input.on('pointermove', (pointer: Phaser.Input.Pointer) => {
+      if (this.isInputBlocked) {
+        this.marker.setVisible(false);
+        return;
+      }
+
       const worldPoint = pointer.positionToCamera(this.cameras.main) as Phaser.Math.Vector2;
       const tileX = Math.floor(worldPoint.x / this.TILE_SIZE);
       const tileY = Math.floor(worldPoint.y / this.TILE_SIZE);
@@ -82,7 +100,7 @@ export default class FarmScene extends Phaser.Scene {
     });
 
     this.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
-      if (pointer.button !== 0) return; // Left click only
+      if (this.isInputBlocked || pointer.button !== 0) return; // Ignore if modal open or non-left-click
 
       const worldPoint = pointer.positionToCamera(this.cameras.main) as Phaser.Math.Vector2;
       const tileX = Math.floor(worldPoint.x / this.TILE_SIZE);
@@ -93,7 +111,7 @@ export default class FarmScene extends Phaser.Scene {
       }
     });
 
-    // 6. Camera Setup
+    // 7. Camera Setup
     this.cameras.main.setBounds(0, 0, this.GRID_WIDTH * this.TILE_SIZE, this.GRID_HEIGHT * this.TILE_SIZE);
     this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
 
@@ -113,7 +131,33 @@ export default class FarmScene extends Phaser.Scene {
     });
   }
 
+  /**
+   * Modal context switch: disables or enables Phaser keyboard and mouse input
+   */
+  public setModalOpen(isOpen: boolean) {
+    this.isInputBlocked = isOpen;
+    if (this.input.keyboard) {
+      this.input.keyboard.enabled = !isOpen;
+    }
+    if (isOpen) {
+      this.stopMovement();
+      if (this.marker) this.marker.setVisible(false);
+    }
+  }
+
+  public stopMovement() {
+    if (this.player && this.player.body) {
+      this.player.setVelocity(0, 0);
+      this.updatePlayerIdleAnimation();
+    }
+  }
+
   update() {
+    if (this.isInputBlocked || (this.input.keyboard && !this.input.keyboard.enabled)) {
+      this.stopMovement();
+      return;
+    }
+
     let vx = 0;
     let vy = 0;
 
@@ -129,8 +173,97 @@ export default class FarmScene extends Phaser.Scene {
       vy *= 0.7071;
     }
 
+    // Direction tracking
+    if (vx < 0) {
+      this.lastDirection = 'left';
+    } else if (vx > 0) {
+      this.lastDirection = 'right';
+    } else if (vy < 0) {
+      this.lastDirection = 'up';
+    } else if (vy > 0) {
+      this.lastDirection = 'down';
+    }
+
     this.player.setVelocity(vx, vy);
     this.player.setDepth(10 + (this.player.y / 1000));
+
+    // Player walking/idle animation control
+    if (vx !== 0 || vy !== 0) {
+      const walkAnim = `walk_${this.lastDirection}`;
+      if (this.anims.exists(walkAnim)) {
+        this.player.anims.play(walkAnim, true);
+      }
+    } else {
+      this.updatePlayerIdleAnimation();
+    }
+  }
+
+  private updatePlayerIdleAnimation() {
+    const idleAnim = `idle_${this.lastDirection}`;
+    if (this.anims.exists(idleAnim)) {
+      this.player.anims.play(idleAnim, true);
+    } else if (this.hasCustomAtlas && this.textures.exists('farm_atlas') && this.textures.get('farm_atlas').has(`player_idle_${this.lastDirection}`)) {
+      this.player.setTexture('farm_atlas', `player_idle_${this.lastDirection}`);
+    } else {
+      this.player.anims.stop();
+    }
+  }
+
+  /**
+   * Helper: Registers 4-directional walk and idle animations if atlas has matching frames
+   */
+  private createPlayerAnimations() {
+    if (!this.textures.exists('farm_atlas')) return;
+    const atlas = this.textures.get('farm_atlas');
+
+    const directions: Array<'down' | 'up' | 'left' | 'right'> = ['down', 'up', 'left', 'right'];
+    for (const dir of directions) {
+      const walk0 = `player_walk_${dir}_0`;
+      const walk1 = `player_walk_${dir}_1`;
+      const idle = `player_idle_${dir}`;
+
+      if (atlas.has(walk0) && atlas.has(walk1) && !this.anims.exists(`walk_${dir}`)) {
+        this.anims.create({
+          key: `walk_${dir}`,
+          frames: [
+            { key: 'farm_atlas', frame: walk0 },
+            { key: 'farm_atlas', frame: walk1 }
+          ],
+          frameRate: 6,
+          repeat: -1
+        });
+      }
+
+      if (atlas.has(idle) && !this.anims.exists(`idle_${dir}`)) {
+        this.anims.create({
+          key: `idle_${dir}`,
+          frames: [{ key: 'farm_atlas', frame: idle }],
+          frameRate: 1
+        });
+      }
+    }
+  }
+
+  /**
+   * Smart Texture Resolver: Seamlessly uses custom texture atlas if present,
+   * otherwise falls back to procedural canvas texture.
+   */
+  private applyTexture(
+    target: Phaser.GameObjects.Image | Phaser.GameObjects.Sprite,
+    frameName: string
+  ) {
+    if (this.hasCustomAtlas && this.textures.exists('farm_atlas') && this.textures.get('farm_atlas').has(frameName)) {
+      target.setTexture('farm_atlas', frameName);
+    } else {
+      target.setTexture(frameName);
+    }
+  }
+
+  private createImage(x: number, y: number, frameName: string): Phaser.GameObjects.Image {
+    if (this.hasCustomAtlas && this.textures.exists('farm_atlas') && this.textures.get('farm_atlas').has(frameName)) {
+      return this.add.image(x, y, 'farm_atlas', frameName);
+    }
+    return this.add.image(x, y, frameName);
   }
 
   private isValidTile(x: number, y: number): boolean {
@@ -140,7 +273,7 @@ export default class FarmScene extends Phaser.Scene {
   private createGrassField() {
     for (let x = 0; x < this.GRID_WIDTH; x++) {
       for (let y = 0; y < this.GRID_HEIGHT; y++) {
-        this.add.image(x * this.TILE_SIZE, y * this.TILE_SIZE, 'tile_grass')
+        this.createImage(x * this.TILE_SIZE, y * this.TILE_SIZE, 'tile_grass')
           .setOrigin(0, 0)
           .setDepth(0);
       }
@@ -246,9 +379,9 @@ export default class FarmScene extends Phaser.Scene {
       if (tile.isTilled) {
         const soilTexture = tile.isWatered ? 'tile_soil_wet' : 'tile_soil_dry';
         if (!entry.soilSprite) {
-          entry.soilSprite = this.add.image(px, py, soilTexture).setOrigin(0, 0).setDepth(1);
+          entry.soilSprite = this.createImage(px, py, soilTexture).setOrigin(0, 0).setDepth(1);
         } else {
-          entry.soilSprite.setTexture(soilTexture);
+          this.applyTexture(entry.soilSprite, soilTexture);
         }
       } else if (entry.soilSprite) {
         entry.soilSprite.destroy();
@@ -261,9 +394,9 @@ export default class FarmScene extends Phaser.Scene {
         const cropTexture = `crop_${tile.crop.id}_${growth.currentStage}`;
 
         if (!entry.cropSprite) {
-          entry.cropSprite = this.add.image(px, py, cropTexture).setOrigin(0, 0).setDepth(5);
+          entry.cropSprite = this.createImage(px, py, cropTexture).setOrigin(0, 0).setDepth(5);
         } else {
-          entry.cropSprite.setTexture(cropTexture);
+          this.applyTexture(entry.cropSprite, cropTexture);
         }
       } else if (entry.cropSprite) {
         entry.cropSprite.destroy();
@@ -278,13 +411,16 @@ export default class FarmScene extends Phaser.Scene {
 
     for (const [key, tile] of Object.entries(tiles)) {
       if (tile.crop) {
-        let entry = this.tileSprites.get(key);
+        const entry = this.tileSprites.get(key);
         const growth = getCropGrowthStage(tile.crop, now);
         const cropTexture = `crop_${tile.crop.id}_${growth.currentStage}`;
 
         if (entry?.cropSprite) {
-          if (entry.cropSprite.texture.key !== cropTexture) {
-            entry.cropSprite.setTexture(cropTexture);
+          const hasAtlas = this.hasCustomAtlas && this.textures.exists('farm_atlas') && this.textures.get('farm_atlas').has(cropTexture);
+          const currentIdentifier = hasAtlas ? entry.cropSprite.frame.name : entry.cropSprite.texture.key;
+
+          if (currentIdentifier !== cropTexture) {
+            this.applyTexture(entry.cropSprite, cropTexture);
             // Gentle bounce pop when crop advances to next stage
             this.tweens.add({
               targets: entry.cropSprite,
@@ -303,7 +439,7 @@ export default class FarmScene extends Phaser.Scene {
           const [xStr, yStr] = key.split(',');
           const px = parseInt(xStr, 10) * this.TILE_SIZE;
           const py = parseInt(yStr, 10) * this.TILE_SIZE;
-          entry.cropSprite = this.add.image(px, py, cropTexture).setOrigin(0, 0).setDepth(5);
+          entry.cropSprite = this.createImage(px, py, cropTexture).setOrigin(0, 0).setDepth(5);
         }
       }
     }

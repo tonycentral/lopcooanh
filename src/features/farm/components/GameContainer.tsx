@@ -78,6 +78,10 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
         setIsShopOpen((prev) => !prev);
         return;
       }
+
+      // If modal or sleeping transition is active, ignore hotbar tool changes
+      if (isShopOpen || isSleeping) return;
+
       const keyNum = parseInt(e.key, 10);
       if (keyNum >= 1 && keyNum <= hotbar.length) {
         selectTool(hotbar[keyNum - 1].id);
@@ -85,7 +89,7 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [hotbar, selectTool]);
+  }, [hotbar, selectTool, isShopOpen, isSleeping]);
 
   const handleSleep = () => {
     if (isSleeping) return;
@@ -95,6 +99,19 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
       setIsSleeping(false);
     }, 600);
   };
+
+  // Synchronize modal state with Phaser input context (disable WASD/mouse raycast when modal is open)
+  useEffect(() => {
+    if (!gameRef.current) return;
+    try {
+      const scene = gameRef.current.scene.getScene('FarmScene') as { setModalOpen?: (open: boolean) => void } | null;
+      if (scene && typeof scene.setModalOpen === 'function') {
+        scene.setModalOpen(isShopOpen || isSleeping);
+      }
+    } catch {
+      // Scene might not be initialized yet
+    }
+  }, [isShopOpen, isSleeping]);
 
   // Phaser Game instance lifecycle management (React 19 strict-mode safe)
   useEffect(() => {

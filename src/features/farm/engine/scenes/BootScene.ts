@@ -10,11 +10,12 @@ export default class BootScene extends Phaser.Scene {
 
   preload() {
     // 1. Check for real Texture Atlas in public assets
-    // URL: /assets/farm/atlas.png and /assets/farm/atlas.json
+    // Vite base-aware path: works seamlessly on local dev server and GitHub Pages subpath
+    const baseUrl = (import.meta.env.BASE_URL || './').replace(/\/$/, '') + '/';
     this.load.atlas(
       'farm_atlas', 
-      '/assets/farm/atlas.png', 
-      '/assets/farm/atlas.json'
+      `${baseUrl}assets/farm/atlas.png`, 
+      `${baseUrl}assets/farm/atlas.json`
     );
 
     // Error handler for atlas load: If custom atlas is missing, flag fallback
