@@ -63,6 +63,7 @@ export async function loadInitialFarmState(userId?: string | null): Promise<Play
         maxEnergy: farmRow.max_energy ?? 100,
         xp: (farmRow as any).xp ?? 0,
         level: (farmRow as any).level ?? 1,
+        masteredQuizIds: (farmRow as any).mastered_quiz_ids ?? (farmRow as any).masteredQuizIds ?? localState?.masteredQuizIds ?? [],
         day: farmRow.day ?? 1,
         activeTool: 'hoe',
         hotbar: farmRow.hotbar ?? [],

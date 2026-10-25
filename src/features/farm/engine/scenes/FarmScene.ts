@@ -126,7 +126,7 @@ export default class FarmScene extends Phaser.Scene {
     tooltipBg.fillRoundedRect(-110, -13, 220, 26, 8);
     tooltipBg.strokeRoundedRect(-110, -13, 220, 26, 8);
 
-    const tooltipText = this.add.text(0, 0, '🔥 Bấm E hoặc Click để Luyện Tập', {
+    const tooltipText = this.add.text(0, 0, '🔥 Nhấn E hoặc Click để Tương Tác', {
       fontSize: '11px',
       color: '#fef3c7',
       fontStyle: 'bold',
@@ -186,7 +186,7 @@ export default class FarmScene extends Phaser.Scene {
     bbqTooltipBg.fillRoundedRect(-110, -13, 220, 26, 8);
     bbqTooltipBg.strokeRoundedRect(-110, -13, 220, 26, 8);
 
-    const bbqTooltipText = this.add.text(0, 0, '🍖 Bấm E hoặc Click để Thưởng Thức BBQ', {
+    const bbqTooltipText = this.add.text(0, 0, '🍖 Nhấn E hoặc Click để Tương Tác', {
       fontSize: '11px',
       color: '#ffedd5',
       fontStyle: 'bold',
@@ -720,10 +720,13 @@ export default class FarmScene extends Phaser.Scene {
     // Case 2: Out of range -> Calculate approach destination and auto-walk
     const store = useGameStore.getState();
     const currentTile = store.tiles[`${x},${y}`];
-    const isSolid = currentTile?.obstacle?.type === 'rock' ||
+    const isSolid = currentTile?.station ||
+                    currentTile?.obstacle?.type === 'rock' ||
                     currentTile?.obstacle?.type === 'wood' ||
                     currentTile?.placeable?.type === 'fence' ||
-                    currentTile?.placeable?.type === 'chest';
+                    currentTile?.placeable?.type === 'chest' ||
+                    (x === this.SANCTUARY_GRID_X && y === this.SANCTUARY_GRID_Y) ||
+                    (x === this.BBQ_GRID_X && y === this.BBQ_GRID_Y);
 
     let destX = targetCenterX;
     let destY = targetCenterY;
@@ -743,10 +746,13 @@ export default class FarmScene extends Phaser.Scene {
       for (const cand of candidates) {
         if (!this.isValidTile(cand.gx, cand.gy)) continue;
         const candTile = store.tiles[`${cand.gx},${cand.gy}`];
-        const candSolid = candTile?.obstacle?.type === 'rock' ||
+        const candSolid = candTile?.station ||
+                          candTile?.obstacle?.type === 'rock' ||
                           candTile?.obstacle?.type === 'wood' ||
                           candTile?.placeable?.type === 'fence' ||
-                          candTile?.placeable?.type === 'chest';
+                          candTile?.placeable?.type === 'chest' ||
+                          (cand.gx === this.SANCTUARY_GRID_X && cand.gy === this.SANCTUARY_GRID_Y) ||
+                          (cand.gx === this.BBQ_GRID_X && cand.gy === this.BBQ_GRID_Y);
         if (!candSolid) {
           const cx = cand.gx * this.TILE_SIZE + 16;
           const cy = cand.gy * this.TILE_SIZE + 16;
@@ -791,6 +797,16 @@ export default class FarmScene extends Phaser.Scene {
    * Evaluates the tile target and triggers appropriate animation or immediate action
    */
   private triggerTileInteraction(x: number, y: number) {
+    // Interacting with indestructible rest stations
+    if (x === this.SANCTUARY_GRID_X && y === this.SANCTUARY_GRID_Y) {
+      this.openSanctuaryQuiz();
+      return;
+    }
+    if (x === this.BBQ_GRID_X && y === this.BBQ_GRID_Y) {
+      this.openBBQStand();
+      return;
+    }
+
     const store = useGameStore.getState();
     const activeTool = store.activeTool;
     const currentTile = store.tiles[`${x},${y}`];

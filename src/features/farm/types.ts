@@ -35,10 +35,18 @@ export interface CraftingRecipe {
   ingredients: CraftingIngredient[];
 }
 
+export type StationType = 'campfire' | 'bbq_stand';
+
+export interface StationData {
+  type: StationType;
+  isDestructible: false;
+}
+
 export interface ObstacleData {
   type: ObstacleType;
   hp: number;
   maxHp: number;
+  isDestructible?: boolean;
 }
 
 export interface CropData {
@@ -56,6 +64,7 @@ export interface TileData {
   crop: CropData | null;
   obstacle?: ObstacleData | null;
   placeable?: PlaceableData | null;
+  station?: StationData | null;
   isFertilized?: boolean;
   lastUpdated?: number;
 }
@@ -104,6 +113,7 @@ export interface PlayerFarmState {
   maxEnergy: number;
   xp: number;
   level: number;
+  masteredQuizIds: string[];
   day: number;
   activeTool: string;
   hotbar: InventoryItem[];

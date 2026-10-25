@@ -196,6 +196,21 @@ export function createInitialTiles(): Record<string, TileData> {
         wateredAt: Date.now() - 35000
       },
       obstacle: null
+    },
+    // Indestructible Rest Stations on the Grid
+    '15,3': {
+      isTilled: false,
+      isWatered: false,
+      crop: null,
+      station: { type: 'campfire', isDestructible: false },
+      lastUpdated: Date.now()
+    },
+    '18,3': {
+      isTilled: false,
+      isWatered: false,
+      crop: null,
+      station: { type: 'bbq_stand', isDestructible: false },
+      lastUpdated: Date.now()
     }
   };
 
@@ -260,6 +275,7 @@ const defaultInitialState: PlayerFarmState = {
   maxEnergy: 100,
   xp: 0,
   level: 1,
+  masteredQuizIds: [],
   day: 1,
   activeTool: 'hoe',
   hotbar: defaultHotbar,
@@ -314,6 +330,8 @@ export interface GameStoreState extends PlayerFarmState {
   depositToChest: (chestKey: string, itemId: string, count?: number) => { success: boolean; reason?: string };
   withdrawFromChest: (chestKey: string, itemId: string, count?: number) => { success: boolean; reason?: string };
   completeQuizReward: (energyReward: number, xpReward: number) => void;
+  recordQuizResult: (quizId: string, isCorrect: boolean, energyReward: number, xpReward: number) => { isLevelUp: boolean; newLevel: number; earnedEnergy: number; earnedXp: number };
+  resetMasteredQuizzes: () => void;
   orderBBQMeal: (food: import('../types').BBQFoodItem) => { success: boolean; reason?: string };
   hydrateFromCloud: (cloudState: Partial<PlayerFarmState>) => void;
   initSync: (userId?: string | null) => Promise<void>;
@@ -412,6 +430,12 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       const key = `${x},${y}`;
       const state = get();
       const currentTile = state.tiles[key];
+
+      if (currentTile?.station || (x === 15 && y === 3) || (x === 18 && y === 3)) {
+        const msg = 'Không thể tưới nước lên trạm nghỉ chân!';
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
 
       if (currentTile?.obstacle) {
         const msg = 'Không thể tưới nước lên chướng ngại vật!';
@@ -657,6 +681,12 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       const key = `${x},${y}`;
       const state = get();
       const currentTile = state.tiles[key];
+
+      if ((x === 15 && y === 3) || (x === 18 && y === 3) || currentTile?.station || currentTile?.obstacle?.isDestructible === false) {
+        const msg = 'Trạm nghỉ chân bất hoại, không thể phá hủy!';
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
 
       if (!currentTile?.obstacle) {
         return { success: false, reason: 'Không có chướng ngại vật ở ô này!' };
@@ -1517,6 +1547,57 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       }
     },
 
+    recordQuizResult: (quizId: string, isCorrect: boolean, energyReward: number, xpReward: number) => {
+      const state = get();
+      if (!isCorrect) {
+        return { isLevelUp: false, newLevel: state.level ?? 1, earnedEnergy: 0, earnedXp: 0 };
+      }
+
+      const currentMastered = state.masteredQuizIds || [];
+      const newMastered = currentMastered.includes(quizId) ? currentMastered : [...currentMastered, quizId];
+
+      const currentXp = state.xp ?? 0;
+      const newXp = currentXp + xpReward;
+      const currentLevel = state.level ?? 1;
+      const newLevel = Math.floor(newXp / 100) + 1;
+      const didLevelUp = newLevel > currentLevel;
+      const newEnergy = didLevelUp ? state.maxEnergy : Math.min(state.maxEnergy, state.energy + energyReward);
+      const now = Date.now();
+
+      const updated = {
+        masteredQuizIds: newMastered,
+        energy: newEnergy,
+        xp: newXp,
+        level: newLevel,
+        updatedAt: now
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+
+      if (didLevelUp) {
+        get().notify(`🎉 THĂNG CẤP! Nông trại đạt Cấp ${newLevel}! Hồi phục 100% Thể Lực (${state.maxEnergy})!`, 'success');
+      }
+
+      return {
+        isLevelUp: didLevelUp,
+        newLevel,
+        earnedEnergy: energyReward,
+        earnedXp: xpReward
+      };
+    },
+
+    resetMasteredQuizzes: () => {
+      const state = get();
+      const updated = {
+        masteredQuizIds: [],
+        updatedAt: Date.now()
+      };
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify('Đã làm mới danh sách từ vựng! Bạn có thể ôn luyện lại từ đầu.', 'info');
+    },
+
     orderBBQMeal: (food) => {
       const state = get();
       let hasIngredients = true;
@@ -1594,6 +1675,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         return {
           ...prev,
           ...cloudState,
+          masteredQuizIds: cloudState.masteredQuizIds ?? prev.masteredQuizIds ?? [],
           tiles: cloudState.tiles ? { ...prev.tiles, ...cloudState.tiles } : prev.tiles,
           hotbar: mergedHotbar,
           inventory: cloudState.inventory && cloudState.inventory.length > 0 ? cloudState.inventory : prev.inventory
