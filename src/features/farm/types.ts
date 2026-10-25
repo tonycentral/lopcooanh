@@ -8,6 +8,8 @@ export interface CropData {
   plantedAt: number;           // Unix timestamp in ms
   totalGrowthSeconds: number;  // Duration to full maturity in seconds
   totalStages: number;         // Number of visual stages (e.g. 4)
+  growthSecondsAcc?: number;   // Accumulated growth seconds while watered
+  wateredAt?: number | null;   // Timestamp when current watering started (null if soil is dry)
 }
 
 export interface TileData {

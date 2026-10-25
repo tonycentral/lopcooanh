@@ -51,27 +51,53 @@ export const SHOP_CROPS = [
 
 
 /**
- * Timestamp Delta Calculation Engine (Decision 5C)
+ * Timestamp Delta & Watering Growth Calculation Engine (Decision 5C)
+ * Plants ONLY accumulate growth seconds while soil is watered (isWatered === true).
+ * When soil is dry, growth is frozen.
  */
-export function getCropGrowthStage(crop: CropData | null, now = Date.now()): CropGrowthCalculation {
+export function getCropGrowthStage(
+  crop: CropData | null, 
+  isWatered = false, 
+  now = Date.now()
+): CropGrowthCalculation {
   if (!crop) {
     return { currentStage: 0, isRipe: false, percent: 0, elapsedSec: 0, remainingSec: 0 };
   }
-  const elapsedSec = Math.max(0, (now - crop.plantedAt) / 1000);
+
+  let baseAccSec = crop.growthSecondsAcc ?? 0;
+  let currentWateredAt = crop.wateredAt;
+
+  // Migration fallback: Handle legacy saves where only plantedAt existed
+  if (crop.growthSecondsAcc === undefined && crop.plantedAt) {
+    if (isWatered) {
+      currentWateredAt = crop.plantedAt;
+      baseAccSec = 0;
+    } else {
+      baseAccSec = 0;
+      currentWateredAt = null;
+    }
+  }
+
+  // Live delta only accrues while the tile is watered
+  const liveSec = (isWatered && currentWateredAt)
+    ? Math.max(0, (now - currentWateredAt) / 1000)
+    : 0;
+
+  const totalElapsedSec = Math.min(crop.totalGrowthSeconds, baseAccSec + liveSec);
   const stageDuration = crop.totalGrowthSeconds / (crop.totalStages - 1);
   const currentStage = Math.min(
     crop.totalStages - 1,
-    Math.floor(elapsedSec / stageDuration)
+    Math.floor(totalElapsedSec / stageDuration)
   );
   const isRipe = currentStage >= crop.totalStages - 1;
-  const percent = Math.min(100, Math.round((elapsedSec / crop.totalGrowthSeconds) * 100));
+  const percent = Math.min(100, Math.round((totalElapsedSec / crop.totalGrowthSeconds) * 100));
 
   return {
     currentStage,
     isRipe,
     percent,
-    elapsedSec,
-    remainingSec: Math.max(0, Math.ceil(crop.totalGrowthSeconds - elapsedSec))
+    elapsedSec: Math.round(totalElapsedSec),
+    remainingSec: Math.max(0, Math.ceil(crop.totalGrowthSeconds - totalElapsedSec))
   };
 }
 
@@ -103,7 +129,9 @@ const defaultInitialState: PlayerFarmState = {
         id: 'wheat',
         plantedAt: Date.now() - 35000,
         totalGrowthSeconds: 60,
-        totalStages: 4
+        totalStages: 4,
+        growthSecondsAcc: 20,
+        wateredAt: Date.now() - 15000
       }
     },
     '13,8': {
@@ -118,7 +146,9 @@ const defaultInitialState: PlayerFarmState = {
         id: 'herb',
         plantedAt: Date.now() - 95000,
         totalGrowthSeconds: 120,
-        totalStages: 4
+        totalStages: 4,
+        growthSecondsAcc: 60,
+        wateredAt: Date.now() - 35000
       }
     }
   },
@@ -248,27 +278,41 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         return { success: false, reason: msg };
       }
 
+      const now = Date.now();
+      const updatedCrop = currentTile.crop ? {
+        ...currentTile.crop,
+        wateredAt: now
+      } : null;
+
       const newTiles: Record<string, TileData> = {
         ...state.tiles,
         [key]: {
           ...currentTile,
           isWatered: true,
-          lastUpdated: Date.now()
+          crop: updatedCrop,
+          lastUpdated: now
         }
       };
 
       const updated = {
         tiles: newTiles,
         energy: Math.max(0, state.energy - 1),
-        updatedAt: Date.now()
+        updatedAt: now
       };
 
       set(updated);
       queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      if (updatedCrop) {
+        get().notify('Đã tưới nước! Cây bắt đầu tích lũy thời gian lớn.', 'success');
+      } else {
+        get().notify('Đất đã được tưới ẩm, sẵn sàng để gieo hạt!', 'info');
+      }
       return { success: true };
     },
 
     // Slot 3 & 5: Gieo hạt (Seed)
+    // Allows planting on ANY tilled soil (dry or watered).
+    // If soil is dry, plant is frozen until watered.
     plantCrop: (x, y, seedId) => {
       const key = `${x},${y}`;
       const state = get();
@@ -313,17 +357,22 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         return item;
       });
 
+      const now = Date.now();
+      const isWatered = Boolean(currentTile.isWatered);
+
       const newTiles: Record<string, TileData> = {
         ...state.tiles,
         [key]: {
           ...currentTile,
           crop: {
             id: cropDef.id,
-            plantedAt: Date.now(),
+            plantedAt: now,
             totalGrowthSeconds: cropDef.growthSeconds,
-            totalStages: cropDef.stages
+            totalStages: cropDef.stages,
+            growthSecondsAcc: 0,
+            wateredAt: isWatered ? now : null
           },
-          lastUpdated: Date.now()
+          lastUpdated: now
         }
       };
 
@@ -331,12 +380,16 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         tiles: newTiles,
         hotbar: newHotbar,
         energy: Math.max(0, state.energy - 1),
-        updatedAt: Date.now()
+        updatedAt: now
       };
 
       set(updated);
       queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
-      get().notify(`Đã gieo mầm ${cropDef.name}!`, 'success');
+      if (isWatered) {
+        get().notify(`Đã gieo mầm ${cropDef.name} (Đất ẩm, mầm bắt đầu phát triển)!`, 'success');
+      } else {
+        get().notify(`Đã gieo mầm ${cropDef.name} (Đất khô, hãy tưới nước để cây lớn)!`, 'info');
+      }
       return { success: true, cropName: cropDef.name };
     },
 
@@ -352,13 +405,15 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         return { success: false, reason: msg };
       }
 
-      const growth = getCropGrowthStage(currentTile.crop);
+      const growth = getCropGrowthStage(currentTile.crop, currentTile.isWatered);
       if (!growth.isRipe) {
-        const msg = `Cây chưa chín! Còn ${growth.remainingSec} giây nữa mới có thể thu hoạch.`;
+        const msg = currentTile.isWatered
+          ? `Cây chưa chín (Stage ${growth.currentStage}/${currentTile.crop.totalStages - 1})! Còn ${growth.remainingSec}s nữa mới có thể thu hoạch.`
+          : `Cây chưa chín và đất đang khô! Hãy tưới nước để cây tiếp tục lớn.`;
         get().notify(msg, 'warning');
         return { 
           success: false, 
-          reason: `Chưa chín! Còn ${growth.remainingSec}s` 
+          reason: currentTile.isWatered ? `Chưa chín! Còn ${growth.remainingSec}s` : 'Đất khô! Cần tưới nước' 
         };
       }
 
@@ -420,17 +475,49 @@ export const useGameStore = create<GameStoreState>((set, get) => {
     },
 
     // 1. Core Simulation: Sleep & Advance to Next Day
+    // Overnight: watered crops advance by 1 stage, unwatered crops stay frozen, all tiles dry out.
     sleepNextDay: () => {
       const state = get();
       const nextDay = state.day + 1;
+      const now = Date.now();
 
-      // Dry up all watered tiles overnight
+      let boostedCropsCount = 0;
       const updatedTiles: Record<string, TileData> = {};
+
       for (const [key, tile] of Object.entries(state.tiles)) {
+        let updatedCrop = tile.crop;
+
+        if (tile.crop) {
+          const stageDuration = tile.crop.totalGrowthSeconds / (tile.crop.totalStages - 1);
+
+          if (tile.isWatered) {
+            // Watered crop: advances by 1 stage overnight
+            const currentLiveGrowth = getCropGrowthStage(tile.crop, true, now);
+            const nextStage = Math.min(tile.crop.totalStages - 1, currentLiveGrowth.currentStage + 1);
+            const targetAccSec = Math.min(tile.crop.totalGrowthSeconds, nextStage * stageDuration);
+
+            updatedCrop = {
+              ...tile.crop,
+              growthSecondsAcc: targetAccSec,
+              wateredAt: null // Freezes until watered again next morning
+            };
+            boostedCropsCount++;
+          } else {
+            // Dry soil: growth remained frozen all day, preserve accumulated seconds
+            const frozenGrowth = getCropGrowthStage(tile.crop, false, now);
+            updatedCrop = {
+              ...tile.crop,
+              growthSecondsAcc: frozenGrowth.elapsedSec,
+              wateredAt: null
+            };
+          }
+        }
+
         updatedTiles[key] = {
           ...tile,
-          isWatered: false, // Dries overnight
-          lastUpdated: Date.now()
+          crop: updatedCrop,
+          isWatered: false, // All soil dries up overnight
+          lastUpdated: now
         };
       }
 
@@ -438,12 +525,16 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         day: nextDay,
         energy: state.maxEnergy, // 100% recovered
         tiles: updatedTiles,
-        updatedAt: Date.now()
+        updatedAt: now
       };
 
       set(updated);
       queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
-      get().notify(`🌅 Bình minh Ngày ${nextDay}! Thể lực hồi phục (${state.maxEnergy}/${state.maxEnergy}). Đất đã khô ráo qua đêm.`, 'success');
+      
+      const boostDetail = boostedCropsCount > 0 
+        ? ` (${boostedCropsCount} cây trồng được tưới nước đã lớn thêm 1 giai đoạn)` 
+        : '';
+      get().notify(`🌅 Bình minh Ngày ${nextDay}! Thể lực hồi phục (${state.maxEnergy}/${state.maxEnergy}). Đất đã khô ráo${boostDetail}.`, 'success');
     },
 
     // 2. Core Economy: Buy Seeds from Shop

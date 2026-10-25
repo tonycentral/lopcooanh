@@ -292,16 +292,22 @@ export default class FarmScene extends Phaser.Scene {
         this.showFloatingText(x, y, res.reason || 'Không thể cuốc!', '#fb7185', true);
       }
     } else if (activeTool === 'water_can') {
+      const tileBefore = store.tiles[`${x},${y}`];
       const res = store.waterTile(x, y);
       if (res.success) {
-        this.showFloatingText(x, y, 'Đã tưới nước (-1 Năng lượng)', '#38bdf8');
+        const msg = tileBefore?.crop ? 'Đã tưới nước (Cây bắt đầu lớn!)' : 'Đã tưới nước (-1 Năng lượng)';
+        this.showFloatingText(x, y, msg, '#38bdf8');
       } else {
         this.showFloatingText(x, y, res.reason || 'Không thể tưới!', '#fb7185', true);
       }
     } else if (activeTool.startsWith('seed_')) {
+      const tileBefore = store.tiles[`${x},${y}`];
       const res = store.plantCrop(x, y, activeTool);
       if (res.success) {
-        this.showFloatingText(x, y, `Gieo mầm ${res.cropName} (-1 Hạt)`, '#34d399');
+        const msg = tileBefore?.isWatered
+          ? `Gieo mầm ${res.cropName} (Đang phát triển)`
+          : `Gieo mầm ${res.cropName} (Cần tưới nước!)`;
+        this.showFloatingText(x, y, msg, tileBefore?.isWatered ? '#34d399' : '#fbbf24');
       } else {
         this.showFloatingText(x, y, res.reason || 'Không thể gieo hạt!', '#fb7185', true);
       }
@@ -310,7 +316,7 @@ export default class FarmScene extends Phaser.Scene {
       if (res.success) {
         this.showFloatingText(x, y, `+1 ${res.cropName} (+${res.goldReward} Gold)`, '#fbbf24');
       } else {
-        this.showFloatingText(x, y, res.reason || 'Không thể thu hoạch!', '#fb7185', true);
+        this.showFloatingText(x, y, res.reason || 'Chưa thể thu hoạch!', '#fb7185', true);
       }
     }
   }
@@ -390,7 +396,7 @@ export default class FarmScene extends Phaser.Scene {
 
       // Crop texture update
       if (tile.crop) {
-        const growth = getCropGrowthStage(tile.crop);
+        const growth = getCropGrowthStage(tile.crop, tile.isWatered);
         const cropTexture = `crop_${tile.crop.id}_${growth.currentStage}`;
 
         if (!entry.cropSprite) {
@@ -412,7 +418,7 @@ export default class FarmScene extends Phaser.Scene {
     for (const [key, tile] of Object.entries(tiles)) {
       if (tile.crop) {
         const entry = this.tileSprites.get(key);
-        const growth = getCropGrowthStage(tile.crop, now);
+        const growth = getCropGrowthStage(tile.crop, tile.isWatered, now);
         const cropTexture = `crop_${tile.crop.id}_${growth.currentStage}`;
 
         if (entry?.cropSprite) {
