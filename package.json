@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:atlas": "python scripts/generate_atlas.py",
     "lint": "oxlint",
     "preview": "vite preview"
   },

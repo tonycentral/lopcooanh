@@ -35,6 +35,7 @@ credentials.json
 
 # Scratch scripts and raw dump files
 *.py
+!scripts/generate_atlas.py
 *.pyc
 __pycache__/
 *.pdf
