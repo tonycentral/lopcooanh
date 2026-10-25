@@ -95,10 +95,14 @@ export interface NotificationMessage {
   timestamp: number;
 }
 
+export * from './types/vocab';
+
 export interface PlayerFarmState {
   gold: number;
   energy: number;
   maxEnergy: number;
+  xp: number;
+  level: number;
   day: number;
   activeTool: string;
   hotbar: InventoryItem[];

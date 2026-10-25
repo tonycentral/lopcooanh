@@ -6,6 +6,7 @@ import { useGameStore } from '../state/useGameStore';
 import { flushPendingFarmSync, initVisibilitySyncListener } from '../services/supabaseSync';
 import ShopModal from './ShopModal';
 import ChestModal from './ChestModal';
+import VocabQuizModal from './VocabQuizModal';
 import { 
   Coins, 
   Zap, 
@@ -18,7 +19,8 @@ import {
   LogOut,
   LogIn,
   ShoppingBag,
-  Hammer
+  Hammer,
+  Sparkles
 } from 'lucide-react';
 
 interface GameContainerProps {
@@ -35,6 +37,8 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
   const gold = useGameStore((state) => state.gold);
   const energy = useGameStore((state) => state.energy);
   const maxEnergy = useGameStore((state) => state.maxEnergy);
+  const xp = useGameStore((state) => state.xp ?? 0);
+  const level = useGameStore((state) => state.level ?? 1);
   const hotbar = useGameStore((state) => state.hotbar);
   const inventory = useGameStore((state) => state.inventory);
   const activeTool = useGameStore((state) => state.activeTool);
@@ -48,6 +52,7 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
   const [shopTab, setShopTab] = useState<'buy' | 'sell' | 'craft'>('buy');
   const [currentChestKey, setCurrentChestKey] = useState<string | null>(null);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isQuizOpen, setIsQuizOpen] = useState(false);
 
   // Auto-dismiss notification after 3.5 seconds
   useEffect(() => {
@@ -115,7 +120,7 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
       }
 
       // If modal is active, ignore hotbar tool changes
-      if (isShopOpen || Boolean(currentChestKey) || isProfileOpen) return;
+      if (isShopOpen || Boolean(currentChestKey) || isProfileOpen || isQuizOpen) return;
 
       const keyNum = parseInt(e.key, 10);
       if (keyNum >= 1 && keyNum <= hotbar.length) {
@@ -124,7 +129,7 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [hotbar, selectTool, isShopOpen, shopTab, currentChestKey, isProfileOpen]);
+  }, [hotbar, selectTool, isShopOpen, shopTab, currentChestKey, isProfileOpen, isQuizOpen]);
 
   // Synchronize modal state with Phaser input context (disable WASD/mouse raycast when modal is open)
   useEffect(() => {
@@ -132,12 +137,12 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     try {
       const scene = gameRef.current.scene.getScene('FarmScene') as { setModalOpen?: (open: boolean) => void } | null;
       if (scene && typeof scene.setModalOpen === 'function') {
-        scene.setModalOpen(isShopOpen || Boolean(currentChestKey) || isProfileOpen);
+        scene.setModalOpen(isShopOpen || Boolean(currentChestKey) || isProfileOpen || isQuizOpen);
       }
     } catch {
       // Scene might not be initialized yet
     }
-  }, [isShopOpen, currentChestKey, isProfileOpen]);
+  }, [isShopOpen, currentChestKey, isProfileOpen, isQuizOpen]);
 
   // Phaser Game instance lifecycle management (React 19 strict-mode safe)
   useEffect(() => {
@@ -153,8 +158,15 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     };
     game.events.on('open-chest', handleOpenChest);
 
+    // Listen to vocab quiz interaction events emitted from FarmScene (Campfire)
+    const handleOpenQuiz = () => {
+      setIsQuizOpen(true);
+    };
+    game.events.on('open-vocab-quiz', handleOpenQuiz);
+
     return () => {
       game.events.off('open-chest', handleOpenChest);
+      game.events.off('open-vocab-quiz', handleOpenQuiz);
       if (gameRef.current) {
         gameRef.current.destroy(true);
         gameRef.current = null;
@@ -217,6 +229,27 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
               <div className="pointer-events-none absolute left-0 top-full mt-2 hidden group-hover:flex flex-col items-center z-50">
                 <div className="bg-slate-950/95 text-slate-200 text-[10px] px-2 py-1 rounded-md border border-slate-700 shadow-xl whitespace-nowrap">
                   Vàng tích lũy: {gold} Gold
+                </div>
+              </div>
+            </div>
+
+            {/* Level & XP Meter with Tooltip */}
+            <div className="group relative flex items-center gap-1.5 cursor-help">
+              <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-lg bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 font-bold text-[10px] sm:text-[11px]">
+                <Sparkles className="w-3 h-3 text-indigo-400" />
+                <span>Lv.{level}</span>
+              </div>
+              <div className="w-10 sm:w-12 h-1.5 bg-slate-800 rounded-full overflow-hidden border border-slate-700">
+                <div 
+                  className="h-full bg-gradient-to-r from-indigo-500 to-cyan-400 transition-all duration-300"
+                  style={{ width: `${xp % 100}%` }}
+                />
+              </div>
+              
+              {/* Tooltip */}
+              <div className="pointer-events-none absolute left-0 top-full mt-2 hidden group-hover:flex flex-col items-center z-50">
+                <div className="bg-slate-950/95 text-slate-200 text-[10px] px-2 py-1 rounded-md border border-slate-700 shadow-xl whitespace-nowrap">
+                  Cấp độ {level} ({xp % 100}/100 XP) • Luyện từ vựng tại Lửa Trại để nhận XP & Thể Lực!
                 </div>
               </div>
             </div>
@@ -475,6 +508,9 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
 
       {/* 6. Chest Storage Modal */}
       <ChestModal isOpen={Boolean(currentChestKey)} chestKey={currentChestKey} onClose={() => setCurrentChestKey(null)} />
+
+      {/* 7. Vocabulary Quiz Modal (Campfire Sanctuary) */}
+      <VocabQuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} />
 
     </div>
   );

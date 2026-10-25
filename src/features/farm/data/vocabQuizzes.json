@@ -1,0 +1,182 @@
+[
+  {
+    "id": "vq_01",
+    "sentence": "The farmer used a sharp _____ to till the dry soil before planting seeds.",
+    "targetWord": "hoe",
+    "options": ["hoe", "sword", "compass", "shield"],
+    "definition": "Cuốc nông nghiệp (a long-handled gardening tool used to cultivate soil)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_02",
+    "sentence": "The miner swung his heavy _____ to break the stubborn stone boulder into pieces.",
+    "targetWord": "pickaxe",
+    "options": ["pickaxe", "needle", "pencil", "ruler"],
+    "definition": "Cuốc chim đập đá (a heavy T-shaped tool used for breaking rock and hard earth)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_03",
+    "sentence": "She used a sharp curved _____ to trim tall weeds and harvest ripe grass.",
+    "targetWord": "scythe",
+    "options": ["scythe", "brush", "pillow", "rope"],
+    "definition": "Lưỡi liềm / câu liêm (an agricultural tool with a long curved blade for cutting grass or grain)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_04",
+    "sentence": "Autumn is the bustling season when villagers gather together to _____ golden crops.",
+    "targetWord": "harvest",
+    "options": ["harvest", "freeze", "abandon", "destroy"],
+    "definition": "Thu hoạch nông sản (the process or period of gathering in crops)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_05",
+    "sentence": "Adding natural compost helps make the garden soil rich and _____.",
+    "targetWord": "fertile",
+    "options": ["fertile", "barren", "hollow", "toxic"],
+    "definition": "Màu mỡ, phì nhiêu (soil capable of producing abundant vegetation or crops)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_06",
+    "sentence": "Farmers dig small canals to _____ their dry fields during long summer droughts.",
+    "targetWord": "irrigate",
+    "options": ["irrigate", "burn", "pollute", "neglect"],
+    "definition": "Tưới tiêu (supply water to land or crops to help growth)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_07",
+    "sentence": "A tiny green _____ emerged gently from the moist earth after two days of warm rain.",
+    "targetWord": "sprout",
+    "options": ["sprout", "cloud", "pebble", "shadow"],
+    "definition": "Mầm non mới nhú (a new shoot or bud growing from a seed or plant)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_08",
+    "sentence": "Applying organic _____ supplies vital nutrients like nitrogen to growing plants.",
+    "targetWord": "fertilizer",
+    "options": ["fertilizer", "plastic", "metal", "gasoline"],
+    "definition": "Phân bón hữu cơ (a substance added to soil to increase its fertility and plant nutrition)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_09",
+    "sentence": "Tired travelers gathered around the warm _____ to rest and recover their energy.",
+    "targetWord": "campfire",
+    "options": ["campfire", "freezer", "glacier", "submarine"],
+    "definition": "Lửa trại nghỉ chân (an open outdoor fire at a campsite for warmth, cooking, and rest)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_10",
+    "sentence": "The ancient stone shrine serves as a peaceful _____ where weary explorers can meditate.",
+    "targetWord": "sanctuary",
+    "options": ["sanctuary", "prison", "factory", "highway"],
+    "definition": "Khu nghỉ chân an bình / Nơi trú ẩn (a place of refuge, peace, or safety)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_11",
+    "sentence": "Organic farmers avoid synthetic _____ to protect useful insects like honeybees.",
+    "targetWord": "pesticides",
+    "options": ["pesticides", "vitamins", "water", "sunlight"],
+    "definition": "Thuốc trừ sâu hóa học (substances used for destroying insects or other harmful organisms)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_12",
+    "sentence": "Felling mature trees provides durable _____ for crafting fences, bridges, and furniture.",
+    "targetWord": "timber",
+    "options": ["timber", "smoke", "fog", "sand"],
+    "definition": "Gỗ xẻ / gỗ xây dựng (wood prepared for use in building and carpentry)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_13",
+    "sentence": "A severe seasonal _____ dried up the village creek and damaged the corn harvest.",
+    "targetWord": "drought",
+    "options": ["drought", "flood", "typhoon", "blizzard"],
+    "definition": "Hạn hán (a prolonged period of abnormally low rainfall leading to a shortage of water)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_14",
+    "sentence": "Spreading a layer of mulch helps soil retain crucial _____ beneath the hot midday sun.",
+    "targetWord": "moisture",
+    "options": ["moisture", "dust", "smoke", "ash"],
+    "definition": "Độ ẩm của đất (water or other liquid diffused in a small quantity as vapor, within a substance)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_15",
+    "sentence": "Diligent farmers dedicate their mornings to _____ aromatic herbs and fresh vegetables.",
+    "targetWord": "cultivate",
+    "options": ["cultivate", "destroy", "ignore", "scatter"],
+    "definition": "Gieo trồng, canh tác (prepare and use land for crops or gardening)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_16",
+    "sentence": "The glass _____ allows gardeners to grow delicate seedlings even during cold winter.",
+    "targetWord": "greenhouse",
+    "options": ["greenhouse", "lighthouse", "tunnel", "cellar"],
+    "definition": "Nhà kính trồng cây (a glass building in which plants that need protection from cold are grown)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_17",
+    "sentence": "Unlike annual plants that die each winter, _____ plants bloom again season after season.",
+    "targetWord": "perennial",
+    "options": ["perennial", "temporary", "artificial", "fragile"],
+    "definition": "Cây lưu niên (lasting or existing for a long or apparently infinite time; living for several years)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_18",
+    "sentence": "Cows, sheep, goats, and horses are essential _____ on a traditional farm.",
+    "targetWord": "livestock",
+    "options": ["livestock", "wildlife", "monsters", "fossils"],
+    "definition": "Gia súc nông trại (farm animals regarded as an asset)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_19",
+    "sentence": "Covering seedlings with protective mulch guards them against harsh morning _____.",
+    "targetWord": "frost",
+    "options": ["frost", "steam", "magma", "sparks"],
+    "definition": "Sương giá, băng giá (small ice crystals formed on ground or plants when temperature drops below freezing)",
+    "xpReward": 25,
+    "energyReward": 35
+  },
+  {
+    "id": "vq_20",
+    "sentence": "Sustainable agriculture focuses on preserving natural resources for future _____.",
+    "targetWord": "generations",
+    "options": ["generations", "deserts", "machines", "ruins"],
+    "definition": "Các thế hệ tương lai (all of the people born and living at about the same time)",
+    "xpReward": 25,
+    "energyReward": 35
+  }
+]

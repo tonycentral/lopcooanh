@@ -258,6 +258,8 @@ const defaultInitialState: PlayerFarmState = {
   gold: 250,
   energy: 100,
   maxEnergy: 100,
+  xp: 0,
+  level: 1,
   day: 1,
   activeTool: 'hoe',
   hotbar: defaultHotbar,
@@ -311,6 +313,7 @@ export interface GameStoreState extends PlayerFarmState {
   fertilizeTile: (x: number, y: number) => { success: boolean; reason?: string };
   depositToChest: (chestKey: string, itemId: string, count?: number) => { success: boolean; reason?: string };
   withdrawFromChest: (chestKey: string, itemId: string, count?: number) => { success: boolean; reason?: string };
+  completeQuizReward: (energyReward: number, xpReward: number) => void;
   hydrateFromCloud: (cloudState: Partial<PlayerFarmState>) => void;
   initSync: (userId?: string | null) => Promise<void>;
 }
@@ -341,6 +344,10 @@ export const useGameStore = create<GameStoreState>((set, get) => {
 
     // Slot 1: Cuốc đất (Hoe)
     tillTile: (x, y) => {
+      if (x === 15 && y === 3) {
+        get().notify('Đây là Khu Nghỉ Chân Tri Thức, không thể cuốc đất!', 'warning');
+        return { success: false, reason: 'Khu Nghỉ Chân!' };
+      }
       const key = `${x},${y}`;
       const state = get();
       const currentTile = state.tiles[key];
@@ -1065,6 +1072,10 @@ export const useGameStore = create<GameStoreState>((set, get) => {
 
     // 6. Place Entities (Fence & Chest)
     placeEntity: (x: number, y: number, placeableType: PlaceableType) => {
+      if (x === 15 && y === 3) {
+        get().notify('Không thể đặt vật phẩm đè lên Khu Nghỉ Chân!', 'warning');
+        return { success: false, reason: 'Khu Nghỉ Chân!' };
+      }
       const key = `${x},${y}`;
       const state = get();
       const currentTile = state.tiles[key];
@@ -1475,6 +1486,34 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
       get().notify(`Đã lấy ${count}x ${targetItem.name} ra túi đồ!`, 'success');
       return { success: true };
+    },
+
+    completeQuizReward: (energyReward: number, xpReward: number) => {
+      const state = get();
+      const currentXp = state.xp ?? 0;
+      const newXp = currentXp + xpReward;
+      const currentLevel = state.level ?? 1;
+      const newLevel = Math.floor(newXp / 100) + 1;
+      const didLevelUp = newLevel > currentLevel;
+
+      const newEnergy = didLevelUp ? state.maxEnergy : Math.min(state.maxEnergy, state.energy + energyReward);
+      const now = Date.now();
+
+      const updated = {
+        energy: newEnergy,
+        xp: newXp,
+        level: newLevel,
+        updatedAt: now
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+
+      if (didLevelUp) {
+        get().notify(`🎉 THĂNG CẤP! Nông trại đạt Cấp ${newLevel}! Hồi phục 100% Thể Lực (${state.maxEnergy})!`, 'success');
+      } else {
+        get().notify(`✨ Tuyệt vời! +${energyReward} Thể Lực, +${xpReward} XP!`, 'success');
+      }
     },
 
     hydrateFromCloud: (cloudState) => {

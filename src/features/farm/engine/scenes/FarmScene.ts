@@ -22,6 +22,8 @@ export default class FarmScene extends Phaser.Scene {
   private readonly GRID_WIDTH = 30;  // 960px
   private readonly GRID_HEIGHT = 20; // 640px
   private readonly INTERACTION_RANGE = 48; // Max distance in px (~1.5 tiles)
+  private readonly SANCTUARY_GRID_X = 15;
+  private readonly SANCTUARY_GRID_Y = 3;
   private playerSpeed = 160;
 
   private pendingAction: PendingAction | null = null;
@@ -29,6 +31,10 @@ export default class FarmScene extends Phaser.Scene {
   private currentToolSprite: Phaser.GameObjects.Sprite | Phaser.GameObjects.Image | null = null;
   private currentActionTween: Phaser.Tweens.Tween | null = null;
   private actionImpactTimer: Phaser.Time.TimerEvent | null = null;
+
+  private sanctuarySprite!: Phaser.Physics.Arcade.Sprite;
+  private sanctuaryTooltip!: Phaser.GameObjects.Container;
+  private interactKey!: Phaser.Input.Keyboard.Key;
 
   private tileSprites = new Map<string, TileSpriteEntry>();
   private marker!: Phaser.GameObjects.Sprite;
@@ -76,6 +82,66 @@ export default class FarmScene extends Phaser.Scene {
     // 4. Static Physics Group for Solid Obstacles (Rocks & Logs)
     this.solidObstacleGroup = this.physics.add.staticGroup();
 
+    // 4b. Rest Sanctuary / Campfire Structure
+    const campX = this.SANCTUARY_GRID_X * this.TILE_SIZE + 16;
+    const campY = this.SANCTUARY_GRID_Y * this.TILE_SIZE + 16;
+    this.sanctuarySprite = this.physics.add.sprite(campX, campY, 'structure_campfire');
+    this.sanctuarySprite.setDepth(11);
+    this.sanctuarySprite.setImmovable(true);
+    (this.sanctuarySprite.body as Phaser.Physics.Arcade.Body).moves = false;
+    this.sanctuarySprite.body.setSize(24, 20).setOffset(4, 10);
+    this.solidObstacleGroup.add(this.sanctuarySprite);
+
+    // Warm pulsing flame animation
+    this.tweens.add({
+      targets: this.sanctuarySprite,
+      scaleY: { from: 1, to: 1.08 },
+      scaleX: { from: 1, to: 0.95 },
+      duration: 380,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut'
+    });
+
+    // Click on Campfire
+    this.sanctuarySprite.setInteractive({ useHandCursor: true });
+    this.sanctuarySprite.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
+      if (this.isInputBlocked || pointer.rightButtonDown()) return;
+      const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.sanctuarySprite.x, this.sanctuarySprite.y);
+      if (dist <= this.INTERACTION_RANGE) {
+        this.openSanctuaryQuiz();
+      } else {
+        this.startAutoApproach(this.SANCTUARY_GRID_X, this.SANCTUARY_GRID_Y, this.sanctuarySprite.x, this.sanctuarySprite.y + 28);
+      }
+    });
+
+    // Floating tooltip container above Campfire
+    const tooltipBg = this.add.graphics();
+    tooltipBg.fillStyle(0x0f172a, 0.9);
+    tooltipBg.lineStyle(1.5, 0xf59e0b, 0.85);
+    tooltipBg.fillRoundedRect(-110, -13, 220, 26, 8);
+    tooltipBg.strokeRoundedRect(-110, -13, 220, 26, 8);
+
+    const tooltipText = this.add.text(0, 0, '🔥 Bấm E hoặc Click để Luyện Tập', {
+      fontSize: '11px',
+      color: '#fef3c7',
+      fontStyle: 'bold',
+      fontFamily: 'sans-serif'
+    }).setOrigin(0.5);
+
+    this.sanctuaryTooltip = this.add.container(campX, campY - 30, [tooltipBg, tooltipText]);
+    this.sanctuaryTooltip.setDepth(26);
+    this.sanctuaryTooltip.setVisible(false);
+
+    this.tweens.add({
+      targets: this.sanctuaryTooltip,
+      y: campY - 34,
+      duration: 750,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut'
+    });
+
     // 5. Player Character
     const initialFrame = this.hasCustomAtlas && this.textures.exists('farm_atlas') && this.textures.get('farm_atlas').has('player_idle_down')
       ? 'player_idle_down'
@@ -103,6 +169,7 @@ export default class FarmScene extends Phaser.Scene {
         left: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
         right: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D)
       };
+      this.interactKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     }
 
     // 6. Mouse Interaction Listeners
@@ -168,7 +235,21 @@ export default class FarmScene extends Phaser.Scene {
       this.cancelCurrentAction();
       this.stopMovement();
       if (this.marker) this.marker.setVisible(false);
+      if (this.sanctuaryTooltip) this.sanctuaryTooltip.setVisible(false);
+    } else {
+      this.isPerformingAction = false;
     }
+  }
+
+  public openSanctuaryQuiz() {
+    this.cancelCurrentAction();
+    this.stopMovement();
+    if (this.player && this.player.body) {
+      this.player.setVelocity(0, 0);
+    }
+    this.isPerformingAction = true;
+    this.updateFacingDirection(this.sanctuarySprite.x, this.sanctuarySprite.y);
+    this.game.events.emit('open-vocab-quiz');
   }
 
   public cancelCurrentAction() {
@@ -227,6 +308,25 @@ export default class FarmScene extends Phaser.Scene {
       return;
     }
 
+    // Proximity check for Campfire / Rest Sanctuary & 'E' key interaction
+    if (this.sanctuarySprite && this.sanctuaryTooltip) {
+      const distToCampfire = Phaser.Math.Distance.Between(
+        this.player.x,
+        this.player.y,
+        this.sanctuarySprite.x,
+        this.sanctuarySprite.y
+      );
+      const isNearCampfire = distToCampfire <= this.INTERACTION_RANGE;
+      this.sanctuaryTooltip.setVisible(isNearCampfire && !this.isInputBlocked);
+
+      if (isNearCampfire && !this.isInputBlocked && !this.isPerformingAction && this.interactKey) {
+        if (Phaser.Input.Keyboard.JustDown(this.interactKey)) {
+          this.openSanctuaryQuiz();
+          return;
+        }
+      }
+    }
+
     let manualVx = 0;
     let manualVy = 0;
 
@@ -280,7 +380,12 @@ export default class FarmScene extends Phaser.Scene {
         this.pendingAction = null;
         this.player.setVelocity(0, 0);
         this.updateFacingDirection(targetCenterX, targetCenterY);
-        this.triggerTileInteraction(gridX, gridY);
+
+        if (gridX === this.SANCTUARY_GRID_X && gridY === this.SANCTUARY_GRID_Y) {
+          this.openSanctuaryQuiz();
+        } else {
+          this.triggerTileInteraction(gridX, gridY);
+        }
         return;
       }
 
@@ -480,6 +585,17 @@ export default class FarmScene extends Phaser.Scene {
   }
 
   private handleTileClick(x: number, y: number) {
+    // Click directly on Campfire / Sanctuary tile
+    if (x === this.SANCTUARY_GRID_X && y === this.SANCTUARY_GRID_Y) {
+      const distToCamp = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.sanctuarySprite.x, this.sanctuarySprite.y);
+      if (distToCamp <= this.INTERACTION_RANGE) {
+        this.openSanctuaryQuiz();
+      } else {
+        this.startAutoApproach(this.SANCTUARY_GRID_X, this.SANCTUARY_GRID_Y, this.sanctuarySprite.x, this.sanctuarySprite.y + 28);
+      }
+      return;
+    }
+
     const targetCenterX = x * this.TILE_SIZE + 16;
     const targetCenterY = y * this.TILE_SIZE + 16;
     const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, targetCenterX, targetCenterY);
@@ -549,13 +665,16 @@ export default class FarmScene extends Phaser.Scene {
       destY = targetCenterY + Math.sin(angle) * 16;
     }
 
+    this.startAutoApproach(x, y, destX, destY);
+  }
+
+  private startAutoApproach(gridX: number, gridY: number, destX: number, destY: number) {
     this.pendingAction = {
-      gridX: x,
-      gridY: y,
+      gridX,
+      gridY,
       targetX: destX,
       targetY: destY
     };
-
     this.physics.moveTo(this.player, destX, destY, this.playerSpeed);
     this.updateFacingDirection(destX, destY);
   }

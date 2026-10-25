@@ -61,6 +61,8 @@ export async function loadInitialFarmState(userId?: string | null): Promise<Play
         gold: farmRow.gold ?? 250,
         energy: farmRow.energy ?? 100,
         maxEnergy: farmRow.max_energy ?? 100,
+        xp: (farmRow as any).xp ?? 0,
+        level: (farmRow as any).level ?? 1,
         day: farmRow.day ?? 1,
         activeTool: 'hoe',
         hotbar: farmRow.hotbar ?? [],
@@ -147,19 +149,39 @@ export async function flushPendingFarmSync(): Promise<void> {
 
   try {
     // 1. Try Upsert into player_farms table
-    const { error: upsertErr } = await supabase
+    let { error: upsertErr } = await supabase
       .from('player_farms')
       .upsert({
         user_id: currentUserId,
         gold: stateToSync.gold,
         energy: stateToSync.energy,
         max_energy: stateToSync.maxEnergy,
+        xp: stateToSync.xp,
+        level: stateToSync.level,
         day: stateToSync.day,
         hotbar: stateToSync.hotbar,
         inventory: stateToSync.inventory,
         tiles: stateToSync.tiles,
         updated_at: new Date().toISOString()
       }, { onConflict: 'user_id' });
+
+    // If player_farms doesn't have xp/level columns, retry without them
+    if (upsertErr && (upsertErr.message?.includes('column') || upsertErr.code === '42703')) {
+      const retryRes = await supabase
+        .from('player_farms')
+        .upsert({
+          user_id: currentUserId,
+          gold: stateToSync.gold,
+          energy: stateToSync.energy,
+          max_energy: stateToSync.maxEnergy,
+          day: stateToSync.day,
+          hotbar: stateToSync.hotbar,
+          inventory: stateToSync.inventory,
+          tiles: stateToSync.tiles,
+          updated_at: new Date().toISOString()
+        }, { onConflict: 'user_id' });
+      upsertErr = retryRes.error;
+    }
 
     if (upsertErr) {
       // Fallback: If player_farms table doesn't exist yet, save into profiles.farm_state
