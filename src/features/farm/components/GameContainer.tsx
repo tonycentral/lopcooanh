@@ -5,6 +5,7 @@ import { createGameConfig } from '../engine/config';
 import { useGameStore } from '../state/useGameStore';
 import { flushPendingFarmSync, initVisibilitySyncListener } from '../services/supabaseSync';
 import ShopModal from './ShopModal';
+import ChestModal from './ChestModal';
 import { 
   Coins, 
   Zap, 
@@ -21,7 +22,8 @@ import {
   LogOut,
   LogIn,
   ShoppingBag,
-  Moon
+  Moon,
+  Hammer
 } from 'lucide-react';
 
 interface GameContainerProps {
@@ -49,6 +51,8 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
   const sleepNextDay = useGameStore((state) => state.sleepNextDay);
 
   const [isShopOpen, setIsShopOpen] = useState(false);
+  const [shopTab, setShopTab] = useState<'buy' | 'sell' | 'craft'>('buy');
+  const [currentChestKey, setCurrentChestKey] = useState<string | null>(null);
   const [isSleeping, setIsSleeping] = useState(false);
 
   // Auto-dismiss notification after 3.5 seconds
@@ -70,17 +74,31 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     };
   }, [currentUser?.id, initSync]);
 
-  // Keyboard shortcut listener for Hotbar slots 1-5 & Shop modal (B)
+  // Keyboard shortcut listener for Hotbar slots 1-9, Shop modal (B), and Crafting tab (C)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Toggle shop
       if (e.key === 'b' || e.key === 'B') {
+        setShopTab('buy');
         setIsShopOpen((prev) => !prev);
         return;
       }
 
+      // Open craft tab directly
+      if (e.key === 'c' || e.key === 'C') {
+        if (!isShopOpen) {
+          setShopTab('craft');
+          setIsShopOpen(true);
+        } else if (shopTab === 'craft') {
+          setIsShopOpen(false);
+        } else {
+          setShopTab('craft');
+        }
+        return;
+      }
+
       // If modal or sleeping transition is active, ignore hotbar tool changes
-      if (isShopOpen || isSleeping) return;
+      if (isShopOpen || Boolean(currentChestKey) || isSleeping) return;
 
       const keyNum = parseInt(e.key, 10);
       if (keyNum >= 1 && keyNum <= hotbar.length) {
@@ -89,7 +107,7 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [hotbar, selectTool, isShopOpen, isSleeping]);
+  }, [hotbar, selectTool, isShopOpen, shopTab, currentChestKey, isSleeping]);
 
   const handleSleep = () => {
     if (isSleeping) return;
@@ -106,12 +124,12 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     try {
       const scene = gameRef.current.scene.getScene('FarmScene') as { setModalOpen?: (open: boolean) => void } | null;
       if (scene && typeof scene.setModalOpen === 'function') {
-        scene.setModalOpen(isShopOpen || isSleeping);
+        scene.setModalOpen(isShopOpen || Boolean(currentChestKey) || isSleeping);
       }
     } catch {
       // Scene might not be initialized yet
     }
-  }, [isShopOpen, isSleeping]);
+  }, [isShopOpen, currentChestKey, isSleeping]);
 
   // Phaser Game instance lifecycle management (React 19 strict-mode safe)
   useEffect(() => {
@@ -121,7 +139,14 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     const game = new Phaser.Game(config);
     gameRef.current = game;
 
+    // Listen to chest interaction events emitted from FarmScene
+    const handleOpenChest = (chestKey: string) => {
+      setCurrentChestKey(chestKey);
+    };
+    game.events.on('open-chest', handleOpenChest);
+
     return () => {
+      game.events.off('open-chest', handleOpenChest);
       if (gameRef.current) {
         gameRef.current.destroy(true);
         gameRef.current = null;
@@ -218,12 +243,28 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
             
             {/* Shop Button */}
             <button
-              onClick={() => setIsShopOpen(true)}
+              onClick={() => {
+                setShopTab('buy');
+                setIsShopOpen(true);
+              }}
               title="Mở Cửa Hàng (Phím B)"
-              className="flex items-center gap-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all shadow-md shadow-amber-950"
+              className="flex items-center gap-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all shadow-md shadow-amber-950 cursor-pointer"
             >
               <ShoppingBag className="w-3.5 h-3.5" />
               <span>Cửa Hàng (B)</span>
+            </button>
+
+            {/* Crafting Button */}
+            <button
+              onClick={() => {
+                setShopTab('craft');
+                setIsShopOpen(true);
+              }}
+              title="Mở Bảng Chế Tạo (Phím C)"
+              className="flex items-center gap-1.5 bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 border border-indigo-500/30 px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all shadow-md shadow-indigo-950 cursor-pointer"
+            >
+              <Hammer className="w-3.5 h-3.5" />
+              <span>Chế Tạo (C)</span>
             </button>
 
             {/* Cloud Sync Status Indicator */}
@@ -340,9 +381,9 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
                   {idx + 1}
                 </span>
                 <span className="text-sm sm:text-base md:text-lg">{item.icon}</span>
-                {item.type === 'seed' && (
+                {(item.type === 'seed' || item.type === 'placeable' || item.type === 'consumable') && item.count !== undefined && (
                   <span className="absolute bottom-0.5 right-0.5 sm:right-1 text-[8px] sm:text-[9px] font-mono font-bold bg-slate-950/80 px-0.5 sm:px-1 rounded text-emerald-300">
-                    x{item.count ?? 0}
+                    x{item.count}
                   </span>
                 )}
               </button>
@@ -361,8 +402,11 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
 
       </div>
 
-      {/* 6. Shop Modal */}
-      <ShopModal isOpen={isShopOpen} onClose={() => setIsShopOpen(false)} />
+      {/* 6. Shop & Crafting Modal */}
+      <ShopModal isOpen={isShopOpen} initialTab={shopTab} onClose={() => setIsShopOpen(false)} />
+
+      {/* 7. Chest Storage Modal */}
+      <ChestModal isOpen={Boolean(currentChestKey)} chestKey={currentChestKey} onClose={() => setCurrentChestKey(null)} />
 
     </div>
   );

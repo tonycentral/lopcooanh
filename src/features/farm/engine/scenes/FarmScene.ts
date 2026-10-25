@@ -7,6 +7,7 @@ interface TileSpriteEntry {
   soilSprite: Phaser.GameObjects.Image | null;
   cropSprite: Phaser.GameObjects.Image | null;
   obstacleSprite?: Phaser.GameObjects.GameObject | null;
+  placeableSprite?: Phaser.GameObjects.GameObject | null;
 }
 
 export default class FarmScene extends Phaser.Scene {
@@ -320,10 +321,78 @@ export default class FarmScene extends Phaser.Scene {
     }
   }
 
+  /**
+   * Helper: Creates solid placeable structures (Fence & Chest) with Arcade Physics
+   * static bodies so player cannot walk through them.
+   */
+  private createPlaceableSprite(x: number, y: number, type: 'fence' | 'chest'): Phaser.GameObjects.GameObject {
+    const texName = `placeable_${type}`;
+    const hasAtlas = this.hasCustomAtlas && this.textures.exists('farm_atlas') && this.textures.get('farm_atlas').has(texName);
+    const tex = hasAtlas ? 'farm_atlas' : texName;
+    const frame = hasAtlas ? texName : undefined;
+
+    const px = x * this.TILE_SIZE;
+    const py = y * this.TILE_SIZE;
+    const depth = 10 + (py + 16) / 1000;
+
+    const sprite = this.solidObstacleGroup.create(px + 16, py + 16, tex, frame) as Phaser.Physics.Arcade.Sprite;
+    sprite.setOrigin(0.5, 0.5);
+    sprite.setDepth(depth);
+    sprite.body.setSize(26, 20).setOffset(3, 6);
+    sprite.refreshBody();
+    return sprite;
+  }
+
   private handleTileClick(x: number, y: number) {
     const store = useGameStore.getState();
     const activeTool = store.activeTool;
     const currentTile = store.tiles[`${x},${y}`];
+
+    // Priority 0: Placing items from Hotbar (Fence or Chest)
+    if (activeTool === 'item_fence' || activeTool === 'item_chest') {
+      const placeType = activeTool === 'item_fence' ? 'fence' : 'chest';
+      const res = store.placeEntity(x, y, placeType);
+      if (res.success) {
+        this.showFloatingText(x, y, `+ Đặt ${placeType === 'fence' ? 'Hàng rào gỗ' : 'Rương gỗ'}!`, '#38bdf8');
+      } else {
+        this.showFloatingText(x, y, res.reason || 'Không thể đặt!', '#fb7185', true);
+      }
+      return;
+    }
+
+    // Priority 0.5: Fertilizer Application
+    if (activeTool === 'item_fertilizer') {
+      const res = store.fertilizeTile(x, y);
+      if (res.success) {
+        this.showFloatingText(x, y, '🧪 Bón phân sinh học (-50% time)!', '#4ade80');
+      } else {
+        this.showFloatingText(x, y, res.reason || 'Không thể bón phân!', '#fb7185', true);
+      }
+      return;
+    }
+
+    // Priority 0.8: Interaction with existing Placeable Structures
+    if (currentTile?.placeable) {
+      if (activeTool === 'pickaxe') {
+        const res = store.dismantleEntity(x, y);
+        if (res.success) {
+          this.showFloatingText(x, y, 'Thu hồi công trình (-2 Năng lượng)', '#facc15');
+        } else {
+          this.showFloatingText(x, y, res.reason || 'Không thể tháo dỡ!', '#fb7185', true);
+        }
+        return;
+      }
+
+      if (currentTile.placeable.type === 'chest') {
+        this.game.events.emit('open-chest', `${x},${y}`);
+        return;
+      }
+
+      if (currentTile.placeable.type === 'fence') {
+        this.showFloatingText(x, y, 'Hàng rào gỗ (Dùng Cuốc chim để tháo dỡ)', '#fb7185', true);
+        return;
+      }
+    }
 
     // Priority 1: Obstacle Interaction
     if (currentTile?.obstacle) {
@@ -455,6 +524,13 @@ export default class FarmScene extends Phaser.Scene {
             (entry.obstacleSprite as Phaser.GameObjects.GameObject).destroy();
           }
         }
+        if (entry.placeableSprite) {
+          if (this.solidObstacleGroup.contains(entry.placeableSprite)) {
+            this.solidObstacleGroup.remove(entry.placeableSprite, true, true);
+          } else {
+            (entry.placeableSprite as Phaser.GameObjects.GameObject).destroy();
+          }
+        }
         this.tileSprites.delete(key);
       }
     }
@@ -468,7 +544,7 @@ export default class FarmScene extends Phaser.Scene {
 
       let entry = this.tileSprites.get(key);
       if (!entry) {
-        entry = { soilSprite: null, cropSprite: null, obstacleSprite: null };
+        entry = { soilSprite: null, cropSprite: null, obstacleSprite: null, placeableSprite: null };
         this.tileSprites.set(key, entry);
       }
 
@@ -525,6 +601,20 @@ export default class FarmScene extends Phaser.Scene {
           (entry.obstacleSprite as Phaser.GameObjects.GameObject).destroy();
         }
         entry.obstacleSprite = null;
+      }
+
+      // 4. Placeable structure texture & solid physics update
+      if (tile.placeable) {
+        if (!entry.placeableSprite) {
+          entry.placeableSprite = this.createPlaceableSprite(x, y, tile.placeable.type);
+        }
+      } else if (entry.placeableSprite) {
+        if (this.solidObstacleGroup.contains(entry.placeableSprite)) {
+          this.solidObstacleGroup.remove(entry.placeableSprite, true, true);
+        } else {
+          (entry.placeableSprite as Phaser.GameObjects.GameObject).destroy();
+        }
+        entry.placeableSprite = null;
       }
     }
   }

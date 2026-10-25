@@ -1,9 +1,39 @@
 // src/features/farm/types.ts
 // Strict TypeScript interfaces for the 2D Farm Engine & State
 
-export type ToolType = 'hoe' | 'water_can' | 'axe' | 'pickaxe' | 'scythe' | 'hand' | 'seed';
+export type ToolType = 'hoe' | 'water_can' | 'axe' | 'pickaxe' | 'scythe' | 'hand' | 'seed' | 'item_fence' | 'item_chest' | 'item_fertilizer';
 
 export type ObstacleType = 'rock' | 'wood' | 'weed';
+
+export type PlaceableType = 'fence' | 'chest';
+
+export interface ChestData {
+  items: InventoryItem[]; // Up to 8 slots
+}
+
+export interface PlaceableData {
+  type: PlaceableType;
+  placedAt: number;
+  chestData?: ChestData;
+}
+
+export interface CraftingIngredient {
+  id: string;
+  name: string;
+  icon: string;
+  count: number;
+}
+
+export interface CraftingRecipe {
+  id: string;
+  name: string;
+  icon: string;
+  outputItemId: string;
+  outputName: string;
+  outputCount: number;
+  desc: string;
+  ingredients: CraftingIngredient[];
+}
 
 export interface ObstacleData {
   type: ObstacleType;
@@ -25,6 +55,8 @@ export interface TileData {
   isWatered: boolean;
   crop: CropData | null;
   obstacle?: ObstacleData | null;
+  placeable?: PlaceableData | null;
+  isFertilized?: boolean;
   lastUpdated?: number;
 }
 
@@ -32,7 +64,7 @@ export interface InventoryItem {
   id: string;
   name: string;
   icon: string;
-  type: 'tool' | 'seed' | 'crop' | 'resource';
+  type: 'tool' | 'seed' | 'crop' | 'resource' | 'placeable' | 'consumable';
   count?: number;
   cropId?: string;
   price?: number;

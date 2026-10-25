@@ -8,17 +8,25 @@ import {
   Coins, 
   Sprout, 
   Package, 
-  Sparkles
+  Sparkles,
+  Hammer
 } from 'lucide-react';
-import { useGameStore, SHOP_SEEDS, ALL_SELLABLE_ITEMS } from '../state/useGameStore';
+import { useGameStore, SHOP_SEEDS, ALL_SELLABLE_ITEMS, CRAFTING_RECIPES } from '../state/useGameStore';
 
 interface ShopModalProps {
   isOpen: boolean;
   onClose: () => void;
+  initialTab?: 'buy' | 'sell' | 'craft';
 }
 
-export default function ShopModal({ isOpen, onClose }: ShopModalProps) {
-  const [tab, setTab] = useState<'buy' | 'sell'>('buy');
+export default function ShopModal({ isOpen, onClose, initialTab = 'buy' }: ShopModalProps) {
+  const [tab, setTab] = useState<'buy' | 'sell' | 'craft'>(initialTab);
+  const [prevInitialTab, setPrevInitialTab] = useState(initialTab);
+
+  if (initialTab !== prevInitialTab) {
+    setPrevInitialTab(initialTab);
+    setTab(initialTab);
+  }
 
   const gold = useGameStore((state) => state.gold);
   const inventory = useGameStore((state) => state.inventory);
@@ -26,12 +34,13 @@ export default function ShopModal({ isOpen, onClose }: ShopModalProps) {
   const buySeed = useGameStore((state) => state.buySeed);
   const sellCrop = useGameStore((state) => state.sellCrop);
   const sellAllCrops = useGameStore((state) => state.sellAllCrops);
+  const craftItem = useGameStore((state) => state.craftItem);
 
-  // Close on Esc key or B key toggle
+  // Close on Esc key or B/C key toggle
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' || e.key === 'b' || e.key === 'B') {
+      if (e.key === 'Escape' || e.key === 'b' || e.key === 'B' || e.key === 'c' || e.key === 'C') {
         onClose();
       }
     };
@@ -106,12 +115,24 @@ export default function ShopModal({ isOpen, onClose }: ShopModalProps) {
             }`}
           >
             <Package className="w-4 h-4" />
-            <span>Bán Sản Phẩm &amp; Tài Nguyên</span>
+            <span>Bán Hàng</span>
             {totalSellableCount > 0 && (
               <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-300 font-mono">
                 {totalSellableCount}
               </span>
             )}
+          </button>
+
+          <button
+            onClick={() => setTab('craft')}
+            className={`flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-t-xl transition-all border-b-2 ${
+              tab === 'craft'
+                ? 'border-indigo-400 text-indigo-300 bg-slate-900'
+                : 'border-transparent text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Hammer className="w-4 h-4" />
+            <span>Chế Tạo (Craft)</span>
           </button>
         </div>
 
@@ -254,9 +275,85 @@ export default function ShopModal({ isOpen, onClose }: ShopModalProps) {
           </div>
         )}
 
+        {/* Tab 3: Chế Tạo Công Cụ & Kiến Trúc (Crafting) */}
+        {tab === 'craft' && (
+          <div className="p-5 space-y-3 max-h-[60vh] overflow-y-auto">
+            <div className="p-3 rounded-xl bg-indigo-950/30 border border-indigo-800/40 text-xs text-indigo-300">
+              Sử dụng các tài nguyên đã khai thác (Gỗ, Đá, Sợi cỏ) để chế tác hàng rào, rương chứa đồ hoặc phân bón sinh học.
+            </div>
+
+            <div className="space-y-3">
+              {CRAFTING_RECIPES.map((recipe) => {
+                const canCraft = recipe.ingredients.every((ing) => {
+                  const invCount = inventory.find((i) => i.id === ing.id)?.count ?? 0;
+                  const hotbarCount = hotbar.find((i) => i.id === ing.id)?.count ?? 0;
+                  return (invCount + hotbarCount) >= ing.count;
+                });
+
+                return (
+                  <div
+                    key={recipe.id}
+                    className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-slate-700 transition-colors"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="text-3xl w-10 h-10 flex items-center justify-center bg-slate-800/80 rounded-xl shrink-0 mt-0.5 sm:mt-0">
+                        {recipe.icon}
+                      </div>
+                      <div>
+                        <div className="text-sm font-semibold text-white flex items-center gap-2">
+                          {recipe.outputName}
+                        </div>
+                        <div className="text-xs text-slate-400 mt-0.5">{recipe.desc}</div>
+
+                        {/* Ingredients list */}
+                        <div className="flex flex-wrap items-center gap-2 mt-2">
+                          <span className="text-[11px] text-slate-400 font-medium">Nguyên liệu:</span>
+                          {recipe.ingredients.map((ing) => {
+                            const invCount = inventory.find((i) => i.id === ing.id)?.count ?? 0;
+                            const hotbarCount = hotbar.find((i) => i.id === ing.id)?.count ?? 0;
+                            const currentTotal = invCount + hotbarCount;
+                            const hasEnough = currentTotal >= ing.count;
+
+                            return (
+                              <span
+                                key={ing.id}
+                                className={`text-[11px] font-mono px-2 py-0.5 rounded-md border flex items-center gap-1 ${
+                                  hasEnough
+                                    ? 'bg-emerald-950/50 border-emerald-700/50 text-emerald-300'
+                                    : 'bg-rose-950/50 border-rose-800/50 text-rose-300'
+                                }`}
+                              >
+                                <span>{ing.icon}</span>
+                                <span>{ing.name}:</span>
+                                <span className="font-bold">{currentTotal}/{ing.count}</span>
+                              </span>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Craft Button */}
+                    <div className="shrink-0 flex items-center justify-end sm:justify-start">
+                      <button
+                        onClick={() => craftItem(recipe.id)}
+                        disabled={!canCraft}
+                        className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:hover:bg-indigo-600 text-white text-xs font-bold transition-all shadow-md shadow-indigo-950 flex items-center gap-1.5 cursor-pointer disabled:cursor-not-allowed"
+                      >
+                        <Hammer className="w-3.5 h-3.5" />
+                        <span>Chế Tạo</span>
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         {/* Footer */}
         <div className="p-3 border-t border-slate-800 bg-slate-950/60 text-center text-[11px] text-slate-500">
-          Mẹo: Nhấn phím <span className="font-mono text-slate-300 font-semibold">B</span> hoặc <span className="font-mono text-slate-300 font-semibold">Esc</span> để đóng cửa hàng
+          Mẹo: Nhấn phím <span className="font-mono text-slate-300 font-semibold">B</span> / <span className="font-mono text-slate-300 font-semibold">C</span> hoặc <span className="font-mono text-slate-300 font-semibold">Esc</span> để đóng
         </div>
       </div>
     </div>

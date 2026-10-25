@@ -280,5 +280,73 @@ export default class BootScene extends Phaser.Scene {
       g.generateTexture('obstacle_weed', 32, 32);
       g.destroy();
     }
+
+    // 11. Placeable: Wooden Fence (32x32)
+    if (!this.textures.exists('placeable_fence')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Drop shadow
+      g.fillStyle(0x0f172a, 0.35);
+      g.fillRect(3, 27, 26, 4);
+      // Horizontal crossrails (back)
+      g.fillStyle(0x6e472e, 1);
+      g.fillRect(1, 11, 30, 4);
+      g.fillRect(1, 21, 30, 4);
+      g.fillStyle(0x8b5a2b, 1);
+      g.fillRect(1, 10, 30, 1);
+      g.fillRect(1, 20, 30, 1);
+      // Two vertical posts
+      g.fillStyle(0x8b5a2b, 1);
+      g.fillRect(4, 5, 6, 24);
+      g.fillRect(22, 5, 6, 24);
+      // Post highlights & caps
+      g.fillStyle(0xa66d3b, 1);
+      g.fillRect(4, 5, 2, 24);
+      g.fillRect(22, 5, 2, 24);
+      g.fillTriangle(4, 5, 7, 1, 10, 5);
+      g.fillTriangle(22, 5, 25, 1, 28, 5);
+      g.generateTexture('placeable_fence', 32, 32);
+      g.destroy();
+    }
+
+    // 12. Placeable: Wooden Chest (32x32)
+    if (!this.textures.exists('placeable_chest')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Drop shadow
+      g.fillStyle(0x0f172a, 0.4);
+      g.fillEllipse(16, 26, 26, 8);
+      // Main chest box
+      g.fillStyle(0x78350f, 1); // Dark amber/wood
+      g.fillRoundedRect(4, 10, 24, 18, 3);
+      // Planks shading
+      g.fillStyle(0x92400e, 1);
+      g.fillRect(6, 12, 20, 5);
+      g.fillRect(6, 19, 20, 7);
+      // Metal rim & bands
+      g.fillStyle(0xd97706, 1); // Brass/Gold trim
+      g.fillRect(4, 16, 24, 3);
+      g.fillRect(7, 10, 2, 18);
+      g.fillRect(23, 10, 2, 18);
+      // Lock latch in center
+      g.fillStyle(0xfef08a, 1);
+      g.fillRect(14, 15, 4, 5);
+      g.fillStyle(0x451a03, 1);
+      g.fillRect(15, 17, 2, 2);
+      g.generateTexture('placeable_chest', 32, 32);
+      g.destroy();
+    }
+
+    // 13. Fertilizer indicator (32x32)
+    if (!this.textures.exists('item_fertilizer')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x15803d, 1);
+      g.fillRoundedRect(6, 6, 20, 20, 4);
+      g.fillStyle(0x4ade80, 1);
+      g.fillCircle(16, 16, 5);
+      g.fillStyle(0xfef08a, 1);
+      g.fillRect(15, 13, 2, 6);
+      g.fillRect(13, 15, 6, 2);
+      g.generateTexture('item_fertilizer', 32, 32);
+      g.destroy();
+    }
   }
 }
