@@ -18,7 +18,8 @@ import type {
   FarmBuilding,
   LivestockType,
   LivestockData,
-  EggEntityData
+  EggEntityData,
+  MovableEntityData
 } from '../types';
 import { 
   queueFarmStateSync, 
@@ -677,6 +678,8 @@ const defaultInitialState: PlayerFarmState = {
   lastSimulatedAt: Date.now(),
   hasHouse: false,
   houseOrigin: { x: 8, y: 2 },
+  sanctuaryPosition: { x: 15, y: 3 },
+  bbqPosition: { x: 18, y: 3 },
   buildings: [],
   livestock: [],
   droppedEggs: [],
@@ -697,8 +700,16 @@ export interface GameStoreState extends PlayerFarmState {
   currentUserId: string | null;
   syncStatus: SyncStatus;
   lastNotification: NotificationMessage | null;
+  isRepositionMode: boolean;
+  movingEntity: MovableEntityData | null;
+  sanctuaryPosition: { x: number; y: number };
+  bbqPosition: { x: number; y: number };
   
   // Actions
+  toggleRepositionMode: (force?: boolean) => void;
+  pickUpEntity: (gridX: number, gridY: number) => { success: boolean; reason?: string };
+  relocateEntity: (newGridX: number, newGridY: number) => { success: boolean; reason?: string };
+  cancelRelocation: () => void;
   setUserId: (userId: string | null) => void;
   selectTool: (toolId: string) => void;
   selectSeed: (seedId: string) => void;
@@ -768,6 +779,10 @@ export const useGameStore = create<GameStoreState>((set, get) => {
     currentUserId: null,
     syncStatus: 'idle',
     lastNotification: null,
+    isRepositionMode: false,
+    movingEntity: null,
+    sanctuaryPosition: { x: 15, y: 3 },
+    bbqPosition: { x: 18, y: 3 },
 
     setUserId: (userId) => set({ currentUserId: userId }),
 
@@ -2861,6 +2876,340 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       get().notify('Đã hủy chế độ đặt móng xây dựng.', 'info');
     },
 
+    toggleRepositionMode: (force?: boolean) => {
+      const state = get();
+      const nextState = force !== undefined ? force : !state.isRepositionMode;
+      if (!nextState && state.movingEntity) {
+        get().cancelRelocation();
+      }
+      set({
+        isRepositionMode: nextState,
+        placementMode: null
+      });
+      get().notify(
+        nextState 
+          ? '📐 Đã bật Chế độ Di dời: Click vào vật thể/cây trồng để nhấc (phím M hoặc ESC để thoát)' 
+          : 'Đã tắt Chế độ Di dời.',
+        'info'
+      );
+    },
+
+    pickUpEntity: (gridX: number, gridY: number) => {
+      const state = get();
+      if (state.movingEntity) {
+        return { success: false, reason: 'Đang nhấc một vật thể khác' };
+      }
+
+      // 1. Check if user clicked on Farmer House (Immovable)
+      const currentBuildings = state.buildings || [];
+      const houseBuilding = currentBuildings.find((b) => b.type === 'house');
+      const houseX = houseBuilding ? houseBuilding.originX : (state.houseOrigin?.x ?? 8);
+      const houseY = houseBuilding ? houseBuilding.originY : (state.houseOrigin?.y ?? 2);
+      if (gridX >= houseX && gridX < houseX + 2 && gridY >= houseY && gridY < houseY + 2) {
+        const msg = 'Nhà chính kiên cố, không thể di dời!';
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      // 2. Check Campfire Sanctuary (Movable)
+      const sancPos = state.sanctuaryPosition ?? { x: 15, y: 3 };
+      if (gridX === sancPos.x && gridY === sancPos.y) {
+        const newTiles = { ...state.tiles };
+        if (newTiles[`${sancPos.x},${sancPos.y}`]) {
+          newTiles[`${sancPos.x},${sancPos.y}`] = {
+            ...newTiles[`${sancPos.x},${sancPos.y}`],
+            station: null
+          };
+        }
+        const movingEntity: MovableEntityData = {
+          type: 'station_campfire',
+          name: 'Bếp Lửa Trại (Sanctuary)',
+          originalGridX: sancPos.x,
+          originalGridY: sancPos.y,
+          width: 1,
+          height: 1,
+          textureKey: 'structure_campfire'
+        };
+        set({ movingEntity, tiles: newTiles, isRepositionMode: true });
+        get().notify('Đã nhấc Bếp Lửa Trại! Di chuột và click để đặt vị trí mới (Esc để hủy)', 'info');
+        return { success: true };
+      }
+
+      // 3. Check BBQ Stand (Movable)
+      const bbqPos = state.bbqPosition ?? { x: 18, y: 3 };
+      if (gridX === bbqPos.x && gridY === bbqPos.y) {
+        const newTiles = { ...state.tiles };
+        if (newTiles[`${bbqPos.x},${bbqPos.y}`]) {
+          newTiles[`${bbqPos.x},${bbqPos.y}`] = {
+            ...newTiles[`${bbqPos.x},${bbqPos.y}`],
+            station: null
+          };
+        }
+        const movingEntity: MovableEntityData = {
+          type: 'station_bbq',
+          name: 'Quầy Nướng BBQ',
+          originalGridX: bbqPos.x,
+          originalGridY: bbqPos.y,
+          width: 1,
+          height: 1,
+          textureKey: 'structure_bbq_stand'
+        };
+        set({ movingEntity, tiles: newTiles, isRepositionMode: true });
+        get().notify('Đã nhấc Quầy Nướng BBQ! Di chuột và click để đặt vị trí mới (Esc để hủy)', 'info');
+        return { success: true };
+      }
+
+      // 4. Check Crop on tile (Movable)
+      const tile = state.tiles[`${gridX},${gridY}`];
+      if (tile?.crop) {
+        const cropData = { ...tile.crop };
+        const newTiles = { ...state.tiles };
+        newTiles[`${gridX},${gridY}`] = {
+          ...tile,
+          crop: null,
+          isTilled: false,
+          isWatered: false
+        };
+        const cropTexKey = cropData.id === 'apple' 
+          ? 'crop_apple_stage3' 
+          : `crop_${cropData.id}_stage2`;
+        const cropName = cropData.id === 'apple' ? 'Cây Táo' : cropData.id === 'herb' ? 'Cây Thảo Mộc' : 'Cây Lúa Mì';
+        const movingEntity: MovableEntityData = {
+          type: 'crop',
+          name: cropName,
+          originalGridX: gridX,
+          originalGridY: gridY,
+          width: 1,
+          height: 1,
+          textureKey: cropTexKey,
+          cropData
+        };
+        set({ movingEntity, tiles: newTiles, isRepositionMode: true });
+        get().notify(`Đã nhấc ${cropName}! Di chuột và click để di dời (Esc để hủy)`, 'info');
+        return { success: true };
+      }
+
+      // 5. Check Placeable (Chest, Fence)
+      if (tile?.placeable) {
+        const placeableData = { ...tile.placeable };
+        const newTiles = { ...state.tiles };
+        newTiles[`${gridX},${gridY}`] = {
+          ...tile,
+          placeable: null
+        };
+        const pName = placeableData.type === 'chest' ? 'Rương Đồ' : 'Hàng Rào';
+        const movingEntity: MovableEntityData = {
+          type: 'placeable',
+          name: pName,
+          originalGridX: gridX,
+          originalGridY: gridY,
+          width: 1,
+          height: 1,
+          textureKey: `placeable_${placeableData.type}`,
+          placeableData
+        };
+        set({ movingEntity, tiles: newTiles, isRepositionMode: true });
+        get().notify(`Đã nhấc ${pName}! Di chuột và click để di dời (Esc để hủy)`, 'info');
+        return { success: true };
+      }
+
+      // 6. Check Coop or Barn (Movable)
+      const movableBld = currentBuildings.find(
+        (b) => b.type !== 'house' && gridX >= b.originX && gridX < b.originX + b.width && gridY >= b.originY && gridY < b.originY + b.height
+      );
+      if (movableBld) {
+        const updatedBuildings = currentBuildings.filter((b) => b.id !== movableBld.id);
+        const bName = movableBld.type === 'coop' ? 'Chuồng Gà' : 'Chuồng Bò';
+        const movingEntity: MovableEntityData = {
+          type: movableBld.type === 'coop' ? 'building_coop' : 'building_barn',
+          name: bName,
+          originalGridX: movableBld.originX,
+          originalGridY: movableBld.originY,
+          width: movableBld.width,
+          height: movableBld.height,
+          textureKey: `building_${movableBld.type}`,
+          buildingData: movableBld
+        };
+        set({ movingEntity, buildings: updatedBuildings, isRepositionMode: true });
+        get().notify(`Đã nhấc ${bName}! Di chuột và click để di dời (Esc để hủy)`, 'info');
+        return { success: true };
+      }
+
+      get().notify('Ô này không có đối tượng có thể di dời!', 'info');
+      return { success: false, reason: 'Không có đối tượng' };
+    },
+
+    relocateEntity: (newGridX: number, newGridY: number) => {
+      const state = get();
+      const entity = state.movingEntity;
+      if (!entity) return { success: false, reason: 'Không có vật thể đang nhấc' };
+
+      const w = entity.width;
+      const h = entity.height;
+
+      // Bounds check
+      if (newGridX < 0 || newGridX + w > 30 || newGridY < 0 || newGridY + h > 20) {
+        const msg = 'Vị trí vượt ra ngoài ranh giới nông trại!';
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      // Check House collision
+      const currentBuildings = state.buildings || [];
+      const houseBuilding = currentBuildings.find((b) => b.type === 'house');
+      const houseX = houseBuilding ? houseBuilding.originX : (state.houseOrigin?.x ?? 8);
+      const houseY = houseBuilding ? houseBuilding.originY : (state.houseOrigin?.y ?? 2);
+      for (let x = newGridX; x < newGridX + w; x++) {
+        for (let y = newGridY; y < newGridY + h; y++) {
+          if (x >= houseX && x < houseX + 2 && y >= houseY && y < houseY + 2) {
+            const msg = 'Không thể đặt đè lên Nhà ở!';
+            get().notify(msg, 'warning');
+            return { success: false, reason: msg };
+          }
+          // Check collision with other buildings
+          for (const b of currentBuildings) {
+            if (x >= b.originX && x < b.originX + b.width && y >= b.originY && y < b.originY + b.height) {
+              const msg = 'Vị trí bị trùng với công trình kiến trúc khác!';
+              get().notify(msg, 'warning');
+              return { success: false, reason: msg };
+            }
+          }
+          // Check collision with campfire or bbq (if not moving them)
+          const sancPos = state.sanctuaryPosition ?? { x: 15, y: 3 };
+          if (entity.type !== 'station_campfire' && x === sancPos.x && y === sancPos.y) {
+            const msg = 'Vị trí trùng với Bếp Lửa Trại!';
+            get().notify(msg, 'warning');
+            return { success: false, reason: msg };
+          }
+          const bbqPos = state.bbqPosition ?? { x: 18, y: 3 };
+          if (entity.type !== 'station_bbq' && x === bbqPos.x && y === bbqPos.y) {
+            const msg = 'Vị trí trùng với Quầy BBQ!';
+            get().notify(msg, 'warning');
+            return { success: false, reason: msg };
+          }
+
+          const tile = state.tiles[`${x},${y}`];
+          if (tile) {
+            if (tile.crop) {
+              const msg = 'Không thể đặt đè lên cây trồng đang canh tác!';
+              get().notify(msg, 'warning');
+              return { success: false, reason: msg };
+            }
+            if (tile.obstacle && (tile.obstacle.type === 'rock' || tile.obstacle.type === 'wood')) {
+              const msg = 'Vướng tảng đá hoặc khúc gỗ! Cần dọn dẹp trước.';
+              get().notify(msg, 'warning');
+              return { success: false, reason: msg };
+            }
+            if (tile.placeable) {
+              const msg = 'Vướng hàng rào hoặc rương đồ!';
+              get().notify(msg, 'warning');
+              return { success: false, reason: msg };
+            }
+          }
+        }
+      }
+
+      const newTiles = { ...state.tiles };
+      let updatedSanc = state.sanctuaryPosition ?? { x: 15, y: 3 };
+      let updatedBbq = state.bbqPosition ?? { x: 18, y: 3 };
+      let updatedBuildings = [...currentBuildings];
+
+      if (entity.type === 'station_campfire') {
+        updatedSanc = { x: newGridX, y: newGridY };
+        newTiles[`${newGridX},${newGridY}`] = {
+          ...(newTiles[`${newGridX},${newGridY}`] || { isTilled: false, isWatered: false, crop: null }),
+          station: { type: 'campfire', isDestructible: false }
+        };
+      } else if (entity.type === 'station_bbq') {
+        updatedBbq = { x: newGridX, y: newGridY };
+        newTiles[`${newGridX},${newGridY}`] = {
+          ...(newTiles[`${newGridX},${newGridY}`] || { isTilled: false, isWatered: false, crop: null }),
+          station: { type: 'bbq_stand', isDestructible: false }
+        };
+      } else if (entity.type === 'crop' && entity.cropData) {
+        newTiles[`${newGridX},${newGridY}`] = {
+          ...(newTiles[`${newGridX},${newGridY}`] || {}),
+          isTilled: true,
+          isWatered: false,
+          crop: entity.cropData,
+          lastUpdated: Date.now()
+        };
+      } else if (entity.type === 'placeable' && entity.placeableData) {
+        newTiles[`${newGridX},${newGridY}`] = {
+          ...(newTiles[`${newGridX},${newGridY}`] || { isTilled: false, isWatered: false, crop: null }),
+          placeable: entity.placeableData,
+          lastUpdated: Date.now()
+        };
+      } else if (entity.buildingData) {
+        const b = {
+          ...entity.buildingData,
+          gridX: newGridX,
+          gridY: newGridY,
+          originX: newGridX,
+          originY: newGridY
+        };
+        updatedBuildings.push(b);
+      }
+
+      const updated = {
+        tiles: newTiles,
+        sanctuaryPosition: updatedSanc,
+        bbqPosition: updatedBbq,
+        buildings: updatedBuildings,
+        movingEntity: null,
+        updatedAt: Date.now()
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify(`🎉 Đã di dời ${entity.name} đến vị trí mới thành công!`, 'success');
+      return { success: true };
+    },
+
+    cancelRelocation: () => {
+      const state = get();
+      const entity = state.movingEntity;
+      if (!entity) return;
+
+      const origX = entity.originalGridX;
+      const origY = entity.originalGridY;
+      const newTiles = { ...state.tiles };
+      let updatedBuildings = [...(state.buildings || [])];
+
+      if (entity.type === 'station_campfire') {
+        newTiles[`${origX},${origY}`] = {
+          ...(newTiles[`${origX},${origY}`] || { isTilled: false, isWatered: false, crop: null }),
+          station: { type: 'campfire', isDestructible: false }
+        };
+      } else if (entity.type === 'station_bbq') {
+        newTiles[`${origX},${origY}`] = {
+          ...(newTiles[`${origX},${origY}`] || { isTilled: false, isWatered: false, crop: null }),
+          station: { type: 'bbq_stand', isDestructible: false }
+        };
+      } else if (entity.type === 'crop' && entity.cropData) {
+        newTiles[`${origX},${origY}`] = {
+          ...(newTiles[`${origX},${origY}`] || {}),
+          isTilled: true,
+          isWatered: false,
+          crop: entity.cropData
+        };
+      } else if (entity.type === 'placeable' && entity.placeableData) {
+        newTiles[`${origX},${origY}`] = {
+          ...(newTiles[`${origX},${origY}`] || { isTilled: false, isWatered: false, crop: null }),
+          placeable: entity.placeableData
+        };
+      } else if (entity.buildingData) {
+        updatedBuildings.push(entity.buildingData);
+      }
+
+      set({
+        tiles: newTiles,
+        buildings: updatedBuildings,
+        movingEntity: null
+      });
+      get().notify('Đã hủy thao tác di dời vật thể.', 'info');
+    },
+
     buildStructure: (type: BuildingType, originX: number, originY: number) => {
       const state = get();
       const config = BUILDING_CONFIGS[type];
@@ -3308,6 +3657,8 @@ export const useGameStore = create<GameStoreState>((set, get) => {
           masteredQuizIds: cloudState.masteredQuizIds ?? prev.masteredQuizIds ?? [],
           hasHouse: hasHouseFlag,
           houseOrigin: houseOriginCoord,
+          sanctuaryPosition: cloudState.sanctuaryPosition ?? prev.sanctuaryPosition ?? { x: 15, y: 3 },
+          bbqPosition: cloudState.bbqPosition ?? prev.bbqPosition ?? { x: 18, y: 3 },
           buildings: loadedBuildings,
           livestock: cloudState.livestock ?? prev.livestock ?? [],
           droppedEggs: cloudState.droppedEggs ?? prev.droppedEggs ?? [],

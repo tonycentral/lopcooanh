@@ -22,6 +22,7 @@ import {
   LogIn,
   ShoppingBag,
   Hammer,
+  Move,
   Sparkles,
   ChevronUp
 } from 'lucide-react';
@@ -51,6 +52,10 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
   const selectTool = useGameStore((state) => state.selectTool);
   const selectSeed = useGameStore((state) => state.selectSeed);
   const toggleMoveOnlyMode = useGameStore((state) => state.toggleMoveOnlyMode);
+  const isRepositionMode = useGameStore((state) => state.isRepositionMode);
+  const movingEntity = useGameStore((state) => state.movingEntity);
+  const toggleRepositionMode = useGameStore((state) => state.toggleRepositionMode);
+  const cancelRelocation = useGameStore((state) => state.cancelRelocation);
   const runOfflineSimulation = useGameStore((state) => state.runOfflineSimulation);
   const initSync = useGameStore((state) => state.initSync);
   const clearNotification = useGameStore((state) => state.clearNotification);
@@ -151,6 +156,22 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
         return;
       }
 
+      // Key M: Toggle Reposition / Layout Mode
+      if (e.key === 'm' || e.key === 'M') {
+        toggleRepositionMode();
+        return;
+      }
+
+      // Key ESC: Cancel moving entity or exit reposition mode
+      if (e.key === 'Escape' && isRepositionMode) {
+        if (movingEntity) {
+          cancelRelocation();
+        } else {
+          toggleRepositionMode(false);
+        }
+        return;
+      }
+
       // If modal is active, ignore hotbar tool changes
       if (isShopOpen || Boolean(currentChestKey) || isProfileOpen || isQuizOpen || isBBQOpen || isFurnitureCraftOpen) return;
 
@@ -180,7 +201,7 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [hotbar, activeTool, selectTool, toggleMoveOnlyMode, isShopOpen, shopTab, currentChestKey, isProfileOpen, isQuizOpen, isBBQOpen, isFurnitureCraftOpen]);
+  }, [hotbar, activeTool, selectTool, toggleMoveOnlyMode, isRepositionMode, movingEntity, toggleRepositionMode, cancelRelocation, isShopOpen, shopTab, currentChestKey, isProfileOpen, isQuizOpen, isBBQOpen, isFurnitureCraftOpen]);
 
   // Synchronize modal state with Phaser input context (disable WASD/mouse raycast when modal is open)
   useEffect(() => {
@@ -437,6 +458,30 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
               </div>
             </div>
 
+            {/* Reposition / Layout Mode Button */}
+            <div className="group relative flex items-center justify-center">
+              <button
+                onClick={() => toggleRepositionMode()}
+                className={`w-9 h-9 rounded-xl border flex items-center justify-center transition-all shadow-lg shadow-black/40 cursor-pointer relative ${
+                  isRepositionMode
+                    ? 'bg-cyan-500/30 border-cyan-400 text-cyan-200 ring-2 ring-cyan-400/40'
+                    : 'bg-slate-900/80 hover:bg-cyan-500/20 text-cyan-300 border-slate-700/60 hover:border-cyan-500/50'
+                }`}
+                title="Bố Trí Lại / Di Dời Công Trình & Cây Trồng (Phím M)"
+              >
+                <Move className="w-4 h-4 text-cyan-300" />
+                <span className="absolute -bottom-1 -right-1 text-[8px] font-mono font-bold bg-cyan-500/30 text-cyan-200 border border-cyan-500/40 px-1 rounded-sm leading-tight">
+                  M
+                </span>
+              </button>
+              {/* Tooltip */}
+              <div className="pointer-events-none absolute top-full mt-2 hidden group-hover:flex flex-col items-center z-50">
+                <div className="bg-slate-950/95 text-slate-200 text-[10px] px-2 py-1 rounded-md border border-slate-700 shadow-xl whitespace-nowrap">
+                  Bố Trí Lại (Phím M)
+                </div>
+              </div>
+            </div>
+
             {/* Profile Avatar Button with 6px Sync Status Dot */}
             <div ref={profileRef} className="relative flex items-center justify-center">
               <button
@@ -556,9 +601,30 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
         )}
 
         {/* 3b. FLOATING INDICATOR FOR MOVE-ONLY / OBSERVATION MODE */}
-        {activeTool === 'none' && (
+        {activeTool === 'none' && !isRepositionMode && (
           <div className="absolute bottom-16 sm:bottom-18 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-950/90 border border-sky-500/50 text-sky-200 text-[10px] sm:text-[11px] font-semibold backdrop-blur-md shadow-xl animate-pulse whitespace-nowrap">
             <span>✋ Chế độ Quan Sát: Click để di chuyển nhân vật • Phím 0 hoặc chọn công cụ để huỷ</span>
+          </div>
+        )}
+
+        {/* 3c. FLOATING INDICATOR FOR REPOSITION / RELOCATION MODE */}
+        {isRepositionMode && (
+          <div className="absolute top-16 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/90 border border-cyan-500/60 text-cyan-200 text-xs font-semibold backdrop-blur-md shadow-2xl animate-in fade-in slide-in-from-top-2 whitespace-nowrap">
+            <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-ping shrink-0" />
+            <span>
+              {movingEntity
+                ? `Đang di dời: ${movingEntity.name} (Click ô mới để đặt, ESC / chuột phải để hủy)`
+                : 'Chế độ Bố Trí Lại: Click vào Bếp Lửa Trại, Quầy BBQ, Cây Trồng để nhấc'}
+            </span>
+            <button
+              onClick={() => {
+                if (movingEntity) cancelRelocation();
+                toggleRepositionMode(false);
+              }}
+              className="ml-2 text-[10px] font-bold px-2 py-0.5 rounded-md bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/40 transition-colors cursor-pointer"
+            >
+              Thoát (M / ESC)
+            </button>
           </div>
         )}
 

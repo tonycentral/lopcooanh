@@ -25,6 +25,22 @@ export interface FarmBuilding {
   createdAt?: number;
 }
 
+export type MovableEntityType = 'station_campfire' | 'station_bbq' | 'crop' | 'placeable' | 'building_coop' | 'building_barn';
+
+export interface MovableEntityData {
+  type: MovableEntityType;
+  id?: string;
+  name: string;
+  originalGridX: number;
+  originalGridY: number;
+  width: number;
+  height: number;
+  textureKey: string;
+  cropData?: CropData;
+  placeableData?: PlaceableData;
+  buildingData?: FarmBuilding;
+}
+
 export type LivestockType = 'chicken' | 'cow';
 
 export interface FarmAnimal {
@@ -178,6 +194,8 @@ export interface PlayerFarmState {
   lastSimulatedAt?: number;
   hasHouse?: boolean;
   houseOrigin?: { x: number; y: number } | null;
+  sanctuaryPosition?: { x: number; y: number };
+  bbqPosition?: { x: number; y: number };
   buildings?: FarmBuilding[];
   livestock?: LivestockData[];
   animals?: FarmAnimal[];

@@ -1,7 +1,7 @@
 // src/features/farm/engine/scenes/FarmScene.ts
 import Phaser from 'phaser';
 import { useGameStore, getCropGrowthStage } from '../../state/useGameStore';
-import type { TileData, BuildingType, LivestockData, EggEntityData } from '../../types';
+import type { TileData, BuildingType, LivestockData, EggEntityData, MovableEntityData } from '../../types';
 import { findAStarPath, findBestAdjacentPath } from '../systems/Pathfinding';
 
 interface TileSpriteEntry {
@@ -28,10 +28,18 @@ export default class FarmScene extends Phaser.Scene {
   private readonly GRID_WIDTH = 30;  // 960px
   private readonly GRID_HEIGHT = 20; // 640px
   private readonly INTERACTION_RANGE = 48; // Max distance in px (~1.5 tiles)
-  private readonly SANCTUARY_GRID_X = 15;
-  private readonly SANCTUARY_GRID_Y = 3;
-  private readonly BBQ_GRID_X = 18;
-  private readonly BBQ_GRID_Y = 3;
+  get SANCTUARY_GRID_X(): number {
+    return useGameStore.getState().sanctuaryPosition?.x ?? 15;
+  }
+  get SANCTUARY_GRID_Y(): number {
+    return useGameStore.getState().sanctuaryPosition?.y ?? 3;
+  }
+  get BBQ_GRID_X(): number {
+    return useGameStore.getState().bbqPosition?.x ?? 18;
+  }
+  get BBQ_GRID_Y(): number {
+    return useGameStore.getState().bbqPosition?.y ?? 3;
+  }
   private playerSpeed = 160;
 
   private currentPath: PathWaypoint[] | null = null;
@@ -48,6 +56,12 @@ export default class FarmScene extends Phaser.Scene {
   private bbqTooltip!: Phaser.GameObjects.Container;
   private interactKey!: Phaser.Input.Keyboard.Key;
   private escKey!: Phaser.Input.Keyboard.Key;
+  private mKey!: Phaser.Input.Keyboard.Key;
+
+  // Reposition / Relocation Ghost Mode
+  private repositionGhostGraphics?: Phaser.GameObjects.Graphics;
+  private repositionNoticeText?: Phaser.GameObjects.Text;
+  private repositionGhostSprite?: Phaser.GameObjects.Sprite;
 
   private tileSprites = new Map<string, TileSpriteEntry>();
   private marker!: Phaser.GameObjects.Sprite;
@@ -305,6 +319,7 @@ export default class FarmScene extends Phaser.Scene {
       };
       this.interactKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
       this.escKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+      this.mKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
     }
 
     // 6. Mouse Interaction Listeners
@@ -314,7 +329,21 @@ export default class FarmScene extends Phaser.Scene {
         return;
       }
 
-      const placementMode = useGameStore.getState().placementMode;
+      const store = useGameStore.getState();
+      const repositionMode = store.isRepositionMode;
+      const movingEntity = store.movingEntity;
+
+      if (repositionMode) {
+        this.marker.setVisible(false);
+        this.updateRepositionGhost(pointer, movingEntity);
+        return;
+      } else if (this.repositionGhostGraphics) {
+        this.repositionGhostGraphics.clear();
+        this.repositionNoticeText?.setVisible(false);
+        this.repositionGhostSprite?.setVisible(false);
+      }
+
+      const placementMode = store.placementMode;
       if (placementMode) {
         this.marker.setVisible(false);
         this.updatePlacementGhost(pointer, placementMode);
@@ -345,7 +374,62 @@ export default class FarmScene extends Phaser.Scene {
     this.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
       if (this.isPerformingAction || this.isInputBlocked) return;
 
-      const placementMode = useGameStore.getState().placementMode;
+      const store = useGameStore.getState();
+      const repositionMode = store.isRepositionMode;
+      const movingEntity = store.movingEntity;
+
+      if (repositionMode) {
+        if (pointer.rightButtonDown()) {
+          if (movingEntity) {
+            store.cancelRelocation();
+          } else {
+            store.toggleRepositionMode(false);
+          }
+          this.repositionGhostGraphics?.clear();
+          this.repositionNoticeText?.setVisible(false);
+          this.repositionGhostSprite?.setVisible(false);
+          this.syncStationsPositions();
+          return;
+        }
+
+        const worldPoint = pointer.positionToCamera(this.cameras.main) as Phaser.Math.Vector2;
+        const tileX = Math.floor(worldPoint.x / this.TILE_SIZE);
+        const tileY = Math.floor(worldPoint.y / this.TILE_SIZE);
+
+        if (movingEntity) {
+          const res = store.relocateEntity(tileX, tileY);
+          if (res.success) {
+            this.createDustPuff(tileX * this.TILE_SIZE + 16, tileY * this.TILE_SIZE + 16);
+            this.repositionGhostGraphics?.clear();
+            this.repositionNoticeText?.setVisible(false);
+            this.repositionGhostSprite?.setVisible(false);
+            this.syncStationsPositions();
+            this.renderAllBuildings();
+          }
+        } else {
+          const res = store.pickUpEntity(tileX, tileY);
+          if (res.success) {
+            this.syncStationsPositions();
+            this.renderAllBuildings();
+          }
+        }
+        return;
+      }
+
+      // Check Shift + Click for quick pick-up & reposition
+      if (pointer.event.shiftKey && pointer.button === 0) {
+        const worldPoint = pointer.positionToCamera(this.cameras.main) as Phaser.Math.Vector2;
+        const tileX = Math.floor(worldPoint.x / this.TILE_SIZE);
+        const tileY = Math.floor(worldPoint.y / this.TILE_SIZE);
+        const res = store.pickUpEntity(tileX, tileY);
+        if (res.success) {
+          this.syncStationsPositions();
+          this.renderAllBuildings();
+          return;
+        }
+      }
+
+      const placementMode = store.placementMode;
       if (placementMode) {
         if (pointer.rightButtonDown()) {
           useGameStore.getState().cancelPlacementMode();
@@ -392,6 +476,11 @@ export default class FarmScene extends Phaser.Scene {
     let prevLivestock = useGameStore.getState().livestock;
     let prevEggs = useGameStore.getState().droppedEggs;
     let prevHasHouse = useGameStore.getState().hasHouse;
+    let prevSanc = useGameStore.getState().sanctuaryPosition;
+    let prevBbq = useGameStore.getState().bbqPosition;
+    let prevMoving = useGameStore.getState().movingEntity;
+
+    this.syncStationsPositions();
 
     this.unsubscribeStore = useGameStore.subscribe((state) => {
       this.syncAllTiles(state.tiles);
@@ -407,6 +496,12 @@ export default class FarmScene extends Phaser.Scene {
       if (state.droppedEggs !== prevEggs) {
         prevEggs = state.droppedEggs;
         this.syncDroppedEggs(state.droppedEggs || []);
+      }
+      if (state.sanctuaryPosition !== prevSanc || state.bbqPosition !== prevBbq || state.movingEntity !== prevMoving) {
+        prevSanc = state.sanctuaryPosition;
+        prevBbq = state.bbqPosition;
+        prevMoving = state.movingEntity;
+        this.syncStationsPositions(state);
       }
     });
 
@@ -680,6 +775,251 @@ export default class FarmScene extends Phaser.Scene {
         const tile = store.tiles[`${x},${y}`];
         if (tile) {
           if (tile.crop || tile.obstacle || tile.placeable || tile.station) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  }
+
+  public syncStationsPositions(state = useGameStore.getState()) {
+    const sanc = state.sanctuaryPosition ?? { x: 15, y: 3 };
+    const bbq = state.bbqPosition ?? { x: 18, y: 3 };
+    const moving = state.movingEntity;
+
+    const isMovingCamp = moving?.type === 'station_campfire';
+    const isMovingBbq = moving?.type === 'station_bbq';
+
+    if (this.sanctuarySprite) {
+      const campX = sanc.x * this.TILE_SIZE + 16;
+      const campY = sanc.y * this.TILE_SIZE + 16;
+      this.sanctuarySprite.setPosition(campX, campY);
+      if (this.sanctuarySprite.body) {
+        (this.sanctuarySprite.body as Phaser.Physics.Arcade.Body).reset(campX, campY);
+      }
+      this.sanctuarySprite.setVisible(!isMovingCamp);
+    }
+    if (this.sanctuaryTooltip) {
+      const campX = sanc.x * this.TILE_SIZE + 16;
+      const campY = sanc.y * this.TILE_SIZE + 16;
+      this.sanctuaryTooltip.setPosition(campX, campY - 30);
+      if (isMovingCamp) this.sanctuaryTooltip.setVisible(false);
+    }
+
+    if (this.bbqSprite) {
+      const bbqX = bbq.x * this.TILE_SIZE + 16;
+      const bbqY = bbq.y * this.TILE_SIZE + 16;
+      this.bbqSprite.setPosition(bbqX, bbqY);
+      if (this.bbqSprite.body) {
+        (this.bbqSprite.body as Phaser.Physics.Arcade.Body).reset(bbqX, bbqY);
+      }
+      this.bbqSprite.setVisible(!isMovingBbq);
+    }
+    if (this.bbqTooltip) {
+      const bbqX = bbq.x * this.TILE_SIZE + 16;
+      const bbqY = bbq.y * this.TILE_SIZE + 16;
+      this.bbqTooltip.setPosition(bbqX, bbqY - 30);
+      if (isMovingBbq) this.bbqTooltip.setVisible(false);
+    }
+  }
+
+  private createDustPuff(x: number, y: number) {
+    for (let i = 0; i < 5; i++) {
+      const offsetX = Phaser.Math.Between(-12, 12);
+      const offsetY = Phaser.Math.Between(-6, 6);
+      const p = this.add.image(x + offsetX, y + offsetY, 'fx_dust').setDepth(30).setScale(0.6);
+      this.tweens.add({
+        targets: p,
+        alpha: { from: 1, to: 0 },
+        y: y + offsetY - Phaser.Math.Between(8, 20),
+        scale: { from: 0.6, to: 1.2 },
+        duration: Phaser.Math.Between(350, 550),
+        ease: 'Quad.easeOut',
+        onComplete: () => p.destroy()
+      });
+    }
+  }
+
+  private updateRepositionGhost(pointer: Phaser.Input.Pointer, movingEntity: MovableEntityData | null) {
+    if (!this.repositionGhostGraphics) {
+      this.repositionGhostGraphics = this.add.graphics().setDepth(28);
+    }
+    if (!this.repositionNoticeText) {
+      this.repositionNoticeText = this.add.text(0, 0, '', {
+        fontSize: '11px',
+        fontStyle: 'bold',
+        color: '#ffffff',
+        stroke: '#0f172a',
+        strokeThickness: 3,
+        fontFamily: 'system-ui, sans-serif'
+      }).setOrigin(0.5, 1).setDepth(29);
+    }
+
+    this.repositionGhostGraphics.clear();
+    const worldPoint = pointer.positionToCamera(this.cameras.main) as Phaser.Math.Vector2;
+    const gx = Math.floor(worldPoint.x / this.TILE_SIZE);
+    const gy = Math.floor(worldPoint.y / this.TILE_SIZE);
+
+    if (!this.isValidTile(gx, gy)) {
+      this.repositionNoticeText.setVisible(false);
+      if (this.repositionGhostSprite) this.repositionGhostSprite.setVisible(false);
+      return;
+    }
+
+    if (movingEntity) {
+      const w = movingEntity.width;
+      const h = movingEntity.height;
+      const px = gx * this.TILE_SIZE;
+      const py = gy * this.TILE_SIZE;
+      const pw = w * this.TILE_SIZE;
+      const ph = h * this.TILE_SIZE;
+
+      const isValid = this.isAreaValidForRelocation(gx, gy, w, h, movingEntity);
+      const strokeColor = isValid ? 0x22c55e : 0xef4444;
+      const fillColor = isValid ? 0x22c55e : 0xef4444;
+
+      this.repositionGhostGraphics.lineStyle(2, strokeColor, 0.95);
+      this.repositionGhostGraphics.fillStyle(fillColor, 0.25);
+      this.repositionGhostGraphics.strokeRect(px, py, pw, ph);
+      this.repositionGhostGraphics.fillRect(px, py, pw, ph);
+
+      // Ghost sprite representation
+      if (!this.repositionGhostSprite) {
+        this.repositionGhostSprite = this.add.sprite(px + pw / 2, py + ph / 2, movingEntity.textureKey).setDepth(27).setAlpha(0.65);
+      } else {
+        this.repositionGhostSprite.setTexture(movingEntity.textureKey);
+        this.repositionGhostSprite.setPosition(px + pw / 2, py + ph / 2);
+        this.repositionGhostSprite.setVisible(true);
+      }
+
+      this.repositionNoticeText.setPosition(px + pw / 2, py - 6);
+      this.repositionNoticeText.setText(
+        isValid
+          ? `[Click để Đặt ${movingEntity.name} - Esc/Phải để Hủy]`
+          : `[Vị trí không hợp lệ - Bị vướng hoặc ra ngoài mép]`
+      );
+      this.repositionNoticeText.setColor(isValid ? '#4ade80' : '#f87171');
+      this.repositionNoticeText.setVisible(true);
+    } else {
+      // Hovering in reposition mode: highlight movable object under cursor
+      if (this.repositionGhostSprite) this.repositionGhostSprite.setVisible(false);
+
+      const store = useGameStore.getState();
+      const px = gx * this.TILE_SIZE;
+      const py = gy * this.TILE_SIZE;
+
+      const currentBuildings = store.buildings || [];
+      const houseBuilding = currentBuildings.find((b) => b.type === 'house');
+      const houseX = houseBuilding ? houseBuilding.originX : (store.houseOrigin?.x ?? 8);
+      const houseY = houseBuilding ? houseBuilding.originY : (store.houseOrigin?.y ?? 2);
+      const isHouse = gx >= houseX && gx < houseX + 2 && gy >= houseY && gy < houseY + 2;
+
+      const sanc = store.sanctuaryPosition ?? { x: 15, y: 3 };
+      const isSanc = gx === sanc.x && gy === sanc.y;
+
+      const bbq = store.bbqPosition ?? { x: 18, y: 3 };
+      const isBbq = gx === bbq.x && gy === bbq.y;
+
+      const tile = store.tiles[`${gx},${gy}`];
+      const hasCrop = Boolean(tile?.crop);
+      const hasPlaceable = Boolean(tile?.placeable);
+      const movableBld = currentBuildings.find(
+        (b) => b.type !== 'house' && gx >= b.originX && gx < b.originX + b.width && gy >= b.originY && gy < b.originY + b.height
+      );
+
+      const isMovable = isSanc || isBbq || hasCrop || hasPlaceable || Boolean(movableBld);
+
+      if (isHouse) {
+        this.repositionGhostGraphics.lineStyle(2, 0xef4444, 0.9);
+        this.repositionGhostGraphics.fillStyle(0xef4444, 0.2);
+        this.repositionGhostGraphics.strokeRect(houseX * 32, houseY * 32, 64, 64);
+        this.repositionGhostGraphics.fillRect(houseX * 32, houseY * 32, 64, 64);
+        this.repositionNoticeText.setPosition(houseX * 32 + 32, houseY * 32 - 6);
+        this.repositionNoticeText.setText('🔒 Nhà chính kiên cố, không thể di dời!');
+        this.repositionNoticeText.setColor('#f87171');
+        this.repositionNoticeText.setVisible(true);
+      } else if (isMovable) {
+        let name = 'Vật thể';
+        let boxX = px;
+        let boxY = py;
+        let boxW = 32;
+        let boxH = 32;
+
+        if (isSanc) name = 'Bếp Lửa Trại 🔥';
+        else if (isBbq) name = 'Quầy Nướng BBQ 🍖';
+        else if (hasCrop) name = tile?.crop?.id === 'apple' ? 'Cây Táo 🍎' : 'Cây Trồng 🌱';
+        else if (hasPlaceable) name = tile?.placeable?.type === 'chest' ? 'Rương Đồ 📦' : 'Hàng Rào 🪵';
+        else if (movableBld) {
+          name = movableBld.type === 'coop' ? 'Chuồng Gà 🛖' : 'Chuồng Bò 🚜';
+          boxX = movableBld.originX * 32;
+          boxY = movableBld.originY * 32;
+          boxW = movableBld.width * 32;
+          boxH = movableBld.height * 32;
+        }
+
+        this.repositionGhostGraphics.lineStyle(2, 0x38bdf8, 0.9);
+        this.repositionGhostGraphics.fillStyle(0x38bdf8, 0.25);
+        this.repositionGhostGraphics.strokeRect(boxX, boxY, boxW, boxH);
+        this.repositionGhostGraphics.fillRect(boxX, boxY, boxW, boxH);
+        this.repositionNoticeText.setPosition(boxX + boxW / 2, boxY - 6);
+        this.repositionNoticeText.setText(`[Click để Nhấc ${name}]`);
+        this.repositionNoticeText.setColor('#38bdf8');
+        this.repositionNoticeText.setVisible(true);
+      } else {
+        this.repositionGhostGraphics.lineStyle(1.5, 0x94a3b8, 0.6);
+        this.repositionGhostGraphics.strokeRect(px, py, 32, 32);
+        this.repositionNoticeText.setVisible(false);
+      }
+    }
+  }
+
+  private isAreaValidForRelocation(gx: number, gy: number, w: number, h: number, movingEntity: MovableEntityData): boolean {
+    if (gx < 0 || gx + w > this.GRID_WIDTH || gy < 0 || gy + h > this.GRID_HEIGHT) return false;
+
+    // Check player proximity - player cannot be standing inside destination footprint
+    const playerGx = Math.floor(this.player.x / this.TILE_SIZE);
+    const playerGy = Math.floor(this.player.y / this.TILE_SIZE);
+    if (playerGx >= gx && playerGx < gx + w && playerGy >= gy && playerGy < gy + h) {
+      return false;
+    }
+
+    const store = useGameStore.getState();
+    const currentBuildings = store.buildings || [];
+    const houseBuilding = currentBuildings.find((b) => b.type === 'house');
+    const houseX = houseBuilding ? houseBuilding.originX : (store.houseOrigin?.x ?? 8);
+    const houseY = houseBuilding ? houseBuilding.originY : (store.houseOrigin?.y ?? 2);
+
+    for (let x = gx; x < gx + w; x++) {
+      for (let y = gy; y < gy + h; y++) {
+        // Collide with house
+        if (x >= houseX && x < houseX + 2 && y >= houseY && y < houseY + 2) return false;
+
+        // Collide with other buildings
+        for (const b of currentBuildings) {
+          if (movingEntity.buildingData?.id === b.id) continue;
+          if (x >= b.originX && x < b.originX + b.width && y >= b.originY && y < b.originY + b.height) {
+            return false;
+          }
+        }
+
+        // Collide with sanctuary
+        const sanc = store.sanctuaryPosition ?? { x: 15, y: 3 };
+        if (movingEntity.type !== 'station_campfire' && x === sanc.x && y === sanc.y) {
+          return false;
+        }
+
+        // Collide with bbq
+        const bbq = store.bbqPosition ?? { x: 18, y: 3 };
+        if (movingEntity.type !== 'station_bbq' && x === bbq.x && y === bbq.y) {
+          return false;
+        }
+
+        const tile = store.tiles[`${x},${y}`];
+        if (tile) {
+          if (tile.crop) return false;
+          if (tile.placeable) return false;
+          if (tile.obstacle && (tile.obstacle.type === 'rock' || tile.obstacle.type === 'wood')) {
             return false;
           }
         }
@@ -980,10 +1320,31 @@ export default class FarmScene extends Phaser.Scene {
     this.updateBoarAI(delta);
     this.updateLivestockAI();
 
-    // Cancel building placement mode if ESC key is pressed
+    // Key M toggles Reposition Mode
+    if (this.mKey && Phaser.Input.Keyboard.JustDown(this.mKey)) {
+      useGameStore.getState().toggleRepositionMode();
+      this.repositionGhostGraphics?.clear();
+      this.repositionNoticeText?.setVisible(false);
+      this.repositionGhostSprite?.setVisible(false);
+      this.syncStationsPositions();
+    }
+
+    // Cancel building placement mode or reposition mode if ESC key is pressed
     if (this.escKey && Phaser.Input.Keyboard.JustDown(this.escKey)) {
-      if (useGameStore.getState().placementMode) {
-        useGameStore.getState().cancelPlacementMode();
+      const store = useGameStore.getState();
+      if (store.movingEntity) {
+        store.cancelRelocation();
+        this.repositionGhostGraphics?.clear();
+        this.repositionNoticeText?.setVisible(false);
+        this.repositionGhostSprite?.setVisible(false);
+        this.syncStationsPositions();
+      } else if (store.isRepositionMode) {
+        store.toggleRepositionMode(false);
+        this.repositionGhostGraphics?.clear();
+        this.repositionNoticeText?.setVisible(false);
+        this.repositionGhostSprite?.setVisible(false);
+      } else if (store.placementMode) {
+        store.cancelPlacementMode();
         this.placementGhostGraphics?.clear();
         this.placementNoticeText?.setVisible(false);
       }
