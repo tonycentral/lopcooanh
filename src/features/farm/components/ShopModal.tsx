@@ -563,7 +563,15 @@ export default function ShopModal({ isOpen, onClose, initialTab = 'buy' }: ShopM
                       className="w-full sm:w-auto px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 disabled:opacity-40 disabled:hover:bg-rose-600 text-white text-xs font-bold transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer disabled:cursor-not-allowed"
                     >
                       <Sparkles className="w-3.5 h-3.5" />
-                      <span>Mua Vật Nuôi</span>
+                      <span>
+                        {!hasBuilding
+                          ? `Cần xây ${buildingName} trước!`
+                          : isFull
+                          ? 'Chuồng đã đầy chỗ!'
+                          : !hasGold
+                          ? 'Chưa đủ Gold'
+                          : 'Mua Vật Nuôi'}
+                      </span>
                     </button>
                   </div>
                 </div>

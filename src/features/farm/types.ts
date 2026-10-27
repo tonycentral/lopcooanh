@@ -16,26 +16,31 @@ export type BuildingType = 'house' | 'coop' | 'barn';
 export interface FarmBuilding {
   id: string;
   type: BuildingType;
+  gridX: number;
+  gridY: number;
   originX: number;
   originY: number;
   width: number;
   height: number;
-  createdAt: number;
+  createdAt?: number;
 }
 
 export type LivestockType = 'chicken' | 'cow';
 
-export interface LivestockData {
+export interface FarmAnimal {
   id: string;
   type: LivestockType;
   name: string;
   buildingId: string;
   x: number;
   y: number;
-  friendship: number; // 0 - 100
-  lastProducedAt?: number;
+  currentHappiness: number;
+  lastProducedAt: number;
+  friendship?: number; // 0 - 100 for compatibility
   hasProductReady?: boolean;
 }
+
+export type LivestockData = FarmAnimal;
 
 export interface EggEntityData {
   id: string;
@@ -175,6 +180,7 @@ export interface PlayerFarmState {
   houseOrigin?: { x: number; y: number } | null;
   buildings?: FarmBuilding[];
   livestock?: LivestockData[];
+  animals?: FarmAnimal[];
   droppedEggs?: EggEntityData[];
   indoorPlacedItems?: PlacedFurnitureItem[];
   hotbar: InventoryItem[];

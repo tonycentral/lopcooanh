@@ -76,7 +76,7 @@ export const SHOP_RESOURCES = [
 
 export const SHOP_PRODUCE = [
   { id: 'produce_egg', name: 'Trứng Gà Tươi', icon: '🥚', price: 25, desc: 'Trứng gà tươi thu hoạch từ đàn gà.' },
-  { id: 'produce_milk', name: 'Bình Sữa Bò Tươi', icon: '🥛', price: 50, desc: 'Bình sữa bò tươi nguyên chất bổ dưỡng.' }
+  { id: 'produce_milk', name: 'Bình Sữa Bò Tươi', icon: '🥛', price: 60, desc: 'Bình sữa bò tươi nguyên chất bổ dưỡng.' }
 ];
 
 export const ALL_SELLABLE_ITEMS = [...SHOP_CROPS, ...SHOP_RESOURCES, ...SHOP_PRODUCE];
@@ -170,7 +170,7 @@ export const LIVESTOCK_CONFIGS: Record<LivestockType, LivestockConfig> = {
     productType: 'produce_milk',
     productName: 'Bình Sữa Bò Tươi',
     productIcon: '🥛',
-    productPrice: 50,
+    productPrice: 60,
     desc: 'Bò sữa cung cấp sữa bổ dưỡng mỗi ngày. Cần Chuồng Bò (tối đa 3 con/chuồng).'
   }
 };
@@ -2998,6 +2998,8 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       const newBuilding: FarmBuilding = {
         id: `bld_${type}_${Date.now()}`,
         type,
+        gridX: originX,
+        gridY: originY,
         originX,
         originY,
         width: config.width,
@@ -3066,14 +3068,17 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         buildingId: parentBuilding.id,
         x: spawnX,
         y: spawnY,
-        friendship: 10,
+        currentHappiness: 20,
+        friendship: 20,
         lastProducedAt: Date.now(),
         hasProductReady: false
       };
 
+      const updatedLivestock = [...currentLivestock, newAnimal];
       const updated = {
         gold: state.gold - config.costGold,
-        livestock: [...currentLivestock, newAnimal],
+        livestock: updatedLivestock,
+        animals: updatedLivestock,
         updatedAt: Date.now()
       };
 
@@ -3157,7 +3162,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         name: 'Bình Sữa Bò Tươi',
         icon: '🥛',
         type: 'crop',
-        price: 50,
+        price: 60,
         count: 1
       };
 
@@ -3183,11 +3188,19 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         }
       }
 
-      const newLivestock = currentLivestock.map((a) =>
-        a.id === animalId
-          ? { ...a, hasProductReady: false, lastProducedAt: Date.now(), friendship: Math.min(100, (a.friendship || 0) + 5) }
-          : a
-      );
+      const newLivestock = currentLivestock.map((a) => {
+        if (a.id === animalId) {
+          const happiness = Math.min(100, ((a.currentHappiness ?? a.friendship) || 0) + 5);
+          return {
+            ...a,
+            hasProductReady: false,
+            lastProducedAt: Date.now(),
+            currentHappiness: happiness,
+            friendship: happiness
+          };
+        }
+        return a;
+      });
 
       const newXp = (state.xp ?? 0) + 15;
       const newLevel = Math.floor(newXp / 100) + 1;
@@ -3196,6 +3209,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         hotbar: newHotbar,
         inventory: newInventory,
         livestock: newLivestock,
+        animals: newLivestock,
         xp: newXp,
         level: Math.max(state.level ?? 1, newLevel),
         updatedAt: Date.now()
@@ -3213,19 +3227,20 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       const animal = currentLivestock.find((a) => a.id === animalId);
       if (!animal) return { success: false };
 
-      const newFriendship = Math.min(100, (animal.friendship || 0) + 3);
+      const newHappiness = Math.min(100, ((animal.currentHappiness ?? animal.friendship) || 0) + 5);
       const newLivestock = currentLivestock.map((a) =>
-        a.id === animalId ? { ...a, friendship: newFriendship } : a
+        a.id === animalId ? { ...a, currentHappiness: newHappiness, friendship: newHappiness } : a
       );
 
       const updated = {
         livestock: newLivestock,
+        animals: newLivestock,
         updatedAt: Date.now()
       };
 
       set(updated);
       queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
-      get().notify(`❤️ Bạn đã vuốt ve ${animal.name}! Thân thiết: ${newFriendship}/100`, 'info');
+      get().notify(`❤️ Bạn đã vuốt ve ${animal.name}! Thân thiết: ${newHappiness}/100`, 'info');
       return { success: true };
     },
 
@@ -3276,6 +3291,8 @@ export const useGameStore = create<GameStoreState>((set, get) => {
           loadedBuildings.push({
             id: 'bld_house_init',
             type: 'house',
+            gridX: houseOriginCoord.x,
+            gridY: houseOriginCoord.y,
             originX: houseOriginCoord.x,
             originY: houseOriginCoord.y,
             width: 2,

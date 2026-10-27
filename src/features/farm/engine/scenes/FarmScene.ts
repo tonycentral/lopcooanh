@@ -1088,6 +1088,35 @@ export default class FarmScene extends Phaser.Scene {
       }
     }
 
+    // Proximity check for Livestock (Chicken / Cow) & 'E' key interaction (Petting or Milking)
+    if (!this.isInputBlocked && !this.isPerformingAction && this.interactKey && Phaser.Input.Keyboard.JustDown(this.interactKey)) {
+      let nearestAnimal: { id: string; sprite: Phaser.GameObjects.Sprite; dist: number } | null = null;
+      for (const [aId, entry] of this.livestockSprites.entries()) {
+        const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, entry.sprite.x, entry.sprite.y);
+        if (dist <= this.INTERACTION_RANGE) {
+          if (!nearestAnimal || dist < nearestAnimal.dist) {
+            nearestAnimal = { id: aId, sprite: entry.sprite, dist };
+          }
+        }
+      }
+
+      if (nearestAnimal) {
+        const store = useGameStore.getState();
+        const animal = (store.livestock || []).find((a) => a.id === nearestAnimal!.id);
+        if (animal) {
+          if (animal.type === 'cow' && animal.hasProductReady) {
+            store.milkCow(animal.id);
+            this.showAnimalEmote(nearestAnimal.sprite, '🥛 +1 Sữa Tươi!', 1800);
+          } else {
+            store.petAnimal(animal.id);
+            const emoteText = animal.type === 'cow' ? '❤️ Ùm bò...' : '❤️ Cục cục tác!';
+            this.showAnimalEmote(nearestAnimal.sprite, emoteText, 1500);
+          }
+          return;
+        }
+      }
+    }
+
     let manualVx = 0;
     let manualVy = 0;
 
