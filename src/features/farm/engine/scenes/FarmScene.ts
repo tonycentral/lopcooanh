@@ -257,6 +257,12 @@ export default class FarmScene extends Phaser.Scene {
 
       if (this.isValidTile(tileX, tileY)) {
         this.marker.setPosition(tileX * this.TILE_SIZE, tileY * this.TILE_SIZE);
+        const activeTool = useGameStore.getState().activeTool;
+        if (activeTool === 'none') {
+          this.marker.setTint(0x94a3b8);
+        } else {
+          this.marker.clearTint();
+        }
         this.marker.setVisible(true);
       } else {
         this.marker.setVisible(false);
@@ -752,7 +758,12 @@ export default class FarmScene extends Phaser.Scene {
     return true;
   }
 
-  private startPathNavigation(waypoints: { x: number; y: number }[], targetGridX: number, targetGridY: number) {
+  private startPathNavigation(
+    waypoints: { x: number; y: number }[], 
+    targetGridX: number, 
+    targetGridY: number,
+    queueAction = true
+  ) {
     this.currentPath = waypoints.map((pt) => ({
       gx: pt.x,
       gy: pt.y,
@@ -760,7 +771,7 @@ export default class FarmScene extends Phaser.Scene {
       wy: pt.y * this.TILE_SIZE + 16
     }));
     this.currentWaypointIndex = 0;
-    this.queuedAction = { targetGridX, targetGridY };
+    this.queuedAction = queueAction ? { targetGridX, targetGridY } : null;
   }
 
   private showFloatingNotice(text: string, x?: number, y?: number) {
@@ -787,8 +798,13 @@ export default class FarmScene extends Phaser.Scene {
   }
 
   private handleTileClick(x: number, y: number) {
+    const store = useGameStore.getState();
+    const isMoveOnly = store.activeTool === 'none';
+    const isSanctuary = x === this.SANCTUARY_GRID_X && y === this.SANCTUARY_GRID_Y;
+    const isBBQ = x === this.BBQ_GRID_X && y === this.BBQ_GRID_Y;
+
     // 1. Direct Click on Campfire Sanctuary
-    if (x === this.SANCTUARY_GRID_X && y === this.SANCTUARY_GRID_Y) {
+    if (isSanctuary) {
       const distToCamp = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.sanctuarySprite.x, this.sanctuarySprite.y);
       if (distToCamp <= this.INTERACTION_RANGE) {
         this.openSanctuaryQuiz();
@@ -797,7 +813,7 @@ export default class FarmScene extends Phaser.Scene {
     }
 
     // 2. Direct Click on BBQ Stand
-    if (x === this.BBQ_GRID_X && y === this.BBQ_GRID_Y) {
+    if (isBBQ) {
       const distToBBQ = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.bbqSprite.x, this.bbqSprite.y);
       if (distToBBQ <= this.INTERACTION_RANGE) {
         this.openBBQStand();
@@ -809,8 +825,27 @@ export default class FarmScene extends Phaser.Scene {
     const targetCenterY = y * this.TILE_SIZE + 16;
     const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, targetCenterX, targetCenterY);
 
-    // Case 1: Within interaction range (dist <= INTERACTION_RANGE) -> trigger interaction immediately
+    // Case 1: Within interaction range (dist <= INTERACTION_RANGE)
     if (dist <= this.INTERACTION_RANGE) {
+      if (isSanctuary) {
+        this.openSanctuaryQuiz();
+        return;
+      }
+      if (isBBQ) {
+        this.openBBQStand();
+        return;
+      }
+      if (isMoveOnly) {
+        // Move-Only Mode: strictly only walk to destination tile, do NOT execute tool actions!
+        if (this.isTileWalkable(x, y)) {
+          this.startPathNavigation([{ x, y }], x, y, false);
+        } else {
+          this.stopMovement();
+          this.updateFacingDirection(targetCenterX, targetCenterY);
+        }
+        return;
+      }
+
       this.stopMovement();
       this.updateFacingDirection(targetCenterX, targetCenterY);
       this.triggerTileInteraction(x, y);
@@ -822,6 +857,7 @@ export default class FarmScene extends Phaser.Scene {
     const startGy = Phaser.Math.Clamp(Math.floor(this.player.y / this.TILE_SIZE), 0, this.GRID_HEIGHT - 1);
 
     const isSolid = !this.isTileWalkable(x, y);
+    const shouldQueueAction = !isMoveOnly || isSanctuary || isBBQ;
 
     if (isSolid) {
       // Find shortest valid path to any walkable adjacent neighbor of solid entity/station
@@ -842,17 +878,17 @@ export default class FarmScene extends Phaser.Scene {
         // Player is already standing on an adjacent tile
         this.stopMovement();
         this.updateFacingDirection(targetCenterX, targetCenterY);
-        if (x === this.SANCTUARY_GRID_X && y === this.SANCTUARY_GRID_Y) {
+        if (isSanctuary) {
           this.openSanctuaryQuiz();
-        } else if (x === this.BBQ_GRID_X && y === this.BBQ_GRID_Y) {
+        } else if (isBBQ) {
           this.openBBQStand();
-        } else {
+        } else if (!isMoveOnly) {
           this.triggerTileInteraction(x, y);
         }
         return;
       }
 
-      this.startPathNavigation(result.path, x, y);
+      this.startPathNavigation(result.path, x, y, shouldQueueAction);
     } else {
       // Walkable target: find direct A* path
       const path = findAStarPath(
@@ -871,17 +907,19 @@ export default class FarmScene extends Phaser.Scene {
       if (path.length === 0) {
         this.stopMovement();
         this.updateFacingDirection(targetCenterX, targetCenterY);
-        this.triggerTileInteraction(x, y);
+        if (!isMoveOnly) {
+          this.triggerTileInteraction(x, y);
+        }
         return;
       }
 
-      this.startPathNavigation(path, x, y);
+      this.startPathNavigation(path, x, y, shouldQueueAction);
     }
   }
 
   /**
-   * Evaluates the tile target and triggers appropriate animation or immediate action
-   */
+    * Evaluates the tile target and triggers appropriate animation or immediate action
+    */
   private triggerTileInteraction(x: number, y: number) {
     // Interacting with indestructible rest stations
     if (x === this.SANCTUARY_GRID_X && y === this.SANCTUARY_GRID_Y) {
@@ -895,6 +933,11 @@ export default class FarmScene extends Phaser.Scene {
 
     const store = useGameStore.getState();
     const activeTool = store.activeTool;
+    if (activeTool === 'none') {
+      // Move-Only mode: strictly no tile interaction
+      return;
+    }
+
     const currentTile = store.tiles[`${x},${y}`];
 
     // Opening a chest (not using pickaxe) opens immediately without weapon swing
@@ -917,7 +960,7 @@ export default class FarmScene extends Phaser.Scene {
         this.executeTileAction(x, y);
       });
     } else {
-      // Direct action for placing items, fertilizer, etc.
+      // Direct action for placing items, fertilizer, seed planting, etc.
       this.executeTileAction(x, y);
     }
   }
@@ -1079,6 +1122,11 @@ export default class FarmScene extends Phaser.Scene {
     const activeTool = store.activeTool;
     const currentTile = store.tiles[`${x},${y}`];
 
+    // Priority -1: Move-Only / Observation Mode
+    if (activeTool === 'none') {
+      return;
+    }
+
     // Priority 0: Placing items from Hotbar (Fence or Chest)
     if (activeTool === 'item_fence' || activeTool === 'item_chest') {
       const placeType = activeTool === 'item_fence' ? 'fence' : 'chest';
@@ -1121,6 +1169,31 @@ export default class FarmScene extends Phaser.Scene {
 
       if (currentTile.placeable.type === 'fence') {
         this.showFloatingText(x, y, 'Hàng rào gỗ (Dùng Cuốc chim để tháo dỡ)', '#fb7185', true);
+        return;
+      }
+    }
+
+    // Priority 0.9: Special Crop Clearing Actions (Withered Crop or Apple Tree Chop)
+    if (currentTile?.crop) {
+      // Scythe or Hoe on Withered Crop
+      if (currentTile.crop.isWithered && (activeTool === 'scythe' || activeTool === 'hoe')) {
+        const res = store.gatherResource(x, y);
+        if (res.success) {
+          this.showFloatingText(x, y, '+1 Sợi Cỏ Dại 🌾 (-1 Năng lượng)', '#a3e635');
+        } else {
+          this.showFloatingText(x, y, res.reason || 'Không thể dọn dẹp!', '#fb7185', true);
+        }
+        return;
+      }
+
+      // Axe Chop on Apple Tree (Stage 2 or Stage 3)
+      if (currentTile.crop.id === 'apple' && activeTool === 'axe') {
+        const res = store.gatherResource(x, y);
+        if (res.success) {
+          this.showFloatingText(x, y, '+6 Gỗ Tự Nhiên 🪵 (-3 Năng lượng)', '#facc15');
+        } else {
+          this.showFloatingText(x, y, res.reason || 'Không thể chặt cây!', '#fb7185', true);
+        }
         return;
       }
     }
@@ -1184,9 +1257,10 @@ export default class FarmScene extends Phaser.Scene {
       } else {
         this.showFloatingText(x, y, res.reason || 'Không thể tưới!', '#fb7185', true);
       }
-    } else if (activeTool.startsWith('seed_')) {
+    } else if (activeTool.startsWith('seed_') || activeTool === 'seed') {
+      const targetSeed = activeTool === 'seed' ? (store.activeSeedId || 'seed_wheat') : activeTool;
       const tileBefore = store.tiles[`${x},${y}`];
-      const res = store.plantCrop(x, y, activeTool);
+      const res = store.plantCrop(x, y, targetSeed);
       if (res.success) {
         const msg = tileBefore?.isWatered
           ? `Gieo mầm ${res.cropName} (Đang phát triển)`
@@ -1198,7 +1272,7 @@ export default class FarmScene extends Phaser.Scene {
     } else if (activeTool === 'hand') {
       const res = store.harvestCrop(x, y);
       if (res.success) {
-        this.showFloatingText(x, y, `+1 ${res.cropName} (+${res.goldReward} Gold)`, '#fbbf24');
+        this.showFloatingText(x, y, `+ ${res.cropName} (+${res.goldReward} Gold)`, '#fbbf24');
       } else {
         this.showFloatingText(x, y, res.reason || 'Chưa thể thu hoạch!', '#fb7185', true);
       }
@@ -1295,7 +1369,9 @@ export default class FarmScene extends Phaser.Scene {
       // 2. Crop texture update
       if (tile.crop) {
         const growth = getCropGrowthStage(tile.crop, tile.isWatered);
-        const cropTexture = `crop_${tile.crop.id}_${growth.currentStage}`;
+        const cropTexture = tile.crop.isWithered
+          ? 'crop_withered'
+          : `crop_${tile.crop.id}_${growth.currentStage}`;
 
         if (!entry.cropSprite) {
           entry.cropSprite = this.createImage(px, py, cropTexture).setOrigin(0, 0).setDepth(5);
@@ -1358,7 +1434,9 @@ export default class FarmScene extends Phaser.Scene {
       if (tile.crop) {
         const entry = this.tileSprites.get(key);
         const growth = getCropGrowthStage(tile.crop, tile.isWatered, now);
-        const cropTexture = `crop_${tile.crop.id}_${growth.currentStage}`;
+        const cropTexture = tile.crop.isWithered
+          ? 'crop_withered'
+          : `crop_${tile.crop.id}_${growth.currentStage}`;
 
         if (entry?.cropSprite) {
           const hasAtlas = this.hasCustomAtlas && this.textures.exists('farm_atlas') && this.textures.get('farm_atlas').has(cropTexture);
@@ -1376,8 +1454,10 @@ export default class FarmScene extends Phaser.Scene {
             });
           }
 
-          // Subtle ripe visual tint indicator when ready for harvest
-          if (growth.isRipe && entry.cropSprite.tintTopLeft === 0xffffff) {
+          if (tile.crop.isWithered) {
+            entry.cropSprite.clearTint();
+          } else if (growth.isRipe && entry.cropSprite.tintTopLeft === 0xffffff) {
+            // Subtle ripe visual tint indicator when ready for harvest
             entry.cropSprite.setTint(0xfff7cc);
           }
         } else if (entry && tile.isTilled) {

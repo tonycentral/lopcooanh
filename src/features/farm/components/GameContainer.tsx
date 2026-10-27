@@ -21,7 +21,8 @@ import {
   LogIn,
   ShoppingBag,
   Hammer,
-  Sparkles
+  Sparkles,
+  ChevronUp
 } from 'lucide-react';
 
 interface GameContainerProps {
@@ -43,9 +44,13 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
   const hotbar = useGameStore((state) => state.hotbar);
   const inventory = useGameStore((state) => state.inventory);
   const activeTool = useGameStore((state) => state.activeTool);
+  const activeSeedId = useGameStore((state) => state.activeSeedId ?? 'seed_wheat');
   const syncStatus = useGameStore((state) => state.syncStatus);
   const lastNotification = useGameStore((state) => state.lastNotification);
   const selectTool = useGameStore((state) => state.selectTool);
+  const selectSeed = useGameStore((state) => state.selectSeed);
+  const toggleMoveOnlyMode = useGameStore((state) => state.toggleMoveOnlyMode);
+  const runOfflineSimulation = useGameStore((state) => state.runOfflineSimulation);
   const initSync = useGameStore((state) => state.initSync);
   const clearNotification = useGameStore((state) => state.clearNotification);
 
@@ -55,6 +60,8 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isQuizOpen, setIsQuizOpen] = useState(false);
   const [isBBQOpen, setIsBBQOpen] = useState(false);
+  const [isSeedMenuOpen, setIsSeedMenuOpen] = useState(false);
+  const seedMenuRef = useRef<HTMLDivElement>(null);
 
   // Auto-dismiss notification after 3.5 seconds
   useEffect(() => {
@@ -64,6 +71,27 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     }, 3500);
     return () => clearTimeout(timer);
   }, [lastNotification, clearNotification]);
+
+  // Periodic Natural Offline Simulation (Every 60 seconds & on mount)
+  useEffect(() => {
+    runOfflineSimulation();
+    const timer = setInterval(() => {
+      runOfflineSimulation();
+    }, 60000);
+    return () => clearInterval(timer);
+  }, [runOfflineSimulation]);
+
+  // Close seed popover when clicking outside
+  useEffect(() => {
+    if (!isSeedMenuOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (seedMenuRef.current && !seedMenuRef.current.contains(e.target as Node)) {
+        setIsSeedMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isSeedMenuOpen]);
 
   // Energy auto-regeneration over time: +1 energy every 4 seconds if below maxEnergy
   useEffect(() => {
@@ -124,14 +152,33 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
       // If modal is active, ignore hotbar tool changes
       if (isShopOpen || Boolean(currentChestKey) || isProfileOpen || isQuizOpen || isBBQOpen) return;
 
+      // Key 0: Toggle Move-Only / Observation Mode
+      if (e.key === '0') {
+        toggleMoveOnlyMode();
+        setIsSeedMenuOpen(false);
+        return;
+      }
+
       const keyNum = parseInt(e.key, 10);
       if (keyNum >= 1 && keyNum <= hotbar.length) {
-        selectTool(hotbar[keyNum - 1].id);
+        const targetTool = hotbar[keyNum - 1].id;
+        if (activeTool === targetTool) {
+          // Toggle unselect active slot -> move-only mode
+          toggleMoveOnlyMode();
+          setIsSeedMenuOpen(false);
+        } else {
+          selectTool(targetTool);
+          if (targetTool.startsWith('seed_') || targetTool === 'seed') {
+            setIsSeedMenuOpen(true);
+          } else {
+            setIsSeedMenuOpen(false);
+          }
+        }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [hotbar, selectTool, isShopOpen, shopTab, currentChestKey, isProfileOpen, isQuizOpen, isBBQOpen]);
+  }, [hotbar, activeTool, selectTool, toggleMoveOnlyMode, isShopOpen, shopTab, currentChestKey, isProfileOpen, isQuizOpen, isBBQOpen]);
 
   // Synchronize modal state with Phaser input context (disable WASD/mouse raycast when modal is open)
   useEffect(() => {
@@ -192,6 +239,18 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
   const stoneCount = inventory.find((i) => i.id === 'resource_stone')?.count ?? 0;
   const fiberCount = inventory.find((i) => i.id === 'resource_fiber')?.count ?? 0;
   const cropItems = inventory.filter((i) => i.type === 'crop' && (i.count ?? 0) > 0);
+
+  const SEED_OPTIONS = [
+    { id: 'seed_wheat', name: 'Lúa Mì', icon: '🌱', cropId: 'wheat' },
+    { id: 'seed_herb', name: 'Thảo Mộc', icon: '🌿', cropId: 'herb' },
+    { id: 'seed_apple', name: 'Cây Táo', icon: '🍎🌱', cropId: 'apple' }
+  ];
+
+  const getSeedStock = (seedId: string) => {
+    const inHotbar = hotbar.find((i) => i.id === seedId)?.count ?? 0;
+    const inInv = inventory.find((i) => i.id === seedId)?.count ?? 0;
+    return inHotbar + inInv;
+  };
 
   return (
     <div className="w-screen h-screen overflow-hidden bg-slate-950 flex flex-col items-center justify-center relative p-2 sm:p-4 select-none font-sans">
@@ -482,30 +541,111 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
           </div>
         )}
 
+        {/* 3b. FLOATING INDICATOR FOR MOVE-ONLY / OBSERVATION MODE */}
+        {activeTool === 'none' && (
+          <div className="absolute bottom-16 sm:bottom-18 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-950/90 border border-sky-500/50 text-sky-200 text-[10px] sm:text-[11px] font-semibold backdrop-blur-md shadow-xl animate-pulse whitespace-nowrap">
+            <span>✋ Chế độ Quan Sát: Click để di chuyển nhân vật • Phím 0 hoặc chọn công cụ để huỷ</span>
+          </div>
+        )}
+
         {/* 4. BOTTOM HOTBAR: Pinned directly at the bottom edge of the Game Frame */}
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1 sm:gap-1.5 bg-slate-900/90 backdrop-blur-md p-1 sm:p-1.5 rounded-2xl border border-slate-800 shadow-2xl">
+          {/* Slot 0: Move-Only / Observation Mode Button */}
+          <button
+            onClick={toggleMoveOnlyMode}
+            title="Chế độ Quan Sát / Chỉ Di Chuyển (Phím 0)"
+            className={`relative flex flex-col items-center justify-center w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-xl transition-all cursor-pointer ${
+              activeTool === 'none' 
+                ? 'bg-sky-600/30 border-2 border-sky-400 shadow-lg shadow-sky-950 scale-105' 
+                : 'bg-slate-800/80 border border-slate-700 hover:bg-slate-700 hover:border-slate-600'
+            }`}
+          >
+            <span className="absolute top-0.5 left-1 text-[8px] sm:text-[9px] font-mono text-slate-400 font-bold">
+              0
+            </span>
+            <span className="text-sm sm:text-base md:text-lg">✋</span>
+          </button>
+
           {hotbar.map((item, idx) => {
-            const isActive = activeTool === item.id;
+            const isActive = activeTool === item.id || (item.type === 'seed' && activeTool.startsWith('seed_'));
+            const isSeedSlot = item.type === 'seed' || item.id.startsWith('seed_');
+
             return (
-              <button
-                key={item.id}
-                onClick={() => selectTool(item.id)}
-                className={`relative flex flex-col items-center justify-center w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-xl transition-all ${
-                  isActive 
-                    ? 'bg-emerald-600/30 border-2 border-emerald-400 shadow-lg shadow-emerald-950 scale-105' 
-                    : 'bg-slate-800/80 border border-slate-700 hover:bg-slate-700 hover:border-slate-600'
-                }`}
-              >
-                <span className="absolute top-0.5 left-1 text-[8px] sm:text-[9px] font-mono text-slate-400 font-bold">
-                  {idx + 1}
-                </span>
-                <span className="text-sm sm:text-base md:text-lg">{item.icon}</span>
-                {(item.type === 'seed' || item.type === 'placeable' || item.type === 'consumable') && item.count !== undefined && (
-                  <span className="absolute bottom-0.5 right-0.5 sm:right-1 text-[8px] sm:text-[9px] font-mono font-bold bg-slate-950/80 px-0.5 sm:px-1 rounded text-emerald-300">
-                    x{item.count}
-                  </span>
+              <div key={item.id} className="relative" ref={isSeedSlot ? seedMenuRef : undefined}>
+                {/* Seed Selector Popover Sub-Menu */}
+                {isSeedSlot && isSeedMenuOpen && (
+                  <div 
+                    className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-slate-900 border border-slate-700 rounded-xl p-2 shadow-2xl z-40 flex flex-col gap-1.5 w-48 animate-in fade-in zoom-in-95 duration-150"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <div className="text-[10px] font-bold text-slate-400 px-1 border-b border-slate-800 pb-1 flex items-center justify-between">
+                      <span>Chọn hạt giống</span>
+                      <ChevronUp className="w-3 h-3 text-slate-500" />
+                    </div>
+                    {SEED_OPTIONS.map((seed) => {
+                      const stock = getSeedStock(seed.id);
+                      const isSelected = activeSeedId === seed.id && activeTool === seed.id;
+                      const isDisabled = stock <= 0;
+                      return (
+                        <button
+                          key={seed.id}
+                          disabled={isDisabled}
+                          onClick={() => {
+                            selectSeed(seed.id);
+                            setIsSeedMenuOpen(false);
+                          }}
+                          className={`flex items-center justify-between px-2 py-1.5 rounded-lg text-xs transition-colors cursor-pointer ${
+                            isSelected 
+                              ? 'bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold'
+                              : isDisabled
+                              ? 'opacity-40 cursor-not-allowed text-slate-500'
+                              : 'hover:bg-slate-800 text-slate-200'
+                          }`}
+                        >
+                          <span className="flex items-center gap-1.5">
+                            <span className="text-sm">{seed.icon}</span>
+                            <span>{seed.name}</span>
+                          </span>
+                          <span className={`text-[10px] font-mono font-bold ${isDisabled ? 'text-slate-600' : 'text-emerald-400'}`}>
+                            x{stock}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 )}
-              </button>
+
+                <button
+                  onClick={() => {
+                    if (isActive) {
+                      toggleMoveOnlyMode();
+                      setIsSeedMenuOpen(false);
+                    } else {
+                      selectTool(item.id);
+                      if (isSeedSlot) {
+                        setIsSeedMenuOpen((prev) => !prev);
+                      } else {
+                        setIsSeedMenuOpen(false);
+                      }
+                    }
+                  }}
+                  className={`relative flex flex-col items-center justify-center w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-xl transition-all cursor-pointer ${
+                    isActive 
+                      ? 'bg-emerald-600/30 border-2 border-emerald-400 shadow-lg shadow-emerald-950 scale-105' 
+                      : 'bg-slate-800/80 border border-slate-700 hover:bg-slate-700 hover:border-slate-600'
+                  }`}
+                >
+                  <span className="absolute top-0.5 left-1 text-[8px] sm:text-[9px] font-mono text-slate-400 font-bold">
+                    {idx + 1}
+                  </span>
+                  <span className="text-sm sm:text-base md:text-lg">{item.icon}</span>
+                  {(item.type === 'seed' || item.type === 'placeable' || item.type === 'consumable') && item.count !== undefined && (
+                    <span className="absolute bottom-0.5 right-0.5 sm:right-1 text-[8px] sm:text-[9px] font-mono font-bold bg-slate-950/80 px-0.5 sm:px-1 rounded text-emerald-300">
+                      x{item.count}
+                    </span>
+                  )}
+                </button>
+              </div>
             );
           })}
         </div>

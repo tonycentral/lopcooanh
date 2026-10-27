@@ -38,17 +38,28 @@ export const CROP_DEFINITIONS: Record<string, CropDefinition> = {
     stages: 4,
     goldValue: 35,
     vocabReward: 'indigenous'
+  },
+  apple: {
+    id: 'apple',
+    name: 'Cây Táo (Apple Tree)',
+    seedId: 'seed_apple',
+    growthSeconds: 1800, // 30 minutes to mature
+    stages: 4,
+    goldValue: 15, // 15 Gold per apple (x3 apples = 45 Gold)
+    vocabReward: 'orchard'
   }
 };
 
 export const SHOP_SEEDS = [
   { id: 'seed_wheat', name: 'Hạt Lúa Mì (Wheat)', icon: '🌱', cropId: 'wheat', price: 5, desc: 'Thời gian chín: 60s. Thu hoạch bán được 15 Gold.' },
-  { id: 'seed_herb', name: 'Hạt Thảo Mộc (Herb)', icon: '🌿', cropId: 'herb', price: 12, desc: 'Thời gian chín: 120s. Thu hoạch bán được 35 Gold.' }
+  { id: 'seed_herb', name: 'Hạt Thảo Mộc (Herb)', icon: '🌿', cropId: 'herb', price: 12, desc: 'Thời gian chín: 120s. Thu hoạch bán được 35 Gold.' },
+  { id: 'seed_apple', name: 'Hạt Cây Táo (Apple Tree)', icon: '🍎🌱', cropId: 'apple', price: 25, desc: 'Thời gian lớn: 30 phút. Thu hoạch bằng tay được 3 Trái Táo (15 Gold/trái) và tự kết trái lại sau 15 phút. Dùng Rìu chặt thu được 6 Gỗ.' }
 ];
 
 export const SHOP_CROPS = [
   { id: 'crop_wheat', name: 'Bông Lúa Mì', icon: '🌾', price: 15, desc: 'Nông sản thu hoạch từ lúa mì.' },
-  { id: 'crop_herb', name: 'Nhánh Thảo Mộc', icon: '🌿', price: 35, desc: 'Dược liệu cao cấp từ thảo mộc.' }
+  { id: 'crop_herb', name: 'Nhánh Thảo Mộc', icon: '🌿', price: 35, desc: 'Dược liệu cao cấp từ thảo mộc.' },
+  { id: 'crop_apple', name: 'Trái Táo Đỏ', icon: '🍎', price: 15, desc: 'Trái cây ngọt lịm thu hoạch từ cây táo.' }
 ];
 
 export const SHOP_RESOURCES = [
@@ -114,6 +125,17 @@ export function getCropGrowthStage(
     return { currentStage: 0, isRipe: false, percent: 0, elapsedSec: 0, remainingSec: 0 };
   }
 
+  // Withered crop due to over-ripening: cannot be normally harvested
+  if (crop.isWithered) {
+    return {
+      currentStage: crop.totalStages - 1,
+      isRipe: false,
+      percent: 100,
+      elapsedSec: crop.totalGrowthSeconds,
+      remainingSec: 0
+    };
+  }
+
   let baseAccSec = crop.growthSecondsAcc ?? 0;
   let currentWateredAt = crop.wateredAt;
 
@@ -148,6 +170,201 @@ export function getCropGrowthStage(
     percent,
     elapsedSec: Math.round(totalElapsedSec),
     remainingSec: Math.max(0, Math.ceil(crop.totalGrowthSeconds - totalElapsedSec))
+  };
+}
+
+export interface OfflineSimulationSummary {
+  hoursPassed: number;
+  spawnedWeeds: number;
+  spawnedObstacles: number;
+  revertedSoils: number;
+  witheredCrops: number;
+  deadTrees: number;
+}
+
+/**
+ * Natural Offline Simulation Engine:
+ * - Calculates time delta based on Date.now() - lastSimulatedAt
+ * - Spawns periodic weeds and obstacles on empty grass tiles (capped at 30% map area)
+ * - Reverts dry uncultivated tilled soil to grass after 3 hours (10,800s)
+ * - Withers unharvested ripe crops (wheat/herb after 6h; apple tree dies after 14 days)
+ */
+export function calculateOfflineSimulation(
+  tiles: Record<string, TileData>,
+  lastSimulatedAt: number,
+  now: number = Date.now(),
+  playerPos?: { x: number; y: number }
+): {
+  tiles: Record<string, TileData>;
+  summary: OfflineSimulationSummary;
+  notice?: string;
+} {
+  const lastSim = lastSimulatedAt || (now - 1000);
+  const elapsedMs = Math.max(0, now - lastSim);
+  const elapsedSec = Math.floor(elapsedMs / 1000);
+
+  const summary: OfflineSimulationSummary = {
+    hoursPassed: Math.floor(elapsedSec / 3600),
+    spawnedWeeds: 0,
+    spawnedObstacles: 0,
+    revertedSoils: 0,
+    witheredCrops: 0,
+    deadTrees: 0
+  };
+
+  const newTiles: Record<string, TileData> = { ...tiles };
+  const playerGx = playerPos ? Math.floor(playerPos.x / 32) : 12;
+  const playerGy = playerPos ? Math.floor(playerPos.y / 32) : 10;
+
+  // ---------------------------------------------------------------------------
+  // A. PERIODIC OBSTACLE SPAWNING (Every 3600s: 1-2 weeds, 1 rock/wood)
+  // Max cap: 30% of total map area (30x20 = 600 tiles -> 180 obstacles)
+  // ---------------------------------------------------------------------------
+  let currentObstacleCount = Object.values(newTiles).filter((t) => Boolean(t.obstacle)).length;
+  const MAX_OBSTACLES = 180;
+
+  if (summary.hoursPassed > 0 && currentObstacleCount < MAX_OBSTACLES) {
+    // Find candidate empty grass tiles
+    const emptyTileKeys: string[] = [];
+    for (let gx = 0; gx < 30; gx++) {
+      for (let gy = 0; gy < 20; gy++) {
+        // Exclude special indestructible stations
+        if ((gx === 15 && gy === 3) || (gx === 18 && gy === 3)) continue;
+        // Distance >= 3 tiles from player
+        if (Math.hypot(gx - playerGx, gy - playerGy) < 3) continue;
+
+        const key = `${gx},${gy}`;
+        const t = newTiles[key];
+        const isEmpty = !t || (!t.isTilled && !t.crop && !t.obstacle && !t.placeable && !t.station);
+        if (isEmpty) {
+          emptyTileKeys.push(key);
+        }
+      }
+    }
+
+    // Limit simulation processing up to 24 hourly cycles
+    const cyclesToSimulate = Math.min(summary.hoursPassed, 24);
+    for (let h = 0; h < cyclesToSimulate; h++) {
+      if (emptyTileKeys.length === 0 || currentObstacleCount >= MAX_OBSTACLES) break;
+
+      // 1. Spawn 1-2 weeds
+      const weedsCount = (h % 2 === 0) ? 1 : 2;
+      for (let w = 0; w < weedsCount; w++) {
+        if (emptyTileKeys.length === 0 || currentObstacleCount >= MAX_OBSTACLES) break;
+        const randIdx = Math.floor(Math.random() * emptyTileKeys.length);
+        const [chosenKey] = emptyTileKeys.splice(randIdx, 1);
+        const existing = newTiles[chosenKey] || { isTilled: false, isWatered: false, crop: null };
+        newTiles[chosenKey] = {
+          ...existing,
+          obstacle: { type: 'weed', hp: 1, maxHp: 1 },
+          lastUpdated: now
+        };
+        currentObstacleCount++;
+        summary.spawnedWeeds++;
+      }
+
+      // 2. Spawn 1 rock or wood log
+      if (emptyTileKeys.length > 0 && currentObstacleCount < MAX_OBSTACLES) {
+        const randIdx = Math.floor(Math.random() * emptyTileKeys.length);
+        const [chosenKey] = emptyTileKeys.splice(randIdx, 1);
+        const obsType: 'rock' | 'wood' = Math.random() > 0.5 ? 'rock' : 'wood';
+        const existing = newTiles[chosenKey] || { isTilled: false, isWatered: false, crop: null };
+        newTiles[chosenKey] = {
+          ...existing,
+          obstacle: { type: obsType, hp: 2, maxHp: 2 },
+          lastUpdated: now
+        };
+        currentObstacleCount++;
+        summary.spawnedObstacles++;
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // B. SOIL REVERSION & C. CROP OVER-RIPENING / DECAY
+  // ---------------------------------------------------------------------------
+  for (const [key, tile] of Object.entries(newTiles)) {
+    // B. Soil Reversion (Tilled, uncultivated & dry for 3 hours / 10,800s)
+    if (tile.isTilled && !tile.crop && !tile.isWatered) {
+      const uncultivatedSince = tile.uncultivatedSince || tile.lastUpdated || lastSim;
+      if (now - uncultivatedSince >= 10800 * 1000) {
+        newTiles[key] = {
+          ...tile,
+          isTilled: false,
+          isWatered: false,
+          isFertilized: false,
+          uncultivatedSince: null,
+          lastUpdated: now
+        };
+        summary.revertedSoils++;
+        continue;
+      } else if (!tile.uncultivatedSince) {
+        newTiles[key] = { ...tile, uncultivatedSince };
+      }
+    } else if (tile.uncultivatedSince && (tile.crop || tile.isWatered)) {
+      newTiles[key] = { ...tile, uncultivatedSince: null };
+    }
+
+    // C. Crop Over-ripening & Decay
+    if (tile.crop) {
+      const growth = getCropGrowthStage(tile.crop, tile.isWatered, now);
+      if (growth.isRipe && !tile.crop.isWithered) {
+        const ripeSince = tile.crop.ripeAt || (now - Math.min(elapsedMs, 3600000));
+        if (!tile.crop.ripeAt) {
+          tile.crop = { ...tile.crop, ripeAt: ripeSince };
+          newTiles[key] = { ...tile, crop: tile.crop };
+        }
+
+        const ripeDuration = now - ripeSince;
+
+        // Wheat & Herb wither after 6 hours (21,600s)
+        if (tile.crop.id === 'wheat' || tile.crop.id === 'herb') {
+          if (ripeDuration >= 21600 * 1000) {
+            newTiles[key] = {
+              ...tile,
+              crop: {
+                ...tile.crop,
+                isWithered: true
+              },
+              lastUpdated: now
+            };
+            summary.witheredCrops++;
+          }
+        }
+
+        // Apple trees die after 14 days (1,209,600s) into dead wood log
+        if (tile.crop.id === 'apple') {
+          if (ripeDuration >= 1209600 * 1000) {
+            newTiles[key] = {
+              ...tile,
+              crop: null,
+              isTilled: false,
+              obstacle: { type: 'wood', hp: 2, maxHp: 2 },
+              lastUpdated: now
+            };
+            summary.deadTrees++;
+          }
+        }
+      }
+    }
+  }
+
+  // Generate friendly ecosystem feedback notice
+  const noticeParts: string[] = [];
+  if (summary.spawnedWeeds > 0) noticeParts.push(`${summary.spawnedWeeds} cỏ dại mới`);
+  if (summary.spawnedObstacles > 0) noticeParts.push(`${summary.spawnedObstacles} đá/gỗ`);
+  if (summary.revertedSoils > 0) noticeParts.push(`${summary.revertedSoils} ô đất hoàn cỏ`);
+  if (summary.witheredCrops > 0) noticeParts.push(`${summary.witheredCrops} cây quá vụ héo úa`);
+  if (summary.deadTrees > 0) noticeParts.push(`${summary.deadTrees} cây mục`);
+
+  const notice = noticeParts.length > 0 
+    ? `🌿 Hệ sinh thái tự nhiên: Đã xuất hiện ${noticeParts.join(', ')} trong thời gian bạn vắng mặt.`
+    : undefined;
+
+  return {
+    tiles: newTiles,
+    summary,
+    notice
   };
 }
 
@@ -278,10 +495,13 @@ const defaultInitialState: PlayerFarmState = {
   masteredQuizIds: [],
   day: 1,
   activeTool: 'hoe',
+  activeSeedId: 'seed_wheat',
+  lastSimulatedAt: Date.now(),
   hotbar: defaultHotbar,
   inventory: [
     { id: 'crop_wheat', name: 'Bông Lúa Mì', icon: '🌾', type: 'crop', count: 2, price: 15 },
     { id: 'crop_herb', name: 'Nhánh Thảo Mộc', icon: '🌿', type: 'crop', count: 1, price: 35 },
+    { id: 'seed_apple', name: 'Hạt Cây Táo (Apple Tree)', icon: '🍎🌱', type: 'seed', count: 3, cropId: 'apple', price: 25 },
     { id: 'resource_wood', name: 'Gỗ Tự Nhiên', icon: '🪵', type: 'resource', count: 4, price: 4 },
     { id: 'resource_stone', name: 'Đá Cuội', icon: '🪨', type: 'resource', count: 2, price: 4 }
   ],
@@ -297,6 +517,9 @@ export interface GameStoreState extends PlayerFarmState {
   // Actions
   setUserId: (userId: string | null) => void;
   selectTool: (toolId: string) => void;
+  selectSeed: (seedId: string) => void;
+  toggleMoveOnlyMode: () => void;
+  runOfflineSimulation: (playerPos?: { x: number; y: number }) => void;
   notify: (message: string, type?: 'success' | 'warning' | 'error' | 'info') => void;
   clearNotification: () => void;
   tillTile: (x: number, y: number) => { success: boolean; reason?: string };
@@ -348,6 +571,55 @@ export const useGameStore = create<GameStoreState>((set, get) => {
 
     selectTool: (toolId) => set({ activeTool: toolId }),
 
+    selectSeed: (seedId) => {
+      set({ activeSeedId: seedId, activeTool: seedId });
+      const seedDef = SHOP_SEEDS.find((s) => s.id === seedId);
+      if (seedDef) {
+        get().notify(`Đã chọn gieo ${seedDef.name}`, 'info');
+      }
+    },
+
+    toggleMoveOnlyMode: () => {
+      const current = get().activeTool;
+      if (current === 'none') {
+        set({ activeTool: 'hoe' });
+        get().notify('Đã chuyển về Cuốc Đất.', 'info');
+      } else {
+        set({ activeTool: 'none' });
+        get().notify('✋ Đã bật Chế độ Quan Sát / Chỉ Di Chuyển (Phím 0 để đổi lại)', 'info');
+      }
+    },
+
+    runOfflineSimulation: (playerPos?: { x: number; y: number }) => {
+      const state = get();
+      const now = Date.now();
+      const lastSim = state.lastSimulatedAt || state.updatedAt || now;
+      const res = calculateOfflineSimulation(state.tiles, lastSim, now, playerPos);
+
+      const hasEvents = (
+        res.summary.spawnedWeeds > 0 ||
+        res.summary.spawnedObstacles > 0 ||
+        res.summary.revertedSoils > 0 ||
+        res.summary.witheredCrops > 0 ||
+        res.summary.deadTrees > 0
+      );
+
+      if (hasEvents) {
+        const updated = {
+          tiles: res.tiles,
+          lastSimulatedAt: now,
+          updatedAt: now
+        };
+        set(updated);
+        queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+        if (res.notice) {
+          get().notify(res.notice, 'info');
+        }
+      } else {
+        set({ lastSimulatedAt: now });
+      }
+    },
+
     notify: (message: string, type: 'success' | 'warning' | 'error' | 'info' = 'info') => {
       set({
         lastNotification: {
@@ -370,6 +642,11 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       const key = `${x},${y}`;
       const state = get();
       const currentTile = state.tiles[key];
+
+      // If tile has a withered crop, Hoe can clear it for 1 fiber
+      if (currentTile?.crop?.isWithered) {
+        return get().gatherResource(x, y);
+      }
 
       if (currentTile?.crop) {
         const msg = 'Đang có cây trồng trên ô này, không thể cuốc!';
@@ -402,6 +679,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         return { success: false, reason: msg };
       }
 
+      const now = Date.now();
       const newTiles: Record<string, TileData> = {
         ...state.tiles,
         [key]: {
@@ -410,14 +688,15 @@ export const useGameStore = create<GameStoreState>((set, get) => {
           isWatered: false,
           crop: null,
           obstacle: null,
-          lastUpdated: Date.now()
+          uncultivatedSince: now,
+          lastUpdated: now
         }
       };
 
       const updated = {
         tiles: newTiles,
         energy: Math.max(0, state.energy - 2),
-        updatedAt: Date.now()
+        updatedAt: now
       };
 
       set(updated);
@@ -479,6 +758,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
           ...currentTile,
           isWatered: true,
           crop: updatedCrop,
+          uncultivatedSince: null,
           lastUpdated: now
         }
       };
@@ -531,7 +811,10 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         return { success: false, reason: msg };
       }
 
-      const seedItem = state.hotbar.find(item => item.id === seedId);
+      const seedInHotbar = state.hotbar.find((item) => item.id === seedId && (item.count ?? 0) > 0);
+      const seedInInv = state.inventory.find((item) => item.id === seedId && (item.count ?? 0) > 0);
+      const seedItem = seedInHotbar || seedInInv;
+
       if (!seedItem || (seedItem.count ?? 0) <= 0) {
         const msg = 'Đã hết hạt giống trong túi đồ!';
         get().notify(msg, 'warning');
@@ -544,19 +827,32 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         return { success: false, reason: msg };
       }
 
-      const cropDef = CROP_DEFINITIONS[seedItem.cropId || ''];
+      const targetCropId = seedItem.cropId || (seedId.replace('seed_', ''));
+      const cropDef = CROP_DEFINITIONS[targetCropId];
       if (!cropDef) {
         const msg = 'Hạt giống không hợp lệ!';
         get().notify(msg, 'error');
         return { success: false, reason: msg };
       }
 
-      const newHotbar = state.hotbar.map(item => {
-        if (item.id === seedId) {
-          return { ...item, count: (item.count ?? 1) - 1 };
-        }
-        return item;
-      });
+      let newHotbar = state.hotbar;
+      let newInventory = state.inventory;
+
+      if (seedInHotbar) {
+        newHotbar = state.hotbar.map((item) => {
+          if (item.id === seedId) {
+            return { ...item, count: (item.count ?? 1) - 1 };
+          }
+          return item;
+        });
+      } else if (seedInInv) {
+        newInventory = state.inventory.map((item) => {
+          if (item.id === seedId) {
+            return { ...item, count: (item.count ?? 1) - 1 };
+          }
+          return item;
+        }).filter((item) => (item.count ?? 0) > 0);
+      }
 
       const now = Date.now();
       const isWatered = Boolean(currentTile.isWatered);
@@ -575,8 +871,11 @@ export const useGameStore = create<GameStoreState>((set, get) => {
             totalGrowthSeconds: effectiveGrowthSec,
             totalStages: cropDef.stages,
             growthSecondsAcc: 0,
-            wateredAt: isWatered ? now : null
+            wateredAt: isWatered ? now : null,
+            isWithered: false,
+            ripeAt: null
           },
+          uncultivatedSince: null,
           lastUpdated: now
         }
       };
@@ -584,6 +883,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       const updated = {
         tiles: newTiles,
         hotbar: newHotbar,
+        inventory: newInventory,
         energy: Math.max(0, state.energy - 1),
         updatedAt: now
       };
@@ -610,6 +910,13 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         return { success: false, reason: msg };
       }
 
+      // Over-ripened withered crop protection
+      if (currentTile.crop.isWithered) {
+        const msg = 'Cây đã bị héo úa do quá hạn thu hoạch! Hãy dùng Liềm hoặc Cuốc để dọn dẹp.';
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
       const growth = getCropGrowthStage(currentTile.crop, currentTile.isWatered);
       if (!growth.isRipe) {
         const msg = currentTile.isWatered
@@ -623,12 +930,71 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       }
 
       const cropDef = CROP_DEFINITIONS[currentTile.crop.id];
+      const now = Date.now();
+
+      // Special Handling for Apple Tree: Hand Harvest yields 3 Apples and rolls back to Stage 2!
+      if (currentTile.crop.id === 'apple') {
+        const appleItemId = 'crop_apple';
+        let newInventory = [...(state.inventory || [])];
+        const existingInvIdx = newInventory.findIndex((i) => i.id === appleItemId);
+        if (existingInvIdx >= 0) {
+          newInventory[existingInvIdx] = {
+            ...newInventory[existingInvIdx],
+            count: (newInventory[existingInvIdx].count ?? 0) + 3
+          };
+        } else {
+          newInventory.push({
+            id: appleItemId,
+            name: 'Trái Táo Đỏ',
+            icon: '🍎',
+            type: 'crop',
+            count: 3,
+            price: 15
+          });
+        }
+
+        // Roll back to Stage 2 (growthSecondsAcc = 900s, total = 1800s -> needs 900s / 15 mins to fruit again)
+        const rolledBackCrop: CropData = {
+          ...currentTile.crop,
+          growthSecondsAcc: 900,
+          wateredAt: currentTile.isWatered ? now : null,
+          isWithered: false,
+          ripeAt: null
+        };
+
+        const newTiles: Record<string, TileData> = {
+          ...state.tiles,
+          [key]: {
+            ...currentTile,
+            crop: rolledBackCrop,
+            lastUpdated: now
+          }
+        };
+
+        const updated = {
+          tiles: newTiles,
+          inventory: newInventory,
+          updatedAt: now
+        };
+
+        set(updated);
+        queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+        get().notify('Thu hoạch thành công +3 Trái Táo 🍎! Cây táo trở về giai đoạn 2 và sẽ kết trái lại sau 15 phút tưới nước.', 'success');
+
+        return {
+          success: true,
+          cropName: 'Trái Táo Đỏ (x3)',
+          goldReward: 45,
+          vocabReward: 'orchard'
+        };
+      }
+
+      // Standard single-harvest crops (Wheat, Herb)
       const goldReward = cropDef?.goldValue || 20;
       const cropItemId = `crop_${currentTile.crop.id}`;
 
-      // Update inventory (increment harvested count)
       let newInventory = [...(state.inventory || [])];
-      const existingInvIdx = newInventory.findIndex(i => i.id === cropItemId);
+      const existingInvIdx = newInventory.findIndex((i) => i.id === cropItemId);
       if (existingInvIdx >= 0) {
         newInventory[existingInvIdx] = {
           ...newInventory[existingInvIdx],
@@ -653,7 +1019,8 @@ export const useGameStore = create<GameStoreState>((set, get) => {
           isWatered: false,
           crop: null,
           isFertilized: false,
-          lastUpdated: Date.now()
+          uncultivatedSince: now,
+          lastUpdated: now
         }
       };
 
@@ -661,7 +1028,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         tiles: newTiles,
         inventory: newInventory,
         gold: state.gold + goldReward,
-        updatedAt: Date.now()
+        updatedAt: now
       };
 
       set(updated);
@@ -676,11 +1043,13 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       };
     },
 
-    // Resource Gathering (Axe -> Wood, Pickaxe -> Rock, Scythe -> Weed)
+    // Resource Gathering (Axe -> Wood/Apple Tree, Pickaxe -> Rock, Scythe -> Weed/Withered Crop)
     gatherResource: (x, y) => {
       const key = `${x},${y}`;
       const state = get();
       const currentTile = state.tiles[key];
+      const tool = state.activeTool;
+      const now = Date.now();
 
       if ((x === 15 && y === 3) || (x === 18 && y === 3) || currentTile?.station || currentTile?.obstacle?.isDestructible === false) {
         const msg = 'Trạm nghỉ chân bất hoại, không thể phá hủy!';
@@ -688,12 +1057,132 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         return { success: false, reason: msg };
       }
 
+      // -----------------------------------------------------------------------
+      // Special Sub-case: Gathering / Clearing Crops (Withered crop or Apple Tree)
+      // -----------------------------------------------------------------------
+      if (currentTile?.crop) {
+        // A. Withered Crop cleared with Scythe or Hoe for 1 Fiber
+        if (currentTile.crop.isWithered) {
+          if (tool !== 'scythe' && tool !== 'hoe') {
+            const msg = 'Cần dùng Liềm (Phím 5) hoặc Cuốc (Phím 1) để dọn dẹp bụi cây héo úa!';
+            get().notify(msg, 'warning');
+            return { success: false, reason: 'Cần Liềm hoặc Cuốc!' };
+          }
+
+          if (state.energy < 1) {
+            get().notify('Kiệt sức! Cần 1 Năng lượng để dọn dẹp.', 'warning');
+            return { success: false, reason: 'Không đủ năng lượng!' };
+          }
+
+          const fiberReward = { id: 'resource_fiber', name: 'Sợi Cỏ Dại', icon: '🌾', count: 1, price: 1 };
+          let newInventory = [...(state.inventory || [])];
+          const existingIdx = newInventory.findIndex((i) => i.id === fiberReward.id);
+          if (existingIdx >= 0) {
+            newInventory[existingIdx] = {
+              ...newInventory[existingIdx],
+              count: (newInventory[existingIdx].count ?? 0) + 1
+            };
+          } else {
+            newInventory.push({ ...fiberReward, type: 'resource' });
+          }
+
+          const newTiles = {
+            ...state.tiles,
+            [key]: {
+              ...currentTile,
+              crop: null,
+              uncultivatedSince: now,
+              lastUpdated: now
+            }
+          };
+
+          const updated = {
+            tiles: newTiles,
+            inventory: newInventory,
+            energy: Math.max(0, state.energy - 1),
+            updatedAt: now
+          };
+
+          set(updated);
+          queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+          get().notify('Đã dọn dẹp bụi cây héo úa (+1 Sợi Cỏ Dại 🌾, -1 Năng lượng)!', 'success');
+          return {
+            success: true,
+            destroyed: true,
+            resourceName: fiberReward.name,
+            resourceCount: 1,
+            icon: fiberReward.icon
+          };
+        }
+
+        // B. Apple Tree chopped with Axe at Stage 2 or 3 for 6 Wood
+        if (currentTile.crop.id === 'apple') {
+          if (tool !== 'axe') {
+            const msg = 'Cần dùng Rìu (Phím 3) để đốn hạ Cây Táo!';
+            get().notify(msg, 'warning');
+            return { success: false, reason: 'Cần dùng Rìu!' };
+          }
+
+          const growth = getCropGrowthStage(currentTile.crop, currentTile.isWatered, now);
+          if (growth.currentStage < 2) {
+            const msg = 'Cây táo còn non (Giai đoạn 0-1), chưa đủ lớn để khai thác gỗ!';
+            get().notify(msg, 'warning');
+            return { success: false, reason: 'Cây táo còn non!' };
+          }
+
+          if (state.energy < 3) {
+            get().notify('Kiệt sức! Cần 3 Năng lượng để chặt cây táo.', 'warning');
+            return { success: false, reason: 'Không đủ năng lượng!' };
+          }
+
+          const woodReward = { id: 'resource_wood', name: 'Gỗ Tự Nhiên', icon: '🪵', count: 6, price: 4 };
+          let newInventory = [...(state.inventory || [])];
+          const existingIdx = newInventory.findIndex((i) => i.id === woodReward.id);
+          if (existingIdx >= 0) {
+            newInventory[existingIdx] = {
+              ...newInventory[existingIdx],
+              count: (newInventory[existingIdx].count ?? 0) + 6
+            };
+          } else {
+            newInventory.push({ ...woodReward, type: 'resource' });
+          }
+
+          const newTiles = {
+            ...state.tiles,
+            [key]: {
+              ...currentTile,
+              crop: null,
+              isTilled: true,
+              uncultivatedSince: now,
+              lastUpdated: now
+            }
+          };
+
+          const updated = {
+            tiles: newTiles,
+            inventory: newInventory,
+            energy: Math.max(0, state.energy - 3),
+            updatedAt: now
+          };
+
+          set(updated);
+          queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+          get().notify('Đã đốn hạ Cây Táo (+6 Gỗ Tự Nhiên 🪵, -3 Năng lượng)!', 'success');
+          return {
+            success: true,
+            destroyed: true,
+            resourceName: woodReward.name,
+            resourceCount: 6,
+            icon: woodReward.icon
+          };
+        }
+      }
+
       if (!currentTile?.obstacle) {
         return { success: false, reason: 'Không có chướng ngại vật ở ô này!' };
       }
 
       const obstacle = currentTile.obstacle;
-      const tool = state.activeTool;
 
       // 1. Tool Matching Validation
       if (obstacle.type === 'wood' && tool !== 'axe') {
@@ -722,7 +1211,6 @@ export const useGameStore = create<GameStoreState>((set, get) => {
 
       const newHp = obstacle.hp - 1;
       const isDestroyed = newHp <= 0;
-      const now = Date.now();
 
       let resourceReward: { id: string; name: string; icon: string; count: number; price: number } | null = null;
       if (isDestroyed) {
@@ -1672,11 +2160,24 @@ export const useGameStore = create<GameStoreState>((set, get) => {
           mergedHotbar = [...cloudState.hotbar, ...missingTools];
         }
 
+        const mergedTiles = cloudState.tiles ? { ...prev.tiles, ...cloudState.tiles } : prev.tiles;
+        const now = Date.now();
+        const lastSim = cloudState.lastSimulatedAt || cloudState.updatedAt || prev.lastSimulatedAt || prev.updatedAt || now;
+        const simRes = calculateOfflineSimulation(mergedTiles, lastSim, now);
+
+        if (simRes.notice) {
+          setTimeout(() => {
+            get().notify(simRes.notice!, 'info');
+          }, 1200);
+        }
+
         return {
           ...prev,
           ...cloudState,
+          activeSeedId: cloudState.activeSeedId ?? prev.activeSeedId ?? 'seed_wheat',
           masteredQuizIds: cloudState.masteredQuizIds ?? prev.masteredQuizIds ?? [],
-          tiles: cloudState.tiles ? { ...prev.tiles, ...cloudState.tiles } : prev.tiles,
+          tiles: simRes.tiles,
+          lastSimulatedAt: now,
           hotbar: mergedHotbar,
           inventory: cloudState.inventory && cloudState.inventory.length > 0 ? cloudState.inventory : prev.inventory
         };

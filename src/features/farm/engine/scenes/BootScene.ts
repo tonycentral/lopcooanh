@@ -177,6 +177,123 @@ export default class BootScene extends Phaser.Scene {
       g.destroy();
     }
 
+    // 5b. Crop Stages: Apple Tree (crop_apple_0, 1, 2, 3)
+    if (!this.textures.exists('crop_apple_0')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Little brown stem with 2 green sprout leaves
+      g.fillStyle(0x78350f, 1);
+      g.fillRect(15, 18, 2, 8);
+      g.fillStyle(0x22c55e, 1);
+      g.fillRect(12, 17, 3, 2);
+      g.fillRect(17, 16, 3, 2);
+      g.fillStyle(0x4ade80, 1);
+      g.fillRect(13, 16, 2, 1);
+      g.fillRect(18, 15, 2, 1);
+      g.generateTexture('crop_apple_0', 32, 32);
+      g.destroy();
+    }
+
+    if (!this.textures.exists('crop_apple_1')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Young sapling: growing trunk and small leafy top
+      g.fillStyle(0x5c2b09, 1);
+      g.fillRect(14, 14, 4, 13);
+      g.fillStyle(0x15803d, 1);
+      g.fillRoundedRect(9, 6, 14, 11, 4);
+      g.fillStyle(0x22c55e, 1);
+      g.fillRoundedRect(11, 8, 10, 7, 2);
+      g.fillStyle(0x4ade80, 1);
+      g.fillRect(12, 7, 4, 2);
+      g.generateTexture('crop_apple_1', 32, 32);
+      g.destroy();
+    }
+
+    if (!this.textures.exists('crop_apple_2')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Mature tree (pre-fruiting / post-harvest): Thick trunk and large lush canopy
+      g.fillStyle(0x451a03, 1);
+      g.fillRect(13, 16, 6, 12);
+      g.fillStyle(0x78350f, 1);
+      g.fillRect(14, 16, 3, 12);
+      // Canopy dark base
+      g.fillStyle(0x14532d, 1);
+      g.fillCircle(16, 11, 13);
+      // Canopy mid green
+      g.fillStyle(0x16a34a, 1);
+      g.fillCircle(12, 10, 8);
+      g.fillCircle(20, 10, 8);
+      g.fillCircle(16, 7, 7);
+      // Canopy top highlights
+      g.fillStyle(0x4ade80, 1);
+      g.fillCircle(14, 6, 4);
+      g.fillCircle(18, 7, 3);
+      g.generateTexture('crop_apple_2', 32, 32);
+      g.destroy();
+    }
+
+    if (!this.textures.exists('crop_apple_3')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Full mature tree with bright ripe red apples
+      // Trunk
+      g.fillStyle(0x451a03, 1);
+      g.fillRect(13, 16, 6, 12);
+      g.fillStyle(0x78350f, 1);
+      g.fillRect(14, 16, 3, 12);
+      // Foliage base
+      g.fillStyle(0x14532d, 1);
+      g.fillCircle(16, 11, 13);
+      g.fillStyle(0x16a34a, 1);
+      g.fillCircle(12, 10, 8);
+      g.fillCircle(20, 10, 8);
+      g.fillCircle(16, 7, 7);
+      g.fillStyle(0x22c55e, 1);
+      g.fillCircle(15, 6, 4);
+      // Red Apples dotted around canopy
+      const appleCoords = [
+        { x: 9, y: 10 },
+        { x: 15, y: 7 },
+        { x: 22, y: 11 },
+        { x: 12, y: 14 },
+        { x: 19, y: 14 }
+      ];
+      for (const a of appleCoords) {
+        // Red fruit
+        g.fillStyle(0xdc2626, 1);
+        g.fillCircle(a.x, a.y, 2.8);
+        // Highlight speck
+        g.fillStyle(0xfef08a, 1);
+        g.fillRect(a.x - 1, a.y - 1, 1, 1);
+        // Tiny brown stem
+        g.fillStyle(0x451a03, 1);
+        g.fillRect(a.x - 0.5, a.y - 3.5, 1, 1.5);
+      }
+      g.generateTexture('crop_apple_3', 32, 32);
+      g.destroy();
+    }
+
+    // 5c. Decayed / Over-ripened Crop (crop_withered)
+    if (!this.textures.exists('crop_withered')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Dry tangled withered stems
+      g.fillStyle(0x573922, 1);
+      g.fillRect(15, 16, 2, 10);
+      g.fillRect(11, 20, 10, 2);
+      // Drooping dead dry foliage
+      g.fillStyle(0x785536, 1);
+      g.fillTriangle(9, 23, 13, 15, 17, 23);
+      g.fillTriangle(15, 23, 19, 14, 23, 23);
+      g.fillStyle(0x99724b, 1);
+      g.fillRect(12, 17, 3, 3);
+      g.fillRect(18, 16, 3, 3);
+      // Faded withered gray spots
+      g.fillStyle(0x78716c, 1);
+      g.fillRect(13, 19, 2, 2);
+      g.fillRect(19, 18, 2, 2);
+      g.fillRect(15, 14, 2, 2);
+      g.generateTexture('crop_withered', 32, 32);
+      g.destroy();
+    }
+
     // 6. Farmer Avatar (32x32)
     if (!this.textures.exists('farmer_sprite')) {
       const g = this.make.graphics({ x: 0, y: 0 });

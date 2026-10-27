@@ -1,7 +1,7 @@
 // src/features/farm/types.ts
 // Strict TypeScript interfaces for the 2D Farm Engine & State
 
-export type ToolType = 'hoe' | 'water_can' | 'axe' | 'pickaxe' | 'scythe' | 'hand' | 'seed' | 'item_fence' | 'item_chest' | 'item_fertilizer';
+export type ToolType = 'none' | 'hoe' | 'water_can' | 'axe' | 'pickaxe' | 'scythe' | 'hand' | 'seed' | 'item_fence' | 'item_chest' | 'item_fertilizer';
 
 export type ObstacleType = 'rock' | 'wood' | 'weed';
 
@@ -50,12 +50,14 @@ export interface ObstacleData {
 }
 
 export interface CropData {
-  id: string;                  // e.g. 'wheat', 'herb'
+  id: string;                  // e.g. 'wheat', 'herb', 'apple'
   plantedAt: number;           // Unix timestamp in ms
   totalGrowthSeconds: number;  // Duration to full maturity in seconds
   totalStages: number;         // Number of visual stages (e.g. 4)
   growthSecondsAcc?: number;   // Accumulated growth seconds while watered
   wateredAt?: number | null;   // Timestamp when current watering started (null if soil is dry)
+  isWithered?: boolean;        // Whether crop has decayed due to over-ripening
+  ripeAt?: number | null;      // Timestamp when crop became fully ripe (Stage 3)
 }
 
 export interface TileData {
@@ -67,6 +69,7 @@ export interface TileData {
   station?: StationData | null;
   isFertilized?: boolean;
   lastUpdated?: number;
+  uncultivatedSince?: number | null; // Timestamp when tile became empty tilled & dry (for 3h reversion)
 }
 
 export interface InventoryItem {
@@ -116,6 +119,8 @@ export interface PlayerFarmState {
   masteredQuizIds: string[];
   day: number;
   activeTool: string;
+  activeSeedId?: string;
+  lastSimulatedAt?: number;
   hotbar: InventoryItem[];
   inventory: InventoryItem[];
   tiles: Record<string, TileData>; // Sparse Map: 'x,y' -> TileData
