@@ -65,13 +65,13 @@ export interface EggEntityData {
   createdAt: number;
 }
 
-export type AnimalType = 'wild_boar' | 'companion_dog' | 'chicken' | 'cow';
+export type AnimalType = 'companion_dog' | 'chicken' | 'cow';
 
 export interface AnimalEntityData {
   type: AnimalType;
   x: number;
   y: number;
-  state: 'idle' | 'follow' | 'wander' | 'sit' | 'fetch' | 'return_stone' | 'running_to_crop' | 'eating' | 'fleeing';
+  state: 'idle' | 'follow' | 'wander' | 'sit' | 'fetch' | 'return_stone';
 }
 
 export type ObstacleType = 'rock' | 'wood' | 'weed';

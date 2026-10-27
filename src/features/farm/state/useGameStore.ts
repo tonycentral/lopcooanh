@@ -728,7 +728,6 @@ export interface GameStoreState extends PlayerFarmState {
     vocabReward?: string; 
     reason?: string 
   };
-  destroyCropByPest: (x: number, y: number) => { success: boolean; cropName?: string; reason?: string };
   throwStone: () => { success: boolean; reason?: string };
   returnFetchedStone: () => { success: boolean };
   gatherResource: (x: number, y: number) => {
@@ -1259,42 +1258,6 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         goldReward,
         vocabReward: cropDef?.vocabReward
       };
-    },
-
-    // Destroy crop when wild boar pest eats it
-    destroyCropByPest: (x, y) => {
-      const key = `${x},${y}`;
-      const state = get();
-      const currentTile = state.tiles[key];
-      if (!currentTile?.crop) {
-        return { success: false, reason: 'Không có cây' };
-      }
-
-      const cropDef = CROP_DEFINITIONS[currentTile.crop.id];
-      const cropName = cropDef?.name || 'Cây trồng';
-      const now = Date.now();
-
-      const newTiles: Record<string, TileData> = {
-        ...state.tiles,
-        [key]: {
-          ...currentTile,
-          crop: null,
-          isWatered: false,
-          isTilled: true,
-          uncultivatedSince: now,
-          lastUpdated: now
-        }
-      };
-
-      const updated = {
-        tiles: newTiles,
-        updatedAt: now
-      };
-
-      set(updated);
-      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
-      get().notify(`⚠️ Heo rừng đã cắn phá và làm hư hại hoàn toàn 1 ô ${cropName}!`, 'error');
-      return { success: true, cropName };
     },
 
     // Throw Stone Minigame (consumes 1 stone from Hotbar or Inventory)

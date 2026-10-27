@@ -673,52 +673,6 @@ export default class BootScene extends Phaser.Scene {
       g.destroy();
     }
 
-    // 15. Wild Boar Pest (32x32)
-    if (!this.textures.exists('wild_boar')) {
-      const g = this.make.graphics({ x: 0, y: 0 });
-      // Ground drop shadow
-      g.fillStyle(0x0f172a, 0.35);
-      g.fillEllipse(16, 26, 24, 8);
-      // Main chunky body
-      g.fillStyle(0x3e2723, 1); // Dark bristle brown
-      g.fillRoundedRect(5, 9, 22, 14, 4);
-      // Dark spine bristles
-      g.fillStyle(0x1b0000, 1);
-      g.fillRect(8, 7, 14, 3);
-      g.fillRect(11, 6, 8, 2);
-      // Snout / Head
-      g.fillStyle(0x4e342e, 1);
-      g.fillRoundedRect(2, 12, 10, 9, 2);
-      g.fillStyle(0x27130e, 1); // Nostrils
-      g.fillRect(3, 15, 2, 3);
-      // White sharp tusks
-      g.fillStyle(0xffffff, 1);
-      g.fillTriangle(6, 17, 7, 12, 9, 17);
-      g.fillTriangle(8, 18, 9, 13, 11, 18);
-      // Eye (fierce red-amber)
-      g.fillStyle(0xd97706, 1);
-      g.fillRect(10, 11, 2, 2);
-      g.fillStyle(0x000000, 1);
-      g.fillRect(10, 11, 1, 1);
-      // Legs with dark hooves
-      g.fillStyle(0x3e2723, 1);
-      g.fillRect(7, 21, 3, 5);
-      g.fillRect(13, 21, 3, 5);
-      g.fillRect(19, 21, 3, 5);
-      g.fillRect(23, 21, 3, 5);
-      g.fillStyle(0x1b0000, 1); // Hooves
-      g.fillRect(7, 25, 3, 2);
-      g.fillRect(13, 25, 3, 2);
-      g.fillRect(19, 25, 3, 2);
-      g.fillRect(23, 25, 3, 2);
-      // Small curly tail
-      g.fillStyle(0x4e342e, 1);
-      g.fillRect(27, 12, 2, 4);
-      g.fillRect(26, 11, 2, 2);
-      g.generateTexture('wild_boar', 32, 32);
-      g.destroy();
-    }
-
     // 16. Companion Pet Dog (Standing/Walking 32x32)
     if (!this.textures.exists('companion_dog')) {
       const g = this.make.graphics({ x: 0, y: 0 });
