@@ -551,12 +551,12 @@ export function calculateOfflineSimulation(
 export const defaultHotbar: InventoryItem[] = [
   { id: 'hoe', name: 'Cuốc Đất (Hoe)', icon: '⛏️', type: 'tool' },
   { id: 'water_can', name: 'Bình Tưới (Water Can)', icon: '💧', type: 'tool' },
+  { id: 'seed', name: 'Hạt Giống (Seeds)', icon: '🌱', type: 'seed' },
+  { id: 'hand', name: 'Thu Hoạch (Harvest)', icon: '🧺', type: 'tool' },
   { id: 'axe', name: 'Rìu Chặt Gỗ (Axe)', icon: '🪓', type: 'tool' },
   { id: 'pickaxe', name: 'Cuốc Chim Đập Đá (Pickaxe)', icon: '⛏', type: 'tool' },
-  { id: 'scythe', name: 'Liềm Cắt Cỏ (Scythe)', icon: '🗡️', type: 'tool' },
-  { id: 'hand', name: 'Thu Hoạch (Hand/Harvest)', icon: '✋', type: 'tool' },
-  { id: 'seed_wheat', name: 'Hạt Giống (Seeds)', icon: '🌱', type: 'seed', count: 15, cropId: 'wheat' },
-  { id: 'resource_stone', name: 'Đá Cuội (Ném chơi với Chó)', icon: '🪨', type: 'resource', count: 10, price: 4 }
+  { id: 'scythe', name: 'Liềm Cắt Cỏ Dại (Scythe)', icon: '🌾', type: 'tool' },
+  { id: 'actions', name: 'Menu Chức Năng Khác', icon: '⭐', type: 'tool' }
 ];
 
 export function createInitialTiles(): Record<string, TileData> {
@@ -686,6 +686,7 @@ const defaultInitialState: PlayerFarmState = {
   indoorPlacedItems: [],
   hotbar: defaultHotbar,
   inventory: [
+    { id: 'seed_wheat', name: 'Hạt Lúa Mì', icon: '🌱', type: 'seed', count: 15, cropId: 'wheat', price: 5 },
     { id: 'crop_wheat', name: 'Bông Lúa Mì', icon: '🌾', type: 'crop', count: 2, price: 15 },
     { id: 'crop_herb', name: 'Nhánh Thảo Mộc', icon: '🌿', type: 'crop', count: 1, price: 35 },
     { id: 'seed_apple', name: 'Hạt Cây Táo (Apple Tree)', icon: '🍎🌱', type: 'seed', count: 3, cropId: 'apple', price: 25 },
@@ -803,7 +804,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         get().notify('Đã chuyển về Cuốc Đất.', 'info');
       } else {
         set({ activeTool: 'none' });
-        get().notify('✋ Đã bật Chế độ Quan Sát / Chỉ Di Chuyển (Phím 0 để đổi lại)', 'info');
+        get().notify('🚶 Đã bật Chế độ Chỉ Di Chuyển / Quan Sát (Phím 0 để đổi lại)', 'info');
       }
     },
 
@@ -1411,7 +1412,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         // A. Withered Crop cleared with Scythe or Hoe for 1 Fiber
         if (currentTile.crop.isWithered) {
           if (tool !== 'scythe' && tool !== 'hoe') {
-            const msg = 'Cần dùng Liềm (Phím 5) hoặc Cuốc (Phím 1) để dọn dẹp bụi cây héo úa!';
+            const msg = 'Cần dùng Liềm (Phím 7) hoặc Cuốc (Phím 1) để dọn dẹp bụi cây héo úa!';
             get().notify(msg, 'warning');
             return { success: false, reason: 'Cần Liềm hoặc Cuốc!' };
           }
@@ -1465,7 +1466,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         // B. Apple Tree chopped with Axe at Stage 2 or 3 for 6 Wood
         if (currentTile.crop.id === 'apple') {
           if (tool !== 'axe') {
-            const msg = 'Cần dùng Rìu (Phím 3) để đốn hạ Cây Táo!';
+            const msg = 'Cần dùng Rìu (Phím 5) để đốn hạ Cây Táo!';
             get().notify(msg, 'warning');
             return { success: false, reason: 'Cần dùng Rìu!' };
           }
@@ -1533,17 +1534,17 @@ export const useGameStore = create<GameStoreState>((set, get) => {
 
       // 1. Tool Matching Validation
       if (obstacle.type === 'wood' && tool !== 'axe') {
-        const msg = 'Cần dùng Rìu (Phím 3) để chặt khúc gỗ!';
+        const msg = 'Cần dùng Rìu (Phím 5) để chặt khúc gỗ!';
         get().notify(msg, 'warning');
         return { success: false, reason: 'Cần dùng Rìu!' };
       }
       if (obstacle.type === 'rock' && tool !== 'pickaxe') {
-        const msg = 'Cần dùng Cuốc chim (Phím 4) để đập tảng đá!';
+        const msg = 'Cần dùng Cuốc chim (Phím 6) để đập tảng đá!';
         get().notify(msg, 'warning');
         return { success: false, reason: 'Cần dùng Cuốc chim!' };
       }
       if (obstacle.type === 'weed' && tool !== 'scythe') {
-        const msg = 'Cần dùng Liềm (Phím 5) để cắt dọn bụi cỏ dại!';
+        const msg = 'Cần dùng Liềm (Phím 7) để cắt dọn bụi cỏ dại!';
         get().notify(msg, 'warning');
         return { success: false, reason: 'Cần dùng Liềm!' };
       }
@@ -3615,11 +3616,16 @@ export const useGameStore = create<GameStoreState>((set, get) => {
 
     hydrateFromCloud: (cloudState) => {
       set((prev) => {
-        let mergedHotbar = prev.hotbar;
+        let mergedHotbar = defaultHotbar;
         if (cloudState.hotbar && cloudState.hotbar.length > 0) {
-          const loadedIds = new Set(cloudState.hotbar.map((i) => i.id));
-          const missingTools = defaultHotbar.filter((t) => t.type === 'tool' && !loadedIds.has(t.id));
-          mergedHotbar = [...cloudState.hotbar, ...missingTools];
+          const loadedMap = new Map(cloudState.hotbar.map((i) => [i.id, i]));
+          mergedHotbar = defaultHotbar.map((defTool) => {
+            const found = loadedMap.get(defTool.id);
+            if (found) {
+              return { ...found, icon: defTool.icon, name: defTool.name };
+            }
+            return defTool;
+          });
         }
 
         const mergedTiles = cloudState.tiles ? { ...prev.tiles, ...cloudState.tiles } : prev.tiles;

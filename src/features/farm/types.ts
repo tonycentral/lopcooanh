@@ -1,7 +1,7 @@
 // src/features/farm/types.ts
 // Strict TypeScript interfaces for the 2D Farm Engine & State
 
-export type ToolType = 'none' | 'hoe' | 'water_can' | 'axe' | 'pickaxe' | 'scythe' | 'hand' | 'seed' | 'item_fence' | 'item_chest' | 'item_fertilizer' | 'resource_stone' | 'furniture_table' | 'furniture_chair' | 'furniture_bookshelf' | 'furniture_rug' | 'furniture_fireplace';
+export type ToolType = 'none' | 'hoe' | 'water_can' | 'axe' | 'pickaxe' | 'scythe' | 'hand' | 'seed' | 'actions' | 'inspect' | 'item_fence' | 'item_chest' | 'item_fertilizer' | 'resource_stone' | 'furniture_table' | 'furniture_chair' | 'furniture_bookshelf' | 'furniture_rug' | 'furniture_fireplace';
 
 export interface PlacedFurnitureItem {
   id: string;

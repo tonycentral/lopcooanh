@@ -24,8 +24,24 @@ import {
   Hammer,
   Move,
   Sparkles,
-  ChevronUp
+  ChevronUp,
+  Footprints,
+  Sprout,
+  ShoppingBasket,
+  PawPrint,
+  Search
 } from 'lucide-react';
+
+const TOOL_METADATA: Record<string, { title: string; desc: string; shortcut: string }> = {
+  hoe: { title: 'Cuốc Đất', desc: 'Tạo luống canh tác trên ô đất', shortcut: '1' },
+  water_can: { title: 'Bình Tưới Nước', desc: 'Tưới ẩm ô đất để cây hoa màu lớn', shortcut: '2' },
+  seed: { title: 'Gieo Hạt Giống', desc: 'Chọn hạt lúa mì, thảo mộc, táo để gieo', shortcut: '3' },
+  hand: { title: 'Thu Hoạch / Chăm Sóc', desc: 'Hái hoa màu, hái táo, nhặt trứng, vắt sữa, vuốt ve', shortcut: '4' },
+  axe: { title: 'Rìu Chặt Cây', desc: 'Đốn gỗ mục & chặt cây táo lấy gỗ tự nhiên', shortcut: '5' },
+  pickaxe: { title: 'Cuốc Chim', desc: 'Đập tảng đá để khai thác đá cuội', shortcut: '6' },
+  scythe: { title: 'Liềm Cắt Cỏ Dại', desc: 'Dọn cỏ dại & thu hoạch sợi cỏ khô (-1 Energy)', shortcut: '7' },
+  actions: { title: 'Menu Chức Năng Khác', desc: 'Chơi ném đá với chó, di dời đồ, kiểm tra ô đất', shortcut: '8' }
+};
 
 interface GameContainerProps {
   currentUser?: { id: string; email?: string } | null;
@@ -69,6 +85,8 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
   const [isFurnitureCraftOpen, setIsFurnitureCraftOpen] = useState(false);
   const [isSeedMenuOpen, setIsSeedMenuOpen] = useState(false);
   const seedMenuRef = useRef<HTMLDivElement>(null);
+  const [isActionsMenuOpen, setIsActionsMenuOpen] = useState(false);
+  const actionsMenuRef = useRef<HTMLDivElement>(null);
 
   // Auto-dismiss notification after 3.5 seconds
   useEffect(() => {
@@ -99,6 +117,18 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isSeedMenuOpen]);
+
+  // Close actions menu popover when clicking outside
+  useEffect(() => {
+    if (!isActionsMenuOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (actionsMenuRef.current && !actionsMenuRef.current.contains(e.target as Node)) {
+        setIsActionsMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isActionsMenuOpen]);
 
   // Energy auto-regeneration over time: +1 energy every 4 seconds if below maxEnergy
   useEffect(() => {
@@ -179,29 +209,36 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
       if (e.key === '0') {
         toggleMoveOnlyMode();
         setIsSeedMenuOpen(false);
+        setIsActionsMenuOpen(false);
         return;
       }
 
       const keyNum = parseInt(e.key, 10);
       if (keyNum >= 1 && keyNum <= hotbar.length) {
         const targetTool = hotbar[keyNum - 1].id;
-        if (activeTool === targetTool) {
+        if (targetTool === 'seed') {
+          const currentSeed = activeSeedId || 'seed_wheat';
+          selectSeed(currentSeed);
+          setIsSeedMenuOpen((prev) => !prev);
+          setIsActionsMenuOpen(false);
+        } else if (targetTool === 'actions') {
+          setIsActionsMenuOpen((prev) => !prev);
+          setIsSeedMenuOpen(false);
+        } else if (activeTool === targetTool) {
           // Toggle unselect active slot -> move-only mode
           toggleMoveOnlyMode();
           setIsSeedMenuOpen(false);
+          setIsActionsMenuOpen(false);
         } else {
           selectTool(targetTool);
-          if (targetTool.startsWith('seed_') || targetTool === 'seed') {
-            setIsSeedMenuOpen(true);
-          } else {
-            setIsSeedMenuOpen(false);
-          }
+          setIsSeedMenuOpen(false);
+          setIsActionsMenuOpen(false);
         }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [hotbar, activeTool, selectTool, toggleMoveOnlyMode, isRepositionMode, movingEntity, toggleRepositionMode, cancelRelocation, isShopOpen, shopTab, currentChestKey, isProfileOpen, isQuizOpen, isBBQOpen, isFurnitureCraftOpen]);
+  }, [hotbar, activeTool, activeSeedId, selectTool, selectSeed, toggleMoveOnlyMode, isRepositionMode, movingEntity, toggleRepositionMode, cancelRelocation, isShopOpen, shopTab, currentChestKey, isProfileOpen, isQuizOpen, isBBQOpen, isFurnitureCraftOpen, isActionsMenuOpen]);
 
   // Synchronize modal state with Phaser input context (disable WASD/mouse raycast when modal is open)
   useEffect(() => {
@@ -286,6 +323,16 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     const inInv = inventory.find((i) => i.id === seedId)?.count ?? 0;
     return inHotbar + inInv;
   };
+
+  const totalSeedStock = inventory
+    .concat(hotbar)
+    .filter((i) => i.type === 'seed' || i.id.startsWith('seed_'))
+    .reduce((sum, i) => sum + (i.count ?? 0), 0);
+
+  const stoneStock = inventory
+    .concat(hotbar)
+    .filter((i) => i.id === 'resource_stone')
+    .reduce((sum, i) => sum + (i.count ?? 0), 0);
 
   return (
     <div className="w-screen h-screen overflow-hidden bg-slate-950 flex flex-col items-center justify-center relative p-2 sm:p-4 select-none font-sans">
@@ -631,27 +678,65 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
         {/* 4. BOTTOM HOTBAR: Pinned directly at the bottom edge of the Game Frame */}
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1 sm:gap-1.5 bg-slate-900/90 backdrop-blur-md p-1 sm:p-1.5 rounded-2xl border border-slate-800 shadow-2xl">
           {/* Slot 0: Move-Only / Observation Mode Button */}
-          <button
-            onClick={toggleMoveOnlyMode}
-            title="Chế độ Quan Sát / Chỉ Di Chuyển (Phím 0)"
-            className={`relative flex flex-col items-center justify-center w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-xl transition-all cursor-pointer ${
-              activeTool === 'none' 
-                ? 'bg-sky-600/30 border-2 border-sky-400 shadow-lg shadow-sky-950 scale-105' 
-                : 'bg-slate-800/80 border border-slate-700 hover:bg-slate-700 hover:border-slate-600'
-            }`}
-          >
-            <span className="absolute top-0.5 left-1 text-[8px] sm:text-[9px] font-mono text-slate-400 font-bold">
-              0
-            </span>
-            <span className="text-sm sm:text-base md:text-lg">✋</span>
-          </button>
+          <div className="group relative">
+            {/* Ergonomic Tooltip */}
+            <div className="pointer-events-none absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 hidden group-hover:flex flex-col items-center z-50">
+              <div className="bg-slate-950/95 text-slate-200 text-[10px] px-2.5 py-1.5 rounded-lg border border-slate-700 shadow-2xl whitespace-nowrap text-center">
+                <div className="font-bold text-sky-300 flex items-center justify-center gap-1.5">
+                  <Footprints className="w-3.5 h-3.5 text-sky-300" />
+                  <span>Chỉ Di Chuyển</span>
+                  <span className="font-mono text-[9px] bg-slate-800 text-slate-300 px-1 rounded">Phím 0</span>
+                </div>
+                <div className="text-[9px] text-slate-400 mt-0.5">Dẫn đường A*, tuyệt đối không tác động công cụ</div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                toggleMoveOnlyMode();
+                setIsSeedMenuOpen(false);
+                setIsActionsMenuOpen(false);
+              }}
+              title="Chế độ Quan Sát / Chỉ Di Chuyển (Phím 0)"
+              className={`relative flex flex-col items-center justify-center w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-xl transition-all cursor-pointer ${
+                activeTool === 'none' 
+                  ? 'bg-sky-600/30 border-2 border-sky-400 shadow-lg shadow-sky-950 scale-105' 
+                  : 'bg-slate-800/80 border border-slate-700 hover:bg-slate-700 hover:border-slate-600'
+              }`}
+            >
+              <span className="absolute top-0.5 left-1 text-[8px] sm:text-[9px] font-mono text-slate-400 font-bold">
+                0
+              </span>
+              <Footprints className="w-4 h-4 sm:w-5 sm:h-5 text-sky-300" />
+            </button>
+          </div>
 
           {hotbar.map((item, idx) => {
-            const isActive = activeTool === item.id || (item.type === 'seed' && activeTool.startsWith('seed_'));
-            const isSeedSlot = item.type === 'seed' || item.id.startsWith('seed_');
+            const isSeedSlot = item.id === 'seed' || item.type === 'seed';
+            const isActionsSlot = item.id === 'actions';
+            const isActive = activeTool === item.id || 
+              (isSeedSlot && (activeTool === 'seed' || activeTool.startsWith('seed_'))) ||
+              (isActionsSlot && (activeTool === 'resource_stone' || activeTool === 'inspect' || isRepositionMode));
+
+            const meta = TOOL_METADATA[item.id] || { title: item.name, desc: '', shortcut: String(idx + 1) };
 
             return (
-              <div key={item.id} className="relative" ref={isSeedSlot ? seedMenuRef : undefined}>
+              <div 
+                key={item.id} 
+                className="group relative" 
+                ref={isSeedSlot ? seedMenuRef : isActionsSlot ? actionsMenuRef : undefined}
+              >
+                {/* Ergonomic Hover Tooltip */}
+                <div className="pointer-events-none absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 hidden group-hover:flex flex-col items-center z-50">
+                  <div className="bg-slate-950/95 text-slate-200 text-[10px] px-2.5 py-1.5 rounded-lg border border-slate-700 shadow-2xl whitespace-nowrap text-center">
+                    <div className="font-bold text-emerald-300 flex items-center justify-center gap-1.5">
+                      <span>{meta.title}</span>
+                      <span className="font-mono text-[9px] bg-slate-800 text-slate-300 px-1 rounded">Phím {meta.shortcut}</span>
+                    </div>
+                    <div className="text-[9px] text-slate-400 mt-0.5">{meta.desc}</div>
+                  </div>
+                </div>
+
                 {/* Seed Selector Popover Sub-Menu */}
                 {isSeedSlot && isSeedMenuOpen && (
                   <div 
@@ -664,7 +749,7 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
                     </div>
                     {SEED_OPTIONS.map((seed) => {
                       const stock = getSeedStock(seed.id);
-                      const isSelected = activeSeedId === seed.id && activeTool === seed.id;
+                      const isSelected = activeSeedId === seed.id && (activeTool === seed.id || activeTool === 'seed');
                       const isDisabled = stock <= 0;
                       return (
                         <button
@@ -695,18 +780,87 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
                   </div>
                 )}
 
+                {/* Actions Menu Popover Sub-Menu */}
+                {isActionsSlot && isActionsMenuOpen && (
+                  <div 
+                    className="absolute bottom-full mb-2 right-0 sm:left-1/2 sm:-translate-x-1/2 bg-slate-900 border border-slate-700 rounded-xl p-2 shadow-2xl z-40 flex flex-col gap-1.5 w-52 animate-in fade-in zoom-in-95 duration-150"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <div className="text-[10px] font-bold text-slate-400 px-1 border-b border-slate-800 pb-1 flex items-center justify-between">
+                      <span>Chức năng phụ</span>
+                      <ChevronUp className="w-3 h-3 text-slate-500" />
+                    </div>
+
+                    {/* 1. Fetch stone with companion dog */}
+                    <button
+                      onClick={() => {
+                        if (stoneStock > 0) {
+                          selectTool('resource_stone');
+                          setIsActionsMenuOpen(false);
+                          useGameStore.getState().notify('🪨 Đã cầm Đá Cuội! Click ra bãi cỏ để ném cho Chó nhặt.', 'info');
+                        } else {
+                          useGameStore.getState().notify('Bạn không có Đá Cuội trong túi đồ!', 'warning');
+                        }
+                      }}
+                      className={`flex items-center justify-between px-2 py-1.5 rounded-lg text-xs transition-colors cursor-pointer hover:bg-slate-800 text-slate-200 ${
+                        activeTool === 'resource_stone' ? 'bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold' : ''
+                      }`}
+                    >
+                      <span className="flex items-center gap-1.5">
+                        <PawPrint className="w-3.5 h-3.5 text-amber-400" />
+                        <span>Chơi với Chó (Ném đá)</span>
+                      </span>
+                      <span className={`text-[10px] font-mono font-bold ${stoneStock <= 0 ? 'text-slate-600' : 'text-amber-400'}`}>
+                        x{stoneStock}
+                      </span>
+                    </button>
+
+                    {/* 2. Reposition / Relocation */}
+                    <button
+                      onClick={() => {
+                        toggleRepositionMode(true);
+                        setIsActionsMenuOpen(false);
+                      }}
+                      className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-xs transition-colors cursor-pointer hover:bg-slate-800 text-slate-200"
+                    >
+                      <Move className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>Bố Trí / Di Dời Đồ</span>
+                    </button>
+
+                    {/* 3. Inspect Soil & Crop */}
+                    <button
+                      onClick={() => {
+                        selectTool('inspect');
+                        setIsActionsMenuOpen(false);
+                        useGameStore.getState().notify('🔍 Chế độ Soi Đất: Click vào bất kỳ ô nào để xem thông tin đất & cây trồng!', 'info');
+                      }}
+                      className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-xs transition-colors cursor-pointer hover:bg-slate-800 text-slate-200 ${
+                        activeTool === 'inspect' ? 'bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 font-bold' : ''
+                      }`}
+                    >
+                      <Search className="w-3.5 h-3.5 text-indigo-400" />
+                      <span>Kiểm Tra Ô Đất &amp; Cây</span>
+                    </button>
+                  </div>
+                )}
+
                 <button
                   onClick={() => {
-                    if (isActive) {
+                    if (isSeedSlot) {
+                      selectSeed(activeSeedId || 'seed_wheat');
+                      setIsSeedMenuOpen((prev) => !prev);
+                      setIsActionsMenuOpen(false);
+                    } else if (isActionsSlot) {
+                      setIsActionsMenuOpen((prev) => !prev);
+                      setIsSeedMenuOpen(false);
+                    } else if (isActive) {
                       toggleMoveOnlyMode();
                       setIsSeedMenuOpen(false);
+                      setIsActionsMenuOpen(false);
                     } else {
                       selectTool(item.id);
-                      if (isSeedSlot) {
-                        setIsSeedMenuOpen((prev) => !prev);
-                      } else {
-                        setIsSeedMenuOpen(false);
-                      }
+                      setIsSeedMenuOpen(false);
+                      setIsActionsMenuOpen(false);
                     }
                   }}
                   className={`relative flex flex-col items-center justify-center w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-xl transition-all cursor-pointer ${
@@ -718,8 +872,26 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
                   <span className="absolute top-0.5 left-1 text-[8px] sm:text-[9px] font-mono text-slate-400 font-bold">
                     {idx + 1}
                   </span>
-                  <span className="text-sm sm:text-base md:text-lg">{item.icon}</span>
-                  {(item.type === 'seed' || item.type === 'placeable' || item.type === 'consumable') && item.count !== undefined && (
+
+                  {/* Distinct Icon Rendering */}
+                  {item.id === 'seed' ? (
+                    <Sprout className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400" />
+                  ) : item.id === 'hand' ? (
+                    <ShoppingBasket className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300" />
+                  ) : item.id === 'actions' ? (
+                    <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-purple-300" />
+                  ) : (
+                    <span className="text-sm sm:text-base md:text-lg">{item.icon}</span>
+                  )}
+
+                  {/* Seed Badge */}
+                  {isSeedSlot && (
+                    <span className="absolute bottom-0.5 right-0.5 sm:right-1 text-[8px] sm:text-[9px] font-mono font-bold bg-slate-950/80 px-0.5 sm:px-1 rounded text-emerald-300">
+                      x{totalSeedStock}
+                    </span>
+                  )}
+                  {/* Item Count Badges */}
+                  {item.id !== 'seed' && (item.type === 'placeable' || item.type === 'resource') && item.count !== undefined && (
                     <span className="absolute bottom-0.5 right-0.5 sm:right-1 text-[8px] sm:text-[9px] font-mono font-bold bg-slate-950/80 px-0.5 sm:px-1 rounded text-emerald-300">
                       x{item.count}
                     </span>

@@ -362,6 +362,10 @@ export default class FarmScene extends Phaser.Scene {
         const activeTool = useGameStore.getState().activeTool;
         if (activeTool === 'none') {
           this.marker.setTint(0x94a3b8);
+        } else if (activeTool === 'inspect') {
+          this.marker.setTint(0x818cf8);
+        } else if (activeTool === 'hand') {
+          this.marker.setTint(0xfcd34d);
         } else {
           this.marker.clearTint();
         }
@@ -2279,6 +2283,26 @@ export default class FarmScene extends Phaser.Scene {
 
     // Priority -1: Move-Only / Observation Mode
     if (activeTool === 'none') {
+      return;
+    }
+
+    // Priority -0.8: Inspect Land / Crop Mode
+    if (activeTool === 'inspect') {
+      const tile = currentTile;
+      if (tile?.crop) {
+        const growth = getCropGrowthStage(tile.crop);
+        const name = tile.crop.id === 'apple' ? 'Cây Táo 🍎' : tile.crop.id === 'herb' ? 'Thảo Mộc 🌿' : 'Lúa Mì 🌾';
+        const status = growth.isRipe ? 'Đã chín (Thu hoạch được! 🧺)' : `${Math.ceil(growth.remainingSec)}s nữa chín`;
+        this.showFloatingNotice(`🌱 ${name} [Giai đoạn ${growth.currentStage}/${tile.crop.totalStages}]: ${status}`, x * 32 + 16, y * 32);
+      } else if (tile?.isTilled) {
+        const waterStatus = tile.isWatered ? 'Đã tưới nước 💧 (Đang ẩm)' : 'Đất khô cần tưới 🏜️';
+        this.showFloatingNotice(`Đất canh tác: ${waterStatus}`, x * 32 + 16, y * 32);
+      } else if (tile?.obstacle) {
+        const obsName = tile.obstacle.type === 'rock' ? 'Đá cuội 🪨' : tile.obstacle.type === 'wood' ? 'Khúc gỗ 🪵' : 'Cỏ dại 🌾';
+        this.showFloatingNotice(`${obsName} (Độ bền: ${tile.obstacle.hp}/${tile.obstacle.maxHp})`, x * 32 + 16, y * 32);
+      } else {
+        this.showFloatingNotice('Đất bãi cỏ tự nhiên', x * 32 + 16, y * 32);
+      }
       return;
     }
 
