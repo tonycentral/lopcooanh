@@ -2,6 +2,7 @@
 import Phaser from 'phaser';
 import BootScene from './scenes/BootScene';
 import FarmScene from './scenes/FarmScene';
+import HouseScene from './scenes/HouseScene';
 
 export function createGameConfig(parentContainer: HTMLElement): Phaser.Types.Core.GameConfig {
   return {
@@ -24,6 +25,6 @@ export function createGameConfig(parentContainer: HTMLElement): Phaser.Types.Cor
       mode: Phaser.Scale.FIT,
       autoCenter: Phaser.Scale.CENTER_BOTH
     },
-    scene: [BootScene, FarmScene]
+    scene: [BootScene, FarmScene, HouseScene]
   };
 }

@@ -12,7 +12,8 @@ import type {
   SyncStatus,
   NotificationMessage,
   PlaceableType,
-  CraftingRecipe
+  CraftingRecipe,
+  PlacedFurnitureItem
 } from '../types';
 import { 
   queueFarmStateSync, 
@@ -107,6 +108,79 @@ export const CRAFTING_RECIPES: CraftingRecipe[] = [
     ingredients: [
       { id: 'resource_fiber', name: 'Sợi Cỏ Dại', icon: '🌾', count: 2 }
     ]
+  },
+  {
+    id: 'craft_house_plot',
+    name: 'Ngôi Nhà Gỗ Nông Dân',
+    icon: '🏡',
+    outputItemId: 'item_house_constructed',
+    outputName: 'Ngôi Nhà Gỗ (x1)',
+    outputCount: 1,
+    desc: 'Xây dựng ngôi nhà gỗ 64x64px có mái ngói đỏ, giường nghỉ ngơi và bàn thợ mộc chế tạo nội thất (Cần 30 Gỗ + 300 Gold).',
+    ingredients: [
+      { id: 'resource_wood', name: 'Gỗ Tự Nhiên', icon: '🪵', count: 30 }
+    ]
+  }
+];
+
+export interface FurnitureRecipe {
+  id: string;
+  name: string;
+  icon: string;
+  outputItemId: string;
+  desc: string;
+  ingredients: { id: string; name: string; icon: string; count: number }[];
+  goldCost: number;
+}
+
+export const FURNITURE_RECIPES: FurnitureRecipe[] = [
+  {
+    id: 'craft_furn_table',
+    name: 'Bàn Gỗ Tròn',
+    icon: '🪵',
+    outputItemId: 'furniture_table',
+    desc: 'Bàn gỗ tròn mộc mạc đặt trong phòng khách.',
+    ingredients: [{ id: 'resource_wood', name: 'Gỗ Tự Nhiên', icon: '🪵', count: 8 }],
+    goldCost: 20
+  },
+  {
+    id: 'craft_furn_chair',
+    name: 'Ghế Gỗ Tựa',
+    icon: '🪑',
+    outputItemId: 'furniture_chair',
+    desc: 'Chiếc ghế gỗ tựa lưng êm ái cho gian nhà.',
+    ingredients: [{ id: 'resource_wood', name: 'Gỗ Tự Nhiên', icon: '🪵', count: 4 }],
+    goldCost: 10
+  },
+  {
+    id: 'craft_furn_bookshelf',
+    name: 'Tủ Sách Gỗ',
+    icon: '📚',
+    outputItemId: 'furniture_bookshelf',
+    desc: 'Tủ sách lưu giữ tri thức và sách tiếng Anh.',
+    ingredients: [{ id: 'resource_wood', name: 'Gỗ Tự Nhiên', icon: '🪵', count: 12 }],
+    goldCost: 40
+  },
+  {
+    id: 'craft_furn_rug',
+    name: 'Thảm Len Trải Sàn',
+    icon: '🧶',
+    outputItemId: 'furniture_rug',
+    desc: 'Thảm dệt hoa văn mềm mại trải sàn nhà.',
+    ingredients: [{ id: 'resource_fiber', name: 'Sợi Cỏ Dại', icon: '🌾', count: 6 }],
+    goldCost: 15
+  },
+  {
+    id: 'craft_furn_fireplace',
+    name: 'Lò Sưởi Ấm Cúng',
+    icon: '🔥',
+    outputItemId: 'furniture_fireplace',
+    desc: 'Lò sưởi gạch đá giữ ấm căn nhà trong đêm lạnh.',
+    ingredients: [
+      { id: 'resource_stone', name: 'Đá Cuội', icon: '🪨', count: 10 },
+      { id: 'resource_wood', name: 'Gỗ Tự Nhiên', icon: '🪵', count: 6 }
+    ],
+    goldCost: 50
   }
 ];
 
@@ -497,6 +571,9 @@ const defaultInitialState: PlayerFarmState = {
   activeTool: 'hoe',
   activeSeedId: 'seed_wheat',
   lastSimulatedAt: Date.now(),
+  hasHouse: false,
+  houseOrigin: { x: 8, y: 2 },
+  indoorPlacedItems: [],
   hotbar: defaultHotbar,
   inventory: [
     { id: 'crop_wheat', name: 'Bông Lúa Mì', icon: '🌾', type: 'crop', count: 2, price: 15 },
@@ -559,6 +636,11 @@ export interface GameStoreState extends PlayerFarmState {
   recordQuizResult: (quizId: string, isCorrect: boolean, energyReward: number, xpReward: number) => { isLevelUp: boolean; newLevel: number; earnedEnergy: number; earnedXp: number };
   resetMasteredQuizzes: () => void;
   orderBBQMeal: (food: import('../types').BBQFoodItem) => { success: boolean; reason?: string };
+  buildHouse: () => { success: boolean; reason?: string };
+  craftFurniture: (recipeId: string) => { success: boolean; reason?: string };
+  placeIndoorFurniture: (itemId: string, gridX: number, gridY: number) => { success: boolean; reason?: string };
+  pickupIndoorFurniture: (placedId: string) => { success: boolean };
+  restInBed: () => void;
   hydrateFromCloud: (cloudState: Partial<PlayerFarmState>) => void;
   initSync: (userId?: string | null) => Promise<void>;
 }
@@ -1619,6 +1701,10 @@ export const useGameStore = create<GameStoreState>((set, get) => {
 
     // 5. Crafting Engine: Craft Tools & Placeables
     craftItem: (recipeId: string) => {
+      if (recipeId === 'craft_house_plot') {
+        return get().buildHouse();
+      }
+
       const state = get();
       const recipe = CRAFTING_RECIPES.find((r) => r.id === recipeId);
       if (!recipe) {
@@ -2283,6 +2369,329 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       return { success: true };
     },
 
+    buildHouse: () => {
+      const state = get();
+      if (state.hasHouse) {
+        const msg = 'Bạn đã xây dựng Ngôi Nhà Gỗ rồi!';
+        get().notify(msg, 'info');
+        return { success: false, reason: msg };
+      }
+
+      const costGold = 300;
+      const costWood = 30;
+
+      if (state.gold < costGold) {
+        const msg = `Không đủ Gold! Cần ${costGold} Gold để xây nhà (hiện có: ${state.gold}).`;
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      const woodCountInv = state.inventory
+        .filter((i) => i.id === 'resource_wood')
+        .reduce((acc, curr) => acc + (curr.count ?? 0), 0);
+      const woodCountHot = state.hotbar
+        .filter((i) => i.id === 'resource_wood')
+        .reduce((acc, curr) => acc + (curr.count ?? 0), 0);
+      const totalWood = woodCountInv + woodCountHot;
+
+      if (totalWood < costWood) {
+        const msg = `Không đủ Gỗ Tự Nhiên! Cần ${costWood} Gỗ để xây nhà (hiện có: ${totalWood}).`;
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      let neededWood = costWood;
+      let newInventory = state.inventory
+        .map((item) => {
+          if (item.id === 'resource_wood' && neededWood > 0) {
+            const take = Math.min(item.count ?? 0, neededWood);
+            neededWood -= take;
+            return { ...item, count: (item.count ?? 0) - take };
+          }
+          return item;
+        })
+        .filter((item) => (item.count ?? 0) > 0 || item.type === 'tool');
+
+      let newHotbar = state.hotbar
+        .map((item) => {
+          if (item.id === 'resource_wood' && neededWood > 0) {
+            const take = Math.min(item.count ?? 0, neededWood);
+            neededWood -= take;
+            return { ...item, count: (item.count ?? 0) - take };
+          }
+          return item;
+        })
+        .filter((item) => (item.count ?? 0) > 0 || item.type === 'tool');
+
+      const newTiles = { ...state.tiles };
+      const housePlotCoords = [
+        { x: 8, y: 2 }, { x: 9, y: 2 },
+        { x: 8, y: 3 }, { x: 9, y: 3 }
+      ];
+      for (const coord of housePlotCoords) {
+        const key = `${coord.x},${coord.y}`;
+        if (newTiles[key]) {
+          newTiles[key] = {
+            ...newTiles[key],
+            isTilled: false,
+            isWatered: false,
+            crop: null,
+            obstacle: null,
+            placeable: null,
+            station: null
+          };
+        }
+      }
+
+      const updated = {
+        gold: state.gold - costGold,
+        inventory: newInventory,
+        hotbar: newHotbar,
+        tiles: newTiles,
+        hasHouse: true,
+        houseOrigin: { x: 8, y: 2 },
+        updatedAt: Date.now()
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify('🎉 Chúc mừng! Ngôi Nhà Gỗ Nông Dân đã hoàn thành. Hãy bước tới trước cửa để vào nhà!', 'success');
+      return { success: true };
+    },
+
+    craftFurniture: (recipeId: string) => {
+      const state = get();
+      const recipe = FURNITURE_RECIPES.find((r) => r.id === recipeId);
+      if (!recipe) {
+        return { success: false, reason: 'Không tìm thấy công thức nội thất.' };
+      }
+
+      if (state.gold < recipe.goldCost) {
+        const msg = `Không đủ Gold! Cần ${recipe.goldCost} Gold để chế tạo ${recipe.name}.`;
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      for (const ing of recipe.ingredients) {
+        const countInv = state.inventory
+          .filter((i) => i.id === ing.id)
+          .reduce((acc, curr) => acc + (curr.count ?? 0), 0);
+        const countHot = state.hotbar
+          .filter((i) => i.id === ing.id)
+          .reduce((acc, curr) => acc + (curr.count ?? 0), 0);
+        const total = countInv + countHot;
+        if (total < ing.count) {
+          const msg = `Không đủ nguyên liệu! Cần ${ing.count} ${ing.name} (hiện có: ${total}).`;
+          get().notify(msg, 'warning');
+          return { success: false, reason: msg };
+        }
+      }
+
+      let newInventory = [...state.inventory];
+      let newHotbar = [...state.hotbar];
+
+      for (const ing of recipe.ingredients) {
+        let needed = ing.count;
+        newInventory = newInventory
+          .map((item) => {
+            if (item.id === ing.id && needed > 0) {
+              const take = Math.min(item.count ?? 0, needed);
+              needed -= take;
+              return { ...item, count: (item.count ?? 0) - take };
+            }
+            return item;
+          })
+          .filter((item) => (item.count ?? 0) > 0 || item.type === 'tool');
+
+        if (needed > 0) {
+          newHotbar = newHotbar
+            .map((item) => {
+              if (item.id === ing.id && needed > 0) {
+                const take = Math.min(item.count ?? 0, needed);
+                needed -= take;
+                return { ...item, count: (item.count ?? 0) - take };
+              }
+              return item;
+            })
+            .filter((item) => (item.count ?? 0) > 0 || item.type === 'tool');
+        }
+      }
+
+      const outputItem: InventoryItem = {
+        id: recipe.outputItemId,
+        name: recipe.name,
+        icon: recipe.icon,
+        type: 'tool',
+        count: 1
+      };
+
+      const existingHotbarIdx = newHotbar.findIndex((i) => i.id === recipe.outputItemId);
+      if (existingHotbarIdx >= 0) {
+        newHotbar[existingHotbarIdx] = {
+          ...newHotbar[existingHotbarIdx],
+          count: (newHotbar[existingHotbarIdx].count ?? 0) + 1
+        };
+      } else if (newHotbar.length < 10) {
+        newHotbar.push(outputItem);
+      } else {
+        const existingInvIdx = newInventory.findIndex((i) => i.id === recipe.outputItemId);
+        if (existingInvIdx >= 0) {
+          newInventory[existingInvIdx] = {
+            ...newInventory[existingInvIdx],
+            count: (newInventory[existingInvIdx].count ?? 0) + 1
+          };
+        } else {
+          newInventory.push(outputItem);
+        }
+      }
+
+      const updated = {
+        gold: state.gold - recipe.goldCost,
+        hotbar: newHotbar,
+        inventory: newInventory,
+        updatedAt: Date.now()
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify(`🔨 Đã chế tạo thành công ${recipe.name}!`, 'success');
+      return { success: true };
+    },
+
+    placeIndoorFurniture: (itemId: string, gridX: number, gridY: number) => {
+      const state = get();
+      if (gridX < 1 || gridX > 8 || gridY < 2 || gridY > 6) {
+        const msg = 'Vị trí này nằm ngoài phạm vi đặt đồ trong phòng!';
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      if ((gridX === 1 && (gridY === 2 || gridY === 3)) || (gridX === 8 && gridY === 2)) {
+        const msg = 'Vị trí này đã có sẵn vật dụng cố định (Giường / Bàn thợ mộc)!';
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      const existingPlaced = state.indoorPlacedItems || [];
+      if (existingPlaced.some((p) => p.gridX === gridX && p.gridY === gridY)) {
+        const msg = 'Ô này đã có đồ nội thất!';
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      const inHotbar = state.hotbar.find((i) => i.id === itemId && (i.count ?? 1) > 0);
+      const inInventory = state.inventory.find((i) => i.id === itemId && (i.count ?? 1) > 0);
+      if (!inHotbar && !inInventory) {
+        const msg = 'Bạn không có món đồ này trong túi đồ!';
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      let newHotbar = [...state.hotbar];
+      let newInventory = [...state.inventory];
+      if (inHotbar) {
+        newHotbar = newHotbar
+          .map((i) => (i.id === itemId ? { ...i, count: (i.count ?? 1) - 1 } : i))
+          .filter((i) => (i.count ?? 0) > 0);
+      } else {
+        newInventory = newInventory
+          .map((i) => (i.id === itemId ? { ...i, count: (i.count ?? 1) - 1 } : i))
+          .filter((i) => (i.count ?? 0) > 0);
+      }
+
+      const newFurnitureItem: PlacedFurnitureItem = {
+        id: `furn_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+        itemId,
+        gridX,
+        gridY
+      };
+
+      const updatedPlaced = [...existingPlaced, newFurnitureItem];
+      const updated = {
+        hotbar: newHotbar,
+        inventory: newInventory,
+        indoorPlacedItems: updatedPlaced,
+        updatedAt: Date.now()
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify('🪑 Đã bài trí nội thất thành công!', 'success');
+      return { success: true };
+    },
+
+    pickupIndoorFurniture: (placedId: string) => {
+      const state = get();
+      const existingPlaced = state.indoorPlacedItems || [];
+      const itemToPick = existingPlaced.find((p) => p.id === placedId);
+      if (!itemToPick) {
+        return { success: false };
+      }
+
+      const recipe = FURNITURE_RECIPES.find((r) => r.outputItemId === itemToPick.itemId);
+      const itemName = recipe?.name || 'Nội Thất';
+      const itemIcon = recipe?.icon || '🪑';
+
+      let newHotbar = [...state.hotbar];
+      let newInventory = [...state.inventory];
+
+      const existingHotbarIdx = newHotbar.findIndex((i) => i.id === itemToPick.itemId);
+      if (existingHotbarIdx >= 0) {
+        newHotbar[existingHotbarIdx] = {
+          ...newHotbar[existingHotbarIdx],
+          count: (newHotbar[existingHotbarIdx].count ?? 0) + 1
+        };
+      } else if (newHotbar.length < 10) {
+        newHotbar.push({
+          id: itemToPick.itemId,
+          name: itemName,
+          icon: itemIcon,
+          type: 'tool',
+          count: 1
+        });
+      } else {
+        const existingInvIdx = newInventory.findIndex((i) => i.id === itemToPick.itemId);
+        if (existingInvIdx >= 0) {
+          newInventory[existingInvIdx] = {
+            ...newInventory[existingInvIdx],
+            count: (newInventory[existingInvIdx].count ?? 0) + 1
+          };
+        } else {
+          newInventory.push({
+            id: itemToPick.itemId,
+            name: itemName,
+            icon: itemIcon,
+            type: 'tool',
+            count: 1
+          });
+        }
+      }
+
+      const updatedPlaced = existingPlaced.filter((p) => p.id !== placedId);
+      const updated = {
+        hotbar: newHotbar,
+        inventory: newInventory,
+        indoorPlacedItems: updatedPlaced,
+        updatedAt: Date.now()
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify(`📦 Đã thu hồi ${itemName} vào túi đồ!`, 'info');
+      return { success: true };
+    },
+
+    restInBed: () => {
+      const state = get();
+      const updated = {
+        energy: state.maxEnergy,
+        updatedAt: Date.now()
+      };
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify('🛏️ Bạn đã ngủ một giấc thật ngon! Thể lực hồi phục 100%.', 'success');
+    },
+
     hydrateFromCloud: (cloudState) => {
       set((prev) => {
         // Ensure all default permanent tools are retained in hotbar even from old saves
@@ -2309,6 +2718,9 @@ export const useGameStore = create<GameStoreState>((set, get) => {
           ...cloudState,
           activeSeedId: cloudState.activeSeedId ?? prev.activeSeedId ?? 'seed_wheat',
           masteredQuizIds: cloudState.masteredQuizIds ?? prev.masteredQuizIds ?? [],
+          hasHouse: cloudState.hasHouse ?? prev.hasHouse ?? false,
+          houseOrigin: cloudState.houseOrigin ?? prev.houseOrigin ?? { x: 8, y: 2 },
+          indoorPlacedItems: cloudState.indoorPlacedItems ?? prev.indoorPlacedItems ?? [],
           tiles: simRes.tiles,
           lastSimulatedAt: now,
           hotbar: mergedHotbar,

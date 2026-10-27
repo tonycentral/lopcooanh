@@ -832,5 +832,333 @@ export default class BootScene extends Phaser.Scene {
       g.generateTexture('item_stone_thrown', 16, 16);
       g.destroy();
     }
+
+    // 19. Outdoor House (64x64)
+    if (!this.textures.exists('farmer_house')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x0f172a, 0.4);
+      g.fillRect(2, 60, 60, 4);
+
+      g.fillStyle(0x475569, 1);
+      g.fillRect(4, 52, 56, 10);
+      g.fillStyle(0x64748b, 1);
+      g.fillRect(4, 52, 56, 2);
+
+      g.fillStyle(0x9a3412, 1);
+      g.fillRect(6, 24, 52, 28);
+      g.fillStyle(0x78350f, 1);
+      for (let y = 28; y <= 48; y += 5) {
+        g.fillRect(6, y, 52, 1);
+      }
+
+      g.fillStyle(0x451a03, 1);
+      g.fillRect(23, 33, 18, 23);
+      g.fillStyle(0xb45309, 1);
+      g.fillRect(25, 35, 14, 21);
+      g.fillStyle(0x78350f, 1);
+      g.fillRect(27, 38, 10, 8);
+      g.fillRect(27, 48, 10, 8);
+      g.fillStyle(0xfde047, 1);
+      g.fillCircle(36, 46, 1.5);
+
+      g.fillStyle(0x451a03, 1);
+      g.fillRect(9, 31, 12, 12);
+      g.fillStyle(0xfef08a, 1);
+      g.fillRect(10, 32, 10, 10);
+      g.fillStyle(0x78350f, 1);
+      g.fillRect(14, 32, 2, 10);
+      g.fillRect(10, 36, 10, 2);
+
+      g.fillStyle(0x451a03, 1);
+      g.fillRect(43, 31, 12, 12);
+      g.fillStyle(0xfef08a, 1);
+      g.fillRect(44, 32, 10, 10);
+      g.fillStyle(0x78350f, 1);
+      g.fillRect(48, 32, 2, 10);
+      g.fillRect(44, 36, 10, 2);
+
+      g.fillStyle(0x713f12, 1);
+      g.fillRect(48, 2, 8, 14);
+      g.fillStyle(0x334155, 1);
+      g.fillRect(47, 1, 10, 3);
+      g.fillStyle(0xe2e8f0, 0.6);
+      g.fillCircle(52, 0, 3);
+
+      g.fillStyle(0x991b1b, 1);
+      g.fillTriangle(0, 26, 32, 2, 64, 26);
+      g.fillStyle(0xb91c1c, 1);
+      g.fillTriangle(3, 25, 32, 4, 61, 25);
+      g.fillStyle(0x7f1d1d, 1);
+      g.fillRect(6, 22, 52, 2);
+      g.fillRect(12, 16, 40, 2);
+      g.fillRect(18, 10, 28, 2);
+      g.fillStyle(0xdc2626, 1);
+      g.fillRect(8, 21, 48, 1);
+      g.fillRect(14, 15, 36, 1);
+      g.fillRect(20, 9, 24, 1);
+
+      g.generateTexture('farmer_house', 64, 64);
+      g.destroy();
+    }
+
+    // 20. House Plot Signboard (32x32)
+    if (!this.textures.exists('house_plot_sign')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x0f172a, 0.35);
+      g.fillEllipse(16, 28, 20, 6);
+      g.fillStyle(0x78350f, 1);
+      g.fillRect(14, 16, 4, 13);
+      g.fillStyle(0xb45309, 1);
+      g.fillRoundedRect(3, 3, 26, 16, 3);
+      g.fillStyle(0xd97706, 1);
+      g.fillRect(5, 5, 22, 12);
+      g.fillStyle(0x0284c7, 1);
+      g.fillRect(7, 7, 7, 8);
+      g.fillStyle(0x38bdf8, 1);
+      g.fillRect(8, 9, 5, 4);
+      g.fillStyle(0x92400e, 1);
+      g.fillRect(19, 9, 2, 6);
+      g.fillStyle(0x64748b, 1);
+      g.fillRect(17, 7, 6, 3);
+      g.fillStyle(0x334155, 1);
+      g.fillCircle(5, 5, 1);
+      g.fillCircle(27, 5, 1);
+      g.fillCircle(5, 17, 1);
+      g.fillCircle(27, 17, 1);
+      g.generateTexture('house_plot_sign', 32, 32);
+      g.destroy();
+    }
+
+    // 21. Indoor Floor Wood Parquet (32x32)
+    if (!this.textures.exists('indoor_floor_wood')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0xb45309, 1);
+      g.fillRect(0, 0, 32, 32);
+      g.fillStyle(0x92400e, 1);
+      g.fillRect(0, 10, 32, 1);
+      g.fillRect(0, 21, 32, 1);
+      g.fillRect(0, 31, 32, 1);
+      g.fillRect(16, 0, 1, 10);
+      g.fillRect(8, 11, 1, 10);
+      g.fillRect(24, 11, 1, 10);
+      g.fillRect(16, 22, 1, 10);
+      g.fillStyle(0xd97706, 1);
+      g.fillRect(1, 1, 14, 1);
+      g.fillRect(17, 1, 14, 1);
+      g.fillRect(9, 12, 14, 1);
+      g.fillRect(1, 23, 14, 1);
+      g.fillRect(17, 23, 14, 1);
+      g.generateTexture('indoor_floor_wood', 32, 32);
+      g.destroy();
+    }
+
+    // 22. Indoor Wall Timber (32x32)
+    if (!this.textures.exists('indoor_wall')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x78350f, 1);
+      g.fillRect(0, 0, 32, 32);
+      g.fillStyle(0x854d0e, 1);
+      for (let x = 0; x < 32; x += 8) {
+        g.fillRect(x, 0, 7, 26);
+      }
+      g.fillStyle(0x451a03, 1);
+      g.fillRect(0, 0, 32, 4);
+      g.fillStyle(0xa16207, 1);
+      g.fillRect(0, 3, 32, 1);
+      g.fillStyle(0x451a03, 1);
+      g.fillRect(0, 26, 32, 6);
+      g.fillStyle(0x92400e, 1);
+      g.fillRect(0, 26, 32, 2);
+      g.generateTexture('indoor_wall', 32, 32);
+      g.destroy();
+    }
+
+    // 23. Indoor Doormat (32x32)
+    if (!this.textures.exists('indoor_doormat')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x78350f, 1);
+      g.fillRoundedRect(3, 5, 26, 22, 3);
+      g.fillStyle(0xd97706, 1);
+      g.fillRoundedRect(5, 7, 22, 18, 2);
+      g.fillStyle(0xfde047, 1);
+      g.strokeRoundedRect(6, 8, 20, 16, 2);
+      g.fillStyle(0x92400e, 1);
+      g.fillRect(9, 15, 14, 2);
+      g.fillRect(11, 13, 2, 6);
+      g.fillRect(15, 13, 2, 6);
+      g.fillRect(19, 13, 2, 6);
+      g.generateTexture('indoor_doormat', 32, 32);
+      g.destroy();
+    }
+
+    // 24. Furniture: Bed (32x32)
+    if (!this.textures.exists('furniture_bed')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x0f172a, 0.35);
+      g.fillRect(2, 26, 28, 5);
+      g.fillStyle(0x5c2b09, 1);
+      g.fillRoundedRect(3, 4, 26, 24, 2);
+      g.fillStyle(0x78350f, 1);
+      g.fillRect(3, 4, 26, 6);
+      g.fillStyle(0x38bdf8, 1);
+      g.fillRoundedRect(5, 12, 22, 15, 2);
+      g.fillStyle(0xf8fafc, 1);
+      g.fillRect(5, 12, 22, 3);
+      g.fillStyle(0xffffff, 1);
+      g.fillRoundedRect(7, 7, 18, 5, 2);
+      g.fillStyle(0xe2e8f0, 1);
+      g.fillRect(9, 9, 14, 2);
+      g.generateTexture('furniture_bed', 32, 32);
+      g.destroy();
+    }
+
+    // 25. Furniture: Workbench (32x32)
+    if (!this.textures.exists('furniture_workbench')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x0f172a, 0.35);
+      g.fillRect(2, 26, 28, 5);
+      g.fillStyle(0x5c2b09, 1);
+      g.fillRect(4, 16, 5, 13);
+      g.fillRect(23, 16, 5, 13);
+      g.fillRect(4, 24, 24, 3);
+      g.fillStyle(0x92400e, 1);
+      g.fillRect(2, 9, 28, 8);
+      g.fillStyle(0xb45309, 1);
+      g.fillRect(2, 9, 28, 2);
+      g.fillStyle(0x64748b, 1);
+      g.fillRect(3, 7, 5, 5);
+      g.fillStyle(0x94a3b8, 1);
+      g.fillRect(2, 8, 2, 3);
+      g.fillStyle(0xe2e8f0, 1);
+      g.fillRect(14, 11, 8, 2);
+      g.fillStyle(0x78350f, 1);
+      g.fillRect(12, 10, 3, 4);
+      g.fillStyle(0x78350f, 1);
+      g.fillRect(24, 13, 2, 4);
+      g.fillStyle(0x64748b, 1);
+      g.fillRect(23, 11, 4, 2);
+      g.generateTexture('furniture_workbench', 32, 32);
+      g.destroy();
+    }
+
+    // 26. Furniture: Round Dining Table (32x32)
+    if (!this.textures.exists('furniture_table')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x0f172a, 0.35);
+      g.fillEllipse(16, 26, 24, 8);
+      g.fillStyle(0x78350f, 1);
+      g.fillRect(14, 15, 4, 10);
+      g.fillRect(10, 24, 12, 3);
+      g.fillStyle(0xa16207, 1);
+      g.fillEllipse(16, 12, 26, 14);
+      g.fillStyle(0xd97706, 1);
+      g.fillEllipse(16, 11, 24, 12);
+      g.fillStyle(0xb45309, 1);
+      g.strokeEllipse(16, 11, 16, 8);
+      g.generateTexture('furniture_table', 32, 32);
+      g.destroy();
+    }
+
+    // 27. Furniture: Dining Chair (32x32)
+    if (!this.textures.exists('furniture_chair')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x0f172a, 0.3);
+      g.fillEllipse(16, 27, 16, 6);
+      g.fillStyle(0x5c2b09, 1);
+      g.fillRect(8, 20, 3, 8);
+      g.fillRect(21, 20, 3, 8);
+      g.fillRect(8, 4, 3, 13);
+      g.fillRect(21, 4, 3, 13);
+      g.fillRect(8, 4, 16, 4);
+      g.fillStyle(0xd97706, 1);
+      g.fillRoundedRect(7, 15, 18, 6, 2);
+      g.fillStyle(0xf59e0b, 1);
+      g.fillRect(8, 16, 16, 2);
+      g.generateTexture('furniture_chair', 32, 32);
+      g.destroy();
+    }
+
+    // 28. Furniture: Bookshelf (32x32)
+    if (!this.textures.exists('furniture_bookshelf')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x0f172a, 0.35);
+      g.fillRect(3, 28, 26, 4);
+      g.fillStyle(0x5c2b09, 1);
+      g.fillRoundedRect(4, 2, 24, 28, 2);
+      g.fillStyle(0x78350f, 1);
+      g.fillRect(6, 4, 20, 24);
+      g.fillStyle(0x451a03, 1);
+      g.fillRect(6, 12, 20, 2);
+      g.fillRect(6, 21, 20, 2);
+      g.fillStyle(0xef4444, 1);
+      g.fillRect(7, 6, 3, 6);
+      g.fillStyle(0x3b82f6, 1);
+      g.fillRect(11, 5, 4, 7);
+      g.fillStyle(0x10b981, 1);
+      g.fillRect(16, 7, 3, 5);
+      g.fillStyle(0xfbbf24, 1);
+      g.fillRect(20, 5, 3, 7);
+      g.fillStyle(0x8b5cf6, 1);
+      g.fillRect(7, 15, 3, 6);
+      g.fillStyle(0xf97316, 1);
+      g.fillRect(11, 14, 4, 7);
+      g.fillStyle(0x06b6d4, 1);
+      g.fillRect(16, 16, 3, 5);
+      g.fillStyle(0xfde68a, 1);
+      g.fillRect(20, 17, 4, 4);
+      g.fillStyle(0x64748b, 1);
+      g.fillRect(7, 24, 5, 5);
+      g.fillStyle(0x9333ea, 1);
+      g.fillRect(13, 23, 4, 6);
+      g.fillStyle(0xd97706, 1);
+      g.fillRect(18, 24, 5, 5);
+      g.generateTexture('furniture_bookshelf', 32, 32);
+      g.destroy();
+    }
+
+    // 29. Furniture: Rug (32x32)
+    if (!this.textures.exists('furniture_rug')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0xf8fafc, 1);
+      g.fillRect(2, 4, 28, 24);
+      g.fillStyle(0xb91c1c, 1);
+      g.fillRect(2, 6, 28, 20);
+      g.fillStyle(0xfbbf24, 1);
+      g.strokeRect(5, 8, 22, 16);
+      g.fillStyle(0x0284c7, 1);
+      g.fillTriangle(16, 11, 21, 16, 16, 21);
+      g.fillTriangle(16, 11, 11, 16, 16, 21);
+      g.fillStyle(0xfef08a, 1);
+      g.fillCircle(16, 16, 2);
+      g.generateTexture('furniture_rug', 32, 32);
+      g.destroy();
+    }
+
+    // 30. Furniture: Fireplace (32x32)
+    if (!this.textures.exists('furniture_fireplace')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x334155, 1);
+      g.fillRect(3, 2, 26, 28);
+      g.fillStyle(0x475569, 1);
+      g.fillRect(2, 2, 28, 4);
+      g.fillStyle(0x1e293b, 1);
+      g.fillRect(3, 10, 26, 1);
+      g.fillRect(3, 18, 26, 1);
+      g.fillRect(10, 6, 1, 4);
+      g.fillRect(22, 6, 1, 4);
+      g.fillStyle(0x0f172a, 1);
+      g.fillRoundedRect(7, 12, 18, 16, 3);
+      g.fillStyle(0x7c2d12, 1);
+      g.fillRect(8, 24, 16, 3);
+      g.fillStyle(0xdc2626, 1);
+      g.fillTriangle(10, 26, 13, 18, 16, 26);
+      g.fillTriangle(15, 26, 18, 16, 21, 26);
+      g.fillStyle(0xf97316, 1);
+      g.fillTriangle(12, 26, 15, 19, 18, 26);
+      g.fillStyle(0xfde047, 1);
+      g.fillTriangle(14, 26, 16, 21, 17, 26);
+      g.generateTexture('furniture_fireplace', 32, 32);
+      g.destroy();
+    }
   }
 }

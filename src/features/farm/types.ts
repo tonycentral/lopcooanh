@@ -1,7 +1,15 @@
 // src/features/farm/types.ts
 // Strict TypeScript interfaces for the 2D Farm Engine & State
 
-export type ToolType = 'none' | 'hoe' | 'water_can' | 'axe' | 'pickaxe' | 'scythe' | 'hand' | 'seed' | 'item_fence' | 'item_chest' | 'item_fertilizer' | 'resource_stone';
+export type ToolType = 'none' | 'hoe' | 'water_can' | 'axe' | 'pickaxe' | 'scythe' | 'hand' | 'seed' | 'item_fence' | 'item_chest' | 'item_fertilizer' | 'resource_stone' | 'furniture_table' | 'furniture_chair' | 'furniture_bookshelf' | 'furniture_rug' | 'furniture_fireplace';
+
+export interface PlacedFurnitureItem {
+  id: string;
+  itemId: string;
+  gridX: number;
+  gridY: number;
+  rotation?: number;
+}
 
 export type AnimalType = 'wild_boar' | 'companion_dog';
 
@@ -130,6 +138,9 @@ export interface PlayerFarmState {
   activeTool: string;
   activeSeedId?: string;
   lastSimulatedAt?: number;
+  hasHouse?: boolean;
+  houseOrigin?: { x: number; y: number } | null;
+  indoorPlacedItems?: PlacedFurnitureItem[];
   hotbar: InventoryItem[];
   inventory: InventoryItem[];
   tiles: Record<string, TileData>; // Sparse Map: 'x,y' -> TileData

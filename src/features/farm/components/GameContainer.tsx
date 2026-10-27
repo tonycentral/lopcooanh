@@ -8,6 +8,7 @@ import ShopModal from './ShopModal';
 import ChestModal from './ChestModal';
 import VocabQuizModal from './VocabQuizModal';
 import BBQStandModal from './BBQStandModal';
+import FurnitureCraftModal from './FurnitureCraftModal';
 import { 
   Coins, 
   Zap, 
@@ -60,6 +61,7 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isQuizOpen, setIsQuizOpen] = useState(false);
   const [isBBQOpen, setIsBBQOpen] = useState(false);
+  const [isFurnitureCraftOpen, setIsFurnitureCraftOpen] = useState(false);
   const [isSeedMenuOpen, setIsSeedMenuOpen] = useState(false);
   const seedMenuRef = useRef<HTMLDivElement>(null);
 
@@ -150,7 +152,7 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
       }
 
       // If modal is active, ignore hotbar tool changes
-      if (isShopOpen || Boolean(currentChestKey) || isProfileOpen || isQuizOpen || isBBQOpen) return;
+      if (isShopOpen || Boolean(currentChestKey) || isProfileOpen || isQuizOpen || isBBQOpen || isFurnitureCraftOpen) return;
 
       // Key 0: Toggle Move-Only / Observation Mode
       if (e.key === '0') {
@@ -178,20 +180,25 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [hotbar, activeTool, selectTool, toggleMoveOnlyMode, isShopOpen, shopTab, currentChestKey, isProfileOpen, isQuizOpen, isBBQOpen]);
+  }, [hotbar, activeTool, selectTool, toggleMoveOnlyMode, isShopOpen, shopTab, currentChestKey, isProfileOpen, isQuizOpen, isBBQOpen, isFurnitureCraftOpen]);
 
   // Synchronize modal state with Phaser input context (disable WASD/mouse raycast when modal is open)
   useEffect(() => {
     if (!gameRef.current) return;
+    const isModalActive = isShopOpen || Boolean(currentChestKey) || isProfileOpen || isQuizOpen || isBBQOpen || isFurnitureCraftOpen;
     try {
-      const scene = gameRef.current.scene.getScene('FarmScene') as { setModalOpen?: (open: boolean) => void } | null;
-      if (scene && typeof scene.setModalOpen === 'function') {
-        scene.setModalOpen(isShopOpen || Boolean(currentChestKey) || isProfileOpen || isQuizOpen || isBBQOpen);
+      const farmScene = gameRef.current.scene.getScene('FarmScene') as { setModalOpen?: (open: boolean) => void } | null;
+      if (farmScene && typeof farmScene.setModalOpen === 'function') {
+        farmScene.setModalOpen(isModalActive);
+      }
+      const houseScene = gameRef.current.scene.getScene('HouseScene') as { setModalOpen?: (open: boolean) => void } | null;
+      if (houseScene && typeof houseScene.setModalOpen === 'function') {
+        houseScene.setModalOpen(isModalActive);
       }
     } catch {
       // Scene might not be initialized yet
     }
-  }, [isShopOpen, currentChestKey, isProfileOpen, isQuizOpen, isBBQOpen]);
+  }, [isShopOpen, currentChestKey, isProfileOpen, isQuizOpen, isBBQOpen, isFurnitureCraftOpen]);
 
   // Phaser Game instance lifecycle management (React 19 strict-mode safe)
   useEffect(() => {
@@ -219,10 +226,17 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
     };
     game.events.on('open-bbq-stand', handleOpenBBQ);
 
+    // Listen to Carpentry Workbench events emitted from HouseScene
+    const handleOpenFurnitureCraft = () => {
+      setIsFurnitureCraftOpen(true);
+    };
+    game.events.on('open-furniture-craft', handleOpenFurnitureCraft);
+
     return () => {
       game.events.off('open-chest', handleOpenChest);
       game.events.off('open-vocab-quiz', handleOpenQuiz);
       game.events.off('open-bbq-stand', handleOpenBBQ);
+      game.events.off('open-furniture-craft', handleOpenFurnitureCraft);
       if (gameRef.current) {
         gameRef.current.destroy(true);
         gameRef.current = null;
@@ -663,6 +677,9 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
 
       {/* 8. BBQ Stand Modal & Reading Comprehension Challenge */}
       <BBQStandModal isOpen={isBBQOpen} onClose={() => setIsBBQOpen(false)} />
+
+      {/* 9. Indoor Furniture Crafting Modal (Carpentry Workbench) */}
+      <FurnitureCraftModal isOpen={isFurnitureCraftOpen} onClose={() => setIsFurnitureCraftOpen(false)} />
 
     </div>
   );
