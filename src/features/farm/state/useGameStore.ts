@@ -50,18 +50,31 @@ export const CROP_DEFINITIONS: Record<string, CropDefinition> = {
     id: 'apple',
     name: 'Cây Táo (Apple Tree)',
     seedId: 'seed_apple',
-    growthSeconds: 1800, // 30 minutes to mature
+    growthSeconds: 300, // 5 minutes to mature
     stages: 4,
     goldValue: 15, // 15 Gold per apple (x3 apples = 45 Gold)
     vocabReward: 'orchard'
   }
 };
 
-export const SHOP_SEEDS = [
-  { id: 'seed_wheat', name: 'Hạt Lúa Mì (Wheat)', icon: '🌱', cropId: 'wheat', price: 5, desc: 'Thời gian chín: 60s. Thu hoạch bán được 15 Gold.' },
-  { id: 'seed_herb', name: 'Hạt Thảo Mộc (Herb)', icon: '🌿', cropId: 'herb', price: 12, desc: 'Thời gian chín: 120s. Thu hoạch bán được 35 Gold.' },
-  { id: 'seed_apple', name: 'Hạt Cây Táo (Apple Tree)', icon: '🍎🌱', cropId: 'apple', price: 25, desc: 'Thời gian lớn: 30 phút. Thu hoạch bằng tay được 3 Trái Táo (15 Gold/trái) và tự kết trái lại sau 15 phút. Dùng Rìu chặt thu được 6 Gỗ.' }
+export interface ShopBuyItem {
+  id: string;
+  name: string;
+  icon: string;
+  price: number;
+  desc: string;
+  type: 'seed' | 'resource';
+  cropId?: string;
+}
+
+export const SHOP_BUY_ITEMS: ShopBuyItem[] = [
+  { id: 'seed_wheat', name: 'Hạt Lúa Mì (Wheat)', icon: '🌱', cropId: 'wheat', price: 5, type: 'seed', desc: 'Thời gian chín: 60s. Thu hoạch bán được 15 Gold.' },
+  { id: 'seed_herb', name: 'Hạt Thảo Mộc (Herb)', icon: '🌿', cropId: 'herb', price: 12, type: 'seed', desc: 'Thời gian chín: 120s. Thu hoạch bán được 35 Gold.' },
+  { id: 'seed_apple', name: 'Hạt Cây Táo (Apple Tree)', icon: '🍎🌱', cropId: 'apple', price: 25, type: 'seed', desc: 'Thời gian lớn: 5 phút. Thu hoạch bằng tay được 3 Trái Táo (15 Gold/trái) và tự kết trái lại sau 2.5 phút. Dùng Rìu chặt thu được 6 Gỗ.' },
+  { id: 'resource_wood', name: 'Gỗ Tự Nhiên (Wood Log)', icon: '🪵', price: 10, type: 'resource', desc: 'Vật liệu xây dựng cơ bản để xây nhà, chuồng gà, chuồng bò và chế tác nội thất.' }
 ];
+
+export const SHOP_SEEDS = SHOP_BUY_ITEMS.filter((i) => i.type === 'seed');
 
 export const SHOP_CROPS = [
   { id: 'crop_wheat', name: 'Bông Lúa Mì', icon: '🌾', price: 15, desc: 'Nông sản thu hoạch từ lúa mì.' },
@@ -70,7 +83,7 @@ export const SHOP_CROPS = [
 ];
 
 export const SHOP_RESOURCES = [
-  { id: 'resource_wood', name: 'Gỗ Tự Nhiên', icon: '🪵', price: 4, desc: 'Khai thác từ các khúc gỗ mục bằng Rìu.' },
+  { id: 'resource_wood', name: 'Gỗ Tự Nhiên (Wood Log)', icon: '🪵', price: 4, desc: 'Khai thác từ các khúc gỗ mục bằng Rìu hoặc bán lấy tiền.' },
   { id: 'resource_stone', name: 'Đá Cuội', icon: '🪨', price: 4, desc: 'Thu thập từ các tảng đá bằng Cuốc chim.' },
   { id: 'resource_fiber', name: 'Sợi Cỏ Dại', icon: '🌾', price: 1, desc: 'Cắt dọn từ các bụi cỏ dại bằng Liềm.' }
 ];
@@ -335,11 +348,31 @@ export function getCropGrowthStage(
     : 0;
 
   const totalElapsedSec = Math.min(crop.totalGrowthSeconds, baseAccSec + liveSec);
-  const stageDuration = crop.totalGrowthSeconds / (crop.totalStages - 1);
-  const currentStage = Math.min(
-    crop.totalStages - 1,
-    Math.floor(totalElapsedSec / stageDuration)
-  );
+  let currentStage: number;
+
+  if (crop.id === 'apple') {
+    // Custom non-linear stage thresholds for Apple Tree (Total 300s / 5 minutes):
+    // Stage 0 -> Stage 1: 75s (ratio 0.25)
+    // Stage 1 -> Stage 2: 75s (reaches Stage 2 at 150s / 2m30s, ratio 0.50)
+    // Stage 2 -> Stage 3: 150s (reaches Stage 3 at 300s / 5m00s, ratio 1.00)
+    const ratio = crop.totalGrowthSeconds > 0 ? totalElapsedSec / crop.totalGrowthSeconds : 1;
+    if (ratio < 0.25) {
+      currentStage = 0;
+    } else if (ratio < 0.5) {
+      currentStage = 1;
+    } else if (ratio < 1.0) {
+      currentStage = 2;
+    } else {
+      currentStage = 3;
+    }
+  } else {
+    const stageDuration = crop.totalGrowthSeconds / (crop.totalStages - 1);
+    currentStage = Math.min(
+      crop.totalStages - 1,
+      Math.floor(totalElapsedSec / stageDuration)
+    );
+  }
+
   const isRipe = currentStage >= crop.totalStages - 1;
   const percent = Math.min(100, Math.round((totalElapsedSec / crop.totalGrowthSeconds) * 100));
 
@@ -486,6 +519,17 @@ export function calculateOfflineSimulation(
 
     // C. Crop Over-ripening & Decay
     if (tile.crop) {
+      // Migrate legacy 1800s apple trees to new 300s (5-minute) standard
+      if (tile.crop.id === 'apple' && tile.crop.totalGrowthSeconds > 300) {
+        const scaledAcc = Math.min(300, Math.round(((tile.crop.growthSecondsAcc ?? 0) / tile.crop.totalGrowthSeconds) * 300));
+        tile.crop = {
+          ...tile.crop,
+          totalGrowthSeconds: 300,
+          growthSecondsAcc: scaledAcc
+        };
+        newTiles[key] = { ...tile, crop: tile.crop };
+      }
+
       const growth = getCropGrowthStage(tile.crop, tile.isWatered, now);
       if (growth.isRipe && !tile.crop.isWithered) {
         const ripeSince = tile.crop.ripeAt || (now - Math.min(elapsedMs, 3600000));
@@ -742,6 +786,7 @@ export interface GameStoreState extends PlayerFarmState {
   addGold: (amount: number) => void;
   sleepNextDay: () => void;
   buySeed: (seedId: string, quantity?: number) => { success: boolean; reason?: string };
+  buyItem: (itemId: string, quantity?: number) => { success: boolean; reason?: string };
   sellCrop: (cropId: string, quantity?: number) => { success: boolean; reason?: string };
   sellAllCrops: () => { success: boolean; totalGold: number; totalSold: number };
   craftItem: (recipeId: string) => { success: boolean; reason?: string };
@@ -1170,10 +1215,11 @@ export const useGameStore = create<GameStoreState>((set, get) => {
           });
         }
 
-        // Roll back to Stage 2 (growthSecondsAcc = 900s, total = 1800s -> needs 900s / 15 mins to fruit again)
+        // Roll back to Stage 2 (growthSecondsAcc = 150s, total = 300s -> needs 150s / 2.5 mins to fruit again)
         const rolledBackCrop: CropData = {
           ...currentTile.crop,
-          growthSecondsAcc: 900,
+          totalGrowthSeconds: 300,
+          growthSecondsAcc: 150,
           wateredAt: currentTile.isWatered ? now : null,
           isWithered: false,
           ripeAt: null
@@ -1196,7 +1242,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
 
         set(updated);
         queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
-        get().notify('Thu hoạch thành công +3 Trái Táo 🍎! Cây táo trở về giai đoạn 2 và sẽ kết trái lại sau 15 phút tưới nước.', 'success');
+        get().notify('Thu hoạch thành công +3 Trái Táo 🍎! Cây táo trở về giai đoạn 2 và sẽ kết trái lại sau 2.5 phút tưới nước.', 'success');
 
         return {
           success: true,
@@ -1663,26 +1709,26 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       get().notify(`🌅 Bình minh Ngày ${nextDay}! Thể lực hồi phục (${state.maxEnergy}/${state.maxEnergy}). Đất đã khô ráo${boostDetail}.`, 'success');
     },
 
-    // 2. Core Economy: Buy Seeds from Shop
-    buySeed: (seedId: string, quantity = 1) => {
+    // 2. Core Economy: Buy Items (Seeds & Wood) from Shop
+    buyItem: (itemId: string, quantity = 1) => {
       const state = get();
-      const seedDef = SHOP_SEEDS.find((s) => s.id === seedId);
-      if (!seedDef) {
-        get().notify('Loại hạt giống không hợp lệ!', 'error');
-        return { success: false, reason: 'Hạt giống không hợp lệ' };
+      const itemDef = SHOP_BUY_ITEMS.find((s) => s.id === itemId);
+      if (!itemDef) {
+        get().notify('Mặt hàng không hợp lệ!', 'error');
+        return { success: false, reason: 'Mặt hàng không hợp lệ' };
       }
 
-      const totalCost = seedDef.price * quantity;
+      const totalCost = itemDef.price * quantity;
       if (state.gold < totalCost) {
         const msg = `Không đủ tiền vàng! Cần ${totalCost} Gold nhưng chỉ có ${state.gold} Gold.`;
         get().notify(msg, 'warning');
         return { success: false, reason: msg };
       }
 
-      // Add to hotbar if slot exists
+      // Add to hotbar if slot already exists
       let inHotbar = false;
       const newHotbar = state.hotbar.map((item) => {
-        if (item.id === seedId) {
+        if (item.id === itemId) {
           inHotbar = true;
           return { ...item, count: (item.count ?? 0) + quantity };
         }
@@ -1692,7 +1738,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       // If not in hotbar, add to inventory
       let newInventory = [...(state.inventory || [])];
       if (!inHotbar) {
-        const invIdx = newInventory.findIndex((i) => i.id === seedId);
+        const invIdx = newInventory.findIndex((i) => i.id === itemId);
         if (invIdx >= 0) {
           newInventory[invIdx] = {
             ...newInventory[invIdx],
@@ -1700,13 +1746,13 @@ export const useGameStore = create<GameStoreState>((set, get) => {
           };
         } else {
           newInventory.push({
-            id: seedDef.id,
-            name: seedDef.name,
-            icon: seedDef.icon,
-            type: 'seed',
+            id: itemDef.id,
+            name: itemDef.name,
+            icon: itemDef.icon,
+            type: itemDef.type,
             count: quantity,
-            cropId: seedDef.cropId,
-            price: seedDef.price
+            cropId: itemDef.cropId,
+            price: itemDef.price
           });
         }
       }
@@ -1720,8 +1766,12 @@ export const useGameStore = create<GameStoreState>((set, get) => {
 
       set(updated);
       queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
-      get().notify(`Đã mua ${quantity}x ${seedDef.name} (-${totalCost} Gold)!`, 'success');
+      get().notify(`Đã mua ${quantity}x ${itemDef.name} (-${totalCost} Gold)!`, 'success');
       return { success: true };
+    },
+
+    buySeed: (seedId: string, quantity = 1) => {
+      return get().buyItem(seedId, quantity);
     },
 
     // 3. Core Economy: Sell Crop Harvests & Gathered Resources to Shop
@@ -1734,17 +1784,36 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       }
 
       const invItem = (state.inventory || []).find((i) => i.id === itemId);
-      const availableCount = invItem?.count ?? 0;
-      if (availableCount < quantity) {
-        const msg = `Không đủ hàng trong kho! Bạn có ${availableCount} đơn vị.`;
+      const hotbarItem = state.hotbar.find((i) => i.id === itemId);
+      const invCount = invItem?.count ?? 0;
+      const hotbarCount = hotbarItem?.count ?? 0;
+      const totalAvailable = invCount + hotbarCount;
+
+      if (totalAvailable < quantity) {
+        const msg = `Không đủ hàng trong kho! Bạn có ${totalAvailable} đơn vị.`;
         get().notify(msg, 'warning');
         return { success: false, reason: msg };
       }
 
       const totalEarned = itemDef.price * quantity;
+      let remainingToDeduct = quantity;
+
+      // Deduct from inventory first
       const newInventory = (state.inventory || []).map((item) => {
-        if (item.id === itemId) {
-          return { ...item, count: Math.max(0, (item.count ?? 0) - quantity) };
+        if (item.id === itemId && remainingToDeduct > 0) {
+          const deduct = Math.min(item.count ?? 0, remainingToDeduct);
+          remainingToDeduct -= deduct;
+          return { ...item, count: (item.count ?? 0) - deduct };
+        }
+        return item;
+      }).filter((item) => (item.type !== 'crop' && item.type !== 'resource') || (item.count ?? 0) > 0);
+
+      // Deduct remaining from hotbar if any
+      const newHotbar = state.hotbar.map((item) => {
+        if (item.id === itemId && remainingToDeduct > 0) {
+          const deduct = Math.min(item.count ?? 0, remainingToDeduct);
+          remainingToDeduct -= deduct;
+          return { ...item, count: (item.count ?? 0) - deduct };
         }
         return item;
       }).filter((item) => (item.type !== 'crop' && item.type !== 'resource') || (item.count ?? 0) > 0);
@@ -1752,6 +1821,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       const updated = {
         gold: state.gold + totalEarned,
         inventory: newInventory,
+        hotbar: newHotbar,
         updatedAt: Date.now()
       };
 
@@ -1764,17 +1834,18 @@ export const useGameStore = create<GameStoreState>((set, get) => {
     // 4. Core Economy: Sell All Crops & Resources at once
     sellAllCrops: () => {
       const state = get();
-      const itemsToSell = (state.inventory || []).filter((i) => (i.type === 'crop' || i.type === 'resource') && (i.count ?? 0) > 0);
+      const invItems = (state.inventory || []).filter((i) => (i.type === 'crop' || i.type === 'resource') && (i.count ?? 0) > 0);
+      const hotbarItems = state.hotbar.filter((i) => (i.type === 'crop' || i.type === 'resource') && (i.count ?? 0) > 0);
 
-      if (itemsToSell.length === 0) {
-        get().notify('Không có nông sản hay tài nguyên nào trong kho để bán!', 'info');
+      if (invItems.length === 0 && hotbarItems.length === 0) {
+        get().notify('Không có nông sản hay tài nguyên nào để bán!', 'info');
         return { success: false, totalGold: 0, totalSold: 0 };
       }
 
       let totalGold = 0;
       let totalSold = 0;
 
-      for (const item of itemsToSell) {
+      for (const item of [...invItems, ...hotbarItems]) {
         const itemDef = ALL_SELLABLE_ITEMS.find((c) => c.id === item.id);
         const unitPrice = itemDef?.price ?? item.price ?? 2;
         const count = item.count ?? 0;
@@ -1783,9 +1854,12 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       }
 
       const newInventory = (state.inventory || []).filter((i) => i.type !== 'crop' && i.type !== 'resource');
+      const newHotbar = state.hotbar.filter((i) => i.type !== 'crop' && i.type !== 'resource');
+
       const updated = {
         gold: state.gold + totalGold,
         inventory: newInventory,
+        hotbar: newHotbar,
         updatedAt: Date.now()
       };
 

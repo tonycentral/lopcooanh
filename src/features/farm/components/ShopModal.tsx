@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import { 
   useGameStore, 
-  SHOP_SEEDS, 
+  SHOP_BUY_ITEMS,
   ALL_SELLABLE_ITEMS, 
   CRAFTING_RECIPES,
   BUILDING_CONFIGS,
@@ -43,7 +43,7 @@ export default function ShopModal({ isOpen, onClose, initialTab = 'buy' }: ShopM
   const hotbar = useGameStore((state) => state.hotbar);
   const buildings = useGameStore((state) => state.buildings || []);
   const livestock = useGameStore((state) => state.livestock || []);
-  const buySeed = useGameStore((state) => state.buySeed);
+  const buyItem = useGameStore((state) => state.buyItem);
   const sellCrop = useGameStore((state) => state.sellCrop);
   const sellAllCrops = useGameStore((state) => state.sellAllCrops);
   const craftItem = useGameStore((state) => state.craftItem);
@@ -65,7 +65,9 @@ export default function ShopModal({ isOpen, onClose, initialTab = 'buy' }: ShopM
   if (!isOpen) return null;
 
   const sellableItemsInInv = inventory.filter((item) => (item.type === 'crop' || item.type === 'resource') && (item.count ?? 0) > 0);
-  const totalSellableCount = sellableItemsInInv.reduce((acc, item) => acc + (item.count ?? 0), 0);
+  const sellableItemsInHotbar = hotbar.filter((item) => (item.type === 'crop' || item.type === 'resource') && (item.count ?? 0) > 0);
+  const totalSellableCount = sellableItemsInInv.reduce((acc, item) => acc + (item.count ?? 0), 0) +
+    sellableItemsInHotbar.reduce((acc, item) => acc + (item.count ?? 0), 0);
 
   return (
     <div 
@@ -117,7 +119,7 @@ export default function ShopModal({ isOpen, onClose, initialTab = 'buy' }: ShopM
             }`}
           >
             <Sprout className="w-4 h-4" />
-            <span>Mua Hạt Giống (Buy)</span>
+            <span>Mua Hàng (Buy)</span>
           </button>
 
           <button
@@ -174,34 +176,37 @@ export default function ShopModal({ isOpen, onClose, initialTab = 'buy' }: ShopM
           </button>
         </div>
 
-        {/* Tab 1: Mua Hạt Giống (Buy Seeds) */}
+        {/* Tab 1: Mua Hàng & Hạt Giống (Buy Goods & Seeds) */}
         {tab === 'buy' && (
           <div className="p-5 space-y-3 max-h-[60vh] overflow-y-auto">
-            {SHOP_SEEDS.map((seed) => {
-              const currentSeedCount = hotbar.find((h) => h.id === seed.id)?.count ?? 0;
-              const canAfford1 = gold >= seed.price;
-              const canAfford5 = gold >= seed.price * 5;
+            {SHOP_BUY_ITEMS.map((item) => {
+              const currentCount = 
+                (hotbar.find((h) => h.id === item.id)?.count ?? 0) +
+                (inventory.find((i) => i.id === item.id)?.count ?? 0);
+              const canAfford1 = gold >= item.price;
+              const canAfford5 = gold >= item.price * 5;
+              const canAfford10 = gold >= item.price * 10;
 
               return (
                 <div 
-                  key={seed.id}
+                  key={item.id}
                   className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center justify-between gap-4 hover:border-slate-700 transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     <div className="text-3xl w-10 h-10 flex items-center justify-center bg-slate-800/80 rounded-xl">
-                      {seed.icon}
+                      {item.icon}
                     </div>
                     <div>
                       <div className="text-sm font-semibold text-white flex items-center gap-2">
-                        {seed.name}
+                        {item.name}
                         <span className="text-[11px] font-normal text-slate-400">
-                          (Đang có: <span className="font-mono text-emerald-400">{currentSeedCount}</span>)
+                          (Đang có: <span className="font-mono text-emerald-400 font-bold">{currentCount}</span>)
                         </span>
                       </div>
-                      <div className="text-xs text-slate-400 mt-0.5">{seed.desc}</div>
+                      <div className="text-xs text-slate-400 mt-0.5">{item.desc}</div>
                       <div className="text-xs font-bold text-amber-400 mt-1 flex items-center gap-1">
                         <Coins className="w-3.5 h-3.5" />
-                        <span>{seed.price} Gold / hạt</span>
+                        <span>{item.price} Gold / đơn vị</span>
                       </div>
                     </div>
                   </div>
@@ -209,19 +214,28 @@ export default function ShopModal({ isOpen, onClose, initialTab = 'buy' }: ShopM
                   {/* Buy Buttons */}
                   <div className="flex items-center gap-2 shrink-0">
                     <button
-                      onClick={() => buySeed(seed.id, 1)}
+                      onClick={() => buyItem(item.id, 1)}
                       disabled={!canAfford1}
-                      className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:hover:bg-emerald-600 text-white text-xs font-semibold transition-all shadow-md shadow-emerald-950"
+                      className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:hover:bg-emerald-600 text-white text-xs font-semibold transition-all shadow-md shadow-emerald-950 cursor-pointer"
                     >
                       Mua x1
                     </button>
                     <button
-                      onClick={() => buySeed(seed.id, 5)}
+                      onClick={() => buyItem(item.id, 5)}
                       disabled={!canAfford5}
-                      className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-40 text-slate-200 text-xs font-semibold border border-slate-700 transition-all"
+                      className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-40 text-slate-200 text-xs font-semibold border border-slate-700 transition-all cursor-pointer"
                     >
-                      Mua x5 ({seed.price * 5}g)
+                      Mua x5 ({item.price * 5}g)
                     </button>
+                    {item.id === 'resource_wood' && (
+                      <button
+                        onClick={() => buyItem(item.id, 10)}
+                        disabled={!canAfford10}
+                        className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-40 text-amber-300 text-xs font-semibold border border-amber-800/50 transition-all cursor-pointer hidden sm:block"
+                      >
+                        Mua x10 ({item.price * 10}g)
+                      </button>
+                    )}
                   </div>
                 </div>
               );
@@ -245,7 +259,7 @@ export default function ShopModal({ isOpen, onClose, initialTab = 'buy' }: ShopM
                 </div>
                 <button
                   onClick={sellAllCrops}
-                  className="px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-amber-950 transition-all"
+                  className="px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-amber-950 transition-all cursor-pointer"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Bán Tất Cả</span>
@@ -260,8 +274,9 @@ export default function ShopModal({ isOpen, onClose, initialTab = 'buy' }: ShopM
             {/* List of Sellable Items */}
             <div className="space-y-3">
               {ALL_SELLABLE_ITEMS.map((item) => {
-                const invItem = inventory.find((i) => i.id === item.id);
-                const count = invItem?.count ?? 0;
+                const invCount = inventory.find((i) => i.id === item.id)?.count ?? 0;
+                const hotbarCount = hotbar.find((h) => h.id === item.id)?.count ?? 0;
+                const count = invCount + hotbarCount;
                 const canSell = count > 0;
 
                 return (
@@ -293,14 +308,14 @@ export default function ShopModal({ isOpen, onClose, initialTab = 'buy' }: ShopM
                       <button
                         onClick={() => sellCrop(item.id, 1)}
                         disabled={!canSell}
-                        className="px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 disabled:opacity-30 disabled:hover:bg-amber-600 text-white text-xs font-semibold transition-all shadow-md shadow-amber-950"
+                        className="px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 disabled:opacity-30 disabled:hover:bg-amber-600 text-white text-xs font-semibold transition-all shadow-md shadow-amber-950 cursor-pointer"
                       >
                         Bán x1 (+{item.price}g)
                       </button>
                       {count >= 5 && (
                         <button
                           onClick={() => sellCrop(item.id, 5)}
-                          className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-all"
+                          className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-all cursor-pointer"
                         >
                           Bán x5 (+{item.price * 5}g)
                         </button>
