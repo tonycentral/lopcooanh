@@ -64,6 +64,29 @@ export default class FarmScene extends Phaser.Scene {
   private isInputBlocked = false;
   private lastDirection: 'down' | 'up' | 'left' | 'right' = 'down';
 
+  // Companion Pet Dog & Fetch Minigame
+  private dog!: Phaser.Physics.Arcade.Sprite;
+  private dogState: 'idle' | 'wander' | 'follow' | 'sit' | 'fetch' | 'return_stone' | 'chase_boar' = 'idle';
+  private dogTargetX = 0;
+  private dogTargetY = 0;
+  private dogWanderTimer = 0;
+  private dogSitTimer = 0;
+  private dogEmoteContainer!: Phaser.GameObjects.Container;
+  private dogEmoteText!: Phaser.GameObjects.Text;
+  private dogStoneIcon!: Phaser.GameObjects.Image;
+  private currentThrownStone: Phaser.GameObjects.Sprite | null = null;
+  private fetchStoneTarget: { x: number; y: number } | null = null;
+
+  // Wild Boar Pest AI
+  private wildBoar: Phaser.Physics.Arcade.Sprite | null = null;
+  private boarState: 'idle' | 'running_to_crop' | 'eating' | 'fleeing' = 'idle';
+  private boarTargetGrid: { x: number; y: number } | null = null;
+  private boarEatingTimer: Phaser.Time.TimerEvent | null = null;
+  private boarSpawnTimer: Phaser.Time.TimerEvent | null = null;
+  private boarEatingTween: Phaser.Tweens.Tween | null = null;
+  private boarCooldownUntil = 0;
+  private boarFleeTarget: { x: number; y: number } = { x: 0, y: 0 };
+
   constructor() {
     super('FarmScene');
   }
@@ -293,10 +316,49 @@ export default class FarmScene extends Phaser.Scene {
       this.syncAllTiles(state.tiles);
     });
 
-    // Periodic growth check every 1 second (Timestamp Delta Calculation)
-    this.time.addEvent({
-      delay: 1000,
-      callback: () => this.updateCropVisuals(),
+    // 8. Companion Dog Creation
+    this.dog = this.physics.add.sprite(this.player.x + 28, this.player.y + 12, 'companion_dog');
+    this.dog.setCollideWorldBounds(true);
+    this.dog.setDepth(14);
+    this.dog.body.setSize(20, 14).setOffset(6, 12);
+    this.physics.add.collider(this.dog, this.solidObstacleGroup);
+
+    // Dog interactive petting
+    this.dog.setInteractive({ useHandCursor: true });
+    this.dog.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
+      if (this.isInputBlocked || pointer.rightButtonDown()) return;
+      this.showDogEmote('❤️ Gâu gâu!', 1800);
+      useGameStore.getState().notify('🐕 Bạn đã vuốt ve chú chó cưng! Thật dễ thương!', 'info');
+    });
+
+    // Dog emote container (speech bubble / hearts / stone in mouth)
+    const emoteBg = this.add.graphics();
+    emoteBg.fillStyle(0x0f172a, 0.9);
+    emoteBg.lineStyle(1.5, 0x38bdf8, 0.9);
+    emoteBg.fillRoundedRect(-24, -10, 48, 20, 6);
+    emoteBg.strokeRoundedRect(-24, -10, 48, 20, 6);
+
+    this.dogEmoteText = this.add.text(0, 0, '🐾', {
+      fontSize: '11px',
+      fontStyle: 'bold',
+      fontFamily: 'sans-serif'
+    }).setOrigin(0.5);
+
+    this.dogStoneIcon = this.add.image(0, 0, 'item_stone_thrown').setScale(0.85);
+    this.dogStoneIcon.setVisible(false);
+
+    this.dogEmoteContainer = this.add.container(this.dog.x, this.dog.y - 20, [emoteBg, this.dogEmoteText, this.dogStoneIcon]);
+    this.dogEmoteContainer.setDepth(28);
+    this.dogEmoteContainer.setVisible(false);
+
+    this.dogState = 'idle';
+    this.dogTargetX = this.dog.x;
+    this.dogTargetY = this.dog.y;
+
+    // 9. Periodic Wild Boar Threat check (every 60s)
+    this.boarSpawnTimer = this.time.addEvent({
+      delay: 60000,
+      callback: () => this.trySpawnWildBoar(),
       loop: true
     });
   }
@@ -387,7 +449,11 @@ export default class FarmScene extends Phaser.Scene {
     this.updatePlayerIdleAnimation();
   }
 
-  update() {
+  update(_time: number, delta: number) {
+    // 0. Update Animal Entity Systems (Companion Dog & Wild Boar)
+    this.updateDogAI(delta);
+    this.updateBoarAI(delta);
+
     if (this.isPerformingAction) {
       if (this.player && this.player.body) {
         this.player.setVelocity(0, 0);
@@ -799,6 +865,13 @@ export default class FarmScene extends Phaser.Scene {
 
   private handleTileClick(x: number, y: number) {
     const store = useGameStore.getState();
+
+    // 0. Stone Throwing Minigame with Companion Dog
+    if (store.activeTool === 'resource_stone') {
+      this.throwStoneToTile(x, y);
+      return;
+    }
+
     const isMoveOnly = store.activeTool === 'none';
     const isSanctuary = x === this.SANCTUARY_GRID_X && y === this.SANCTUARY_GRID_Y;
     const isBBQ = x === this.BBQ_GRID_X && y === this.BBQ_GRID_Y;
@@ -1124,6 +1197,12 @@ export default class FarmScene extends Phaser.Scene {
 
     // Priority -1: Move-Only / Observation Mode
     if (activeTool === 'none') {
+      return;
+    }
+
+    // Priority -0.5: Stone Throw Fetch Minigame
+    if (activeTool === 'resource_stone') {
+      this.throwStoneToTile(x, y);
       return;
     }
 
@@ -1470,9 +1549,455 @@ export default class FarmScene extends Phaser.Scene {
     }
   }
 
+  /**
+   * Fetch Stone Minigame: Player throws a pebble towards target grid tile,
+   * dog chases and retrieves it to reward +1 Stone, +5 XP, +5 Energy!
+   */
+  private throwStoneToTile(gx: number, gy: number) {
+    if (this.currentThrownStone) return; // Stone already in flight or being retrieved
+
+    const store = useGameStore.getState();
+    const res = store.throwStone();
+    if (!res.success) {
+      this.showFloatingNotice('Không còn đá trong túi đồ!');
+      return;
+    }
+
+    const targetWx = gx * this.TILE_SIZE + 16;
+    const targetWy = gy * this.TILE_SIZE + 16;
+
+    this.updateFacingDirection(targetWx, targetWy);
+
+    // Spawn stone projectile
+    const stone = this.add.sprite(this.player.x, this.player.y - 10, 'item_stone_thrown');
+    stone.setDepth(25);
+    this.currentThrownStone = stone;
+
+    // Small throw recoil on player
+    this.tweens.add({
+      targets: this.player,
+      y: this.player.y - 4,
+      duration: 100,
+      yoyo: true,
+      ease: 'Quad.easeOut'
+    });
+
+    const flightDuration = Math.min(800, Math.max(350, Phaser.Math.Distance.Between(this.player.x, this.player.y, targetWx, targetWy) * 2.2));
+
+    this.tweens.add({
+      targets: stone,
+      x: targetWx,
+      duration: flightDuration,
+      ease: 'Linear'
+    });
+
+    this.tweens.add({
+      targets: stone,
+      y: targetWy - 36,
+      duration: flightDuration / 2,
+      ease: 'Quad.easeOut',
+      yoyo: true,
+      onComplete: () => {
+        stone.y = targetWy;
+        this.spawnImpactParticles(targetWx, targetWy, 'fx_dust');
+        this.startDogFetch(targetWx, targetWy);
+      }
+    });
+  }
+
+  private startDogFetch(targetWx: number, targetWy: number) {
+    this.fetchStoneTarget = { x: targetWx, y: targetWy };
+    this.dogState = 'fetch';
+    this.dog.setTexture('companion_dog');
+    this.showDogEmote('Gâu! 🐾', 1200);
+  }
+
+  private showDogEmote(text: string, durationMs = 1500) {
+    this.dogEmoteText.setText(text);
+    this.dogStoneIcon.setVisible(false);
+    this.dogEmoteContainer.setVisible(true);
+
+    this.time.delayedCall(durationMs, () => {
+      if (this.dogState !== 'return_stone') {
+        this.dogEmoteContainer.setVisible(false);
+      }
+    });
+  }
+
+  /**
+   * Companion Pet Dog AI State Machine:
+   * Handles Leash wandering, player following, fetching thrown stones, and barking to scare boars
+   */
+  private updateDogAI(delta: number) {
+    if (!this.dog || !this.dog.body) return;
+
+    if (this.dogEmoteContainer) {
+      this.dogEmoteContainer.setPosition(this.dog.x, this.dog.y - 20);
+    }
+    this.dog.setDepth(10 + (this.dog.y / 1000));
+
+    // 1. Fetch State (Chasing the thrown stone)
+    if (this.dogState === 'fetch') {
+      if (!this.fetchStoneTarget) {
+        this.dogState = 'idle';
+        return;
+      }
+
+      const dx = this.fetchStoneTarget.x - this.dog.x;
+      const dy = this.fetchStoneTarget.y - this.dog.y;
+      const dist = Math.hypot(dx, dy);
+
+      if (dist <= 12) {
+        this.dog.setVelocity(0, 0);
+        if (this.currentThrownStone) {
+          this.currentThrownStone.destroy();
+          this.currentThrownStone = null;
+        }
+        this.fetchStoneTarget = null;
+        this.dogState = 'return_stone';
+        // Show stone in mouth
+        this.dogEmoteText.setText('');
+        this.dogStoneIcon.setVisible(true);
+        this.dogEmoteContainer.setVisible(true);
+      } else {
+        const speed = 180;
+        this.dog.setVelocity((dx / dist) * speed, (dy / dist) * speed);
+        this.dog.setFlipX(dx < 0);
+      }
+      return;
+    }
+
+    // 2. Return Stone State (Delivering fetched stone back to player)
+    if (this.dogState === 'return_stone') {
+      const dx = this.player.x - this.dog.x;
+      const dy = this.player.y - this.dog.y;
+      const dist = Math.hypot(dx, dy);
+
+      if (dist <= 28) {
+        this.dog.setVelocity(0, 0);
+        this.dogStoneIcon.setVisible(false);
+        this.dogState = 'idle';
+        this.dogWanderTimer = 2000;
+        this.dogSitTimer = 0;
+
+        useGameStore.getState().returnFetchedStone();
+        this.showDogEmote('❤️ Gâu!', 2200);
+        this.showFloatingText(
+          Math.floor(this.dog.x / this.TILE_SIZE),
+          Math.floor(this.dog.y / this.TILE_SIZE),
+          '+1 Đá Cuội 🪨 (+5 XP, +5 Năng lượng)',
+          '#4ade80'
+        );
+      } else {
+        const speed = 175;
+        this.dog.setVelocity((dx / dist) * speed, (dy / dist) * speed);
+        this.dog.setFlipX(dx < 0);
+      }
+      return;
+    }
+
+    // 3. Chase Wild Boar State (Defending the crops)
+    if (this.dogState === 'chase_boar') {
+      if (!this.wildBoar || this.boarState === 'fleeing') {
+        this.dogState = 'follow';
+        return;
+      }
+
+      const dx = this.wildBoar.x - this.dog.x;
+      const dy = this.wildBoar.y - this.dog.y;
+      const dist = Math.hypot(dx, dy);
+
+      if (dist <= 50) {
+        this.showDogEmote('Gâu gâu! 🐕🔊', 1500);
+        this.scareWildBoar();
+        this.dogState = 'follow';
+        this.dog.setVelocity(0, 0);
+      } else {
+        const speed = 165;
+        this.dog.setVelocity((dx / dist) * speed, (dy / dist) * speed);
+        this.dog.setFlipX(dx < 0);
+      }
+      return;
+    }
+
+    // 4. Default Follow / Leash / Wander / Sit AI
+    const distToPlayer = Phaser.Math.Distance.Between(this.dog.x, this.dog.y, this.player.x, this.player.y);
+
+    // If wild boar appeared within 160px of dog, dog automatically protects the farm!
+    if (this.wildBoar && this.boarState !== 'fleeing') {
+      const distToBoar = Phaser.Math.Distance.Between(this.dog.x, this.dog.y, this.wildBoar.x, this.wildBoar.y);
+      if (distToBoar <= 160) {
+        this.dogState = 'chase_boar';
+        this.dog.setTexture('companion_dog');
+        this.showDogEmote('Gâu! ⚠️', 1000);
+        return;
+      }
+    }
+
+    if (distToPlayer > 96) {
+      // Follow: Player moved far away (> 96px) -> run towards player
+      this.dog.setTexture('companion_dog');
+      const dx = this.player.x - this.dog.x;
+      const dy = this.player.y - this.dog.y;
+      const dist = Math.hypot(dx, dy);
+      const speed = 135;
+      this.dog.setVelocity((dx / dist) * speed, (dy / dist) * speed);
+      this.dog.setFlipX(dx < 0);
+      this.dogState = 'follow';
+      this.dogSitTimer = 0;
+    } else if (distToPlayer > 44) {
+      // Leash range (44 - 96px): Trot gently around player
+      this.dogWanderTimer -= delta;
+      if (this.dogWanderTimer <= 0) {
+        this.dogWanderTimer = Phaser.Math.Between(1600, 3200);
+        const angle = Math.random() * Math.PI * 2;
+        const radius = Phaser.Math.Between(34, 56);
+        this.dogTargetX = this.player.x + Math.cos(angle) * radius;
+        this.dogTargetY = this.player.y + Math.sin(angle) * radius;
+      }
+
+      const dx = this.dogTargetX - this.dog.x;
+      const dy = this.dogTargetY - this.dog.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist > 8) {
+        this.dog.setTexture('companion_dog');
+        this.dog.setVelocity((dx / dist) * 65, (dy / dist) * 65);
+        this.dog.setFlipX(dx < 0);
+      } else {
+        this.dog.setVelocity(0, 0);
+      }
+      this.dogSitTimer = 0;
+    } else {
+      // Very close to player (dist <= 44): Stop and Sit
+      this.dog.setVelocity(0, 0);
+      this.dogSitTimer += delta;
+      if (this.dogSitTimer > 2500) {
+        this.dog.setTexture('companion_dog_sit');
+      } else {
+        this.dog.setTexture('companion_dog');
+      }
+    }
+  }
+
+  /**
+   * Wild Boar Pest AI System:
+   * Periodic 60s spawn loop targeting nearest crops, eating for 5s, and fleeing when chased
+   */
+  private trySpawnWildBoar() {
+    if (Date.now() < this.boarCooldownUntil) return;
+    if (this.wildBoar) return; // Only 1 active boar at a time
+
+    const store = useGameStore.getState();
+    const activeCrops: Array<{ gx: number; gy: number }> = [];
+
+    for (const [key, tile] of Object.entries(store.tiles)) {
+      if (tile.crop && !tile.crop.isWithered) {
+        const [gx, gy] = key.split(',').map(Number);
+        activeCrops.push({ gx, gy });
+      }
+    }
+
+    if (activeCrops.length === 0) return; // No crops to target
+
+    // Spawn from random edge outside grid
+    const edge = Math.floor(Math.random() * 4);
+    let sx = 0;
+    let sy = 0;
+
+    if (edge === 0) {
+      sx = -16;
+      sy = Phaser.Math.Between(64, this.GRID_HEIGHT * this.TILE_SIZE - 64);
+    } else if (edge === 1) {
+      sx = this.GRID_WIDTH * this.TILE_SIZE + 16;
+      sy = Phaser.Math.Between(64, this.GRID_HEIGHT * this.TILE_SIZE - 64);
+    } else if (edge === 2) {
+      sx = Phaser.Math.Between(64, this.GRID_WIDTH * this.TILE_SIZE - 64);
+      sy = -16;
+    } else {
+      sx = Phaser.Math.Between(64, this.GRID_WIDTH * this.TILE_SIZE - 64);
+      sy = this.GRID_HEIGHT * this.TILE_SIZE + 16;
+    }
+
+    this.wildBoar = this.physics.add.sprite(sx, sy, 'wild_boar');
+    this.wildBoar.setDepth(14);
+    this.wildBoar.body.setSize(24, 16).setOffset(4, 10);
+    this.physics.add.collider(this.wildBoar, this.solidObstacleGroup);
+
+    // Find closest crop to spawn point
+    let nearestCrop = activeCrops[0];
+    let minDist = Infinity;
+    for (const c of activeCrops) {
+      const d = Math.hypot(c.gx * this.TILE_SIZE + 16 - sx, c.gy * this.TILE_SIZE + 16 - sy);
+      if (d < minDist) {
+        minDist = d;
+        nearestCrop = c;
+      }
+    }
+
+    this.boarTargetGrid = { x: nearestCrop.gx, y: nearestCrop.gy };
+    this.boarState = 'running_to_crop';
+
+    // Notify user with warning banner
+    useGameStore.getState().notify('⚠️ Cảnh báo: Heo rừng đang tiến vào ăn trộm mùa màng!', 'warning');
+  }
+
+  private updateBoarAI(_delta: number) {
+    if (!this.wildBoar || !this.wildBoar.body) return;
+
+    this.wildBoar.setDepth(10 + (this.wildBoar.y / 1000));
+
+    // Player or Dog proximity triggers immediate flee!
+    const distToPlayer = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.wildBoar.x, this.wildBoar.y);
+    const distToDog = Phaser.Math.Distance.Between(this.dog.x, this.dog.y, this.wildBoar.x, this.wildBoar.y);
+
+    if (this.boarState !== 'fleeing' && (distToPlayer <= 48 || distToDog <= 55)) {
+      this.scareWildBoar();
+      return;
+    }
+
+    // State 1: Running to Crop
+    if (this.boarState === 'running_to_crop') {
+      if (!this.boarTargetGrid) {
+        this.scareWildBoar();
+        return;
+      }
+
+      const store = useGameStore.getState();
+      const targetTile = store.tiles[`${this.boarTargetGrid.x},${this.boarTargetGrid.y}`];
+      if (!targetTile?.crop) {
+        this.scareWildBoar();
+        return;
+      }
+
+      const targetWx = this.boarTargetGrid.x * this.TILE_SIZE + 16;
+      const targetWy = this.boarTargetGrid.y * this.TILE_SIZE + 16;
+
+      const dx = targetWx - this.wildBoar.x;
+      const dy = targetWy - this.wildBoar.y;
+      const dist = Math.hypot(dx, dy);
+
+      if (dist <= 10) {
+        // Arrived at crop, start eating (5 seconds)
+        this.wildBoar.setVelocity(0, 0);
+        this.boarState = 'eating';
+        this.showFloatingNotice('Heo rừng đang ăn trộm cây... (5s)', this.wildBoar.x, this.wildBoar.y - 14);
+
+        this.boarEatingTween = this.tweens.add({
+          targets: this.wildBoar,
+          scaleY: { from: 1, to: 0.8 },
+          duration: 250,
+          yoyo: true,
+          repeat: -1,
+          ease: 'Sine.easeInOut'
+        });
+
+        const targetGrid = { ...this.boarTargetGrid };
+        this.boarEatingTimer = this.time.delayedCall(5000, () => {
+          if (this.boarState === 'eating' && this.wildBoar) {
+            store.destroyCropByPest(targetGrid.x, targetGrid.y);
+            this.scareWildBoar();
+          }
+        });
+      } else {
+        const speed = 85;
+        this.wildBoar.setVelocity((dx / dist) * speed, (dy / dist) * speed);
+        this.wildBoar.setFlipX(dx > 0);
+      }
+      return;
+    }
+
+    // State 2: Eating (holding position during eating timer)
+    if (this.boarState === 'eating') {
+      this.wildBoar.setVelocity(0, 0);
+      return;
+    }
+
+    // State 3: Fleeing at double speed (165px/s)
+    if (this.boarState === 'fleeing') {
+      const dx = this.boarFleeTarget.x - this.wildBoar.x;
+      const dy = this.boarFleeTarget.y - this.wildBoar.y;
+      const dist = Math.hypot(dx, dy) || 1;
+      const speed = 165;
+      this.wildBoar.setVelocity((dx / dist) * speed, (dy / dist) * speed);
+      this.wildBoar.setFlipX(dx > 0);
+
+      // Check if safely escaped outside map bounds
+      if (
+        this.wildBoar.x < -30 ||
+        this.wildBoar.x > this.GRID_WIDTH * this.TILE_SIZE + 30 ||
+        this.wildBoar.y < -30 ||
+        this.wildBoar.y > this.GRID_HEIGHT * this.TILE_SIZE + 30
+      ) {
+        this.destroyWildBoar();
+      }
+    }
+  }
+
+  public scareWildBoar() {
+    if (!this.wildBoar || this.boarState === 'fleeing') return;
+
+    if (this.boarEatingTimer) {
+      this.boarEatingTimer.remove();
+      this.boarEatingTimer = null;
+    }
+
+    if (this.boarEatingTween) {
+      this.boarEatingTween.stop();
+      this.boarEatingTween = null;
+      if (this.wildBoar) {
+        this.wildBoar.setScale(1);
+      }
+    }
+
+    this.boarState = 'fleeing';
+    this.showFloatingNotice('💦 Heo rừng hoảng sợ bỏ chạy!', this.wildBoar.x, this.wildBoar.y - 14);
+
+    // Escape straight towards nearest map edge away from player
+    const fx = this.wildBoar.x > this.player.x ? (this.GRID_WIDTH * this.TILE_SIZE + 50) : -50;
+    const fy = this.wildBoar.y > this.player.y ? (this.GRID_HEIGHT * this.TILE_SIZE + 50) : -50;
+    this.boarFleeTarget = { x: fx, y: fy };
+  }
+
+  private destroyWildBoar() {
+    if (this.boarEatingTimer) {
+      this.boarEatingTimer.remove();
+      this.boarEatingTimer = null;
+    }
+    if (this.boarEatingTween) {
+      this.boarEatingTween.stop();
+      this.boarEatingTween = null;
+    }
+    if (this.wildBoar) {
+      this.wildBoar.destroy();
+      this.wildBoar = null;
+    }
+    // 60 seconds cooldown before next boar can spawn
+    this.boarCooldownUntil = Date.now() + 60000;
+  }
+
   shutdown() {
     this.cancelCurrentAction();
     this.stopMovement();
+    if (this.boarSpawnTimer) {
+      this.boarSpawnTimer.remove();
+      this.boarSpawnTimer = null;
+    }
+    if (this.boarEatingTimer) {
+      this.boarEatingTimer.remove();
+      this.boarEatingTimer = null;
+    }
+    if (this.boarEatingTween) {
+      this.boarEatingTween.stop();
+      this.boarEatingTween = null;
+    }
+    if (this.wildBoar) {
+      this.wildBoar.destroy();
+      this.wildBoar = null;
+    }
+    if (this.currentThrownStone) {
+      this.currentThrownStone.destroy();
+      this.currentThrownStone = null;
+    }
     if (this.unsubscribeStore) {
       this.unsubscribeStore();
       this.unsubscribeStore = null;

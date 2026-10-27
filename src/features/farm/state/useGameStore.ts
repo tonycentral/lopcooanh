@@ -376,8 +376,8 @@ export const defaultHotbar: InventoryItem[] = [
   { id: 'pickaxe', name: 'Cuốc Chim Đập Đá (Pickaxe)', icon: '⛏', type: 'tool' },
   { id: 'scythe', name: 'Liềm Cắt Cỏ (Scythe)', icon: '🗡️', type: 'tool' },
   { id: 'hand', name: 'Thu Hoạch (Hand/Harvest)', icon: '✋', type: 'tool' },
-  { id: 'seed_wheat', name: 'Hạt Lúa Mì (Wheat Seeds)', icon: '🌱', type: 'seed', count: 15, cropId: 'wheat' },
-  { id: 'seed_herb', name: 'Hạt Thảo Mộc (Herb Seeds)', icon: '🌿', type: 'seed', count: 8, cropId: 'herb' }
+  { id: 'seed_wheat', name: 'Hạt Giống (Seeds)', icon: '🌱', type: 'seed', count: 15, cropId: 'wheat' },
+  { id: 'resource_stone', name: 'Đá Cuội (Ném chơi với Chó)', icon: '🪨', type: 'resource', count: 10, price: 4 }
 ];
 
 export function createInitialTiles(): Record<string, TileData> {
@@ -503,7 +503,7 @@ const defaultInitialState: PlayerFarmState = {
     { id: 'crop_herb', name: 'Nhánh Thảo Mộc', icon: '🌿', type: 'crop', count: 1, price: 35 },
     { id: 'seed_apple', name: 'Hạt Cây Táo (Apple Tree)', icon: '🍎🌱', type: 'seed', count: 3, cropId: 'apple', price: 25 },
     { id: 'resource_wood', name: 'Gỗ Tự Nhiên', icon: '🪵', type: 'resource', count: 4, price: 4 },
-    { id: 'resource_stone', name: 'Đá Cuội', icon: '🪨', type: 'resource', count: 2, price: 4 }
+    { id: 'resource_stone', name: 'Đá Cuội', icon: '🪨', type: 'resource', count: 10, price: 4 }
   ],
   tiles: createInitialTiles(),
   updatedAt: Date.now()
@@ -532,6 +532,9 @@ export interface GameStoreState extends PlayerFarmState {
     vocabReward?: string; 
     reason?: string 
   };
+  destroyCropByPest: (x: number, y: number) => { success: boolean; cropName?: string; reason?: string };
+  throwStone: () => { success: boolean; reason?: string };
+  returnFetchedStone: () => { success: boolean };
   gatherResource: (x: number, y: number) => {
     success: boolean;
     destroyed?: boolean;
@@ -1041,6 +1044,136 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         goldReward,
         vocabReward: cropDef?.vocabReward
       };
+    },
+
+    // Destroy crop when wild boar pest eats it
+    destroyCropByPest: (x, y) => {
+      const key = `${x},${y}`;
+      const state = get();
+      const currentTile = state.tiles[key];
+      if (!currentTile?.crop) {
+        return { success: false, reason: 'Không có cây' };
+      }
+
+      const cropDef = CROP_DEFINITIONS[currentTile.crop.id];
+      const cropName = cropDef?.name || 'Cây trồng';
+      const now = Date.now();
+
+      const newTiles: Record<string, TileData> = {
+        ...state.tiles,
+        [key]: {
+          ...currentTile,
+          crop: null,
+          isWatered: false,
+          isTilled: true,
+          uncultivatedSince: now,
+          lastUpdated: now
+        }
+      };
+
+      const updated = {
+        tiles: newTiles,
+        updatedAt: now
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify(`⚠️ Heo rừng đã cắn phá và làm hư hại hoàn toàn 1 ô ${cropName}!`, 'error');
+      return { success: true, cropName };
+    },
+
+    // Throw Stone Minigame (consumes 1 stone from Hotbar or Inventory)
+    throwStone: () => {
+      const state = get();
+      const hotbarStone = state.hotbar.find((i) => i.id === 'resource_stone' && (i.count ?? 0) > 0);
+      const invStone = state.inventory.find((i) => i.id === 'resource_stone' && (i.count ?? 0) > 0);
+
+      if (!hotbarStone && !invStone) {
+        get().notify('Không còn Đá Cuội trong túi đồ để ném!', 'warning');
+        return { success: false, reason: 'Hết đá' };
+      }
+
+      let newHotbar = state.hotbar;
+      let newInventory = state.inventory;
+
+      if (hotbarStone) {
+        newHotbar = state.hotbar.map((i) => {
+          if (i.id === 'resource_stone') {
+            return { ...i, count: (i.count ?? 1) - 1 };
+          }
+          return i;
+        });
+      } else if (invStone) {
+        newInventory = state.inventory.map((i) => {
+          if (i.id === 'resource_stone') {
+            return { ...i, count: (i.count ?? 1) - 1 };
+          }
+          return i;
+        }).filter((i) => (i.count ?? 0) > 0);
+      }
+
+      const updated = {
+        hotbar: newHotbar,
+        inventory: newInventory,
+        updatedAt: Date.now()
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      return { success: true };
+    },
+
+    // Companion Dog returns fetched stone (+1 stone, +5 XP, +5 Energy)
+    returnFetchedStone: () => {
+      const state = get();
+      const currentXp = state.xp ?? 0;
+      const newXp = currentXp + 5;
+      const currentLevel = state.level ?? 1;
+      const didLevelUp = Math.floor(newXp / 100) + 1 > currentLevel;
+      const newLevel = Math.floor(newXp / 100) + 1;
+      const newEnergy = didLevelUp ? state.maxEnergy : Math.min(state.maxEnergy, state.energy + 5);
+
+      let newHotbar = state.hotbar;
+      let newInventory = state.inventory;
+
+      const hotbarIdx = newHotbar.findIndex((i) => i.id === 'resource_stone');
+      if (hotbarIdx >= 0) {
+        newHotbar = newHotbar.map((i) => {
+          if (i.id === 'resource_stone') {
+            return { ...i, count: (i.count ?? 0) + 1 };
+          }
+          return i;
+        });
+      } else {
+        const invIdx = newInventory.findIndex((i) => i.id === 'resource_stone');
+        if (invIdx >= 0) {
+          newInventory = newInventory.map((i) => {
+            if (i.id === 'resource_stone') {
+              return { ...i, count: (i.count ?? 0) + 1 };
+            }
+            return i;
+          });
+        } else {
+          newInventory = [
+            ...newInventory,
+            { id: 'resource_stone', name: 'Đá Cuội', icon: '🪨', type: 'resource', count: 1, price: 4 }
+          ];
+        }
+      }
+
+      const updated = {
+        energy: newEnergy,
+        xp: newXp,
+        level: newLevel,
+        hotbar: newHotbar,
+        inventory: newInventory,
+        updatedAt: Date.now()
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify('🐕 Chú chó đã nhặt đá mang về! (+1 Đá Cuội 🪨, +5 XP, +5 Năng lượng ❤️)', 'success');
+      return { success: true };
     },
 
     // Resource Gathering (Axe -> Wood/Apple Tree, Pickaxe -> Rock, Scythe -> Weed/Withered Crop)

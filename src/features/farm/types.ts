@@ -1,7 +1,16 @@
 // src/features/farm/types.ts
 // Strict TypeScript interfaces for the 2D Farm Engine & State
 
-export type ToolType = 'none' | 'hoe' | 'water_can' | 'axe' | 'pickaxe' | 'scythe' | 'hand' | 'seed' | 'item_fence' | 'item_chest' | 'item_fertilizer';
+export type ToolType = 'none' | 'hoe' | 'water_can' | 'axe' | 'pickaxe' | 'scythe' | 'hand' | 'seed' | 'item_fence' | 'item_chest' | 'item_fertilizer' | 'resource_stone';
+
+export type AnimalType = 'wild_boar' | 'companion_dog';
+
+export interface AnimalEntityData {
+  type: AnimalType;
+  x: number;
+  y: number;
+  state: 'idle' | 'follow' | 'wander' | 'sit' | 'fetch' | 'return_stone' | 'running_to_crop' | 'eating' | 'fleeing';
+}
 
 export type ObstacleType = 'rock' | 'wood' | 'weed';
 

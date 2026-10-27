@@ -672,5 +672,165 @@ export default class BootScene extends Phaser.Scene {
       g.generateTexture('fx_water_splash', 16, 16);
       g.destroy();
     }
+
+    // 15. Wild Boar Pest (32x32)
+    if (!this.textures.exists('wild_boar')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Ground drop shadow
+      g.fillStyle(0x0f172a, 0.35);
+      g.fillEllipse(16, 26, 24, 8);
+      // Main chunky body
+      g.fillStyle(0x3e2723, 1); // Dark bristle brown
+      g.fillRoundedRect(5, 9, 22, 14, 4);
+      // Dark spine bristles
+      g.fillStyle(0x1b0000, 1);
+      g.fillRect(8, 7, 14, 3);
+      g.fillRect(11, 6, 8, 2);
+      // Snout / Head
+      g.fillStyle(0x4e342e, 1);
+      g.fillRoundedRect(2, 12, 10, 9, 2);
+      g.fillStyle(0x27130e, 1); // Nostrils
+      g.fillRect(3, 15, 2, 3);
+      // White sharp tusks
+      g.fillStyle(0xffffff, 1);
+      g.fillTriangle(6, 17, 7, 12, 9, 17);
+      g.fillTriangle(8, 18, 9, 13, 11, 18);
+      // Eye (fierce red-amber)
+      g.fillStyle(0xd97706, 1);
+      g.fillRect(10, 11, 2, 2);
+      g.fillStyle(0x000000, 1);
+      g.fillRect(10, 11, 1, 1);
+      // Legs with dark hooves
+      g.fillStyle(0x3e2723, 1);
+      g.fillRect(7, 21, 3, 5);
+      g.fillRect(13, 21, 3, 5);
+      g.fillRect(19, 21, 3, 5);
+      g.fillRect(23, 21, 3, 5);
+      g.fillStyle(0x1b0000, 1); // Hooves
+      g.fillRect(7, 25, 3, 2);
+      g.fillRect(13, 25, 3, 2);
+      g.fillRect(19, 25, 3, 2);
+      g.fillRect(23, 25, 3, 2);
+      // Small curly tail
+      g.fillStyle(0x4e342e, 1);
+      g.fillRect(27, 12, 2, 4);
+      g.fillRect(26, 11, 2, 2);
+      g.generateTexture('wild_boar', 32, 32);
+      g.destroy();
+    }
+
+    // 16. Companion Pet Dog (Standing/Walking 32x32)
+    if (!this.textures.exists('companion_dog')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Drop shadow
+      g.fillStyle(0x0f172a, 0.35);
+      g.fillEllipse(16, 26, 22, 7);
+      // Main golden body
+      g.fillStyle(0xd97706, 1); // Honey gold
+      g.fillRoundedRect(7, 11, 18, 11, 4);
+      // Fluffy lighter belly & chest
+      g.fillStyle(0xfef3c7, 1);
+      g.fillRoundedRect(6, 13, 8, 8, 3);
+      // Head
+      g.fillStyle(0xd97706, 1);
+      g.fillRoundedRect(4, 7, 10, 10, 3);
+      // Floppy ear
+      g.fillStyle(0x92400e, 1);
+      g.fillRoundedRect(10, 7, 4, 7, 2);
+      // Snout & black nose
+      g.fillStyle(0xfde68a, 1);
+      g.fillRoundedRect(2, 10, 5, 5, 2);
+      g.fillStyle(0x1e293b, 1);
+      g.fillRect(2, 10, 2, 2);
+      // Friendly eye
+      g.fillStyle(0x1e293b, 1);
+      g.fillRect(7, 9, 2, 2);
+      g.fillStyle(0xffffff, 1);
+      g.fillRect(7, 9, 1, 1);
+      // Red collar with gold bell tag
+      g.fillStyle(0xef4444, 1);
+      g.fillRect(5, 15, 6, 2);
+      g.fillStyle(0xfacc15, 1);
+      g.fillCircle(8, 17, 1.5);
+      // Four paws
+      g.fillStyle(0xd97706, 1);
+      g.fillRect(7, 20, 3, 6);
+      g.fillRect(11, 20, 3, 6);
+      g.fillRect(17, 20, 3, 6);
+      g.fillRect(21, 20, 3, 6);
+      g.fillStyle(0xfef3c7, 1); // Paws tips
+      g.fillRect(7, 24, 3, 2);
+      g.fillRect(11, 24, 3, 2);
+      g.fillRect(17, 24, 3, 2);
+      g.fillRect(21, 24, 3, 2);
+      // Upright wagging tail
+      g.fillStyle(0xb45309, 1);
+      g.fillRect(24, 8, 3, 5);
+      g.fillRect(23, 11, 3, 3);
+      g.generateTexture('companion_dog', 32, 32);
+      g.destroy();
+    }
+
+    // 17. Companion Pet Dog (Sitting 32x32)
+    if (!this.textures.exists('companion_dog_sit')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Drop shadow
+      g.fillStyle(0x0f172a, 0.35);
+      g.fillEllipse(16, 26, 20, 7);
+      // Sitting body (compact)
+      g.fillStyle(0xd97706, 1);
+      g.fillRoundedRect(8, 13, 15, 11, 4);
+      // Fluffy lighter chest
+      g.fillStyle(0xfef3c7, 1);
+      g.fillRoundedRect(7, 14, 7, 8, 3);
+      // Head
+      g.fillStyle(0xd97706, 1);
+      g.fillRoundedRect(5, 8, 10, 10, 3);
+      // Floppy ear
+      g.fillStyle(0x92400e, 1);
+      g.fillRoundedRect(11, 8, 4, 7, 2);
+      // Snout & nose
+      g.fillStyle(0xfde68a, 1);
+      g.fillRoundedRect(3, 11, 5, 5, 2);
+      g.fillStyle(0x1e293b, 1);
+      g.fillRect(3, 11, 2, 2);
+      // Friendly eye
+      g.fillStyle(0x1e293b, 1);
+      g.fillRect(8, 10, 2, 2);
+      g.fillStyle(0xffffff, 1);
+      g.fillRect(8, 10, 1, 1);
+      // Red collar
+      g.fillStyle(0xef4444, 1);
+      g.fillRect(6, 16, 6, 2);
+      g.fillStyle(0xfacc15, 1);
+      g.fillCircle(9, 18, 1.5);
+      // Front paws straight
+      g.fillStyle(0xd97706, 1);
+      g.fillRect(8, 20, 3, 6);
+      g.fillRect(12, 20, 3, 6);
+      // Hind legs resting flat
+      g.fillStyle(0xb45309, 1);
+      g.fillRoundedRect(16, 19, 7, 6, 2);
+      // Tail resting on ground
+      g.fillStyle(0xd97706, 1);
+      g.fillRect(22, 21, 5, 3);
+      g.generateTexture('companion_dog_sit', 32, 32);
+      g.destroy();
+    }
+
+    // 18. Thrown Stone Projectile (16x16)
+    if (!this.textures.exists('item_stone_thrown')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      g.fillStyle(0x0f172a, 0.3);
+      g.fillCircle(8, 10, 4);
+      g.fillStyle(0x64748b, 1);
+      g.fillCircle(8, 8, 5);
+      g.fillStyle(0x94a3b8, 1);
+      g.fillCircle(7, 6, 2.5);
+      g.fillStyle(0x334155, 1);
+      g.fillRect(9, 9, 2, 2);
+      g.generateTexture('item_stone_thrown', 16, 16);
+      g.destroy();
+    }
   }
 }
