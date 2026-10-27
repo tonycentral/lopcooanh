@@ -1160,5 +1160,342 @@ export default class BootScene extends Phaser.Scene {
       g.generateTexture('furniture_fireplace', 32, 32);
       g.destroy();
     }
+
+    // 31. Building: Chicken Coop (96x96px = 3x3 tiles)
+    if (!this.textures.exists('building_coop')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Ground shadow
+      g.fillStyle(0x0f172a, 0.4);
+      g.fillRect(4, 90, 88, 6);
+
+      // Stone & stilt foundation
+      g.fillStyle(0x475569, 1);
+      g.fillRect(8, 82, 80, 8);
+      g.fillStyle(0x64748b, 1);
+      g.fillRect(8, 82, 80, 2);
+
+      // Main Coop Timber Body
+      g.fillStyle(0x92400e, 1); // Rich amber wood
+      g.fillRect(10, 36, 76, 48);
+      // Vertical wood planks lines
+      g.fillStyle(0x78350f, 1);
+      for (let x = 18; x <= 80; x += 10) {
+        g.fillRect(x, 36, 1, 48);
+      }
+
+      // Chicken coop ramp & door (Center)
+      g.fillStyle(0x451a03, 1);
+      g.fillRect(38, 54, 20, 30);
+      g.fillStyle(0xb45309, 1); // Wooden ramp plank
+      g.fillRect(36, 68, 24, 18);
+      g.fillStyle(0x78350f, 1); // Ramp grip cleats
+      g.fillRect(36, 72, 24, 2);
+      g.fillRect(36, 78, 24, 2);
+      // Straw bedding inside door
+      g.fillStyle(0xfde047, 1);
+      g.fillRect(40, 60, 16, 4);
+
+      // Nesting box on left side
+      g.fillStyle(0x78350f, 1);
+      g.fillRect(14, 52, 18, 22);
+      g.fillStyle(0x92400e, 1);
+      g.fillRect(15, 54, 16, 18);
+      // Straw and egg in nesting box window
+      g.fillStyle(0xfde047, 1);
+      g.fillRect(17, 62, 12, 4);
+      g.fillStyle(0xffffff, 1);
+      g.fillEllipse(23, 63, 6, 4);
+
+      // Feed trough in front right
+      g.fillStyle(0x5c2b09, 1);
+      g.fillRect(64, 76, 18, 8);
+      g.fillStyle(0xf59e0b, 1); // Grain seeds
+      g.fillRect(66, 78, 14, 3);
+      g.fillStyle(0xfde047, 1);
+      g.fillCircle(69, 79, 1);
+      g.fillCircle(73, 79, 1);
+      g.fillCircle(77, 79, 1);
+
+      // Slanted Roof (Golden amber thatch / shingle)
+      g.fillStyle(0xb45309, 1);
+      g.fillTriangle(4, 38, 48, 6, 92, 38);
+      g.fillStyle(0xd97706, 1);
+      g.fillTriangle(8, 36, 48, 9, 88, 36);
+      // Roof shingle rows
+      g.fillStyle(0x92400e, 1);
+      g.fillRect(12, 32, 72, 2);
+      g.fillRect(20, 24, 56, 2);
+      g.fillRect(30, 16, 36, 2);
+      g.fillStyle(0xf59e0b, 1);
+      g.fillRect(14, 31, 68, 1);
+      g.fillRect(22, 23, 52, 1);
+      g.fillRect(32, 15, 32, 1);
+
+      // Weathercock / Rooster sign on roof peak
+      g.fillStyle(0x334155, 1);
+      g.fillRect(47, 2, 2, 8);
+      g.fillStyle(0xd97706, 1);
+      g.fillCircle(48, 3, 3);
+      g.fillStyle(0xdc2626, 1); // Comb
+      g.fillRect(47, 0, 3, 2);
+
+      g.generateTexture('building_coop', 96, 96);
+      g.destroy();
+    }
+
+    // 32. Building: Barn (96x96px = 3x3 tiles)
+    if (!this.textures.exists('building_barn')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Ground shadow
+      g.fillStyle(0x0f172a, 0.4);
+      g.fillRect(4, 90, 88, 6);
+
+      // Stone foundation
+      g.fillStyle(0x475569, 1);
+      g.fillRect(6, 82, 84, 8);
+      g.fillStyle(0x64748b, 1);
+      g.fillRect(6, 82, 84, 2);
+
+      // Traditional Red Barn Walls
+      g.fillStyle(0x991b1b, 1); // Deep barn red
+      g.fillRect(8, 34, 80, 50);
+      g.fillStyle(0x7f1d1d, 1);
+      for (let x = 16; x <= 80; x += 10) {
+        g.fillRect(x, 34, 1, 50);
+      }
+
+      // White Trim Pillars
+      g.fillStyle(0xf8fafc, 1);
+      g.fillRect(8, 34, 3, 50);
+      g.fillRect(85, 34, 3, 50);
+      g.fillRect(8, 80, 80, 2);
+
+      // Double Barn Doors in center
+      g.fillStyle(0x451a03, 1); // Door frame
+      g.fillRect(32, 48, 32, 36);
+      g.fillStyle(0xb91c1c, 1); // Doors
+      g.fillRect(34, 50, 13, 34);
+      g.fillRect(49, 50, 13, 34);
+      // Classic White X-bracing on barn doors
+      g.lineStyle(2, 0xf8fafc, 1);
+      g.strokeRect(35, 52, 11, 30);
+      g.beginPath();
+      g.moveTo(35, 52); g.lineTo(46, 82);
+      g.moveTo(46, 52); g.lineTo(35, 82);
+      g.strokePath();
+
+      g.strokeRect(50, 52, 11, 30);
+      g.beginPath();
+      g.moveTo(50, 52); g.lineTo(61, 82);
+      g.moveTo(61, 52); g.lineTo(50, 82);
+      g.strokePath();
+
+      // Iron door hinges and latch
+      g.fillStyle(0x1e293b, 1);
+      g.fillRect(33, 54, 3, 4);
+      g.fillRect(33, 76, 3, 4);
+      g.fillRect(60, 54, 3, 4);
+      g.fillRect(60, 76, 3, 4);
+      g.fillRect(47, 66, 2, 5);
+
+      // Hay Loft Window & Golden Hay Bale on upper floor
+      g.fillStyle(0x451a03, 1);
+      g.fillRect(40, 26, 16, 16);
+      g.fillStyle(0xfde047, 1); // Hay bale
+      g.fillRoundedRect(42, 32, 12, 12, 2);
+      g.fillStyle(0xd97706, 1);
+      g.fillRect(42, 36, 12, 1);
+      g.fillRect(42, 40, 12, 1);
+
+      // Gambrel Barn Roof (Arched dark shingles)
+      g.fillStyle(0x334155, 1); // Slate base
+      g.beginPath();
+      g.moveTo(4, 36);
+      g.lineTo(20, 14);
+      g.lineTo(48, 6);
+      g.lineTo(76, 14);
+      g.lineTo(92, 36);
+      g.closePath();
+      g.fillPath();
+
+      g.fillStyle(0x475569, 1);
+      g.beginPath();
+      g.moveTo(7, 34);
+      g.lineTo(21, 16);
+      g.lineTo(48, 9);
+      g.lineTo(75, 16);
+      g.lineTo(89, 34);
+      g.closePath();
+      g.fillPath();
+
+      // Roof ridge highlights
+      g.fillStyle(0x64748b, 1);
+      g.fillRect(46, 5, 4, 3);
+      g.fillRect(20, 14, 56, 1);
+
+      g.generateTexture('building_barn', 96, 96);
+      g.destroy();
+    }
+
+    // 33. Livestock Animal: Chicken (32x32px)
+    if (!this.textures.exists('animal_chicken')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Ground shadow
+      g.fillStyle(0x0f172a, 0.35);
+      g.fillEllipse(16, 26, 16, 6);
+
+      // Plump White Body
+      g.fillStyle(0xf8fafc, 1);
+      g.fillEllipse(16, 16, 18, 14);
+      g.fillStyle(0xe2e8f0, 1);
+      g.fillEllipse(17, 18, 14, 10);
+
+      // Head & Neck
+      g.fillStyle(0xf8fafc, 1);
+      g.fillCircle(11, 11, 6);
+
+      // Wing Feathers
+      g.fillStyle(0xe2e8f0, 1);
+      g.fillEllipse(19, 15, 10, 7);
+      g.fillStyle(0xcfd8dc, 1);
+      g.fillRect(23, 14, 3, 2);
+
+      // Bright Red Comb & Wattle
+      g.fillStyle(0xef4444, 1);
+      g.fillCircle(11, 5, 2.5);
+      g.fillCircle(8, 6, 2);
+      g.fillCircle(13, 6, 2);
+      g.fillCircle(8, 14, 2); // Wattle
+
+      // Golden Beak
+      g.fillStyle(0xf59e0b, 1);
+      g.fillTriangle(7, 10, 3, 12, 7, 13);
+
+      // Eye
+      g.fillStyle(0x0f172a, 1);
+      g.fillRect(10, 9, 2, 2);
+      g.fillStyle(0xffffff, 1);
+      g.fillRect(10, 9, 1, 1);
+
+      // Yellow Feet
+      g.fillStyle(0xf59e0b, 1);
+      g.fillRect(13, 22, 2, 5);
+      g.fillRect(18, 22, 2, 5);
+      g.fillRect(11, 26, 4, 2);
+      g.fillRect(17, 26, 4, 2);
+
+      g.generateTexture('animal_chicken', 32, 32);
+      g.destroy();
+    }
+
+    // 34. Livestock Animal: Dairy Cow (32x32px)
+    if (!this.textures.exists('animal_cow')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Ground shadow
+      g.fillStyle(0x0f172a, 0.35);
+      g.fillEllipse(16, 26, 24, 7);
+
+      // Plump White Body
+      g.fillStyle(0xf8fafc, 1);
+      g.fillRoundedRect(7, 10, 20, 13, 4);
+
+      // Black Holstein Spots on body
+      g.fillStyle(0x1e293b, 1);
+      g.fillCircle(12, 13, 4);
+      g.fillCircle(20, 17, 4);
+      g.fillCircle(23, 12, 3);
+
+      // Cow Head
+      g.fillStyle(0xf8fafc, 1);
+      g.fillRoundedRect(4, 7, 10, 10, 3);
+      g.fillStyle(0x1e293b, 1); // Spot over eye/ear
+      g.fillRect(7, 7, 6, 5);
+
+      // Small Horns
+      g.fillStyle(0xfde68a, 1);
+      g.fillRect(6, 5, 2, 3);
+      g.fillRect(11, 5, 2, 3);
+
+      // Pink Snout & Nostrils
+      g.fillStyle(0xfbcfe8, 1);
+      g.fillRoundedRect(2, 11, 6, 6, 2);
+      g.fillStyle(0x9d174d, 1);
+      g.fillRect(3, 13, 1, 2);
+      g.fillRect(5, 13, 1, 2);
+
+      // Friendly Eye
+      g.fillStyle(0x0f172a, 1);
+      g.fillRect(8, 9, 2, 2);
+      g.fillStyle(0xffffff, 1);
+      g.fillRect(8, 9, 1, 1);
+
+      // Red collar with brass cowbell
+      g.fillStyle(0xef4444, 1);
+      g.fillRect(5, 16, 6, 2);
+      g.fillStyle(0xfacc15, 1); // Bell
+      g.fillRect(7, 18, 3, 3);
+
+      // Four Legs with hooves
+      g.fillStyle(0xf8fafc, 1);
+      g.fillRect(8, 21, 3, 6);
+      g.fillRect(13, 21, 3, 6);
+      g.fillRect(18, 21, 3, 6);
+      g.fillRect(22, 21, 3, 6);
+      g.fillStyle(0x1e293b, 1); // Hooves
+      g.fillRect(8, 25, 3, 2);
+      g.fillRect(13, 25, 3, 2);
+      g.fillRect(18, 25, 3, 2);
+      g.fillRect(22, 25, 3, 2);
+
+      // Tufted Tail
+      g.fillStyle(0xf8fafc, 1);
+      g.fillRect(26, 12, 2, 7);
+      g.fillStyle(0x1e293b, 1);
+      g.fillRect(25, 18, 3, 3);
+
+      g.generateTexture('animal_cow', 32, 32);
+      g.destroy();
+    }
+
+    // 35. Produce: Fresh Egg (16x16px)
+    if (!this.textures.exists('produce_egg')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Ground shadow
+      g.fillStyle(0x0f172a, 0.3);
+      g.fillEllipse(8, 12, 10, 4);
+
+      // Cream Oval Egg
+      g.fillStyle(0xfef3c7, 1);
+      g.fillEllipse(8, 8, 10, 12);
+      // Soft highlight
+      g.fillStyle(0xffffff, 0.85);
+      g.fillEllipse(7, 6, 4, 5);
+
+      g.generateTexture('produce_egg', 16, 16);
+      g.destroy();
+    }
+
+    // 36. Produce: Milk Bottle (16x16px)
+    if (!this.textures.exists('produce_milk')) {
+      const g = this.make.graphics({ x: 0, y: 0 });
+      // Ground shadow
+      g.fillStyle(0x0f172a, 0.3);
+      g.fillEllipse(8, 14, 10, 4);
+
+      // Glass Bottle Body
+      g.fillStyle(0xf8fafc, 1);
+      g.fillRoundedRect(4, 5, 8, 9, 2);
+      // Blue Milk Label
+      g.fillStyle(0x38bdf8, 1);
+      g.fillRect(4, 8, 8, 3);
+      // Neck and Foil Cap
+      g.fillStyle(0xbae6fd, 1);
+      g.fillRect(6, 2, 4, 3);
+      g.fillStyle(0x0284c7, 1); // Cap
+      g.fillRect(5, 1, 6, 2);
+
+      g.generateTexture('produce_milk', 16, 16);
+      g.destroy();
+    }
   }
 }

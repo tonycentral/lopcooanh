@@ -9,18 +9,28 @@ import {
   Sprout, 
   Package, 
   Sparkles,
-  Hammer
+  Hammer,
+  Home,
+  Heart
 } from 'lucide-react';
-import { useGameStore, SHOP_SEEDS, ALL_SELLABLE_ITEMS, CRAFTING_RECIPES } from '../state/useGameStore';
+import { 
+  useGameStore, 
+  SHOP_SEEDS, 
+  ALL_SELLABLE_ITEMS, 
+  CRAFTING_RECIPES,
+  BUILDING_CONFIGS,
+  LIVESTOCK_CONFIGS
+} from '../state/useGameStore';
+import type { BuildingType, LivestockType } from '../types';
 
 interface ShopModalProps {
   isOpen: boolean;
   onClose: () => void;
-  initialTab?: 'buy' | 'sell' | 'craft';
+  initialTab?: 'buy' | 'sell' | 'craft' | 'buildings' | 'livestock';
 }
 
 export default function ShopModal({ isOpen, onClose, initialTab = 'buy' }: ShopModalProps) {
-  const [tab, setTab] = useState<'buy' | 'sell' | 'craft'>(initialTab);
+  const [tab, setTab] = useState<'buy' | 'sell' | 'craft' | 'buildings' | 'livestock'>(initialTab);
   const [prevInitialTab, setPrevInitialTab] = useState(initialTab);
 
   if (initialTab !== prevInitialTab) {
@@ -31,10 +41,14 @@ export default function ShopModal({ isOpen, onClose, initialTab = 'buy' }: ShopM
   const gold = useGameStore((state) => state.gold);
   const inventory = useGameStore((state) => state.inventory);
   const hotbar = useGameStore((state) => state.hotbar);
+  const buildings = useGameStore((state) => state.buildings || []);
+  const livestock = useGameStore((state) => state.livestock || []);
   const buySeed = useGameStore((state) => state.buySeed);
   const sellCrop = useGameStore((state) => state.sellCrop);
   const sellAllCrops = useGameStore((state) => state.sellAllCrops);
   const craftItem = useGameStore((state) => state.craftItem);
+  const startPlacementMode = useGameStore((state) => state.startPlacementMode);
+  const buyLivestock = useGameStore((state) => state.buyLivestock);
 
   // Close on Esc key or B/C key toggle
   useEffect(() => {
@@ -133,6 +147,30 @@ export default function ShopModal({ isOpen, onClose, initialTab = 'buy' }: ShopM
           >
             <Hammer className="w-4 h-4" />
             <span>Chế Tạo (Craft)</span>
+          </button>
+
+          <button
+            onClick={() => setTab('buildings')}
+            className={`flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-t-xl transition-all border-b-2 ${
+              tab === 'buildings'
+                ? 'border-amber-400 text-amber-300 bg-slate-900'
+                : 'border-transparent text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Home className="w-4 h-4" />
+            <span>Xây Dựng</span>
+          </button>
+
+          <button
+            onClick={() => setTab('livestock')}
+            className={`flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-t-xl transition-all border-b-2 ${
+              tab === 'livestock'
+                ? 'border-rose-400 text-rose-300 bg-slate-900'
+                : 'border-transparent text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Heart className="w-4 h-4" />
+            <span>Vật Nuôi</span>
           </button>
         </div>
 
@@ -348,6 +386,189 @@ export default function ShopModal({ isOpen, onClose, initialTab = 'buy' }: ShopM
                 );
               })}
             </div>
+          </div>
+        )}
+
+        {/* Tab 4: Xây Dựng Kiến Trúc (Buildings) */}
+        {tab === 'buildings' && (
+          <div className="p-5 space-y-3 max-h-[60vh] overflow-y-auto">
+            {(['house', 'coop', 'barn'] as BuildingType[]).map((bType) => {
+              const bConfig = BUILDING_CONFIGS[bType];
+              const woodTotal = inventory
+                .concat(hotbar)
+                .filter((i) => i.id === 'resource_wood')
+                .reduce((acc, curr) => acc + (curr.count ?? 0), 0);
+              const stoneTotal = inventory
+                .concat(hotbar)
+                .filter((i) => i.id === 'resource_stone')
+                .reduce((acc, curr) => acc + (curr.count ?? 0), 0);
+
+              const hasGold = gold >= bConfig.costGold;
+              const hasWood = woodTotal >= bConfig.costWood;
+              const hasStone = stoneTotal >= bConfig.costStone;
+              const canBuild = hasGold && hasWood && hasStone;
+
+              const existingCount = buildings.filter((b) => b.type === bType).length;
+              const isHouseBuilt = bType === 'house' && existingCount >= 1;
+
+              return (
+                <div
+                  key={bType}
+                  className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:border-slate-700 transition-colors"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-14 h-14 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-3xl shrink-0">
+                      {bConfig.icon}
+                    </div>
+                    <div>
+                      <div className="text-sm font-semibold text-white flex items-center gap-2">
+                        {bConfig.name}
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-mono">
+                          {bConfig.width}x{bConfig.height} ô lưới ({bConfig.width * 32}x{bConfig.height * 32}px)
+                        </span>
+                        {isHouseBuilt && (
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-medium">
+                            ✓ Đã Xây Dựng
+                          </span>
+                        )}
+                        {bType !== 'house' && existingCount > 0 && (
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-medium">
+                            Đang có: {existingCount}
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-xs text-slate-400 mt-1">{bConfig.desc}</div>
+
+                      {/* Cost Badges */}
+                      <div className="flex flex-wrap items-center gap-2 mt-2.5">
+                        <span
+                          className={`text-[11px] font-mono px-2 py-0.5 rounded-md border flex items-center gap-1 ${
+                            hasGold
+                              ? 'bg-amber-950/50 border-amber-700/50 text-amber-300'
+                              : 'bg-rose-950/50 border-rose-800/50 text-rose-300'
+                          }`}
+                        >
+                          🪙 {gold}/{bConfig.costGold} Gold
+                        </span>
+
+                        <span
+                          className={`text-[11px] font-mono px-2 py-0.5 rounded-md border flex items-center gap-1 ${
+                            hasWood
+                              ? 'bg-emerald-950/50 border-emerald-700/50 text-emerald-300'
+                              : 'bg-rose-950/50 border-rose-800/50 text-rose-300'
+                          }`}
+                        >
+                          🪵 {woodTotal}/{bConfig.costWood} Gỗ
+                        </span>
+
+                        {bConfig.costStone > 0 && (
+                          <span
+                            className={`text-[11px] font-mono px-2 py-0.5 rounded-md border flex items-center gap-1 ${
+                              hasStone
+                                ? 'bg-emerald-950/50 border-emerald-700/50 text-emerald-300'
+                                : 'bg-rose-950/50 border-rose-800/50 text-rose-300'
+                            }`}
+                          >
+                            🪨 {stoneTotal}/{bConfig.costStone} Đá
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="shrink-0 w-full sm:w-auto flex justify-end">
+                    <button
+                      onClick={() => {
+                        const res = startPlacementMode(bType);
+                        if (res.success) onClose();
+                      }}
+                      disabled={!canBuild || isHouseBuilt}
+                      className="w-full sm:w-auto px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 disabled:opacity-40 disabled:hover:bg-amber-600 text-white text-xs font-bold transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer disabled:cursor-not-allowed"
+                    >
+                      <Hammer className="w-3.5 h-3.5" />
+                      <span>{isHouseBuilt ? 'Đã Có Nhà' : 'Chọn Vị Trí Đặt Móng'}</span>
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Tab 5: Mua Vật Nuôi (Livestock) */}
+        {tab === 'livestock' && (
+          <div className="p-5 space-y-3 max-h-[60vh] overflow-y-auto">
+            {(['chicken', 'cow'] as LivestockType[]).map((lType) => {
+              const lConfig = LIVESTOCK_CONFIGS[lType];
+              const parentBuilding = buildings.find((b) => b.type === lConfig.requiredBuilding);
+              const currentAnimals = livestock.filter((a) => a.type === lType);
+              const capacity = BUILDING_CONFIGS[lConfig.requiredBuilding].capacity ?? 3;
+              const hasBuilding = Boolean(parentBuilding);
+              const isFull = currentAnimals.length >= capacity;
+              const hasGold = gold >= lConfig.costGold;
+              const canPurchase = hasBuilding && !isFull && hasGold;
+
+              const buildingName = lConfig.requiredBuilding === 'coop' ? 'Chuồng Gà' : 'Chuồng Bò';
+
+              return (
+                <div
+                  key={lType}
+                  className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:border-slate-700 transition-colors"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-14 h-14 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-3xl shrink-0">
+                      {lConfig.icon}
+                    </div>
+                    <div>
+                      <div className="text-sm font-semibold text-white flex items-center gap-2">
+                        {lConfig.name}
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-mono">
+                          {currentAnimals.length}/{capacity} con
+                        </span>
+                        {!hasBuilding && (
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 font-medium">
+                            Chưa có {buildingName}
+                          </span>
+                        )}
+                        {hasBuilding && isFull && (
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-medium">
+                            Đã Đầy Chuồng
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-xs text-slate-400 mt-1">{lConfig.desc}</div>
+
+                      <div className="flex flex-wrap items-center gap-2 mt-2.5">
+                        <span
+                          className={`text-[11px] font-mono px-2 py-0.5 rounded-md border flex items-center gap-1 ${
+                            hasGold
+                              ? 'bg-amber-950/50 border-amber-700/50 text-amber-300'
+                              : 'bg-rose-950/50 border-rose-800/50 text-rose-300'
+                          }`}
+                        >
+                          🪙 Giá mua: {lConfig.costGold} Gold
+                        </span>
+
+                        <span className="text-[11px] px-2 py-0.5 rounded-md bg-slate-800/80 border border-slate-700 text-slate-300 flex items-center gap-1">
+                          ✨ Sản phẩm: {lConfig.productIcon} {lConfig.productName} ({lConfig.productPrice} Gold)
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="shrink-0 w-full sm:w-auto flex justify-end">
+                    <button
+                      onClick={() => buyLivestock(lType)}
+                      disabled={!canPurchase}
+                      className="w-full sm:w-auto px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 disabled:opacity-40 disabled:hover:bg-rose-600 text-white text-xs font-bold transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer disabled:cursor-not-allowed"
+                    >
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>Mua Vật Nuôi</span>
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         )}
 

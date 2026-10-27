@@ -11,7 +11,40 @@ export interface PlacedFurnitureItem {
   rotation?: number;
 }
 
-export type AnimalType = 'wild_boar' | 'companion_dog';
+export type BuildingType = 'house' | 'coop' | 'barn';
+
+export interface FarmBuilding {
+  id: string;
+  type: BuildingType;
+  originX: number;
+  originY: number;
+  width: number;
+  height: number;
+  createdAt: number;
+}
+
+export type LivestockType = 'chicken' | 'cow';
+
+export interface LivestockData {
+  id: string;
+  type: LivestockType;
+  name: string;
+  buildingId: string;
+  x: number;
+  y: number;
+  friendship: number; // 0 - 100
+  lastProducedAt?: number;
+  hasProductReady?: boolean;
+}
+
+export interface EggEntityData {
+  id: string;
+  x: number;
+  y: number;
+  createdAt: number;
+}
+
+export type AnimalType = 'wild_boar' | 'companion_dog' | 'chicken' | 'cow';
 
 export interface AnimalEntityData {
   type: AnimalType;
@@ -140,6 +173,9 @@ export interface PlayerFarmState {
   lastSimulatedAt?: number;
   hasHouse?: boolean;
   houseOrigin?: { x: number; y: number } | null;
+  buildings?: FarmBuilding[];
+  livestock?: LivestockData[];
+  droppedEggs?: EggEntityData[];
   indoorPlacedItems?: PlacedFurnitureItem[];
   hotbar: InventoryItem[];
   inventory: InventoryItem[];

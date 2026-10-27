@@ -13,7 +13,12 @@ import type {
   NotificationMessage,
   PlaceableType,
   CraftingRecipe,
-  PlacedFurnitureItem
+  PlacedFurnitureItem,
+  BuildingType,
+  FarmBuilding,
+  LivestockType,
+  LivestockData,
+  EggEntityData
 } from '../types';
 import { 
   queueFarmStateSync, 
@@ -69,7 +74,106 @@ export const SHOP_RESOURCES = [
   { id: 'resource_fiber', name: 'Sợi Cỏ Dại', icon: '🌾', price: 1, desc: 'Cắt dọn từ các bụi cỏ dại bằng Liềm.' }
 ];
 
-export const ALL_SELLABLE_ITEMS = [...SHOP_CROPS, ...SHOP_RESOURCES];
+export const SHOP_PRODUCE = [
+  { id: 'produce_egg', name: 'Trứng Gà Tươi', icon: '🥚', price: 25, desc: 'Trứng gà tươi thu hoạch từ đàn gà.' },
+  { id: 'produce_milk', name: 'Bình Sữa Bò Tươi', icon: '🥛', price: 50, desc: 'Bình sữa bò tươi nguyên chất bổ dưỡng.' }
+];
+
+export const ALL_SELLABLE_ITEMS = [...SHOP_CROPS, ...SHOP_RESOURCES, ...SHOP_PRODUCE];
+
+export interface BuildingConfig {
+  type: BuildingType;
+  name: string;
+  icon: string;
+  width: number;
+  height: number;
+  costWood: number;
+  costStone: number;
+  costGold: number;
+  capacity?: number;
+  animalType?: LivestockType;
+  desc: string;
+}
+
+export const BUILDING_CONFIGS: Record<BuildingType, BuildingConfig> = {
+  house: {
+    type: 'house',
+    name: 'Nhà Ở Nông Dân',
+    icon: '🏡',
+    width: 2,
+    height: 2,
+    costWood: 30,
+    costStone: 0,
+    costGold: 300,
+    desc: 'Ngôi nhà gỗ ấm cúng (2x2), bên trong có giường ngủ hồi phục 100% thể lực và bàn thợ mộc.'
+  },
+  coop: {
+    type: 'coop',
+    name: 'Chuồng Gà (Chicken Coop)',
+    icon: '🛖',
+    width: 3,
+    height: 3,
+    costWood: 40,
+    costStone: 20,
+    costGold: 400,
+    capacity: 4,
+    animalType: 'chicken',
+    desc: 'Chuồng nuôi gà (3x3 ô lưới) có máng ăn và ổ rơm. Sức chứa tối đa 4 con gà.'
+  },
+  barn: {
+    type: 'barn',
+    name: 'Chuồng Bò (Cattle Barn)',
+    icon: '🚜',
+    width: 3,
+    height: 3,
+    costWood: 60,
+    costStone: 35,
+    costGold: 600,
+    capacity: 3,
+    animalType: 'cow',
+    desc: 'Chuồng bò nông trại (3x3 ô lưới) kiên cố với kho rơm và bãi quây. Sức chứa tối đa 3 con bò.'
+  }
+};
+
+export interface LivestockConfig {
+  type: LivestockType;
+  name: string;
+  icon: string;
+  costGold: number;
+  requiredBuilding: BuildingType;
+  productType: 'produce_egg' | 'produce_milk';
+  productName: string;
+  productIcon: string;
+  productPrice: number;
+  desc: string;
+}
+
+export const LIVESTOCK_CONFIGS: Record<LivestockType, LivestockConfig> = {
+  chicken: {
+    type: 'chicken',
+    name: 'Gà Con / Gà Đẻ Trứng',
+    icon: '🐔',
+    costGold: 150,
+    requiredBuilding: 'coop',
+    productType: 'produce_egg',
+    productName: 'Trứng Gà Tươi',
+    productIcon: '🥚',
+    productPrice: 25,
+    desc: 'Gà mái đẻ trứng hàng ngày. Cần Chuồng Gà (tối đa 4 con/chuồng).'
+  },
+  cow: {
+    type: 'cow',
+    name: 'Bò Sữa Nông Trại',
+    icon: '🐮',
+    costGold: 400,
+    requiredBuilding: 'barn',
+    productType: 'produce_milk',
+    productName: 'Bình Sữa Bò Tươi',
+    productIcon: '🥛',
+    productPrice: 50,
+    desc: 'Bò sữa cung cấp sữa bổ dưỡng mỗi ngày. Cần Chuồng Bò (tối đa 3 con/chuồng).'
+  }
+};
 
 export const CRAFTING_RECIPES: CraftingRecipe[] = [
   {
@@ -573,6 +677,9 @@ const defaultInitialState: PlayerFarmState = {
   lastSimulatedAt: Date.now(),
   hasHouse: false,
   houseOrigin: { x: 8, y: 2 },
+  buildings: [],
+  livestock: [],
+  droppedEggs: [],
   indoorPlacedItems: [],
   hotbar: defaultHotbar,
   inventory: [
@@ -641,6 +748,16 @@ export interface GameStoreState extends PlayerFarmState {
   placeIndoorFurniture: (itemId: string, gridX: number, gridY: number) => { success: boolean; reason?: string };
   pickupIndoorFurniture: (placedId: string) => { success: boolean };
   restInBed: () => void;
+  placementMode: { type: BuildingType; width: number; height: number; costWood: number; costStone: number; costGold: number } | null;
+  startPlacementMode: (type: BuildingType) => { success: boolean; reason?: string };
+  cancelPlacementMode: () => void;
+  buildStructure: (type: BuildingType, originX: number, originY: number) => { success: boolean; reason?: string };
+  buyLivestock: (type: LivestockType) => { success: boolean; reason?: string };
+  collectEgg: (eggId: string) => { success: boolean };
+  milkCow: (animalId: string) => { success: boolean; reason?: string };
+  petAnimal: (animalId: string) => { success: boolean };
+  addDroppedEgg: (egg: EggEntityData) => void;
+  updateLivestockProduct: (animalId: string, hasProduct: boolean) => void;
   hydrateFromCloud: (cloudState: Partial<PlayerFarmState>) => void;
   initSync: (userId?: string | null) => Promise<void>;
 }
@@ -2692,9 +2809,448 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       get().notify('🛏️ Bạn đã ngủ một giấc thật ngon! Thể lực hồi phục 100%.', 'success');
     },
 
+    placementMode: null,
+
+    startPlacementMode: (type: BuildingType) => {
+      const state = get();
+      const config = BUILDING_CONFIGS[type];
+      if (!config) return { success: false, reason: 'Công trình không hợp lệ.' };
+
+      if (state.gold < config.costGold) {
+        const msg = `Không đủ Gold! Cần ${config.costGold} Gold (hiện có: ${state.gold}).`;
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      const woodTotal = state.inventory
+        .concat(state.hotbar)
+        .filter((i) => i.id === 'resource_wood')
+        .reduce((acc, curr) => acc + (curr.count ?? 0), 0);
+      if (woodTotal < config.costWood) {
+        const msg = `Không đủ Gỗ! Cần ${config.costWood} Gỗ (hiện có: ${woodTotal}).`;
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      const stoneTotal = state.inventory
+        .concat(state.hotbar)
+        .filter((i) => i.id === 'resource_stone')
+        .reduce((acc, curr) => acc + (curr.count ?? 0), 0);
+      if (stoneTotal < config.costStone) {
+        const msg = `Không đủ Đá! Cần ${config.costStone} Đá (hiện có: ${stoneTotal}).`;
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      set({
+        placementMode: {
+          type,
+          width: config.width,
+          height: config.height,
+          costWood: config.costWood,
+          costStone: config.costStone,
+          costGold: config.costGold
+        }
+      });
+      get().notify(`🏗️ Hãy chọn vị trí đặt móng cho ${config.name} trên nông trại!`, 'info');
+      return { success: true };
+    },
+
+    cancelPlacementMode: () => {
+      set({ placementMode: null });
+      get().notify('Đã hủy chế độ đặt móng xây dựng.', 'info');
+    },
+
+    buildStructure: (type: BuildingType, originX: number, originY: number) => {
+      const state = get();
+      const config = BUILDING_CONFIGS[type];
+      if (!config) return { success: false, reason: 'Công trình không hợp lệ.' };
+
+      const currentBuildings = state.buildings || [];
+      const existing = currentBuildings.filter((b) => b.type === type);
+      if (type === 'house' && existing.length >= 1) {
+        const msg = 'Bạn đã xây dựng Nhà Ở rồi!';
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      if (state.gold < config.costGold) {
+        const msg = `Không đủ Gold! Cần ${config.costGold} Gold (hiện có: ${state.gold}).`;
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      const woodTotal = state.inventory
+        .concat(state.hotbar)
+        .filter((i) => i.id === 'resource_wood')
+        .reduce((acc, curr) => acc + (curr.count ?? 0), 0);
+      if (woodTotal < config.costWood) {
+        const msg = `Không đủ Gỗ! Cần ${config.costWood} Gỗ (hiện có: ${woodTotal}).`;
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      const stoneTotal = state.inventory
+        .concat(state.hotbar)
+        .filter((i) => i.id === 'resource_stone')
+        .reduce((acc, curr) => acc + (curr.count ?? 0), 0);
+      if (stoneTotal < config.costStone) {
+        const msg = `Không đủ Đá! Cần ${config.costStone} Đá (hiện có: ${stoneTotal}).`;
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      if (originX < 0 || originX + config.width > 30 || originY < 0 || originY + config.height > 20) {
+        const msg = 'Vị trí công trình vượt ra ngoài ranh giới nông trại!';
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      for (let x = originX; x < originX + config.width; x++) {
+        for (let y = originY; y < originY + config.height; y++) {
+          if ((x === 15 && y === 3) || (x === 18 && y === 3)) {
+            const msg = 'Không thể xây đè lên Khu Vực Công Trình Đặc Biệt!';
+            get().notify(msg, 'warning');
+            return { success: false, reason: msg };
+          }
+          for (const b of currentBuildings) {
+            if (x >= b.originX && x < b.originX + b.width && y >= b.originY && y < b.originY + b.height) {
+              const msg = 'Vị trí này bị trùng với công trình kiến trúc khác!';
+              get().notify(msg, 'warning');
+              return { success: false, reason: msg };
+            }
+          }
+          const tile = state.tiles[`${x},${y}`];
+          if (tile) {
+            if (tile.crop) {
+              const msg = 'Không thể xây đè lên hoa màu đang canh tác!';
+              get().notify(msg, 'warning');
+              return { success: false, reason: msg };
+            }
+            if (tile.obstacle) {
+              const msg = 'Vướng chướng ngại vật (đá/gỗ/cỏ dại)! Cần dọn dẹp trước.';
+              get().notify(msg, 'warning');
+              return { success: false, reason: msg };
+            }
+            if (tile.placeable) {
+              const msg = 'Vướng hàng rào hoặc rương đồ!';
+              get().notify(msg, 'warning');
+              return { success: false, reason: msg };
+            }
+          }
+        }
+      }
+
+      let neededWood = config.costWood;
+      let neededStone = config.costStone;
+
+      let newInventory = [...state.inventory];
+      let newHotbar = [...state.hotbar];
+
+      const deductItem = (id: string, count: number) => {
+        let needed = count;
+        newInventory = newInventory
+          .map((item) => {
+            if (item.id === id && needed > 0) {
+              const take = Math.min(item.count ?? 0, needed);
+              needed -= take;
+              return { ...item, count: (item.count ?? 0) - take };
+            }
+            return item;
+          })
+          .filter((item) => (item.count ?? 0) > 0 || item.type === 'tool');
+
+        if (needed > 0) {
+          newHotbar = newHotbar
+            .map((item) => {
+              if (item.id === id && needed > 0) {
+                const take = Math.min(item.count ?? 0, needed);
+                needed -= take;
+                return { ...item, count: (item.count ?? 0) - take };
+              }
+              return item;
+            })
+            .filter((item) => (item.count ?? 0) > 0 || item.type === 'tool');
+        }
+      };
+
+      if (neededWood > 0) deductItem('resource_wood', neededWood);
+      if (neededStone > 0) deductItem('resource_stone', neededStone);
+
+      const newTiles = { ...state.tiles };
+      for (let x = originX; x < originX + config.width; x++) {
+        for (let y = originY; y < originY + config.height; y++) {
+          const key = `${x},${y}`;
+          if (newTiles[key]) {
+            newTiles[key] = {
+              ...newTiles[key],
+              isTilled: false,
+              isWatered: false,
+              crop: null,
+              obstacle: null,
+              placeable: null,
+              station: null
+            };
+          }
+        }
+      }
+
+      const newBuilding: FarmBuilding = {
+        id: `bld_${type}_${Date.now()}`,
+        type,
+        originX,
+        originY,
+        width: config.width,
+        height: config.height,
+        createdAt: Date.now()
+      };
+
+      const updatedBuildings = [...currentBuildings, newBuilding];
+      const updated: Partial<GameStoreState> = {
+        gold: state.gold - config.costGold,
+        inventory: newInventory,
+        hotbar: newHotbar,
+        tiles: newTiles,
+        buildings: updatedBuildings,
+        placementMode: null,
+        updatedAt: Date.now()
+      };
+
+      if (type === 'house') {
+        updated.hasHouse = true;
+        updated.houseOrigin = { x: originX, y: originY };
+      }
+
+      set(updated as Partial<GameStoreState>);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify(`🎉 Đã xây dựng thành công ${config.name}!`, 'success');
+      return { success: true };
+    },
+
+    buyLivestock: (type: LivestockType) => {
+      const state = get();
+      const config = LIVESTOCK_CONFIGS[type];
+      if (!config) return { success: false, reason: 'Vật nuôi không hợp lệ' };
+
+      const buildings = state.buildings || [];
+      const parentBuilding = buildings.find((b) => b.type === config.requiredBuilding);
+      if (!parentBuilding) {
+        const requiredName = config.requiredBuilding === 'coop' ? 'Chuồng Gà' : 'Chuồng Bò';
+        const msg = `Cần xây ${requiredName} trước khi mua ${config.name}!`;
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      const currentLivestock = state.livestock || [];
+      const currentCount = currentLivestock.filter((a) => a.buildingId === parentBuilding.id).length;
+      const capacity = BUILDING_CONFIGS[config.requiredBuilding].capacity ?? 3;
+      if (currentCount >= capacity) {
+        const msg = `${config.requiredBuilding === 'coop' ? 'Chuồng Gà' : 'Chuồng Bò'} đã đầy chỗ (${currentCount}/${capacity} con)!`;
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      if (state.gold < config.costGold) {
+        const msg = `Không đủ Gold! Cần ${config.costGold} Gold (hiện có: ${state.gold}).`;
+        get().notify(msg, 'warning');
+        return { success: false, reason: msg };
+      }
+
+      const spawnX = (parentBuilding.originX + 1.5) * 32 + (Math.random() * 20 - 10);
+      const spawnY = (parentBuilding.originY + parentBuilding.height) * 32 + 16 + (Math.random() * 16);
+
+      const newAnimal: LivestockData = {
+        id: `anim_${type}_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+        type,
+        name: type === 'chicken' ? `Gà Mái #${currentCount + 1}` : `Bò Sữa #${currentCount + 1}`,
+        buildingId: parentBuilding.id,
+        x: spawnX,
+        y: spawnY,
+        friendship: 10,
+        lastProducedAt: Date.now(),
+        hasProductReady: false
+      };
+
+      const updated = {
+        gold: state.gold - config.costGold,
+        livestock: [...currentLivestock, newAnimal],
+        updatedAt: Date.now()
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify(`🎉 Chúc mừng bạn đã đón 1 ${config.name} về nông trại!`, 'success');
+      return { success: true };
+    },
+
+    collectEgg: (eggId: string) => {
+      const state = get();
+      const currentEggs = state.droppedEggs || [];
+      const egg = currentEggs.find((e) => e.id === eggId);
+      if (!egg) return { success: false };
+
+      const updatedEggs = currentEggs.filter((e) => e.id !== eggId);
+
+      const eggItem: InventoryItem = {
+        id: 'produce_egg',
+        name: 'Trứng Gà Tươi',
+        icon: '🥚',
+        type: 'crop',
+        price: 25,
+        count: 1
+      };
+
+      let newHotbar = [...state.hotbar];
+      let newInventory = [...state.inventory];
+      const existingHotbarIdx = newHotbar.findIndex((i) => i.id === 'produce_egg');
+      if (existingHotbarIdx >= 0) {
+        newHotbar[existingHotbarIdx] = {
+          ...newHotbar[existingHotbarIdx],
+          count: (newHotbar[existingHotbarIdx].count ?? 0) + 1
+        };
+      } else if (newHotbar.length < 10) {
+        newHotbar.push(eggItem);
+      } else {
+        const existingInvIdx = newInventory.findIndex((i) => i.id === 'produce_egg');
+        if (existingInvIdx >= 0) {
+          newInventory[existingInvIdx] = {
+            ...newInventory[existingInvIdx],
+            count: (newInventory[existingInvIdx].count ?? 0) + 1
+          };
+        } else {
+          newInventory.push(eggItem);
+        }
+      }
+
+      const newXp = (state.xp ?? 0) + 10;
+      const newLevel = Math.floor(newXp / 100) + 1;
+
+      const updated = {
+        hotbar: newHotbar,
+        inventory: newInventory,
+        droppedEggs: updatedEggs,
+        xp: newXp,
+        level: Math.max(state.level ?? 1, newLevel),
+        updatedAt: Date.now()
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify('🥚 Đã nhặt được 1 Trứng Gà Tươi! (+10 XP)', 'success');
+      return { success: true };
+    },
+
+    milkCow: (animalId: string) => {
+      const state = get();
+      const currentLivestock = state.livestock || [];
+      const cow = currentLivestock.find((a) => a.id === animalId && a.type === 'cow');
+      if (!cow) return { success: false, reason: 'Không tìm thấy bò sữa' };
+
+      if (!cow.hasProductReady) {
+        const msg = `${cow.name} chưa có sữa mới! Hãy chờ thêm một chút nhé.`;
+        get().notify(msg, 'info');
+        return { success: false, reason: msg };
+      }
+
+      const milkItem: InventoryItem = {
+        id: 'produce_milk',
+        name: 'Bình Sữa Bò Tươi',
+        icon: '🥛',
+        type: 'crop',
+        price: 50,
+        count: 1
+      };
+
+      let newHotbar = [...state.hotbar];
+      let newInventory = [...state.inventory];
+      const existingHotbarIdx = newHotbar.findIndex((i) => i.id === 'produce_milk');
+      if (existingHotbarIdx >= 0) {
+        newHotbar[existingHotbarIdx] = {
+          ...newHotbar[existingHotbarIdx],
+          count: (newHotbar[existingHotbarIdx].count ?? 0) + 1
+        };
+      } else if (newHotbar.length < 10) {
+        newHotbar.push(milkItem);
+      } else {
+        const existingInvIdx = newInventory.findIndex((i) => i.id === 'produce_milk');
+        if (existingInvIdx >= 0) {
+          newInventory[existingInvIdx] = {
+            ...newInventory[existingInvIdx],
+            count: (newInventory[existingInvIdx].count ?? 0) + 1
+          };
+        } else {
+          newInventory.push(milkItem);
+        }
+      }
+
+      const newLivestock = currentLivestock.map((a) =>
+        a.id === animalId
+          ? { ...a, hasProductReady: false, lastProducedAt: Date.now(), friendship: Math.min(100, (a.friendship || 0) + 5) }
+          : a
+      );
+
+      const newXp = (state.xp ?? 0) + 15;
+      const newLevel = Math.floor(newXp / 100) + 1;
+
+      const updated = {
+        hotbar: newHotbar,
+        inventory: newInventory,
+        livestock: newLivestock,
+        xp: newXp,
+        level: Math.max(state.level ?? 1, newLevel),
+        updatedAt: Date.now()
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify(`🥛 Đã vắt được 1 Bình Sữa Bò Tươi từ ${cow.name}! (+15 XP, +5 Tim)`, 'success');
+      return { success: true };
+    },
+
+    petAnimal: (animalId: string) => {
+      const state = get();
+      const currentLivestock = state.livestock || [];
+      const animal = currentLivestock.find((a) => a.id === animalId);
+      if (!animal) return { success: false };
+
+      const newFriendship = Math.min(100, (animal.friendship || 0) + 3);
+      const newLivestock = currentLivestock.map((a) =>
+        a.id === animalId ? { ...a, friendship: newFriendship } : a
+      );
+
+      const updated = {
+        livestock: newLivestock,
+        updatedAt: Date.now()
+      };
+
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+      get().notify(`❤️ Bạn đã vuốt ve ${animal.name}! Thân thiết: ${newFriendship}/100`, 'info');
+      return { success: true };
+    },
+
+    addDroppedEgg: (egg: EggEntityData) => {
+      const state = get();
+      const currentEggs = state.droppedEggs || [];
+      const updated = {
+        droppedEggs: [...currentEggs, egg],
+        updatedAt: Date.now()
+      };
+      set(updated);
+      queueFarmStateSync(state.currentUserId, { ...get(), ...updated });
+    },
+
+    updateLivestockProduct: (animalId: string, hasProduct: boolean) => {
+      const state = get();
+      const currentLivestock = state.livestock || [];
+      const newLivestock = currentLivestock.map((a) =>
+        a.id === animalId ? { ...a, hasProductReady: hasProduct, lastProducedAt: Date.now() } : a
+      );
+      set({ livestock: newLivestock });
+    },
+
     hydrateFromCloud: (cloudState) => {
       set((prev) => {
-        // Ensure all default permanent tools are retained in hotbar even from old saves
         let mergedHotbar = prev.hotbar;
         if (cloudState.hotbar && cloudState.hotbar.length > 0) {
           const loadedIds = new Set(cloudState.hotbar.map((i) => i.id));
@@ -2713,13 +3269,31 @@ export const useGameStore = create<GameStoreState>((set, get) => {
           }, 1200);
         }
 
+        const loadedBuildings = cloudState.buildings ?? prev.buildings ?? [];
+        const hasHouseFlag = cloudState.hasHouse ?? prev.hasHouse ?? false;
+        const houseOriginCoord = cloudState.houseOrigin ?? prev.houseOrigin ?? { x: 8, y: 2 };
+        if (hasHouseFlag && !loadedBuildings.some((b) => b.type === 'house')) {
+          loadedBuildings.push({
+            id: 'bld_house_init',
+            type: 'house',
+            originX: houseOriginCoord.x,
+            originY: houseOriginCoord.y,
+            width: 2,
+            height: 2,
+            createdAt: Date.now()
+          });
+        }
+
         return {
           ...prev,
           ...cloudState,
           activeSeedId: cloudState.activeSeedId ?? prev.activeSeedId ?? 'seed_wheat',
           masteredQuizIds: cloudState.masteredQuizIds ?? prev.masteredQuizIds ?? [],
-          hasHouse: cloudState.hasHouse ?? prev.hasHouse ?? false,
-          houseOrigin: cloudState.houseOrigin ?? prev.houseOrigin ?? { x: 8, y: 2 },
+          hasHouse: hasHouseFlag,
+          houseOrigin: houseOriginCoord,
+          buildings: loadedBuildings,
+          livestock: cloudState.livestock ?? prev.livestock ?? [],
+          droppedEggs: cloudState.droppedEggs ?? prev.droppedEggs ?? [],
           indoorPlacedItems: cloudState.indoorPlacedItems ?? prev.indoorPlacedItems ?? [],
           tiles: simRes.tiles,
           lastSimulatedAt: now,

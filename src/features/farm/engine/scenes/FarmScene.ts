@@ -1,7 +1,7 @@
 // src/features/farm/engine/scenes/FarmScene.ts
 import Phaser from 'phaser';
 import { useGameStore, getCropGrowthStage } from '../../state/useGameStore';
-import type { TileData } from '../../types';
+import type { TileData, BuildingType, LivestockData, EggEntityData } from '../../types';
 import { findAStarPath, findBestAdjacentPath } from '../systems/Pathfinding';
 
 interface TileSpriteEntry {
@@ -47,6 +47,7 @@ export default class FarmScene extends Phaser.Scene {
   private bbqSprite!: Phaser.Physics.Arcade.Sprite;
   private bbqTooltip!: Phaser.GameObjects.Container;
   private interactKey!: Phaser.Input.Keyboard.Key;
+  private escKey!: Phaser.Input.Keyboard.Key;
 
   private tileSprites = new Map<string, TileSpriteEntry>();
   private marker!: Phaser.GameObjects.Sprite;
@@ -87,15 +88,29 @@ export default class FarmScene extends Phaser.Scene {
   private boarCooldownUntil = 0;
   private boarFleeTarget: { x: number; y: number } = { x: 0, y: 0 };
 
-  // Outdoor House Construction & Interior Scene Transition
+  // Outdoor House & Dynamic Farm Buildings
   private initialSpawnX?: number;
   private initialSpawnY?: number;
-  private houseSprite?: Phaser.Physics.Arcade.Sprite;
   private houseSignSprite?: Phaser.Physics.Arcade.Sprite;
   private houseTooltip?: Phaser.GameObjects.Container;
   private readonly HOUSE_GRID_X = 8;
   private readonly HOUSE_GRID_Y = 2;
-  private currentHasHouse = false;
+  private buildingSprites = new Map<string, { sprite: Phaser.Physics.Arcade.Sprite; tooltip?: Phaser.GameObjects.Container }>();
+
+  // Construction Placement Ghost Preview Mode
+  private placementGhostGraphics?: Phaser.GameObjects.Graphics;
+  private placementNoticeText?: Phaser.GameObjects.Text;
+
+  // Livestock AI & Produce Dropped Entities
+  private livestockSprites = new Map<string, {
+    sprite: Phaser.Physics.Arcade.Sprite;
+    data: LivestockData;
+    wanderTimer: number;
+    targetX: number;
+    targetY: number;
+    isPeckingOrGrazing: boolean;
+  }>();
+  private eggSprites = new Map<string, Phaser.GameObjects.Sprite>();
 
   constructor() {
     super('FarmScene');
@@ -251,8 +266,10 @@ export default class FarmScene extends Phaser.Scene {
       ease: 'Sine.easeInOut'
     });
 
-    // 4c. Outdoor House / House Construction Foundation
-    this.renderHouseStructure();
+    // 4c. Render Farm Buildings & Construction Foundation
+    this.renderAllBuildings();
+    this.syncLivestockSprites(useGameStore.getState().livestock || []);
+    this.syncDroppedEggs(useGameStore.getState().droppedEggs || []);
 
     // 5. Player Character
     const initialFrame = this.hasCustomAtlas && this.textures.exists('farm_atlas') && this.textures.get('farm_atlas').has('player_idle_down')
@@ -287,6 +304,7 @@ export default class FarmScene extends Phaser.Scene {
         right: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D)
       };
       this.interactKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+      this.escKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
     }
 
     // 6. Mouse Interaction Listeners
@@ -294,6 +312,16 @@ export default class FarmScene extends Phaser.Scene {
       if (this.isInputBlocked) {
         this.marker.setVisible(false);
         return;
+      }
+
+      const placementMode = useGameStore.getState().placementMode;
+      if (placementMode) {
+        this.marker.setVisible(false);
+        this.updatePlacementGhost(pointer, placementMode);
+        return;
+      } else if (this.placementGhostGraphics) {
+        this.placementGhostGraphics.clear();
+        this.placementNoticeText?.setVisible(false);
       }
 
       const worldPoint = pointer.positionToCamera(this.cameras.main) as Phaser.Math.Vector2;
@@ -315,7 +343,33 @@ export default class FarmScene extends Phaser.Scene {
     });
 
     this.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
-      if (this.isPerformingAction || this.isInputBlocked || pointer.button !== 0) return; // Ignore if acting or modal open
+      if (this.isPerformingAction || this.isInputBlocked) return;
+
+      const placementMode = useGameStore.getState().placementMode;
+      if (placementMode) {
+        if (pointer.rightButtonDown()) {
+          useGameStore.getState().cancelPlacementMode();
+          this.placementGhostGraphics?.clear();
+          this.placementNoticeText?.setVisible(false);
+          return;
+        }
+        const worldPoint = pointer.positionToCamera(this.cameras.main) as Phaser.Math.Vector2;
+        const tileX = Math.floor(worldPoint.x / this.TILE_SIZE);
+        const tileY = Math.floor(worldPoint.y / this.TILE_SIZE);
+        if (this.isAreaValidForBuilding(tileX, tileY, placementMode.width, placementMode.height)) {
+          const res = useGameStore.getState().buildStructure(placementMode.type, tileX, tileY);
+          if (res.success) {
+            this.placementGhostGraphics?.clear();
+            this.placementNoticeText?.setVisible(false);
+            this.renderAllBuildings();
+          }
+        } else {
+          this.showFloatingNotice('Vị trí đặt không hợp lệ!', worldPoint.x, worldPoint.y);
+        }
+        return;
+      }
+
+      if (pointer.button !== 0) return;
 
       const worldPoint = pointer.positionToCamera(this.cameras.main) as Phaser.Math.Vector2;
       const tileX = Math.floor(worldPoint.x / this.TILE_SIZE);
@@ -334,12 +388,25 @@ export default class FarmScene extends Phaser.Scene {
     this.syncAllTiles();
 
     // Subscribe to Zustand state changes
-    this.currentHasHouse = Boolean(useGameStore.getState().hasHouse);
+    let prevBuildings = useGameStore.getState().buildings;
+    let prevLivestock = useGameStore.getState().livestock;
+    let prevEggs = useGameStore.getState().droppedEggs;
+    let prevHasHouse = useGameStore.getState().hasHouse;
+
     this.unsubscribeStore = useGameStore.subscribe((state) => {
       this.syncAllTiles(state.tiles);
-      if (Boolean(state.hasHouse) !== this.currentHasHouse) {
-        this.currentHasHouse = Boolean(state.hasHouse);
-        this.renderHouseStructure();
+      if (state.buildings !== prevBuildings || state.hasHouse !== prevHasHouse) {
+        prevBuildings = state.buildings;
+        prevHasHouse = state.hasHouse;
+        this.renderAllBuildings();
+      }
+      if (state.livestock !== prevLivestock) {
+        prevLivestock = state.livestock;
+        this.syncLivestockSprites(state.livestock || []);
+      }
+      if (state.droppedEggs !== prevEggs) {
+        prevEggs = state.droppedEggs;
+        this.syncDroppedEggs(state.droppedEggs || []);
       }
     });
 
@@ -410,11 +477,14 @@ export default class FarmScene extends Phaser.Scene {
     }
   }
 
-  public renderHouseStructure() {
-    if (this.houseSprite) {
-      this.solidObstacleGroup.remove(this.houseSprite, true, true);
-      this.houseSprite = undefined;
+  public renderAllBuildings() {
+    // Clear previous building sprites
+    for (const entry of this.buildingSprites.values()) {
+      this.solidObstacleGroup.remove(entry.sprite, true, true);
+      entry.tooltip?.destroy();
     }
+    this.buildingSprites.clear();
+
     if (this.houseSignSprite) {
       this.solidObstacleGroup.remove(this.houseSignSprite, true, true);
       this.houseSignSprite = undefined;
@@ -425,59 +495,33 @@ export default class FarmScene extends Phaser.Scene {
     }
 
     const state = useGameStore.getState();
-    const houseCenterX = (this.HOUSE_GRID_X + 1) * this.TILE_SIZE; // 288
-    const houseCenterY = (this.HOUSE_GRID_Y + 1) * this.TILE_SIZE; // 96
-    const doorX = houseCenterX;
-    const doorY = (this.HOUSE_GRID_Y + 2) * this.TILE_SIZE; // 128
+    const buildingsList = state.buildings || [];
+    const hasAnyHouse = state.hasHouse || buildingsList.some((b) => b.type === 'house');
 
-    this.houseTooltip = this.add.container(doorX, doorY - 14);
-    this.houseTooltip.setDepth(30);
-    this.houseTooltip.setVisible(false);
-
-    const tooltipBg = this.add.graphics();
-    tooltipBg.fillStyle(0x0f172a, 0.92);
-    tooltipBg.lineStyle(1.5, state.hasHouse ? 0x38bdf8 : 0xf59e0b, 0.9);
-    tooltipBg.fillRoundedRect(-125, -13, 250, 26, 8);
-    tooltipBg.strokeRoundedRect(-125, -13, 250, 26, 8);
-
-    const tooltipText = this.add.text(
-      0,
-      0,
-      state.hasHouse ? '🏡 Nhấn E hoặc Click để Vào Nhà' : '🔨 [E] Xây Nhà Gỗ (30🪵 300🪙)',
-      {
-        fontSize: '11px',
-        color: '#ffffff',
-        fontFamily: 'system-ui, -apple-system, sans-serif'
-      }
-    ).setOrigin(0.5, 0.5);
-
-    this.houseTooltip.add([tooltipBg, tooltipText]);
-
-    if (state.hasHouse) {
-      this.houseSprite = this.physics.add.sprite(houseCenterX, houseCenterY, 'farmer_house');
-      this.houseSprite.setDepth(11);
-      this.houseSprite.setImmovable(true);
-      (this.houseSprite.body as Phaser.Physics.Arcade.Body).moves = false;
-      this.houseSprite.body.setSize(64, 48).setOffset(0, 16);
-      this.solidObstacleGroup.add(this.houseSprite);
-
-      this.houseSprite.setInteractive({ useHandCursor: true });
-      this.houseSprite.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
-        if (this.isInputBlocked || pointer.rightButtonDown()) return;
-        const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, doorX, doorY);
-        if (dist <= this.INTERACTION_RANGE) {
-          this.enterHouseScene();
-        } else {
-          this.handleTileClick(this.HOUSE_GRID_X, this.HOUSE_GRID_Y + 1);
-        }
-      });
-    } else {
+    // If no house built yet, show default foundation plot signboard at (8, 2)
+    if (!hasAnyHouse) {
+      const houseCenterX = (this.HOUSE_GRID_X + 1) * this.TILE_SIZE;
+      const houseCenterY = (this.HOUSE_GRID_Y + 1) * this.TILE_SIZE;
       this.houseSignSprite = this.physics.add.sprite(houseCenterX, houseCenterY, 'house_plot_sign');
       this.houseSignSprite.setDepth(11);
       this.houseSignSprite.setImmovable(true);
       (this.houseSignSprite.body as Phaser.Physics.Arcade.Body).moves = false;
       this.houseSignSprite.body.setSize(24, 20).setOffset(4, 10);
       this.solidObstacleGroup.add(this.houseSignSprite);
+
+      this.houseTooltip = this.add.container(houseCenterX, (this.HOUSE_GRID_Y + 2) * this.TILE_SIZE - 14);
+      this.houseTooltip.setDepth(30).setVisible(false);
+      const ttBg = this.add.graphics();
+      ttBg.fillStyle(0x0f172a, 0.92);
+      ttBg.lineStyle(1.5, 0xf59e0b, 0.9);
+      ttBg.fillRoundedRect(-125, -13, 250, 26, 8);
+      ttBg.strokeRoundedRect(-125, -13, 250, 26, 8);
+      const ttTxt = this.add.text(0, 0, '🔨 [E] Xây Nhà Gỗ (30🪵 300🪙)', {
+        fontSize: '11px',
+        color: '#ffffff',
+        fontFamily: 'system-ui, -apple-system, sans-serif'
+      }).setOrigin(0.5, 0.5);
+      this.houseTooltip.add([ttBg, ttTxt]);
 
       this.houseSignSprite.setInteractive({ useHandCursor: true });
       this.houseSignSprite.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
@@ -490,9 +534,360 @@ export default class FarmScene extends Phaser.Scene {
         }
       });
     }
+
+    // Render each constructed building
+    for (const b of buildingsList) {
+      const centerX = b.originX * this.TILE_SIZE + (b.width * this.TILE_SIZE) / 2;
+      const centerY = b.originY * this.TILE_SIZE + (b.height * this.TILE_SIZE) / 2;
+      const doorX = centerX;
+      const doorY = (b.originY + b.height) * this.TILE_SIZE;
+
+      let textureKey = 'farmer_house';
+      let tooltipMsg = '🏡 [E] Vào Trong Nhà';
+      let bodyW = 64;
+      let bodyH = 48;
+      let offY = 16;
+
+      if (b.type === 'coop') {
+        textureKey = 'building_coop';
+        const chickenCount = (state.livestock || []).filter((a) => a.type === 'chicken').length;
+        tooltipMsg = `🛖 Chuồng Gà (${chickenCount}/4 con)`;
+        bodyW = 96;
+        bodyH = 72;
+        offY = 24;
+      } else if (b.type === 'barn') {
+        textureKey = 'building_barn';
+        const cowCount = (state.livestock || []).filter((a) => a.type === 'cow').length;
+        tooltipMsg = `🚜 Chuồng Bò (${cowCount}/3 con)`;
+        bodyW = 96;
+        bodyH = 72;
+        offY = 24;
+      }
+
+      const sprite = this.physics.add.sprite(centerX, centerY, textureKey);
+      sprite.setDepth(11);
+      sprite.setImmovable(true);
+      (sprite.body as Phaser.Physics.Arcade.Body).moves = false;
+      sprite.body.setSize(bodyW, bodyH).setOffset(0, offY);
+      this.solidObstacleGroup.add(sprite);
+
+      const tooltip = this.add.container(doorX, doorY - 14);
+      tooltip.setDepth(30).setVisible(false);
+      const ttBg = this.add.graphics();
+      ttBg.fillStyle(0x0f172a, 0.92);
+      ttBg.lineStyle(1.5, b.type === 'house' ? 0x38bdf8 : 0xf59e0b, 0.9);
+      ttBg.fillRoundedRect(-125, -13, 250, 26, 8);
+      ttBg.strokeRoundedRect(-125, -13, 250, 26, 8);
+      const ttTxt = this.add.text(0, 0, tooltipMsg, {
+        fontSize: '11px',
+        color: '#ffffff',
+        fontFamily: 'system-ui, -apple-system, sans-serif'
+      }).setOrigin(0.5, 0.5);
+      tooltip.add([ttBg, ttTxt]);
+
+      sprite.setInteractive({ useHandCursor: true });
+      sprite.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
+        if (this.isInputBlocked || pointer.rightButtonDown()) return;
+        const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, doorX, doorY);
+        if (dist <= this.INTERACTION_RANGE) {
+          if (b.type === 'house') {
+            this.enterHouseScene(b.originX, b.originY);
+          } else if (b.type === 'coop') {
+            useGameStore.getState().notify('🛖 Đây là Chuồng Gà. Đàn gà đang dạo chơi quanh chuồng!', 'info');
+          } else if (b.type === 'barn') {
+            useGameStore.getState().notify('🚜 Đây là Chuồng Bò. Đàn bò sữa đang gặm cỏ quanh chuồng!', 'info');
+          }
+        } else {
+          this.handleTileClick(b.originX + Math.floor(b.width / 2), b.originY + b.height);
+        }
+      });
+
+      this.buildingSprites.set(b.id, { sprite, tooltip });
+    }
   }
 
-  public enterHouseScene() {
+  private updatePlacementGhost(
+    pointer: Phaser.Input.Pointer,
+    mode: { type: BuildingType; width: number; height: number; costWood: number; costStone: number; costGold: number }
+  ) {
+    if (!this.placementGhostGraphics) {
+      this.placementGhostGraphics = this.add.graphics().setDepth(28);
+    }
+    if (!this.placementNoticeText) {
+      this.placementNoticeText = this.add.text(0, 0, '', {
+        fontSize: '12px',
+        fontStyle: 'bold',
+        color: '#ffffff',
+        stroke: '#0f172a',
+        strokeThickness: 3,
+        fontFamily: 'system-ui, sans-serif'
+      }).setOrigin(0.5, 1).setDepth(29);
+    }
+
+    this.placementGhostGraphics.clear();
+    const worldPoint = pointer.positionToCamera(this.cameras.main) as Phaser.Math.Vector2;
+    const gx = Math.floor(worldPoint.x / this.TILE_SIZE);
+    const gy = Math.floor(worldPoint.y / this.TILE_SIZE);
+
+    const isValid = this.isAreaValidForBuilding(gx, gy, mode.width, mode.height);
+    const px = gx * this.TILE_SIZE;
+    const py = gy * this.TILE_SIZE;
+    const pw = mode.width * this.TILE_SIZE;
+    const ph = mode.height * this.TILE_SIZE;
+
+    const strokeColor = isValid ? 0x22c55e : 0xef4444;
+    const fillColor = isValid ? 0x22c55e : 0xef4444;
+
+    this.placementGhostGraphics.lineStyle(2, strokeColor, 0.9);
+    this.placementGhostGraphics.fillStyle(fillColor, 0.3);
+    this.placementGhostGraphics.strokeRect(px, py, pw, ph);
+    this.placementGhostGraphics.fillRect(px, py, pw, ph);
+
+    // Door indicator in bottom center
+    const doorX = px + pw / 2 - 16;
+    const doorY = py + ph - 8;
+    this.placementGhostGraphics.fillStyle(0xfde047, 0.8);
+    this.placementGhostGraphics.fillRect(doorX, doorY, 32, 8);
+
+    this.placementNoticeText.setPosition(px + pw / 2, py - 6);
+    this.placementNoticeText.setText(
+      isValid
+        ? `[Click để Đặt Móng - Esc/Phải để Hủy]`
+        : `[Vị trí không hợp lệ - Vướng vật thể/ngoài biên]`
+    );
+    this.placementNoticeText.setColor(isValid ? '#4ade80' : '#f87171');
+    this.placementNoticeText.setVisible(true);
+  }
+
+  private isAreaValidForBuilding(gx: number, gy: number, width: number, height: number): boolean {
+    if (gx < 0 || gx + width > this.GRID_WIDTH || gy < 0 || gy + height > this.GRID_HEIGHT) {
+      return false;
+    }
+    const store = useGameStore.getState();
+    const currentBuildings = store.buildings || [];
+
+    for (let x = gx; x < gx + width; x++) {
+      for (let y = gy; y < gy + height; y++) {
+        if ((x === this.SANCTUARY_GRID_X && y === this.SANCTUARY_GRID_Y) ||
+            (x === this.BBQ_GRID_X && y === this.BBQ_GRID_Y)) {
+          return false;
+        }
+        for (const b of currentBuildings) {
+          if (x >= b.originX && x < b.originX + b.width && y >= b.originY && y < b.originY + b.height) {
+            return false;
+          }
+        }
+        const tile = store.tiles[`${x},${y}`];
+        if (tile) {
+          if (tile.crop || tile.obstacle || tile.placeable || tile.station) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  }
+
+  private syncLivestockSprites(livestockList: LivestockData[]) {
+    const currentIds = new Set(livestockList.map((a) => a.id));
+
+    for (const [id, entry] of this.livestockSprites.entries()) {
+      if (!currentIds.has(id)) {
+        entry.sprite.destroy();
+        this.livestockSprites.delete(id);
+      }
+    }
+
+    for (const animal of livestockList) {
+      if (!this.livestockSprites.has(animal.id)) {
+        const tex = animal.type === 'chicken' ? 'animal_chicken' : 'animal_cow';
+        const sprite = this.physics.add.sprite(animal.x, animal.y, tex);
+        sprite.setDepth(12);
+        sprite.setCollideWorldBounds(true);
+        if (animal.type === 'chicken') {
+          sprite.body.setSize(18, 14).setOffset(7, 14);
+        } else {
+          sprite.body.setSize(24, 18).setOffset(4, 12);
+        }
+        this.physics.add.collider(sprite, this.solidObstacleGroup);
+
+        sprite.setInteractive({ useHandCursor: true });
+        sprite.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
+          if (this.isInputBlocked || pointer.rightButtonDown()) return;
+          if (animal.type === 'cow') {
+            const currentCow = (useGameStore.getState().livestock || []).find((a) => a.id === animal.id);
+            if (currentCow?.hasProductReady) {
+              useGameStore.getState().milkCow(animal.id);
+              this.showAnimalEmote(sprite, '🥛 +1 Sữa Tươi!', 1800);
+            } else {
+              useGameStore.getState().petAnimal(animal.id);
+              this.showAnimalEmote(sprite, '❤️ Ùm bò...', 1500);
+            }
+          } else {
+            useGameStore.getState().petAnimal(animal.id);
+            this.showAnimalEmote(sprite, '❤️ Cục cục tác!', 1500);
+          }
+        });
+
+        this.livestockSprites.set(animal.id, {
+          sprite,
+          data: animal,
+          wanderTimer: Date.now() + Math.random() * 3000,
+          targetX: animal.x,
+          targetY: animal.y,
+          isPeckingOrGrazing: false
+        });
+      }
+    }
+  }
+
+  private syncDroppedEggs(eggs: EggEntityData[]) {
+    const currentIds = new Set(eggs.map((e) => e.id));
+    for (const [id, sprite] of this.eggSprites.entries()) {
+      if (!currentIds.has(id)) {
+        sprite.destroy();
+        this.eggSprites.delete(id);
+      }
+    }
+
+    for (const egg of eggs) {
+      if (!this.eggSprites.has(egg.id)) {
+        const sprite = this.physics.add.sprite(egg.x, egg.y, 'produce_egg');
+        sprite.setDepth(10);
+        sprite.setInteractive({ useHandCursor: true });
+        sprite.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
+          if (this.isInputBlocked || pointer.rightButtonDown()) return;
+          const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, egg.x, egg.y);
+          if (dist <= this.INTERACTION_RANGE) {
+            useGameStore.getState().collectEgg(egg.id);
+          } else {
+            this.handleTileClick(Math.floor(egg.x / this.TILE_SIZE), Math.floor(egg.y / this.TILE_SIZE));
+          }
+        });
+
+        this.eggSprites.set(egg.id, sprite);
+      }
+    }
+  }
+
+  private updateLivestockAI() {
+    const now = Date.now();
+    const store = useGameStore.getState();
+    const buildingsList = store.buildings || [];
+
+    // Stepping on eggs collects them automatically
+    const eggs = store.droppedEggs || [];
+    for (const egg of eggs) {
+      const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, egg.x, egg.y);
+      if (dist <= 22) {
+        store.collectEgg(egg.id);
+        break;
+      }
+    }
+
+    for (const [animalId, entry] of this.livestockSprites.entries()) {
+      const sprite = entry.sprite;
+      const animal = (store.livestock || []).find((a) => a.id === animalId);
+      if (!animal) continue;
+
+      // 1. Egg laying timer (for chickens)
+      if (animal.type === 'chicken') {
+        const lastProd = animal.lastProducedAt || now;
+        if (now - lastProd >= 60000 && Math.random() < 0.05) {
+          store.addDroppedEgg({
+            id: `egg_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+            x: sprite.x + (Math.random() * 12 - 6),
+            y: sprite.y + 4,
+            createdAt: now
+          });
+          store.updateLivestockProduct(animalId, false);
+          this.showAnimalEmote(sprite, '🥚 Cục tác!', 2000);
+        }
+      }
+
+      // 2. Milk readiness timer (for cows)
+      if (animal.type === 'cow' && !animal.hasProductReady) {
+        const lastProd = animal.lastProducedAt || now;
+        if (now - lastProd >= 75000) {
+          store.updateLivestockProduct(animalId, true);
+          this.showAnimalEmote(sprite, '🥛 Sẵn sàng vắt!', 2500);
+        }
+      }
+
+      // 3. Wandering around home building
+      if (now >= entry.wanderTimer) {
+        const parentBuilding = buildingsList.find((b) => b.id === animal.buildingId);
+        const homeX = parentBuilding ? (parentBuilding.originX + parentBuilding.width / 2) * this.TILE_SIZE : sprite.x;
+        const homeY = parentBuilding ? (parentBuilding.originY + parentBuilding.height + 1) * this.TILE_SIZE : sprite.y;
+
+        const angle = Math.random() * Math.PI * 2;
+        const radius = 24 + Math.random() * 80;
+        const rawTargetX = homeX + Math.cos(angle) * radius;
+        const rawTargetY = homeY + Math.sin(angle) * radius;
+
+        entry.targetX = Phaser.Math.Clamp(rawTargetX, 32, (this.GRID_WIDTH - 2) * this.TILE_SIZE);
+        entry.targetY = Phaser.Math.Clamp(rawTargetY, 32, (this.GRID_HEIGHT - 2) * this.TILE_SIZE);
+        entry.wanderTimer = now + 4000 + Math.random() * 5000;
+        entry.isPeckingOrGrazing = false;
+      }
+
+      const dx = entry.targetX - sprite.x;
+      const dy = entry.targetY - sprite.y;
+      const dist = Math.hypot(dx, dy);
+
+      if (dist > 6) {
+        const speed = animal.type === 'chicken' ? 35 : 22;
+        const vx = (dx / dist) * speed;
+        const vy = (dy / dist) * speed;
+        sprite.setVelocity(vx, vy);
+        if (Math.abs(vx) > 2) {
+          sprite.setFlipX(vx < 0);
+        }
+      } else {
+        sprite.setVelocity(0, 0);
+        if (!entry.isPeckingOrGrazing && Math.random() < 0.02) {
+          entry.isPeckingOrGrazing = true;
+          this.tweens.add({
+            targets: sprite,
+            scaleY: animal.type === 'chicken' ? 0.8 : 0.9,
+            y: sprite.y + 2,
+            duration: 250,
+            yoyo: true,
+            repeat: 2,
+            ease: 'Sine.easeInOut'
+          });
+        }
+      }
+    }
+  }
+
+  private showAnimalEmote(target: Phaser.GameObjects.Sprite, text: string, duration = 1800) {
+    const bubble = this.add.container(target.x, target.y - 20).setDepth(35);
+    const bg = this.add.graphics();
+    bg.fillStyle(0x0f172a, 0.92);
+    bg.lineStyle(1.5, 0xf59e0b, 0.9);
+    bg.fillRoundedRect(-45, -10, 90, 20, 6);
+    bg.strokeRoundedRect(-45, -10, 90, 20, 6);
+
+    const txt = this.add.text(0, 0, text, {
+      fontSize: '11px',
+      color: '#ffffff',
+      fontStyle: 'bold',
+      fontFamily: 'system-ui, sans-serif'
+    }).setOrigin(0.5, 0.5);
+
+    bubble.add([bg, txt]);
+
+    this.tweens.add({
+      targets: bubble,
+      y: target.y - 36,
+      alpha: { from: 1, to: 0 },
+      duration,
+      onComplete: () => bubble.destroy()
+    });
+  }
+
+  public enterHouseScene(houseOriginX = this.HOUSE_GRID_X, houseOriginY = this.HOUSE_GRID_Y) {
     this.cancelCurrentAction();
     this.stopMovement();
     if (this.player && this.player.body) {
@@ -500,15 +895,15 @@ export default class FarmScene extends Phaser.Scene {
     }
     this.scene.start('HouseScene', {
       hasCustomAtlas: this.hasCustomAtlas,
-      returnSpawnX: (this.HOUSE_GRID_X + 1) * this.TILE_SIZE,
-      returnSpawnY: (this.HOUSE_GRID_Y + 2) * this.TILE_SIZE + 18
+      returnSpawnX: (houseOriginX + 1) * this.TILE_SIZE,
+      returnSpawnY: (houseOriginY + 2) * this.TILE_SIZE + 18
     });
   }
 
   public attemptBuildHouse() {
     const res = useGameStore.getState().buildHouse();
     if (res.success) {
-      this.renderHouseStructure();
+      this.renderAllBuildings();
     }
   }
 
@@ -580,9 +975,19 @@ export default class FarmScene extends Phaser.Scene {
   }
 
   update(_time: number, delta: number) {
-    // 0. Update Animal Entity Systems (Companion Dog & Wild Boar)
+    // 0. Update Animal Entity Systems (Companion Dog, Wild Boar & Livestock)
     this.updateDogAI(delta);
     this.updateBoarAI(delta);
+    this.updateLivestockAI();
+
+    // Cancel building placement mode if ESC key is pressed
+    if (this.escKey && Phaser.Input.Keyboard.JustDown(this.escKey)) {
+      if (useGameStore.getState().placementMode) {
+        useGameStore.getState().cancelPlacementMode();
+        this.placementGhostGraphics?.clear();
+        this.placementNoticeText?.setVisible(false);
+      }
+    }
 
     if (this.isPerformingAction) {
       if (this.player && this.player.body) {
@@ -634,12 +1039,10 @@ export default class FarmScene extends Phaser.Scene {
       }
     }
 
-    // Proximity check for House / House Plot & 'E' key interaction
-    const houseCenterX = (this.HOUSE_GRID_X + 1) * this.TILE_SIZE;
-    const houseDoorY = (this.HOUSE_GRID_Y + 2) * this.TILE_SIZE;
-    const checkTargetY = useGameStore.getState().hasHouse ? houseDoorY : (this.HOUSE_GRID_Y + 1) * this.TILE_SIZE;
-
+    // Proximity check for House Foundation Plot & 'E' key interaction
     if (this.houseTooltip) {
+      const houseCenterX = (this.HOUSE_GRID_X + 1) * this.TILE_SIZE;
+      const checkTargetY = (this.HOUSE_GRID_Y + 1) * this.TILE_SIZE;
       const distToHouse = Phaser.Math.Distance.Between(
         this.player.x,
         this.player.y,
@@ -651,12 +1054,36 @@ export default class FarmScene extends Phaser.Scene {
 
       if (isNearHouse && !this.isInputBlocked && !this.isPerformingAction && this.interactKey) {
         if (Phaser.Input.Keyboard.JustDown(this.interactKey)) {
-          if (useGameStore.getState().hasHouse) {
-            this.enterHouseScene();
-          } else {
-            this.attemptBuildHouse();
-          }
+          this.attemptBuildHouse();
           return;
+        }
+      }
+    }
+
+    // Proximity check for all constructed Farm Buildings (House, Coop, Barn)
+    for (const [bId, entry] of this.buildingSprites.entries()) {
+      const b = (useGameStore.getState().buildings || []).find((x) => x.id === bId);
+      if (!b || !entry.tooltip) continue;
+
+      const doorX = b.originX * this.TILE_SIZE + (b.width * this.TILE_SIZE) / 2;
+      const doorY = (b.originY + b.height) * this.TILE_SIZE;
+      const distToDoor = Phaser.Math.Distance.Between(this.player.x, this.player.y, doorX, doorY);
+      const isNear = distToDoor <= this.INTERACTION_RANGE;
+
+      entry.tooltip.setVisible(isNear && !this.isInputBlocked);
+
+      if (isNear && !this.isInputBlocked && !this.isPerformingAction && this.interactKey) {
+        if (Phaser.Input.Keyboard.JustDown(this.interactKey)) {
+          if (b.type === 'house') {
+            this.enterHouseScene(b.originX, b.originY);
+            return;
+          } else if (b.type === 'coop') {
+            useGameStore.getState().notify('🛖 Đây là Chuồng Gà. Đàn gà đang đẻ trứng quanh chuồng!', 'info');
+            return;
+          } else if (b.type === 'barn') {
+            useGameStore.getState().notify('🚜 Đây là Chuồng Bò. Đàn bò sữa đang gặm cỏ quanh chuồng!', 'info');
+            return;
+          }
         }
       }
     }
@@ -728,7 +1155,21 @@ export default class FarmScene extends Phaser.Scene {
             const targetCenterY = action.targetGridY * this.TILE_SIZE + 16;
             this.updateFacingDirection(targetCenterX, targetCenterY);
 
-            if (action.targetGridX === this.SANCTUARY_GRID_X && action.targetGridY === this.SANCTUARY_GRID_Y) {
+            const buildingsList = useGameStore.getState().buildings || [];
+            const arrivedBuilding = buildingsList.find((b) =>
+              action.targetGridX >= b.originX && action.targetGridX < b.originX + b.width &&
+              action.targetGridY >= b.originY && action.targetGridY < b.originY + b.height
+            );
+
+            if (arrivedBuilding) {
+              if (arrivedBuilding.type === 'house') {
+                this.enterHouseScene(arrivedBuilding.originX, arrivedBuilding.originY);
+              } else if (arrivedBuilding.type === 'coop') {
+                useGameStore.getState().notify('🛖 Bạn đã đến trước Chuồng Gà!', 'info');
+              } else if (arrivedBuilding.type === 'barn') {
+                useGameStore.getState().notify('🚜 Bạn đã đến trước Chuồng Bò!', 'info');
+              }
+            } else if (action.targetGridX === this.SANCTUARY_GRID_X && action.targetGridY === this.SANCTUARY_GRID_Y) {
               this.openSanctuaryQuiz();
             } else if (action.targetGridX === this.BBQ_GRID_X && action.targetGridY === this.BBQ_GRID_Y) {
               this.openBBQStand();
@@ -967,13 +1408,21 @@ export default class FarmScene extends Phaser.Scene {
       return false;
     }
 
-    // House or House foundation footprint (8,2) to (9,3) is solid
-    if (gx >= this.HOUSE_GRID_X && gx <= this.HOUSE_GRID_X + 1 &&
-        gy >= this.HOUSE_GRID_Y && gy <= this.HOUSE_GRID_Y + 1) {
-      return false;
+    const store = useGameStore.getState();
+    const buildingsList = store.buildings || [];
+    for (const b of buildingsList) {
+      if (gx >= b.originX && gx < b.originX + b.width && gy >= b.originY && gy < b.originY + b.height) {
+        return false;
+      }
     }
 
-    const store = useGameStore.getState();
+    // Default House foundation footprint (8,2) to (9,3) is solid if no house constructed yet
+    if (!store.hasHouse && !buildingsList.some((b) => b.type === 'house')) {
+      if (gx >= this.HOUSE_GRID_X && gx <= this.HOUSE_GRID_X + 1 &&
+          gy >= this.HOUSE_GRID_Y && gy <= this.HOUSE_GRID_Y + 1) {
+        return false;
+      }
+    }
     const tile = store.tiles[`${gx},${gy}`];
     if (!tile) return true;
 
@@ -1050,6 +1499,11 @@ export default class FarmScene extends Phaser.Scene {
     const isHouse = (x === this.HOUSE_GRID_X || x === this.HOUSE_GRID_X + 1) &&
                     (y === this.HOUSE_GRID_Y || y === this.HOUSE_GRID_Y + 1);
 
+    const buildingsList = store.buildings || [];
+    const clickedBuilding = buildingsList.find((b) =>
+      x >= b.originX && x < b.originX + b.width && y >= b.originY && y < b.originY + b.height
+    );
+
     // 1. Direct Click on Campfire Sanctuary
     if (isSanctuary) {
       const distToCamp = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.sanctuarySprite.x, this.sanctuarySprite.y);
@@ -1068,8 +1522,25 @@ export default class FarmScene extends Phaser.Scene {
       }
     }
 
-    // 3. Direct Click on House / House Plot
-    if (isHouse) {
+    // 3. Direct Click on Constructed Buildings
+    if (clickedBuilding) {
+      const doorX = (clickedBuilding.originX + clickedBuilding.width / 2) * this.TILE_SIZE;
+      const doorY = (clickedBuilding.originY + clickedBuilding.height) * this.TILE_SIZE;
+      const distToBld = Phaser.Math.Distance.Between(this.player.x, this.player.y, doorX, doorY);
+      if (distToBld <= this.INTERACTION_RANGE) {
+        if (clickedBuilding.type === 'house') {
+          this.enterHouseScene(clickedBuilding.originX, clickedBuilding.originY);
+        } else if (clickedBuilding.type === 'coop') {
+          store.notify('🛖 Đây là Chuồng Gà. Đàn gà đang đẻ trứng quanh chuồng!', 'info');
+        } else if (clickedBuilding.type === 'barn') {
+          store.notify('🚜 Đây là Chuồng Bò. Đàn bò sữa đang gặm cỏ quanh chuồng!', 'info');
+        }
+        return;
+      }
+    }
+
+    // 4. Direct Click on Default House Plot Signboard
+    if (isHouse && !clickedBuilding) {
       const houseDoorX = (this.HOUSE_GRID_X + 1) * this.TILE_SIZE;
       const houseDoorY = (this.HOUSE_GRID_Y + 2) * this.TILE_SIZE;
       const distToHouse = Phaser.Math.Distance.Between(this.player.x, this.player.y, houseDoorX, houseDoorY);
@@ -1095,6 +1566,16 @@ export default class FarmScene extends Phaser.Scene {
       }
       if (isBBQ) {
         this.openBBQStand();
+        return;
+      }
+      if (clickedBuilding) {
+        if (clickedBuilding.type === 'house') {
+          this.enterHouseScene(clickedBuilding.originX, clickedBuilding.originY);
+        } else if (clickedBuilding.type === 'coop') {
+          store.notify('🛖 Đây là Chuồng Gà. Đàn gà đang đẻ trứng quanh chuồng!', 'info');
+        } else if (clickedBuilding.type === 'barn') {
+          store.notify('🚜 Đây là Chuồng Bò. Đàn bò sữa đang gặm cỏ quanh chuồng!', 'info');
+        }
         return;
       }
       if (isHouse) {
@@ -1127,7 +1608,7 @@ export default class FarmScene extends Phaser.Scene {
     const startGy = Phaser.Math.Clamp(Math.floor(this.player.y / this.TILE_SIZE), 0, this.GRID_HEIGHT - 1);
 
     const isSolid = !this.isTileWalkable(x, y);
-    const shouldQueueAction = !isMoveOnly || isSanctuary || isBBQ || isHouse;
+    const shouldQueueAction = !isMoveOnly || isSanctuary || isBBQ || isHouse || Boolean(clickedBuilding);
 
     if (isSolid) {
       // Find shortest valid path to any walkable adjacent neighbor of solid entity/station
@@ -1152,6 +1633,14 @@ export default class FarmScene extends Phaser.Scene {
           this.openSanctuaryQuiz();
         } else if (isBBQ) {
           this.openBBQStand();
+        } else if (clickedBuilding) {
+          if (clickedBuilding.type === 'house') {
+            this.enterHouseScene(clickedBuilding.originX, clickedBuilding.originY);
+          } else if (clickedBuilding.type === 'coop') {
+            store.notify('🛖 Bạn đã đến trước Chuồng Gà!', 'info');
+          } else if (clickedBuilding.type === 'barn') {
+            store.notify('🚜 Bạn đã đến trước Chuồng Bò!', 'info');
+          }
         } else if (isHouse) {
           if (store.hasHouse) {
             this.enterHouseScene();
