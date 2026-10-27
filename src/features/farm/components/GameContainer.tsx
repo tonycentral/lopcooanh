@@ -193,13 +193,15 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
       }
 
       // Key ESC: Cancel moving entity or exit reposition mode
-      if (e.key === 'Escape' && isRepositionMode) {
+      if (e.key === 'Escape') {
         if (movingEntity) {
           cancelRelocation();
-        } else {
-          toggleRepositionMode(false);
+          return;
         }
-        return;
+        if (isRepositionMode) {
+          toggleRepositionMode(false);
+          return;
+        }
       }
 
       // If modal is active, ignore hotbar tool changes
@@ -207,6 +209,8 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
 
       // Key 0: Toggle Move-Only / Observation Mode
       if (e.key === '0') {
+        if (movingEntity) cancelRelocation();
+        else if (isRepositionMode) toggleRepositionMode(false);
         toggleMoveOnlyMode();
         setIsSeedMenuOpen(false);
         setIsActionsMenuOpen(false);
@@ -215,6 +219,9 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
 
       const keyNum = parseInt(e.key, 10);
       if (keyNum >= 1 && keyNum <= hotbar.length) {
+        if (movingEntity) cancelRelocation();
+        else if (isRepositionMode) toggleRepositionMode(false);
+
         const targetTool = hotbar[keyNum - 1].id;
         if (targetTool === 'seed') {
           const currentSeed = activeSeedId || 'seed_wheat';
@@ -341,10 +348,13 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
           UNIFIED GAME FRAME (ASPECT RATIO 3:2 / 960x640px BOUNDED)
           Ensures ZERO dead space and anchors all HUD tightly inside the viewport
           ========================================================================= */}
-      <div className="relative w-full max-w-[960px] aspect-[3/2] max-h-[calc(100vh-2rem)] rounded-2xl overflow-hidden border-2 border-slate-800 shadow-2xl bg-slate-900 flex items-center justify-center">
+      <div 
+        onContextMenu={(e) => e.preventDefault()}
+        className="relative w-full max-w-[960px] aspect-[3/2] max-h-[calc(100vh-2rem)] rounded-2xl overflow-hidden border-2 border-slate-800 shadow-2xl bg-slate-900 flex items-center justify-center"
+      >
         
         {/* 1. Canvas Viewport for Phaser 3 */}
-        <div ref={containerRef} className="w-full h-full" />
+        <div ref={containerRef} onContextMenu={(e) => e.preventDefault()} className="w-full h-full" />
 
         {/* 2. REFACTORED TOP HUD: Streamlined Glassmorphism Stats & Icon Action Buttons */}
         <div className="absolute top-3 left-3 right-3 z-20 flex items-center justify-between pointer-events-none gap-2">
@@ -693,6 +703,8 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
 
             <button
               onClick={() => {
+                if (movingEntity) cancelRelocation();
+                else if (isRepositionMode) toggleRepositionMode(false);
                 toggleMoveOnlyMode();
                 setIsSeedMenuOpen(false);
                 setIsActionsMenuOpen(false);
@@ -846,6 +858,9 @@ export default function GameContainer({ currentUser, onOpenAuthModal, onSignOut 
 
                 <button
                   onClick={() => {
+                    if (movingEntity) cancelRelocation();
+                    else if (isRepositionMode) toggleRepositionMode(false);
+
                     if (isSeedSlot) {
                       selectSeed(activeSeedId || 'seed_wheat');
                       setIsSeedMenuOpen((prev) => !prev);

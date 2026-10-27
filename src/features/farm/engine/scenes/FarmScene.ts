@@ -315,6 +315,9 @@ export default class FarmScene extends Phaser.Scene {
       this.mKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
     }
 
+    // Disable browser context menu on canvas so right-click is fully captured by Phaser
+    this.input.mouse?.disableContextMenu();
+
     // 6. Mouse Interaction Listeners
     this.input.on('pointermove', (pointer: Phaser.Input.Pointer) => {
       if (this.isInputBlocked) {
@@ -323,17 +326,15 @@ export default class FarmScene extends Phaser.Scene {
       }
 
       const store = useGameStore.getState();
-      const repositionMode = store.isRepositionMode;
+      const repositionMode = store.isRepositionMode || Boolean(store.movingEntity);
       const movingEntity = store.movingEntity;
 
       if (repositionMode) {
         this.marker.setVisible(false);
         this.updateRepositionGhost(pointer, movingEntity);
         return;
-      } else if (this.repositionGhostGraphics) {
-        this.repositionGhostGraphics.clear();
-        this.repositionNoticeText?.setVisible(false);
-        this.repositionGhostSprite?.setVisible(false);
+      } else {
+        this.clearRepositionGhost();
       }
 
       const placementMode = store.placementMode;
@@ -372,23 +373,34 @@ export default class FarmScene extends Phaser.Scene {
       if (this.isPerformingAction || this.isInputBlocked) return;
 
       const store = useGameStore.getState();
-      const repositionMode = store.isRepositionMode;
-      const movingEntity = store.movingEntity;
+      const isRightClick = pointer.rightButtonDown() || pointer.button === 2;
 
-      if (repositionMode) {
-        if (pointer.rightButtonDown()) {
-          if (movingEntity) {
-            store.cancelRelocation();
-          } else {
-            store.toggleRepositionMode(false);
-          }
-          this.repositionGhostGraphics?.clear();
-          this.repositionNoticeText?.setVisible(false);
-          this.repositionGhostSprite?.setVisible(false);
+      // Global right-click cancel for repositioning or placement
+      if (isRightClick) {
+        if (store.movingEntity) {
+          store.cancelRelocation();
+          this.clearRepositionGhost();
           this.syncStationsPositions();
           return;
         }
+        if (store.isRepositionMode) {
+          store.toggleRepositionMode(false);
+          this.clearRepositionGhost();
+          this.syncStationsPositions();
+          return;
+        }
+        if (store.placementMode) {
+          store.cancelPlacementMode();
+          this.placementGhostGraphics?.clear();
+          this.placementNoticeText?.setVisible(false);
+          return;
+        }
+      }
 
+      const repositionMode = store.isRepositionMode || Boolean(store.movingEntity);
+      const movingEntity = store.movingEntity;
+
+      if (repositionMode) {
         const worldPoint = pointer.positionToCamera(this.cameras.main) as Phaser.Math.Vector2;
         const tileX = Math.floor(worldPoint.x / this.TILE_SIZE);
         const tileY = Math.floor(worldPoint.y / this.TILE_SIZE);
@@ -397,9 +409,7 @@ export default class FarmScene extends Phaser.Scene {
           const res = store.relocateEntity(tileX, tileY);
           if (res.success) {
             this.createDustPuff(tileX * this.TILE_SIZE + 16, tileY * this.TILE_SIZE + 16);
-            this.repositionGhostGraphics?.clear();
-            this.repositionNoticeText?.setVisible(false);
-            this.repositionGhostSprite?.setVisible(false);
+            this.clearRepositionGhost();
             this.syncStationsPositions();
             this.renderAllBuildings();
           }
@@ -499,6 +509,9 @@ export default class FarmScene extends Phaser.Scene {
         prevBbq = state.bbqPosition;
         prevMoving = state.movingEntity;
         this.syncStationsPositions(state);
+      }
+      if (!state.isRepositionMode && !state.movingEntity) {
+        this.clearRepositionGhost();
       }
     });
 
@@ -829,6 +842,21 @@ export default class FarmScene extends Phaser.Scene {
         onComplete: () => p.destroy()
       });
     }
+  }
+
+  public clearRepositionGhost() {
+    if (this.repositionGhostGraphics) {
+      this.repositionGhostGraphics.clear();
+    }
+    if (this.repositionNoticeText) {
+      this.repositionNoticeText.setVisible(false);
+    }
+    if (this.repositionGhostSprite) {
+      this.repositionGhostSprite.setVisible(false);
+      this.repositionGhostSprite.destroy();
+      this.repositionGhostSprite = undefined;
+    }
+    this.input.setDefaultCursor('default');
   }
 
   private updateRepositionGhost(pointer: Phaser.Input.Pointer, movingEntity: MovableEntityData | null) {
@@ -1341,9 +1369,7 @@ export default class FarmScene extends Phaser.Scene {
     // Key M toggles Reposition Mode
     if (this.mKey && Phaser.Input.Keyboard.JustDown(this.mKey)) {
       useGameStore.getState().toggleRepositionMode();
-      this.repositionGhostGraphics?.clear();
-      this.repositionNoticeText?.setVisible(false);
-      this.repositionGhostSprite?.setVisible(false);
+      this.clearRepositionGhost();
       this.syncStationsPositions();
     }
 
@@ -1352,15 +1378,12 @@ export default class FarmScene extends Phaser.Scene {
       const store = useGameStore.getState();
       if (store.movingEntity) {
         store.cancelRelocation();
-        this.repositionGhostGraphics?.clear();
-        this.repositionNoticeText?.setVisible(false);
-        this.repositionGhostSprite?.setVisible(false);
+        this.clearRepositionGhost();
         this.syncStationsPositions();
       } else if (store.isRepositionMode) {
         store.toggleRepositionMode(false);
-        this.repositionGhostGraphics?.clear();
-        this.repositionNoticeText?.setVisible(false);
-        this.repositionGhostSprite?.setVisible(false);
+        this.clearRepositionGhost();
+        this.syncStationsPositions();
       } else if (store.placementMode) {
         store.cancelPlacementMode();
         this.placementGhostGraphics?.clear();

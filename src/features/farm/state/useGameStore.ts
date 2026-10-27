@@ -746,7 +746,9 @@ export interface GameStoreState extends PlayerFarmState {
   syncStatus: SyncStatus;
   lastNotification: NotificationMessage | null;
   isRepositionMode: boolean;
+  isRelocating: boolean;
   movingEntity: MovableEntityData | null;
+  selectedRelocateEntity: MovableEntityData | null;
   sanctuaryPosition: { x: number; y: number };
   bbqPosition: { x: number; y: number };
   
@@ -825,15 +827,41 @@ export const useGameStore = create<GameStoreState>((set, get) => {
     syncStatus: 'idle',
     lastNotification: null,
     isRepositionMode: false,
+    isRelocating: false,
     movingEntity: null,
+    selectedRelocateEntity: null,
     sanctuaryPosition: { x: 15, y: 3 },
     bbqPosition: { x: 18, y: 3 },
 
     setUserId: (userId) => set({ currentUserId: userId }),
 
-    selectTool: (toolId) => set({ activeTool: toolId }),
+    selectTool: (toolId) => {
+      const state = get();
+      if (state.movingEntity) {
+        get().cancelRelocation();
+      } else if (state.isRepositionMode) {
+        set({
+          isRepositionMode: false,
+          isRelocating: false,
+          movingEntity: null,
+          selectedRelocateEntity: null
+        });
+      }
+      set({ activeTool: toolId });
+    },
 
     selectSeed: (seedId) => {
+      const state = get();
+      if (state.movingEntity) {
+        get().cancelRelocation();
+      } else if (state.isRepositionMode) {
+        set({
+          isRepositionMode: false,
+          isRelocating: false,
+          movingEntity: null,
+          selectedRelocateEntity: null
+        });
+      }
       set({ activeSeedId: seedId, activeTool: seedId });
       const seedDef = SHOP_SEEDS.find((s) => s.id === seedId);
       if (seedDef) {
@@ -842,6 +870,17 @@ export const useGameStore = create<GameStoreState>((set, get) => {
     },
 
     toggleMoveOnlyMode: () => {
+      const state = get();
+      if (state.movingEntity) {
+        get().cancelRelocation();
+      } else if (state.isRepositionMode) {
+        set({
+          isRepositionMode: false,
+          isRelocating: false,
+          movingEntity: null,
+          selectedRelocateEntity: null
+        });
+      }
       const current = get().activeTool;
       if (current === 'none') {
         set({ activeTool: 'hoe' });
@@ -2917,17 +2956,28 @@ export const useGameStore = create<GameStoreState>((set, get) => {
     toggleRepositionMode: (force?: boolean) => {
       const state = get();
       const nextState = force !== undefined ? force : !state.isRepositionMode;
-      if (!nextState && state.movingEntity) {
-        get().cancelRelocation();
+      if (!nextState) {
+        if (state.movingEntity) {
+          get().cancelRelocation();
+          return;
+        }
+        set({
+          isRepositionMode: false,
+          isRelocating: false,
+          movingEntity: null,
+          selectedRelocateEntity: null,
+          placementMode: null
+        });
+        get().notify('Đã tắt Chế độ Di dời.', 'info');
+        return;
       }
       set({
-        isRepositionMode: nextState,
+        isRepositionMode: true,
+        isRelocating: true,
         placementMode: null
       });
       get().notify(
-        nextState 
-          ? '📐 Đã bật Chế độ Di dời: Click vào vật thể/cây trồng để nhấc (phím M hoặc ESC để thoát)' 
-          : 'Đã tắt Chế độ Di dời.',
+        '📐 Đã bật Chế độ Di dời: Click vào vật thể/cây trồng để nhấc (phím M hoặc ESC để thoát)',
         'info'
       );
     },
@@ -2968,7 +3018,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
           height: 1,
           textureKey: 'structure_campfire'
         };
-        set({ movingEntity, tiles: newTiles, isRepositionMode: true });
+        set({ movingEntity, selectedRelocateEntity: movingEntity, tiles: newTiles, isRepositionMode: true, isRelocating: true });
         get().notify('Đã nhấc Bếp Lửa Trại! Di chuột và click để đặt vị trí mới (Esc để hủy)', 'info');
         return { success: true };
       }
@@ -2992,7 +3042,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
           height: 1,
           textureKey: 'structure_bbq_stand'
         };
-        set({ movingEntity, tiles: newTiles, isRepositionMode: true });
+        set({ movingEntity, selectedRelocateEntity: movingEntity, tiles: newTiles, isRepositionMode: true, isRelocating: true });
         get().notify('Đã nhấc Quầy Nướng BBQ! Di chuột và click để đặt vị trí mới (Esc để hủy)', 'info');
         return { success: true };
       }
@@ -3022,7 +3072,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
           textureKey: cropTexKey,
           cropData
         };
-        set({ movingEntity, tiles: newTiles, isRepositionMode: true });
+        set({ movingEntity, selectedRelocateEntity: movingEntity, tiles: newTiles, isRepositionMode: true, isRelocating: true });
         get().notify(`Đã nhấc ${cropName}! Di chuột và click để di dời (Esc để hủy)`, 'info');
         return { success: true };
       }
@@ -3046,7 +3096,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
           textureKey: `placeable_${placeableData.type}`,
           placeableData
         };
-        set({ movingEntity, tiles: newTiles, isRepositionMode: true });
+        set({ movingEntity, selectedRelocateEntity: movingEntity, tiles: newTiles, isRepositionMode: true, isRelocating: true });
         get().notify(`Đã nhấc ${pName}! Di chuột và click để di dời (Esc để hủy)`, 'info');
         return { success: true };
       }
@@ -3068,7 +3118,7 @@ export const useGameStore = create<GameStoreState>((set, get) => {
           textureKey: `building_${movableBld.type}`,
           buildingData: movableBld
         };
-        set({ movingEntity, buildings: updatedBuildings, isRepositionMode: true });
+        set({ movingEntity, selectedRelocateEntity: movingEntity, buildings: updatedBuildings, isRepositionMode: true, isRelocating: true });
         get().notify(`Đã nhấc ${bName}! Di chuột và click để di dời (Esc để hủy)`, 'info');
         return { success: true };
       }
@@ -3195,6 +3245,10 @@ export const useGameStore = create<GameStoreState>((set, get) => {
         bbqPosition: updatedBbq,
         buildings: updatedBuildings,
         movingEntity: null,
+        selectedRelocateEntity: null,
+        isRepositionMode: false,
+        isRelocating: false,
+        activeTool: 'none',
         updatedAt: Date.now()
       };
 
@@ -3243,7 +3297,11 @@ export const useGameStore = create<GameStoreState>((set, get) => {
       set({
         tiles: newTiles,
         buildings: updatedBuildings,
-        movingEntity: null
+        movingEntity: null,
+        selectedRelocateEntity: null,
+        isRepositionMode: false,
+        isRelocating: false,
+        activeTool: 'none'
       });
       get().notify('Đã hủy thao tác di dời vật thể.', 'info');
     },
